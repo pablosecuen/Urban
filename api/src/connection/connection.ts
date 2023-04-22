@@ -23,3 +23,7 @@ db.collection("test")
   .catch((error) => console.error("Error al conectarse a Firebase Firestore"));
 
 export { db };
+
+
+
+// `NO TOCAR!!!!!!!!!!!!!!!!!!!!!!!!!`
