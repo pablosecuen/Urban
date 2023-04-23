@@ -10,7 +10,7 @@ interface User {
   };
   history: {
     orders: string[];
-    searches: string[];
+    travels: string[];
   };
   img: string;
   DNI: string;
