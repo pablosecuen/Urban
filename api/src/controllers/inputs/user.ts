@@ -26,3 +26,24 @@ export const newUser = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id; // Obtener ID del usuario a actualizar
+    const data: User = req.body; // Obtener datos actualizados del usuario
+
+    // Verificar si el usuario existe en Firestore
+    const docRef = await db.collection('users').doc(id).get();
+    if (!docRef.exists) {
+      throw new Error('No se encontró el usuario');
+    }
+
+    // Actualizar el usuario en Firestore
+    await db.collection('users').doc(id).update(data);
+
+    res.status(200).json({ message: 'Usuario actualizado correctamente' });
+  } catch (error) {
+    console.error('Error al actualizar el usuario', error);
+    res.status(400).json({ message: error.message });
+  }
+};
