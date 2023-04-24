@@ -21,3 +21,23 @@ export const searchOrder = async (
     res.status(500).json({ message: "Error al obtener la orden" });
   }
 };
+
+export const getAllOrders = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const orderRef = db.collection("orders");
+    const orderSnapshot = await orderRef.get();
+    const orders: Object[] = [];
+
+    orderSnapshot.forEach((doc) => {
+      const orden = { id: doc.id, ...doc.data() };
+      orders.push(orden);
+    });
+    res.status(201).json(orders);
+  } catch (error) {
+    console.error("Error al obtener las ordenes", error);
+    res.status(500).json({ message: "Error al obtener las ordenes" });
+  }
+};
