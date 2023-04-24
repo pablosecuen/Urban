@@ -1,29 +1,32 @@
-import { Request, Response } from 'express';
-import { db } from '../../connection/connection';
-import User from '../../schema/user';
+import { Request, Response } from "express";
+import { db } from "../../connection/connection";
+import User from "../../schema/user";
 
-export const searchUser = async (req: Request, res: Response) => {
+export const searchUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
-    const doc = await db.collection('users').doc(id).get();
+    const doc = await db.collection("users").doc(id).get();
     if (!doc.exists) {
-      res.status(404).json({ message: 'Usuario no encontrado' });
+      res.status(404).json({ message: "Usuario no encontrado" });
     } else {
       const usuario = doc.data() as User;
       res.json(usuario);
     }
   } catch (error) {
-    console.error('Error al obtener el usuario', error);
-    res.status(500).json({ message: 'Error al obtener el usuario' });
+    console.error("Error al obtener el usuario", error);
+    res.status(500).json({ message: "Error al obtener el usuario" });
   }
 };
 
-export const allUsers = async (_req: Request, res: Response) => {
+export const allUsers = async (_req: Request, res: Response): Promise<void> => {
   try {
-    const usersRef = db.collection('users');
+    const usersRef = db.collection("users");
     const usersSnapshot = await usersRef.get();
 
-    const users = [];
+    const users: Object[] = [];
     usersSnapshot.forEach((doc) => {
       const user = {
         id: doc.id,
@@ -34,7 +37,7 @@ export const allUsers = async (_req: Request, res: Response) => {
 
     res.json(users);
   } catch (error) {
-    console.error('Error al obtener los usuarios', error);
-    res.status(500).json({ message: 'Error al obtener los usuarios' });
+    console.error("Error al obtener los usuarios", error);
+    res.status(500).json({ message: "Error al obtener los usuarios" });
   }
 };
