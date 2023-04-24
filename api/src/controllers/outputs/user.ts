@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import User from "../../schema/user";
 
-export const searchUser = async (req: Request, res: Response) => {
+export const searchUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
     const doc = await db.collection("users").doc(id).get();
@@ -18,7 +21,7 @@ export const searchUser = async (req: Request, res: Response) => {
   }
 };
 
-export const allUsers = async (_req: Request, res: Response) => {
+export const allUsers = async (_req: Request, res: Response): Promise<void> => {
   try {
     const usersRef = db.collection("users");
     const usersSnapshot = await usersRef.get();
