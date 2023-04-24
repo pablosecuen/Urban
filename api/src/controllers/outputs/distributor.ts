@@ -5,7 +5,6 @@ import Distributor from "../../schema/distributor";
 export const searchDistributor = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const doc = await db.collection("distributors").doc(id).get();
     if (!doc.exists) {
       res.status(404).json({ message: "Distribuidor no encontrado" });
