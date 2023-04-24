@@ -4,8 +4,9 @@ import { Local } from "../../interfaces/local";
 
 export const searchLocal = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name } = req.params;
-    const doc = await db.collection("locals").doc(name).get();
+    const { id } = req.params;
+
+    const doc = await db.collection("locals").doc(id).get();
     if (!doc.exists) {
       res.status(404).json({ message: "Local no encontrado" });
     } else {
@@ -34,7 +35,7 @@ export const allLocals = async (_req: Request, res: Response): Promise<void> => 
 
     res.json(locals);
   } catch (error) {
-    console.error("Error al obtener los usuarios", error);
-    res.status(500).json({ message: "Error al obtener los usuarios" });
+    console.error("Error al obtener los locales", error);
+    res.status(500).json({ message: "Error al obtener los locales" });
   }
 };
