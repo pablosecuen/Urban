@@ -17,3 +17,24 @@ export const searchLocal = async (req: Request, res: Response): Promise<void> =>
     res.status(500).json({ message: "Error al obtener el local" });
   }
 };
+
+export const allLocals = async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const localsRef = db.collection("locals");
+    const localsSnapshot = await localsRef.get();
+
+    const locals: Object[] = [];
+    localsSnapshot.forEach((doc) => {
+      const local = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      locals.push(local);
+    });
+
+    res.json(locals);
+  } catch (error) {
+    console.error("Error al obtener los usuarios", error);
+    res.status(500).json({ message: "Error al obtener los usuarios" });
+  }
+};
