@@ -5,6 +5,7 @@ import travelInputRouter from "./inputs/travels";
 import distributorInputRouter from "./inputs/distributor";
 import distributorOutputRouter from "./outputs/distributor";
 import orderInputRouter from "./inputs/order";
+import orderOutputRouter from "./outputs/order";
 
 const router = Router();
 
@@ -21,5 +22,7 @@ router.use("/order", orderInputRouter);
 router.use("/user", userOutputRouter);
 
 router.use("/distributor", distributorOutputRouter);
+
+router.use("/order", orderOutputRouter);
 
 export default router;
