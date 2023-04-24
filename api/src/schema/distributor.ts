@@ -1,0 +1,14 @@
+interface Distributor {
+  name: string;
+  adress: string;
+  email: string;
+  password: string;
+  payment: string;
+  history: string;
+  img: string;
+  vehicle: string;
+  dni: number;
+  license: string;
+}
+
+export default Distributor;
