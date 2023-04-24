@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import Distributor from "../../schema/distributor";
 
-export const newDistributor = async (req: Request, res: Response) => {
+export const newDistributor = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const data: Distributor = req.body;
 
@@ -23,9 +26,12 @@ export const newDistributor = async (req: Request, res: Response) => {
   }
 };
 
-export const updateDistributor = async (req: Request, res: Response) => {
+export const updateDistributor = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const id = req.params.id; // obtener id del distribuidor que se va a actualizar
+    const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
     const data: Distributor = req.body; //datos de distribuidor a actualizar
 
     //verificar si existe el usuario en la base de datos

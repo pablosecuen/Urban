@@ -2,9 +2,12 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import Distributor from "../../schema/distributor";
 
-export const searchDistributor = async (req: Request, res: Response) => {
+export const searchDistributor = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id: string = req.params.id;
     const doc = await db.collection("distributors").doc(id).get();
     if (!doc.exists) {
       res.status(404).json({ message: "Distribuidor no encontrado" });
@@ -18,7 +21,10 @@ export const searchDistributor = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllDistributors = async (req: Request, res: Response) => {
+export const getAllDistributors = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const distributorsRef = db.collection("distributors");
     const distributorsSnapshot = await distributorsRef.get();
