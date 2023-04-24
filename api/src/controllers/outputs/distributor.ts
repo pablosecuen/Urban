@@ -16,7 +16,7 @@ export const searchDistributor = async (
       res.status(201).json(distribuidor);
     }
   } catch (error) {
-    console.error("Error al obtener el usuario", error);
+    console.error("Error al obtener el distribuidor", error);
     res.status(500).json({ message: "Error al obtener el distribuidor" });
   }
 };
@@ -39,7 +39,7 @@ export const getAllDistributors = async (
 
     res.status(201).json(distributors);
   } catch (error) {
-    console.error("Error al obtener el usuario", error);
+    console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
   }
 };
