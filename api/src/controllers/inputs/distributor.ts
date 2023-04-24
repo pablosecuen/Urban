@@ -21,7 +21,7 @@ export const newDistributor = async (
     const docRef = await db.collection("distributors").add(data);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
-    console.error("Error al actualizar el usuario", error);
+    console.error("Error al crear el distribuidor", error);
     res.status(400).json({ messege: error.message });
   }
 };

@@ -4,6 +4,7 @@ import userOutputRouter from "./outputs/user";
 import travelInputRouter from "./inputs/travels";
 import distributorInputRouter from "./inputs/distributor";
 import distributorOutputRouter from "./outputs/distributor";
+import orderInputRouter from "./inputs/order";
 
 const router = Router();
 
@@ -13,6 +14,8 @@ router.use("/user", userInputRouter);
 router.use("/travels", travelInputRouter);
 
 router.use("/distributor", distributorInputRouter);
+
+router.use("/order", orderInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
