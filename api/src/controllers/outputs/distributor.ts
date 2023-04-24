@@ -18,9 +18,20 @@ export const searchDistributor = async (req: Request, res: Response) => {
   }
 };
 
-export const allDistributors = async (req: Request, res: Response) => {
+export const getAllDistributors = async (req: Request, res: Response) => {
   try {
-    res.status(201).json({ status: "todo ok" });
+    const distributorsRef = db.collection("distributors");
+    const distributorsSnapshot = await distributorsRef.get();
+    const distributors: Object[] = [];
+    distributorsSnapshot.forEach((doc) => {
+      const distributor = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      distributors.push(distributor);
+    });
+
+    res.status(201).json(distributors);
   } catch (error) {
     console.error("Error al obtener el usuario", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });

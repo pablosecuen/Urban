@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
   searchDistributor,
-  allDistributors,
+  getAllDistributors,
 } from "../../controllers/outputs/distributor";
 
 const router = Router();
 
 // Ruta para obtener un usuario por su ID
 router.get("/:id", searchDistributor);
-router.get("/", allDistributors);
+router.get("/", getAllDistributors);
 
 export default router;
