@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { getDocs, query, where } from "firebase/firestore";
-import { Local } from "../../interfaces/local";
+import { Local } from "../../schema/local";
 
 export const searchLocal = async (req: Request, res: Response): Promise<void> => {
   try {
