@@ -1,8 +1,13 @@
-export interface User {
+export interface UserToRegister {
   name: string;
-  address: string;
   email: string;
   password: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface User extends UserToRegister {
+  address: string;
   payments: {
     cardNumber: string;
     expirationDate: string;
@@ -14,11 +19,17 @@ export interface User {
   };
   img: string;
   DNI: string;
+  deleted: boolean;
 }
 
-export interface UserToRegister
-  extends Omit<User, 'address' | 'history' | 'img' | 'DNI'> {
-  address: string;
-  img: string;
-  DNI: string;
+export interface UserToUpdate extends Partial<UserToRegister> {
+  deleted: boolean;
+  address?: string;
+  payments?: {
+    cardNumber?: string;
+    expirationDate?: string;
+    securityCode?: string;
+  };
+  img?: string;
+  DNI?: string;
 }
