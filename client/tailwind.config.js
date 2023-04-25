@@ -6,8 +6,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        verde: "#e0ffcd",
+        celeste: "#CCEAF7",
+        blue: "rgb(59,130,246)",
+      },
+      boxShadow: {
+        "custom-md": "5px 13px 20px black",
+      },
+    },
   },
   plugins: [],
-}
-
+};
