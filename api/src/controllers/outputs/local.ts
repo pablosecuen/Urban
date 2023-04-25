@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { Local } from "../../interfaces/local";
+import { getDocs, query, where } from "firebase/firestore";
+import { Local } from "../../schema/local";
 
 export const searchLocal = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -19,11 +20,18 @@ export const searchLocal = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-export const allLocals = async (_req: Request, res: Response): Promise<void> => {
+export const getLocals = async (req: Request, res: Response): Promise<void> => {
   try {
+    const { name } = req.query;
     const localsRef = db.collection("locals");
-    const localsSnapshot = await localsRef.get();
 
+    let localsSnapshot: any;
+    if (name) {
+      const q = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`);
+      localsSnapshot = await getDocs(q);
+    } else {
+      localsSnapshot = await localsRef.get();
+    }
     const locals: Object[] = [];
     localsSnapshot.forEach((doc) => {
       const local = {

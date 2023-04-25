@@ -1,15 +1,28 @@
 import { Router } from "express";
+
 import userInputRouter from "./inputs/user";
 import userOutputRouter from "./outputs/user";
+
+import vehicleInputRouter from "./inputs/vehicle";
+import vehicleOutputRouter from "./outputs/vehicle";
+
 import chauffeurInputRouter from "./inputs/chauffeur";
 import chauffeurOutputRouter from "./outputs/chauffeur";
+
 import travelInputRouter from "./inputs/travels";
+import travelOutputRouter from "./outputs/travels";
+
 import distributorInputRouter from "./inputs/distributor";
 import distributorOutputRouter from "./outputs/distributor";
+
 import orderInputRouter from "./inputs/order";
 import orderOutputRouter from "./outputs/order";
+
 import localInputRouter from "./inputs/local";
 import localOutputRouter from "./outputs/local";
+
+import productInputRouter from "./inputs/product";
+import productOutputRouter from "./outputs/product";
 
 const router = Router();
 
@@ -24,14 +37,24 @@ router.use("/order", orderInputRouter);
 
 router.use("/local", localInputRouter);
 
+router.use("/products", productInputRouter)
+
+router.use("/vehicle", vehicleInputRouter);
+
 router.use("/chauffeur", chauffeurInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
+router.use("/travels", travelOutputRouter)
+
 router.use("/local", localOutputRouter);
 
+router.use("/vehicle", vehicleOutputRouter);
+
 router.use("/chauffeur", chauffeurOutputRouter);
+
+router.use("/products", productOutputRouter)
 
 router.use("/distributor", distributorOutputRouter);
 

@@ -2,7 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
     width: 100%;
     margin: 0px;
 }
+
+button {
+  @apply py-1 px-4 bg-blue-500 rounded-md text-white;
+}
+
+label {
+  @apply text-blue-500 font-semibold tracking-wide;
+}
+
+input {
+  accent-color: @apply text-blue-500;
+  @apply border-b-2 rounded-md;
+}
+
+input:focus-visible {
+  outline-offset: 0px;
+  outline-color: blue;
+  outline-style: solid;
+  outline-width: 1px;
+}
+

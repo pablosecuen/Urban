@@ -3,13 +3,12 @@ export interface Distributor {
   adress: string;
   email: string;
   password: string;
-  payment: string;
-  history: {
+  payment?: string;
+  history?: {
     orders: string[];
   };
   img: string;
   vehicle: string;
-  DNI: number;
+  dni: number;
   license: string;
 }
-
