@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Distributor from "../../schema/distributor";
+import { Distributor } from "../../schema/distributor";
 
 export const newDistributor = async (
   req: Request,
