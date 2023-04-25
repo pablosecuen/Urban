@@ -1,12 +1,12 @@
 interface Order {
   userId: string;
-  distributorID: string;
+  distributorId: string;
   localId: string;
   date: string;
   price: number;
   destination: string;
-  Status: boolean;
-  Order: OrderStatus;
+  status: boolean;
+  order: OrderStatus;
 }
 
 export default Order;

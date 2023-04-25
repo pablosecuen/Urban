@@ -1,14 +1,15 @@
-interface Distributor {
+export interface Distributor {
   name: string;
   adress: string;
   email: string;
   password: string;
   payment: string;
-  history: string;
+  history: {
+    orders: string[];
+  };
   img: string;
   vehicle: string;
-  dni: number;
+  DNI: number;
   license: string;
 }
 
-export default Distributor;
