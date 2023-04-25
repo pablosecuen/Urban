@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { newUser,updateUser } from "../../controllers/inputs/user";
+import { newUser, updateUser } from "../../controllers/inputs/user";
+import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
 
 const router = Router();
 
 // Ruta para crear un nuevo usuario
 
-router.post("/", newUser);
-router.put("/:id", updateUser);
+router.post("/", newUserValidated, newUser);
+router.put("/:id", updateUserValidated, updateUser);
 
 export default router;
