@@ -7,7 +7,7 @@ import { validateOrder } from "../../utils/validations/order";
 export const newOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const orderData: Order = req.body;
-    console.log(orderData);
+
     if (!validateOrder(orderData)) throw new Error("Faltan ingresar datos");
 
     const docRef = await db.collection("orders").add(orderData);
