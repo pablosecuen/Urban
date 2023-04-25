@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { searchLocal, allLocals } from "../../controllers/outputs/local";
+import { searchLocal, getLocals } from "../../controllers/outputs/local";
 
 const router = Router();
 
 // Ruta para obtener un local por su name
 router.get("/:id", searchLocal);
 
-router.get("/", allLocals);
+router.get("/", getLocals);
 
 export default router;
