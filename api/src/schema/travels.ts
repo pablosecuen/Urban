@@ -1,4 +1,4 @@
-interface Travel {
+export interface Travel {
     userId: string;
     chauffeurId: string;
     date: Date;
@@ -8,5 +8,5 @@ interface Travel {
     status: TravelStatus;
 }
 
-export default Travel
+
 
