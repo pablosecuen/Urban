@@ -1,11 +1,11 @@
 interface Vehicle {
-  owner: string;
+  ownerId: string;
   patent: string;
   brand: string;
   model: string;
   year: string;
   img: string[];
-  chauffeurs: string[];
+  chauffeurId: string[];
 }
 
 export default Vehicle;

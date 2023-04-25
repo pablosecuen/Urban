@@ -6,6 +6,9 @@ import userOutputRouter from "./outputs/user";
 import vehicleInputRouter from "./inputs/vehicle";
 import vehicleOutputRouter from "./outputs/vehicle";
 
+import ownerInputRouter from "./inputs/owner";
+import ownerOutputRouter from "./outputs/owner";
+
 import chauffeurInputRouter from "./inputs/chauffeur";
 import chauffeurOutputRouter from "./outputs/chauffeur";
 
@@ -37,16 +40,18 @@ router.use("/order", orderInputRouter);
 
 router.use("/local", localInputRouter);
 
-router.use("/products", productInputRouter)
+router.use("/products", productInputRouter);
 
 router.use("/vehicle", vehicleInputRouter);
 
 router.use("/chauffeur", chauffeurInputRouter);
 
+router.use("/owner", ownerInputRouter);
+
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
-router.use("/travels", travelOutputRouter)
+router.use("/travels", travelOutputRouter);
 
 router.use("/local", localOutputRouter);
 
@@ -54,7 +59,9 @@ router.use("/vehicle", vehicleOutputRouter);
 
 router.use("/chauffeur", chauffeurOutputRouter);
 
-router.use("/products", productOutputRouter)
+router.use("/owner", ownerOutputRouter);
+
+router.use("/products", productOutputRouter);
 
 router.use("/distributor", distributorOutputRouter);
 
