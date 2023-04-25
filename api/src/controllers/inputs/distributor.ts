@@ -1,19 +1,15 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { Distributor } from "../../schema/distributor";
+import { validateDistributor } from "../../utils/validations/distributor";
 
-export const newDistributor = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const newDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: Distributor = req.body;
 
+    if (!validateDistributor(data)) throw new Error("Faltan ingresar datos");
     // Verificar si ya existe un distribuidor con el correo electrónico dado
-    const snapshot = await db
-      .collection("distributors")
-      .where("email", "==", data.email)
-      .get();
+    const snapshot = await db.collection("distributors").where("email", "==", data.email).get();
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
@@ -26,10 +22,7 @@ export const newDistributor = async (
   }
 };
 
-export const updateDistributor = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
     const data: Distributor = req.body; //datos de distribuidor a actualizar
@@ -41,9 +34,7 @@ export const updateDistributor = async (
     }
     // Actualizar el usuario en Firestore
     await db.collection("distributors").doc(id).update(data);
-    res
-      .status(201)
-      .json({ menssage: "Distribuidor actualizado correctamente" });
+    res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el Distribuidor", error);
     res.status(400).json({ messege: error.message });

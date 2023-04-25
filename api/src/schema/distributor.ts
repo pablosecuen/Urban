@@ -9,7 +9,6 @@ export interface Distributor {
   };
   img: string;
   vehicle: string;
-  DNI: number;
+  dni: number;
   license: string;
 }
-
