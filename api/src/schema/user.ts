@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   name: string;
   address: string;
   email: string;
@@ -16,4 +16,9 @@ interface User {
   DNI: string;
 }
 
-export default User
+export interface UserToRegister
+  extends Omit<User, 'address' | 'history' | 'img' | 'DNI'> {
+  address: string;
+  img: string;
+  DNI: string;
+}
