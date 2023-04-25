@@ -1,14 +1,20 @@
-
-import Login from '@component/components/Login/Login'
-import styles from './page.module.css'
-
+import Login from "@component/components/Login/Login";
+import logo from "../assets/imagenes/UrbanLogo.png";
+import Image, { StaticImageData } from "next/image";
 
 export default function Home() {
   return (
-<main className={styles.main}>
-  <div className={styles.left}>asdasdasd</div>
-  <div className={styles.right}>
-    <Login/>
-  </div>
-</main>
-  )}
+    <main className="flex flex-col h-full sm:flex-row">
+      <div className="h-full border-2 flex justify-center align-center items-center sm:h-full">
+        <Image
+          src={logo as StaticImageData}
+          alt="logo"
+          className="w-full aspect-ratio-square"
+        />
+      </div>
+      <div className="h-full border-2 sm:h-full">
+        <Login />
+      </div>
+    </main>
+  );
+}
