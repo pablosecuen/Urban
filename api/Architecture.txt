@@ -13,6 +13,12 @@ src/
 │       ├── output-1.ts # Módulo para el controlador de salida 1
 │       ├── output-2.ts # Módulo para el controlador de salida 2
 │       └── ...
+├── interfaces/         # Carpeta para los modelos de los datos(interfaces y types)
+│   ├── user.ts         # Archivo con los modelos de user
+│   ├── chauffeur.ts    # Archivo con los modelos de chauffeur
+│   ├── distributor.ts  # Archivo con los modelos de distributor
+│   ├── local.ts        # Archivo con los modelos de local
+│   └── ...
 │
 ├── routers/            # Carpeta para los routers de la aplicación
 │   ├── inputs/         # Carpeta para los routers de entradas de datos

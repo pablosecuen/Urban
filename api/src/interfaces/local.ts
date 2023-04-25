@@ -12,4 +12,8 @@ export interface Local {
 }
 
 // Omit copia la interface omitiendo las propiedades especificadas
-export type LocalToRegister = Omit<Local, "id" | "payments" | "history" | "products" | "state">;
+export interface LocalToRegister
+  extends Omit<Local, "id" | "payments" | "history" | "products" | "state"> {}
+
+// Partial hace que las props extendidas sean opcionales
+export interface LocalToUpdate extends Partial<LocalToRegister> {}
