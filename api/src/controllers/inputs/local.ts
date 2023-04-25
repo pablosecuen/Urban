@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { LocalToRegister, LocalToUpdate } from "../../interfaces/local";
+import { LocalToRegister, LocalToUpdate } from "../../schema/local";
 
 /**
  * Controlador para crear un local en Firestore.
