@@ -1,30 +1,45 @@
 "use client";
 import Link from "next/link";
-import styles from "./NavBar.module.css";
-import { useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import React, { useState } from "react";
+import Image, { StaticImageData } from "next/image";
 import logo from "../../assets/imagenes/UrbanLogo.png";
+import {
+  HiMenuAlt1,
+  HiUserCircle,
+  HiOutlineHome,
+  HiOutlineBell,
+  HiOutlineAnnotation,
+} from "react-icons/hi";
+import { IconType } from "react-icons";
+
+import { useMediaQuery } from "react-responsive";
 
 const links = [
   {
-    label: "home",
+    label: "Home",
     route: "/",
+    icon: HiOutlineHome,
   },
   {
-    label: "perfil",
+    label: "Perfil",
     route: "/perfil",
+    icon: HiUserCircle,
   },
   {
-    label: "notificaciones",
+    label: "Notificaciones",
     route: "/notificaciones",
+    icon: HiOutlineBell,
   },
   {
-    label: "ayuda",
+    label: "Ayuda",
     route: "/ayuda",
+    icon: HiOutlineAnnotation,
   },
 ];
 
 export default function NavBar() {
+  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
+
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -32,47 +47,63 @@ export default function NavBar() {
     console.log(showMenu);
   };
 
-  const isMobile = useMediaQuery({ maxWidth: 700 });
-
   return (
     <header>
-      <nav className={styles.nav}>
-        <img src="../../assets/imagenes/UrbanLogo.png" alt="logo" />
-        {isMobile ? (
-          <>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="-6 -3 30 30"
-              className={styles.hamburguer}
-              onClick={toggleMenu}
-            >
-              <path
-                fill="none"
-                stroke="#000000"
-                strokeLinecap="round"
-                strokeMiterlimit="10"
-                strokeWidth="2"
-                d="M2,6h20M2,12h20M2,18h20"
-              />
-            </svg>
-            {showMenu && (
-              <ul className={styles.ulMobile}>
-                <li className={styles.liMobile}>uno</li>
-                <li className={styles.liMobile}>dos</li>
-                <li className={styles.liMobile}>tres</li>
-              </ul>
-            )}
-          </>
-        ) : (
-          <ul className={styles.ul}>
-            {links.map(({ label, route }) => (
-              <li className={styles.li} key={route}>
-                <Link href={route}>{label}</Link>
-              </li>
+      {isMobile ? (
+        <nav className="w-full h-12 flex bg-verde justify-between ">
+          <div className="w-12">
+            <Image
+              src={logo as StaticImageData}
+              alt="logo"
+              className="h-12 w-12"
+            />
+          </div>
+
+          <HiMenuAlt1
+            onClick={toggleMenu}
+            className="md:hidden text-xl mr-4 cursor-pointer w-1/12 h-full z-10"
+          />
+
+          <div
+            className={`md:hidden absolute w-0 overflow-hidden top-12 left-0  h-full bg-white  transition-all ease-in-out duration-1000 ${
+              showMenu && "w-1/2 shadow-custom-md"
+            }`}
+          >
+            <ul className="flex flex-col items-center p-4">
+              {links.map((link) => (
+                <li key={link.route} className="my-2 flex items-center ">
+                  <link.icon className="w-6 h-6" />
+                  <Link href={link.route} onClick={toggleMenu}>
+                    <span className="mx-2">{link.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      ) : (
+        <nav className="w-full h-12 flex bg-verde justify-between overflow-hidden">
+          <div className="w-12 ">
+            <Image
+              src={logo as StaticImageData}
+              alt="logo"
+              className="h-12 w-12"
+            />
+          </div>
+          <ul className="flex  w-2/3 lg:w-1/3 justify-between items-center ">
+            {links.map((link) => (
+              <div>
+                <li key={link.route} className=" flex gap-2 text-center">
+                  <link.icon className="w-6 h-8 " />
+                  <Link href={link.route} className=" flex items-center">
+                    {link.label}
+                  </Link>
+                </li>
+              </div>
             ))}
           </ul>
-        )}
-      </nav>
+        </nav>
+      )}
     </header>
   );
 }

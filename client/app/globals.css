@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+    width: 100%;
+    margin: 0px;
+}
+
 button {
   @apply py-1 px-4 bg-blue-500 rounded-md text-white;
 }
@@ -21,3 +27,4 @@ input:focus-visible {
   outline-style: solid;
   outline-width: 1px;
 }
+
