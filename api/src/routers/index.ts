@@ -1,6 +1,8 @@
 import { Router } from "express";
 import userInputRouter from "./inputs/user";
 import userOutputRouter from "./outputs/user";
+import vehicleInputRouter from "./inputs/vehicle";
+import vehicleOutputRouter from "./outputs/vehicle";
 import chauffeurInputRouter from "./inputs/chauffeur";
 import chauffeurOutputRouter from "./outputs/chauffeur";
 import travelInputRouter from "./inputs/travels";
@@ -24,12 +26,16 @@ router.use("/order", orderInputRouter);
 
 router.use("/local", localInputRouter);
 
+router.use("/vehicle", vehicleInputRouter);
+
 router.use("/chauffeur", chauffeurInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
 router.use("/local", localOutputRouter);
+
+router.use("/vehicle", vehicleOutputRouter);
 
 router.use("/chauffeur", chauffeurOutputRouter);
 
