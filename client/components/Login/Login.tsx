@@ -105,7 +105,7 @@ const Login: React.FC<LoginFormProps & RegisterFormProps> = ({
             <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Google</button>
             <button onClick={handleRegisterClick}>Facebook</button>
-            <button onClick={handleLoginClick} className="mt-10">
+            <button onClick={handleLoginClick} className="mt-6">
               Ya tienes cuenta? ingresa aquí
             </button>
           </div>
@@ -131,8 +131,6 @@ const Login: React.FC<LoginFormProps & RegisterFormProps> = ({
             </label>
           </div>
           <div className="flex flex-col justify-between items-center align-middle h-1/2 border-2">
-            <button type="submit">Login</button>
-
             <button onClick={handleRegisterClick}>Login</button>
             <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Google</button>
