@@ -3,7 +3,7 @@ export interface Products {
   price: string;
   description: string;
   stock: number;
+  type: TypeProduct;
+  localId: string[];
   img: string;
 }
-
-
