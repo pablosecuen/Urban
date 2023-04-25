@@ -1,5 +1,11 @@
-export default function perfil () {
-    return (
-        <h1>esta es la pagina de perfil</h1>
-    )
+import ProfileUser from "../../components/Perfil/user";
+import ProfileChofer from "../../components/Perfil/chofer";
+
+export default function perfil() {
+  return (
+    <div className="flex">
+      {/* <ProfileUser></ProfileUser> */}
+      <ProfileChofer></ProfileChofer>
+    </div>
+  );
 }
