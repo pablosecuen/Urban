@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { LocalToRegister, LocalToUpdate } from "../../schema/local";
+import { Local, LocalToRegister, LocalToUpdate } from "../../schema/local";
 
 /**
  * Controlador para crear un local en Firestore.
@@ -8,8 +8,14 @@ import { LocalToRegister, LocalToUpdate } from "../../schema/local";
 export const newLocal = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: LocalToRegister = req.body;
-
-    const docRef = await db.collection("locals").add(data);
+    const dataFormated: Local = {
+      ...data,
+      payments: [],
+      history: [],
+      state: false,
+      deleted: false,
+    };
+    const docRef = await db.collection("locals").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     try {
