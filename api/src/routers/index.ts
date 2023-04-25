@@ -24,16 +24,14 @@ router.use("/order", orderInputRouter);
 
 router.use("/local", localInputRouter);
 
+router.use("/chauffeur", chauffeurInputRouter);
+
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
 router.use("/local", localOutputRouter);
 
-// Rutas para Choferes
-router.use("/chauffeur", chauffeurInputRouter);
 router.use("/chauffeur", chauffeurOutputRouter);
-
-router.use("/travels", travelInputRouter);
 
 router.use("/distributor", distributorOutputRouter);
 

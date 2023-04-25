@@ -1,11 +1,8 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Distributor from "../../schema/distributor";
+import { Distributor } from "../../schema/distributor";
 
-export const searchDistributor = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const searchDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
     const doc = await db.collection("distributors").doc(id).get();
@@ -21,10 +18,7 @@ export const searchDistributor = async (
   }
 };
 
-export const getAllDistributors = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getAllDistributors = async (req: Request, res: Response): Promise<void> => {
   try {
     const distributorsRef = db.collection("distributors");
     const distributorsSnapshot = await distributorsRef.get();

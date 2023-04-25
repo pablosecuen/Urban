@@ -1,18 +1,17 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import User from "../../schema/user";
 
 export const searchUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
     if (!doc.exists) {
       res.status(404).json({ message: "Usuario no encontrado" });
     } else {
-      const usuario = doc.data() as User;
+      const usuario = { id: doc.id, ...doc.data() };
       res.json(usuario);
     }
   } catch (error) {

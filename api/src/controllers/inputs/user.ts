@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import User from "../../schema/user";
+import { UserToRegister, User } from "../../schema/user";
 
 /**
  * Controlador para crear un usuario en Firestore.
  */
 export const newUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: User = req.body;
+    const data: UserToRegister = req.body;
 
     // Verificar si ya existe un usuario con el correo electrónico dado
     const snapshot = await db
