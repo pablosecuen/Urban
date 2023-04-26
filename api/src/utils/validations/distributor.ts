@@ -12,7 +12,7 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
       !data.password ||
       !data.img ||
       !data.vehicle ||
-      !data.dni ||
+      !data.DNI ||
       !data.license
     )
       throw new Error("Faltan datos");
@@ -36,7 +36,7 @@ export const updateDistributorValidate = (
       "password",
       "img",
       "vehicle",
-      "dni",
+      "DNI",
       "license",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))

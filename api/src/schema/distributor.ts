@@ -5,7 +5,7 @@ export interface DistributorToRegister {
   password: string;
   img: string;
   vehicle: string;
-  dni: number;
+  DNI: number;
   license: string;
 }
 
