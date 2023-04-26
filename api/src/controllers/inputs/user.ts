@@ -46,7 +46,9 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     }
   }
 };
-
+/**
+ * Controlador para actulizar un usuario en Firestore.
+ */
 export const updateUser = async (
   req: Request,
   res: Response
@@ -68,5 +70,22 @@ export const updateUser = async (
   } catch (error) {
     console.error("Error al actualizar el usuario", error);
     res.status(400).json({ message: error.message });
+  }
+};
+/**
+ * Controlador para hacer un borrado logico de un usuario en Firestore.
+ */
+export const deletedUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("users").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el usuario");
+    }
+    await db.collection("users").doc(id).update({ deleted: true });
+    res.status(201).json({ menssage: "Usuario eliminado correctamente" });
+  } catch (error) {
+    console.error("Error al borrar el Usuario", error);
+    res.status(400).json({ messege: error.message });
   }
 };

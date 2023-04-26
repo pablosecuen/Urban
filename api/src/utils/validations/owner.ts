@@ -15,7 +15,7 @@ export const newOwnerValidated = (req: Request, res: Response, next: NextFunctio
 export const updateOwnerValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: OwnerToUpdate = req.body;
-    const allowProperties = ["deleted", "name", "email", "phone", "adress", "DNI", "vehicleId"];
+    const allowProperties = ["deleted", "name", "email", "phone", "adress", "DNI", "vehiclesId"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos faltantes");
     next();
