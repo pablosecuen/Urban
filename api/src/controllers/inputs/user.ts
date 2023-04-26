@@ -70,3 +70,18 @@ export const updateUser = async (
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deletedUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("users").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el usuario");
+    }
+    await db.collection("users").doc(id).update({ deleted: true });
+    res.status(201).json({ menssage: "Usuario eliminado correctamente" });
+  } catch (error) {
+    console.error("Error al borrar el Usuario", error);
+    res.status(400).json({ messege: error.message });
+  }
+};
