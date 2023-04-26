@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { newVehicle, updateVehicle, deleteVehicle } from "../../controllers/inputs/vehicle";
-import { newVehicleValidate, updateVehicleValidate } from "../../utils/validations/vehicle";
+import {
+  deleteVehicleValidate,
+  newVehicleValidate,
+  updateVehicleValidate,
+} from "../../utils/validations/vehicle";
 
 const router = Router();
 
@@ -8,6 +12,6 @@ const router = Router();
 
 router.post("/", newVehicleValidate, newVehicle);
 router.put("/:id", updateVehicleValidate, updateVehicle);
-router.put("/delete/:id", deleteVehicle);
+router.put("/delete/:id", deleteVehicleValidate, deleteVehicle);
 
 export default router;

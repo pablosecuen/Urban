@@ -24,8 +24,7 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       !data.year ||
       !data.img ||
       !data.ownerId ||
-      !data.chauffeurId ||
-      !data.deleted
+      !data.chauffeurId
     )
       throw new Error("Faltan datos");
     next();
@@ -55,18 +54,14 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
   }
 };
 
-// export const deleteDistributorValidate = (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): void => {
-//   try {
-//     const data: DistributorToUpdate = req.body;
-//     const allowProperties: string[] = ["delete"];
-//     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-//       throw new Error("Datos no permitidos");
-//     next();
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// };
+export const deleteVehicleValidate = (req: Request, res: Response, next: NextFunction): void => {
+  try {
+    const data: VehicleToUpdate = req.body;
+    const allowProperties: string[] = ["delete"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
