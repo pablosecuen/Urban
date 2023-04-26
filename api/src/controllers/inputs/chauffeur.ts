@@ -56,3 +56,11 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteChauffeur = async (req: Request, res: Response): Promise<void> => {
+  try {
+  } catch (innerError) {
+    console.error("Error al eliminar el chofer", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
