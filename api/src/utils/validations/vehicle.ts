@@ -34,30 +34,26 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
   }
 };
 
-// export const updateDistributorValidate = (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): void => {
-//   try {
-//     const data: DistributorToUpdate = req.body;
-//     const allowProperties: string[] = [
-//       "name",
-//       "adress",
-//       "email",
-//       "password",
-//       "img",
-//       "vehicle",
-//       "dni",
-//       "license",
-//     ];
-//     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-//       throw new Error("Datos no permitidos");
-//     next();
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// };
+export const updateVehicleValidate = (req: Request, res: Response, next: NextFunction): void => {
+  try {
+    const data: VehicleToUpdate = req.body;
+    const allowProperties: string[] = [
+      "patent",
+      "brand",
+      "model",
+      "year",
+      "img",
+      "ownerId",
+      "chauffeurId",
+      "deleted",
+    ];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 // export const deleteDistributorValidate = (
 //   req: Request,

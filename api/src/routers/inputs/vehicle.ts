@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { newVehicle, updateVehicle, deleteVehicle } from "../../controllers/inputs/vehicle";
-import { newVehicleValidate } from "../../utils/validations/vehicle";
+import { newVehicleValidate, updateVehicleValidate } from "../../utils/validations/vehicle";
 
 const router = Router();
 
 // Ruta para crear vehiculos
 
 router.post("/", newVehicleValidate, newVehicle);
-router.put("/:id", updateVehicle);
+router.put("/:id", updateVehicleValidate, updateVehicle);
 router.put("/delete/:id", deleteVehicle);
 
 export default router;
