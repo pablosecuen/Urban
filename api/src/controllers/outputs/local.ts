@@ -28,7 +28,7 @@ export const getLocals = async (req: Request, res: Response): Promise<void> => {
 
     let localsSnapshot: any;
     if (name) {
-      const q = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`);
+      const q = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`); // por favor poner de la constante decente
       localsSnapshot = await getDocs(q);
     } else {
       localsSnapshot = await localsRef.get();
