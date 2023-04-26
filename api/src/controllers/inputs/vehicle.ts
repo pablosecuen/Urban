@@ -1,21 +1,28 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Vehicle from "../../schema/vehicle";
+import { VehicleToRegister, Vehicle, VehicleToUpdate } from "../../schema/vehicle";
 import firebase from "firebase/compat/app";
 
 export const newVehicle = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: Vehicle = req.body;
-    const docRef = await db.collection("vehicle").add(data);
+    const data: VehicleToRegister = req.body;
+    const dataFormated = {
+      ...data,
+      deleted: false,
+    };
+    const docRef = await db.collection("vehicle").add(dataFormated);
 
-    await db.collection("chauffeur").doc(data.chauffeurId).update({
+    await db.collection("chauffeur").doc(dataFormated.chauffeurId).update({
       "vehicle.vehicleId": docRef.id,
       "vehicle.patent": data.patent,
-    })
+    });
 
-    await db.collection("owner").doc(data.ownerId).update({
-      "vehiclesId": firebase.firestore.FieldValue.arrayUnion(docRef.id),
-    })
+    await db
+      .collection("owner")
+      .doc(dataFormated.ownerId)
+      .update({
+        vehiclesId: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+      });
 
     res.status(200).json({ message: "Vehículo creado correctamente", id: docRef.id });
   } catch (innerError) {
@@ -27,7 +34,7 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
 export const updateVehicle = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
-    const data: Vehicle = req.body;
+    const data: VehicleToUpdate = req.body;
 
     const docRef = await db.collection("vehicle").doc(id).get();
 
