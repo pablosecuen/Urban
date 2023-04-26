@@ -42,3 +42,15 @@ export const updateChauffeurValidated = (req: Request, res: Response, next: Next
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteChauffeurValidated = (req: Request, res: Response, next: NextFunction): void => {
+  try {
+    const data: ChauffeurToUpdate = req.body;
+    const allowProperties = ["deleted"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw Error("Dato faltante");
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
