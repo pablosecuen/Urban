@@ -13,9 +13,8 @@ app.use(morgan('dev'));
 app.use((_req, res, next) => {
     res.header(
         "Access-Control-Allow-Origin",
-        // "https://petfriendlyuniverse.vercel.app" // ORIGIN en deploy
         `${process.env.ORIGIN}`
-    ); // update to match the domain you will make the request from
+    );
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
         "Access-Control-Allow-Headers",
