@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import firebase from "firebase/compat/app";
 import Order from "../../schema/order";
-import { validateOrder } from "../../utils/validations/order";
 
+/**
+ * Controlador para crear una orden
+
+ */
 export const newOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const orderData: Order = req.body;
-
-    if (!validateOrder(orderData)) throw new Error("Faltan ingresar datos");
-
     const docRef = await db.collection("orders").add(orderData);
     await db
       .collection("users")
@@ -29,7 +29,9 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
     res.status(400).json({ messege: error.message });
   }
 };
-
+/**
+ * Controlador para actualizar las ordenes
+ */
 export const updateOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;

@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { Distributor, DistributorToRegister } from "../../schema/distributor";
 
+/**
+ * Controlador para crear distribuidores
+ */
 export const newDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: DistributorToRegister = req.body;
@@ -29,6 +32,9 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
   }
 };
 
+/**
+ * Controlador para actualizar distribuidores
+ */
 export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
