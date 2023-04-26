@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { getDocs, query, where } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import { Local } from "../../schema/local";
 
 export const searchLocal = async (req: Request, res: Response): Promise<void> => {
   try {
-
     const id: string = req.params.id;
 
     const doc = await db.collection("locals").doc(id).get();
@@ -28,8 +27,8 @@ export const getLocals = async (req: Request, res: Response): Promise<void> => {
 
     let localsSnapshot: any;
     if (name) {
-      const q = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`); // por favor poner de la constante decente
-      localsSnapshot = await getDocs(q);
+      const query = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`); // por favor poner de la constante decente
+      localsSnapshot = await getDocs(query);
     } else {
       localsSnapshot = await localsRef.get();
     }
@@ -72,6 +71,3 @@ export const getLocalByProduct = async (req: Request, res: Response): Promise<vo
     res.status(500).json({ message: "Error al obtener el local" });
   }
 };
-
-
-

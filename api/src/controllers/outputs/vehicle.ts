@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import { query, where, getDocs, collection } from "firebase/firestore";
 import { Vehicle } from "../../schema/vehicle";
 
 export const searchAllVehicles = async (req: Request, res: Response): Promise<void> => {
   try {
-    const vehicleRef = db.collection("vehicle");
-    const vehicleSnapshot = await vehicleRef.get();
+    const query_ = query(collection(db, "vehicle"), where("deleted", "==", false));
+    const vehicleSnapshot = await getDocs(query_);
+
     const vehicles = [];
     vehicleSnapshot.forEach((doc) => {
       const vehicle = {
@@ -14,6 +16,7 @@ export const searchAllVehicles = async (req: Request, res: Response): Promise<vo
       };
       vehicles.push(vehicle);
     });
+
     res.json(vehicles);
   } catch (innerError) {
     console.error("Error al encontrar los vehículos", innerError);
@@ -24,7 +27,11 @@ export const searchAllVehicles = async (req: Request, res: Response): Promise<vo
 export const searchVehicleByPatent = async (req: Request, res: Response): Promise<void> => {
   try {
     const patent: string = req.params.patent;
-    const doc = await db.collection("vehicle").where("patent", "==", patent).get();
+    const doc = await db
+      .collection("vehicle")
+      .where("patent", "==", patent)
+      .where("deleted", "==", false)
+      .get();
     if (doc.empty) {
       res.status(404).json({ message: `No se encontró ningún vehículo con la patente ${patent}` });
     }
@@ -41,7 +48,11 @@ export const searchVehicleByPatent = async (req: Request, res: Response): Promis
 export const searchVehicleByOwner = async (req: Request, res: Response): Promise<void> => {
   try {
     const owner: string = req.params.ownerId;
-    const doc = await db.collection("vehicle").where("owner", "==", owner).get();
+    const doc = await db
+      .collection("vehicle")
+      .where("owner", "==", owner)
+      .where("deleted", "==", false)
+      .get();
     if (doc.empty) {
       res.status(404).json({ message: `No se encontró ningún vehículo en propiedad de ${owner}` });
     }
@@ -57,7 +68,10 @@ export const searchVehicleByYear = async (req: Request, res: Response): Promise<
   try {
     const year: string = req.params.year;
     const vehicleRef = db.collection("vehicle");
-    const vehicleSnapshot = await vehicleRef.where("year", "==", year).get();
+    const vehicleSnapshot = await vehicleRef
+      .where("year", "==", year)
+      .where("deleted", "==", false)
+      .get();
     const vehicles = [];
     vehicleSnapshot.forEach((doc) => {
       const vehicle = {
