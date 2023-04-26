@@ -46,7 +46,9 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     }
   }
 };
-
+/**
+ * Controlador para actulizar un usuario en Firestore.
+ */
 export const updateUser = async (
   req: Request,
   res: Response
@@ -70,7 +72,9 @@ export const updateUser = async (
     res.status(400).json({ message: error.message });
   }
 };
-
+/**
+ * Controlador para hacer un borrado logico de un usuario en Firestore.
+ */
 export const deletedUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
