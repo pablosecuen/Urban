@@ -8,5 +8,9 @@ export interface Travel {
     status: TravelStatus;
 }
 
+export interface TravelToUpdate {
+    status?: TravelStatus;
+}
+
 
 

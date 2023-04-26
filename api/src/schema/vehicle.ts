@@ -1,11 +1,23 @@
-interface Vehicle {
-  owner: string;
+export interface VehicleToRegister {
   patent: string;
   brand: string;
   model: string;
   year: string;
   img: string[];
-  chauffeurs: string[];
+  ownerId: string;
+  chauffeurId: string;
 }
 
-export default Vehicle;
+export interface Vehicle extends VehicleToRegister {
+  deleted?: boolean;
+}
+
+export interface VehicleToUpdate extends Partial<Vehicle> {
+  patent?: string;
+  brand?: string;
+  model?: string;
+  year?: string;
+  img?: string[];
+  ownerId?: string;
+  chauffeurId?: string;
+}

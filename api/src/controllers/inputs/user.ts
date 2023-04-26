@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { UserToRegister, User } from "../../schema/user";
+import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -8,17 +8,34 @@ import { UserToRegister, User } from "../../schema/user";
 export const newUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: UserToRegister = req.body;
+    const dataFormated: User = {
+      ...data,
+      address: "",
+      payments: {
+        cardNumber: "",
+        expirationDate: "",
+        securityCode: "",
+      }
+      ,
+      history: {
+        orders: [],
+        travels: [],
+      },
+      img: "",
+      DNI: "",
+      deleted: false
+    };
 
     // Verificar si ya existe un usuario con el correo electrónico dado
     const snapshot = await db
       .collection("users")
-      .where("email", "==", data.email)
+      .where("email", "==", dataFormated.email)
       .get();
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
 
-    const docRef = await db.collection("users").add(data);
+    const docRef = await db.collection("users").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     try {
@@ -29,14 +46,16 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     }
   }
 };
-
+/**
+ * Controlador para actulizar un usuario en Firestore.
+ */
 export const updateUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
-    const data: User = req.body; // Obtener datos actualizados del usuario
+    const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
 
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
@@ -51,5 +70,22 @@ export const updateUser = async (
   } catch (error) {
     console.error("Error al actualizar el usuario", error);
     res.status(400).json({ message: error.message });
+  }
+};
+/**
+ * Controlador para hacer un borrado logico de un usuario en Firestore.
+ */
+export const deletedUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("users").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el usuario");
+    }
+    await db.collection("users").doc(id).update({ deleted: true });
+    res.status(201).json({ menssage: "Usuario eliminado correctamente" });
+  } catch (error) {
+    console.error("Error al borrar el Usuario", error);
+    res.status(400).json({ messege: error.message });
   }
 };

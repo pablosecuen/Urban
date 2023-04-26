@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Vehicle from "../../schema/vehicle";
+import { Vehicle } from "../../schema/vehicle";
 
 export const searchAllVehicles = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -29,7 +29,9 @@ export const searchVehicleByPatent = async (req: Request, res: Response): Promis
       res.status(404).json({ message: `No se encontró ningún vehículo con la patente ${patent}` });
     }
     const vehicleData = doc.docs[0].data() as Vehicle;
-    res.json(vehicleData);
+    console.log(vehicleData);
+    const { ownerId, chauffeurId } = vehicleData;
+    res.json({ ...vehicleData, ...{ ownerId, chauffeurId } });
   } catch (innerError) {
     console.error("Error al encontrar el vehículo por patente", innerError);
     res.status(400).json({ message: innerError.message });
@@ -38,7 +40,7 @@ export const searchVehicleByPatent = async (req: Request, res: Response): Promis
 
 export const searchVehicleByOwner = async (req: Request, res: Response): Promise<void> => {
   try {
-    const owner: string = req.params.owner;
+    const owner: string = req.params.ownerId;
     const doc = await db.collection("vehicle").where("owner", "==", owner).get();
     if (doc.empty) {
       res.status(404).json({ message: `No se encontró ningún vehículo en propiedad de ${owner}` });
