@@ -22,12 +22,15 @@ export const searchLocal = async (req: Request, res: Response): Promise<void> =>
 
 export const getLocals = async (req: Request, res: Response): Promise<void> => {
   try {
-    const name: string = req.params.name;
+    const name: string = req.query.name.toString();
     const localsRef = db.collection("locals");
 
     let localsSnapshot: any;
     if (name) {
-      const query = localsRef.where("name", ">=", name).where("name", "<", `${name}\uf8ff`); // por favor poner de la constante decente
+      const query = localsRef
+        .where("name", ">=", name)
+        .where("name", "<", `${name}\uf8ff`)
+        .where("deleted", "==", false);
       localsSnapshot = await getDocs(query);
     } else {
       localsSnapshot = await localsRef.get();

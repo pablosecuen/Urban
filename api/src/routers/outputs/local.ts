@@ -5,8 +5,8 @@ const router = Router();
 
 router.get("/:id", searchLocal);
 
-router.get("/", getLocals);
+router.get("/", getLocals); // permite (name) por query, si no lo recibe es un getAll
 
-router.get("/product/:id", getLocalByProduct)
+router.get("/product/:id", getLocalByProduct);
 
 export default router;
