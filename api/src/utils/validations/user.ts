@@ -23,3 +23,19 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteUserValidate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    const data: UserToUpdate = req.body;
+    const allowProperties: string[] = ["delete"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
