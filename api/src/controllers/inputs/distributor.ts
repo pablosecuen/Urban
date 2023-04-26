@@ -4,6 +4,7 @@ import { Distributor, DistributorToRegister } from "../../schema/distributor";
 
 /**
  * Controlador para crear distribuidores
+ * * @param req body tipo DistributorToRegister
  */
 export const newDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -34,6 +35,8 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
 
 /**
  * Controlador para actualizar distribuidores
+ * @param req Id tipo string
+ * @param req body tipo DistributorToUpdate
  */
 export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -50,6 +53,26 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
     res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el Distribuidor", error);
+    res.status(400).json({ messege: error.message });
+  }
+};
+/**
+ * Controlador para eliminar un distribuidor por id
+ 
+ * @param req Id tipo string
+ */
+export const deleteDistributor = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id; //obtener id del distribuidor a eliminar
+    const docRef = await db.collection("distributors").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el distributor");
+    }
+    // Actualizar el usuario en Firestore
+    await db.collection("distributors").doc(id).update({ deleted: true });
+    res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
+  } catch (error) {
+    console.error("Error al borrar el Distribuidor", error);
     res.status(400).json({ messege: error.message });
   }
 };

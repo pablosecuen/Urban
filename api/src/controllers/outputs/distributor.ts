@@ -36,7 +36,11 @@ export const getAllDistributors = async (req: Request, res: Response): Promise<v
       };
       distributors.push(distributor);
     });
-    res.status(201).json(distributors);
+    const trueDistributors = distributors.filter((distributor: any, i = 0) => {
+      return distributor.deleted === false;
+    });
+
+    res.status(201).json(trueDistributors);
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
