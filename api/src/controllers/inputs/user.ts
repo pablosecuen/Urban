@@ -10,7 +10,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const data: UserToRegister = req.body;
     const dataFormated: User = {
       ...data,
-      address: "",
+      adress: "",
       payments: {
         cardNumber: "",
         expirationDate: "",
