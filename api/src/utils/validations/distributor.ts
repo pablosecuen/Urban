@@ -29,6 +29,35 @@ export const updateDistributorValidate = (
 ): void => {
   try {
     const data: DistributorToUpdate = req.body;
+    const allowProperties: string[] = [
+      "name",
+      "adress",
+      "email",
+      "password",
+      "img",
+      "vehicle",
+      "dni",
+      "license",
+    ];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const deleteDistributorValidate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    const data: DistributorToUpdate = req.body;
+    const allowProperties: string[] = ["delete"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
+    next();
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
