@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { newVehicle, updateVehicle } from "../../controllers/inputs/vehicle";
+import { newVehicle, updateVehicle, deleteVehicle } from "../../controllers/inputs/vehicle";
 
 const router = Router();
 
@@ -7,5 +7,6 @@ const router = Router();
 
 router.post("/", newVehicle);
 router.put("/:id", updateVehicle);
+router.put("/delete/:id", deleteVehicle);
 
 export default router;

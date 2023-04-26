@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Vehicle from "../../schema/vehicle";
+import { Vehicle } from "../../schema/vehicle";
 
 export const searchAllVehicles = async (req: Request, res: Response): Promise<void> => {
   try {
