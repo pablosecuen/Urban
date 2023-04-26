@@ -3,10 +3,10 @@ import { db } from "../../connection/connection";
 import Order from "../../schema/order";
 import { newOrder } from "../inputs/order";
 
-export const searchOrder = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+/**
+ * Controlador para buscar una orden por id
+ */
+export const searchOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
     const doc = await db.collection("orders").doc(id).get();
@@ -21,11 +21,10 @@ export const searchOrder = async (
     res.status(500).json({ message: "Error al obtener la orden" });
   }
 };
-
-export const getAllOrders = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+/**
+ * controlador para buscar todas las ordenes
+ */
+export const getAllOrders = async (req: Request, res: Response): Promise<void> => {
   try {
     const orderRef = db.collection("orders");
     const orderSnapshot = await orderRef.get();

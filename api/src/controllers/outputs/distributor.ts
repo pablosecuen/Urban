@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { Distributor } from "../../schema/distributor";
 
+/**
+ * Controlador para buscar un distribuidor por id
+ */
 export const searchDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
@@ -18,6 +21,9 @@ export const searchDistributor = async (req: Request, res: Response): Promise<vo
   }
 };
 
+/**
+ * Controlador para obtener todos los distribuidores
+ */
 export const getAllDistributors = async (req: Request, res: Response): Promise<void> => {
   try {
     const distributorsRef = db.collection("distributors");
@@ -30,7 +36,6 @@ export const getAllDistributors = async (req: Request, res: Response): Promise<v
       };
       distributors.push(distributor);
     });
-
     res.status(201).json(distributors);
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);

@@ -1,20 +1,30 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { Distributor } from "../../schema/distributor";
-import { validateDistributor } from "../../utils/validations/distributor";
+import { Distributor, DistributorToRegister } from "../../schema/distributor";
 
+/**
+ * Controlador para crear distribuidores
+ */
 export const newDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: Distributor = req.body;
+    const data: DistributorToRegister = req.body;
+    const dataFormated: Distributor = {
+      ...data,
+      payments: [],
+      history: [],
+      deleted: false,
+    };
 
-    if (!validateDistributor(data)) throw new Error("Faltan ingresar datos");
     // Verificar si ya existe un distribuidor con el correo electrónico dado
-    const snapshot = await db.collection("distributors").where("email", "==", data.email).get();
+    const snapshot = await db
+      .collection("distributors")
+      .where("email", "==", dataFormated.email)
+      .get();
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
     //crear doocumento de distribuidor
-    const docRef = await db.collection("distributors").add(data);
+    const docRef = await db.collection("distributors").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear el distribuidor", error);
@@ -22,6 +32,9 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
   }
 };
 
+/**
+ * Controlador para actualizar distribuidores
+ */
 export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
