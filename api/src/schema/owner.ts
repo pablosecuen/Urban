@@ -3,7 +3,7 @@ interface Owner {
   email: string;
   phone: string;
   DNI: string;
-  vehicles: string[];
+  vehiclesId: string[];
 }
 
 export default Owner;
