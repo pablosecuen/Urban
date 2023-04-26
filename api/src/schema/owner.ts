@@ -1,4 +1,4 @@
-interface Owner {
+export interface OwnerToRegister {
   name: string;
   email: string;
   phone: string;
@@ -6,4 +6,16 @@ interface Owner {
   vehiclesId: string[];
 }
 
-export default Owner;
+export interface Owner extends OwnerToRegister {
+  adress?: string;
+  deleted?: boolean;
+}
+
+export interface OwnerToUpdate extends Partial<OwnerToRegister> {
+  deleted?: boolean;
+  name?: string;
+  email?: string;
+  phone?: string;
+  DNI?: string;
+  vehiclesId?: string[];
+}

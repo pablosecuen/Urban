@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Owner from "../../schema/owner";
 
 export const searchOwner = async (req: Request, res: Response): Promise<void> => {
   try {
