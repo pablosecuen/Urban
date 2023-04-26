@@ -22,7 +22,7 @@ export const allChauffeur = async (req: Request, res: Response): Promise<void> =
     try {
         const chauffeurRef = db.collection('chauffeur');
         const chauffeurSnapshot = await chauffeurRef.get();
-        const chauffeurs = [];
+        const chauffeurs: Object[] = [];
         chauffeurSnapshot.forEach((doc) => {
             const chauffeur = {
                 id: doc.id,
