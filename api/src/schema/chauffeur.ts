@@ -1,22 +1,42 @@
-interface Chauffeur {
+export interface ChauffeurToRegister {
   name: string;
-  address: string;
   email: string;
   password: string;
+  phone: string;
+  DNI: string;
+  license: string;
+  address: string;
+}
+
+export interface Chauffeur extends ChauffeurToRegister {
+  deleted: boolean;
+  ownerState: boolean;
+  vehicle: {
+    vehicleId: string;
+    patent: string;
+  };
   payments: {
     cardNumber: string;
     expirationDate: string;
     securityCode: string;
   };
-  history: string[];
   img: string;
-  DNI: string;
-  license: string;
-  vehicle: {
+  history?: string[];
+}
+
+export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
+  deleted?: boolean;
+  email?: string;
+  password?: string;
+  phone?: string;
+  adress?: string;
+  vehicle?: {
     vehicleId: string;
     patent: string;
   };
-  ownerState: boolean;
+  payments?: {
+    cardNumber: string;
+    expirationDate: string;
+    securityCode: string;
+  };
 }
-
-export default Chauffeur;
