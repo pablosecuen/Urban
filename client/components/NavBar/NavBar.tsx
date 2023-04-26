@@ -19,21 +19,25 @@ const links = [
     label: "Home",
     route: "/",
     icon: HiOutlineHome,
+    id: "1",
   },
   {
     label: "Perfil",
     route: "/perfil",
     icon: HiUserCircle,
+    id: "2",
   },
   {
     label: "Notificaciones",
     route: "/notificaciones",
     icon: HiOutlineBell,
+    id: "3",
   },
   {
     label: "Ayuda",
     route: "/ayuda",
     icon: HiOutlineAnnotation,
+    id: "4",
   },
 ];
 
@@ -52,11 +56,7 @@ export default function NavBar() {
       {isMobile ? (
         <nav className="w-full h-12 flex bg-verde justify-between ">
           <div className="w-12">
-            <Image
-              src={logo as StaticImageData}
-              alt="logo"
-              className="h-12 w-12"
-            />
+            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-12" />
           </div>
 
           <HiMenuAlt1
@@ -71,9 +71,9 @@ export default function NavBar() {
           >
             <ul className="flex flex-col items-center p-4">
               {links.map((link) => (
-                <li key={link.route} className="my-2 flex items-center ">
+                <li key={link.id} className="my-2 flex items-center ">
                   <link.icon className="w-6 h-6" />
-                  <Link href={link.route} onClick={toggleMenu}>
+                  <Link href={link.label} onClick={toggleMenu}>
                     <span className="mx-2">{link.label}</span>
                   </Link>
                 </li>
@@ -84,11 +84,7 @@ export default function NavBar() {
       ) : (
         <nav className="w-full h-12 flex bg-verde justify-between overflow-hidden">
           <div className="w-12 ">
-            <Image
-              src={logo as StaticImageData}
-              alt="logo"
-              className="h-12 w-12"
-            />
+            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-12" />
           </div>
           <ul className="flex  w-2/3 lg:w-1/3 justify-between items-center ">
             {links.map((link) => (

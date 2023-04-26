@@ -20,6 +20,10 @@ input {
   @apply border-b-2 rounded-md;
 }
 
+.link {
+  @apply bg-white rounded-md text-center py-1 px-4
+}
+
 input:focus-visible {
   outline-offset: 0px;
   outline-color: blue;
