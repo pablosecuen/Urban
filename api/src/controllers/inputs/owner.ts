@@ -35,6 +35,14 @@ export const updateOwner = async (req: Request, res: Response): Promise<void> =>
 
 export const deleteOwner = async (req: Request, res: Response): Promise<void> => {
   try {
+    const id: string = req.params.id;
+    const data: OwnerToUpdate = req.body;
+    const docRef = await db.collection("owner").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el propietario");
+    }
+    await db.collection("owner").doc(id).update({ deleted: true });
+    res.status(200).json({ message: "Propietario eliminado correctamente" });
   } catch (innerError) {
     console.error("Error al eliminar el propietario", innerError);
     res.status(400).json({ message: innerError.message });
