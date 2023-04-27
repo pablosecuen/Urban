@@ -17,7 +17,7 @@ import { useMediaQuery } from "react-responsive";
 const links = [
   {
     label: "Home",
-    route: "/",
+    route: "/home",
     icon: HiOutlineHome,
     id: "1",
   },
