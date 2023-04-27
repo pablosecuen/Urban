@@ -36,7 +36,7 @@ export default function Perfil() {
       ))}
       </div>
 
-      {/* Content */}
+      {/* Content  */}
       {contenidoHistorialPerfil.map((item, index) => (
         <>
          {activeTab === `${item.name}` && (
@@ -45,7 +45,7 @@ export default function Perfil() {
             <div className="h-32 w-full border-2">{item.placeHolder}</div>
           </div>
         )}</>
-      ))}
+      ))} 
     </>
   );
 }
