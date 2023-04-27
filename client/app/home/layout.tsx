@@ -13,9 +13,9 @@ export default function Home({ children }: { children: React.ReactNode }) {
         <NavBar />
       </header>
 
-      <div className="flex-col container flex lg:flex-row justify-center mx-auto items-center lg:pb-20">
-        <div className="lg:w-1/2 w-full flex flex-col gap-8 justify-center  items-center">
-          <Image src={logo as StaticImageData} alt="logo" className="lg:w-96 w-24" />
+      <div className="flex-col container flex lg:flex-row justify-center mx-auto items-center h-screen lg:pb-20">
+        <div className="lg:w-1/2 w-full flex flex-col justify-center gap-4 items-center">
+          <Image src={logo as StaticImageData} alt="logo" className="lg:w-96 w-24 " />
           <Menu />
         </div>
         <div className="lg:w-1/2 w-full  flex justify-center items-center">{children}</div>
