@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       colors: {
         verde: "#e0ffcd",
-        celeste: "#CCEAF7",
+        verdeurban: "#76F900",
+        celeste: "#07BABF",
         blue: "rgb(59,130,246)",
       },
       boxShadow: {
