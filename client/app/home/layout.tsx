@@ -1,11 +1,12 @@
 import NavBar from "@component/components/NavBar/NavBar";
+import Footer from "@component/components/Footer/Footer"
 import logo from "../../assets/imagenes/UrbanLogo.png";
 import Image, { StaticImageData } from "next/image";
-import sos from "../../assets/icons/sos.png";
-import escudo from "../../assets/icons/escudo.png";
-import planet from "../../assets/icons/planet.png";
-import contract from "../../assets/icons/contract.png";
-import Link from "next/link";
+// import sos from "../../assets/icons/sos.png";
+// import escudo from "../../assets/icons/escudo.png";
+// import planet from "../../assets/icons/planet.png";
+// import contract from "../../assets/icons/contract.png";
+// import Link from "next/link";
 import Menu from "@component/components/Menu/Menu";
 
 export default function Home({ children }: { children: React.ReactNode }) {
@@ -21,7 +22,8 @@ export default function Home({ children }: { children: React.ReactNode }) {
         </div>
         <div className="w-1/2  flex justify-center items-center">{children}</div>
       </div>
-      <footer className="h-96 bg-verde flex items-center align-middle justify-center">
+      <Footer />
+      {/* <footer className="h-96 bg-verde flex items-center align-middle justify-center">
         <div className="flex flex-col">
           {" "}
           <span className="text-black text-3xl font-bold text-center  flex justify-center">
@@ -55,7 +57,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

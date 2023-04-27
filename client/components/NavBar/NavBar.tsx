@@ -55,7 +55,7 @@ export default function NavBar() {
     <header>
       {isMobile ? (
         <nav className="w-full h-12 flex bg-verde justify-between ">
-            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-auto border" />
+            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-auto" />
 
           <HiMenuAlt1
             onClick={toggleMenu}
@@ -80,9 +80,11 @@ export default function NavBar() {
           </div>
         </nav>
       ) : (
-        <nav className="w-full h-12 flex bg-verde justify-between overflow-hidden">
+        <nav className="w-full h-12 bg-verde">
+          <div className="container mx-auto flex justify-between">
+            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-auto" />
 
-            <Image src={logo as StaticImageData} alt="logo" className="h-12 w-auto border" />
+
 
           <ul className="flex  w-2/3 lg:w-1/3 justify-between items-center ">
             {links.map((link) => (
@@ -96,6 +98,7 @@ export default function NavBar() {
               </div>
             ))}
           </ul>
+            </div>
         </nav>
       )}
     </header>
