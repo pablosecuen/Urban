@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export default function Transportes() {
   return (
-    <div className="ml-12 mx-auto border-2 p-10 rounded-3xl shadow-2xl shadow-black/40">
+ 
+    <div className="lg:ml-12 mt-10 lg:mt-0 mx-auto border-2 p-10 rounded-3xl shadow-2xl shadow-black/40">
       <div className="flex flex-col gap-6 ">
         <h1 className="text-blue text-center font-semibold text-xl">
           Estas son las mejores opciones encontradas
@@ -60,5 +61,6 @@ export default function Transportes() {
         </Link>
       </div>
     </div>
+
   );
 }
