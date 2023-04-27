@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Especiales() {
   return (
     <div className="flex flex-col justify-center items-center gap-4 w-4/5 border-2">
@@ -26,6 +28,12 @@ export default function Especiales() {
           Indicaciones especiales
           <input type="password" />
         </label>
+        <Link
+          href="http://localhost:3000/home/especiales/confirmacion"
+          className="w-2/3 text-center bg-blue text-white rounded-md p-2"
+        >
+          Confirmar pedido especial
+        </Link>
       </div>
       <div className="flex flex-col justify-between items-center align-middle h-1/2"></div>
     </div>
