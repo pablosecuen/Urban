@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import bcrypt from "bcrypt";
 import { ChauffeurToRegister, Chauffeur, ChauffeurToUpdate } from "../../schema/chauffeur";
 
 export const newChauffeur = async (req: Request, res: Response): Promise<void> => {
@@ -28,6 +29,9 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
+
+    const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
+    dataFormated.password = hashedPassword;
 
     const docRef = await db.collection("chauffeur").add(dataFormated);
     res.status(201).json({ id: docRef.id });
