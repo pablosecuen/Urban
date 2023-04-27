@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="align-center flex h-full items-center justify-center border-2 sm:h-full">
+      <div className="flex h-full mx-auto w-full border-2 sm:h-full">
         <Image src={logo as StaticImageData} alt="logo" className="aspect-ratio-square w-full" />
       </div>
       <div className="h-full border-2 sm:h-full  lg:w-4/5">
