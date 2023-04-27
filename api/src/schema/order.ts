@@ -1,6 +1,7 @@
-interface Order {
+export interface Order {
   userId: string;
   distributorId: string;
+  productId: string;
   localId: string;
   date: string;
   price: number;
@@ -9,4 +10,6 @@ interface Order {
   order: OrderStatus;
 }
 
-export default Order;
+export interface TravelToUpdate {
+  order?: OrderStatus;
+}
