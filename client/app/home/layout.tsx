@@ -5,7 +5,6 @@ import sos from "../../assets/icons/sos.png";
 import escudo from "../../assets/icons/escudo.png";
 import planet from "../../assets/icons/planet.png";
 import contract from "../../assets/icons/contract.png";
-import Link from "next/link";
 import Menu from "@component/components/Menu/Menu";
 
 export default function Home({ children }: { children: React.ReactNode }) {
