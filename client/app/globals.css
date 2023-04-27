@@ -8,7 +8,7 @@
 }
 
 button {
-  @apply py-1 px-4 bg-blue rounded-md text-white;
+  @apply py-1 px-4 bg-blue rounded-md text-white shadow-md shadow-black/40;
 }
 
 label {
