@@ -115,11 +115,11 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center align-middle items-center">
+    <div className="h-screen flex justify-center align-middle items-center w-full">
       {isRegister ? (
         <form
           onSubmit={handleRegister}
-          className="w-1/2 my-8 h-[600px] border-2 flex flex-col justify-between items-center align-middle p-4"
+          className="lg:w-1/2 w-4/5 my-8 h-[600px] border-2 rounded-3xl shadow-lg shadow-black/40 flex flex-col justify-between items-center align-middle pb-4 px-4"
         >
           <div className="flex flex-col justify-center items-center align-middle h-1/2">
             {" "}
@@ -147,16 +147,16 @@ const Login = () => {
             <button onClick={handleRegisterClick}>Google</button>
             <button onClick={handleRegisterClick}>Facebook</button>
             <button onClick={handleLoginClick} className="mt-6">
-              Ya tienes cuenta? ingresa aquí
+            <p>Ya tienes cuenta?</p><p>ingresa aquí</p>
             </button>
           </div>
         </form>
       ) : (
         <form
           onSubmit={handleLogin}
-          className="w-1/2 my-8 h-[600px] border-2 flex flex-col justify-between items-center align-middle p-4"
+          className="lg:w-1/2 w-4/5 my-8 h-[600px] border-2 rounded-3xl shadow-lg shadow-black/40 flex flex-col justify-between items-center align-middle p-4"
         >
-          <div className="flex flex-col justify-center items-center align-middle h-1/2">
+          <div className="flex flex-col justify-center items-center align-middle h-1/2 ">
             {" "}
             <label className="text-center">
               Email:
@@ -174,7 +174,7 @@ const Login = () => {
             <button onClick={handleRegisterClick}>Facebook</button>
 
             <button className="mt-6" onClick={handleRegisterClick}>
-              no tienes cuenta? registrate aqui
+              <p>no tienes cuenta?</p> <p>registrate aqui</p>
             </button>
           </div>
         </form>

@@ -1,7 +1,7 @@
 import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
 export default function Viajes() {
   return (
-    <div className="ml-12 mx-auto border-2 p-10">
+    <div className="ml-12 mx-auto border-2 p-10 rounded-3xl shadow-2xl shadow-black/40">
       <div className="flex flex-col gap-10 border-2">
         <h1 className="text-blue text-center text-xl">
           Estas son las mejores opciones encontradas
