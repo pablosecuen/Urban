@@ -16,6 +16,12 @@ module.exports = {
         "custom-md": "5px 13px 20px black",
       },
     },
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        lg: '3rem',
+      },
+    },
   },
   plugins: [],
 };

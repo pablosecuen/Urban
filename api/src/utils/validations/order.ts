@@ -15,8 +15,8 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
       !dataOrder.order
     ) {
       throw new Error("Faltan datos");
-      next();
     }
+    next();
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

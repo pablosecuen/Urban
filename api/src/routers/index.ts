@@ -27,6 +27,8 @@ import localOutputRouter from "./outputs/local";
 import productInputRouter from "./inputs/product";
 import productOutputRouter from "./outputs/product";
 
+import loginInputRouter from "./inputs/login";
+
 const router = Router();
 
 // Rutas para entrada de datos
@@ -47,6 +49,8 @@ router.use("/vehicle", vehicleInputRouter);
 router.use("/chauffeur", chauffeurInputRouter);
 
 router.use("/owner", ownerInputRouter);
+
+router.use("/login", loginInputRouter)
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);

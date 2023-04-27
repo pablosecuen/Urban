@@ -4,10 +4,11 @@ import { Products, ProductsToUpdate } from "../../schema/products";
 export const newProductValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: Products = req.body;
-    if (!data.name || !data.price || !data.description || !data.img || !data.type || !data.stock || data.localId)
+    if (!data.name || !data.price || !data.description || !data.img || !data.type || !data.stock || !data.localId)
       throw Error("Datos incompletos");
     next();
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: error.message });
   }
 };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import bcrypt from 'bcrypt';
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 
 /**
@@ -10,7 +11,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const data: UserToRegister = req.body;
     const dataFormated: User = {
       ...data,
-      address: "",
+      adress: "",
       payments: {
         cardNumber: "",
         expirationDate: "",
@@ -34,6 +35,10 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
+
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
+    dataFormated.password = hashedPassword;
 
     const docRef = await db.collection("users").add(dataFormated);
     res.status(201).json({ id: docRef.id });

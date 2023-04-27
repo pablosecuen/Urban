@@ -20,21 +20,24 @@ export const searchUser = async (
   }
 };
 
-export const allUsers = async (_req: Request, res: Response): Promise<void> => {
+export const allUsers = async (req: Request, res: Response): Promise<void> => {
   try {
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+
     const usersRef = db.collection("users");
-    const usersSnapshot = await usersRef.get();
+    const [usersSnapshot, totalUsersSnapshot] = await Promise.all([
+      usersRef.limit(endIndex).get(),
+      usersRef.get()
+    ]);
 
-    const users: Object[] = [];
-    usersSnapshot.forEach((doc) => {
-      const user = {
-        id: doc.id,
-        ...doc.data(),
-      };
-      users.push(user);
-    });
+    const usersData = usersSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
+    const totalUsers = totalUsersSnapshot.size;
 
-    res.json(users);
+    res.json({ users: usersData, totalUsers });
   } catch (error) {
     console.error("Error al obtener los usuarios", error);
     res.status(500).json({ message: "Error al obtener los usuarios" });

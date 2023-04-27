@@ -11,11 +11,4 @@ export interface Owner extends OwnerToRegister {
   deleted?: boolean;
 }
 
-export interface OwnerToUpdate extends Partial<OwnerToRegister> {
-  deleted?: boolean;
-  name?: string;
-  email?: string;
-  phone?: string;
-  DNI?: string;
-  vehiclesId?: string[];
-}
+export interface OwnerToUpdate extends Partial<OwnerToRegister> { }

@@ -7,7 +7,7 @@ export interface UserToRegister {
 }
 
 export interface User extends UserToRegister {
-  address: string;
+  adress: string;
   payments: {
     cardNumber: string;
     expirationDate: string;
@@ -23,13 +23,4 @@ export interface User extends UserToRegister {
 }
 
 export interface UserToUpdate extends Partial<UserToRegister> {
-  deleted: boolean;
-  address?: string;
-  payments?: {
-    cardNumber?: string;
-    expirationDate?: string;
-    securityCode?: string;
-  };
-  img?: string;
-  DNI?: string;
 }

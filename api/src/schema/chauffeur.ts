@@ -25,18 +25,5 @@ export interface Chauffeur extends ChauffeurToRegister {
 }
 
 export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
-  deleted?: boolean;
-  email?: string;
-  password?: string;
-  phone?: string;
-  adress?: string;
-  vehicle?: {
-    vehicleId: string;
-    patent: string;
-  };
-  payments?: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
+
 }
