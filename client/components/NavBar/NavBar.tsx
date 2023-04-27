@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import logo from "../../assets/imagenes/UrbanLogo.png";
+import logo from "../../assets/imagenes/UrbanIso.png";
 import {
   HiMenuAlt1,
   HiUserCircle,
@@ -17,7 +17,7 @@ import { useMediaQuery } from "react-responsive";
 const links = [
   {
     label: "Home",
-    route: "/home",
+    route: "/",
     icon: HiOutlineHome,
     id: "1",
   },
