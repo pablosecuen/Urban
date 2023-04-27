@@ -23,24 +23,27 @@ export const searchDistributor = async (req: Request, res: Response): Promise<vo
 
 /**
  * Controlador para obtener todos los distribuidores
+ * con paginado
  */
 export const getAllDistributors = async (req: Request, res: Response): Promise<void> => {
   try {
-    const distributorsRef = db.collection("distributors");
-    const distributorsSnapshot = await distributorsRef.get();
-    const distributors: Object[] = [];
-    distributorsSnapshot.forEach((doc) => {
-      const distributor = {
-        id: doc.id,
-        ...doc.data(),
-      };
-      distributors.push(distributor);
-    });
-    const trueDistributors = distributors.filter((distributor: any, i = 0) => {
-      return distributor.deleted === false;
-    });
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
 
-    res.status(201).json(trueDistributors);
+    const distributorsRef = db.collection("distributors");
+    const [distributorsSnapshot, totalDistributorsSnapshot] = await Promise.all([
+      distributorsRef.limit(endIndex).get(),
+      distributorsRef.get(),
+    ]);
+
+    const distributorsData = distributorsSnapshot.docs
+      .slice(startIndex, endIndex)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+    const totalDistributors = totalDistributorsSnapshot.size;
+
+    res.status(201).json({ distributors: distributorsData, totalDistributors });
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
