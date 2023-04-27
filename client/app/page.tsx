@@ -19,7 +19,7 @@ export default function LandingPage() {
       <div className="flex h-full mx-auto w-1/2 sm:h-full pl-24 justify-center">
         <Image src={logo as StaticImageData} alt="logo" className="aspect-ratio-square lg:w-full w-full " />
       </div>
-      <div className="h-full   lg:w-4/5 w-1/2">
+      <div className="h-full   lg:w-4/5 w-full">
         <Login />
       </div>
     </>
