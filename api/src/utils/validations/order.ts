@@ -1,4 +1,4 @@
-import Order from "../../schema/order";
+import { Order } from "../../schema/order";
 import { Request, Response, NextFunction } from "express";
 
 export const newOrderValidate = (req: Request, res: Response, next: NextFunction): void => {

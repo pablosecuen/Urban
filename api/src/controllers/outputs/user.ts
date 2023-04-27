@@ -31,19 +31,23 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
 
     let usersRef: firebase.firestore.Query<firebase.firestore.DocumentData> = db.collection("users");
 
+    // Filtrar usuarios por campos adicionales en la query string
     if (Object.keys(req.query).length > 2) {
       const filters = Object.keys(req.query).filter(key => key !== 'page' && key !== 'pageSize');
       filters.forEach(key => {
         usersRef = usersRef.where(key, '==', req.query[key]);
       });
-    } else {
-      usersRef = db.collection("users");
     }
 
+    // Filtrar usuarios eliminados (deleted = false)
+    usersRef = usersRef.where('deleted', '==', false);
+
+    // Obtener el total de usuarios sin contar los eliminados
     const totalUsersSnapshot = await usersRef.get();
     const totalFilteredUsers = totalUsersSnapshot.size;
     const totalPages = Math.ceil(totalFilteredUsers / pageSize);
 
+    // Obtener los usuarios paginados sin contar los eliminados
     const usersSnapshot = await usersRef.limit(endIndex).get();
     const usersData = usersSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -53,5 +57,6 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error al obtener los usuarios" });
   }
 };
+
 
 
