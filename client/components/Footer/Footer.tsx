@@ -12,7 +12,7 @@ export default function Footer() {
         <span className=" text-center  flex justify-center">
           Encuentra la oferta de servicios de transporte terrestre público y privado disponible en tiempo real
         </span>
-        <div className="flex justify-around mt-10">
+        <div className="flex justify-between mt-10">
           {iconsData.map((icon) => (
             <div className="flex flex-col w-60 h-60 gap-2" key={icon.alt}>
               <Image src={icon.image} alt={icon.alt} className="h-28 w-28 flex self-center" />
