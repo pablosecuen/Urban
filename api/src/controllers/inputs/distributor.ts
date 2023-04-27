@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import bcrypt from "bcrypt";
 import { Distributor, DistributorToRegister } from "../../schema/distributor";
 
 /**
@@ -24,6 +25,11 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
+
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
+    dataFormated.password = hashedPassword;
+
     //crear doocumento de distribuidor
     const docRef = await db.collection("distributors").add(dataFormated);
     res.status(201).json({ id: docRef.id });
