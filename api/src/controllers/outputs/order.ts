@@ -26,15 +26,22 @@ export const searchOrder = async (req: Request, res: Response): Promise<void> =>
  */
 export const getAllOrders = async (req: Request, res: Response): Promise<void> => {
   try {
-    const orderRef = db.collection("orders");
-    const orderSnapshot = await orderRef.get();
-    const orders: Object[] = [];
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
 
-    orderSnapshot.forEach((doc) => {
-      const orden = { id: doc.id, ...doc.data() };
-      orders.push(orden);
-    });
-    res.status(201).json(orders);
+    const ordersRef = db.collection("orders");
+    const [ordersSnapshot, totalOrdersSnapshot] = await Promise.all([
+      ordersRef.limit(endIndex).get(),
+      ordersRef.get(),
+    ]);
+    const ordersData = ordersSnapshot.docs
+      .slice(startIndex, endIndex)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+    const totalOrders = totalOrdersSnapshot.size;
+
+    res.status(201).json({ orders: ordersData, totalOrders });
   } catch (error) {
     console.error("Error al obtener las ordenes", error);
     res.status(500).json({ message: "Error al obtener las ordenes" });
