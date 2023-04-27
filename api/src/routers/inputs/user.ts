@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { newUser, updateUser, deletedUser } from "../../controllers/inputs/user";
-import { deleteUserValidate, newUserValidated, updateUserValidated } from "../../utils/validations/user";
+import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
 
 const router = Router();
 
@@ -8,6 +8,6 @@ const router = Router();
 
 router.post("/", newUserValidated, newUser);
 router.put("/:id", updateUserValidated, updateUser);
-router.delete("/:id", deleteUserValidate, deletedUser);
+router.delete("/:id", deletedUser);
 
 export default router;

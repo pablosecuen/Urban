@@ -5,7 +5,6 @@ import {
   updateDistributor,
 } from "../../controllers/inputs/distributor";
 import {
-  deleteDistributorValidate,
   newDistributorValidate,
   updateDistributorValidate,
 } from "../../utils/validations/distributor";
@@ -17,6 +16,6 @@ router.post("/", newDistributorValidate, newDistributor);
 //Ruta actualizar distribuidor
 router.put("/:id", updateDistributorValidate, updateDistributor);
 //Ruta eliminar distribuidor
-router.delete("/:id", deleteDistributorValidate, deleteDistributor);
+router.delete("/:id", deleteDistributor);
 
 export default router;
