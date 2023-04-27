@@ -27,7 +27,7 @@ export default function Confirmacion() {
         tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
       </p>
       <Link
-        href="http://localhost:3000/home/especiales/confirmacion/pagos"
+        href="/home/especiales/confirmacion/pagos"
         className="w-2/3 text-center bg-blue text-white rounded-md p-2"
       >
         Ir a pagar
