@@ -6,6 +6,8 @@ import {
   HiOutlineLocationMarker,
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
+import Link from "next/link";
+
 
 export default function Reserva() {
   return (
@@ -43,8 +45,10 @@ export default function Reserva() {
           <MdPets className="w-10 text-blue" />
           <input className="pl-2 w-2/3" placeholder="Mascotas..." type="text" />
         </div>
+
 <Link href="/home/reserva/viajes" className="flex justify-center">
         <button className="w-1/2 self-center">Buscar tu viaje!</button></Link>
+
       </form>
     </div>
   );
