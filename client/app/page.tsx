@@ -11,7 +11,7 @@ interface LoginProps {
   onLoginClick: () => void;
 }
 
-export default function Home() {
+export default function LandingPage() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
