@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import Order from "../../schema/order";
+import { Order } from "../../schema/order";
 import { newOrder } from "../inputs/order";
 
 /**
