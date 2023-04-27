@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  searchAllVehicles,
+  getVehicles,
   searchVehicleByPatent,
   searchVehicleByOwner,
   searchVehicleByYear,
@@ -10,7 +10,7 @@ const router = Router();
 
 // Ruta para obtener vehiculos
 
-router.get("/", searchAllVehicles);
+router.get("/", getVehicles);
 router.get("/patent/:patent", searchVehicleByPatent);
 router.get("/owner/:owner", searchVehicleByOwner);
 router.get("/year/:year", searchVehicleByYear);
