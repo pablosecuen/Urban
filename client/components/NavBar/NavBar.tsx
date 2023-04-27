@@ -62,17 +62,17 @@ export default function NavBar() {
 
             <ul className="flex space-x-4 w-1/3 items-center">
               {links.map((link) => (
-                <div>
+             
                   <li
                     key={link.id}
-                    className="flex items-center justify-center"
+                    className="flex items-center px-2 justify-center"
                   >
                     <Link href={link.route} className="flex">
                       <link.icon className="w-5 h-6" />
                       {link.label}
                     </Link>
                   </li>
-                </div>
+               
               ))}
             </ul>
           </div>
