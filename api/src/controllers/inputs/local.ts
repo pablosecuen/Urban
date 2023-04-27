@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import bcrypt from "bcrypt";
 import { Local, LocalToRegister, LocalToUpdate } from "../../schema/local";
 
 /**
@@ -15,6 +16,9 @@ export const newLocal = async (req: Request, res: Response): Promise<void> => {
       state: false,
       deleted: false,
     };
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
+    dataFormated.password = hashedPassword;
     const docRef = await db.collection("locals").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {

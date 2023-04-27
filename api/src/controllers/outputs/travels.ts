@@ -1,41 +1,52 @@
-import { Request, Response } from 'express';
-import { db } from '../../connection/connection';
-import { Travel } from '../../schema/travels';
+import { Request, Response } from "express";
+import { db } from "../../connection/connection";
+import { Travel } from "../../schema/travels";
 
 export const travelByUser = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const userId = req.params.userId; // obtiene el ID del usuario desde la solicitud
+  try {
+    const userId = req.params.userId; // obtiene el ID del usuario desde la solicitud
 
-        // Realiza la consulta a la base de datos
-        const snapshot = await db.collection('travels').where('userId', '==', userId).get();
+    // Realiza la consulta a la base de datos
+    const snapshot = await db.collection("travels").where("userId", "==", userId).get();
 
-        // Crea un array con todos los viajes encontrados
-        const travels = snapshot.docs.map((doc) => doc.data());
+    // Crea un array con todos los viajes encontrados
 
-        // Envía la respuesta al cliente
-        res.status(200).json(travels);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error al obtener los viajes del usuario');
-    }
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(snapshot.docs.length / pageSize);
+
+    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => doc.data());
+
+    // Envía la respuesta al cliente
+    res.status(200).json({ travels, totalPages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener los viajes del usuario");
+  }
 };
 
 export const travelByChauffeur = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const chauffeurId = req.params.chauffeurId; // obtiene el ID del chofer desde la solicitud
+  try {
+    const chauffeurId = req.params.chauffeurId; // obtiene el ID del chofer desde la solicitud
 
-        // Realiza la consulta a la base de datos
-        const snapshot = await db.collection('travels').where('chauffeurId', '==', chauffeurId).get();
+    // Realiza la consulta a la base de datos
+    const snapshot = await db.collection("travels").where("chauffeurId", "==", chauffeurId).get();
 
-        // Crea un array con todos los viajes encontrados
-        const travels = snapshot.docs.map((doc) => doc.data());
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(snapshot.docs.length / pageSize);
 
-        // Envía la respuesta al cliente
-        res.status(200).json(travels);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error al obtener los viajes del chofer');
-    }
+    // Crea un array con todos los viajes encontrados
+    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => doc.data());
+
+    // Envía la respuesta al cliente
+    res.status(200).json({ travels, totalPages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener los viajes del chofer");
+  }
 };
-
-

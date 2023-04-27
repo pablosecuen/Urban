@@ -12,6 +12,6 @@ router.post("/chauffeur", loginChauffeur);
 
 router.post("/distributor", loginDistributor);
 
-// router.post("/local", loginLocal);
+router.post("/local", loginLocal);
 
 export default router;

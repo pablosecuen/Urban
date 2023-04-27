@@ -22,7 +22,7 @@ export const searchLocal = async (req: Request, res: Response): Promise<void> =>
 
 export const getLocals = async (req: Request, res: Response): Promise<void> => {
   try {
-    const name: string = req.query.name.toString();
+    const name: string = req.query.name?.toString();
     const localsRef = db.collection("locals");
 
     let localsSnapshot: any;
@@ -36,16 +36,21 @@ export const getLocals = async (req: Request, res: Response): Promise<void> => {
       const query = localsRef.where("deleted", "==", false);
       localsSnapshot = await getDocs(query);
     }
-    const locals: Object[] = [];
-    localsSnapshot.forEach((doc) => {
-      const local = {
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(localsSnapshot.docs.length / pageSize);
+
+    const localsData: Object[] = localsSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
         id: doc.id,
         ...doc.data(),
       };
-      locals.push(local);
     });
 
-    res.json(locals);
+    res.status(200).json({ locals: localsData, totalPages });
   } catch (error) {
     console.error("Error al obtener los locales", error);
     res.status(500).json({ message: "Error al obtener los locales" });
