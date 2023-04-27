@@ -1,4 +1,7 @@
 "use client";
+
+import Link from "next/link";
+
 export default function Confirmacion() {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -22,7 +25,8 @@ export default function Confirmacion() {
       <p className="text-gray-400 text-center">
         tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
       </p>
-      <button className="w-1/2 mt-10">Ir a pagar</button>
+      <Link href="/home/reserva/viajes/confirmacion/pagos" className="flex justify-center">
+      <button className="w-1/2 mt-10">Ir a pagar</button></Link>
     </div>
   );
 }

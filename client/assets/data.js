@@ -7,6 +7,9 @@ import {
   HiOutlineHome,
   HiOutlineBell,
   HiOutlineAnnotation,
+  HiOutlineClipboardCheck,
+  HiShoppingBag,
+  HiOutlineInbox,
 } from "react-icons/hi";
 
 // Icons Footer
@@ -20,28 +23,82 @@ import contract from "./icons/contract.png";
 //  NavBar
 export const links = [
   {
-    label: "Home",
-    route: "/",
+    label: "home",
+    route: "/home",
     icon: HiOutlineHome,
     id: "1",
   },
   {
-    label: "Perfil",
+    label: "perfil",
     route: "/perfil",
     icon: HiUserCircle,
     id: "2",
   },
   {
-    label: "Notificaciones",
+    label: "notificaciones",
     route: "/notificaciones",
     icon: HiOutlineBell,
     id: "3",
   },
   {
-    label: "Ayuda",
+    label: "ayuda",
     route: "/ayuda",
     icon: HiOutlineAnnotation,
     id: "4",
+  },
+];
+
+
+
+//  NavBar Mobile
+export const linksMobile = [
+  {
+    label: "home",
+    route: "/home",
+    icon: HiOutlineHome,
+    id: "1",
+  },
+  {
+    label: "perfil",
+    route: "/perfil",
+    icon: HiUserCircle,
+    id: "2",
+  },
+  {
+    label: "notificaciones",
+    route: "/notificaciones",
+    icon: HiOutlineBell,
+    id: "3",
+  },
+  {
+    label: "ayuda",
+    route: "/ayuda",
+    icon: HiOutlineAnnotation,
+    id: "4",
+  },
+  {
+    label: "reserva",
+    route: "/home/reserva",
+    icon: HiOutlineClipboardCheck,
+    id: "5",
+  },
+  {
+    label: "paqueteria",
+    route: "/home/paqueteria",
+    icon: HiOutlineInbox,
+    id: "6",
+  },
+  {
+    label: "especiales",
+    route: "/home/especiales",
+    icon: HiShoppingBag,
+    id: "7",
+  },
+  {
+    label: "gestion",
+    route: "/home/gestion",
+    icon: HiOutlineAnnotation,
+    id: "8",
   },
 ];
 

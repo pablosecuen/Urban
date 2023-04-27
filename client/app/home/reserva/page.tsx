@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   HiUserGroup,
   HiOutlineCalendar,
@@ -5,10 +6,12 @@ import {
   HiOutlineLocationMarker,
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
+import Link from "next/link";
+
 
 export default function Reserva() {
   return (
-    <div className="w-4/5 mx-auto border-2">
+    <div className="w-4/5 mx-auto border-2 rounded-3xl shadow-2xl shadow-black/40 mt-10 lg:mt-0 mb-40 lg:mb-0">
       <h1 className="text-blue text-center text-xl mt-12">
         Llena el formulario para encontrar tu viaje
       </h1>
@@ -43,7 +46,9 @@ export default function Reserva() {
           <input className="pl-2 w-2/3" placeholder="Mascotas..." type="text" />
         </div>
 
-        <button className="w-1/2">Buscar tu viaje!</button>
+<Link href="/home/reserva/viajes" className="flex justify-center">
+        <button className="w-1/2 self-center">Buscar tu viaje!</button></Link>
+
       </form>
     </div>
   );

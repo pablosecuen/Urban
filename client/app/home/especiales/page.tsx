@@ -8,7 +8,7 @@ import {
 
 export default function Especiales() {
   return (
-    <div className="lg:w-4/5 lg:mx-auto border-2">
+    <div className="lg:w-4/5 lg:mx-auto border-2 rounded-3xl shadow-2xl shadow-black/40 mb-8 lg:mb-0">
       <h1 className="text-blue text-center text-xl mt-12">Llena el formulario para tu pedido</h1>
       <form className="flex flex-col gap-5 pb-32 pt-12 items-center justify-center">
         <div className="flex items-center justify-center">
