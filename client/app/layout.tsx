@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex flex-col h-full sm:flex-row">{children}</main>
+        <main className="flex flex-col h-full sm:flex-row w-full justify-center items-center ">{children}</main>
       </body>
     </html>
   );

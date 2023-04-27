@@ -1,9 +1,15 @@
 "use client";
 import { useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import { useRouter } from 'next/navigation';
+import axios from "axios";
 
 interface UserToRegister {
   name: string;
+  email: string;
+  password: string;
+}
+
+interface UserToLogin {
   email: string;
   password: string;
 }
@@ -14,10 +20,8 @@ interface LoginResponse {
   token?: string;
 }
 
-interface UserToLogin {
-  email: string;
-  password: string;
-}
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,6 +29,8 @@ const Login = () => {
   const [name, setName] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [isRegister, setIsRegister] = useState(false);
+
+  const router = useRouter();
 
   function onLogin(username: string, password: string) {
     if (username === "admin" && password === "password") {
@@ -34,31 +40,29 @@ const Login = () => {
     }
   }
 
-  const handleLogin = (e: any) => {
+ 
+  const handleLogin = async (e: any) => {
     e.preventDefault();
-    async function loginUser(userData: UserToLogin): Promise<LoginResponse> {
-      try {
-        const response: AxiosResponse = await axios.post("http://localhost:3000/user", userData);
-        if (response.status >= 200 && response.status < 300) {
-          const token = response.data.token;
-          return {
-            success: true,
-            token,
-          };
-        } else {
-          const message = response.data.message || "Error al iniciar sesión";
-          return {
-            success: false,
-            message,
-          };
-        }
-      } catch (error) {
-        console.error(error);
-        return {
-          success: false,
-          message: "Error al iniciar sesión",
-        };
+    const userData: UserToLogin = {
+      email,
+      password,
+    };
+    try {
+      const response = await axios.post<LoginResponse>(
+        "http://localhost:3000/login/user",
+        userData
+      );
+      const {  token } = response.data;
+      if ( token) {
+        console.log("Login successful");
+        router.push('/home');
+        // Save the token to localStorage or a state variable
+      } else {
+        console.log("Login failed");
       }
+    } catch (error) {
+      console.error(error);
+      console.log("Error al iniciar sesión");
     }
   };
 
@@ -66,6 +70,7 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
       console.log(response.data); // the created user data
+      router.push('/home');
     } catch (error) {
       console.log("salio todo mal");
     }
@@ -110,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[100vh] flex justify-center align-middle items-center">
+    <div className="h-screen flex justify-center align-middle items-center">
       {isRegister ? (
         <form
           onSubmit={handleRegister}

@@ -1,6 +1,7 @@
 export default function Home() {
+
   return (
-    <div className="flex flex-col w-4/5">
+   <div className="lg:flex lg:flex-col lg:w-4/5 w-full justify-center "> 
       <p className="text-center font-bold text-2xl my-2">Bienvedios a Urban!</p>
       <p className="text-center">
         Nuestra mision es entregar al usuario el poder de decidir su medio de transporte acercando a
