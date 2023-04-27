@@ -54,7 +54,7 @@ export const links = [
 export const linksMobile = [
   {
     label: "home",
-    route: "/",
+    route: "/home",
     icon: HiOutlineHome,
     id: "1",
   },
