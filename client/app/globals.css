@@ -21,7 +21,7 @@ input {
 }
 
 .link {
-  @apply bg-white rounded-md text-center py-1 px-4
+  @apply lg:bg-white lg:text-black rounded-md text-center py-1 px-4 bg-blue text-white
 }
 
 input:focus-visible {
