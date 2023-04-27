@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import firebase from "firebase/compat/app";
-import Order from "../../schema/order";
+import { Order } from "../../schema/order";
 
 /**
  * Controlador para crear una orden
