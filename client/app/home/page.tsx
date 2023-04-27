@@ -1,9 +1,9 @@
 export default function Home() {
 
   return (
-   <div className="lg:flex lg:flex-col lg:w-4/5 w-full justify-center border-2 rounded-3xl py-20 px-24 shadow-lg shadow/30"> 
+   <div className="lg:flex lg:flex-col lg:w-4/5 w-full justify-center border-2 rounded-3xl py-20 px-4 lg:px-24 shadow-lg shadow/30 mb-8 lg:mb-0"> 
       <p className="text-center font-bold text-2xl my-2">Bienvedios a <span className="text-verdeurban">U</span><span className=" text-celeste">rban</span>!</p>
-      <p className="text-center">
+      <p className="text-center w-full ">
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte acercando a
         la oferta a la palma de su mano, <b>para empoderarte</b> con mayor información asistiendo en que tomes
         la mejor decision disponble dentro de tus necesidades, en nuestra app podras encontrar todo
