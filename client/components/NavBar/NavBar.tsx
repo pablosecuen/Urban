@@ -5,7 +5,7 @@ import Image, { StaticImageData } from "next/image";
 import logo from "../../assets/imagenes/UrbanIso.png";
 
 import { useMediaQuery } from "react-responsive";
-import { links } from "../../assets/data";
+import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
 
 export default function NavBar() {
@@ -25,7 +25,7 @@ export default function NavBar() {
           <Image
             src={logo as StaticImageData}
             alt="logo"
-            className="h-12 w-auto"
+            className="h-10 w-auto self-center"
           />
 
           <HiMenuAlt1
@@ -39,15 +39,16 @@ export default function NavBar() {
             }`}
           >
             <ul className="flex flex-col items-center p-4">
-              {links.map((link) => (
+              {linksMobile.map((link) => (
                 <li key={link.id} className="my-2 flex items-center ">
                   <link.icon className="w-6 h-6" />
-                  <Link href={link.label} onClick={toggleMenu}>
+                  <Link href={link.route} onClick={toggleMenu}>
                     <span className="mx-2">{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
+
           </div>
         </nav>
       ) : (
@@ -56,14 +57,14 @@ export default function NavBar() {
             <Image
               src={logo as StaticImageData}
               alt="logo"
-              className="h-12 w-auto"
+              className="h-10 w-auto self-center"
             />
 
             <ul className="flex space-x-4 w-1/3 items-center">
               {links.map((link) => (
                 <div>
                   <li
-                    key={link.route}
+                    key={link.id}
                     className="flex items-center justify-center"
                   >
                     <Link href={link.route} className="flex">
