@@ -10,11 +10,12 @@ export const getVehicles = async (req: Request, res: Response): Promise<void> =>
 
     let query_ = query(collection(db, "vehicle"), where("deleted", "==", false));
 
-    const additionalArgs = allProperties.map((property) => {
-      return where(property, "==", req.query[property]);
-    });
+    const additionalArgs = allProperties
+      .filter((property) => !["page", "pageSize"].includes(property))
+      .map((property) => {
+        return where(property, "==", req.query[property]);
+      });
     // ejemplo de additionalArgs = [where(property, "==", req.query[property]), where(property1, "==", req.query[property1])]
-
     if (additionalArgs.length > 0)
       query_ = query(collection(db, "vehicle"), where("deleted", "==", false), ...additionalArgs);
 
