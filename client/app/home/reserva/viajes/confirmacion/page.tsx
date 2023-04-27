@@ -20,7 +20,6 @@ export default function Confirmacion() {
         <p className=" lg:text-3xl lg:text-center">un toco de plata</p>
       </div>
       <p className="text-gray-400 text-center">
-        {" "}
         tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
       </p>
       <button className="w-1/2 mt-10">Ir a pagar</button>
