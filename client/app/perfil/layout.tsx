@@ -12,7 +12,6 @@ interface ProfileProps {
     return (
       <div className="flex flex-col w-full ">
           <NavBar/>
-          
         <div className="h-[97vh] ">
           <div className="flex w-3/5 h-4/5 items-center justify-center border-2 mx-auto mt-20">
             <div className="flex flex-col w-1/2 border-2 p-8 gap-4">  
