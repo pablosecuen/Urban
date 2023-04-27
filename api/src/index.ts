@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import dotenv from "dotenv";
 import router from "./routers";
 import morgan from 'morgan';
@@ -9,6 +10,14 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(morgan('dev'));
+
+app.use(
+    session({
+        secret: "my-secret-key",
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
 app.use((_req, res, next) => {
     res.header(
