@@ -29,26 +29,17 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
 
-    let usersRef: firebase.firestore.Query<firebase.firestore.DocumentData> = db.collection("users");
+    const filters = Object.keys(req.query)
+      .filter(key => key !== 'page' && key !== 'pageSize' && key !== 'deleted')
+      .reduce((acc, key) => {
+        return acc.where(key, '==', req.query[key]);
+      }, db.collection("users").where('deleted', '==', false));
 
-    // Filtrar usuarios por campos adicionales en la query string
-    if (Object.keys(req.query).length > 2) {
-      const filters = Object.keys(req.query).filter(key => key !== 'page' && key !== 'pageSize');
-      filters.forEach(key => {
-        usersRef = usersRef.where(key, '==', req.query[key]);
-      });
-    }
+    const usersSnapshot = await filters.limit(endIndex).get();
 
-    // Filtrar usuarios eliminados (deleted = false)
-    usersRef = usersRef.where('deleted', '==', false);
-
-    // Obtener el total de usuarios sin contar los eliminados
-    const totalUsersSnapshot = await usersRef.get();
-    const totalFilteredUsers = totalUsersSnapshot.size;
+    const totalFilteredUsers = usersSnapshot.size;
     const totalPages = Math.ceil(totalFilteredUsers / pageSize);
 
-    // Obtener los usuarios paginados sin contar los eliminados
-    const usersSnapshot = await usersRef.limit(endIndex).get();
     const usersData = usersSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
 
     res.json({ users: usersData, totalPages });
@@ -57,6 +48,3 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error al obtener los usuarios" });
   }
 };
-
-
-
