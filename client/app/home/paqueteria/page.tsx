@@ -1,4 +1,6 @@
 import { HiOutlineLocationMarker, HiOutlineCalendar, HiOutlineBriefcase } from "react-icons/hi";
+import Link from "next/link";
+
 
 export default function Paqueteria() {
   return (
@@ -27,7 +29,9 @@ export default function Paqueteria() {
           <input className="pl-2 w-2/3" placeholder="Items a transportar..." type="text" />
         </div>
 
-        <button className="w-1/2 mt-10">Buscar tu cadete!</button>
+        <Link href={'home/paqueteria/transportes'} className="w-1/2 bg-blue text-white rounded-lg p-2 text-center">
+           <span>Buscar a tu cadete!</span> 
+        </Link>
       </form>
     </div>
   );
