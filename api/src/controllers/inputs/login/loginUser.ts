@@ -6,7 +6,7 @@ import { Strategy } from "passport-local";
 import { compareSync } from "bcrypt";
 import { User } from "../../../schema/user";
 
-const localStrategy = new Strategy({ usernameField: "email" }, async (email, password, done) => {
+const userStretegy = new Strategy({ usernameField: "email" }, async (email, password, done) => {
   try {
     const usersRef = db.collection("users");
     const snapshot = await usersRef.where("email", "==", email).get();
@@ -24,7 +24,7 @@ const localStrategy = new Strategy({ usernameField: "email" }, async (email, pas
     return done(error);
   }
 });
-passport.use("localStrategy", localStrategy);
+passport.use("userStretegy", userStretegy);
 
 passport.serializeUser((User: User, done) => {
   done(null, User.email);
@@ -46,7 +46,7 @@ passport.deserializeUser(async (email: string, done) => {
 }); //todo esto despues se hara un middlware de auth de passport
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
-  passport.authenticate("localStrategy", (err, user) => {
+  passport.authenticate("userStretegy", (err: Error, user: User) => {
     if (err) {
       return res.status(500).json(err);
     }
