@@ -50,6 +50,21 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
   }
 };
 
+export const enableVehicle = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("vehicle").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("El vehículo no se econtró");
+    }
+    await db.collection("vehicle").doc(id).update({ deleted: false });
+    res.status(200).json({ message: "Vehículo habilitado correctamente" });
+  } catch (innerError) {
+    console.error("Error al habilitar el vehículo", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
+
 export const deleteVehicle = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
