@@ -4,7 +4,7 @@ export interface Products {
   description: string;
   stock: number;
   type: TypeProduct;
-  localId: string[];
+  localId: string;
   img: string;
 }
 
