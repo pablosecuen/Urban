@@ -14,7 +14,7 @@ export const searchUser = async (
       res.status(404).json({ message: "Usuario no encontrado" });
     } else {
       const usuario = { id: doc.id, ...doc.data() };
-      res.json(usuario);
+      res.status(200).json(usuario);
     }
   } catch (error) {
     console.error("Error al obtener el usuario", error);
@@ -42,7 +42,7 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
 
     const usersData = usersSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
 
-    res.json({ users: usersData, totalPages });
+    res.status(200).send({ users: usersData, totalPages });
   } catch (error) {
     console.error("Error al obtener los usuarios", error);
     res.status(500).json({ message: "Error al obtener los usuarios" });
