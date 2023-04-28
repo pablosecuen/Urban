@@ -4,7 +4,6 @@ import { Products, ProductsToUpdate } from '../../schema/products';
 
 export const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    console.log("hola");
     const data: Products = req.body;
     const docRef = await db.collection("products").add(data);
     res.status(201).json({ id: docRef.id });
