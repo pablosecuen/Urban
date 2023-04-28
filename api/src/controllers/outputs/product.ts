@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { db } from '../../connection/connection';
-import { Products } from '../../schema/products';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
 
 export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -9,17 +11,20 @@ export const getAllProducts = async (req: Request, res: Response): Promise<void>
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
 
-    const filters = Object.keys(req.query)
-      .filter(key => key !== 'page' && key !== 'pageSize')
-      .reduce((acc, key) => {
-        return acc.where(key, '==', req.query[key]);
-      }, db.collection("products"));
+    let productRef: firebase.firestore.Query<firebase.firestore.DocumentData> = db.collection("products");
 
-    const productsSnapshot = await filters.limit(endIndex).get();
+    if (Object.keys(req.query).length > 2) {
+      const filters = Object.keys(req.query).filter(key => key !== 'page' && key !== 'pageSize');
+      filters.forEach(key => {
+        productRef = productRef.where(key, '==', req.query[key]);
+      });
+    }
+    //agregar  varioble para saber si un producto esta en disponible o listo para agregarse un boolenano
+    const totalProductSnapshot = await productRef.get();
+    const totalFilteredProducts = totalProductSnapshot.size;
+    const totalPages = Math.ceil(totalFilteredProducts / pageSize);
 
-    const totalFilteredUsers = productsSnapshot.size;
-    const totalPages = Math.ceil(totalFilteredUsers / pageSize);
-
+    const productsSnapshot = await productRef.limit(endIndex).get();
     const productsData = productsSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
 
     res.status(200).json({ products: productsData, totalPages });
@@ -32,38 +37,48 @@ export const getAllProducts = async (req: Request, res: Response): Promise<void>
 export const getAllProductsByType = async (req: Request, res: Response): Promise<void> => {
   try {
     const productType: string = req.params.productType;
-    const productsSnapshot = await db.collection('products').where('type', '==', productType).get();
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
 
-    const products = productsSnapshot.docs.map((doc) => {
-      return {
-        id: doc.id,
-        ...doc.data()
-      };
-    });
+    const productRef = db.collection('products').where('type', '==', productType);
+    const totalProductSnapshot = await productRef.get();
+    const totalFilteredProducts = totalProductSnapshot.size;
+    const totalPages = Math.ceil(totalFilteredProducts / pageSize);
 
-    res.status(200).json(products);
+    const productsSnapshot = await productRef.limit(endIndex).get();
+    const productsData = productsSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
+
+    res.status(200).json({ products: productsData, totalPages });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener los productos por tipo');
   }
 };
 
+
 export const getAllProductsByStore = async (req: Request, res: Response): Promise<void> => {
   try {
     const store: string = req.params.store;
-    const productsSnapshot = await db.collection('products').where('localId', 'array-contains', store).get();
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
 
-    const products = productsSnapshot.docs.map((doc) => {
-      return {
-        id: doc.id,
-        ...doc.data()
-      };
-    });
+    const productRef = db.collection('products').where('localId', '==', store);
+    const totalProductSnapshot = await productRef.get();
+    const totalFilteredProducts = totalProductSnapshot.size;
+    const totalPages = Math.ceil(totalFilteredProducts / pageSize);
 
-    res.status(200).json(products);
+    const productsSnapshot = await productRef.limit(endIndex).get();
+    const productsData = productsSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
+
+    res.status(200).json({ products: productsData, totalPages });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al obtener los productos por tienda');
+    res.status(500).send('Error al obtener los productos por tipo');
   }
 };
+
 
