@@ -47,15 +47,17 @@ export const getDistributors = async (req: Request, res: Response): Promise<void
     const pageSize = Number(req.query.pageSize) || 2;
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
-    const totalPages = Math.ceil(distributorsSnapshot.docChanges.length / pageSize);
+    const totalDistributors = distributorsSnapshot.size;
+    const totalPages = Math.ceil(totalDistributors / pageSize);
 
     const distributorsData = distributorsSnapshot.docs
       .slice(startIndex, endIndex)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    res.status(201).json({ distributors: distributorsData, totalPages });
+    res.status(200).json({ distributors: distributorsData, totalPages, totalDistributors });
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
   }
 };
+

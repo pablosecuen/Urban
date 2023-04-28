@@ -11,10 +11,7 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
       !dataOrder.date ||
       !dataOrder.localId ||
       !dataOrder.price ||
-      !dataOrder.destination ||
-      !dataOrder.order ||
-      !dataOrder.status
-    ) {
+      !dataOrder.destination) {
       throw new Error("Faltan datos");
     }
     next();

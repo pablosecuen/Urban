@@ -10,31 +10,56 @@ import { Order } from "../../schema/order";
 export const newOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const orderData: Order = req.body;
-    const docRef = await db.collection("orders").add(orderData);
-    await db
-      .collection("users")
-      .doc(orderData.userId)
-      .update({
+    const dataFormated: Order = {
+      ...orderData,
+      status: true,
+      order: "pending"
+    }
+    console.log(dataFormated.localId);
+
+    const [userDoc, distributorDoc, localDoc] = await Promise.all([
+      db.collection("users").doc(dataFormated.userId).get(),
+      db.collection("distributors").doc(dataFormated.distributorId).get(),
+      db.collection("locals").doc(dataFormated.localId).get(),
+    ]);
+
+    if (!userDoc.exists) {
+      res.status(404).json({ message: "El usuario no existe" });
+      return;
+    }
+
+    if (!distributorDoc.exists) {
+      res.status(404).json({ message: "El distribuidor no existe" });
+      return;
+    }
+
+    if (!localDoc.exists) {
+      res.status(404).json({ message: "El local no existe" });
+      return;
+    }
+
+    const docRef = await db.collection("orders").add(dataFormated);
+
+    await Promise.all([
+      db.collection("users").doc(orderData.userId).update({
         "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
-      });
-    await db
-      .collection("distributors")
-      .doc(orderData.distributorId)
-      .update({
+      }),
+      db.collection("distributors").doc(orderData.distributorId).update({
         "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
-      });
-    await db
-      .collection("local")
-      .doc(orderData.localId)
-      .update({
+      }),
+      db.collection("locals").doc(orderData.localId).update({
         history: firebase.firestore.FieldValue.arrayUnion(docRef.id),
-      });
+      }),
+    ]);
+
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear la orden", error);
     res.status(400).json({ messege: error.message });
   }
 };
+
+
 /**
  * Controlador para actualizar las ordenes
  */

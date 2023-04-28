@@ -5,7 +5,20 @@ import { Products, ProductsToUpdate } from '../../schema/products';
 export const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: Products = req.body;
-    const docRef = await db.collection("products").add(data);
+    const dataFormated = {
+      ...data,
+      deleted: false,
+    }
+
+    const [localDoc] = await Promise.all([
+      db.collection("locals").doc(dataFormated.localId).get(),
+    ]);
+
+    if (!localDoc.exists) {
+      throw new Error("El local no existe");
+    }
+
+    const docRef = await db.collection("products").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error(error);
