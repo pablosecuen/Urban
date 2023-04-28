@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import axios from "axios";
+import { fileURLToPath } from "url";
+import { stringify } from "querystring";
 
 interface UserToRegister {
   name: string;
@@ -20,9 +22,6 @@ interface LoginResponse {
   token?: string;
 }
 
-
-
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,22 +39,19 @@ const Login = () => {
     }
   }
 
- 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    const userData: UserToLogin = {
+    const user: UserToLogin = {
       email,
       password,
     };
     try {
-      const response = await axios.post<LoginResponse>(
-        "http://localhost:3000/login/user",
-        userData
-      );
-      const {  token } = response.data;
-      if ( token) {
+      const response = await axios.post<LoginResponse>("http://localhost:3000/login/user", user);
+      const { token } = response.data;
+      if (token) {
         console.log("Login successful");
-        router.push('/home');
+        // store the user object in local storage
+        router.push("/home");
         // Save the token to localStorage or a state variable
       } else {
         console.log("Login failed");
@@ -70,7 +66,7 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
       console.log(response.data); // the created user data
-      router.push('/home');
+      router.push("/home");
     } catch (error) {
       console.log("salio todo mal");
     }
@@ -115,13 +111,13 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center align-middle items-center w-full">
+    <div className="flex h-screen w-full items-center justify-center align-middle">
       {isRegister ? (
         <form
           onSubmit={handleRegister}
-          className="lg:w-1/2 w-4/5 my-8 h-[600px] border-2 rounded-3xl shadow-lg shadow-black/40 flex flex-col justify-between items-center align-middle pb-4 px-4"
+          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
         >
-          <div className="flex flex-col justify-center items-center align-middle h-1/2">
+          <div className="flex h-1/2 flex-col items-center justify-center align-middle">
             {" "}
             <label className="text-center">
               Name:
@@ -140,23 +136,24 @@ const Login = () => {
               <input type="password" value={repeatPassword} onChange={handleRepeatPasswordChange} />
             </label>
           </div>
-          <div className="flex flex-col justify-between items-center align-middle h-1/2">
+          <div className="flex h-1/2 flex-col items-center justify-between align-middle">
             {" "}
             <button onClick={handleRegister}>Register</button>
             <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Google</button>
             <button onClick={handleRegisterClick}>Facebook</button>
             <button onClick={handleLoginClick} className="mt-6">
-            <p>Ya tienes cuenta?</p><p>ingresa aquí</p>
+              <p>Ya tienes cuenta?</p>
+              <p>ingresa aquí</p>
             </button>
           </div>
         </form>
       ) : (
         <form
           onSubmit={handleLogin}
-          className="lg:w-1/2 w-4/5 my-8 h-[600px] border-2 rounded-3xl shadow-lg shadow-black/40 flex flex-col justify-between items-center align-middle p-4"
+          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 p-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
         >
-          <div className="flex flex-col justify-center items-center align-middle h-1/2 ">
+          <div className="flex h-1/2 flex-col items-center justify-center align-middle ">
             {" "}
             <label className="text-center">
               Email:
@@ -167,7 +164,7 @@ const Login = () => {
               <input type="password" value={password} onChange={handlePasswordChange} />
             </label>
           </div>
-          <div className="flex flex-col justify-between items-center align-middle h-1/2 ">
+          <div className="flex h-1/2 flex-col items-center justify-between align-middle ">
             <button onClick={handleLogin}>Login</button>
             <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Google</button>
