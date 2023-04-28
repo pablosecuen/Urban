@@ -38,13 +38,14 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     const usersSnapshot = await filters.limit(endIndex).get();
 
     const totalFilteredUsers = usersSnapshot.size;
-    const totalPages = Math.ceil(totalFilteredUsers / pageSize);
+    const totalUsers = await db.collection("users").where('deleted', '==', false).get().then(snapshot => snapshot.size);
 
     const usersData = usersSnapshot.docs.slice(startIndex, endIndex).map(doc => ({ id: doc.id, ...doc.data() }));
 
-    res.status(200).send({ users: usersData, totalPages });
+    res.status(200).send({ users: usersData, totalUsers });
   } catch (error) {
     console.error("Error al obtener los usuarios", error);
     res.status(500).json({ message: "Error al obtener los usuarios" });
   }
 };
+
