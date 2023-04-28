@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import {  Travel, TravelToUpdate } from "../../schema/travels";
+import { Travel, TravelToUpdate } from "../../schema/travels";
 
 export const newTravelValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: Travel = req.body;
-    if (!data.userId || !data.chauffeurId || !data.price || !data.status || !data.destination || !data.origin || !data.date
-     )
+    if (!data.userId || !data.chauffeurId || !data.price || !data.destination || !data.origin || !data.date
+    )
       throw Error("Datos incompletos");
     next();
   } catch (error) {
