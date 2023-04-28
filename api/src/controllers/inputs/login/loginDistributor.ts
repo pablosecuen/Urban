@@ -7,7 +7,7 @@ import { compareSync } from "bcrypt";
 import { disconnect } from "process";
 import { Distributor } from "../../../schema/distributor";
 
-const localStategy = new Strategy({ usernameField: "email" }, async (email, password, done) => {
+const localDistributor = new Strategy({ usernameField: "email" }, async (email, password, done) => {
   try {
     const distributorsRef = db.collection("distributors");
     const snapshot = await distributorsRef.where("email", "==", email).get();
@@ -25,7 +25,7 @@ const localStategy = new Strategy({ usernameField: "email" }, async (email, pass
     return done(error);
   }
 });
-passport.use("localStategy", localStategy);
+passport.use("localDistributor", localDistributor);
 
 passport.serializeUser((distributor: Distributor, done) => {
   done(null, distributor.email);
@@ -47,7 +47,7 @@ passport.deserializeUser(async (email: string, done) => {
 });
 
 export const loginDistributor = async (req: Request, res: Response): Promise<void> => {
-  passport.authenticate("localStategy", (err, distributor) => {
+  passport.authenticate("localDistributor", (err: Error, distributor: Distributor) => {
     if (err) {
       return res.status(500).json({ message: "Internal server error" });
     }
