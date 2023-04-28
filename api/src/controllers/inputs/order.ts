@@ -23,6 +23,12 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       .update({
         "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
       });
+    await db
+      .collection("local")
+      .doc(orderData.localId)
+      .update({
+        history: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+      });
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear la orden", error);
