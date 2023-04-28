@@ -29,7 +29,7 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
   try {
     const allProperties = Object.keys(req.query);
 
-    let query_ = query(collection(db, "orders"), where("deleted", "==", false));
+    let query_ = query(collection(db, "orders"));
 
     const additionalArgs = allProperties
       .filter((property) => !["page", "pageSize"].includes(property))
@@ -46,7 +46,7 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
     const pageSize = Number(req.query.pageSize) || 2;
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
-    const totalPages = Math.ceil(ordersSnapshot.docChanges.length / pageSize);
+    const totalPages = Math.ceil(ordersSnapshot.size / pageSize);
 
     const ordersData = ordersSnapshot.docs
       .slice(startIndex, endIndex)
@@ -58,3 +58,4 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error al obtener las ordenes" });
   }
 };
+
