@@ -13,12 +13,12 @@ export default function Home({ children }: { children: React.ReactNode }) {
         <NavBar />
       </header>
 
-      <div className="flex-col container flex lg:flex-row justify-center mx-auto items-center h-full py-10 lg:pb-20">
-        <div className="lg:w-1/2 w-full flex flex-col justify-center gap-4 items-center">
-          <Image src={logo as StaticImageData} alt="logo" className="lg:w-96 w-24 " />
+      <div className="mx-auto flex h-full flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
+        <div className="flex w-full flex-col items-center justify-center gap-4 lg:w-1/2">
+          <Image src={logo as StaticImageData} alt="logo" className="w-24 lg:w-96 " />
           <Menu />
         </div>
-        <div className="lg:w-1/2 w-full  flex justify-center items-center">{children}</div>
+        <div className="flex w-full items-center justify-center lg:w-1/2">{children}</div>
       </div>
       <Footer />
     </div>
