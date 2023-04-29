@@ -13,15 +13,16 @@ export default function Gestion() {
   ];
 
   return (
-    <section className="container flex h-auto w-full flex-col gap-2 border border-black bg-slate-100 lg:container lg:mx-auto lg:w-3/5 lg:bg-none lg:p-10">
-      <h3 className="rounded-3xl p-4  font-bold tracking-widest text-left">
-        Historial de viajes
-      </h3>
+    <section className="container flex h-auto w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:w-3/5 lg:bg-none lg:p-10">
+      <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul className="flex flex-col gap-3 ">
         {/* Usamos map para generar un li por cada objeto del array */}
         {viajesHardcodeados.map((viaje) => (
           <Link href={`/home/gestion/${viaje.id}`}>
-            <li key={viaje.id} className="border-blue rounded-full p-2 flex items-center gap-4 border px-4 group">
+            <li
+              key={viaje.id}
+              className="group flex items-center gap-4 rounded-full border bg-white p-2 px-4 transition-all duration-200 hover:border-blue"
+            >
               <article className="flex flex-col text-left">
                 <small className="text-md">{viaje.ruta}</small>
                 <small>{viaje.fecha}</small>
@@ -29,7 +30,7 @@ export default function Gestion() {
               {/* Usamos Link de Next para crear un enlace */}
               <FiChevronRight
                 size={25}
-                className="rounded-full text-blue transition-all duration-300 group-hover:text-white"
+                className="rounded-full text-blue transition-all duration-200 lg:group-hover:scale-125"
               />
             </li>
           </Link>
