@@ -1,11 +1,8 @@
-
+"use client";
 import React from "react";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-free/css/all.css";
-
-"use client";
 import { useState, useEffect } from "react";
-
 
 // components
 config.autoAddCss = false;
@@ -31,7 +28,6 @@ export default function HeaderStats() {
       {/* Header */}
 
       <div className="relative bg-blueGray-800 pb-32 pt-12 md:pt-32">
-
         <div className="mx-auto w-full px-4 md:px-10">
           <div>
             {/* Card stats */}
