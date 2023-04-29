@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const NotificationDropdown = () => {
   // dropdown props
@@ -17,51 +18,53 @@ const NotificationDropdown = () => {
   };
   return (
     <>
-      <a
-        className="text-blueGray-500 py-1 px-3"
-        href="#pablo"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        <i className="fas fa-ellipsis-v"></i>
-      </a>
-      <div
-        ref={popoverDropdownRef}
-        className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-        }
-      >
+      <div className=" relative w-48">
         <a
+          className=" px-3 py-1 text-blueGray-500"
           href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
+          ref={btnDropdownRef}
+          onClick={(e) => {
+            e.preventDefault();
+            dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
+          }}
         >
-          Action
+          <i className="fas fa-ellipsis-v w-auto"></i>
         </a>
-        <a
-          href="#pablo"
+        <div
+          ref={popoverDropdownRef}
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            (dropdownPopoverShow ? "block " : "hidden ") +
+            "absolute right-0  z-50  w-48 list-none rounded bg-white py-2 text-left text-base shadow-lg"
           }
-          onClick={(e) => e.preventDefault()}
         >
-          Another action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Something else here
-        </a>
+          <a
+            href="#pablo"
+            className={
+              "block w-48 whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
+            }
+            onClick={(e) => e.preventDefault()}
+          >
+            Action
+          </a>
+          <a
+            href="#pablo"
+            className={
+              "block w-48 whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
+            }
+            onClick={(e) => e.preventDefault()}
+          >
+            Another action
+          </a>
+          <a
+            href="#pablo"
+            className={
+              "block w-48 whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
+            }
+            onClick={(e) => e.preventDefault()}
+          >
+            Something else here
+          </a>
+        </div>
       </div>
     </>
   );

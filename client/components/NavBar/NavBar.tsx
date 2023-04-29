@@ -6,21 +6,35 @@ import logo from "../../assets/imagenes/UrbanIso.png";
 import { useMediaQuery } from "react-responsive";
 import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
+import { User } from "../../app/types/User";
 
 export default function NavBar() {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   const [showMenu, setShowMenu] = useState(false);
+  const [userData, setUserData] = useState<userData | null>(null);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
     console.log(showMenu);
   };
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("user");
-  //   setUserData(null);
-  // };
+  useEffect(() => {
+    const userDataString = localStorage.getItem("user");
+    if (userDataString) {
+      setUserData(JSON.parse(userDataString));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUserData(null);
+  };
+
+  interface userData {
+    name: string;
+    img: string;
+  }
 
   return (
     <header>
@@ -47,6 +61,30 @@ export default function NavBar() {
                   </Link>
                 </li>
               ))}
+              {userData ? (
+                <li className="my-2 flex items-center ">
+                  <Image
+                    src={userData?.img}
+                    alt={userData?.name}
+                    className="h-6 w-6 rounded-full"
+                  />
+                  <span className="mx-2">{userData?.name}</span>
+                  <button className="text-blue-500" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li className="my-2 flex items-center ">
+                  <Image
+                    src="/placeholder.png"
+                    alt="placeholder"
+                    width={50}
+                    height={50}
+                    className="h-6 w-6 rounded-full"
+                  />
+                  <span className="mx-2">Guest</span>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
