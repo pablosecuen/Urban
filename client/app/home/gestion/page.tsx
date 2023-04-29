@@ -15,7 +15,7 @@ interface Data 	{
 }
 
 const getData = ():Promise<Data[]> => {
-  return axios.get('http://localhost:3000/travels')
+  return axios.get('http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37')
 }
 
 console.log(getData());
