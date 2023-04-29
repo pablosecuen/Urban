@@ -11,7 +11,7 @@ module.exports = {
         verde: "#e0ffcd",
         verdeurban: "#76F900",
         celeste: "#07BABF",
-        blue: "rgb(59,130,246)",
+        blue: "rgb(2,132,199)",
       },
       boxShadow: {
         "custom-md": "5px 13px 20px black",
