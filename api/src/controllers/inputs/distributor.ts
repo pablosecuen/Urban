@@ -62,6 +62,23 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
     res.status(400).json({ messege: error.message });
   }
 };
+
+export const enableDistributor  = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id; //obtener id del distribuidor a eliminar
+    const docRef = await db.collection("distributors").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontró el distributor");
+    }
+    // Actualizar el usuario en Firestore
+    await db.collection("distributors").doc(id).update({ deleted: false });
+    res.status(201).json({ menssage: "Distribuidor habilitado correctamente" });
+  } catch (error) {
+    console.error("Error al habilitar el Distribuidor", error);
+    res.status(400).json({ messege: error.message });
+  }
+};
+
 /**
  * Controlador para eliminar un distribuidor por id
  
@@ -76,7 +93,7 @@ export const deleteDistributor = async (req: Request, res: Response): Promise<vo
     }
     // Actualizar el usuario en Firestore
     await db.collection("distributors").doc(id).update({ deleted: true });
-    res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
+    res.status(201).json({ menssage: "Distribuidor eliminado correctamente" });
   } catch (error) {
     console.error("Error al borrar el Distribuidor", error);
     res.status(400).json({ messege: error.message });
