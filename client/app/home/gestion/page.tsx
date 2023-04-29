@@ -13,7 +13,7 @@ export default function Gestion() {
   ];
 
   return (
-    <section className="container flex h-auto w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:w-3/5 lg:bg-none lg:p-10">
+    <section className="container flex h-auto w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:bg-none lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul className="flex flex-col gap-3 ">
         {/* Usamos map para generar un li por cada objeto del array */}
@@ -23,8 +23,8 @@ export default function Gestion() {
               key={viaje.id}
               className="group flex items-center gap-4 rounded-full border bg-white p-2 px-4 transition-all duration-200 hover:border-blue"
             >
-              <article className="flex flex-col text-left">
-                <small className="text-md">{viaje.ruta}</small>
+              <article className="flex flex-col text-left ">
+                <small className="font-bold ">{viaje.ruta}</small>
                 <small>{viaje.fecha}</small>
               </article>
               {/* Usamos Link de Next para crear un enlace */}
