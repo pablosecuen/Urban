@@ -5,7 +5,6 @@ import {
   updateDistributor,
 } from "../../controllers/inputs/distributor";
 import {
-  deleteDistributorValidate,
   newDistributorValidate,
   updateDistributorValidate,
 } from "../../utils/validations/distributor";
@@ -16,7 +15,9 @@ const router = Router();
 router.post("/", newDistributorValidate, newDistributor);
 //Ruta actualizar distribuidor
 router.put("/:id", updateDistributorValidate, updateDistributor);
-//Ruta eliminar distribuidor
-router.delete("/:id", deleteDistributorValidate, deleteDistributor);
+//Ruta habilitar distribuidor
+router.patch("/enable/:id", deleteDistributor);
+//Ruta eliminar distribuido
+router.delete("/delete/:id", deleteDistributor);
 
 export default router;

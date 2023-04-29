@@ -46,7 +46,7 @@ passport.deserializeUser(async (email: string, done) => {
 }); //todo esto despues se hara un middlware de auth de passport
 
 export const loginLocal = async (req: Request, res: Response): Promise<void> => {
-  passport.authenticate("localStrategy", (err, local) => {
+  passport.authenticate("localStrategy", (err: Error, local: Local) => {
     if (err) {
       return res.status(500).json(err);
     }

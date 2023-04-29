@@ -52,12 +52,27 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
+export const enableLocal = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("locals").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("El local no se encontró");
+    }
+    await db.collection("locals").doc(id).update({ deleted: false });
+    res.status(200).json({ message: "Local habilitado correctamente" });
+  } catch (innerError) {
+    console.error("Error al habilitar el local", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
+
 export const deleteLocal = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("locals").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El vehículo no se eliminó");
+      throw new Error("El local no se eliminó");
     }
     await db.collection("locals").doc(id).update({ deleted: true });
     res.status(200).json({ message: "Local eliminado correctamente" });

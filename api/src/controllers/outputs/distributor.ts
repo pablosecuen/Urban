@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { Distributor } from "../../schema/distributor";
+import { query, where, getDocs, collection } from "firebase/firestore";
 
 /**
  * Controlador para buscar un distribuidor por id
@@ -25,27 +26,38 @@ export const searchDistributor = async (req: Request, res: Response): Promise<vo
  * Controlador para obtener todos los distribuidores
  * con paginado
  */
-export const getAllDistributors = async (req: Request, res: Response): Promise<void> => {
+export const getDistributors = async (req: Request, res: Response): Promise<void> => {
   try {
+    const allProperties = Object.keys(req.query);
+
+    let query_ = query(collection(db, "distributors"), where("deleted", "==", false));
+
+    const additionalArgs = allProperties
+      .filter((property) => !["page", "pageSize"].includes(property))
+      .map((property) => {
+        return where(property, "==", req.query[property]);
+      });
+    if (additionalArgs.length > 0) {
+      query_ = query(query_, ...additionalArgs);
+    }
+
+    const distributorsSnapshot = await getDocs(query_);
+
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
-
-    const distributorsRef = db.collection("distributors");
-    const [distributorsSnapshot, totalDistributorsSnapshot] = await Promise.all([
-      distributorsRef.limit(endIndex).get(),
-      distributorsRef.get(),
-    ]);
+    const totalDistributors = distributorsSnapshot.size;
+    const totalPages = Math.ceil(totalDistributors / pageSize);
 
     const distributorsData = distributorsSnapshot.docs
       .slice(startIndex, endIndex)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
-    const totalDistributors = totalDistributorsSnapshot.size;
 
-    res.status(201).json({ distributors: distributorsData, totalDistributors });
+    res.status(200).json({ distributors: distributorsData, totalPages, totalDistributors });
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
   }
 };
+

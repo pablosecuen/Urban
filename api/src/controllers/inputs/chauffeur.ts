@@ -61,6 +61,21 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
   }
 };
 
+export const enableChauffeur = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("chauffeur").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontrón el chofer");
+    }
+    await db.collection("chauffeur").doc(id).update({ deleted: false });
+    res.status(200).json({ message: "Chofer habilitado correctamente" });
+  } catch (error) {
+    console.error("Error al habilitar el chofer", error);
+    res.status(400).json({ message: error.message });
+  }
+};
+
 export const deleteChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;

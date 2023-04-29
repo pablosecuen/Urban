@@ -1,66 +1,42 @@
+import Link from "next/link";
+import { FiChevronRight } from "react-icons/fi";
+
 export default function Gestion() {
-  // Los botones dentro de cada li tienen que ser Links que nos lleven a la ruta "/home/gestion/${id}" con la id del viaje
+  // Array de objetos que representan los datos de cada viaje
+  const viajesHardcodeados = [
+    { id: 1, fecha: "12/01/23 - 12:00hs", ruta: "Medellin-La Ceja" },
+    { id: 2, fecha: "13/01/23 - 13:00hs", ruta: "La Ceja-Medellin" },
+    { id: 3, fecha: "14/01/23 - 14:00hs", ruta: "Medellin-La Ceja" },
+    { id: 4, fecha: "15/01/23 - 15:00hs", ruta: "La Ceja-Medellin" },
+    { id: 5, fecha: "16/01/23 - 16:00hs", ruta: "Medellin-La Ceja" },
+    { id: 6, fecha: "17/01/23 - 17:00hs", ruta: "La Ceja-Medellin" },
+  ];
+
   return (
-    <div className="w-3/5 mx-auto p-10 h-3/5 flex flex-col gap-10">
-      <div className="rounded-3xl bg-sky-600 text-white font-bold tracking-widest p-4 text-center shadow-xl shadow-black/40">
-        <h3>Historial de viajes</h3>
-      </div>
-      <ul className="flex flex-col gap-3">
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
+    <section className="container flex h-3/5 w-full flex-col gap-2 bg-slate-100 lg:container lg:mx-auto lg:w-3/5 lg:bg-none lg:p-10">
+      <h3 className="rounded-3xl p-4  font-bold tracking-widest text-left">
+        Historial de viajes
+      </h3>
+      <ul className="flex flex-col gap-3 ">
+        {/* Usamos map para generar un li por cada objeto del array */}
+        {viajesHardcodeados.map((viaje) => (
+          <Link href={`/home/gestion/${viaje.id}`}>
+            <li key={viaje.id} className="border-blue rounded-full p-2 flex items-center gap-4 border px-4">
+              <article className="flex flex-col text-left">
+                <small className="text-md">{viaje.ruta}</small>
+                <small>{viaje.fecha}</small>
+              </article>
+              {/* <div className="w-1/4 border border-black"> */}
+              {/* Usamos Link de Next para crear un enlace */}
+              <FiChevronRight
+                size={25}
+                className="rounded-full text-blue transition-all duration-300 hover:rotate-90"
+              />
+              {/* </div> */}
+            </li>
+          </Link>
+        ))}
       </ul>
-    </div>
+    </section>
   );
 }

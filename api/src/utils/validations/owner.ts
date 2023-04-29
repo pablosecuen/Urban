@@ -23,15 +23,3 @@ export const updateOwnerValidated = (req: Request, res: Response, next: NextFunc
     res.status(400).json({ message: error.message });
   }
 };
-
-export const deleteOwnerValidated = (req: Request, res: Response, next: NextFunction): void => {
-  try {
-    const data: OwnerToUpdate = req.body;
-    const allowProperties = ["deleted"];
-    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-      throw Error("Dato faltante");
-    next();
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};

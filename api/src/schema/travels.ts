@@ -5,11 +5,12 @@ export interface Travel {
     origin: string;
     destination: string;
     price: string;
-    status: TravelStatus;
+    status: boolean;
+    travel: TravelStatus;
 }
 
 export interface TravelToUpdate {
-    status?: TravelStatus;
+    travel?: TravelStatus;
 }
 
 

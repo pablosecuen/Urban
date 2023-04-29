@@ -7,19 +7,41 @@ import firebase from 'firebase/compat/app';
 export const newTravel = async (req: Request, res: Response): Promise<void> => {
     try {
         const data: Travel = req.body;
-        const docRef = await db.collection('travels').add(data);
-        await db.collection('users').doc(data.userId).update({
-            'history.travels': firebase.firestore.FieldValue.arrayUnion(docRef.id)
+        const dataFormated = {
+            ...data,
+            status: true,
+            travel: "pending"
+        }
+
+        const [userDoc, chauffeurDoc] = await Promise.all([
+            db.collection("users").doc(dataFormated.userId).get(),
+            db.collection("chauffeur").doc(dataFormated.chauffeurId).get(),
+        ]);
+
+        if (!userDoc.exists) {
+            throw new Error("El usuario no existe");
+        }
+
+        if (!chauffeurDoc.exists) {
+            throw new Error("El chofer no existe");
+        }
+
+        const docRef = await db.collection("travels").add(dataFormated);
+
+        await db.collection("users").doc(dataFormated.userId).update({
+            "history.travels": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         });
-        await db.collection('chauffeur').doc(data.chauffeurId).update({
-            'history.travels': firebase.firestore.FieldValue.arrayUnion(docRef.id)
+        await db.collection("chauffeur").doc(dataFormated.chauffeurId).update({
+            "history.travels": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         });
+
         res.status(201).json({ id: docRef.id });
     } catch (error) {
-        console.error('Error al crear el viaje', error);
-        res.status(500).json({ message: 'Error al crear el viaje' });
+        console.error("Error al crear el viaje", error);
+        res.status(500).json({ message: error.message });
     }
 };
+
 
 export const updateTravel = async (
     req: Request,

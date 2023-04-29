@@ -1,23 +1,45 @@
+
 import React from "react";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-free/css/all.css";
+
+"use client";
+import { useState, useEffect } from "react";
+
+
 // components
 config.autoAddCss = false;
 import CardStats from "components/Cards/CardStats.js";
+import axios from "axios";
 
 export default function HeaderStats() {
+  const [totalUsers, setAllUsers] = useState(0);
+
+  const getUsers = async () => {
+    const total = await axios.get("http://localhost:3000/user").then((response) => {
+      return response.data.totalPages * response.data.users.length;
+    });
+    return total;
+  };
+
+  useEffect(() => {
+    setAllUsers(getUsers());
+  }, []);
+
   return (
     <>
       {/* Header */}
+
       <div className="relative bg-blueGray-800 pb-32 pt-12 md:pt-32">
+
         <div className="mx-auto w-full px-4 md:px-10">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
+                  statSubtitle="Total Users"
+                  statTitle={totalUsers}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"

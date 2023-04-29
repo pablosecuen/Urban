@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { newVehicle, updateVehicle, deleteVehicle } from "../../controllers/inputs/vehicle";
 import {
-  deleteVehicleValidate,
-  newVehicleValidate,
-  updateVehicleValidate,
-} from "../../utils/validations/vehicle";
+  newVehicle,
+  updateVehicle,
+  deleteVehicle,
+  enableVehicle,
+} from "../../controllers/inputs/vehicle";
+import { newVehicleValidate, updateVehicleValidate } from "../../utils/validations/vehicle";
 
 const router = Router();
 
@@ -12,6 +13,7 @@ const router = Router();
 
 router.post("/", newVehicleValidate, newVehicle);
 router.put("/:id", updateVehicleValidate, updateVehicle);
-router.put("/delete/:id", deleteVehicleValidate, deleteVehicle);
+router.patch("/enable/:id", enableVehicle);
+router.delete("/delete/:id", deleteVehicle);
 
 export default router;

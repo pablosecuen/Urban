@@ -1,5 +1,39 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
+import { query, where, collection, getDocs } from "firebase/firestore";
+
+export const searchAllOwners = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const allProperties = Object.keys(req.query);
+    let query_ = query(collection(db, "owner"));
+    const additionalArgs = allProperties
+      .filter((property) => !["page", "pageSize"].includes(property))
+      .map((property) => {
+        return where(property, "==", req.query[property]);
+      });
+    if (additionalArgs.length > 0) query_ = query(collection(db, "owner"), ...additionalArgs);
+
+    const ownerSnapshot = await getDocs(query_);
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(ownerSnapshot.docs.length / pageSize);
+
+    const owners = ownerSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    res.status(200).json({ owners, totalPages });
+  } catch (innerError) {
+    console.error("Error al encontrar propietarios", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
 
 export const searchOwner = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -16,32 +50,3 @@ export const searchOwner = async (req: Request, res: Response): Promise<void> =>
     res.status(400).json({ message: innerError.message });
   }
 };
-
-export const searchAllOwners = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const ownersRef = db.collection("owner");
-    const ownersSnapshot = await ownersRef.get();
-
-    const owners: Object[] = [];
-    ownersSnapshot.forEach((doc) => {
-      const owner = {
-        id: doc.id,
-        ...doc.data(),
-      };
-      owners.push(owner);
-    });
-
-    res.json(owners);
-  } catch (innerError) {
-    console.error("Error al encontrar propietarios", innerError);
-    res.status(400).json({ message: innerError.message });
-  }
-};
-
-/* export const searchOwnerByPatent = async (req: Request, res: Response): Promise<void> => {
-  try {
-  } catch (innerError) {
-    console.error("Error al encontrar propietario por patente", innerError);
-    res.status(400).json({ message: innerError.message });
-  }
-}; */

@@ -1,4 +1,4 @@
-import Order from "../../schema/order";
+import { Order } from "../../schema/order";
 import { Request, Response, NextFunction } from "express";
 
 export const newOrderValidate = (req: Request, res: Response, next: NextFunction): void => {
@@ -8,12 +8,10 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
     if (
       !dataOrder.userId ||
       !dataOrder.distributorId ||
-      !dataOrder.localId ||
       !dataOrder.date ||
+      !dataOrder.localId ||
       !dataOrder.price ||
-      !dataOrder.destination ||
-      !dataOrder.order
-    ) {
+      !dataOrder.destination) {
       throw new Error("Faltan datos");
     }
     next();
