@@ -12,8 +12,10 @@ export default function Gestion() {
   ];
 
   return (
-    <div className="container border border-black mx-auto flex h-3/5 w-3/5 flex-col gap-10 lg:p-10">
-        <h3 className="rounded-3xl bg-sky-600 p-4 text-center font-bold tracking-widest text-white shadow-xl shadow-black/40">Historial de viajes</h3>
+    <div className="container mx-auto flex h-3/5 w-3/5 flex-col gap-10 border border-black lg:p-10">
+      <h3 className="rounded-3xl bg-sky-600 p-4 text-center font-bold tracking-widest text-white shadow-xl shadow-black/40">
+        Historial de viajes
+      </h3>
       <ul className="flex flex-col gap-3">
         {/* Usamos map para generar un li por cada objeto del array */}
         {viajes.map((viaje) => (
