@@ -1,5 +1,25 @@
+import axios from "axios";
+import { log } from "console";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
+
+interface Data 	{
+  date: string,
+  userId: string,
+  destination: string,
+  travel: string,
+  price: string,
+  status: boolean,
+  chauffeurId: string,
+  origin: string
+}
+
+const getData = ():Promise<Data[]> => {
+  return axios.get('http://localhost:3000/travels')
+}
+
+console.log(getData());
+
 
 export default function Gestion() {
   // Array de objetos que representan los datos de cada viaje
