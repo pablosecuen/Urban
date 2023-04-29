@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { fileURLToPath } from "url";
-import { stringify } from "querystring";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 interface UserToRegister {
   name: string;
@@ -110,6 +109,13 @@ const Login = () => {
     setRepeatPassword(e.target.value);
   };
 
+  function handleSuccess(credentialResponse: CredentialResponse) {
+    console.log("CredentialResponse", credentialResponse);
+  }
+  function handleErorr() {
+    console.log("no funca");
+  }
+
   return (
     <div className="flex h-screen w-full items-center justify-center align-middle">
       {isRegister ? (
@@ -139,21 +145,22 @@ const Login = () => {
           <div className="flex h-1/2 flex-col items-center justify-between align-middle">
             {" "}
             <button onClick={handleRegister}>Register</button>
-            <button onClick={handleRegisterClick}>Apple Id</button>
-            <button onClick={handleRegisterClick}>Google</button>
-            <button onClick={handleRegisterClick}>Facebook</button>
+            {/* <button onClick={handleRegisterClick}>Apple Id</button>
+            <button onClick={handleRegisterClick}>Facebook</button> */}
+            <div className="flex w-auto items-center justify-center">
+              <GoogleLogin onError={handleErorr} onSuccess={handleSuccess} />
+            </div>
             <button onClick={handleLoginClick} className="mt-6">
-              <p>Ya tienes cuenta?</p>
-              <p>ingresa aquí</p>
+              <p>Ya tienes cuenta? ingresa aqui</p>
             </button>
           </div>
         </form>
       ) : (
         <form
-          onSubmit={handleLogin}
-          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 p-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
+          onSubmit={handleRegister}
+          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
         >
-          <div className="flex h-1/2 flex-col items-center justify-center align-middle ">
+          <div className="flex h-1/2 flex-col items-center justify-center align-middle">
             {" "}
             <label className="text-center">
               Email:
@@ -166,12 +173,14 @@ const Login = () => {
           </div>
           <div className="flex h-1/2 flex-col items-center justify-between align-middle ">
             <button onClick={handleLogin}>Login</button>
-            <button onClick={handleRegisterClick}>Apple Id</button>
-            <button onClick={handleRegisterClick}>Google</button>
-            <button onClick={handleRegisterClick}>Facebook</button>
+            {/* <button onClick={handleRegisterClick}>Apple Id</button> */}
+            <div className="flex w-auto items-center justify-center">
+              <GoogleLogin onError={handleErorr} onSuccess={handleSuccess} />
+            </div>
+            {/* <button onClick={handleRegisterClick}>Facebook</button> */}
 
             <button className="mt-6" onClick={handleRegisterClick}>
-              <p>no tienes cuenta?</p> <p>registrate aqui</p>
+              <p>no tienes cuenta? registrate aqui</p>
             </button>
           </div>
         </form>
