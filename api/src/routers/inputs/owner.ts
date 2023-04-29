@@ -7,7 +7,7 @@ const router = Router();
 // Ruta para crear y actualizar choferes
 router.post("/", newOwnerValidated, newOwner);
 router.put("/:id", updateOwnerValidated, updateOwner);
-router.put("enable/:id", enableOwner);
+router.patch("enable/:id", enableOwner);
 router.delete("/delete/:id", deleteOwner);
 
 export default router;
