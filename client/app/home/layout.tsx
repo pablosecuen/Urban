@@ -14,7 +14,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
       </header>
 
 
-      <div className="container mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:flex-row lg:pb-20">
+      <div className="lg:container mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:flex-row lg:pb-20">
 
         <div className="flex w-full flex-col items-center justify-center gap-4 lg:w-1/2">
           <Image src={logo as StaticImageData} alt="logo" className="w-24 lg:w-96 " />
