@@ -1,14 +1,15 @@
 import Link from "next/link";
+import { FiChevronRight } from "react-icons/fi";
 
 export default function Gestion() {
   // Array de objetos que representan los datos de cada viaje
   const viajesHardcodeados = [
-    { id: 1, fecha: "12/01/23", ruta: "12:00-Medellin-La Ceja" },
-    { id: 2, fecha: "13/01/23", ruta: "13:00-La Ceja-Medellin" },
-    { id: 3, fecha: "14/01/23", ruta: "14:00-Medellin-La Ceja" },
-    { id: 4, fecha: "15/01/23", ruta: "15:00-La Ceja-Medellin" },
-    { id: 5, fecha: "16/01/23", ruta: "16:00-Medellin-La Ceja" },
-    { id: 6, fecha: "17/01/23", ruta: "17:00-La Ceja-Medellin" },
+    { id: 1, fecha: "12/01/23 - 12:00hs", ruta: "Medellin-La Ceja" },
+    { id: 2, fecha: "13/01/23 - 13:00hs", ruta: "La Ceja-Medellin" },
+    { id: 3, fecha: "14/01/23 - 14:00hs", ruta: "Medellin-La Ceja" },
+    { id: 4, fecha: "15/01/23 - 15:00hs", ruta: "La Ceja-Medellin" },
+    { id: 5, fecha: "16/01/23 - 16:00hs", ruta: "Medellin-La Ceja" },
+    { id: 6, fecha: "17/01/23 - 17:00hs", ruta: "La Ceja-Medellin" },
   ];
 
   return (
@@ -16,17 +17,19 @@ export default function Gestion() {
       <h3 className="rounded-3xl bg-sky-600 p-4 text-center font-bold tracking-widest text-white">
         Historial de viajes
       </h3>
-      <ul className="flex flex-col gap-3 ">
+      <ul className="flex flex-col gap-3 ">p0
         {/* Usamos map para generar un li por cada objeto del array */}
         {viajesHardcodeados.map((viaje) => (
           <li key={viaje.id} className="flex items-center gap-4 px-4 border border-black">
-            <article className=" text-center">
-              <small>{viaje.fecha}</small>
+            <article className="flex flex-col text-center">
               <small>{viaje.ruta}</small>
+              <small>{viaje.fecha}</small>
             </article>
             <div className="w-1/4">
               {/* Usamos Link de Next para crear un enlace */}
-              <Link href={`/home/gestion/${viaje.id}`} className="rounded-full border-2 border-blue p-2">Gestionar</Link>
+              <Link href={`/home/gestion/${viaje.id}`} >
+                <FiChevronRight size={25} className="text-blue rounded-full border border-blue"/>
+              </Link>
             </div>
           </li>
         ))}
