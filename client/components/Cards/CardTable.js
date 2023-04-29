@@ -36,8 +36,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
                   Project
@@ -46,8 +46,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
                   Budget
@@ -56,8 +56,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
                   Status
@@ -66,8 +66,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
                   Users
@@ -76,8 +76,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
                   Completion
@@ -86,8 +86,8 @@ export default function CardTable({ color }) {
                   className={
                     "whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      ? "border-blueGray-100 bg-blueGray-50 text-blueGray-500"
+                      : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 ></th>
               </tr>
@@ -119,22 +119,30 @@ export default function CardTable({ color }) {
                     <img
                       src="/img/team-1-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-2-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-3-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-4-470x470.png"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                   </div>
                 </td>
@@ -181,22 +189,30 @@ export default function CardTable({ color }) {
                     <img
                       src="/img/team-1-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-2-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-3-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-4-470x470.png"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                   </div>
                 </td>
@@ -243,22 +259,30 @@ export default function CardTable({ color }) {
                     <img
                       src="/img/team-1-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-2-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-3-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-4-470x470.png"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                   </div>
                 </td>
@@ -305,22 +329,30 @@ export default function CardTable({ color }) {
                     <img
                       src="/img/team-1-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-2-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-3-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-4-470x470.png"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                   </div>
                 </td>
@@ -367,22 +399,30 @@ export default function CardTable({ color }) {
                     <img
                       src="/img/team-1-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-2-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-3-800x800.jpg"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                     <img
                       src="/img/team-4-470x470.png"
                       alt="..."
-                      className="border-blueGray-50 -ml-4 h-10 w-10 rounded-full border-2 shadow"
+
+                      className="-ml-4 h-10 w-10 rounded-full border-2 border-blueGray-50 shadow"
+
                     ></img>
                   </div>
                 </td>

@@ -1,8 +1,14 @@
+
+import React from "react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-free/css/all.css";
+
 "use client";
 import { useState, useEffect } from "react";
 
-// components
 
+// components
+config.autoAddCss = false;
 import CardStats from "components/Cards/CardStats.js";
 import axios from "axios";
 
@@ -23,7 +29,9 @@ export default function HeaderStats() {
   return (
     <>
       {/* Header */}
-      <div className="bg-blueGray-800 relative pb-32 pt-12 md:pt-32">
+
+      <div className="relative bg-blueGray-800 pb-32 pt-12 md:pt-32">
+
         <div className="mx-auto w-full px-4 md:px-10">
           <div>
             {/* Card stats */}
@@ -73,7 +81,7 @@ export default function HeaderStats() {
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
                   statIconName="fas fa-percent"
-                  statIconColor="bg-lightBlue-500"
+                  statIconColor="bg-blueGray-500"
                 />
               </div>
             </div>
