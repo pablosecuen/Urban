@@ -80,8 +80,8 @@ function MapExample() {
   });
   return (
     <>
-      <div className="relative w-full rounded h-600-px">
-        <div className="rounded h-full" ref={mapRef} />
+      <div className="h-600-px relative w-full rounded">
+        <div className="h-full rounded" ref={mapRef} />
       </div>
     </>
   );

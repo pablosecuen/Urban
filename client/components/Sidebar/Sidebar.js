@@ -40,7 +40,7 @@ export default function Sidebar() {
             }
           >
             {/* Collapse header */}
-            <div className="border-blueGray-200 mb-4 block border-b border-solid pb-4 md:hidden md:min-w-full">
+            <div className="mb-4 block border-b border-solid border-blueGray-200 pb-4 md:hidden md:min-w-full">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link href="/">Notus NextJS</Link>
@@ -62,7 +62,7 @@ export default function Sidebar() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 h-12 w-full rounded  border  border-solid bg-white px-3 py-2 text-base font-normal leading-snug shadow-none outline-none focus:outline-none"
+                  className="h-12 w-full rounded border border-solid border-blueGray-500  bg-white  px-3 py-2 text-base font-normal leading-snug text-blueGray-600 placeholder-blueGray-300 shadow-none outline-none focus:outline-none"
                 />
               </div>
             </form>
@@ -70,25 +70,90 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full">
+            <h6 className="block pb-4 pt-1 text-xs font-bold uppercase text-blueGray-500 no-underline md:min-w-full">
               Admin Layout Pages
             </h6>
             {/* Navigation */}
 
             <ul className="flex list-none flex-col md:min-w-full md:flex-col">
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
+                      fill="#000000"
+                    ></path>{" "}
+                  </g>
+                </svg>{" "}
                 <Link href="/admin/dashboard">Dashboard</Link>
               </li>
 
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 1024 1024"
+                  fill="#000000"
+                  className="w-auto"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      fill="#000000"
+                      d="M764.416 254.72a351.68 351.68 0 0 1 86.336 149.184H960v192.064H850.752a351.68 351.68 0 0 1-86.336 149.312l54.72 94.72-166.272 96-54.592-94.72a352.64 352.64 0 0 1-172.48 0L371.136 936l-166.272-96 54.72-94.72a351.68 351.68 0 0 1-86.336-149.312H64v-192h109.248a351.68 351.68 0 0 1 86.336-149.312L204.8 160l166.208-96h.192l54.656 94.592a352.64 352.64 0 0 1 172.48 0L652.8 64h.128L819.2 160l-54.72 94.72zM704 499.968a192 192 0 1 0-384 0 192 192 0 0 0 384 0z"
+                    ></path>
+                  </g>
+                </svg>
                 <Link href="/admin/settings">Settings</Link>
               </li>
 
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g id="Edit / Table_Add">
+                      {" "}
+                      <path
+                        id="Vector"
+                        d="M11 4H15.8002C16.9203 4 17.4801 4 17.9079 4.21799C18.2842 4.40973 18.5905 4.71547 18.7822 5.0918C19 5.5192 19 6.07899 19 7.19691V9.0002L11.0001 9.0001M11 4H6.2002C5.08009 4 4.51962 4 4.0918 4.21799C3.71547 4.40973 3.40973 4.71547 3.21799 5.0918C3 5.51962 3 6.08009 3 7.2002V9M11 4L11.0001 9.0001M3 9V15M3 9L11.0001 9.0001M3 15V16.8002C3 17.9203 3 18.4801 3.21799 18.9079C3.40973 19.2842 3.71547 19.5905 4.0918 19.7822C4.5192 20 5.07899 20 6.19691 20H11.0002L11.0001 9.0001M3 15H11M15 16H18M18 16H21M18 16V19M18 16V13"
+                        stroke="#000000"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
                 <Link href="/admin/tables">Tables</Link>
               </li>
 
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g id="Navigation / Map">
+                      {" "}
+                      <path
+                        id="Vector"
+                        d="M15 6V21M15 6L21 3V18L15 21M15 6L9 3M15 21L9 18M9 18L3 21V6L9 3M9 18V3"
+                        stroke="#000000"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
                 <Link href="/admin/maps">Maps</Link>
               </li>
             </ul>
@@ -96,35 +161,62 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full">
-              Auth Layout Pages
-            </h6>
+
             {/* Navigation */}
-
-            <ul className="flex list-none flex-col md:mb-4 md:min-w-full md:flex-col">
-              <li className="items-center">
-                <Link href="/auth/login">Login</Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/auth/register">Register</Link>
-              </li>
-            </ul>
 
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full">
+            <h6 className="block pb-4 pt-1 text-xs font-bold uppercase text-blueGray-500 no-underline md:min-w-full">
               No Layout Pages
             </h6>
             {/* Navigation */}
 
             <ul className="flex list-none flex-col md:mb-4 md:min-w-full md:flex-col">
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg
+                  fill="#000000"
+                  height="25px"
+                  width="25px"
+                  version="1.2"
+                  baseProfile="tiny"
+                  id="Layer_1"
+                  className="w-auto"
+                  viewBox="-351 153 256 256"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g>
+                      {" "}
+                      <path d="M-112.7,181.7h-219.8c-6.9,0-12.7,5.8-12.7,12.7V340c0,6.9,5.8,12.7,12.7,12.7h79.5v21.2h-20.2c-3.5,0-6.4,2.9-6.4,6.4v0.9 c0,3.5,2.9,6.4,6.4,6.4h101.4c3.5,0,6.4-2.9,6.4-6.4v-0.9c0-3.5-2.9-6.4-6.4-6.4h-20.2v-21.2h79.5c6.9,0,12.7-5.8,12.7-12.7V194.4 C-100,187.4-105.8,181.7-112.7,181.7z M-222.6,345c-4,0.1-7.3-3.2-7.3-7.3c0-4,3.3-7.3,7.3-7.3s7.3,3.3,7.3,7.3 C-215.3,341.7-218.6,345-222.6,345z M-115.6,324.7H-329V197.5h213.5V324.7z"></path>{" "}
+                      <polygon points="-175.5,261 -215.6,282.3 -249.9,212.2 -299.9,310 -143.6,310 "></polygon>{" "}
+                      <circle cx="-163.3" cy="235.2" r="17.8"></circle>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
                 <Link href="/landing">Landing Page</Link>
               </li>
 
-              <li className="items-center">
+              <li className="flex items-center justify-start gap-2">
+                <svg
+                  fill="#000000"
+                  version="1.1"
+                  id="Layer_1"
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 256 201"
+                  enable-background="new 0 0 256 201"
+                  className="w-auto"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path d="M154.195,61.371V39.514h-12.047v10.777l-14-12.791L81.113,79.601l7.151,8.058l7.252-6.547V130.5h64.897V81.514l7.135,6.547 l7.339-7.856L154.195,61.371z M238.25,143.813V13.875c0-6.523-5.289-11.813-11.813-11.813H29.563 c-6.523,0-11.813,5.289-11.813,11.813v129.938L2,175.313v11.813c0,6.523,5.289,11.813,11.813,11.813h228.375 c6.523,0,11.813-5.289,11.813-11.813v-11.813L238.25,143.813z M104.125,175.313l1.122-11.813h45.752l1.122,11.813H104.125z M218.563,143.813H37.438V21.75h181.125V143.813z"></path>{" "}
+                  </g>
+                </svg>
                 <Link href="/profile">Profile Page</Link>
               </li>
             </ul>
@@ -132,7 +224,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full">
+            <h6 className="block pb-4 pt-1 text-xs font-bold uppercase text-blueGray-500 no-underline md:min-w-full">
               Documentation
             </h6>
             {/* Navigation */}
