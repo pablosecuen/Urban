@@ -1,65 +1,35 @@
+import Link from "next/link";
+
 export default function Gestion() {
-  // Los botones dentro de cada li tienen que ser Links que nos lleven a la ruta "/home/gestion/${id}" con la id del viaje
+  // Array de objetos que representan los datos de cada viaje
+  const viajes = [
+    { id: 1, fecha: "12/01/23", ruta: "12:00-Medellin-La Ceja" },
+    { id: 2, fecha: "13/01/23", ruta: "13:00-La Ceja-Medellin" },
+    { id: 3, fecha: "14/01/23", ruta: "14:00-Medellin-La Ceja" },
+    { id: 4, fecha: "15/01/23", ruta: "15:00-La Ceja-Medellin" },
+    { id: 5, fecha: "16/01/23", ruta: "16:00-Medellin-La Ceja" },
+    { id: 6, fecha: "17/01/23", ruta: "17:00-La Ceja-Medellin" },
+  ];
+
   return (
-    <div className="w-3/5 mx-auto p-10 h-3/5 flex flex-col gap-10">
-      <div className="rounded-3xl bg-sky-600 text-white font-bold tracking-widest p-4 text-center shadow-xl shadow-black/40">
+    <div className="mx-auto flex h-3/5 w-3/5 flex-col gap-10 p-10">
+      <div className="rounded-3xl bg-sky-600 p-4 text-center font-bold tracking-widest text-white shadow-xl shadow-black/40">
         <h3>Historial de viajes</h3>
       </div>
       <ul className="flex flex-col gap-3">
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
-        <li className="flex gap-4 px-4 items-center">
-          <div className="text-center border-2 border-blue rounded-full p-2">
-            <small>12/01/23</small>
-            <small>12:00-Medellin-La Ceja</small>
-          </div>
-          <div className="w-1/4">
-            <button>Gestionar</button>
-          </div>
-        </li>
+        {/* Usamos map para generar un li por cada objeto del array */}
+        {viajes.map((viaje) => (
+          <li key={viaje.id} className="flex items-center gap-4 px-4">
+            <div className="rounded-full border-2 border-blue p-2 text-center">
+              <small>{viaje.fecha}</small>
+              <small>{viaje.ruta}</small>
+            </div>
+            <div className="w-1/4">
+              {/* Usamos Link de Next para crear un enlace */}
+              <Link href={`/home/gestion/${viaje.id}`}>Gestionar</Link>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
