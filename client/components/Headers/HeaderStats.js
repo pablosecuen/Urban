@@ -1,22 +1,37 @@
-import React from "react";
+"use client";
+import { useState, useEffect } from "react";
 
 // components
 
 import CardStats from "components/Cards/CardStats.js";
+import axios from "axios";
 
 export default function HeaderStats() {
+  const [totalUsers, setAllUsers] = useState(0);
+
+  const getUsers = async () => {
+    const total = await axios.get("http://localhost:3000/user").then((response) => {
+      return response.data.totalPages * response.data.users.length;
+    });
+    return total;
+  };
+
+  useEffect(() => {
+    setAllUsers(getUsers());
+  }, []);
+
   return (
     <>
       {/* Header */}
-      <div className="relative bg-blueGray-800 md:pt-32 pb-32 pt-12">
-        <div className="px-4 md:px-10 mx-auto w-full">
+      <div className="bg-blueGray-800 relative pb-32 pt-12 md:pt-32">
+        <div className="mx-auto w-full px-4 md:px-10">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
+                  statSubtitle="Total Users"
+                  statTitle={totalUsers}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -25,7 +40,7 @@ export default function HeaderStats() {
                   statIconColor="bg-red-500"
                 />
               </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="NEW USERS"
                   statTitle="2,356"
@@ -37,7 +52,7 @@ export default function HeaderStats() {
                   statIconColor="bg-orange-500"
                 />
               </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="SALES"
                   statTitle="924"
@@ -49,7 +64,7 @@ export default function HeaderStats() {
                   statIconColor="bg-pink-500"
                 />
               </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="PERFORMANCE"
                   statTitle="49,65%"
