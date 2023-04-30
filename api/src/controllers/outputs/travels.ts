@@ -17,7 +17,9 @@ export const travelByUser = async (req: Request, res: Response): Promise<void> =
     const endIndex = page * pageSize;
     const totalPages = Math.ceil(snapshot.docs.length / pageSize);
 
-    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => doc.data());
+    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
 
     // Envía la respuesta al cliente
     res.status(200).json({ travels, totalPages });
@@ -41,7 +43,9 @@ export const travelByChauffeur = async (req: Request, res: Response): Promise<vo
     const totalPages = Math.ceil(snapshot.docs.length / pageSize);
 
     // Crea un array con todos los viajes encontrados
-    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => doc.data());
+    const travels = snapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
 
     // Envía la respuesta al cliente
     res.status(200).json({ travels, totalPages });
