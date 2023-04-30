@@ -1,5 +1,25 @@
+import axios from "axios";
+import { log } from "console";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
+
+interface Data 	{
+  date: string,
+  userId: string,
+  destination: string,
+  travel: string,
+  price: string,
+  status: boolean,
+  chauffeurId: string,
+  origin: string
+}
+
+const getData = ():Promise<Data[]> => {
+  return axios.get('http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37')
+}
+
+console.log(getData());
+
 
 export default function Gestion() {
   // Array de objetos que representan los datos de cada viaje
@@ -13,26 +33,25 @@ export default function Gestion() {
   ];
 
   return (
-    <section className="container flex h-3/5 w-full flex-col gap-2 bg-slate-100 lg:container lg:mx-auto lg:w-3/5 lg:bg-none lg:p-10">
-      <h3 className="rounded-3xl p-4  font-bold tracking-widest text-left">
-        Historial de viajes
-      </h3>
+    <section className="container flex h-auto w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:bg-none lg:p-10">
+      <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul className="flex flex-col gap-3 ">
         {/* Usamos map para generar un li por cada objeto del array */}
         {viajesHardcodeados.map((viaje) => (
           <Link href={`/home/gestion/${viaje.id}`}>
-            <li key={viaje.id} className="border-blue rounded-full p-2 flex items-center gap-4 border px-4">
-              <article className="flex flex-col text-left">
-                <small className="text-md">{viaje.ruta}</small>
+            <li
+              key={viaje.id}
+              className="group flex items-center gap-4 rounded-full border bg-white p-2 px-4 transition-all duration-200 hover:border-blue"
+            >
+              <article className="flex flex-col text-left ">
+                <small className="font-bold ">{viaje.ruta}</small>
                 <small>{viaje.fecha}</small>
               </article>
-              {/* <div className="w-1/4 border border-black"> */}
               {/* Usamos Link de Next para crear un enlace */}
               <FiChevronRight
                 size={25}
-                className="rounded-full text-blue transition-all duration-300 hover:rotate-90"
+                className="rounded-full text-blue transition-all duration-200 lg:group-hover:scale-125"
               />
-              {/* </div> */}
             </li>
           </Link>
         ))}

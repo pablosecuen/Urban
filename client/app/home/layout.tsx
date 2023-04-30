@@ -9,20 +9,15 @@ import Link from "next/link";
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <header>
         <NavBar />
-      </header>
 
-
-      <div className="container mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:flex-row lg:pb-20">
-
-        <div className="flex w-full flex-col items-center justify-center gap-4 lg:w-1/2">
+      <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
+        <div className="flex w-full flex-col items-center justify-center gap-4">
           <Image src={logo as StaticImageData} alt="logo" className="w-24 lg:w-96 " />
           <Menu />
         </div>
 
-        <div className="flex w-full  items-center justify-center lg:w-1/2">{children}</div>
-
+        <div className="flex w-full items-center justify-center">{children}</div>
       </div>
       <Footer />
     </div>
