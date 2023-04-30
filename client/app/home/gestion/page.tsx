@@ -1,51 +1,51 @@
 import axios from "axios";
-import { log } from "console";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
 
-interface Data 	{
-  date: string,
-  userId: string,
-  destination: string,
-  travel: string,
-  price: string,
-  status: boolean,
-  chauffeurId: string,
-  origin: string
+interface Travel {
+  id: string;
+  date: string;
+  userId: string;
+  destination: string;
+  travel: string;
+  price: string;
+  status: boolean;
+  chauffeurId: string;
+  origin: string;
+}
+interface Data {
+  travels:  Travel[];
 }
 
-const getData = ():Promise<Data[]> => {
-  return axios.get('http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37')
-}
+const getData = async (): Promise<Data> => {
+  // const response = await axios.get('http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37')
+  // console.log(response.data);
+  // return response.data
+  return fetch("http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37")
+    .then((res) => res.json())
+    .then((data) => data);
+};
 
-console.log(getData());
-
-
-export default function Gestion() {
-  // Array de objetos que representan los datos de cada viaje
-  const viajesHardcodeados = [
-    { id: 1, fecha: "12/01/23 - 12:00hs", ruta: "Medellin-La Ceja" },
-    { id: 2, fecha: "13/01/23 - 13:00hs", ruta: "La Ceja-Medellin" },
-    { id: 3, fecha: "14/01/23 - 14:00hs", ruta: "Medellin-La Ceja" },
-    { id: 4, fecha: "15/01/23 - 15:00hs", ruta: "La Ceja-Medellin" },
-    { id: 5, fecha: "16/01/23 - 16:00hs", ruta: "Medellin-La Ceja" },
-    { id: 6, fecha: "17/01/23 - 17:00hs", ruta: "La Ceja-Medellin" },
-  ];
+export default async function Gestion() {
+  const data = await getData();
+  console.log(data);
 
   return (
-    <section className="container flex h-auto w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:bg-none lg:p-10">
+    <section className="container flex h-auto lg:h-96 w-full flex-col gap-2  bg-slate-100 lg:container lg:mx-auto lg:bg-none lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul className="flex flex-col gap-3 ">
         {/* Usamos map para generar un li por cada objeto del array */}
-        {viajesHardcodeados.map((viaje) => (
+        {data.travels.map((viaje: any) => (
           <Link href={`/home/gestion/${viaje.id}`}>
             <li
               key={viaje.id}
               className="group flex items-center gap-4 rounded-full border bg-white p-2 px-4 transition-all duration-200 hover:border-blue"
             >
               <article className="flex flex-col text-left ">
-                <small className="font-bold ">{viaje.ruta}</small>
-                <small>{viaje.fecha}</small>
+                <small className="font-bold ">{viaje.destination}</small>
+                <small>
+                  {viaje.date.slice(0, 10)} {viaje.date.slice(11, 16)}
+                </small>
               </article>
               {/* Usamos Link de Next para crear un enlace */}
               <FiChevronRight
