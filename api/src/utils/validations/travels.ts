@@ -16,7 +16,7 @@ export const newTravelValidated = (req: Request, res: Response, next: NextFuncti
 export const updateTravelValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: TravelToUpdate = req.body;
-    const allowProperties = ["status"];
+    const allowProperties = ["status", "travel"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
     next();
