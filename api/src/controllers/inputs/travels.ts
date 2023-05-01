@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { db } from '../../connection/connection';
 import { Travel, TravelToUpdate } from '../../schema/travels';
-import firebase from 'firebase/compat/app';
-
+import firebase from "firebase-admin";
 
 export const newTravel = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -56,9 +55,9 @@ export const updateTravel = async (
             throw new Error("No se encontró el viaje especificado");
         }
 
-        await db.collection("travels").doc(id).update(data);
+        await db.collection("travels").doc(id).update({ data });
 
-        res.status(200).json({ message: "Usuario actualizado correctamente" });
+        res.status(200).json({ message: "Viaje actualizado correctamente" });
     } catch (error) {
         console.error("Error al actualizar el usuario", error);
         res.status(400).json({ message: error.message });
