@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { Distributor } from "../../schema/distributor";
-import { query, where, getDocs, collection } from "firebase/firestore";
+import firebase from "firebase-admin";
 
 /**
  * Controlador para buscar un distribuidor por id
@@ -26,35 +26,35 @@ export const searchDistributor = async (req: Request, res: Response): Promise<vo
  * Controlador para obtener todos los distribuidores
  * con paginado
  */
+
 export const getDistributors = async (req: Request, res: Response): Promise<void> => {
   try {
-    const allProperties = Object.keys(req.query);
+    const { page = 1, pageSize = 10, ...filters } = req.query;
 
-    let query_ = query(collection(db, "distributors"), where("deleted", "==", false));
+    const validFilters = Object.entries(filters).filter(([key, _]) => key !== "page" && key !== "pageSize");
 
-    const additionalArgs = allProperties
-      .filter((property) => !["page", "pageSize"].includes(property))
-      .map((property) => {
-        return where(property, "==", req.query[property]);
-      });
-    if (additionalArgs.length > 0) {
-      query_ = query(query_, ...additionalArgs);
-    }
+    let query: any = db.collection("distributors");
 
-    const distributorsSnapshot = await getDocs(query_);
+    validFilters.forEach(([property, value]) => {
+      query = query.where(property, "==", value);
+    });
 
-    const page = Number(req.query.page) || 1;
-    const pageSize = Number(req.query.pageSize) || 2;
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = page * pageSize;
-    const totalDistributors = distributorsSnapshot.size;
-    const totalPages = Math.ceil(totalDistributors / pageSize);
+    const distributorSnapshot = await query.get();
 
-    const distributorsData = distributorsSnapshot.docs
-      .slice(startIndex, endIndex)
-      .map((doc) => ({ id: doc.id, ...doc.data() }));
+    const totalItems = distributorSnapshot.docs.length;
+    const totalPages = Math.ceil(totalItems / Number(pageSize));
 
-    res.status(200).json({ distributors: distributorsData, totalPages, totalDistributors });
+    const startIndex = (Number(page) - 1) * Number(pageSize);
+    const endIndex = startIndex + Number(pageSize);
+
+    const distributors = distributorSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    res.status(200).json({ distributors, totalPages, totalItems });
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });
