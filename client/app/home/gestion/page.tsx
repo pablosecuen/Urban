@@ -23,6 +23,7 @@ const getData = async (): Promise<Data> => {
     .then((data) => data);
 };
 
+
 export default async function Gestion() {
   const data = await getData();
 
