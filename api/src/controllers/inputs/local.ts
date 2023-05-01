@@ -43,7 +43,7 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
     }
 
     // Actualizar el local en Firestore
-    await db.collection("locals").doc(id).update(data);
+    await db.collection("locals").doc(id).update({ data });
 
     res.status(200).json({ message: "Local actualizado correctamente" });
   } catch (error) {
