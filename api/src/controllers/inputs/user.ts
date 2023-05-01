@@ -69,7 +69,7 @@ export const updateUser = async (
     }
 
     // Actualizar el usuario en Firestore
-    await db.collection("users").doc(id).update(data);
+    await db.collection("users").doc(id).update({ data });
 
     res.status(200).json({ message: "Usuario actualizado correctamente" });
   } catch (error) {
