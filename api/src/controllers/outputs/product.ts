@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { db } from '../../connection/connection';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import firebase from "firebase-admin";
 
 
 export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
