@@ -9,8 +9,6 @@ export const metadata = {
   description: "Solucion en tranportes a tu alcance ",
 };
 
-// holiwis
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
