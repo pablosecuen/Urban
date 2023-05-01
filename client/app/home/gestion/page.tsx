@@ -17,6 +17,7 @@ interface Data {
   travels:  Travel[];
 }
 
+// Traigo todos los viajes del usuario
 const getData = async (): Promise<Data> => {
   return fetch("http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37")
     .then((res) => res.json())
