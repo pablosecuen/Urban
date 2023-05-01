@@ -52,9 +52,11 @@ router.use("/chauffeur", chauffeurInputRouter);
 
 router.use("/owner", ownerInputRouter);
 
-router.use("/login", loginInputRouter)
+router.use("/login", loginInputRouter);
 
-router.use("/logout", logoutInputRouter)
+router.use("/logout", logoutInputRouter);
+
+router.use("/payment", paymentInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
