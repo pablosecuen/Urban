@@ -5,15 +5,16 @@ import { query, where, collection, getDocs } from "firebase/firestore";
 export const searchAllOwners = async (req: Request, res: Response): Promise<void> => {
   try {
     const allProperties = Object.keys(req.query);
-    let query_ = query(collection(db, "owner"));
-    const additionalArgs = allProperties
-      .filter((property) => !["page", "pageSize"].includes(property))
-      .map((property) => {
-        return where(property, "==", req.query[property]);
-      });
-    if (additionalArgs.length > 0) query_ = query(collection(db, "owner"), ...additionalArgs);
+    let query: any = db.collection("owner").where("deleted", "==", false)
 
-    const ownerSnapshot = await getDocs(query_);
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
+
+    const ownerSnapshot = await query.get();
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;

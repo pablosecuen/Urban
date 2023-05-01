@@ -1,7 +1,6 @@
 import { Request, Response, query } from "express";
 import { db } from "../../connection/connection";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import firebase from "firebase-admin";
 
 export const searchUser = async (
   req: Request,

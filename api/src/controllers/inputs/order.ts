@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import firebase from "firebase/compat/app";
+import firebase from "firebase-admin";
 import { Order } from "../../schema/order";
 
 /**
@@ -15,7 +15,6 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       status: true,
       order: "pending"
     }
-    console.log(dataFormated.localId);
 
     const [userDoc, distributorDoc, localDoc] = await Promise.all([
       db.collection("users").doc(dataFormated.userId).get(),
@@ -73,7 +72,7 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
       throw new Error("No se encontró la orden");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("orders").doc(id).update(data);
+    await db.collection("orders").doc(id).update({ data });
     res.status(201).json({ menssage: "Orden actualizada correctamente" });
   } catch (error) {
     console.error("Error al actualizar la orden", error);

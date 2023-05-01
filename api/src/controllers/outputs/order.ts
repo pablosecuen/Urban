@@ -29,18 +29,16 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
   try {
     const allProperties = Object.keys(req.query);
 
-    let query_ = query(collection(db, "orders"));
+    let query: any = db.collection("orders")
 
-    const additionalArgs = allProperties
-      .filter((property) => !["page", "pageSize"].includes(property))
-      .map((property) => {
-        return where(property, "==", req.query[property]);
-      });
-    if (additionalArgs.length > 0) {
-      query_ = query(query_, ...additionalArgs);
-    }
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
 
-    const ordersSnapshot = await getDocs(query_);
+    const ordersSnapshot = await query.get();
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;

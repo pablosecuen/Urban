@@ -29,7 +29,7 @@ export const updateOwner = async (req: Request, res: Response): Promise<void> =>
     if (!docRef.exists) {
       throw new Error("No se encontró el propietario");
     }
-    await db.collection("owner").doc(id).update(data);
+    await db.collection("owner").doc(id).update({ data });
     res.status(200).json({ message: "Propietario actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el propietario", innerError);

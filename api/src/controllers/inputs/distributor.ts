@@ -55,7 +55,7 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("distributors").doc(id).update(data);
+    await db.collection("distributors").doc(id).update({ data });
     res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el Distribuidor", error);
@@ -63,7 +63,7 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
   }
 };
 
-export const enableDistributor  = async (req: Request, res: Response): Promise<void> => {
+export const enableDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
     const docRef = await db.collection("distributors").doc(id).get();

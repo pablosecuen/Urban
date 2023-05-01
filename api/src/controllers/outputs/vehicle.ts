@@ -8,18 +8,16 @@ export const getVehicles = async (req: Request, res: Response): Promise<void> =>
     // posibles querys = {model:"string", brand: "marca", iYear: "2015", fYear: "2015"}
     const allProperties = Object.keys(req.query);
 
-    let query_ = query(collection(db, "vehicle"), where("deleted", "==", false));
+    let query: any = db.collection("vehicle").where("deleted", "==", false)
 
-    const additionalArgs = allProperties
-      .filter((property) => !["page", "pageSize"].includes(property))
-      .map((property) => {
-        return where(property, "==", req.query[property]);
-      });
-    // ejemplo de additionalArgs = [where(property, "==", req.query[property]), where(property1, "==", req.query[property1])]
-    if (additionalArgs.length > 0)
-      query_ = query(collection(db, "vehicle"), where("deleted", "==", false), ...additionalArgs);
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
 
-    const vehicleSnapshot = await getDocs(query_);
+    const vehicleSnapshot = await query.get();
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
