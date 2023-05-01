@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { Travel } from "../../schema/travels";
 
 export const travelByUser = async (req: Request, res: Response): Promise<void> => {
   try {
