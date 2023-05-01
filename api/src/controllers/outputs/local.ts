@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { getDocs } from "firebase/firestore";
 import { Local } from "../../schema/local";
 
 export const searchLocal = async (req: Request, res: Response): Promise<void> => {
@@ -22,20 +21,20 @@ export const searchLocal = async (req: Request, res: Response): Promise<void> =>
 
 export const getLocals = async (req: Request, res: Response): Promise<void> => {
   try {
-    const name: string = req.query.name?.toString();
-    const localsRef = db.collection("locals");
+    const allProperties = Object.keys(req.query);
 
-    let localsSnapshot: any;
-    if (name) {
-      const query = localsRef
-        .where("name", ">=", name)
-        .where("name", "<", `${name}\uf8ff`)
-        .where("deleted", "==", false);
-      localsSnapshot = await getDocs(query);
-    } else {
-      const query = localsRef.where("deleted", "==", false);
-      localsSnapshot = await getDocs(query);
-    }
+    let query: any = db.collection("locals").where("deleted", "==", false)
+
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
+
+
+    const localsSnapshot = await query.get();
+
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
