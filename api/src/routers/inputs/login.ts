@@ -7,6 +7,7 @@ import { db } from "../../connection/connection";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 
+
 const router = Router();
 
 router.post("/user", loginUser);
@@ -20,8 +21,8 @@ router.post("/local", loginLocal);
 passport.use(
     new GoogleStrategy(
         {
-            clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
-            clientSecret: "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",
+            clientID: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
             callbackURL: "http://localhost:3000/login/auth/google",
         },
         async (accessToken, refreshToken, profile, done) => {
