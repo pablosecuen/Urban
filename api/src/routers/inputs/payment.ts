@@ -1,8 +1,10 @@
+import postPayment from "../../controllers/inputs/payment";
+
 const { Router } = require("express");
 
 const paymentInputRouter = Router();
 
-paymentInputRouter.post("/new", postPaymentHandler);
+paymentInputRouter.post("/new", postPayment);
 
 paymentInputRouter.get("/feedback", function (req, res) {
   res.json({
@@ -11,4 +13,4 @@ paymentInputRouter.get("/feedback", function (req, res) {
     MerchantOrder: req.query.merchant_order_id,
   });
 });
-module.exports = paymentInputRouter;
+export default paymentInputRouter;

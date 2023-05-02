@@ -30,6 +30,7 @@ import productOutputRouter from "./outputs/product";
 import loginInputRouter from "./inputs/login";
 
 import logoutInputRouter from "./inputs/logout";
+import paymentInputRouter from "./inputs/payment";
 
 const router = Router();
 
