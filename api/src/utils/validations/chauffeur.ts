@@ -41,6 +41,7 @@ export const updateChauffeurValidated = (req: Request, res: Response, next: Next
     const allowProperties = ["email", "password", "phone", "address", "vehicle", "payments"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
+
     if (
       (data?.email && !isEmailValid(data.email)) ||
       (data?.password && !isPasswordValid(data.password)) ||
