@@ -1,11 +1,11 @@
 export interface DistributorToRegister {
   name: string;
-  adress: string;
+  address: string;
   email: string;
   password: string;
   img: string;
   vehicle: string;
-  DNI: number;
+  DNI: string;
   license: string;
 }
 

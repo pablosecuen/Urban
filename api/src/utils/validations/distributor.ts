@@ -1,19 +1,29 @@
 import { Distributor, DistributorToUpdate } from "../../schema/distributor";
 import { Request, Response, NextFunction } from "express";
+import {
+  isAddressValid,
+  isDNIValid,
+  isEmailValid,
+  isImgValid,
+  isLicenseValid,
+  isNameValid,
+  isPasswordValid,
+  isVehicleValid,
+} from "./validators";
 
 export const newDistributorValidate = (req: Request, res: Response, next: NextFunction): void => {
   // Validar que todas las propiedades tengan un valor válido
   try {
     const data: Distributor = req.body;
     if (
-      !data.name ||
-      !data.adress ||
-      !data.email ||
-      !data.password ||
-      !data.img ||
-      !data.vehicle ||
-      !data.DNI ||
-      !data.license
+      !isNameValid(data.name) ||
+      !isAddressValid(data.address) ||
+      !isEmailValid(data.email) ||
+      !isPasswordValid(data.password) ||
+      !isImgValid(data.img) ||
+      !isVehicleValid(data.vehicle) ||
+      !isDNIValid(data.DNI) ||
+      !isLicenseValid(data.license)
     )
       throw new Error("Faltan datos");
     next();
