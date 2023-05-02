@@ -2,11 +2,10 @@ export interface PassageToRegister {
   destination: string,
   stock: number,
   stop: string,
-  description: {
-    departureDate: string,
-    arrivalDate: string,
-    duration: string,
-  },
+  description: string,
+  departureDate: string,
+  arrivalDate: string,
+  duration: string,
   price: number,
 }
 
