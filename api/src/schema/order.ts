@@ -1,3 +1,5 @@
+import { OrderStatus } from "../types/types";
+
 export interface Order {
   userId: string;
   distributorId: string;
@@ -10,6 +12,6 @@ export interface Order {
   order: OrderStatus;
 }
 
-export interface TravelToUpdate {
+export interface OrderToUpdate {
   order?: OrderStatus;
 }

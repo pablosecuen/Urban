@@ -25,7 +25,9 @@ module.exports = {
           800: "#343746",
           900: "#1F2933",
         },
-
+        pending: "#f97316",
+        completed: "#34d399",
+        canceled: "#f87171",
       },
       boxShadow: {
         "custom-md": "5px 13px 20px black",

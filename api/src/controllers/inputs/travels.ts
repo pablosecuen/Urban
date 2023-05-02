@@ -43,24 +43,48 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
 
 
 export const updateTravel = async (
-    req: Request,
-    res: Response
+    { params: { id }, body: { travel } }: Request<{ id: string }, any, { travel: string }>,
+    res: Response<{ message: string }>
 ): Promise<void> => {
     try {
-        const id: string = req.params.id;
-        const data: TravelToUpdate = req.body;
+        const docRef = db.collection("travels").doc(id);
+        const doc = await docRef.get();
 
-        const docRef = await db.collection("travels").doc(id).get();
-        if (!docRef.exists) {
+        if (!doc.exists) {
             throw new Error("No se encontró el viaje especificado");
         }
 
-        await db.collection("travels").doc(id).update({ data });
+        const currentStatus = doc.get("travel");
+
+        if (!currentStatus) {
+            throw new Error("El viaje no tiene un estado definido");
+        }
+
+        const statuses = {
+            pending: "progress",
+            progress: "approved",
+            approved: "approved",
+            rejected: "rejected"
+        };
+
+        const newStatus = statuses[currentStatus];
+
+        if (!newStatus) {
+            throw new Error("El estado actual del viaje no es válido");
+        }
+
+        if (newStatus !== travel) {
+            throw new Error(`El estado del viaje no coincide con el cambio solicitado (actual: ${currentStatus}, nuevo: ${travel})`);
+        }
+
+        await docRef.update({ travel: newStatus });
 
         res.status(200).json({ message: "Viaje actualizado correctamente" });
     } catch (error) {
-        console.error("Error al actualizar el usuario", error);
+        console.error("Error al actualizar el viaje", error);
         res.status(400).json({ message: error.message });
     }
 };
+
+
 
