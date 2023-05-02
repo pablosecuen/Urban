@@ -31,5 +31,24 @@ export const newBusDriver = async (req: Request, res: Response): Promise<void> =
     }
   }
 };
+/**
+ * Controlador para actualizar el conductor
+ * @param id recibe el Id del conductor,
+ * @body  trae los datos a actualizar hasta ahora solo la licencia,
+ */
+export const updateBusDriver = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const licencia: string = req.body.license;
 
-export const updateBusDriver = (req: Request, res: Response) => {};
+    const docRef = await db.collection("busDriver").doc(id).get();
+    if (!docRef) {
+      throw new Error("El conductor no existe");
+    }
+    await db.collection("busDriver").doc(id).update({ license: licencia });
+    res.status(201).json({ menssage: "Licencia actualizada correctamente" });
+  } catch (error) {
+    console.error("Error al actualizar el conductor", error);
+    res.status(400).json({ messege: error.message });
+  }
+};
