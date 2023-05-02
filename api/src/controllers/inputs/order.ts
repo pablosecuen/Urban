@@ -6,7 +6,7 @@ import { OrderStatus } from "../../types/types";
 
 /**
  * Controlador para crear una orden
-
+ *@body Trae los datos para crear la orden
  */
 export const newOrder = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -70,6 +70,8 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
 
 /**
  * Controlador para actualizar las ordenes
+ * @param id recibe el Id de la orden,
+ * @body data tarae los datos a actualizar,
  */
 export const updateOrder = async (req: Request, res: Response): Promise<void> => {
   try {
