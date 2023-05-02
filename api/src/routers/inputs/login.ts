@@ -6,6 +6,7 @@ import { loginLocal } from "../../controllers/inputs/login/loginLocal";
 import { db } from "../../connection/connection";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import FacebookStrategy from "passport-facebook";
+import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import passport from "passport";
 
 const router = Router();
@@ -88,6 +89,52 @@ router.get(
   passport.authenticate("facebook", { failureRedirect: "/login", failureMessage: true }),
   function (req, res) {
     res.redirect("/");
+  }
+);
+
+//Auth de Microsoft
+
+passport.use(
+  new MicrosoftStrategy(
+    {
+      //Hay que registrar la app en Microsoft Azure para obtener los datos
+      clientID: process.env.MICROSOFT_CLIENT_ID,
+      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/microsoft/callback",
+      scope: ["user.read", "mail.read", "offline_access"],
+      authorizationURL: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      tokenURL: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      done(null, profile);
+    }
+    /* 
+    function(accessToken, refreshToken, profile, done) {
+        User.findOrCreate({ userId: profile.id }, function (err, user) {
+          return done(err, user);
+        });
+      }
+    */
+  )
+);
+
+router.get(
+  "/microsoft",
+  passport.authenticate("auth-microsoft", {
+    prompt: "select_account",
+    session: false,
+  })
+);
+
+router.get(
+  "/microsoft/callback",
+  passport.authenticate("auth-microsoft", {
+    failureRedirect: "/auth/microsoft",
+    session: false,
+  }),
+  (req, res) => {
+    res.json(req.user);
   }
 );
 
