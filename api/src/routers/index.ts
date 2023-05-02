@@ -3,6 +3,9 @@ import { Router } from "express";
 import userInputRouter from "./inputs/user";
 import userOutputRouter from "./outputs/user";
 
+import busInputRouter from "./inputs/bus";
+import busOutputRouter from "./outputs/bus";
+
 import vehicleInputRouter from "./inputs/vehicle";
 import vehicleOutputRouter from "./outputs/vehicle";
 
@@ -47,6 +50,8 @@ router.use("/local", localInputRouter);
 
 router.use("/products", productInputRouter);
 
+router.use("/bus", busInputRouter);
+
 router.use("/vehicle", vehicleInputRouter);
 
 router.use("/chauffeur", chauffeurInputRouter);
@@ -65,6 +70,8 @@ router.use("/user", userOutputRouter);
 router.use("/travels", travelOutputRouter);
 
 router.use("/local", localOutputRouter);
+
+router.use("/bus", busOutputRouter);
 
 router.use("/vehicle", vehicleOutputRouter);
 
