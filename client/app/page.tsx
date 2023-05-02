@@ -20,33 +20,23 @@ export default function LandingPage() {
 
   console.log(entities);
 
-  const handleGetAllUsers = () => {
-    dispatch(getAllUsers())
-      .then((data: any) => {
-        console.log("Users: ", data.payload);
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
-      });
-  };
   return (
-    <>
+    <div className="flex flex-col items-center justify-center lg:flex-row">
       <GoogleOAuthProvider
         clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
       >
         {" "}
-        <div className="mx-auto flex h-full w-1/2 justify-center pl-24 sm:h-full">
+        <div className="mx-auto flex w-1/2 justify-center   sm:h-full lg:h-full lg:pl-24">
           <Image
             src={logo as StaticImageData}
             alt="logo"
-            className="aspect-ratio-square w-full lg:w-full "
+            className="aspect-ratio-square h-48 w-48 lg:h-full lg:w-full"
           />
         </div>
-        <div className="h-full   w-full lg:w-4/5">
-          <button onClick={handleGetAllUsers}>Get All Users</button>
+        <div className=" h-96 w-full  lg:h-full lg:w-1/2 lg:pr-40">
           <Login />
         </div>
       </GoogleOAuthProvider>
-    </>
+    </div>
   );
 }
