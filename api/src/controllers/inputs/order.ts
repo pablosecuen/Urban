@@ -91,8 +91,8 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
 
 /**
  * Controllador para actualizar el estado de las ordenes
- * @params recibe el Id de la orden
- * en body manda el nuevo estado de la orden
+ * @param id recibe el Id de la orden,
+ * @body newStatus manda el nuevo estado de la orden
  * {"newStatus": "process"} {"newStatus": "approved"} {"newStatus": "rejected"}
  */
 export const orderStateUpdate = async (req: Request, res: Response): Promise<void> => {
