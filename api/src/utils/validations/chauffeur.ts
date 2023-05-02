@@ -13,6 +13,10 @@ import {
 export const newChauffeurValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: ChauffeurToRegister = req.body;
+    const allowProperties = ["name", "email", "password", "phone", "DNI", "license", "address"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw Error("Datos no permitidos");
+
     if (
       !isNameValid(data.name) ||
       !isEmailValid(data.email) ||
@@ -22,7 +26,7 @@ export const newChauffeurValidated = (req: Request, res: Response, next: NextFun
       !isLicenseValid(data.license) ||
       !isAddressValid(data.address)
     )
-      throw Error("Datos incompletos");
+      throw Error("Datos incompletos o no válidos");
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
