@@ -106,6 +106,35 @@ export default function NavBar() {
                   </Link>
                 </li>
               ))}
+              {userData ? (
+                <li className="my-2 flex items-center justify-between ">
+                  <Image
+                    src={userData?.img}
+                    alt={userData?.name}
+                    width={50}
+                    height={50}
+                    className=" w-96 rounded-full border-2 border-blue"
+                  />
+                  <span className="mx-2">{userData?.name}</span>
+                  <button className="text-blue-500" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li className="my-2 flex items-center ">
+                  <Image
+                    src="/placeholder.png"
+                    alt="placeholder"
+                    width={50}
+                    height={50}
+                    className="h-6 w-6 rounded-full"
+                  />
+                  <span className="mx-2">Guest</span>
+                  <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
