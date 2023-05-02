@@ -1,5 +1,5 @@
-type TravelStatus = "pending" | "progress" | "approved" | "rejected";
+export type TravelStatus = "pending" | "progress" | "approved" | "rejected";
 
-type OrderStatus = "pending" | "progress" | "approved" | "rejected";
+export type OrderStatus = "pending" | "progress" | "approved" | "rejected";
 
-type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
+export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
