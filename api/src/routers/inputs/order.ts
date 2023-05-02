@@ -9,6 +9,6 @@ router.post("/", newOrderValidate, newOrder);
 //Ruta actualizar Orden
 router.put("/:id", updateOrder);
 //Ruta de actualizar estado de Orden
-router.get("/orderStateUpdate/:id", orderStateUpdate);
+router.put("/orderStateUpdate/:id", orderStateUpdate);
 
 export default router;
