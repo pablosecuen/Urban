@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { CredentialResponse } from "@react-oauth/google";
 
 interface UserToRegister {
   name: string;
@@ -46,6 +46,25 @@ const Login = () => {
     };
     try {
       const response = await axios.post<LoginResponse>("http://localhost:3000/login/user", user);
+      const { token } = response.data;
+      if (token) {
+        console.log("Login successful");
+        // store the user object in local storage
+        router.push("/home");
+        // Save the token to localStorage or a state variable
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error(error);
+      console.log("Error al iniciar sesión");
+    }
+  };
+
+  const handleLoginGoogle = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get<LoginResponse>("http://localhost:3000/login/auth/google");
       const { token } = response.data;
       if (token) {
         console.log("Login successful");
@@ -117,11 +136,11 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center align-middle">
+    <div className="mt-12 flex h-full w-full items-center justify-center align-middle lg:mt-0 lg:h-screen">
       {isRegister ? (
         <form
           onSubmit={handleRegister}
-          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
+          className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:h-[600px] lg:w-1/2"
         >
           <div className="flex h-1/2 flex-col items-center justify-center align-middle">
             {" "}
@@ -144,13 +163,65 @@ const Login = () => {
           </div>
           <div className="flex h-1/2 flex-col items-center justify-between align-middle">
             {" "}
-            <button onClick={handleRegister}>Register</button>
+            <button className="mx-auto w-1/2 py-2 font-semibold" onClick={handleRegister}>
+              Register
+            </button>
             {/* <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Facebook</button> */}
             <div className="flex w-auto items-center justify-center">
-              <GoogleLogin onError={handleErorr} onSuccess={handleSuccess} />
+              <button
+                className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
+                onClick={handleLoginGoogle}
+              >
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 32 32"
+                  data-name="Layer 1"
+                  id="Layer_1"
+                  fill="#000000"
+                  className="w-auto"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"
+                      fill="#00ac47"
+                    ></path>
+                    <path
+                      d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16"
+                      fill="#4285f4"
+                    ></path>
+                    <path
+                      d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z"
+                      fill="#ffba00"
+                    ></path>
+                    <polygon
+                      fill="#2ab2db"
+                      points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"
+                    ></polygon>
+                    <path
+                      d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z"
+                      fill="#ea4435"
+                    ></path>
+                    <polygon
+                      fill="#2ab2db"
+                      points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"
+                    ></polygon>
+                    <path
+                      d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"
+                      fill="#4285f4"
+                    ></path>
+                  </g>
+                </svg>
+                Ingresá con Google
+              </button>
             </div>
-            <button onClick={handleLoginClick} className="mt-6">
+            <button
+              className="w-1/2 py-2 text-xs font-semibold lg:mx-auto lg:mt-6"
+              onClick={handleLoginClick}
+            >
               <p>Ya tienes cuenta? ingresa aqui</p>
             </button>
           </div>
@@ -158,7 +229,7 @@ const Login = () => {
       ) : (
         <form
           onSubmit={handleRegister}
-          className="my-8 flex h-[600px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:w-1/2"
+          className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:h-[600px] lg:w-1/2"
         >
           <div className="flex h-1/2 flex-col items-center justify-center align-middle">
             {" "}
@@ -172,14 +243,66 @@ const Login = () => {
             </label>
           </div>
           <div className="flex h-1/2 flex-col items-center justify-between align-middle ">
-            <button onClick={handleLogin}>Login</button>
+            <button className="mx-auto w-1/2 py-2 font-semibold" onClick={handleLogin}>
+              Login
+            </button>
             {/* <button onClick={handleRegisterClick}>Apple Id</button> */}
             <div className="flex w-auto items-center justify-center">
-              <GoogleLogin onError={handleErorr} onSuccess={handleSuccess} />
+              <button
+                className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
+                onClick={handleLoginGoogle}
+              >
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 32 32"
+                  data-name="Layer 1"
+                  id="Layer_1"
+                  fill="#000000"
+                  className=" w-auto"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"
+                      fill="#00ac47"
+                    ></path>
+                    <path
+                      d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16"
+                      fill="#4285f4"
+                    ></path>
+                    <path
+                      d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z"
+                      fill="#ffba00"
+                    ></path>
+                    <polygon
+                      fill="#2ab2db"
+                      points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"
+                    ></polygon>
+                    <path
+                      d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z"
+                      fill="#ea4435"
+                    ></path>
+                    <polygon
+                      fill="#2ab2db"
+                      points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"
+                    ></polygon>
+                    <path
+                      d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"
+                      fill="#4285f4"
+                    ></path>
+                  </g>
+                </svg>
+                Ingresá con Google
+              </button>
             </div>
             {/* <button onClick={handleRegisterClick}>Facebook</button> */}
 
-            <button className="mt-6" onClick={handleRegisterClick}>
+            <button
+              className="w-1/2 py-2 text-xs font-semibold lg:mx-auto lg:mt-6"
+              onClick={handleRegisterClick}
+            >
               <p>no tienes cuenta? registrate aqui</p>
             </button>
           </div>

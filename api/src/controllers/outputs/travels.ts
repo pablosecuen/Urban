@@ -1,6 +1,26 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 
+
+export const searchTravel = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const doc = await db.collection("travels").doc(id).get();
+    if (!doc.exists) {
+      res.status(404).json({ message: "Viaje no encontrado" });
+    } else {
+      const usuario = { id: doc.id, ...doc.data() };
+      res.json(usuario);
+    }
+  } catch (error) {
+    console.error("Error al obtener el viaje", error);
+    res.status(500).json({ message: "Error al obtener el viaje" });
+  }
+};
+
 export const travelByUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.params.userId; // obtiene el ID del usuario desde la solicitud
