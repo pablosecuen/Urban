@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { newBus, updateBus, deleteBus, enableBus } from "../../controllers/inputs/bus";
+import { enablePassage, newPassage, updatePassage,deletePassage } from "../../controllers/inputs/passage";
 
 const router = Router();
 
 //Ruta para crear bondis
 
-router.post("/", newBus);
-router.put("/:id", updateBus);
-router.patch("/:id", enableBus);
-router.delete("/:id", deleteBus);
+router.post("/", newPassage);
+router.put("/:id", updatePassage);
+router.patch("/:id", enablePassage);
+router.delete("/:id", deletePassage);
 
 export default router;
