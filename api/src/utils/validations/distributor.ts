@@ -15,6 +15,18 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
   // Validar que todas las propiedades tengan un valor válido
   try {
     const data: Distributor = req.body;
+    const allowProperties = [
+      "name",
+      "address",
+      "email",
+      "password",
+      "img",
+      "vehicle",
+      "DNI",
+      "license",
+    ];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw new Error("Datos no permitidos");
     if (
       !isNameValid(data.name) ||
       !isAddressValid(data.address) ||
