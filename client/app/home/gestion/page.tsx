@@ -12,14 +12,13 @@ const getData = async (): Promise<Data> => {
 
 export default async function Gestion() {
   const data = await getData();
-
   const statusTravel: Status = {
     [TravelStatus.PENDING]: <HiOutlinePause className="h-5 w-10" />,
     [TravelStatus.COMPLETED]: <HiOutlineCheck className="h-5 w-10" />,
     [TravelStatus.CANCELED]: <HiOutlineX className=" h-5 w-10" />,
   };
   return (
-    <section className="container flex h-auto w-full flex-col gap-2 bg-slate-100 shadow-lg shadow-black/10 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
+    <section className="container flex h-auto w-full flex-col gap-2 rounded-3xl bg-slate-100 shadow-2xl shadow-black/40 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul
         className={`flex h-full flex-col gap-3 ${
@@ -33,12 +32,11 @@ export default async function Gestion() {
               <div className="flex items-center">
                 <div>
                   <small className="font-bold ">{viaje.destination}</small>
-                  <small className="flex ">
+                  <small className="flex">
                     <span>Fecha: {viaje.date.slice(0, 10).split("-").reverse().join("-")}</span>
                     <span>Horario: {viaje.date.slice(11, 16)}</span>
                   </small>
                 </div>
-
                 <small
                   className={`flex w-2/5 items-center justify-center text-center font-semibold uppercase tracking-wider ${
                     viaje.travel === TravelStatus.PENDING
