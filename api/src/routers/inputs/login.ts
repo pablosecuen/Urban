@@ -8,6 +8,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import FacebookStrategy from "passport-facebook";
 import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import passport from "passport";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 router.get("/", (req, res) => {
@@ -63,32 +64,36 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, cb) {
       try {
-        const user = await db.collection("federated_credentials").doc(profile.id).get();
+        let user: any = await db.collection("authWithFacebook").doc(profile.id).get(); // esto busca el user en "authWithFacebook"
         if (!user.exists) {
-          await db.collection("users").doc(profile.id).set({
-            email: profile.emails[0].value, // no puedo acceder al mail desde la auth de facebook
-            name: profile.displayName,
-          });
+          user = { email: profile.emails[0].value, name: profile.displayName };
+          await db.collection("authWithFacebook").doc(profile.id).set(user);
+        } else {
+          user = {
+            name: user._fieldsProto.name.stringValue,
+            email: user._fieldsProto.email.stringValue,
+          };
         }
-        cb(null, user.data());
+
+        cb(null, user);
       } catch (error) {
+        console.log(error);
         return cb(error);
       }
     }
   )
 );
+
 router.get("/auth/facebook", passport.authenticate("facebook"));
-router.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", {
-    scope: ["email", "user_location"],
-  })
-);
 router.get(
   "/oauth2/redirect/facebook",
   passport.authenticate("facebook", { failureRedirect: "/login", failureMessage: true }),
-  function (req, res) {
-    res.redirect("/");
+  (req, res) => {
+    const { user } = req;
+    const token = jwt.sign(user, "clavemegasecreta");
+
+    // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
+    res.redirect(`http://localhost:3001?token=${token}`);
   }
 );
 

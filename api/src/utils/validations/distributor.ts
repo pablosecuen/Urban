@@ -38,6 +38,7 @@ export const updateDistributorValidate = (
       "vehicle",
       "DNI",
       "license",
+      "payments",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");

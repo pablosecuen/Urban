@@ -16,7 +16,7 @@ export const newLocalValidate = (req: Request, res: Response, next: NextFunction
 export const updateLocalValidate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: LocalToUpdate = req.body;
-    const allowProperties = ["name", "adress", "email", "password", "img"];
+    const allowProperties = ["name", "adress", "email", "password", "img", "payments"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
     next();
