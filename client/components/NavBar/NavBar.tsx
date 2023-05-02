@@ -1,12 +1,15 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import logo from "../../assets/imagenes/UrbanIso.png";
 import { useMediaQuery } from "react-responsive";
+import { User, userData } from "../../app/types/User";
 import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
+
+import logo from "../../assets/imagenes/UrbanIso.png";
+
 
 export default function NavBar() {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
@@ -31,11 +34,6 @@ export default function NavBar() {
     localStorage.removeItem("user");
     setUserData(null);
   };
-
-  interface userData {
-    name: string;
-    img: string;
-  }
 
   return (
     <header className="bg-verde">
