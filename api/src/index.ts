@@ -3,6 +3,8 @@ import session from "express-session";
 import dotenv from "dotenv";
 import router from "./routers";
 import morgan from 'morgan';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './swaggerOptions';
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ app.use(
         saveUninitialized: false,
     })
 );
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((_req, res, next) => {
     res.header(

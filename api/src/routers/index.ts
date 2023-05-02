@@ -30,6 +30,7 @@ import productOutputRouter from "./outputs/product";
 import loginInputRouter from "./inputs/login";
 
 import logoutInputRouter from "./inputs/logout";
+import paymentInputRouter from "./inputs/payment";
 
 const router = Router();
 
@@ -52,9 +53,11 @@ router.use("/chauffeur", chauffeurInputRouter);
 
 router.use("/owner", ownerInputRouter);
 
-router.use("/login", loginInputRouter)
+router.use("/login", loginInputRouter);
 
-router.use("/logout", logoutInputRouter)
+router.use("/logout", logoutInputRouter);
+
+router.use("/payment", paymentInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
