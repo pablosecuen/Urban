@@ -12,6 +12,7 @@ const getData = async (): Promise<Data> => {
 
 export default async function Gestion() {
   const data = await getData();
+
   const statusTravel: Status = {
     [TravelStatus.PENDING]: <HiOutlinePause className="h-5 w-10" />,
     [TravelStatus.COMPLETED]: <HiOutlineCheck className="h-5 w-10" />,
@@ -21,7 +22,7 @@ export default async function Gestion() {
     <section className="container flex h-auto w-full flex-col gap-2 bg-slate-100 shadow-lg shadow-black/10 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul
-        className={` flex h-full  flex-col gap-3 ${
+        className={`flex h-full flex-col gap-3 ${
           data.travels.length > 5 && "scrollbar overflow-scroll overflow-x-hidden overflow-y-scroll"
         }`}
       >
@@ -29,7 +30,7 @@ export default async function Gestion() {
         {data?.travels.map((viaje: Travel) => (
           <Link key={viaje.id} href={`/home/gestion/${viaje.id}`}>
             <li className="group flex items-center justify-between gap-4 rounded-full border bg-white px-10 py-2 transition-all duration-200 hover:border-blue">
-              <div className="flex items-center  ">
+              <div className="flex items-center">
                 <div>
                   <small className="font-bold ">{viaje.destination}</small>
                   <small className="flex ">
