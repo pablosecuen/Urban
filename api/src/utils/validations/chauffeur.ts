@@ -1,17 +1,26 @@
 import { Request, Response, NextFunction } from "express";
 import { ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
+import {
+  isAddressValid,
+  isDNIValid,
+  isEmailValid,
+  isLicenseValid,
+  isNameValid,
+  isPasswordValid,
+  isPhoneValid,
+} from "./validators";
 
 export const newChauffeurValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: ChauffeurToRegister = req.body;
     if (
-      !data.name ||
-      !data.email ||
-      !data.password ||
-      !data.phone ||
-      !data.DNI ||
-      !data.license ||
-      !data.address
+      !isNameValid(data.name) ||
+      !isEmailValid(data.email) ||
+      !isPasswordValid(data.password) ||
+      !isPhoneValid(data.phone) ||
+      !isDNIValid(data.DNI) ||
+      !isLicenseValid(data.license) ||
+      !isAddressValid(data.address)
     )
       throw Error("Datos incompletos");
     next();
