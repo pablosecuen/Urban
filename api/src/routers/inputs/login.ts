@@ -9,6 +9,7 @@ import FacebookStrategy from "passport-facebook";
 import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import passport from "passport";
 import jwt from "jsonwebtoken";
+import { profile } from "console";
 
 const router = Router();
 router.get("/", (req, res) => {
@@ -32,16 +33,37 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log(profile);
         const user = await db.collection("users").doc(profile.id).get();
         if (!user.exists) {
           await db.collection("users").doc(profile.id).set({
             email: profile.emails[0].value,
             name: profile.displayName,
+            img: profile.photos[0].value,
+            adress: "",
+      payments: {
+        cardNumber: "",
+        expirationDate: "",
+        securityCode: "",
+      }
+      ,
+      history: {
+        orders: [],
+        travels: [],
+      },
+      DNI: "",
+      deleted: false
           });
+
         }
-        done(null, user.data());
+        const payload = {
+          email: profile.emails[0].value,
+          name: profile.displayName,
+          img: profile.photos[0].value,
+          id: profile.id,
+        }
+        done(null, payload);
       } catch (error) {
+        console.log(error);
         done(error);
       }
     }
@@ -50,7 +72,11 @@ passport.use(
 
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/auth/google", (req, res) => {
-  res.send("profile");
+  const { user } = req;
+  const token = jwt.sign(user, "clavemegasecreta");
+
+  // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
+  res.redirect(`http://localhost:3001?token=${token}`);
 });
 
 // auth de facebook
