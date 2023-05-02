@@ -5,7 +5,10 @@ export interface UserToRegister {
   createdAt?: string;
   updatedAt?: string;
 }
-
+export interface userData {
+  name: string;
+  img: string;
+}
 export interface User extends UserToRegister {
   adress: string;
   payments: {

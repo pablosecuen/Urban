@@ -5,7 +5,7 @@ import { Distributor, DistributorToRegister } from "../../schema/distributor";
 
 /**
  * Controlador para crear distribuidores
- * * @param req body tipo DistributorToRegister
+ * * @body datos para crear distribuidor tipo DistributorToRegister
  */
 export const newDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -42,7 +42,7 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
 /**
  * Controlador para actualizar distribuidores
  * @param req Id tipo string
- * @param req body tipo DistributorToUpdate
+ * @body datos para actualizar distribuidor tipo DistributorToUpdate
  */
 export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -62,7 +62,11 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
     res.status(400).json({ messege: error.message });
   }
 };
-
+/**
+ *Controlador para habilitar un distribuidor
+ * @param id del distribuidor
+ *
+ */
 export const enableDistributor = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
@@ -82,7 +86,7 @@ export const enableDistributor = async (req: Request, res: Response): Promise<vo
 /**
  * Controlador para eliminar un distribuidor por id
  
- * @param req Id tipo string
+ * @param id del distribuidor a eliminar 
  */
 export const deleteDistributor = async (req: Request, res: Response): Promise<void> => {
   try {

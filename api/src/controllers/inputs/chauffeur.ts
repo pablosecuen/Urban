@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
-import { ChauffeurToRegister, Chauffeur, ChauffeurToUpdate } from "../../schema/chauffeur";
+import { ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
 
 export const newChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {

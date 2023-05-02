@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
-import {pestañasHistorialPerfil, contenidoHistorialPerfil} from "../../assets/data"
-
+import { pestañasHistorialPerfil, contenidoHistorialPerfil } from "../../assets/data";
 
 export default function Perfil() {
   const [loading, setLoading] = useState(true);
@@ -20,34 +19,33 @@ export default function Perfil() {
   }
 
   return (
-    <>
+    <div className="h-96">
       {/* Tabs */}
       <div className="flex w-full ">
-      {pestañasHistorialPerfil.map((item, index) => (
-        <div
-        key={item.id}
-          className={`w-full px-2 border-2 cursor-pointer rounded-tr-2xl ${
-            activeTab === `${item.name}` ? "bg-gray-200" : ""
-          }`}
-          onClick={() => handleTabClick(`${item.name}`)}
-        >
-         { item.name}
-        </div>
-      ))}
+        {pestañasHistorialPerfil.map((item, index) => (
+          <div
+            key={item.id}
+            className={`w-full cursor-pointer rounded-t-xl border px-2 py-1 transition duration-500 ${
+              activeTab === `${item.name}` && "bg-gray-200"
+            }`}
+            onClick={() => handleTabClick(`${item.name}`)}
+          >
+            <h3>{item.name}</h3>
+          </div>
+        ))}
       </div>
 
       {/* Content  */}
       {contenidoHistorialPerfil.map((item, index) => (
         <>
-         {activeTab === `${item.name}` && (
-          <div className="w-full px-2 border-2" title={item.title}>
-            <p>{item.p}</p>
-            <div className="h-32 w-full border-2">{item.placeHolder}</div>
-          </div>
-        )}</>
-      ))} 
-    </>
+          {activeTab === `${item.name}` && (
+            <div className="h-full w-full overflow-hidden border-2 bg-red-300 " title={item.title}>
+              <h4>{item.p}</h4>
+              <div className=" h-full w-full overflow-scroll border-2">{item.placeHolder}</div>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
   );
 }
-
-
