@@ -102,7 +102,7 @@ export default function NavBar() {
                 <li
                   key={link.id}
                   className={`flex ${
-                    pathname === link.route && "border-b border-celeste "
+                    pathname.includes(link.route) && "border-b   border-celeste "
                   } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste`}
                 >
                   <Link
