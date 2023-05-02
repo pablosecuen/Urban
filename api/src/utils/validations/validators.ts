@@ -1,3 +1,5 @@
+import { Payment, VehicleForChauffeur } from "../../schema/chauffeur";
+
 export const isNameValid = (name: string): Boolean => {
   if (typeof name === "string" && name.length <= 50) return true;
   return false;
@@ -22,7 +24,7 @@ export const isPhoneValid = (phone: string): Boolean => {
 
 // IMPORTANTE!  solo permite DNI de 9 dígitos en formato string, preguntar como es en Colombia
 export const isDNIValid = (DNI: string): Boolean => {
-  if (typeof DNI === "string" && DNI.length === 9) return true;
+  if (typeof DNI === "string" && DNI.length === 8) return true;
   return false;
 };
 
@@ -52,8 +54,14 @@ export const isVehicleValid = (vehicle: string): Boolean => {
 };
 
 // IMPORTANTE! => por ahora solo verifica que es un objeto (falta definir el formato)
-export const arePaymentsValid = (payments: object): Boolean => {
-  if (typeof payments === "object") return true;
+export const arePaymentsValid = (payments: Payment): Boolean => {
+  if (
+    typeof payments.cardNumber === "string" &&
+    typeof payments.expirationDate === "string" &&
+    typeof payments.securityCode === "string"
+  ) {
+    return true;
+  }
   return false;
 };
 
@@ -155,5 +163,15 @@ export const isModelValid = (model: string): Boolean => {
 
 export const isYearValid = (year: string): Boolean => {
   if (typeof year === "string" && year.length >= 2 && year.length <= 4) return true;
+  return false;
+};
+
+export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean => {
+  if (
+    typeof vehicle === "object" &&
+    typeof vehicle.vehicleId === "string" &&
+    typeof vehicle.patent === "string"
+  )
+    return true;
   return false;
 };
