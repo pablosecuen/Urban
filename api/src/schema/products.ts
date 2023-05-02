@@ -1,6 +1,6 @@
 export interface Products {
   name: string;
-  price: string;
+  price: number;
   description: string;
   stock: number;
   type: TypeProduct;

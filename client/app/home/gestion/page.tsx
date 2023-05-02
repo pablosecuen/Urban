@@ -1,7 +1,9 @@
 import axios from "axios";
 import Link from "next/link";
+
 import { TravelStatus, Travel, Status, Data } from "@component/app/types/Travels";
 import { HiOutlineChevronRight, HiOutlinePause, HiOutlineCheck, HiOutlineX } from "react-icons/hi";
+
 
 // Traigo todos los viajes del usuario
 const getData = async (): Promise<Data> => {
@@ -19,6 +21,7 @@ export default async function Gestion() {
     [TravelStatus.CANCELED]: <HiOutlineX className=" h-5 w-10" />,
   };
   return (
+
     <section className="container flex h-auto w-full flex-col gap-2 bg-slate-100 shadow-lg shadow-black/10 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <ul
@@ -54,6 +57,7 @@ export default async function Gestion() {
                     ? "Completado"
                     : "Cancelado"}
                   {statusTravel[viaje.travel]}
+
                 </small>
               </div>
               <HiOutlineChevronRight className="w-10 rounded-full text-2xl text-blue transition-all duration-200 lg:group-hover:scale-125" />

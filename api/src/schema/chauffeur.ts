@@ -11,19 +11,22 @@ export interface ChauffeurToRegister {
 export interface Chauffeur extends ChauffeurToRegister {
   deleted: boolean;
   ownerState: boolean;
-  vehicle: {
-    vehicleId: string;
-    patent: string;
-  };
-  payments: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
+  vehicle: VehicleForChauffeur;
+  payments: Payment[];
   img: string;
   history?: string[];
 }
-
 export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
+  vehicle: VehicleForChauffeur;
+  payments: Payment;
+}
 
+export interface VehicleForChauffeur {
+  vehicleId: string;
+  patent: string;
+}
+export interface Payment {
+  cardNumber: string;
+  expirationDate: string;
+  securityCode: string;
 }
