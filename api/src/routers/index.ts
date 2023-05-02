@@ -32,6 +32,9 @@ import loginInputRouter from "./inputs/login";
 import logoutInputRouter from "./inputs/logout";
 import paymentInputRouter from "./inputs/payment";
 
+import busDriverInputRouter from "./inputs/busDriver";
+import busDriverOutputRouter from "./outputs/busDriver";
+
 const router = Router();
 
 // Rutas para entrada de datos
@@ -59,6 +62,8 @@ router.use("/logout", logoutInputRouter);
 
 router.use("/payment", paymentInputRouter);
 
+router.use("/busDriver", busDriverInputRouter);
+
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
@@ -77,5 +82,7 @@ router.use("/products", productOutputRouter);
 router.use("/distributor", distributorOutputRouter);
 
 router.use("/order", orderOutputRouter);
+
+router.use("/busDriver", busDriverOutputRouter);
 
 export default router;
