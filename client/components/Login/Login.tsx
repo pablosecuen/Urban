@@ -66,10 +66,11 @@ const Login = () => {
     try {
       const response = await axios.get<LoginResponse>("http://localhost:3000/login/auth/google");
       const { token } = response.data;
+      console.log(response.data);
       if (token) {
         console.log("Login successful");
         // store the user object in local storage
-        router.push("/home");
+
         // Save the token to localStorage or a state variable
       } else {
         console.log("Login failed");
