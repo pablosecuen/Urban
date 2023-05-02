@@ -90,7 +90,7 @@ export default function Sidebar() {
                     ></path>{" "}
                   </g>
                 </svg>{" "}
-                <Link href="/admin/dashboard">Dashboard</Link>
+                <Link href="/admin">Dashboard</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
@@ -196,7 +196,7 @@ export default function Sidebar() {
                     </g>{" "}
                   </g>
                 </svg>
-                <Link href="/landing">Landing Page</Link>
+                <Link href="/">Landing Page</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
@@ -217,7 +217,7 @@ export default function Sidebar() {
                     <path d="M154.195,61.371V39.514h-12.047v10.777l-14-12.791L81.113,79.601l7.151,8.058l7.252-6.547V130.5h64.897V81.514l7.135,6.547 l7.339-7.856L154.195,61.371z M238.25,143.813V13.875c0-6.523-5.289-11.813-11.813-11.813H29.563 c-6.523,0-11.813,5.289-11.813,11.813v129.938L2,175.313v11.813c0,6.523,5.289,11.813,11.813,11.813h228.375 c6.523,0,11.813-5.289,11.813-11.813v-11.813L238.25,143.813z M104.125,175.313l1.122-11.813h45.752l1.122,11.813H104.125z M218.563,143.813H37.438V21.75h181.125V143.813z"></path>{" "}
                   </g>
                 </svg>
-                <Link href="/profile">Profile Page</Link>
+                <Link href="/perfil">Profile Page</Link>
               </li>
             </ul>
 
@@ -225,15 +225,13 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="block pb-4 pt-1 text-xs font-bold uppercase text-blueGray-500 no-underline md:min-w-full">
-              Documentation
+              Technologies
             </h6>
             {/* Navigation */}
             <ul className="flex list-none flex-col md:mb-4 md:min-w-full md:flex-col">
-              <li className="inline-flex">Styles</li>
-
               <li className="inline-flex">CSS Components</li>
 
-              <li className="inline-flex">Angular</li>
+              <li className="inline-flex">Typescrypt</li>
 
               <li className="inline-flex">Javascript</li>
 
@@ -241,9 +239,11 @@ export default function Sidebar() {
 
               <li className="inline-flex">React</li>
 
-              <li className="inline-flex">Svelte</li>
+              <li className="inline-flex">Redux</li>
 
-              <li className="inline-flex">VueJS</li>
+              <li className="inline-flex">Express</li>
+
+              <li className="inline-flex">Firebase</li>
             </ul>
           </div>
         </div>

@@ -7,7 +7,9 @@ import { useMediaQuery } from "react-responsive";
 import { User, userData } from "../../app/types/User";
 import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
+
 import logo from "../../assets/imagenes/UrbanIso.png";
+
 
 export default function NavBar() {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
@@ -41,7 +43,7 @@ export default function NavBar() {
 
           <HiMenuAlt1
             onClick={toggleMenu}
-            className="z-10 mr-4 h-full w-1/12 cursor-pointer text-xl md:hidden"
+            className="top-0 z-50 mr-4 h-full w-1/12 cursor-pointer  text-xl md:hidden"
           />
 
           <div
@@ -50,20 +52,14 @@ export default function NavBar() {
             }`}
           >
             <ul className="flex flex-col items-center p-4">
-              {linksMobile.map((link) => (
-                <li key={link.id} className="my-2 flex items-center ">
-                  <link.icon className="h-6 w-6" />
-                  <Link href={link.route} onClick={toggleMenu}>
-                    <span className="mx-2">{link.label}</span>
-                  </Link>
-                </li>
-              ))}
               {userData ? (
-                <li className="my-2 flex items-center ">
+                <li className="my-2 flex items-center justify-between ">
                   <Image
                     src={userData?.img}
                     alt={userData?.name}
-                    className="h-6 w-6 rounded-full"
+                    width={50}
+                    height={50}
+                    className=" w-96 rounded-full border-2 border-blue"
                   />
                   <span className="mx-2">{userData?.name}</span>
                   <button className="text-blue-500" onClick={handleLogout}>
@@ -80,8 +76,19 @@ export default function NavBar() {
                     className="h-6 w-6 rounded-full"
                   />
                   <span className="mx-2">Guest</span>
+                  <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                    Login
+                  </Link>
                 </li>
               )}
+              {linksMobile.map((link) => (
+                <li key={link.id} className="my-2 flex items-center ">
+                  <link.icon className="h-6 w-6" />
+                  <Link href={link.route} onClick={toggleMenu}>
+                    <span className="mx-2">{link.label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </nav>
@@ -107,6 +114,35 @@ export default function NavBar() {
                   </Link>
                 </li>
               ))}
+              {userData ? (
+                <li className="my-2 flex items-center justify-between ">
+                  <Image
+                    src={userData?.img}
+                    alt={userData?.name}
+                    width={50}
+                    height={50}
+                    className=" w-96 rounded-full border-2 border-blue"
+                  />
+                  <span className="mx-2">{userData?.name}</span>
+                  <button className="text-blue-500" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li className="my-2 flex items-center ">
+                  <Image
+                    src="/placeholder.png"
+                    alt="placeholder"
+                    width={50}
+                    height={50}
+                    className="h-6 w-6 rounded-full"
+                  />
+                  <span className="mx-2">Guest</span>
+                  <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
