@@ -6,7 +6,7 @@ mercadopago.configure({
   access_token: MP_TOKEN,
 });
 
-const postPaymentHandler = (req, res) => {
+const postPayment = (req, res) => {
   const products = req.body;
   // preference
   let preference = {
@@ -34,4 +34,4 @@ const postPaymentHandler = (req, res) => {
     });
 };
 
-module.exports = { postPaymentHandler };
+export default postPayment;
