@@ -8,7 +8,7 @@ export interface UserToRegister {
   password: string,
 }
 export interface User extends UserToRegister {
-  addres: Address
+  address: Address
   payments: Payment[];
   history: {
     orders: string[];
@@ -22,14 +22,14 @@ export interface User extends UserToRegister {
   cc?: string;
   ce?: string,
   deleted: boolean,
-  createAt: string,
-  updateAt: string,
+  createAt?: Date,
 }
 
-export interface UserToUpdate{
-  addres?: Address,
+export interface UserToUpdate {
+  address?: Address,
   phone?: Phone,
   img?: string,
   gender?: string
   payments?: Payment[],
+  updateAt?: Date,
 }
