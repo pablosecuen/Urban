@@ -8,7 +8,7 @@ import {
   isLicenseValid,
   isNameValid,
   isPasswordValid,
-  isVehicleValid,
+  isVehicleTypeValid,
 } from "./validators";
 
 export const newDistributorValidate = (req: Request, res: Response, next: NextFunction): void => {
@@ -21,7 +21,8 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
       "email",
       "password",
       "img",
-      "vehicle",
+      "vehicleType",
+      "vehiclePatent",
       "DNI",
       "license",
     ];
@@ -33,7 +34,7 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
       !isEmailValid(data.email) ||
       !isPasswordValid(data.password) ||
       !isImgValid(data.img) ||
-      !isVehicleValid(data.vehicle) ||
+      !isVehicleTypeValid(data.vehicleType) ||
       !isDNIValid(data.DNI) ||
       !isLicenseValid(data.license)
     )
@@ -53,17 +54,25 @@ export const updateDistributorValidate = (
     const data: DistributorToUpdate = req.body;
     const allowProperties: string[] = [
       "name",
-      "adress",
+      "address",
       "email",
       "password",
       "img",
       "vehicle",
-      "DNI",
       "license",
       "payments",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
+    if (
+      (data?.name && !isEmailValid(data.name)) ||
+      (data?.address && !isAddressValid(data.address)) ||
+      (data?.email && !isEmailValid(data.email)) ||
+      (data?.password && !isPasswordValid(data.password)) ||
+      (data?.img && !isImgValid(data.img)) ||
+      (data?.vehicleType && !isVehicleValid(data.vehicleType))
+    )
+      throw Error("Datos no válidos");
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
