@@ -11,19 +11,36 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const data: UserToRegister = req.body;
     const dataFormated: User = {
       ...data,
-      address: "",
-      payments: {
+      address: {
+        postalCode: "",
+        location: "",
+        state: "",
+        street: "",
+        number: "",
+        department: "",
+      },
+      phone: {
+        areaCode: "",
+        number: "",
+        displayPhone: "",
+      },
+      nationality: "",
+      birthday: "",
+      gender: "",
+      payments: [{
         cardNumber: "",
         expirationDate: "",
         securityCode: "",
-      },
+      }],
       history: {
         orders: [],
         travels: [],
       },
       img: "",
-      DNI: "",
+      ce: "",
+      cc: "",
       deleted: false,
+      createAt: new Date(Date.now()),
     };
 
     // Verificar si ya existe un usuario con el correo electrónico dado
