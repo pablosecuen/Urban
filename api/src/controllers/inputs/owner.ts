@@ -10,7 +10,7 @@ export const newOwner = async (req: Request, res: Response): Promise<void> => {
       deleted: false,
       address: "",
     };
-    const snapshot = await db.collection("owner").where("DNI", "==", dataFormated.DNI).get();
+    const snapshot = await db.collection("owner").where("cc", "==", dataFormated.cc).get();
     if (!snapshot.empty) {
       throw new Error("El DNI ya está registrado");
     }
