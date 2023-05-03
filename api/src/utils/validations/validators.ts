@@ -102,7 +102,7 @@ export const isDateValid = (date: string): Boolean => {
   return false;
 };
 
-export const isPriceValid = (price: string): Boolean => {
+export const isPriceValid = (price: number): Boolean => {
   if (typeof price === "number" && price >= 0) return true;
   return false;
 };
