@@ -40,6 +40,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       ce: "",
       cc: "",
       deleted: false,
+      displayName: data.firstName + " " + data.lastName,
       createAt: new Date(Date.now()),
     };
 
