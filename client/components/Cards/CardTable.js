@@ -23,7 +23,7 @@ export default function CardTable({ color }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Card Tables
+                Estadisticas de Rutas
               </h3>
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function CardTable({ color }) {
                       : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
-                  Project
+                  Ruta
                 </th>
                 <th
                   className={
@@ -51,7 +51,7 @@ export default function CardTable({ color }) {
                       : "border-blueGray-500 bg-blueGray-600 text-blueGray-200")
                   }
                 >
-                  Budget
+                  Ingreso promedio
                 </th>
                 <th
                   className={
