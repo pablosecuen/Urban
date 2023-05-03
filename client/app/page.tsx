@@ -3,7 +3,6 @@ import Login from "@component/components/Login/Login";
 import logo from "../assets/imagenes/UrbanLogo.png";
 import Image, { StaticImageData } from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../Redux/user/userActions";
 import { AppDispatch, RootState } from "@component/Redux/store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
