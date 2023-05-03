@@ -1,6 +1,13 @@
+import axios from "axios";
 import Link from "next/link";
 import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
 
+// Traigo los pasages de la API
+// const getPassages = async (): Promise<Data> => {
+//   const data = await axios.get("http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37");
+//   const travels = data.data;
+//   return travels;
+// };
 
 
 export default function Viajes() {
