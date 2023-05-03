@@ -10,7 +10,6 @@ export interface DistributorToRegister {
   vehiclePatent?: string;
   DNI: string;
   license?: string;
-  creadteAt: Date,
 }
 
 export interface Distributor extends DistributorToRegister {
@@ -21,6 +20,4 @@ export interface Distributor extends DistributorToRegister {
 
 export interface DistributorToUpdate extends Partial<DistributorToRegister> {
   payments?: Payment;
-  updateAt: Date,
-  deleteAt: Date,
 }

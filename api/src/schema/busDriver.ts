@@ -2,7 +2,6 @@ export interface BusDriverToRegister {
   name: string;
   DNI: string;
   license: string;
-  creadteAt: Date,
 }
 
 export interface BusDriver {
@@ -10,7 +9,4 @@ export interface BusDriver {
   DNI: string;
   license: string;
   deleted: boolean;
-  creadteAt: Date,
-  updateAt: Date,
-  deleteAt: Date,
 }
