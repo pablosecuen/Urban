@@ -23,6 +23,7 @@ export interface Distributor extends DistributorToRegister {
 }
 
 export interface DistributorToUpdate {
+  img: string,
   phone: Phone;
   license: string;
   address: Address,
