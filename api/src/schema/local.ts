@@ -1,13 +1,18 @@
+import { Address } from "../types/types";
+
 export interface LocalToRegister {
   name: string;
-  address: string;
+  address: Address;
   email: string;
   password: string;
   img: string;
 }
 
 export interface Local extends LocalToRegister {
-  payments: Object[]; //provisional
+  bankAccount: {
+    bankHolder: string;
+    accountNumber: string;
+  }
   history: string[];
   state: boolean;
   deleted: boolean;

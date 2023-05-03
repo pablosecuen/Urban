@@ -1,23 +1,35 @@
-import { Payment } from "./chauffeur";
-import { TypeVehicle } from "../types/types";
+import { Address, Payment, Phone, TypeVehicle } from "../types/types";
 export interface DistributorToRegister {
-  name: string;
-  address: string;
+  firstName: string,
+  lastName: string,
+  address: Address,
   email: string;
   password: string;
-  img: string;
-  vehicleType: TypeVehicle;
-  vehiclePatent?: string;
-  DNI: string;
-  license?: string;
+  phone: Phone;
+  nationality: string,
+  birthday: string,
+  cc?: string;
+  ce?: string;
+  passport?: string;
+  license: string;
+  img: string,
 }
-
 export interface Distributor extends DistributorToRegister {
-  payments: Payment[];
+  displayName: string,
+  license: string;
+  payments: Payment;
+  vehicleType?: TypeVehicle;
   history: string[];
   deleted: boolean;
+  status: boolean,
 }
 
-export interface DistributorToUpdate extends Partial<DistributorToRegister> {
-  payments?: Payment;
+export interface DistributorToUpdate {
+  img: string,
+  phone: Phone;
+  license: string;
+  address: Address,
+  payments: Payment;
+  vehicleType?: TypeVehicle;
 }
+

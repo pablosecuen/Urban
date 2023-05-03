@@ -50,10 +50,8 @@ export const travelByUser = async (req: Request, res: Response): Promise<void> =
 
 export const getAllTravel = async (req: Request, res: Response): Promise<void> => {
   try {
-    const chauffeurId = req.params.chauffeurId; // obtiene el ID del chofer desde la solicitud
 
-    // Realiza la consulta a la base de datos
-    const snapshot = await db.collection("travels").where("chauffeurId", "==", chauffeurId).get();
+    const snapshot = await db.collection("travels").get();
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
