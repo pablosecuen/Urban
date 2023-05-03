@@ -3,13 +3,13 @@ import { Request, Response, NextFunction } from "express";
 import {
   arePaymentsValid,
   isAddressValid,
-  isDNIValid,
+  isCcValid,
   isEmailValid,
+  isFirstNameValid,
   isImgValid,
+  isLastNameValid,
   isLicenseValid,
-  isNameValid,
   isPasswordValid,
-  isPatentValid,
   isVehicleTypeValid,
 } from "./validators";
 
@@ -31,14 +31,13 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
     if (
-      !isNameValid(data.name) ||
-      !isAddressValid(data.address) ||
+      !isFirstNameValid(data.firstName) ||
+      !isLastNameValid(data.lastName) ||
       !isEmailValid(data.email) ||
       !isPasswordValid(data.password) ||
       !isImgValid(data.img) ||
       !isVehicleTypeValid(data.vehicleType) ||
-      !isPatentValid(data.vehiclePatent) ||
-      !isDNIValid(data.DNI) ||
+      !isCcValid(data.cc) ||
       !isLicenseValid(data.license)
     )
       throw new Error("Faltan datos");
@@ -67,17 +66,12 @@ export const updateDistributorValidate = (
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
-    if (
-      (data?.name && !isNameValid(data.name)) ||
-      (data?.address && !isAddressValid(data.address)) ||
-      (data?.email && !isEmailValid(data.email)) ||
-      (data?.password && !isPasswordValid(data.password)) ||
+    (data?.address) ||
       (data?.img && !isImgValid(data.img)) ||
       (data?.vehicleType && !isVehicleTypeValid(data.vehicleType)) ||
       (data?.license && !isLicenseValid(data.license)) ||
       (data?.payments && !arePaymentsValid(data.payments))
-    )
-      throw Error("Datos no válidos");
+    throw Error("Datos no válidos");
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
