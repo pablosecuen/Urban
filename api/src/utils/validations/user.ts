@@ -27,7 +27,7 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
   try {
     const data: UserToUpdate = req.body;
     const allowProperties = [
-      "addres",
+      "address",
       "password",
       "img",
       "payments.cardNumber",
@@ -38,7 +38,7 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
       throw Error("Datos no permitidos");
     if (
       //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
-      (data?.addres) ||
+      (data?.address) ||
       (data?.img && isImgValid(data.img))
     )
       next();
