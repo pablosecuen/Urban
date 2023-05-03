@@ -1,81 +1,84 @@
 import axios from "axios";
 import Link from "next/link";
+
+import { Passages, Passage } from "@component/app/types/Travels";
 import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
 
 // Traigo los pasages de la API
-// const getPassages = async (): Promise<Data> => {
-//   const data = await axios.get("http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37");
-//   const travels = data.data;
-//   return travels;
-// };
+const getPassages = async (): Promise<Passages> => {
+  const data = await axios.get("http://localhost:3000/passage?pageSize=10000");
+  const passages = data.data;
+  return passages;
+};
 
+export default async function Viajes() {
+  const data = await getPassages();
+  console.log(data.passages);
+  
 
-export default function Viajes() {
   return (
-    <div className="lg:ml-12 mx-auto p-10 h-full rounded-3xl shadow-2xl shadow-black/40 ">
-      <div className="flex flex-col gap-4 ">
-        <h1 className="text-blue text-center text-xl">
 
+
+    <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
+      <div className="flex flex-col gap-4 ">
+        <h1 className="text-center text-xl text-blue">
           Estas son las mejores opciones encontradas
         </h1>
-        <div className="flex flex-col items-center justify-center ">
-          <div className="flex gap-2 items-center">
 
-            <FaBus size="20" className="text-blue w-4" />
-            <span className="text-gray-600 font-semibold text-lg">Bus</span>
+        {data?.passages.map((passage: Passage) => (
 
+        <div className="flex flex-col items-center justify-center border border-black">
+          <div className="flex items-center gap-2">
+            <FaBus size="20" className="w-4 text-blue" />
+            <span className="text-lg font-semibold text-gray-600">Bus</span>
           </div>
-          <span className="pt-2 text-gray-600 text-sm">
+          <span className="pt-2 text-sm text-gray-600">
+            Conductor: Luis G. Cootransandina - 1:00pm - {passage.destination} <br />
+            {passage.description}
+          </span>
+        </div>
+        ))}
+
+
+        {/* <hr />
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex items-center gap-2">
+            <FaCar size="20" className="w-4 text-blue" />
+            <span className="text-lg font-semibold text-gray-600">Automovil privado</span>
+          </div>
+          <span className="pt-2 text-sm text-gray-600">
             Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
             Tiempo estimado: 4 horas
           </span>
         </div>
         <hr />
         <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-2 items-center">
-
-            <FaCar size="20" className="text-blue w-4" />
-            <span className="text-gray-600 font-semibold text-lg">Automovil privado</span>
-
+          <div className="flex items-center gap-2">
+            <FaTaxi size="20" className="w-4 text-blue" />
+            <span className="text-lg font-semibold text-gray-600">Taxi Publico</span>
           </div>
-          <span className="pt-2 text-gray-600 text-sm">
+          <span className="pt-2 text-sm text-gray-600">
             Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
             Tiempo estimado: 4 horas
           </span>
         </div>
         <hr />
         <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-2 items-center">
-
-            <FaTaxi size="20" className="text-blue w-4" />
-            <span className="text-gray-600 font-semibold text-lg">Taxi Publico</span>
-
+          <div className="flex items-center gap-2">
+            <FaMotorcycle size="20" className="w-4 text-blue" />
+            <span className="text-lg font-semibold text-gray-600">Motocicleta privada</span>
           </div>
-          <span className="pt-2 text-gray-600 text-sm">
+          <span className="pt-2 text-sm text-gray-600">
             Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
             Tiempo estimado: 4 horas
           </span>
-        </div>
-        <hr />
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-2 items-center">
-
-            <FaMotorcycle size="20" className="text-blue w-4" />
-            <span className="text-gray-600 font-semibold text-lg">Motocicleta privada</span>
-
-          </div>
-          <span className="pt-2 text-gray-600 text-sm">
-            Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
-            Tiempo estimado: 4 horas
-          </span>
-        </div>
+        </div> */}
       </div>
-      <div className="flex pt-10 gap-2">
-
+      <div className="flex gap-2 pt-10">
         <button>Ver mas opciones</button>
         <Link href="/home/reserva/viajes/confirmacion">
-        <button>Reservar</button></Link>
-
+          <button>Reservar</button>
+        </Link>
       </div>
     </div>
   );

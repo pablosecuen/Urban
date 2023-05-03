@@ -25,7 +25,7 @@ export type Status = {
 };
 
 // 
-export interface Passages {
+export interface Passage {
   id: string,
   duration: string,
   deleted: boolean,
@@ -37,4 +37,8 @@ export interface Passages {
   stock: number,
   arrivalDate: string,
   status: true
+}
+
+export interface Passages {
+  passages: Passage[];
 }
