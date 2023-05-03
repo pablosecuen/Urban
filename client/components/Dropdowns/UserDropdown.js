@@ -39,6 +39,8 @@ const UserDropdown = () => {
               alt="..."
               className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/team-1-800x800.jpg"
+              width={40}
+              height={40}
             />
           </span>
         </div>
