@@ -2,7 +2,7 @@ import { Address, Payment, Phone, TypeVehicle } from "../types/types";
 export interface DistributorToRegister {
   firstName: string,
   lastName: string,
-  displayName: string,
+  address: Address,
   email: string;
   password: string;
   phone: Phone;
@@ -11,15 +11,17 @@ export interface DistributorToRegister {
   cc?: string;
   ce?: string;
   passport?: string;
+  license: string;
   img: string,
-  address: Address,
 }
 export interface Distributor extends DistributorToRegister {
+  displayName: string,
   license: string;
   payments: Payment;
   vehicleType?: TypeVehicle;
   history: string[];
   deleted: boolean;
+  status: boolean,
 }
 
 export interface DistributorToUpdate {
