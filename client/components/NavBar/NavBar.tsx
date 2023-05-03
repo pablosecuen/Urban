@@ -197,14 +197,7 @@ export default function NavBar() {
                 </>
               ) : (
                 <li className="my-2 flex items-center ">
-                  <Image
-                    src="/placeholder.png"
-                    alt="placeholder"
-                    width={50}
-                    height={50}
-                    className="h-6 w-6 rounded-full"
-                  />
-                  <span className="mx-2">Guest</span>
+                  <span className="mx-2 font-semibold">Guest</span>
                   <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
                     Login
                   </Link>
