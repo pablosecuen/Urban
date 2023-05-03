@@ -61,25 +61,6 @@ const Login = () => {
     }
   };
 
-  const handleLoginGoogle = async (e: any) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get<LoginResponse>("http://localhost:3000/login/auth/google");
-      const { token } = response.data;
-      console.log(response.data);
-      if (token) {
-        console.log("Login successful");
-        // store the user object in local storage
-
-        // Save the token to localStorage or a state variable
-      } else {
-        console.log("Login failed");
-      }
-    } catch (error) {
-      console.error(error);
-      console.log("Error al iniciar sesión");
-    }
-  };
 
   const createUser = async (userData: UserToRegister) => {
     try {
@@ -163,54 +144,7 @@ const Login = () => {
             {/* <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Facebook</button> */}
             <div className="flex w-auto flex-col items-center justify-center gap-3">
-              <button
-                className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
-                onClick={handleLoginGoogle}
-              >
-                <svg
-                  width="24px"
-                  height="24px"
-                  viewBox="0 0 32 32"
-                  data-name="Layer 1"
-                  id="Layer_1"
-                  fill="#000000"
-                  className="w-auto"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"
-                      fill="#00ac47"
-                    ></path>
-                    <path
-                      d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16"
-                      fill="#4285f4"
-                    ></path>
-                    <path
-                      d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z"
-                      fill="#ffba00"
-                    ></path>
-                    <polygon
-                      fill="#2ab2db"
-                      points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"
-                    ></polygon>
-                    <path
-                      d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z"
-                      fill="#ea4435"
-                    ></path>
-                    <polygon
-                      fill="#2ab2db"
-                      points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"
-                    ></polygon>
-                    <path
-                      d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"
-                      fill="#4285f4"
-                    ></path>
-                  </g>
-                </svg>
-                Login with Google
-              </button>
+            <a className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30" href="http://localhost:3000/login/auth/google" rel="noopener noreferrer">Login with google</a>
               <button className="bg-blue-700 hover:bg-blue-800 flex items-center whitespace-nowrap rounded px-4 py-2 font-semibold text-white shadow-md  shadow-black/30">
                 <svg className="mr-2 h-6 w-6 fill-current" viewBox="0 0 24 24">
                   <path d="M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z" />
@@ -248,54 +182,7 @@ const Login = () => {
             </button>
             {/* <button onClick={handleRegisterClick}>Apple Id</button> */}
             <div className="flex w-auto flex-col items-center justify-center gap-3">
-              <button
-                className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
-                onClick={handleLoginGoogle}
-              >
-                <svg
-                  width="24px"
-                  height="24px"
-                  viewBox="0 0 32 32"
-                  data-name="Layer 1"
-                  id="Layer_1"
-                  fill="#000000"
-                  className=" w-auto"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"
-                      fill="#00ac47"
-                    ></path>
-                    <path
-                      d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16"
-                      fill="#4285f4"
-                    ></path>
-                    <path
-                      d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z"
-                      fill="#ffba00"
-                    ></path>
-                    <polygon
-                      fill="#2ab2db"
-                      points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"
-                    ></polygon>
-                    <path
-                      d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z"
-                      fill="#ea4435"
-                    ></path>
-                    <polygon
-                      fill="#2ab2db"
-                      points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"
-                    ></polygon>
-                    <path
-                      d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"
-                      fill="#4285f4"
-                    ></path>
-                  </g>
-                </svg>
-                Login with Google
-              </button>
+            <a className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30" href="http://localhost:3000/login/auth/google" rel="noopener noreferrer">Login with google</a>
               <button className="bg-blue-700 hover:bg-blue-800 flex items-center whitespace-nowrap rounded px-4 py-2 font-semibold text-white shadow-md  shadow-black/30">
                 <svg className="mr-2 h-6 w-6 fill-current" viewBox="0 0 24 24">
                   <path d="M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z" />
