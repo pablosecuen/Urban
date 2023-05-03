@@ -9,7 +9,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <NavBar />
-
       <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
         <div className="flex w-full flex-col items-center justify-center gap-4">
           <Image
@@ -19,7 +18,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
           />
           <Menu />
         </div>
-
         <div className="flex w-full items-center justify-center">{children}</div>
       </div>
       <div className="mt-48 lg:mt-0">
