@@ -27,16 +27,15 @@ export default async function Viajes() {
 
         {data?.passages.map((passage: Passage) => (
 
-        <div className="flex flex-col items-center justify-center border border-black">
+        <Link key={passage.id} href={`/home/viajes/${passage.id}`} className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-2">
             <FaBus size="20" className="w-4 text-blue" />
-            <span className="text-lg font-semibold text-gray-600">Bus</span>
+            <span className="text-lg font-semibold text-gray-600 capitalize">{passage.origin} - {passage.destination}</span>
           </div>
-          <span className="pt-2 text-sm text-gray-600">
-            Conductor: Luis G. Cootransandina - 1:00pm - {passage.destination} <br />
-            {passage.description}
-          </span>
-        </div>
+          <small className="pt-2 text-sm text-gray-600">
+            {passage.departureDate} - {passage.arrivalDate}
+          </small>
+        </Link>
         ))}
 
 
