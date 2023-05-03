@@ -4,7 +4,7 @@ export type OrderStatus = "pending" | "progress" | "approved" | "rejected";
 
 export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
 
-export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other";
+export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other" | "false";
 
 
 export type Payment = {
@@ -13,7 +13,7 @@ export type Payment = {
     securityCode: string;
 }
 
-export type Address={
+export type Address = {
     postalCode: string,
     location: string,
     state: string,
@@ -21,10 +21,9 @@ export type Address={
     number: string,
     department: string,
 }
-  
-export type Phone={
+
+export type Phone = {
     areaCode: string,
     number: string,
     displayPhone: string,
 }
-  
