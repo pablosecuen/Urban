@@ -7,7 +7,7 @@ export interface PassageToRegister {
   arrivalDate: string;
   duration: string;
   price: number;
-  numberSeats: number;
+  numberSeat: number;
 }
 
 export interface Passage extends PassageToRegister {
