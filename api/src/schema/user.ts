@@ -2,8 +2,7 @@ export interface UserToRegister {
   name: string;
   email: string;
   password: string;
-  createdAt?: string;
-  updatedAt?: string;
+  creadteAt: Date,
 }
 
 export interface User extends UserToRegister {
@@ -20,7 +19,11 @@ export interface User extends UserToRegister {
   img: string;
   DNI: string;
   deleted: boolean;
+  updateAt: Date,
+  deleteAt: Date,
 }
 
 export interface UserToUpdate extends Partial<UserToRegister> {
+  updateAt: Date,
+  deleteAt: Date,
 }
