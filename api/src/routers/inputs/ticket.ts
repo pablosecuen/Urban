@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { newTicket } from "../../controllers/inputs/ticket";
+import { aceptTicket, newTicket } from "../../controllers/inputs/ticket";
 
 const router = Router();
 
 router.post("/", newTicket);
+
+router.patch("/acept/:id", aceptTicket);
 
 export default router;
