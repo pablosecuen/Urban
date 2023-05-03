@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import { UserToRegister, UserToUpdate } from "../../schema/user";
 import {
   isAddressValid,
-  isDNIValid,
+  isCcValid,
   isEmailValid,
+  isFirstNameValid,
   isImgValid,
   isNameValid,
   isPasswordValid,
@@ -12,8 +13,8 @@ import {
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: UserToRegister = req.body;
-    if (!data.name || !data.email || !data.password) throw Error("Datos incompletos");
-    if (!isNameValid(data.name) || !isEmailValid(data.email) || !isPasswordValid(data.password)) {
+    if (!data.firstName || !data.lastName || !data.email || !data.password) throw Error("Datos incompletos");
+    if (!isFirstNameValid(data.firstName) || !isNameValid(data.lastName) || !isEmailValid(data.email) || !isPasswordValid(data.password)) {
       throw new Error("Datos no validos");
     }
     next();
@@ -26,27 +27,26 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
   try {
     const data: UserToUpdate = req.body;
     const allowProperties = [
-      "name",
+      "cc",
       "address",
-      "email",
-      "password",
+      "phone",
+      "payments",
+      "nationality",
+      "birthday",
+      "gender",
+      "ce",
       "img",
       "payments.cardNumber",
       "payments.cardExpiration",
       "payments.securityCode",
-      "DNI",
-      "deleted",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
     if (
       //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
-      (data?.name && isNameValid(data.name)) ||
-      (data?.email && isEmailValid(data.email)) ||
-      (data?.password && isPasswordValid(data.password)) ||
-      (data?.address && isAddressValid(data.address)) ||
+      (data?.address) ||
       (data?.img && isImgValid(data.img)) ||
-      (data?.DNI && isDNIValid(data.DNI))
+      (data?.cc)
     )
       next();
   } catch (error) {

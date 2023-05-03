@@ -14,7 +14,7 @@ export const newBusDriver = async (req: Request, res: Response): Promise<void> =
     };
     const snapshot = await db
       .collection("busDriver")
-      .where("DNI", "==", dataFormated.DNI)
+      .where("cc", "==", dataFormated.cc)
       .get();
     if (!snapshot.empty) {
       throw new Error("El conductor ya está registrado");

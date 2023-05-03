@@ -11,10 +11,13 @@ export const newLocal = async (req: Request, res: Response): Promise<void> => {
     const data: LocalToRegister = req.body;
     const dataFormated: Local = {
       ...data,
-      payments: [],
       history: [],
       state: false,
       deleted: false,
+      bankAccount: {
+        bankHolder: "",
+        accountNumber: ""
+      }
     };
     // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(dataFormated.password, 10);

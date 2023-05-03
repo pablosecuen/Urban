@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { OwnerToRegister, OwnerToUpdate } from "../../schema/owner";
 import {
   isAddressValid,
-  isDNIValid,
+  isCcValid,
   isEmailValid,
   isNameValid,
   isPhoneValid,
@@ -12,13 +12,13 @@ import {
 export const newOwnerValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: OwnerToRegister = req.body;
-    if (!data.name || !data.email || !data.phone || !data.DNI || !data.vehiclesId)
+    if (!data.name || !data.email || !data.phone || !data.cc || !data.vehiclesId)
       throw Error("Datos incompletos");
     if (
       !isNameValid(data.name) ||
       !isEmailValid(data.email) ||
       !isPhoneValid(data.phone) ||
-      !isDNIValid(data.DNI) ||
+      !isCcValid(data.cc) ||
       !isVehiclesIdValid(data.vehiclesId)
     ) {
       throw new Error("Datos incompletos o no válidos");
@@ -39,7 +39,7 @@ export const updateOwnerValidated = (req: Request, res: Response, next: NextFunc
       (data?.name && !isNameValid(data.name)) ||
       (data?.email && !isEmailValid(data.email)) ||
       (data?.phone && !isPhoneValid(data.phone)) ||
-      (data?.DNI && !isDNIValid(data.DNI)) ||
+      (data?.cc && !isCcValid(data.cc)) ||
       (data?.vehiclesId && !isVehiclesIdValid(data.vehiclesId)) ||
       (data?.address && !isAddressValid(data.address))
     ) {
