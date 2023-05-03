@@ -13,7 +13,6 @@ const getPassages = async (): Promise<Passages> => {
 
 export default async function Viajes() {
   const data = await getPassages();
-  console.log(data.passages);
   
 
   return (
@@ -27,7 +26,7 @@ export default async function Viajes() {
 
         {data?.passages.map((passage: Passage) => (
 
-        <Link key={passage.id} href={`/home/viajes/${passage.id}`} className="flex flex-col items-center justify-center">
+        <Link key={passage.id} href={`/home/viajes/confirmacion/${passage.id}`} className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-2">
             <FaBus size="20" className="w-4 text-blue" />
             <span className="text-lg font-semibold text-gray-600 capitalize">{passage.origin} - {passage.destination}</span>
