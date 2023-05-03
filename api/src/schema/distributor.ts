@@ -1,20 +1,23 @@
+import { Payment } from "./chauffeur";
+import { TypeVehicle } from "../types/types";
 export interface DistributorToRegister {
   name: string;
-  adress: string;
+  address: string;
   email: string;
   password: string;
   img: string;
-  vehicle: string;
-  DNI: number;
-  license: string;
+  vehicleType: TypeVehicle;
+  vehiclePatent?: string;
+  DNI: string;
+  license?: string;
 }
 
 export interface Distributor extends DistributorToRegister {
-  payments: Object[]; //provisional
+  payments: Payment[];
   history: string[];
   deleted: boolean;
 }
 
 export interface DistributorToUpdate extends Partial<DistributorToRegister> {
-  payments: Object[];
+  payments?: Payment;
 }
