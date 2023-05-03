@@ -1,12 +1,12 @@
 export interface BusDriverToRegister {
   name: string;
-  DNI: string;
+  cc: string;
   license: string;
 }
 
 export interface BusDriver {
   name: string;
-  DNI: string;
+  cc: string;
   license: string;
   deleted: boolean;
 }
