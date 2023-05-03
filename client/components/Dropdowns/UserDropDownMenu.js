@@ -18,7 +18,7 @@ const UserDropdown = () => {
   };
   return (
     <div
-      className="flex w-auto justify-end  "
+      className="absolute -right-10 top-12 flex h-48 w-48 justify-end bg-black"
       onClick={(e) => {
         e.preventDefault();
         dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
@@ -39,6 +39,8 @@ const UserDropdown = () => {
               alt="..."
               className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/team-1-800x800.jpg"
+              width={50}
+              height={50}
             />
           </span>
         </div>
@@ -53,7 +55,7 @@ const UserDropdown = () => {
         <a
           href="#pablo"
           className={
-            "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
+            "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-white"
           }
           onClick={(e) => e.preventDefault()}
         >

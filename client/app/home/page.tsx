@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useEffect } from "react";
-
+import { toast } from "sonner";
 export default function Home() {
   let token: any;
   if (typeof window !== "undefined") {
@@ -23,6 +23,21 @@ export default function Home() {
     }, []);
   }
 
+  useEffect(() => {
+    token &&
+      axios
+        .get("http://localhost:3000/user/decoding", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((data) => {
+          console.log(data.data);
+          const userData = data.data;
+          localStorage.setItem("user", JSON.stringify(userData));
+        });
+  }, [token]);
+
   return (
     <div className="shadow/30 mb-8 w-full justify-center rounded-3xl border-2 px-4 py-4 shadow-lg xl:mb-0 xl:flex xl:w-4/5 xl:flex-col xl:px-24">
       <p className="my-2 text-center text-2xl font-bold">
@@ -42,6 +57,7 @@ export default function Home() {
       <p className="mt-8 text-center text-lg font-bold">
         Selecciona el tipo de servicio para poder continuar
       </p>
+      <button onClick={() => toast("My first toast")}>Give me a toast</button>
     </div>
   );
 }

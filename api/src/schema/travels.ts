@@ -5,7 +5,7 @@ export interface Travel {
   chauffeurId: string;
   origin: string;
   destination: string;
-  price: string;
+  price: number;
   status: boolean;
   travel: TravelStatus;
 }

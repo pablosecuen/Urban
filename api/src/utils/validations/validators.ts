@@ -47,6 +47,11 @@ export const isImgValid = (img: string): Boolean => {
   return false;
 };
 
+export const isArrayImgValid = (imgs: string[]): Boolean => {
+  if (imgs.every((i) => typeof i === "string")) return true;
+  return false;
+};
+
 // string de entre 5 y 50 caracteres
 export const isVehicleTypeValid = (vehicleType: string): Boolean => {
   const allowValues = ["motorcycle", "car", "bicycle", "van", "other"];
@@ -97,7 +102,7 @@ export const isDateValid = (date: string): Boolean => {
   return false;
 };
 
-export const isPriceValid = (price: string): Boolean => {
+export const isPriceValid = (price: number): Boolean => {
   if (typeof price === "number" && price >= 0) return true;
   return false;
 };
@@ -144,6 +149,18 @@ export const isChauffeurIdValid = (chauffeurId: string): Boolean => {
 
 export const isOriginValid = (origin: string): Boolean => {
   if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return true;
+  return false;
+};
+
+export const isOwnerIdValid = (ownerId: string): Boolean => {
+  if (typeof ownerId === "string") return true;
+  return false;
+};
+
+export const isVehiclesIdValid = (vehiclesId: any): boolean => {
+  if (Array.isArray(vehiclesId)) {
+    return true;
+  }
   return false;
 };
 
