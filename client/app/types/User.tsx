@@ -8,6 +8,8 @@ export interface UserToRegister {
 export interface userData {
   name: string;
   img: string;
+  email: string;
+  adress: string;
 }
 export interface User extends UserToRegister {
   adress: string;

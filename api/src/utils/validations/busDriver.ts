@@ -8,8 +8,10 @@ export const newBusDriverValidate = (req: Request, res: Response, next: NextFunc
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
 
-    if (!isNameValid(data.name) || !isDNIValid(data.DNI) || !isLicenseValid(data.license))
+    if (!isNameValid(data.name) || !isDNIValid(data.DNI) || !isLicenseValid(data.license)) {
       throw Error("Datos incompletos o no válidos");
+    }
+
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
