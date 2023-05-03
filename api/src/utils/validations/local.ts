@@ -17,7 +17,6 @@ export const newLocalValidate = (req: Request, res: Response, next: NextFunction
       isNameValid(data.name) ||
       isEmailValid(data.email) ||
       isPasswordValid(data.password) ||
-      isAddressValid(data.address) ||
       isImgValid(data.img)
     ) {
       throw new Error("Datos no validos");
@@ -37,9 +36,7 @@ export const updateLocalValidate = (req: Request, res: Response, next: NextFunct
       throw Error("Datos no permitidos");
     if (
       (data?.name && isNameValid(data.name)) ||
-      (data?.email && isEmailValid(data.email)) ||
-      (data?.password && isPasswordValid(data.password)) ||
-      (data?.address && isAddressValid(data.address)) ||
+      (data?.address) ||
       (data?.img && isImgValid(data.img))
     ) {
       throw new Error("Datos no validos");
