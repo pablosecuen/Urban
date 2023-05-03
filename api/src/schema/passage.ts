@@ -9,7 +9,6 @@ export interface PassageToRegister {
   price: number;
   numberSeat: number;
 }
-
 export interface Passage extends PassageToRegister {
   deleted: boolean;
   status: boolean;

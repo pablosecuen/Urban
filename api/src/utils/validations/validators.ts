@@ -1,6 +1,15 @@
-import { Payment, VehicleForChauffeur } from "../../schema/chauffeur";
+import { VehicleForChauffeur } from "../../schema/chauffeur";
+import { Payment } from "../../types/types";
 
 export const isNameValid = (name: string): Boolean => {
+  if (typeof name === "string" && name.length <= 50) return true;
+  return false;
+};
+export const isFirstNameValid = (name: string): Boolean => {
+  if (typeof name === "string" && name.length <= 50) return true;
+  return false;
+};
+export const isLastNameValid = (name: string): Boolean => {
   if (typeof name === "string" && name.length <= 50) return true;
   return false;
 };
@@ -23,8 +32,8 @@ export const isPhoneValid = (phone: string): Boolean => {
 };
 
 // IMPORTANTE!  solo permite DNI de 9 dígitos en formato string, preguntar como es en Colombia
-export const isDNIValid = (DNI: string): Boolean => {
-  if (typeof DNI === "string" && DNI.length === 8) return true;
+export const isCcValid = (cc: string): Boolean => {
+  if (typeof cc === "string" && cc.length === 8) return true;
   return false;
 };
 

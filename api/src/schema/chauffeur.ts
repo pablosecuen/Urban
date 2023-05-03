@@ -1,26 +1,40 @@
-import { Payment } from "../types/types";
+import { Address, Payment, Phone } from "../types/types";
 
 export interface ChauffeurToRegister {
-  name: string;
+  firstName: string,
+  lastName: string,
+  displayName: string,
   email: string;
   password: string;
-  phone: string;
-  DNI: string;
+  phone: Phone;
+  nationality: string,
+  birthday: string,
+  cc?: string;
+  ce?: string;
+  passport?: string;
   license: string;
-  address: string;
+  img: string,
+  typeChauffeur: string,
+  address: Address,
+  occupation: string,
 }
 
 export interface Chauffeur extends ChauffeurToRegister {
-  deleted: boolean;
-  ownerState: boolean;
-  vehicle: VehicleForChauffeur;
-  payments: Payment[];
-  img: string;
-  history?: string[];
-}
-export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
-  vehicle: VehicleForChauffeur;
   payments: Payment;
+  history: string[];
+  ownerState: boolean,
+  vehicle: VehicleForChauffeur;
+  deleted: boolean;
+}
+
+export interface ChauffeurToUpdate {
+  typeChauffeur?: string,
+  license?: string;
+  occupation?: string,
+  address?: Address,
+  phone?: Phone;
+  vehicle?: VehicleForChauffeur;
+  payments?: Payment;
 }
 
 export interface VehicleForChauffeur {

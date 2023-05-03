@@ -3,13 +3,13 @@ import { Request, Response, NextFunction } from "express";
 import {
   arePaymentsValid,
   isAddressValid,
-  isDNIValid,
+  isCcValid,
   isEmailValid,
+  isFirstNameValid,
   isImgValid,
+  isLastNameValid,
   isLicenseValid,
-  isNameValid,
   isPasswordValid,
-  isPatentValid,
   isVehicleTypeValid,
 } from "./validators";
 
@@ -18,30 +18,34 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
   try {
     const data: Distributor = req.body;
     const allowProperties = [
-      "name",
+      "firstName",
+      "lastname",
       "address",
       "email",
       "password",
+      "phone",
+      "nationality",
+      "birthday",
+      "cc",
       "img",
-      "vehicleType",
-      "vehiclePatent",
-      "DNI",
-      "license",
+      "license"
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
-    if (
-      !isNameValid(data.name) ||
-      !isAddressValid(data.address) ||
-      !isEmailValid(data.email) ||
-      !isPasswordValid(data.password) ||
-      !isImgValid(data.img) ||
-      !isVehicleTypeValid(data.vehicleType) ||
-      !isPatentValid(data.vehiclePatent) ||
-      !isDNIValid(data.DNI) ||
-      !isLicenseValid(data.license)
-    )
-      throw new Error("Faltan datos");
+    // if (
+    //   !isFirstNameValid(data.firstName) ||
+    //   !isLastNameValid(data.lastName) ||
+    //   !data.address ||
+    //   !isEmailValid(data.email) ||
+    //   !isPasswordValid(data.password) ||
+    //   !data.phone ||
+    //   !data.nationality ||
+    //   !data.birthday ||
+    //   !isCcValid(data.cc) ||
+    //   !isImgValid(data.img) ||
+    //   !isLicenseValid(data.license)
+    // )
+    //   throw new Error("Faltan datos");
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -56,28 +60,21 @@ export const updateDistributorValidate = (
   try {
     const data: DistributorToUpdate = req.body;
     const allowProperties: string[] = [
-      "name",
+      "phone",
       "address",
       "vehicleType",
-      "vehiclePatent",
-      "email",
       "img",
       "license",
       "payments",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
-    if (
-      (data?.name && !isNameValid(data.name)) ||
-      (data?.address && !isAddressValid(data.address)) ||
-      (data?.email && !isEmailValid(data.email)) ||
-      (data?.password && !isPasswordValid(data.password)) ||
-      (data?.img && !isImgValid(data.img)) ||
-      (data?.vehicleType && !isVehicleTypeValid(data.vehicleType)) ||
-      (data?.license && !isLicenseValid(data.license)) ||
-      (data?.payments && !arePaymentsValid(data.payments))
-    )
-      throw Error("Datos no válidos");
+    // (data?.address) ||
+    //   (data?.img && !isImgValid(data.img)) ||
+    //   (data?.vehicleType && !isVehicleTypeValid(data.vehicleType)) ||
+    //   (data?.license && !isLicenseValid(data.license)) ||
+    //   (data?.payments && !arePaymentsValid(data.payments))
+    // throw Error("Datos no válidos");
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });

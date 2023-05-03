@@ -2,13 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import { ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
 import {
   arePaymentsValid,
-  isAddressValid,
-  isDNIValid,
+  isCcValid,
   isEmailValid,
+  isFirstNameValid,
+  isLastNameValid,
   isLicenseValid,
-  isNameValid,
   isPasswordValid,
-  isPhoneValid,
   isVehicleToChauffeurValid,
 } from "./validators";
 
@@ -20,13 +19,15 @@ export const newChauffeurValidated = (req: Request, res: Response, next: NextFun
       throw Error("Datos no permitidos");
 
     if (
-      !isNameValid(data.name) ||
+      !isFirstNameValid(data.firstName) ||
+      !isLastNameValid(data.lastName) ||
       !isEmailValid(data.email) ||
       !isPasswordValid(data.password) ||
-      !isPhoneValid(data.phone) ||
-      !isDNIValid(data.DNI) ||
-      !isLicenseValid(data.license) ||
-      !isAddressValid(data.address)
+      // !isPhoneValid(data.phone) ||
+      !isCcValid(data.cc) ||
+      !isLicenseValid(data.license)
+      // ||
+      // !isAddressValid(data.address)
     )
       throw Error("Datos incompletos o no válidos");
     next();
@@ -43,10 +44,8 @@ export const updateChauffeurValidated = (req: Request, res: Response, next: Next
       throw Error("Datos no permitidos");
 
     if (
-      (data?.email && !isEmailValid(data.email)) ||
-      (data?.password && !isPasswordValid(data.password)) ||
-      (data?.phone && !isPhoneValid(data.phone)) ||
-      (data?.address && !isAddressValid(data.address)) ||
+      (data?.phone) ||
+      (data?.address) ||
       (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle)) ||
       (data?.payments && !arePaymentsValid(data.payments))
     )

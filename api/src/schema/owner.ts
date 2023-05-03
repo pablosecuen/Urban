@@ -2,7 +2,8 @@ export interface OwnerToRegister {
   name: string;
   email: string;
   phone: string;
-  DNI: string;
+  cc?: string;
+  ce?: string;
   vehiclesId: string[];
 }
 
