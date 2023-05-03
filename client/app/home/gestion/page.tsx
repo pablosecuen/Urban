@@ -8,6 +8,7 @@ import { HiOutlineChevronRight, HiOutlinePause, HiOutlineCheck, HiOutlineX } fro
 const getData = async (): Promise<Data> => {
   const data = await axios.get("http://localhost:3000/travels/user/uwK0sWKXcpiROc5owN37");
   const travels = data.data;
+  console.log(travels);
   return travels;
 };
 

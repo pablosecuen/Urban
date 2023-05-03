@@ -5,6 +5,7 @@ import { pestañasHistorialPerfil, contenidoHistorialPerfil } from "../../assets
 export default function Perfil() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Viajes");
+  const [userData, setUserData] = useState(null);
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -12,6 +13,10 @@ export default function Perfil() {
 
   useEffect(() => {
     setLoading(false);
+    const userDataString = localStorage.getItem("user");
+    if (userDataString) {
+      setUserData(JSON.parse(userDataString));
+    }
   }, []);
 
   if (loading) {

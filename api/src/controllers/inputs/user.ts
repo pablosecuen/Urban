@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 
 /**
@@ -11,27 +11,23 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const data: UserToRegister = req.body;
     const dataFormated: User = {
       ...data,
-      adress: "",
+      address: "",
       payments: {
         cardNumber: "",
         expirationDate: "",
         securityCode: "",
-      }
-      ,
+      },
       history: {
         orders: [],
         travels: [],
       },
       img: "",
       DNI: "",
-      deleted: false
+      deleted: false,
     };
 
     // Verificar si ya existe un usuario con el correo electrónico dado
-    const snapshot = await db
-      .collection("users")
-      .where("email", "==", dataFormated.email)
-      .get();
+    const snapshot = await db.collection("users").where("email", "==", dataFormated.email).get();
     if (!snapshot.empty) {
       throw new Error("El correo electrónico ya está registrado");
     }
@@ -54,10 +50,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
 /**
  * Controlador para actulizar un usuario en Firestore.
  */
-export const updateUser = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
@@ -69,7 +62,10 @@ export const updateUser = async (
     }
 
     // Actualizar el usuario en Firestore
-    await db.collection("users").doc(id).update({ ...data });
+    await db
+      .collection("users")
+      .doc(id)
+      .update({ ...data });
 
     res.status(200).json({ message: "Usuario actualizado correctamente" });
   } catch (error) {

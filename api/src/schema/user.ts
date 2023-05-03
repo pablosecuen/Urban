@@ -1,25 +1,35 @@
-export interface UserToRegister {
-  name: string;
-  email: string;
-  password: string;
-}
+import { Address, Payment, Phone } from "../types/types";
 
+export interface UserToRegister {
+  firstName: string,
+  lastName: string,
+  displayName: string,
+  email: string,
+  password: string,
+}
 export interface User extends UserToRegister {
-  adress: string;
-  payments: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
+  addres: Address
+  payments: Payment[];
   history: {
     orders: string[];
     travels: string[];
   };
+  phone: Phone,
+  nationality: string,
+  birthday: string,
+  gender: string,
   img: string;
-  DNI: string;
-  deleted: boolean;
+  cc?: string;
+  ce?: string,
+  deleted: boolean,
+  createAt: string,
+  updateAt: string,
 }
 
-export interface UserToUpdate extends Partial<UserToRegister> {
-
+export interface UserToUpdate{
+  addres?: Address,
+  phone?: Phone,
+  img?: string,
+  gender?: string
+  payments?: Payment[],
 }
