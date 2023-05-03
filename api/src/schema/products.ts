@@ -1,3 +1,5 @@
+import { TypeProduct } from "../types/types";
+
 export interface Products {
   name: string;
   price: number;

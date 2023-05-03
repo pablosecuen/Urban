@@ -12,7 +12,7 @@ export const newBusDriver = async (req: Request, res: Response): Promise<void> =
       ...data,
       deleted: false,
     };
-    const snapshot = await await db
+    const snapshot = await db
       .collection("busDriver")
       .where("DNI", "==", dataFormated.DNI)
       .get();

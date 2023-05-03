@@ -29,7 +29,7 @@ export const getAllProducts = async (req: Request, res: Response): Promise<void>
     res.status(200).json({ products: productsData, totalPages });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al obtener los productos');
+    res.status(500).json('Error al obtener los productos');
   }
 };
 
@@ -52,7 +52,7 @@ export const getAllProductsByType = async (req: Request, res: Response): Promise
     res.status(200).json({ products: productsData, totalPages });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al obtener los productos por tipo');
+    res.status(500).json('Error al obtener los productos por tipo');
   }
 };
 
@@ -76,7 +76,23 @@ export const getAllProductsByStore = async (req: Request, res: Response): Promis
     res.status(200).json({ products: productsData, totalPages });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al obtener los productos por tipo');
+    res.status(500).json('Error al obtener los productos por tipo');
+  }
+};
+
+export const getProductId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const doc = await db.collection("products").doc(id).get();
+    if (!doc.exists) {
+      res.status(404).json({ message: "Producto no encontrado" });
+    } else {
+      const product = { id: doc.id, ...doc.data() };
+      res.status(200).json(product);
+    }
+  } catch (error) {
+    console.error("Error al obtener el producto", error);
+    res.status(500).json({ message: "Error al obtener el producto" });
   }
 };
 

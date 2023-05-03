@@ -83,7 +83,7 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
       throw new Error("No se encontró la orden");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("orders").doc(id).update({ data });
+    await db.collection("orders").doc(id).update({ ...data });
     res.status(201).json({ menssage: "Orden actualizada correctamente" });
   } catch (error) {
     console.error("Error al actualizar la orden", error);

@@ -28,10 +28,14 @@ export const newProduct = async (req: Request, res: Response): Promise<void> => 
 
 export const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+    const id: string = req.params.id;
     const updatedProductData: ProductsToUpdate = req.body;
-    const productName: string = req.params.productName;
-    await db.collection('products').doc(productName).update({ updatedProductData });
-    res.status(200).json(updatedProductData);
+    const docRef = await db.collection('products').doc(id).get();
+    if (!docRef) {
+      throw new Error("No se encontró el producto");
+    }
+    await db.collection('products').doc(id).update({ ...updatedProductData });
+    res.status(200).json({ message: "Producto actualizado correctamente" });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al actualizar el producto');

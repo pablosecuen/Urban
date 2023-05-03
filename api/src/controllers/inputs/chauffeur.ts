@@ -53,7 +53,7 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
     if (!docRef.exists) {
       throw new Error("No se encontró el chofer");
     }
-    await db.collection("chauffeur").doc(id).update({ data });
+    await db.collection("chauffeur").doc(id).update({ ...data });
     res.status(200).json({ message: "Chofer actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el usuario", error);
