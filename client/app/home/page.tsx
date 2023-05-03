@@ -1,26 +1,28 @@
-"use client"
+"use client";
 import axios from "axios";
 import { useEffect } from "react";
 
 export default function Home() {
-  let token: any
-  if (typeof window !== 'undefined') {
+  let token: any;
+  if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search); //fijarse problema de window
-    token = urlParams.get('token');
+    token = urlParams.get("token");
   }
-  if(token){
-    useEffect(() => {
-      token && axios.get("http://localhost:3000/user/decoding",
-      {
-        headers: {
-        'Authorization': 'Bearer ' + token
-      },}
-      ) 
-      .then((data)=>{
-        console.log(data.data);
-      })
-    },[])
-  }
+
+  useEffect(() => {
+    token &&
+      axios
+        .get("http://localhost:3000/user/decoding", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((data) => {
+          console.log(data.data);
+          const userData = data.data;
+          localStorage.setItem("user", JSON.stringify(userData));
+        });
+  }, [token]);
 
   return (
     <div className="shadow/30 mb-8 w-full justify-center rounded-3xl border-2 px-4 py-20 shadow-lg lg:mb-0 lg:flex lg:w-4/5 lg:flex-col lg:px-24">
