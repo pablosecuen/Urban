@@ -1,71 +1,9 @@
 import { Router } from "express";
-import { searchUser, allUsers } from "../../controllers/outputs/user";
+import { searchUser, allUsers, decodingUser } from "../../controllers/outputs/user";
 
 const router = Router();
 
 // Ruta para obtener un usuario por su I
-
-/**
- * @swagger
- * /users/{id}:
- *   get:
- *     summary: Obtener un usuario por ID
- *     description: Devuelve un usuario por su ID
- *     tags:
- *       - Usuarios
- *     parameters:
- *       - name: id
- *         in: path
- *         description: ID del usuario a buscar
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Usuario encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '/schemas/user'
- *             example:
- *               id: string
- *               password: string
- *               img: string
- *               deleted: false
- *               payments: 
- *                 securityCode: string
- *                 cardNumber: string
- *                 expirationDate: string
- *               name: string
- *               adress: string
- *               history: 
- *                 travels: [string]
- *                 orders: [string]
- *               email: string
- *               DNI: string
- *       '404':
- *         description: Usuario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Descripción del error
- *       '500':
- *         description: Error al buscar el usuario
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Descripción del error
- */
-
-router.get("/:id", searchUser);
 
 /**
  * @swagger
@@ -126,5 +64,70 @@ router.get("/:id", searchUser);
  *                   description: Descripción del error
  */
 router.get("/", allUsers);
+
+
+router.get("/decoding", decodingUser)
+
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     summary: Obtener un usuario por ID
+ *     description: Devuelve un usuario por su ID
+ *     tags:
+ *       - Usuarios
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID del usuario a buscar
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Usuario encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '/schemas/user'
+ *             example:
+ *               id: string
+ *               password: string
+ *               img: string
+ *               deleted: false
+ *               payments: 
+ *                 securityCode: string
+ *                 cardNumber: string
+ *                 expirationDate: string
+ *               name: string
+ *               adress: string
+ *               history: 
+ *                 travels: [string]
+ *                 orders: [string]
+ *               email: string
+ *               DNI: string
+ *       '404':
+ *         description: Usuario no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ *       '500':
+ *         description: Error al buscar el usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
+router.get("/:id", searchUser);
 
 export default router;

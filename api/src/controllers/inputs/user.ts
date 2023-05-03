@@ -80,8 +80,6 @@ export const updateUser = async (
 /**
  * Controlador para hacer un borrado logico de un usuario en Firestore.
  */
-
-
 export const enableUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
@@ -96,7 +94,6 @@ export const enableUser = async (req: Request, res: Response): Promise<void> => 
     res.status(400).json({ message: innerError.message });
   }
 };
-
 
 export const deletedUser = async (req: Request, res: Response): Promise<void> => {
   try {

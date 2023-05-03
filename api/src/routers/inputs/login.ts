@@ -33,33 +33,31 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const user = await db.collection("users").doc(profile.id).get();
+        let user: any = await db.collection("users").doc(profile.id).get();
         if (!user.exists) {
-          await db.collection("users").doc(profile.id).set({
+          user = await db.collection("users").doc(profile.id).set({
             email: profile.emails[0].value,
             name: profile.displayName,
             img: profile.photos[0].value,
             adress: "",
-      payments: {
-        cardNumber: "",
-        expirationDate: "",
-        securityCode: "",
-      }
-      ,
-      history: {
-        orders: [],
-        travels: [],
-      },
-      DNI: "",
-      deleted: false
+            payments: {
+              cardNumber: "",
+              expirationDate: "",
+              securityCode: "",
+            }
+            ,
+            history: {
+              orders: [],
+              travels: [],
+            },
+            DNI: "",
+            deleted: false
           });
-
         }
         const payload = {
           email: profile.emails[0].value,
           name: profile.displayName,
-          img: profile.photos[0].value,
-          id: profile.id,
+          id: profile.id
         }
         done(null, payload);
       } catch (error) {
@@ -69,14 +67,13 @@ passport.use(
     }
   )
 );
-
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/auth/google", (req, res) => {
   const { user } = req;
+  console.log(user);
   const token = jwt.sign(user, "clavemegasecreta");
-
   // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
-  res.redirect(`http://localhost:3001?token=${token}`);
+  res.redirect(`http://localhost:3001/home?token=${token}`);
 });
 
 // auth de facebook
