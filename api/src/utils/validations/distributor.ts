@@ -58,17 +58,17 @@ export const updateDistributorValidate = (
     const allowProperties: string[] = [
       "name",
       "address",
-      "email",
-      "password",
-      "img",
       "vehicleType",
+      "vehiclePatent",
+      "email",
+      "img",
       "license",
       "payments",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
     if (
-      (data?.name && !isEmailValid(data.name)) ||
+      (data?.name && !isNameValid(data.name)) ||
       (data?.address && !isAddressValid(data.address)) ||
       (data?.email && !isEmailValid(data.email)) ||
       (data?.password && !isPasswordValid(data.password)) ||
