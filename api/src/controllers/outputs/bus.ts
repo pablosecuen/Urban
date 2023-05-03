@@ -44,8 +44,8 @@ export const getBusById = async (req: Request, res: Response): Promise<void> => 
     if (!doc.exists) {
       res.status(404).json({ message: "Bus no encontrado" });
     } else {
-      const Bus = { id: doc.id, ...doc.data() };
-      res.json(Bus);
+      const bus = { id: doc.id, ...doc.data() };
+      res.json(bus);
     }
   } catch (error) {
     console.error("Error al obtener el bus", error);

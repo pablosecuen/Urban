@@ -22,7 +22,7 @@ input {
 }
 
 .link {
-  @apply rounded-md bg-blue px-4 py-1 text-center text-white lg:bg-white lg:text-black;
+  @apply rounded-md bg-blue px-4 py-1 text-center font-medium text-black transition-all duration-300  lg:bg-celeste;
 }
 
 input:focus-visible {

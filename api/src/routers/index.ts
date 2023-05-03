@@ -3,9 +3,6 @@ import { Router } from "express";
 import userInputRouter from "./inputs/user";
 import userOutputRouter from "./outputs/user";
 
-import busInputRouter from "./inputs/bus";
-import busOutputRouter from "./outputs/bus";
-
 import vehicleInputRouter from "./inputs/vehicle";
 import vehicleOutputRouter from "./outputs/vehicle";
 
@@ -38,6 +35,12 @@ import paymentInputRouter from "./inputs/payment";
 import busDriverInputRouter from "./inputs/busDriver";
 import busDriverOutputRouter from "./outputs/busDriver";
 
+import busInputRouter from "./inputs/bus";
+import busOutputRouter from "./outputs/bus";
+
+import passageInputRouter from "./inputs/passage";
+import passageOutputRouter from "./outputs/passage";
+
 const router = Router();
 
 // Rutas para entrada de datos
@@ -53,8 +56,6 @@ router.use("/local", localInputRouter);
 
 router.use("/products", productInputRouter);
 
-router.use("/bus", busInputRouter);
-
 router.use("/vehicle", vehicleInputRouter);
 
 router.use("/chauffeur", chauffeurInputRouter);
@@ -69,14 +70,16 @@ router.use("/payment", paymentInputRouter);
 
 router.use("/busDriver", busDriverInputRouter);
 
+router.use("/bus", busInputRouter);
+
+router.use("/passage", passageInputRouter)
+
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
 router.use("/travels", travelOutputRouter);
 
 router.use("/local", localOutputRouter);
-
-router.use("/bus", busOutputRouter);
 
 router.use("/vehicle", vehicleOutputRouter);
 
@@ -91,5 +94,10 @@ router.use("/distributor", distributorOutputRouter);
 router.use("/order", orderOutputRouter);
 
 router.use("/busDriver", busDriverOutputRouter);
+
+router.use("/bus", busOutputRouter);
+
+router.use("/passage", passageOutputRouter)
+
 
 export default router;

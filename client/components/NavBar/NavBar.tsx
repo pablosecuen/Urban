@@ -1,14 +1,19 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import logo from "../../assets/imagenes/UrbanIso.png";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
+import { User, userData } from "../../app/types/User";
 import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
 
+import logo from "../../assets/imagenes/UrbanIso.png";
+
+
 export default function NavBar() {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
+  const pathname = usePathname();
 
   const [showMenu, setShowMenu] = useState(false);
   const [userData, setUserData] = useState<userData | null>(null);
@@ -30,13 +35,8 @@ export default function NavBar() {
     setUserData(null);
   };
 
-  interface userData {
-    name: string;
-    img: string;
-  }
-
   return (
-    <header>
+    <header className="bg-verde">
       {isMobile ? (
         <nav className="flex h-12 w-full justify-between bg-verde ">
           <Image src={logo as StaticImageData} alt="logo" className="h-10 w-auto self-center" />
@@ -93,14 +93,22 @@ export default function NavBar() {
           </div>
         </nav>
       ) : (
-        <nav className="h-12 w-full bg-verde">
+        <nav className="bg-verde py-2 ">
           <div className="container mx-auto flex justify-between">
             <Image src={logo as StaticImageData} alt="logo" className="h-10 w-auto self-center" />
 
             <ul className="flex w-1/3 items-center space-x-4">
               {links.map((link) => (
-                <li key={link.id} className="flex items-center justify-center px-2">
-                  <Link href={link.route} className="flex">
+                <li
+                  key={link.id}
+                  className={`flex ${
+                    pathname.includes(link.route) && "border-b   border-celeste "
+                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste`}
+                >
+                  <Link
+                    href={link.route}
+                    className="flex items-center gap-1 text-sm font-semibold uppercase"
+                  >
                     <link.icon className="h-6 w-5" />
                     {link.label}
                   </Link>

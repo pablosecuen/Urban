@@ -66,10 +66,11 @@ const Login = () => {
     try {
       const response = await axios.get<LoginResponse>("http://localhost:3000/login/auth/google");
       const { token } = response.data;
+      console.log(response.data);
       if (token) {
         console.log("Login successful");
         // store the user object in local storage
-        router.push("/home");
+
         // Save the token to localStorage or a state variable
       } else {
         console.log("Login failed");
@@ -128,13 +129,6 @@ const Login = () => {
     setRepeatPassword(e.target.value);
   };
 
-  function handleSuccess(credentialResponse: CredentialResponse) {
-    console.log("CredentialResponse", credentialResponse);
-  }
-  function handleErorr() {
-    console.log("no funca");
-  }
-
   return (
     <div className="mt-12 flex h-full w-full items-center justify-center align-middle lg:mt-0 lg:h-screen">
       {isRegister ? (
@@ -168,7 +162,7 @@ const Login = () => {
             </button>
             {/* <button onClick={handleRegisterClick}>Apple Id</button>
             <button onClick={handleRegisterClick}>Facebook</button> */}
-            <div className="flex w-auto items-center justify-center">
+            <div className="flex w-auto flex-col items-center justify-center gap-3">
               <button
                 className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
                 onClick={handleLoginGoogle}
@@ -215,7 +209,13 @@ const Login = () => {
                     ></path>
                   </g>
                 </svg>
-                Ingresá con Google
+                Login with Google
+              </button>
+              <button className="bg-blue-700 hover:bg-blue-800 flex items-center whitespace-nowrap rounded px-4 py-2 font-semibold text-white shadow-md  shadow-black/30">
+                <svg className="mr-2 h-6 w-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z" />
+                </svg>
+                <span>Login with Facebook</span>
               </button>
             </div>
             <button
@@ -247,7 +247,7 @@ const Login = () => {
               Login
             </button>
             {/* <button onClick={handleRegisterClick}>Apple Id</button> */}
-            <div className="flex w-auto items-center justify-center">
+            <div className="flex w-auto flex-col items-center justify-center gap-3">
               <button
                 className=" flex w-56 items-center justify-between gap-3 whitespace-nowrap rounded-sm border border-[#888] bg-white py-2 font-semibold text-[#757575] shadow-md shadow-black/30"
                 onClick={handleLoginGoogle}
@@ -294,7 +294,13 @@ const Login = () => {
                     ></path>
                   </g>
                 </svg>
-                Ingresá con Google
+                Login with Google
+              </button>
+              <button className="bg-blue-700 hover:bg-blue-800 flex items-center whitespace-nowrap rounded px-4 py-2 font-semibold text-white shadow-md  shadow-black/30">
+                <svg className="mr-2 h-6 w-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z" />
+                </svg>
+                <span>Login with Facebook</span>
               </button>
             </div>
             {/* <button onClick={handleRegisterClick}>Facebook</button> */}
