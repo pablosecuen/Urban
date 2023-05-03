@@ -9,15 +9,9 @@ export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other" | "
 export type TicketStatus = "pending" | "acepted" | "canceled";
 
 export type Payment = {
-  cardNumber: string;
-  expirationDate: string;
-  securityCode: string;
-};
-
-export type Payment = {
-  cardNumber: string;
-  expirationDate: string;
-  securityCode: string;
+    cardNumber: string;
+    expirationDate: string;
+    securityCode: string;
 };
 
 export type Address = {
