@@ -11,6 +11,7 @@ import axios from "axios";
 
 export default function HeaderStats() {
   const [totalUsers, setAllUsers] = useState(0);
+  const [totalTravels, setTotalTravels] = useState(0);
 
   const getUsers = async () => {
     const total = await axios.get("http://localhost:3000/user").then((response) => {
@@ -19,8 +20,16 @@ export default function HeaderStats() {
     return total;
   };
 
+  const getAllTravels = async () => {
+    const total = await axios.get("http://localhost:3000/travels").then((response) => {
+      return response.data.totalPages * response.data.travels.length;
+    });
+    return total;
+  };
+
   useEffect(() => {
     setAllUsers(getUsers());
+    console.log(setTotalTravels(getAllTravels()));
   }, []);
 
   return (
@@ -58,7 +67,7 @@ export default function HeaderStats() {
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
-                  statSubtitle="SALES"
+                  statSubtitle="Viajes"
                   statTitle="924"
                   statArrow="down"
                   statPercent="1.10"

@@ -6,12 +6,19 @@ export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
 
 export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other" | "false";
 
+export type TicketStatus = "pending" | "acepted" | "canceled";
 
 export type Payment = {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-}
+  cardNumber: string;
+  expirationDate: string;
+  securityCode: string;
+};
+
+export type Payment = {
+  cardNumber: string;
+  expirationDate: string;
+  securityCode: string;
+};
 
 export type Address = {
     postalCode: string,
