@@ -6,6 +6,7 @@ export interface PassageToRegister {
   departureDate: string,
   arrivalDate: string,
   duration: string,
+  img: string,
   price: number,
 }
 
