@@ -29,7 +29,11 @@ export interface UserToUpdate {
   address?: Address,
   phone?: Phone,
   img?: string,
-  gender?: string
   payments?: Payment[],
+  nationality?: string,
+  birthday?: string,
+  gender?: string,
+  cc?: string;
+  ce?: string,
   updateAt?: Date,
 }
