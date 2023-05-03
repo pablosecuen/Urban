@@ -1,11 +1,13 @@
 import { Request, Response, query } from "express";
 import { db } from "../../connection/connection";
+import jwt from "jsonwebtoken";
 import firebase from "firebase-admin";
 
 export const searchUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  console.log("sxeo");
   try {
     const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
@@ -53,5 +55,21 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
+export const decodingUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { authorization }: any = req.headers;
+    const token = authorization.slice(7);
+    const decoded: any = jwt.verify(token, "clavemegasecreta");
+    const doc = await db.collection("users").doc(decoded.id).get();
+    if (!doc.exists) {
+      res.status(404).json({ message: "Usuario no encontrado" });
+    } else {
+      const usuario = { id: doc.id, ...doc.data() };
+      res.json(usuario);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: error.message });
+  }
+}
 
