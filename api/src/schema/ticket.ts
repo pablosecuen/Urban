@@ -1,17 +1,16 @@
-import { TypeTicket } from "../types/types";
+import { TicketStatus } from "../types/types";
 
 export interface TicketToRegister {
   userId: string;
   passageId: string;
-  type: TypeTicket;
-  createdAt: Date;
 }
 
 export interface Ticket extends TicketToRegister {
-  deleted: boolean;
-  status: boolean;
-  updateAt: Date;
-  deleteAt: Date;
+  status: TicketStatus;
+  createdAt: Date;
+  updateAt: Date | string;
 }
 
-export interface TicketToUpdate extends Partial<TicketToRegister> {}
+export interface TicketToUpdate {
+  status: TicketStatus;
+}
