@@ -7,7 +7,6 @@ export interface PassageToRegister {
   arrivalDate: string,
   duration: string,
   price: number,
-  creadteAt: Date,
 }
 
 export interface Passage extends PassageToRegister {
@@ -16,6 +15,5 @@ export interface Passage extends PassageToRegister {
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
-  updateAt: Date,
-  deleteAt: Date,
+
 }

@@ -6,7 +6,6 @@ export interface ChauffeurToRegister {
   DNI: string;
   license: string;
   address: string;
-  creadteAt: Date,
 }
 
 export interface Chauffeur extends ChauffeurToRegister {
@@ -20,8 +19,6 @@ export interface Chauffeur extends ChauffeurToRegister {
 export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
   vehicle: VehicleForChauffeur;
   payments: Payment;
-  updateAt: Date,
-  deleteAt: Date,
 }
 
 export interface VehicleForChauffeur {
