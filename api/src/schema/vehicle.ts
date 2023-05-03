@@ -5,7 +5,8 @@ export interface VehicleToRegister {
   year: string;
   img: string[];
   ownerId: string;
-  chauffeurId: string; 
+  chauffeurId: string;
+  documents: string[]
 }
 
 export interface Vehicle extends VehicleToRegister {
@@ -13,4 +14,5 @@ export interface Vehicle extends VehicleToRegister {
 }
 
 export interface VehicleToUpdate extends Partial<Vehicle> {
+  documents: string[]
 }
