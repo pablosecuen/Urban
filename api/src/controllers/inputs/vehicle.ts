@@ -54,7 +54,7 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
       throw new Error("El vehículo no se actualizo");
     }
 
-    await db.collection("vehicle").doc(id).update({ data });
+    await db.collection("vehicle").doc(id).update({ ...data });
     res.status(200).json({ message: "Vehículo actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el vehículo", innerError);

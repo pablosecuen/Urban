@@ -1,6 +1,6 @@
 export interface LocalToRegister {
   name: string;
-  adress: string;
+  address: string;
   email: string;
   password: string;
   img: string;

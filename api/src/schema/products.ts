@@ -1,6 +1,8 @@
+import { TypeProduct } from "../types/types";
+
 export interface Products {
   name: string;
-  price: string;
+  price: number;
   description: string;
   stock: number;
   type: TypeProduct;
@@ -9,5 +11,5 @@ export interface Products {
 }
 
 export interface ProductsToUpdate extends Partial<Products> {
-  deleted: boolean;
+  deleted: boolean
 }

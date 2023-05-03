@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
-import { ChauffeurToRegister, Chauffeur, ChauffeurToUpdate } from "../../schema/chauffeur";
+import { ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
 
 export const newChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -53,7 +53,7 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
     if (!docRef.exists) {
       throw new Error("No se encontró el chofer");
     }
-    await db.collection("chauffeur").doc(id).update({ data });
+    await db.collection("chauffeur").doc(id).update({ ...data });
     res.status(200).json({ message: "Chofer actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el usuario", error);

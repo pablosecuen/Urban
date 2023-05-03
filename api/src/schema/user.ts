@@ -2,12 +2,10 @@ export interface UserToRegister {
   name: string;
   email: string;
   password: string;
-  createdAt?: string;
-  updatedAt?: string;
 }
 
 export interface User extends UserToRegister {
-  adress: string;
+  address: string;
   payments: {
     cardNumber: string;
     expirationDate: string;
@@ -23,4 +21,7 @@ export interface User extends UserToRegister {
 }
 
 export interface UserToUpdate extends Partial<UserToRegister> {
+  address?: string;
+  img?: string;
+  DNI?: string;
 }

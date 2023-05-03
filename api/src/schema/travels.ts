@@ -1,17 +1,15 @@
+import { TravelStatus } from "../types/types";
+
 export interface Travel {
-    userId: string;
-    chauffeurId: string;
-    date: Date;
-    origin: string;
-    destination: string;
-    price: string;
-    status: boolean;
-    travel: TravelStatus;
+  userId: string;
+  chauffeurId: string;
+  origin: string;
+  destination: string;
+  price: number;
+  status: boolean;
+  travel: TravelStatus;
 }
 
 export interface TravelToUpdate {
-    travel?: TravelStatus;
+  travel?: TravelStatus;
 }
-
-
-
