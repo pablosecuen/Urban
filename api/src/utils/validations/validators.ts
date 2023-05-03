@@ -48,8 +48,9 @@ export const isImgValid = (img: string): Boolean => {
 };
 
 // string de entre 5 y 50 caracteres
-export const isVehicleValid = (vehicle: string): Boolean => {
-  if (typeof vehicle === "string" && vehicle.length >= 5 && vehicle.length <= 50) return true;
+export const isVehicleTypeValid = (vehicleType: string): Boolean => {
+  const allowValues = ["motorcycle", "car", "bicycle", "van", "other"];
+  if (allowValues.includes(vehicleType)) return true;
   return false;
 };
 
