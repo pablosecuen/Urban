@@ -27,8 +27,14 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
   try {
     const data: UserToUpdate = req.body;
     const allowProperties = [
+      "cc",
       "address",
-      "password",
+      "phone",
+      "payments",
+      "nationality",
+      "birthday",
+      "gender",
+      "ce",
       "img",
       "payments.cardNumber",
       "payments.cardExpiration",
@@ -39,7 +45,8 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
     if (
       //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
       (data?.address) ||
-      (data?.img && isImgValid(data.img))
+      (data?.img && isImgValid(data.img)) ||
+      (data?.cc)
     )
       next();
   } catch (error) {
