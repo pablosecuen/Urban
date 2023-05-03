@@ -12,9 +12,14 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
     const data: DistributorToRegister = req.body;
     const dataFormated: Distributor = {
       ...data,
-      payments: [],
+      payments: {
+        cardNumber: "",
+        expirationDate: "",
+        securityCode: "",
+      },
       history: [],
       deleted: false,
+      license: ""
     };
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
