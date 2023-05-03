@@ -45,6 +45,9 @@ import sendMailInputRouter from "./inputs/sendMail";
 
 import ticketInputRouter from "./inputs/ticket";
 
+import roadTripInputRouter from "./inputs/roadtrip";
+import roadTripOutputRouter from "./outputs/roadTrip";
+
 const router = Router();
 
 // Rutas para entrada de datos
@@ -80,6 +83,8 @@ router.use("/passage", passageInputRouter);
 
 router.use("/ticket", ticketInputRouter);
 
+router.use("/roadtrip", roadTripInputRouter);
+
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
 
@@ -104,5 +109,7 @@ router.use("/busDriver", busDriverOutputRouter);
 router.use("/bus", busOutputRouter);
 
 router.use("/passage", passageOutputRouter);
+
+router.use("/roadtrip", roadTripOutputRouter);
 
 export default router;
