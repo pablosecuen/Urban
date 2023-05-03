@@ -5,7 +5,7 @@ import { newBusDriver, updateBusDriver } from "../../controllers/inputs/busDrive
 const router = Router();
 
 //Ruta creacion de
-router.post("/", newBusDriver);
+router.post("/", newBusDriverValidate, newBusDriver);
 //Ruta actualizar busDriver
 router.put("/:id", updateBusDriver);
 

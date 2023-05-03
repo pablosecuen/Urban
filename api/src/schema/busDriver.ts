@@ -6,7 +6,7 @@ export interface BusDriverToRegister {
 
 export interface BusDriver {
   name: string;
-  DNI: number;
+  DNI: string;
   license: string;
   deleted: boolean;
 }
