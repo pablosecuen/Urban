@@ -4,6 +4,7 @@ export interface LocalToRegister {
   email: string;
   password: string;
   img: string;
+  createAt: Date,
 }
 
 export interface Local extends LocalToRegister {
@@ -11,6 +12,8 @@ export interface Local extends LocalToRegister {
   history: string[];
   state: boolean;
   deleted: boolean;
+  updateAt: Date,
+  deleteAt: Date,
 }
 
 // Partial hace que las props extendidas sean opcionales
