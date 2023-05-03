@@ -6,4 +6,4 @@ export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
 
 export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other";
 
-export type TypeTicket = "pending" | "canceled" | "completed";
+export type TicketStatus = "pending" | "acepted" | "canceled";
