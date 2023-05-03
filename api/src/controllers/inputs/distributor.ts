@@ -19,7 +19,10 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
       },
       history: [],
       deleted: false,
-      license: ""
+      license: "",
+      status: false,
+      displayName: data.firstName + " " + data.lastName,
+      vehicleType: "false",
     };
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
