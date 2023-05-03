@@ -4,8 +4,7 @@ import { Travel, TravelToUpdate } from "../../schema/travels";
 export const newTravelValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: Travel = req.body;
-    if (!data.userId || !data.chauffeurId || !data.price || !data.destination || !data.origin || !data.date
-    )
+    if (!data.userId || !data.chauffeurId || !data.price || !data.destination || !data.origin)
       throw Error("Datos incompletos");
     next();
   } catch (error) {
