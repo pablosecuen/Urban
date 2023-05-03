@@ -6,10 +6,14 @@ export interface VehicleToRegister {
   img: string[];
   ownerId: string;
   chauffeurId: string;
+  creadteAt: Date,  
 }
 
 export interface Vehicle extends VehicleToRegister {
   deleted?: boolean;
 }
 
-export interface VehicleToUpdate extends Partial<Vehicle> {}
+export interface VehicleToUpdate extends Partial<Vehicle> {
+  updateAt: Date,
+  deleteAt: Date,
+}
