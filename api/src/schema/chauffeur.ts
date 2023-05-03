@@ -1,3 +1,5 @@
+import { Payment } from "../types/types";
+
 export interface ChauffeurToRegister {
   name: string;
   email: string;
@@ -24,9 +26,4 @@ export interface ChauffeurToUpdate extends Partial<ChauffeurToRegister> {
 export interface VehicleForChauffeur {
   vehicleId: string;
   patent: string;
-}
-export interface Payment {
-  cardNumber: string;
-  expirationDate: string;
-  securityCode: string;
 }
