@@ -1,13 +1,12 @@
 export interface PassageToRegister {
-  destination: string,
+  origin: string,
   stock: number,
-  stop: string,
+  destination: string,
   description: string,
   departureDate: string,
   arrivalDate: string,
   duration: string,
   price: number,
-  creadteAt: Date,
 }
 
 export interface Passage extends PassageToRegister {
@@ -16,6 +15,5 @@ export interface Passage extends PassageToRegister {
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
-  updateAt: Date,
-  deleteAt: Date,
+
 }

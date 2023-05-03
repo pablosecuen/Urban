@@ -41,6 +41,8 @@ import busOutputRouter from "./outputs/bus";
 import passageInputRouter from "./inputs/passage";
 import passageOutputRouter from "./outputs/passage";
 
+import sendMailInputRouter from "./inputs/sendMail";
+
 import ticketInputRouter from "./inputs/passage";
 
 const router = Router();
@@ -75,8 +77,6 @@ router.use("/busDriver", busDriverInputRouter);
 router.use("/bus", busInputRouter);
 
 router.use("/passage", passageInputRouter);
-
-router.use("/ticket", ticketInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);

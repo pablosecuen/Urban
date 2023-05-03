@@ -5,9 +5,6 @@ export interface BusToRegister {
   year: string;
   number_bus: string;
   company: string;
-  creadteAt: Date,
-  updateAt: Date,
-  deleteAt: Date,
   //chauffeurId: string;
 }
 
@@ -18,6 +15,4 @@ export interface Bus extends BusToRegister {
 }
 
 export interface BusToUpdate extends Partial<BusToRegister> {
-  updateAt: Date,
-  deleteAt: Date,
 }
