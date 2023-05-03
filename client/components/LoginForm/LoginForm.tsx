@@ -38,12 +38,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
   const handleRegisterClick = () => {
     setIsRegister(!isRegister);
   };
-  // const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setEmail(e.target.value);
-  // };
-  // const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setPassword(e.target.value);
-  // };
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
     const user: UserToLogin = userData;
