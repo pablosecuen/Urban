@@ -53,3 +53,20 @@ export const aceptTicket = async (req: Request, res: Response): Promise<void> =>
     res.status(500).json({ message: error.message });
   }
 };
+
+export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const ticketDoc = await db.collection("tickets").doc(id).get();
+
+    if (!ticketDoc.exists) throw new Error("El ticket no existe");
+
+    await db.collection("tickets").doc(id).update({ status: "canceled" });
+
+    res.status(201).json({ message: "Ticket cancelado" });
+  } catch (error) {
+    console.error("Error al cancelar ticket", error);
+    res.status(500).json({ message: error.message });
+  }
+};
