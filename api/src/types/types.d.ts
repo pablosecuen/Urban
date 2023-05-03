@@ -5,3 +5,26 @@ export type OrderStatus = "pending" | "progress" | "approved" | "rejected";
 export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
 
 export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other";
+
+
+export type Payment = {
+    cardNumber: string;
+    expirationDate: string;
+    securityCode: string;
+}
+
+export type Address={
+    postalCode: string,
+    location: string,
+    state: string,
+    street: string,
+    number: string,
+    department: string,
+}
+  
+export type Phone={
+    areaCode: string,
+    number: string,
+    displayPhone: string,
+}
+  
