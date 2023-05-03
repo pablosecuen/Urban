@@ -7,7 +7,6 @@ export const searchUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  console.log("sxeo");
   try {
     const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
@@ -15,7 +14,7 @@ export const searchUser = async (
       res.status(404).json({ message: "Usuario no encontrado" });
     } else {
       const usuario = { id: doc.id, ...doc.data() };
-      res.json(usuario);
+      res.status(200).json(usuario);
     }
   } catch (error) {
     console.error("Error al obtener el usuario", error);
