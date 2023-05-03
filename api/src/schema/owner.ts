@@ -7,8 +7,10 @@ export interface OwnerToRegister {
 }
 
 export interface Owner extends OwnerToRegister {
-  adress?: string;
+  address?: string;
   deleted?: boolean;
 }
 
-export interface OwnerToUpdate extends Partial<OwnerToRegister> { }
+export interface OwnerToUpdate extends Partial<OwnerToRegister> {
+  address?: string;
+}
