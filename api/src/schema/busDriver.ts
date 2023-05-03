@@ -1,6 +1,6 @@
 export interface BusDriverToRegister {
   name: string;
-  DNI: number;
+  DNI: string;
   license: string;
 }
 
