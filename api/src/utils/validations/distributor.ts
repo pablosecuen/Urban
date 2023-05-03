@@ -1,6 +1,7 @@
 import { Distributor, DistributorToUpdate } from "../../schema/distributor";
 import { Request, Response, NextFunction } from "express";
 import {
+  arePaymentsValid,
   isAddressValid,
   isDNIValid,
   isEmailValid,
@@ -8,6 +9,7 @@ import {
   isLicenseValid,
   isNameValid,
   isPasswordValid,
+  isPatentValid,
   isVehicleTypeValid,
 } from "./validators";
 
@@ -35,6 +37,7 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
       !isPasswordValid(data.password) ||
       !isImgValid(data.img) ||
       !isVehicleTypeValid(data.vehicleType) ||
+      !isPatentValid(data.vehiclePatent) ||
       !isDNIValid(data.DNI) ||
       !isLicenseValid(data.license)
     )
@@ -58,7 +61,7 @@ export const updateDistributorValidate = (
       "email",
       "password",
       "img",
-      "vehicle",
+      "vehicleType",
       "license",
       "payments",
     ];
@@ -70,7 +73,9 @@ export const updateDistributorValidate = (
       (data?.email && !isEmailValid(data.email)) ||
       (data?.password && !isPasswordValid(data.password)) ||
       (data?.img && !isImgValid(data.img)) ||
-      (data?.vehicleType && !isVehicleValid(data.vehicleType))
+      (data?.vehicleType && !isVehicleTypeValid(data.vehicleType)) ||
+      (data?.license && !isLicenseValid(data.license)) ||
+      (data?.payments && !arePaymentsValid(data.payments))
     )
       throw Error("Datos no válidos");
     next();
