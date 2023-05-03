@@ -51,7 +51,13 @@ export default function NavBar() {
     <header className="bg-verde">
       {isMobile ? (
         <nav className="flex h-12 w-full justify-between bg-verde ">
-          <Image src={logo as StaticImageData} alt="logo" className="h-10 w-auto self-center" />
+          <Image
+            src={logo as StaticImageData}
+            alt="logo"
+            className="h-10 w-auto self-center"
+            width={50}
+            height={50}
+          />
 
           <HiMenuAlt1
             onClick={toggleMenu}
@@ -109,7 +115,13 @@ export default function NavBar() {
       ) : (
         <nav className="bg-verde py-2 ">
           <div className="container mx-auto flex justify-between">
-            <Image src={logo as StaticImageData} alt="logo" className="h-10 w-auto self-center" />
+            <Image
+              src={logo as StaticImageData}
+              alt="logo"
+              className="h-10 w-auto self-center"
+              width={100}
+              height={100}
+            />
 
             <ul className="flex w-1/3 items-center space-x-4">
               {links.map((link) => (
