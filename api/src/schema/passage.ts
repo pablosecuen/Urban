@@ -1,7 +1,7 @@
 export interface PassageToRegister {
-  destination: string,
+  origin: string,
   stock: number,
-  stop: string,
+  destination: string,
   description: string,
   departureDate: string,
   arrivalDate: string,
