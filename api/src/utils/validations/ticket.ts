@@ -9,7 +9,7 @@ export const newTicketValidate = (req: Request, res: Response, next: NextFunctio
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Propiedades no válidas");
     if (!data.userId || !data.passageId) throw Error("Datos incompletos");
-    if (isUserIdValid(data.userId) || isPassageIdValid(data.passageId)) {
+    if (!isUserIdValid(data.userId) || !isPassageIdValid(data.passageId)) {
       throw new Error("Datos no validos");
     }
     next();
