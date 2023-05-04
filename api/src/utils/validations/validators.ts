@@ -1,18 +1,23 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone } from "../../types/types";
 
-export const isFirstNameValid = (name: string): Boolean => {
+export const isNameValid = (name: string): Boolean => {
   if (typeof name === "string" && name.length <= 50) return true;
   return false;
 };
 
-export const isLastNameValid = (name: string): Boolean => {
-  if (typeof name === "string" && name.length <= 50) return true;
+export const isFirstNameValid = (firstName: string): Boolean => {
+  if (typeof firstName === "string" && firstName.length <= 50) return true;
   return false;
 };
 
-export const isDisplayNameValid = (name: string): Boolean => {
-  if (typeof name === "string" && name.length <= 50) return true;
+export const isLastNameValid = (lastName: string): Boolean => {
+  if (typeof lastName === "string" && lastName.length <= 50) return true;
+  return false;
+};
+
+export const isDisplayNameValid = (displayName: string): Boolean => {
+  if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
 };
 
