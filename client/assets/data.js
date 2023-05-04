@@ -1,4 +1,4 @@
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * I M P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * I M P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 // Icons NavBar
 import {
@@ -19,7 +19,7 @@ import planet from "./icons/planet.png";
 import contract from "./icons/contract.png";
 import Viajes from "@component/app/home/reserva/viajes/page";
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 //  NavBar
 export const links = [
@@ -48,8 +48,6 @@ export const links = [
     id: "4",
   },
 ];
-
-
 
 //  NavBar Mobile
 export const linksMobile = [
@@ -119,8 +117,7 @@ export const iconsData = [
   {
     image: planet,
     alt: "sos",
-    description:
-      "Viajando con nuestros aliados contribuyes al cuidado del medio ambiente",
+    description: "Viajando con nuestros aliados contribuyes al cuidado del medio ambiente",
   },
   {
     image: contract,
@@ -129,55 +126,59 @@ export const iconsData = [
   },
 ];
 
-export const pestañasHistorialPerfil =[
+export const pestañasHistorialPerfil = [
   {
     name: "Viajes",
-    id:1,
+    id: 1,
   },
   {
     name: "Especiales",
-    id:2,
+    id: 2,
   },
   {
     name: "Taxis",
-    id:3,
+    id: 3,
   },
   {
     name: "Car-pool",
-    id:4,
-  }
-]
+    id: 4,
+  },
+];
 
-  export const contenidoHistorialPerfil =[
-    {
-      name: "Viajes",
-      title: "historial de viajes",
-      p: "Historial de viajes",
-      placeHolder: `aca van las cards del historial de viajes`,
-      id: "1",
-    },
-    {
-      name: "Especiales",
-      title: "historial de pedidos especiales",
-      p: "Historial de pedidos especiales",
-      placeHolder: `aca van las cards del historial de pedidos`,
-      id: "2",
-    },
-    {
-      name: "Taxis",
-      title: "historial de Taxis tomados",
-      p: "Historial de viajes",
-      placeHolder: `aca van las cards del historial de viajes en taxi`,
-      id: "1",
-    },
-    {
-      name: "Car-pool",
-      title: "historial de viajes",
-      p: "Historial de viajes en Car-pool",
-      placeHolder: `aca van las cards del historial de viajes en car-pool`,
-      id: "1",
-    }
+export const contenidoHistorialPerfil = [
+  {
+    name: "Viajes",
+    title: "historial de viajes",
+    p: "Historial de viajes",
+    placeHolder: `aca van las cards del historial de viajes`,
+    id: "1",
+  },
+  {
+    name: "Especiales",
+    title: "historial de pedidos especiales",
+    p: "Historial de pedidos especiales",
+    placeHolder: `aca van las cards del historial de pedidos`,
+    id: "2",
+  },
+  {
+    name: "Taxis",
+    title: "historial de Taxis tomados",
+    p: "Historial de viajes",
+    placeHolder: `aca van las cards del historial de viajes en taxi`,
+    id: "1",
+  },
+  {
+    name: "Car-pool",
+    title: "historial de viajes",
+    p: "Historial de viajes en Car-pool",
+    placeHolder: `aca van las cards del historial de viajes en car-pool`,
+    id: "1",
+  },
+];
 
-
-
-]
+export const pageData = [
+  { name: "/especiales", visits: "0", uniqueUsers: "0", bounceRate: "50", id: "1" },
+  { name: "/gestion", visits: "0", uniqueUsers: "0", bounceRate: "-13", id: "2" },
+  { name: "/paqueteria", visits: "0", uniqueUsers: "0", bounceRate: "22", id: "3" },
+  { name: "/reserva", visits: "0", uniqueUsers: "0", bounceRate: "-35", id: "4" },
+];
