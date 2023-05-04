@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
-import { ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
+import { Chauffeur, ChauffeurToRegister, ChauffeurToUpdate } from "../../schema/chauffeur";
+
 
 export const newChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: ChauffeurToRegister = req.body;
-    const dataFormated = {
+    const dataFormated: Chauffeur = {
       ...data,
       deleted: false,
       ownerState: false,
@@ -21,6 +22,9 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
       },
       img: "",
       history: [],
+      createAd: new Date(Date.now()),
+      displayName: data.firstName + " " + data.lastName,
+      status: false
     };
     const snapshot = await db
       .collection("chauffeur")
@@ -49,11 +53,12 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
   try {
     const id: string = req.params.id;
     const data: ChauffeurToUpdate = req.body;
+    const updateAt: Date = new Date(Date.now());
     const docRef = await db.collection("chauffeur").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el chofer");
     }
-    await db.collection("chauffeur").doc(id).update({ ...data });
+    await db.collection("chauffeur").doc(id).update({ ...data, updateAt: updateAt });
     res.status(200).json({ message: "Chofer actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el usuario", error);
