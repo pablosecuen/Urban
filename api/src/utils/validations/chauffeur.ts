@@ -11,8 +11,10 @@ import {
   isLastNameValid,
   isLicenseValid,
   isNationalityValid,
+  isOcupationValid,
   isPasswordValid,
   isPhoneValid,
+  isTypeChauffeurValid,
   isVehicleToChauffeurValid,
 } from "./validators";
 
@@ -63,10 +65,14 @@ export const updateChauffeurValidated = (req: Request, res: Response, next: Next
       throw Error("Datos no permitidos");
 
     if (
-      data?.phone ||
-      data?.address ||
       (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle)) ||
-      (data?.payments && !arePaymentsValid(data.payments))
+      (data?.payments && !arePaymentsValid(data.payments)) ||
+      (data?.typeChauffeur && !isTypeChauffeurValid(data.typeChauffeur)) ||
+      (data?.license && !isLicenseValid(data.license)) ||
+      (data?.occupation && !isOcupationValid(data.occupation)) ||
+      (data?.address && !isAddressValid(data.address)) ||
+      (data?.phone && !isPhoneValid(data.phone)) ||
+      (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle))
     )
       throw Error("Datos no válidos");
     next();
