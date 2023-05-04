@@ -58,7 +58,6 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
       "ownerId",
       "chauffeurId",
       "documents",
-      "deleted",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw new Error("Datos no permitidos");
