@@ -22,7 +22,7 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
       },
       img: "",
       history: [],
-      createAd: new Date(Date.now()),
+      createAt: new Date(Date.now()),
       displayName: data.firstName + " " + data.lastName,
       status: false
     };
