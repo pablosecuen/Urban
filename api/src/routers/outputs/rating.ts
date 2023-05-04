@@ -2,6 +2,8 @@ import { Router } from "express";
 
 const router = Router();
 
+//Hay que revisar si hay utilidad en usar esto atte stefano y agustin
+
 router.get("/distributor/:id");
 
 export default router;

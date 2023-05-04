@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
+import { DistributorRating } from "../../schema/distributorRating";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -72,26 +73,53 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
 export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId, distributorId } = req.params;
-    const { rating, comment } = req.body;
+    const data = req.body;
 
-    // const dataFormatted: DistributorRating = {
-    //   ...data,
-    //   status: "pending",
-    //   createdAt: new Date(Date.now()),
-    //   updateAt: "",
-    // };
+    const dataFormatted: DistributorRating = {
+      userId,
+      distributorId,
+      ...data,
+      createdAt: new Date(Date.now()).toISOString(),
+    };
 
-    // const [userDoc, passageDoc] = await Promise.all([
-    //   db.collection("users").doc(dataFormatted.userId).get(),
-    //   db.collection("passages").doc(dataFormatted.passageId).get(),
-    // ]);
+    const [userDoc, distributorDoc] = await Promise.all([
+      db.collection("users").doc(dataFormatted.userId).get(),
+      db.collection("distributors").doc(dataFormatted.distributorId).get(),
+    ]);
 
-    // if (!userDoc.exists) throw new Error("El usuario no existe");
-    // if (!passageDoc.exists) throw new Error("El pasaje no existe");
+    if (!userDoc.exists) throw new Error("El usuario no existe");
+    if (!distributorDoc.exists) throw new Error("El distribuidor no existe");
 
-    // const docRef = await db.collection("tickets").add(dataFormatted);
+    const docRef = await db.collection("distributorRating").add(dataFormatted);
 
-    // res.status(201).json({ id: docRef.id });
+    //Ahora sacamos el promedio de todos los rating del distribuidor
+    let distributorRatings: any = db
+      .collection("distributorRating")
+      .where("distributorId", "==", distributorId);
+    const prueba = await distributorRatings.get();
+    console.log({ prueba: prueba.doc });
+    // console.log({
+    //   distributorRatings: await distributorRatings.get(),
+    //   distributorRatings1: distributorRatings.docs,
+    //   //"distributorRatings.doc": distributorRatings.docs,
+    // });
+
+    // const totalRating = distributorRatings.docs.reduce((acc, curr) => {
+    //   console.log({
+    //     "curr.data()": curr.data(),
+    //     curr: curr,
+    //   });
+    //   return acc + curr.data().rating;
+    // }, 0);
+
+    //Esto no esta testeado Fede que Dios me perdone pero lo subo asi
+    // const averageRating = totalRating / distributorRatings.docs.length;
+
+    // await db.collection("distributors").doc(distributorId).update({
+    //   rating: averageRating,
+    // });
+
+    res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al generar rating", error);
     res.status(500).json({ message: error.message });
