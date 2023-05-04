@@ -19,7 +19,7 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
     const data: Distributor = req.body;
     const allowProperties = [
       "firstName",
-      "lastname",
+      "lastName",
       "address",
       "email",
       "password",
