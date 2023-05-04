@@ -1,3 +1,5 @@
+import { Address, Payment, Phone } from "../../../api/src/types/types.d";
+
 export interface UserToRegister {
   name: string;
   email: string;
@@ -12,19 +14,22 @@ export interface userData {
   adress: string;
 }
 export interface User extends UserToRegister {
-  adress: string;
-  payments: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
+  address: Address;
+  payments: Payment[];
   history: {
     orders: string[];
     travels: string[];
   };
+  phone: Phone;
+  nationality: string;
+  birthday: string;
+  gender: string;
   img: string;
-  DNI: string;
+  cc?: string;
+  ce?: string;
   deleted: boolean;
+  createAt?: Date;
+  id: string;
 }
 
 export interface UserToUpdate extends Partial<UserToRegister> {}

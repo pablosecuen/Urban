@@ -3,8 +3,6 @@ import { Provider } from "react-redux";
 import { store } from "../Redux/store/store";
 import { Toaster } from "sonner";
 
-// asdasd
-
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>

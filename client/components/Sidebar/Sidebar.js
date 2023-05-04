@@ -78,13 +78,13 @@ export default function Sidebar() {
             <ul className="flex list-none flex-col md:min-w-full md:flex-col">
               <li className="flex items-center justify-start gap-2">
                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
                       fill="#000000"
                     ></path>{" "}
@@ -101,8 +101,8 @@ export default function Sidebar() {
                   fill="#000000"
                   className="w-auto"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     <path
                       fill="#000000"
@@ -115,8 +115,8 @@ export default function Sidebar() {
 
               <li className="flex items-center justify-start gap-2">
                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <g id="Edit / Table_Add">
@@ -125,9 +125,9 @@ export default function Sidebar() {
                         id="Vector"
                         d="M11 4H15.8002C16.9203 4 17.4801 4 17.9079 4.21799C18.2842 4.40973 18.5905 4.71547 18.7822 5.0918C19 5.5192 19 6.07899 19 7.19691V9.0002L11.0001 9.0001M11 4H6.2002C5.08009 4 4.51962 4 4.0918 4.21799C3.71547 4.40973 3.40973 4.71547 3.21799 5.0918C3 5.51962 3 6.08009 3 7.2002V9M11 4L11.0001 9.0001M3 9V15M3 9L11.0001 9.0001M3 15V16.8002C3 17.9203 3 18.4801 3.21799 18.9079C3.40973 19.2842 3.71547 19.5905 4.0918 19.7822C4.5192 20 5.07899 20 6.19691 20H11.0002L11.0001 9.0001M3 15H11M15 16H18M18 16H21M18 16V19M18 16V13"
                         stroke="#000000"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></path>{" "}
                     </g>{" "}
                   </g>
@@ -137,8 +137,8 @@ export default function Sidebar() {
 
               <li className="flex items-center justify-start gap-2">
                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <g id="Navigation / Map">
@@ -147,9 +147,9 @@ export default function Sidebar() {
                         id="Vector"
                         d="M15 6V21M15 6L21 3V18L15 21M15 6L9 3M15 21L9 18M9 18L3 21V6L9 3M9 18V3"
                         stroke="#000000"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></path>{" "}
                     </g>{" "}
                   </g>
@@ -184,8 +184,8 @@ export default function Sidebar() {
                   className="w-auto"
                   viewBox="-351 153 256 256"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <g>
@@ -207,11 +207,11 @@ export default function Sidebar() {
                   width="25px"
                   height="25px"
                   viewBox="0 0 256 201"
-                  enable-background="new 0 0 256 201"
+                  enableBackground="new 0 0 256 201"
                   className="w-auto"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <path d="M154.195,61.371V39.514h-12.047v10.777l-14-12.791L81.113,79.601l7.151,8.058l7.252-6.547V130.5h64.897V81.514l7.135,6.547 l7.339-7.856L154.195,61.371z M238.25,143.813V13.875c0-6.523-5.289-11.813-11.813-11.813H29.563 c-6.523,0-11.813,5.289-11.813,11.813v129.938L2,175.313v11.813c0,6.523,5.289,11.813,11.813,11.813h228.375 c6.523,0,11.813-5.289,11.813-11.813v-11.813L238.25,143.813z M104.125,175.313l1.122-11.813h45.752l1.122,11.813H104.125z M218.563,143.813H37.438V21.75h181.125V143.813z"></path>{" "}
