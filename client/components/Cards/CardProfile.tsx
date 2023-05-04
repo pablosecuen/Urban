@@ -1,7 +1,6 @@
-import React from "react";
+"use client";
 import Image from "next/image";
 import foto from "../../assets/imagenes/perfil.png";
-import location from "../../assets/icons/svg/location.svg";
 
 // components
 
