@@ -10,7 +10,7 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       ...data,
       status: true,
       deleted: false,
-      createAt: new Date(Date.now())
+      createAt: new Date(Date.now()).toISOString()
     };
     const docRef = await db.collection("passages").add(dataFormated);
 
@@ -25,7 +25,7 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const data: PassageToUpdate = req.body;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
       throw new Error("El bus no se actualizó");
