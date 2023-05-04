@@ -8,6 +8,7 @@ export interface PassageToRegister {
   duration: string,
   img: string,
   price: number,
+  createAt: Date
 }
 
 export interface Passage extends PassageToRegister {
@@ -16,5 +17,4 @@ export interface Passage extends PassageToRegister {
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
-
 }
