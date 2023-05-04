@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Transportes() {
   return (
-    <div className=" mx-auto mt-10 rounded-3xl border-2 p-10 py-4 shadow-2xl shadow-black/40 lg:h-[510px]">
+    <div className=" mx-auto mt-10 rounded-3xl border-2 p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
       <div className="flex scroll-my-10 flex-col gap-6">
         <h1 className="text-center text-xl font-semibold text-blue">
           Estas son las mejores opciones encontradas
