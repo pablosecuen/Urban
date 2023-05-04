@@ -15,7 +15,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       ...orderData,
       status: true,
       order: "pending",
-      createAt: new Date(Date.now()),
+      createAt: new Date(Date.now()).toISOString(),
     };
 
     const [userDoc, distributorDoc, localDoc] = await Promise.all([
@@ -78,7 +78,7 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
   try {
     const id: string = req.params.id;
     const data: Order = req.body;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
 
     const docRef = await db.collection("orders").doc(id).get();
     if (!docRef) {

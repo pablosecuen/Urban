@@ -9,9 +9,12 @@ export interface Travel {
   status: boolean;
   travel: TravelStatus;
   createdAt: Date;
+
 }
 
 export interface TravelToUpdate {
   travel?: TravelStatus;
+
   updatedAt?: Date;
+
 }

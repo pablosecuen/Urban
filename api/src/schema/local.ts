@@ -1,4 +1,4 @@
-import { Address } from "../types/types";
+import { Address, Payment } from "../types/types";
 
 export interface LocalToRegister {
   name: string;
@@ -12,15 +12,15 @@ export interface Local extends LocalToRegister {
   bankAccount: {
     bankHolder: string;
     accountNumber: string;
-  }
+  };
   history: string[];
   status: boolean;
   deleted: boolean;
-  createAt?: Date,
+  createAt?: string;
 }
 
 // Partial hace que las props extendidas sean opcionales
 export interface LocalToUpdate extends Partial<LocalToRegister> {
-  payments: Object[]; // provisional
-  updateAt: Date,
+  payments: Payment; // provisional
+  updateAt: string;
 }

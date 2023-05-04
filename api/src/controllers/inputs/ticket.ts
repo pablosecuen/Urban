@@ -8,7 +8,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     const dataFormatted: Ticket = {
       ...data,
       status: "pending",
-      createdAt: new Date(Date.now()),
+      createdAt: new Date(Date.now()).toISOString(),
       updateAt: "",
     };
 
@@ -32,7 +32,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 export const aceptTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
@@ -50,7 +50,7 @@ export const aceptTicket = async (req: Request, res: Response): Promise<void> =>
 export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString()
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
