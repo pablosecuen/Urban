@@ -4,7 +4,7 @@ import React from "react";
 
 import CardLineChart from "../../components/Cards/CardLineChart.js";
 import CardBarChart from "../../components/Cards/CardBarChart.js";
-import CardPageVisits from "../../components/Cards/CardPageVisits.js";
+import CardPageVisits from "../../components/Cards/CardPageVisits";
 import CardSocialTraffic from "../../components/Cards/CardSocialTraffic.js";
 
 // layout for page

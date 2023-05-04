@@ -2,40 +2,39 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
-import { fetchAllUsers } from "@component/Redux/user/userSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { User } from "../../app/types/User";
+import { Travel } from "../../app/types/Travels";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
+import { fetchAllTravels } from "@component/Redux/travel/travelSlice";
 
 // components
 
-export default function CardSettings() {
+export default function CardUsers() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allUsers = useSelector((state: RootState) => state.user.allUsers);
+  const allTravels = useSelector((state: RootState) => state.travel.allTravels);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedTravel, setSelectedTravel] = useState<Travel | null>(null);
   const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchAllUsers());
+    dispatch(fetchAllTravels());
   }, [dispatch]);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredUsers = allUsers.filter(
-    (user) =>
-      (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (user.id && user.id.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredTravels = allTravels.filter(
+    (travel) =>
+      (travel.origin && travel.origin.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (travel.userId && travel.userId.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  const handleClick = (user: User) => {
-    setSelectedUser(user);
+  const handleClick = (travel: Travel) => {
+    setSelectedTravel(travel);
   };
 
   const handleSettingsClick = () => {
@@ -43,12 +42,12 @@ export default function CardSettings() {
   };
 
   return (
-    <form>
+    <div>
       {/*contendedor de render de todos los usuarios */}
       <div className="relative mb-6 flex min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-100 shadow-lg">
         <div className="mb-0 rounded-t bg-white px-6 py-6">
           <div className="flex justify-between text-center">
-            <h6 className="flex text-lg font-bold text-blueGray-700">Users List</h6>
+            <h6 className="flex text-lg font-bold text-blueGray-700">Travel list</h6>
             <div className="flex items-center">
               <label htmlFor="search" className="flex items-center text-gray-500">
                 <FaSearch className="w-auto" />
@@ -69,40 +68,30 @@ export default function CardSettings() {
               </button> */}
             </div>
           </div>
-          {/* este es el render de los usuarios */}
+          {/* este es el render de los travels */}
         </div>
         <div style={{ height: "500px", overflow: "scroll" }}>
-          {filteredUsers.map((user) => (
+          {filteredTravels.map((travel) => (
             <div
-              onClick={() => handleClick(user)}
-              key={user.id}
+              onClick={() => handleClick(travel)}
+              key={travel.id}
               className="flex w-full cursor-pointer justify-between gap-4 border-2 px-4 py-2"
             >
               <div className="flex items-center gap-4">
-                <Image
-                  src={user.img}
-                  width={50}
-                  height={50}
-                  alt="profile pc"
-                  className="h-12 w-12 rounded-full"
-                />
-                <h3 className="">{user.name}</h3>
+                <h3 className="">{travel.origin}</h3>
               </div>
-              <div className="flex w-80 items-center justify-around border-2">
-                <p className="flex ">
-                  <p className=" font-bold">id: </p>
-                  {user.id}
-                </p>
+              <div className="flex items-center gap-4">
+                <h3 className="">{travel.destination}</h3>
               </div>
             </div>
           ))}
         </div>
       </div>
-      {/* user details */}
+      {/* Travel details */}
       <div className="relative mb-6 flex min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-100 shadow-lg">
         <div className="mb-0 rounded-t bg-white px-6 py-6">
           <div className="flex justify-between  text-center">
-            <h6 className="flex text-lg font-bold text-blueGray-700">User details</h6>
+            <h6 className="flex text-lg font-bold text-blueGray-700">Travel details</h6>
             <button
               className="relative mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
               type="button"
@@ -130,7 +119,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.name : ""}
+                    defaultValue={selectedTravel ? selectedTravel.userId : ""}
                   />
                 </div>
               </div>
@@ -145,7 +134,7 @@ export default function CardSettings() {
                   <input
                     type="email"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.email : ""}
+                    defaultValue={selectedTravel ? selectedTravel.chauffeurId : ""}
                   />
                 </div>
               </div>
@@ -160,7 +149,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.name : ""}
+                    defaultValue={selectedTravel ? selectedTravel.id : ""}
                   />
                 </div>
               </div>
@@ -175,7 +164,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.birthday : ""}
+                    defaultValue={selectedTravel ? selectedTravel.userId : ""}
                   />
                 </div>
               </div>
@@ -199,9 +188,9 @@ export default function CardSettings() {
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                     defaultValue={
-                      typeof selectedUser?.address === "string"
-                        ? selectedUser.address
-                        : selectedUser?.address?.street
+                      typeof selectedTravel?.origin === "string"
+                        ? selectedTravel.origin
+                        : selectedTravel?.origin
                     }
                   />
                 </div>
@@ -217,7 +206,7 @@ export default function CardSettings() {
                   <input
                     type="email"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.gender : ""}
+                    defaultValue={selectedTravel ? selectedTravel.origin : ""}
                   />
                 </div>
               </div>
@@ -232,7 +221,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.nationality : ""}
+                    defaultValue={selectedTravel ? selectedTravel.destination : ""}
                   />
                 </div>
               </div>
@@ -247,7 +236,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.cc : ""}
+                    defaultValue={selectedTravel ? selectedTravel.travel : ""}
                   />
                 </div>
               </div>
@@ -262,7 +251,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.ce : ""}
+                    defaultValue={selectedTravel ? selectedTravel.price : ""}
                   />
                 </div>
               </div>
@@ -282,13 +271,13 @@ export default function CardSettings() {
                 <input
                   type="text"
                   className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue={selectedUser ? selectedUser.createAt?.toString() : ""}
+                  defaultValue={selectedTravel ? selectedTravel.createAt?.toString() : ""}
                 />
               </div>
             </div>
           </form>
         </div>
       </div>
-    </form>
+    </div>
   );
 }

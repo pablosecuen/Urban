@@ -8,6 +8,7 @@ export interface ChauffeurToRegister {
   phone: Phone,
   nationality: string,
   birthday: string,
+  gender: string,
   cc?: string,
   ce?: string,
   passport?: string,
@@ -26,7 +27,8 @@ export interface Chauffeur extends ChauffeurToRegister {
   deleted: boolean,
   status: boolean,
   displayName: string,
-  createAd: Date;
+  createAt: string;
+  rating: number,
 }
 
 export interface ChauffeurToUpdate {
@@ -37,7 +39,9 @@ export interface ChauffeurToUpdate {
   phone?: Phone,
   vehicle?: VehicleForChauffeur,
   payments?: Payment,
-  updateAt: Date;
+  updateAt: string;
+  rating: number,
+  status?: boolean,
 }
 
 export interface VehicleForChauffeur {

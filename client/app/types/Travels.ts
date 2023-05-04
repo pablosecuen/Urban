@@ -1,18 +1,3 @@
-export interface Travel {
-  id: string;
-  date: string;
-  userId: string;
-  destination: string;
-  travel: TravelStatus;
-  price: string;
-  status: boolean;
-  chauffeurId: string;
-  origin: string;
-}
-export interface Data {
-  travels: Travel[];
-}
-
 export enum TravelStatus {
   PENDING = "pending",
   COMPLETED = "completed",
@@ -41,4 +26,21 @@ export interface Passage {
 
 export interface Passages {
   passages: Passage[];
+}
+
+export interface Travel {
+  userId: string;
+  chauffeurId: string;
+  origin: string;
+  destination: string;
+  price: number;
+  status: boolean;
+  travel: TravelStatus;
+  createdAt: Date;
+  id: string;
+}
+
+export interface TravelToUpdate {
+  travel?: TravelStatus;
+  updateAd?: Date;
 }

@@ -17,20 +17,20 @@ export const newProductValidated = (req: Request, res: Response, next: NextFunct
       !data.name ||
       !data.price ||
       !data.description ||
-      !data.img ||
-      !data.type ||
       !data.stock ||
-      !data.localId
+      !data.type ||
+      !data.localId ||
+      !data.img
     )
       throw Error("Datos incompletos");
     if (
       !isNameValid(data.name) ||
+      !isPriceValid(data.price) ||
       !isDescriptionValid(data.description) ||
-      !isImgValid(data.img) ||
-      !isProductTypeValid(data.type) ||
       !isStockValid(data.stock) ||
-      // !isPriceValid(data.price) ||
-      !isLocalIdValid(data.localId)
+      !isProductTypeValid(data.type) ||
+      !isLocalIdValid(data.localId) ||
+      !isImgValid(data.img)
     ) {
       throw new Error("Datos no validos");
     }
@@ -49,12 +49,12 @@ export const updateProductValidated = (req: Request, res: Response, next: NextFu
       throw Error("Datos no permitidos");
     if (
       (data?.name && !isNameValid(data.name)) ||
+      (data?.price && !isPriceValid(data.price)) ||
       (data?.description && !isDescriptionValid(data.description)) ||
-      (data?.img && !isImgValid(data.img)) ||
-      (data?.type && !isProductTypeValid(data.type)) ||
       (data?.stock && !isStockValid(data.stock)) ||
+      (data?.type && !isProductTypeValid(data.type)) ||
       (data?.localId && !isLocalIdValid(data.localId)) ||
-      (data?.price && !isPriceValid(data.price))
+      (data?.img && !isImgValid(data.img))
     ) {
       throw new Error("Datos incompletos o no válidos");
     }

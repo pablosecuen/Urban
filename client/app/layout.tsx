@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex h-full w-full flex-col items-center justify-center sm:flex-row ">
+        <main className="mx-auto flex h-full max-w-screen-2xl flex-col items-center justify-center sm:flex-row ">
           <Toaster position="bottom-right" expand={true} richColors className="absolute w-auto" />
 
           <Providers>{children}</Providers>

@@ -17,21 +17,22 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
     if (
       !data.userId ||
       !data.distributorId ||
-      !data.date ||
+      !data.productId ||
       !data.localId ||
+      !data.date ||
       !data.price ||
       !data.destination
     ) {
       throw new Error("Faltan datos");
     }
     if (
-      !isDistributorIdValid(data.distributorId) ||
       !isUserIdValid(data.userId) ||
+      !isDistributorIdValid(data.distributorId) ||
       !isProductIdValid(data.productId) ||
       !isLocalIdValid(data.localId) ||
       !isDateValid(data.date) ||
-      !isDestinationValid(data.destination) ||
-      !isPriceValid(data.price)
+      !isPriceValid(data.price) ||
+      !isDestinationValid(data.destination)
     ) {
       throw new Error("Datos no validos");
     }

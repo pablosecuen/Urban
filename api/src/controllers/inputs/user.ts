@@ -43,7 +43,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       cc: "",
       deleted: false,
       displayName: data.firstName + " " + data.lastName,
-      createAt: new Date(Date.now()),
+      createAt: new Date(Date.now()).toISOString(),
     };
 
     // Verificar si ya existe un usuario con el correo electrónico dado
@@ -105,7 +105,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
-    const updateAt: Date = new Date(Date.now()); // Obtener fecha actual
+    const updateAt: string = new Date(Date.now()).toISOString(); // Obtener fecha actual
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {

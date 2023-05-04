@@ -10,9 +10,9 @@ export default function Auth({ children }) {
     <>
       <Navbar transparent />
       <main>
-        <section className="relative w-full h-full py-40 min-h-screen">
+        <section className="relative h-full min-h-screen w-full py-40">
           <div
-            className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
+            className="bg-full absolute top-0 h-full w-full bg-blueGray-800 bg-no-repeat"
             style={{
               backgroundImage: "url('/img/register_bg_2.png')",
             }}

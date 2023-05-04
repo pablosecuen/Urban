@@ -7,8 +7,8 @@ export interface TicketToRegister {
 
 export interface Ticket extends TicketToRegister {
   status: TicketStatus;
-  createdAt: Date;
-  updateAt: Date | string;
+  createdAt: string;
+  updateAt: string;
 }
 
 export interface TicketToUpdate {

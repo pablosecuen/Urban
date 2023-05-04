@@ -13,6 +13,7 @@ export interface DistributorToRegister {
   passport?: string;
   license: string;
   img: string,
+  rating: number,
 }
 export interface Distributor extends DistributorToRegister {
   displayName: string,
@@ -22,7 +23,8 @@ export interface Distributor extends DistributorToRegister {
   history: string[];
   deleted: boolean;
   status: boolean,
-  createAd: Date;
+  createAt: string;
+  rating: number,
 }
 
 export interface DistributorToUpdate {
@@ -32,6 +34,8 @@ export interface DistributorToUpdate {
   address: Address,
   payments: Payment;
   vehicleType?: TypeVehicle;
-  updateAd: Date;
+  updateAt: string;
+  status?: boolean,
+  rating: number,
 }
 
