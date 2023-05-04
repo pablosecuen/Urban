@@ -8,11 +8,11 @@ import { Passage } from "../../app/types/Passages";
 import { AxiosResponse } from "axios";
 
 interface PassageState {
-  allPassages: Passage[]; // change any[] to your specific type
+  allPassages: Passage[]; 
 }
 
 const initialState: PassageState = {
-  allPassages: [], // provide an empty array as the initial state value for allUsers
+  allPassages: [], 
 };
 
 type ResponseType = AxiosResponse<any, any>;
@@ -21,8 +21,7 @@ export const fetchAllPassages: AsyncThunk<Passage[], void, {}> = createAsyncThun
   "passage/fetchAllPassages",
   async () => {
     const response: ResponseType = await getAllPassages();
-    console.log({fetchAllPassages: response});
-    return response.data.passages; // return the users array
+    return response.data.passages; 
   }
 );
 

@@ -1,6 +1,5 @@
 'use client'
 import Link from "next/link";
-// import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
@@ -15,9 +14,7 @@ export default function Viajes() {
 
   useEffect(() => {
     dispatch(fetchAllPassages());
-  }, []);
-  console.log(allPassages);
-  
+  }, []);  
 
   return (
 
