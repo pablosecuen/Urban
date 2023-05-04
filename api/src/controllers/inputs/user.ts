@@ -27,11 +27,13 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       nationality: "",
       birthday: "",
       gender: "",
-      payments: [{
-        cardNumber: "",
-        expirationDate: "",
-        securityCode: "",
-      }],
+      payments: [
+        {
+          cardNumber: "",
+          expirationDate: "",
+          securityCode: "",
+        },
+      ],
       history: {
         orders: [],
         travels: [],
@@ -65,6 +67,37 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     }
   }
 };
+
+// necesita validacion xq tiene datos por body
+export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, distributorId } = req.params;
+    const { rating, comment } = req.body;
+
+    // const dataFormatted: DistributorRating = {
+    //   ...data,
+    //   status: "pending",
+    //   createdAt: new Date(Date.now()),
+    //   updateAt: "",
+    // };
+
+    // const [userDoc, passageDoc] = await Promise.all([
+    //   db.collection("users").doc(dataFormatted.userId).get(),
+    //   db.collection("passages").doc(dataFormatted.passageId).get(),
+    // ]);
+
+    // if (!userDoc.exists) throw new Error("El usuario no existe");
+    // if (!passageDoc.exists) throw new Error("El pasaje no existe");
+
+    // const docRef = await db.collection("tickets").add(dataFormatted);
+
+    // res.status(201).json({ id: docRef.id });
+  } catch (error) {
+    console.error("Error al generar rating", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 /**
  * Controlador para actulizar un usuario en Firestore.
  */
