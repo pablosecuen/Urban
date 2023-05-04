@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  AsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 
 import { Travel } from "../../app/types/Travels";
 import { getAllTravels } from "./travelActions";
@@ -22,7 +18,7 @@ export const fetchAllTravels: AsyncThunk<Travel[], void, {}> = createAsyncThunk(
   "travels/fetchAllTravels",
   async () => {
     const response: ResponseType = await getAllTravels();
-    return response.data.users; // return the users array
+    return response.data.travels; // return the users array
   }
 );
 
