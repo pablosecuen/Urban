@@ -5,7 +5,7 @@ import {
   AsyncThunk,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
-import { getAllUsers, getUserById, getUserByName, getUserByPatent } from "./passageActions";
+import { getAllPassages } from "./passageActions";
 import { User } from "../../app/types/User";
 import { AxiosResponse } from "axios";
 interface UserState {
@@ -21,7 +21,7 @@ type ResponseType = AxiosResponse<any, any>;
 export const fetchAllUsers: AsyncThunk<User[], void, {}> = createAsyncThunk(
   "users/fetchAllUsers",
   async () => {
-    const response: ResponseType = await getAllUsers();
+    const response: ResponseType = await getAllPassages();
     return response.data.users; // return the users array
   }
 );
