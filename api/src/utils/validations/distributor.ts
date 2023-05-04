@@ -70,14 +70,18 @@ export const updateDistributorValidate = (
       "license",
       "payments",
     ];
-    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+    if (Object.keys(data).some((key) => !allowProperties.includes(key))) {
       throw new Error("Datos no permitidos");
-    (data?.address && isAddressValid(data.address)) ||
+    }
+    if (
+      (data?.address && isAddressValid(data.address)) ||
       (data?.img && !isImgValid(data.img)) ||
       (data?.vehicleType && !isVehicleTypeValid(data.vehicleType)) ||
       (data?.license && !isLicenseValid(data.license)) ||
-      (data?.payments && !arePaymentsValid(data.payments));
-    throw Error("Datos no válidos");
+      (data?.payments && !arePaymentsValid(data.payments))
+    ) {
+      throw Error("Datos no válidos");
+    }
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
