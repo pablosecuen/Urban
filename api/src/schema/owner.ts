@@ -19,14 +19,8 @@ export interface Owner extends OwnerToRegister {
 }
 
 export interface OwnerToUpdate {
-  firstName?: string;
-  lastName?: string;
-  displayName?: string;
   email?: string;
   phone?: Phone;
   address?: Address;
-  cc?: string;
-  ce?: string;
-  vehiclesId?: string[];
   updateAt?: Date;
 }
