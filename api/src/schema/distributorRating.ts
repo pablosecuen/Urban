@@ -2,7 +2,6 @@ export interface DistributorRating {
   userId: string;
   distributorId: string;
   rating: number;
-  comment: string;
+  comment?: string;
   createdAt: string;
-  updateAt: string;
 }

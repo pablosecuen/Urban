@@ -1,9 +1,7 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  AsyncThunk,
-} from "@reduxjs/toolkit";
-import { getAllUsers } from "./userActions";
+
+import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
+import { getAllUsers, getUserById, getUserByName, getUserByPatent } from "./userActions";
+
 import { User } from "../../app/types/User";
 import { AxiosResponse } from "axios";
 interface UserState {
