@@ -8,7 +8,15 @@ export const newOwner = async (req: Request, res: Response): Promise<void> => {
     const dataFormated = {
       ...data,
       deleted: false,
-      address: "",
+      address: {
+        postalCode: "",
+        location: "",
+        state: "",
+        street: "",
+        number: "",
+        department: "",
+      },
+      createAt: new Date(Date.now())
     };
     const snapshot = await db.collection("owner").where("cc", "==", dataFormated.cc).get();
     if (!snapshot.empty) {
@@ -26,6 +34,7 @@ export const updateOwner = async (req: Request, res: Response): Promise<void> =>
   try {
     const id: string = req.params.id;
     const data: OwnerToUpdate = req.body;
+    const updateAt: Date = new Date(Date.now())
     const docRef = await db.collection("owner").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el propietario");
@@ -33,7 +42,7 @@ export const updateOwner = async (req: Request, res: Response): Promise<void> =>
     await db
       .collection("owner")
       .doc(id)
-      .update({ ...data });
+      .update({ ...data, updateAt: updateAt });
     res.status(200).json({ message: "Propietario actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el propietario", innerError);
