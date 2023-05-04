@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { LocalToRegister, LocalToUpdate } from "../../schema/local";
 import {
+  arePaymentsValid,
   isAddressValid,
   isEmailValid,
   isImgValid,
@@ -11,13 +12,15 @@ import {
 export const newLocalValidate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: LocalToRegister = req.body;
-    if (!data.name || !data.address || !data.email || !data.password || !data.img)
-      throw Error("Datos incompletos");
+    const allowProperties = ["name", "address", "email", "password", "img"];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw Error("Datos no permitidos");
     if (
-      isNameValid(data.name) ||
-      isEmailValid(data.email) ||
-      isPasswordValid(data.password) ||
-      isImgValid(data.img)
+      !isNameValid(data.name) ||
+      !isAddressValid(data.address) ||
+      !isEmailValid(data.email) ||
+      !isPasswordValid(data.password) ||
+      !isImgValid(data.img)
     ) {
       throw new Error("Datos no validos");
     }
@@ -31,14 +34,10 @@ export const newLocalValidate = (req: Request, res: Response, next: NextFunction
 export const updateLocalValidate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: LocalToUpdate = req.body;
-    const allowProperties = ["name", "adress", "email", "password", "img", "payments"];
+    const allowProperties = ["payments"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
-    if (
-      (data?.name && isNameValid(data.name)) ||
-      (data?.address) ||
-      (data?.img && isImgValid(data.img))
-    ) {
+    if (data?.payments && arePaymentsValid(data.payments)) {
       throw new Error("Datos no validos");
     }
     next();
