@@ -25,14 +25,14 @@ export default function Viajes() {
         </h1>
 
         {allPassages.map((passage) => (
-          <section key={passage.id} className="flex w-full flex-col border border-black">
-            <h1 className="border capitalize">
+          <Link href={`/home/reserva/viajes/${passage.id}`} key={passage.id} className="flex w-full flex-col border border-black">
+            <h3 className="border capitalize">
               {passage.origin} - {passage.destination}
-            </h1>
+            </h3>
             <small>
-              {passage.departureDate} - {passage.arrivalDate}
+              {passage.departureDate} {passage.duration}
             </small>
-          </section>
+          </Link>
         ))}
       </div>
       <div className="flex gap-2 pt-10">
