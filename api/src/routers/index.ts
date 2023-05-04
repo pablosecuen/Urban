@@ -44,6 +44,7 @@ import passageOutputRouter from "./outputs/passage";
 import sendMailInputRouter from "./inputs/sendMail";
 
 import ticketInputRouter from "./inputs/ticket";
+import ticketOutputRouter from "./outputs/ticket";
 
 import roadTripInputRouter from "./inputs/roadtrip";
 import roadTripOutputRouter from "./outputs/roadTrip";
@@ -109,6 +110,8 @@ router.use("/busDriver", busDriverOutputRouter);
 router.use("/bus", busOutputRouter);
 
 router.use("/passage", passageOutputRouter);
+
+router.use("/ticket", ticketOutputRouter);
 
 router.use("/roadtrip", roadTripOutputRouter);
 
