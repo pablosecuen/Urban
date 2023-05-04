@@ -136,6 +136,16 @@ export const isDistributorIdValid = (distributorId: string): Boolean => {
   return false;
 };
 
+export const isRatingValid = (rating: number): Boolean => {
+  if (typeof rating === "number" && rating >= 0 && rating <= 5) return true;
+  return false;
+};
+
+export const isCommentValid = (comment: string): Boolean => {
+  if (typeof comment === "string" && comment.length <= 200) return true;
+  return false;
+};
+
 export const isProductIdValid = (productId: string): Boolean => {
   if (typeof productId === "string") return true;
   return false;
