@@ -18,13 +18,13 @@ export default function setValidate(values: { [key: string]: string }): Object{
     const validations: Validations = {
       password: (value: string):  setErrores=>{
         if(!regexPassword.test(value) && value != ""){
-          return {messagePassword: "la password esta mal"}
+          return {messagePassword: "La contraseña no es correcta"}
         }
         return {messagePassword: ""}
       },
       email:  (value: string):  setErrores => {
         if(!regexEmail.test(value) && value != ""){
-          return {messageEmail: "el email esta mal"}
+          return {messageEmail: "El email no es correcto"}
         }
         return {messageEmail: ""}
       }
