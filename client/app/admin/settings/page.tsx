@@ -1,12 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import CardSettings from "../../../components/Cards/CardSettings";
 import CardProfile from "../../../components/Cards/CardProfile";
+
 import { RootState } from "@component/Redux/store/store";
+
 import { fetchAllUsers } from "@component/Redux/user/userSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
+import CardProfile from "@component/components/Cards/CardProfile";
 
 // components
 

@@ -77,29 +77,47 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   return (
     <form
       onSubmit={handleRegister}
-      className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:h-[600px] lg:w-1/2"
+      className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:ml-20 lg:h-5/6 lg:w-4/5"
     >
-      <div className="flex h-1/2 flex-col items-center justify-center align-middle">
-        {" "}
+      <div className="flex h-1/2 flex-col items-center justify-center gap-2 align-middle">
         <label className="text-center">
-          Name:
-          <input type="text" value={name} onChange={handleNameChange} />
+          Name: <br />
+          <input
+            className="lg:mt-1 lg:w-3/4"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
         </label>
         <label className="text-center">
-          Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
+          Email: <br />
+          <input
+            className="lg:mt-1 lg:w-3/4"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </label>
         <label className="text-center">
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          Password: <br />
+          <input
+            className="lg:mt-1 lg:w-3/4"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
         </label>
         <label className="text-center">
-          Repeat Password:
-          <input type="password" value={repeatPassword} onChange={handleRepeatPasswordChange} />
+          Repeat Password: <br />
+          <input
+            className="lg:mt-1 lg:w-3/4"
+            type="password"
+            value={repeatPassword}
+            onChange={handleRepeatPasswordChange}
+          />
         </label>
       </div>
-      <div className="flex h-1/2 flex-col items-center justify-between align-middle">
-        {" "}
+      <div className="flex h-1/2 flex-col items-center justify-between align-middle lg:mt-2">
         <button className="mx-auto w-1/2 py-2 font-semibold" onClick={handleRegister}>
           Register
         </button>
@@ -119,13 +137,13 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
             </svg>
             <span>Login with Facebook</span>
           </button>
+          <button
+            className=" py-3 text-xs font-semibold lg:mx-auto lg:mt-6"
+            onClick={handleLoginClick}
+          >
+            <p>Ya tienes cuenta? ingresa aqui</p>
+          </button>
         </div>
-        <button
-          className="w-1/2 py-2 text-xs font-semibold lg:mx-auto lg:mt-6"
-          onClick={handleLoginClick}
-        >
-          <p>Ya tienes cuenta? ingresa aqui</p>
-        </button>
       </div>
     </form>
   );

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { User } from "../../app/types/User";
+import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
 
 // components
 
@@ -17,6 +18,7 @@ export default function CardSettings() {
   const allUsers = useSelector((state: RootState) => state.user.allUsers);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
     dispatch(fetchAllUsers());
@@ -36,8 +38,12 @@ export default function CardSettings() {
     setSelectedUser(user);
   };
 
+  const handleSettingsClick = () => {
+    setShowDropDown(!showDropDown); // toggle state variable on click
+  };
+
   return (
-    <>
+    <form>
       {/*contendedor de render de todos los usuarios */}
       <div className="relative mb-6 flex min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-100 shadow-lg">
         <div className="mb-0 rounded-t bg-white px-6 py-6">
@@ -55,12 +61,12 @@ export default function CardSettings() {
                   onChange={handleSearchChange}
                 />
               </label>
-              <button
+              {/* <button
                 className="mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
                 type="button"
               >
                 Settings
-              </button>
+              </button> */}
             </div>
           </div>
           {/* este es el render de los usuarios */}
@@ -98,11 +104,13 @@ export default function CardSettings() {
           <div className="flex justify-between  text-center">
             <h6 className="flex text-lg font-bold text-blueGray-700">User details</h6>
             <button
-              className="mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+              className="relative mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
               type="button"
+              onClick={handleSettingsClick}
             >
               Settings
             </button>
+            {showDropDown && <UserDropDownSettings />}
           </div>
         </div>
         <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
@@ -281,6 +289,6 @@ export default function CardSettings() {
           </form>
         </div>
       </div>
-    </>
+    </form>
   );
 }

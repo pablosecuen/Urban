@@ -1,16 +1,23 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
-import { Payment } from "../../types/types";
+import { Address, Payment, Phone } from "../../types/types";
 
 export const isNameValid = (name: string): Boolean => {
   if (typeof name === "string" && name.length <= 50) return true;
   return false;
 };
-export const isFirstNameValid = (name: string): Boolean => {
-  if (typeof name === "string" && name.length <= 50) return true;
+
+export const isFirstNameValid = (firstName: string): Boolean => {
+  if (typeof firstName === "string" && firstName.length <= 50) return true;
   return false;
 };
-export const isLastNameValid = (name: string): Boolean => {
-  if (typeof name === "string" && name.length <= 50) return true;
+
+export const isLastNameValid = (lastName: string): Boolean => {
+  if (typeof lastName === "string" && lastName.length <= 50) return true;
+  return false;
+};
+
+export const isDisplayNameValid = (displayName: string): Boolean => {
+  if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
 };
 
@@ -26,14 +33,41 @@ export const isPasswordValid = (password: string): Boolean => {
 };
 
 // numero de telefono en string de entre 8 y 20 caracteres
-export const isPhoneValid = (phone: string): Boolean => {
-  if (typeof phone === "string" && phone.length > 5 && phone.length < 20) return true;
+export const isPhoneValid = (phone: Phone): Boolean => {
+  const allowProperties = ["areaCode", "number", "displayPhone"];
+  if (
+    typeof phone === "object" &&
+    Object.keys(phone).every((key) => allowProperties.includes(key)) &&
+    Object.values(phone).every((value) => typeof value === "string")
+  )
+    return true;
   return false;
 };
 
-// IMPORTANTE!  solo permite DNI de 9 dígitos en formato string, preguntar como es en Colombia
+export const isNationalityValid = (nationality: string): Boolean => {
+  if (typeof nationality === "string" && nationality.length <= 50) return true;
+  return false;
+};
+
+export const isBirthdayValid = (birthday: string): Boolean => {
+  if (typeof birthday === "string" && birthday.length <= 50) return true;
+  return false;
+};
+
+// IMPORTANTE!  solo permite cc de 8 dígitos en formato string, preguntar como es en Colombia
 export const isCcValid = (cc: string): Boolean => {
   if (typeof cc === "string" && cc.length === 8) return true;
+  return false;
+};
+
+// IMPORTANTE!  solo permite ce de 8 dígitos en formato string, preguntar como es en Colombia
+export const isCeValid = (ce: string): Boolean => {
+  if (typeof ce === "string" && ce.length === 8) return true;
+  return false;
+};
+
+export const isPassportValid = (passport: string): Boolean => {
+  if (typeof passport === "string" && passport.length <= 100) return true;
   return false;
 };
 
@@ -44,9 +78,20 @@ export const isLicenseValid = (license: string): Boolean => {
   return false;
 };
 
-// string de entre 5 y 50 caracteres
-export const isAddressValid = (address: string): Boolean => {
-  if (typeof address === "string" && address.length >= 5 && address.length <= 50) return true;
+export const isTypeChauffeurValid = (typeChauffeur: string): Boolean => {
+  if (typeof typeChauffeur === "string" && typeChauffeur.length <= 300) return true;
+  return false;
+};
+
+// cumple con la interface Address
+export const isAddressValid = (address: Address): Boolean => {
+  const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
+  if (
+    typeof address === "object" &&
+    Object.keys(address).every((key) => allowProperties.includes(key)) &&
+    Object.values(address).every((value) => typeof value === "string")
+  )
+    return true;
   return false;
 };
 
@@ -70,10 +115,11 @@ export const isVehicleTypeValid = (vehicleType: string): Boolean => {
 
 // IMPORTANTE! => por ahora solo verifica que es un objeto (falta definir el formato)
 export const arePaymentsValid = (payments: Payment): Boolean => {
+  const allowProperties = ["cardNumber", "expirationDate", "securityCode"];
   if (
-    typeof payments.cardNumber === "string" &&
-    typeof payments.expirationDate === "string" &&
-    typeof payments.securityCode === "string"
+    typeof payments === "object" &&
+    Object.keys(payments).every((key) => allowProperties.includes(key)) &&
+    Object.values(payments).every((value) => typeof value === "string")
   ) {
     return true;
   }
@@ -96,6 +142,11 @@ export const isProductIdValid = (productId: string): Boolean => {
 };
 
 export const isLocalIdValid = (localId: string): Boolean => {
+  if (typeof localId === "string") return true;
+  return false;
+};
+
+export const isPassageIdValid = (localId: string): Boolean => {
   if (typeof localId === "string") return true;
   return false;
 };
@@ -161,6 +212,11 @@ export const isOriginValid = (origin: string): Boolean => {
   return false;
 };
 
+export const isOcupationValid = (ocupation: string): Boolean => {
+  if (typeof ocupation === "string") return true;
+  return false;
+};
+
 export const isOwnerIdValid = (ownerId: string): Boolean => {
   if (typeof ownerId === "string") return true;
   return false;
@@ -194,10 +250,11 @@ export const isYearValid = (year: string): Boolean => {
 };
 
 export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean => {
+  const allowProperties = ["vehicleId", "patent"];
   if (
     typeof vehicle === "object" &&
-    typeof vehicle.vehicleId === "string" &&
-    typeof vehicle.patent === "string"
+    Object.keys(vehicle).every((key) => allowProperties.includes(key)) &&
+    Object.values(vehicle).every((value) => typeof value === "string")
   )
     return true;
   return false;

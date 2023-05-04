@@ -64,7 +64,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
   return (
     <form
       onSubmit={handleLogin}
-      className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:h-[600px] lg:w-1/2"
+      className="my-8 flex h-[450px] w-4/5 flex-col items-center justify-between rounded-3xl border-2 px-4 pb-4 align-middle shadow-lg shadow-black/40 lg:ml-20 lg:h-4/5 lg:w-4/5"
     >
       <div className="flex h-1/2 flex-col items-center justify-center gap-6 ">
         <label
@@ -78,7 +78,9 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
             name="email"
             value={userData.email}
             onChange={handleInputChange}
-            className={`transition_all ${errores.messageEmail && "focus-visible:outline-red-500"}`}
+            className={`transition_all mt-1 ${
+              errores.messageEmail && "focus-visible:outline-red-500 "
+            }`}
           />
           <small
             className={`transition_all absolute ${
@@ -99,7 +101,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
             name="password"
             value={userData.password}
             onChange={handleInputChange}
-            className={`transition_all ${
+            className={`transition_all mt-1  ${
               errores.messagePassword && " focus-visible:outline-red-500"
             }`}
           />
@@ -113,9 +115,11 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
         </label>
       </div>
       <div className="flex h-1/2 flex-col items-center justify-between align-middle ">
-        <button className="mx-auto w-1/2 py-2 font-semibold" onClick={handleLogin}>
+        <button className="mx-auto mt-2 w-1/2 py-2 font-semibold" onClick={handleLogin}>
           Login
         </button>
+      </div>
+      <div className="flex h-1/2 flex-col items-center justify-between align-middle ">
         {/* <button onClick={handleRegisterClick}>Apple Id</button> */}
         <div className="flex w-1/2 flex-col items-center justify-center gap-3">
           <Link
@@ -132,15 +136,14 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
             </svg>
             <span>Login with Facebook</span>
           </button>
+          <button
+            className="py-3 text-xs font-semibold lg:mx-auto lg:mt-6"
+            onClick={handleRegisterClick}
+          >
+            <p>No tienes cuenta? Registrate aqui</p>
+          </button>
         </div>
         {/* <button onClick={handleRegisterClick}>Facebook</button> */}
-
-        <button
-          className="w-1/2 py-2 text-xs font-semibold lg:mx-auto lg:mt-6"
-          onClick={handleRegisterClick}
-        >
-          <p>no tienes cuenta? registrate aqui</p>
-        </button>
       </div>
     </form>
   );

@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../user/userSlice";
-
+import travelReducer from "../travel/travelSlice";
 
 
 export function makeStore(){
     return configureStore({
         reducer: {
             user: userReducer,
+            travel: travelReducer,
         },
 
     })

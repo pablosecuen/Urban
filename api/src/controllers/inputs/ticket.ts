@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { Ticket, TicketToRegister } from "../../schema/ticket";
 import { db } from "../../connection/connection";
-import firebase from "firebase-admin";
 
 export const newTicket = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -22,13 +21,6 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     if (!passageDoc.exists) throw new Error("El pasaje no existe");
 
     const docRef = await db.collection("tickets").add(dataFormatted);
-
-    await db
-      .collection("users")
-      .doc(dataFormatted.userId)
-      .update({
-        "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
-      });
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {
