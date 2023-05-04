@@ -11,9 +11,7 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
             ...data,
             status: true,
             travel: "pending",
-
-            createdAt: new Date(Date.now()),
-
+            createdAt: new Date(Date.now()).toISOString(),
         }
 
         const [userDoc, chauffeurDoc] = await Promise.all([
@@ -26,7 +24,7 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
         }
 
         if (!chauffeurDoc.exists) {
-            throw new Error("El chofer no existe");
+            throw new Error("El  chofer no existe");
         }
 
         const chauffeurData = chauffeurDoc.data();
@@ -59,7 +57,7 @@ export const updateTravel = async (
     res: Response
 ): Promise<void> => {
     try {
-        const updateAt: string = new Date(Date.now()).toISOString()
+        const updatedAt: string = new Date(Date.now()).toISOString()
 
         const id = req.params.id;
         const travelsCollection = db.collection("travels");
@@ -68,7 +66,7 @@ export const updateTravel = async (
 
         const newStatus = currentStatus === "pending" ? "progress" : currentStatus === "progress" ? "finished" : (() => { throw new Error("El estado actual del viaje no es válido"); })();
 
-        await travelsCollection.doc(id).update({ travel: newStatus, updateAt: updateAt });
+        await travelsCollection.doc(id).update({ travel: newStatus, updatedAt: updatedAt });
 
         res.status(200).json({ message: "Viaje actualizado correctamente", newStatus });
     } catch (error) {
@@ -83,7 +81,7 @@ export const cancelTravel = async (
     res: Response
 ): Promise<void> => {
     try {
-        const updateAt: string = new Date(Date.now()).toISOString()
+        const updatedAt: string = new Date(Date.now()).toISOString()
 
         const id = req.params.id;
         const travelsCollection = db.collection("travels");
@@ -94,7 +92,7 @@ export const cancelTravel = async (
             throw new Error("El viaje no se puede cancelar porque no está en estado pendiente");
         }
 
-        await travelsCollection.doc(id).update({ travel: "rejected", updateAt: updateAt });
+        await travelsCollection.doc(id).update({ travel: "rejected", updatedAt: updatedAt });
 
         res.status(200).json({ message: "Viaje cancelado correctamente" });
     } catch (error) {

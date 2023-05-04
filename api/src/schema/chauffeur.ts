@@ -27,7 +27,7 @@ export interface Chauffeur extends ChauffeurToRegister {
   deleted: boolean,
   status: boolean,
   displayName: string,
-  createAt: string;
+  createdAt: string;
   rating: number,
 }
 
@@ -39,7 +39,7 @@ export interface ChauffeurToUpdate {
   phone?: Phone,
   vehicle?: VehicleForChauffeur,
   payments?: Payment,
-  updateAt: string;
+  updatedAt: string;
   rating: number,
   status?: boolean,
 }

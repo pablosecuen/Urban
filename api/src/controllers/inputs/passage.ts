@@ -10,7 +10,7 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       ...data,
       status: true,
       deleted: false,
-      createAt: new Date(Date.now()).toISOString()
+      createdAt: new Date(Date.now()).toISOString()
     };
     const docRef = await db.collection("passages").add(dataFormated);
 
@@ -25,12 +25,12 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const data: PassageToUpdate = req.body;
-    const updateAt: string = new Date(Date.now()).toISOString();
+    const updatedAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
       throw new Error("El bus no se actualizó");
     }
-    await db.collection("bus").doc(id).update({ ...data, updateAt: updateAt });
+    await db.collection("bus").doc(id).update({ ...data, updatedAt: updatedAt });
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el Pasaje", innerError);

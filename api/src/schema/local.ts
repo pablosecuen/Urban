@@ -16,11 +16,11 @@ export interface Local extends LocalToRegister {
   history: string[];
   status: boolean;
   deleted: boolean;
-  createAt?: string;
+  createdAt: string;
 }
 
 // Partial hace que las props extendidas sean opcionales
 export interface LocalToUpdate extends Partial<LocalToRegister> {
   payments: Payment; // provisional
-  updateAt: string;
+  updatedAt: string;
 }

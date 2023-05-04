@@ -27,7 +27,7 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
       },
       img: "",
       history: [],
-      createAt: new Date(Date.now()).toISOString(),
+      createdAt: new Date(Date.now()).toISOString(),
       displayName: data.firstName + " " + data.lastName,
       status: false,
       rating: 0,
@@ -59,12 +59,12 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
   try {
     const id: string = req.params.id;
     const data: ChauffeurToUpdate = req.body;
-    const updateAt: string = new Date(Date.now()).toISOString();
+    const updatedAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection("chauffeur").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el chofer");
     }
-    await db.collection("chauffeur").doc(id).update({ ...data, updateAt: updateAt });
+    await db.collection("chauffeur").doc(id).update({ ...data, updatedAt: updatedAt });
     res.status(200).json({ message: "Chofer actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el usuario", error);
