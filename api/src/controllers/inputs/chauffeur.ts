@@ -20,11 +20,17 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
         expirationDate: "",
         securityCode: "",
       },
+      phone: {
+        areaCode: "",
+        number: "",
+        displayPhone: "",
+      },
       img: "",
       history: [],
-      createAt: new Date(Date.now()),
+      createAt: new Date(Date.now()).toISOString(),
       displayName: data.firstName + " " + data.lastName,
-      status: false
+      status: false,
+      rating: 0,
     };
     const snapshot = await db
       .collection("chauffeur")
@@ -53,7 +59,7 @@ export const updateChauffeur = async (req: Request, res: Response): Promise<void
   try {
     const id: string = req.params.id;
     const data: ChauffeurToUpdate = req.body;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection("chauffeur").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el chofer");
