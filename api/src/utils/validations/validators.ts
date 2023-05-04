@@ -49,6 +49,11 @@ export const isNationalityValid = (nationality: string): Boolean => {
   return false;
 };
 
+export const isGenderVality = (gender: string): Boolean => {
+  if (typeof gender === "string" && gender.length <= 40) return true;
+  return false;
+};
+
 export const isBirthdayValid = (birthday: string): Boolean => {
   if (typeof birthday === "string" && birthday.length <= 50) return true;
   return false;

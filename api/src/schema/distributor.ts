@@ -23,7 +23,7 @@ export interface Distributor extends DistributorToRegister {
   history: string[];
   deleted: boolean;
   status: boolean,
-  createAt: string;
+  createdAt: string;
   rating: number,
 }
 
@@ -34,7 +34,7 @@ export interface DistributorToUpdate {
   address: Address,
   payments: Payment;
   vehicleType?: TypeVehicle;
-  updateAt: string;
+  updatedAt: string;
   status?: boolean,
   rating: number,
 }

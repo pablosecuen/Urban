@@ -29,10 +29,10 @@ export default function LandingPage() {
           <Image
             src={logo as StaticImageData}
             alt="logo"
-            className="aspect-ratio-square h-48 w-48 lg:h-full lg:w-full"
+            className="aspect-ratio-square h-40 w-40 lg:h-full lg:w-full"
           />
         </div>
-        <div className=" h-96 w-full  lg:h-full lg:w-1/2 lg:pr-40">
+        <div className=" lg:mx-auto lg:w-1/2">
           <Login />
         </div>
       </GoogleOAuthProvider>
