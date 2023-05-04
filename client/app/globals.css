@@ -26,7 +26,7 @@ input {
 }
 
 .transition_all {
-  @apply transition-all duration-300  ease-in-out;
+  @apply transition-all duration-500  ease-in-out;
 }
 
 input:focus-visible {
