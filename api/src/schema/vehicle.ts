@@ -11,7 +11,7 @@ export interface VehicleToRegister {
 
 export interface Vehicle extends VehicleToRegister {
   deleted?: boolean;
-  createAt?: Date;
+  createdAt?: string;
 }
 
 export interface VehicleToUpdate {
@@ -23,5 +23,5 @@ export interface VehicleToUpdate {
   ownerId?: string;
   chauffeurId?: string;
   documents?: string[];
-  updateAt?: Date;
+  updatedAt?: string;
 }

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
-
 import { Travel } from "../../app/types/Travels";
 import { getAllTravels } from "./travelActions";
 import { AxiosResponse } from "axios";

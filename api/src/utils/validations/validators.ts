@@ -49,6 +49,11 @@ export const isNationalityValid = (nationality: string): Boolean => {
   return false;
 };
 
+export const isGenderVality = (gender: string): Boolean => {
+  if (typeof gender === "string" && gender.length <= 40) return true;
+  return false;
+};
+
 export const isBirthdayValid = (birthday: string): Boolean => {
   if (typeof birthday === "string" && birthday.length <= 50) return true;
   return false;
@@ -133,6 +138,16 @@ export const isUserIdValid = (userId: string): Boolean => {
 
 export const isDistributorIdValid = (distributorId: string): Boolean => {
   if (typeof distributorId === "string") return true;
+  return false;
+};
+
+export const isRatingValid = (rating: number): Boolean => {
+  if (typeof rating === "number" && rating >= 0 && rating <= 5) return true;
+  return false;
+};
+
+export const isCommentValid = (comment: string): Boolean => {
+  if (typeof comment === "string" && comment.length <= 200) return true;
   return false;
 };
 

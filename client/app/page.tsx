@@ -25,14 +25,14 @@ export default function LandingPage() {
         clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
       >
         {" "}
-        <div className="mx-auto flex w-1/2 justify-center   sm:h-full lg:h-full lg:pl-24">
+        <div className="mx-auto flex w-1/2 justify-end  sm:h-full lg:h-full lg:pl-24">
           <Image
             src={logo as StaticImageData}
             alt="logo"
-            className="aspect-ratio-square h-48 w-48 lg:h-full lg:w-full"
+            className="aspect-ratio-square h-96 w-96 lg:h-full lg:w-auto"
           />
         </div>
-        <div className=" h-96 w-full  lg:h-full lg:w-1/2 lg:pr-40">
+        <div className=" flex justify-start  lg:w-1/2 lg:pr-96">
           <Login />
         </div>
       </GoogleOAuthProvider>

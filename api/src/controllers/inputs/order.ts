@@ -15,7 +15,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       ...orderData,
       status: true,
       order: "pending",
-      createAt: new Date(Date.now()),
+      createdAt: new Date(Date.now()).toISOString(),
     };
 
     const [userDoc, distributorDoc, localDoc] = await Promise.all([
@@ -78,14 +78,14 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
   try {
     const id: string = req.params.id;
     const data: Order = req.body;
-    const updateAt: Date = new Date(Date.now());
+    const updatedAt: string = new Date(Date.now()).toISOString();
 
     const docRef = await db.collection("orders").doc(id).get();
     if (!docRef) {
       throw new Error("No se encontró la orden");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("orders").doc(id).update({ ...data, updateAt: updateAt });
+    await db.collection("orders").doc(id).update({ ...data, updatedAt: updatedAt });
     res.status(201).json({ menssage: "Orden actualizada correctamente" });
   } catch (error) {
     console.error("Error al actualizar la orden", error);

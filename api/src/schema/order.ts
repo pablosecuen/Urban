@@ -10,10 +10,10 @@ export interface Order {
   destination: string;
   status: boolean;
   order: OrderStatus;
-  createAt?: Date,
+  createdAt: string,
 }
 
 export interface OrderToUpdate {
   order?: OrderStatus;
-  updateAt?: Date;
+  updatedAt?: string;
 }

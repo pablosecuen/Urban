@@ -1,6 +1,13 @@
 import { Router } from "express";
-import { newUser, updateUser, deletedUser, enableUser } from "../../controllers/inputs/user";
+import {
+  newUser,
+  updateUser,
+  deletedUser,
+  enableUser,
+  newDistributorRating,
+} from "../../controllers/inputs/user";
 import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
+import { newDistributorRatingValidator } from "../../utils/validations/rating";
 
 const router = Router();
 
@@ -42,6 +49,8 @@ const router = Router();
  *                   description: Descripción del error
  */
 router.post("/", newUserValidated, newUser);
+
+router.post("/rating/:userId/:distributorId", newDistributorRatingValidator, newDistributorRating);
 
 /**
  * @swagger
