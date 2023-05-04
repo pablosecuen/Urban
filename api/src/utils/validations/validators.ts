@@ -100,6 +100,11 @@ export const isLocalIdValid = (localId: string): Boolean => {
   return false;
 };
 
+export const isPassageIdValid = (localId: string): Boolean => {
+  if (typeof localId === "string") return true;
+  return false;
+};
+
 export const areVehiclesIdValid = (vehiclesId: string[]): Boolean => {
   if (vehiclesId.some((id) => typeof id !== "string")) return true;
   return false;
