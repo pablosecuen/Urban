@@ -22,7 +22,7 @@ export interface User extends UserToRegister {
   cc?: string;
   ce?: string,
   deleted: boolean,
-  createAt?: string,
+  createdAt?: string,
 }
 
 export interface UserToUpdate {
@@ -35,5 +35,5 @@ export interface UserToUpdate {
   gender?: string,
   cc?: string;
   ce?: string,
-  updateAt?: string,
+  updatedAt?: string,
 }

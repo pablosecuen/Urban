@@ -10,7 +10,7 @@ export interface OwnerToRegister {
   cc: string;
   ce?: string;
   vehiclesId?: string[];
-  createAt?: string;
+  createdAt: string;
 }
 
 export interface Owner extends OwnerToRegister {
@@ -22,5 +22,5 @@ export interface OwnerToUpdate {
   email?: string;
   phone?: Phone;
   address?: Address;
-  updateAt?: string;
+  updatedAt?: string;
 }

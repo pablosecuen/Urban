@@ -9,7 +9,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
       ...data,
       status: "pending",
       createdAt: new Date(Date.now()).toISOString(),
-      updateAt: "",
+      updatedAt: "",
     };
 
     const [userDoc, passageDoc] = await Promise.all([
@@ -32,13 +32,13 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 export const aceptTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const updateAt: string = new Date(Date.now()).toISOString();
+    const updatedAt: string = new Date(Date.now()).toISOString();
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
     if (!ticketDoc.exists) throw new Error("El ticket no existe");
 
-    await db.collection("tickets").doc(id).update({ status: "acepted", updateAt: updateAt });
+    await db.collection("tickets").doc(id).update({ status: "acepted", updatedAt: updatedAt });
 
     res.status(201).json({ message: "Ticket actualizado" });
   } catch (error) {
@@ -50,13 +50,13 @@ export const aceptTicket = async (req: Request, res: Response): Promise<void> =>
 export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const updateAt: string = new Date(Date.now()).toISOString()
+    const updatedAt: string = new Date(Date.now()).toISOString()
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
     if (!ticketDoc.exists) throw new Error("El ticket no existe");
 
-    await db.collection("tickets").doc(id).update({ status: "canceled", updateAt: updateAt });
+    await db.collection("tickets").doc(id).update({ status: "canceled", updatedAt: updatedAt });
 
     res.status(201).json({ message: "Ticket cancelado" });
   } catch (error) {
