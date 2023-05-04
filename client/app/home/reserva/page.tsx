@@ -9,42 +9,43 @@ import { MdPets } from "react-icons/md";
 
 export default function Reserva() {
   return (
-    <div className="w-4/5 mx-auto border-2 rounded-3xl shadow-2xl shadow-black/40 ">
-      <h1 className="text-blue text-center text-xl mt-12">
+    <div className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
+      <h1 className="mt-12 text-center text-xl text-blue">
         Llena el formulario para encontrar tu viaje
       </h1>
-      <form className="flex flex-col gap-5 pb-32 pt-12 items-center justify-center">
+      <form className="flex flex-col items-center justify-center gap-5 pb-32 pt-12">
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Desde que lugar..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Desde que lugar..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Hasta que lugar..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineCalendar className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Cuando?..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Cuando?..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiUserGroup className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Cantidad de pasajeros..." type="number" />
+          <input className="w-2/3 pl-2" placeholder="Cantidad de pasajeros..." type="number" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Equipaje..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Equipaje..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <MdPets className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Mascotas..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div>
-<Link href="/home/reserva/viajes" className="flex justify-center">
-        <button className="w-1/2 self-center">Buscar tu viaje!</button></Link>
+        <Link href="/home/reserva/viajes" className="flex justify-center">
+          <button className="w-1/2 self-center">Buscar tu viaje!</button>
+        </Link>
       </form>
     </div>
   );
