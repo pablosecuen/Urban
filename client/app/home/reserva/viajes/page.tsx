@@ -1,3 +1,4 @@
+'use client'
 import axios from "axios";
 import Link from "next/link";
 
@@ -5,14 +6,32 @@ import { Passages, Passage } from "@component/app/types/Travels";
 import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
 
 // Traigo los pasages de la API
-const getPassages = async (): Promise<Passages> => {
-  const data = await axios.get("http://localhost:3000/passage?pageSize=10000");
-  const passages = data.data;
-  return passages;
-};
+// const getPassages = async (): Promise<Passages> => {
+//   const data = await axios.get("http://localhost:3000/passage?pageSize=10000");
+//   const passages = data.data;
+//   return passages;
+// };
+
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@component/Redux/store/store";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "@reduxjs/toolkit";
+import { fetchAllTravels } from "@component/Redux/travel/travelSlice";
+
+// components
 
 export default async function Viajes() {
-  const data = await getPassages();
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const allTravels = useSelector((state: RootState) => state.travel.allTravels);
+
+  useEffect(() => {
+    dispatch(fetchAllTravels());
+  }, [dispatch]);
+  console.log(allTravels);
+
+  // const data = await getPassages();
   
 
   return (
@@ -24,7 +43,7 @@ export default async function Viajes() {
           Estas son las mejores opciones encontradas
         </h1>
 
-        {data?.passages.map((passage: Passage) => (
+        {/* {data?.passages.map((passage: Passage) => (
 
         <Link key={passage.id} href={`/home/viajes/confirmacion/${passage.id}`} className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-2">
@@ -35,7 +54,7 @@ export default async function Viajes() {
             {passage.departureDate} - {passage.arrivalDate}
           </small>
         </Link>
-        ))}
+        ))} */}
 
 
         {/* <hr />
