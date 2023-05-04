@@ -60,19 +60,26 @@ export const newChauffeurValidated = (req: Request, res: Response, next: NextFun
 export const updateChauffeurValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: ChauffeurToUpdate = req.body;
-    const allowProperties = ["email", "password", "phone", "address", "vehicle", "payments"];
+    const allowProperties = [
+      "typeChauffeur",
+      "license",
+      "occupation",
+      "address",
+      "phone",
+      "vehicle",
+      "payments",
+    ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
 
     if (
-      (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle)) ||
-      (data?.payments && !arePaymentsValid(data.payments)) ||
       (data?.typeChauffeur && !isTypeChauffeurValid(data.typeChauffeur)) ||
       (data?.license && !isLicenseValid(data.license)) ||
       (data?.occupation && !isOcupationValid(data.occupation)) ||
       (data?.address && !isAddressValid(data.address)) ||
       (data?.phone && !isPhoneValid(data.phone)) ||
-      (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle))
+      (data?.vehicle && !isVehicleToChauffeurValid(data.vehicle)) ||
+      (data?.payments && !arePaymentsValid(data.payments))
     )
       throw Error("Datos no válidos");
     next();
