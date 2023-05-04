@@ -26,7 +26,7 @@ export interface Chauffeur extends ChauffeurToRegister {
   deleted: boolean,
   status: boolean,
   displayName: string,
-  createAd: Date;
+  createAt: Date;
 }
 
 export interface ChauffeurToUpdate {
