@@ -10,19 +10,15 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { User } from "../../app/types/User";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
+import { CardUsersProps } from "@component/app/admin/users/page";
+import { Payment } from "@component/app/types/Payments";
 
 // components
 
-export default function CardUsers() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allUsers = useSelector((state: RootState) => state.user.allUsers);
+const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, selectedUser }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  // const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showDropDown, setShowDropDown] = useState(false);
-
-  useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -33,10 +29,6 @@ export default function CardUsers() {
       (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (user.id && user.id.toLowerCase().includes(searchTerm.toLowerCase()))
   );
-
-  const handleClick = (user: User) => {
-    setSelectedUser(user);
-  };
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
@@ -61,12 +53,6 @@ export default function CardUsers() {
                   onChange={handleSearchChange}
                 />
               </label>
-              {/* <button
-                className="mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-                type="button"
-              >
-                Settings
-              </button> */}
             </div>
           </div>
           {/* este es el render de los usuarios */}
@@ -74,7 +60,7 @@ export default function CardUsers() {
         <div style={{ height: "500px", overflow: "scroll" }}>
           {filteredUsers.map((user) => (
             <div
-              onClick={() => handleClick(user)}
+              onClick={() => handleClickFunction(user)}
               key={user.id}
               className="flex w-full cursor-pointer justify-between gap-4 border-2 px-4 py-2"
             >
@@ -155,13 +141,44 @@ export default function CardUsers() {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Nombre
+                    Medios de pago
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedUser ? selectedUser.name : ""}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <input
+                      type="text"
+                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      defaultValue={selectedUser?.payments[0]?.cardNumber ?? ""}
+                    />
+                    <input
+                      type="text"
+                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      defaultValue={selectedUser?.payments[0]?.expirationDate ?? ""}
+                    />
+                    <input
+                      type="text"
+                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      defaultValue={selectedUser?.payments[0]?.securityCode ?? ""}
+                    />
+                  </div>
+
+                  <div className="flex justify-center">
+                    <svg
+                      width="20px"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#626062"
+                      className="w-auto "
+                    >
+                      <input
+                        type="text"
+                        className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                        defaultValue={selectedUser ? selectedUser.name : ""}
+                      />
+                      {/* Icono de usuario */}
+                    </svg>
+                  </div>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -282,7 +299,7 @@ export default function CardUsers() {
                 <input
                   type="text"
                   className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue={selectedUser ? selectedUser.createAt?.toString() : ""}
+                  defaultValue="notas especiales del usuario"
                 />
               </div>
             </div>
@@ -291,4 +308,6 @@ export default function CardUsers() {
       </div>
     </div>
   );
-}
+};
+
+export default CardUsers;
