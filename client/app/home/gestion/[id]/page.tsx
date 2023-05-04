@@ -38,7 +38,7 @@ export default function DetailTravel({ params }: DetailTravelProps) {
   }, []);
 
   return (
-    <section className="container flex h-auto w-full flex-col gap-2 bg-slate-100 shadow-lg shadow-black/10 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
+    <section className="container flex h-auto w-full flex-col gap-2 rounded-3xl border-2 bg-slate-100 shadow-2xl shadow-black/40 lg:container lg:mx-auto lg:h-[500px] lg:p-10">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Detalle de viaje</h3>
       <article>
         {/* info viaje */}
