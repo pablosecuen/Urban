@@ -64,16 +64,16 @@ CardStats.defaultProps = {
 };
 
 CardStats.propTypes = {
-  statSubtitle: PropTypes.string,
-  statTitle: PropTypes.string,
+  statSubtitle: PropTypes.any,
+  statTitle: PropTypes.any,
   statArrow: PropTypes.oneOf(["up", "down"]),
-  statPercent: PropTypes.string,
+  statPercent: PropTypes.any,
   // can be any of the text color utilities
   // from tailwindcss
-  statPercentColor: PropTypes.string,
-  statDescripiron: PropTypes.string,
-  statIconName: PropTypes.string,
+  statPercentColor: PropTypes.any,
+  statDescripiron: PropTypes.any,
+  statIconName: PropTypes.any,
   // can be any of the background color utilities
   // from tailwindcss
-  statIconColor: PropTypes.string,
+  statIconColor: PropTypes.any,
 };

@@ -1,18 +1,38 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  AsyncThunkPayloadCreator,
+  AsyncThunk,
+  ThunkDispatch,
+} from "@reduxjs/toolkit";
 import { getAllUsers, getUserById, getUserByName, getUserByPatent } from "./userActions";
-const initialState = {
-  entities: [],
-} as any;
+import { User } from "../../app/types/User";
+import { AxiosResponse } from "axios";
+interface UserState {
+  allUsers: User[]; // change any[] to your specific type
+}
+
+const initialState: UserState = {
+  allUsers: [], // provide an empty array as the initial state value for allUsers
+};
+
+type ResponseType = AxiosResponse<any, any>;
+
+export const fetchAllUsers: AsyncThunk<User[], void, {}> = createAsyncThunk(
+  "users/fetchAllUsers",
+  async () => {
+    const response: ResponseType = await getAllUsers();
+    return response.data.users; // return the users array
+  }
+);
 
 const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllUsers.fulfilled, (state, action) => {
-      if (Array.isArray(action.payload)) {
-        state.entities.push(...action.payload);
-      }
+    builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
+      state.allUsers = action.payload;
     });
   },
 });
