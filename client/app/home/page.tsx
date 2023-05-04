@@ -8,20 +8,19 @@ export default function Home() {
     const urlParams = new URLSearchParams(window.location.search); //fijarse problema de window
     token = urlParams.get("token");
   }
-  if (token) {
-    useEffect(() => {
-      token &&
-        axios
-          .get("http://localhost:3000/user/decoding", {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          })
-          .then((data) => {
-            console.log(data.data);
-          });
-    }, []);
-  }
+
+  useEffect(() => {
+    token &&
+      axios
+        .get("http://localhost:3000/user/decoding", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((data) => {
+          console.log(data.data);
+        });
+  }, [token]);
 
   useEffect(() => {
     token &&
@@ -57,7 +56,7 @@ export default function Home() {
       <p className="mt-8 text-center text-lg font-bold">
         Selecciona el tipo de servicio para poder continuar
       </p>
-      <button onClick={() => toast("My first toast")}>Give me a toast</button>
+      <button onClick={() => toast.success("My first toast")}>Give me a toast</button>
     </div>
   );
 }
