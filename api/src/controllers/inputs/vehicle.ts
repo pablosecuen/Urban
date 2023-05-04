@@ -9,7 +9,7 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
     const dataFormated: Vehicle = {
       ...data,
       deleted: false,
-      createAt: new Date(Date.now()).toISOString(),
+      createdAt: new Date(Date.now()).toISOString(),
     };
 
     const [chauffeurDoc, ownerDoc] = await Promise.all([
@@ -48,7 +48,7 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const data: VehicleToUpdate = req.body;
-    const updateAt: string = new Date(Date.now()).toISOString();
+    const updatedAt: string = new Date(Date.now()).toISOString();
 
     const docRef = await db.collection("vehicle").doc(id).get();
 
@@ -56,7 +56,7 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
       throw new Error("El vehículo no se actualizo");
     }
 
-    await db.collection("vehicle").doc(id).update({ ...data, updateAt: updateAt });
+    await db.collection("vehicle").doc(id).update({ ...data, updatedAt: updatedAt });
     res.status(200).json({ message: "Vehículo actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el vehículo", innerError);

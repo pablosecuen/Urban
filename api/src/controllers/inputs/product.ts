@@ -8,7 +8,7 @@ export const newProduct = async (req: Request, res: Response): Promise<void> => 
     const dataFormated: ProductsToUpdate = {
       ...data,
       deleted: false,
-      createAt: new Date(Date.now()).toISOString(),
+      createdAt: new Date(Date.now()).toISOString(),
     }
 
     const [localDoc] = await Promise.all([
@@ -31,12 +31,12 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const updatedProductData: ProductsToUpdate = req.body;
-    const updateAt: string = new Date(Date.now()).toISOString();
+    const updatedAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection('products').doc(id).get();
     if (!docRef) {
       throw new Error("No se encontró el producto");
     }
-    await db.collection('products').doc(id).update({ ...updatedProductData, updateAt: updateAt });
+    await db.collection('products').doc(id).update({ ...updatedProductData, updatedAt: updatedAt });
     res.status(200).json({ message: "Producto actualizado correctamente" });
   } catch (error) {
     console.error(error);
