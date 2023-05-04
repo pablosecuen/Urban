@@ -46,7 +46,7 @@ import sendMailInputRouter from "./inputs/sendMail";
 import ticketInputRouter from "./inputs/ticket";
 import ticketOutputRouter from "./outputs/ticket";
 
-import roadTripInputRouter from "./inputs/roadtrip";
+import roadTripInputRouter from "./inputs/roadTrip";
 import roadTripOutputRouter from "./outputs/roadTrip";
 
 const router = Router();
