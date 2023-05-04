@@ -3,16 +3,15 @@ import { Address, Payment, Phone } from "../types/types";
 export interface ChauffeurToRegister {
   firstName: string,
   lastName: string,
-  displayName: string,
-  email: string;
-  password: string;
-  phone: Phone;
+  email: string,
+  password: string,
+  phone: Phone,
   nationality: string,
   birthday: string,
-  cc?: string;
-  ce?: string;
-  passport?: string;
-  license: string;
+  cc?: string,
+  ce?: string,
+  passport?: string,
+  license: string,
   img: string,
   typeChauffeur: string,
   address: Address,
@@ -20,24 +19,28 @@ export interface ChauffeurToRegister {
 }
 
 export interface Chauffeur extends ChauffeurToRegister {
-  payments: Payment;
-  history: string[];
+  payments: Payment,
+  history: string[],
   ownerState: boolean,
-  vehicle: VehicleForChauffeur;
-  deleted: boolean;
+  vehicle: VehicleForChauffeur,
+  deleted: boolean,
+  status: boolean,
+  displayName: string,
+  createAd: Date;
 }
 
 export interface ChauffeurToUpdate {
   typeChauffeur?: string,
-  license?: string;
+  license?: string,
   occupation?: string,
   address?: Address,
-  phone?: Phone;
-  vehicle?: VehicleForChauffeur;
-  payments?: Payment;
+  phone?: Phone,
+  vehicle?: VehicleForChauffeur,
+  payments?: Payment,
+  updateAt: Date;
 }
 
 export interface VehicleForChauffeur {
-  vehicleId: string;
-  patent: string;
+  vehicleId: string,
+  patent: string,
 }

@@ -8,10 +8,12 @@ export interface PassageToRegister {
   duration: string;
   price: number;
   numberSeat: number;
+  createAt: Date
 }
 export interface Passage extends PassageToRegister {
   deleted: boolean;
   status: boolean;
 }
+
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {}

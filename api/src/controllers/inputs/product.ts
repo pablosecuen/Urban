@@ -5,9 +5,10 @@ import { Products, ProductsToUpdate } from '../../schema/products';
 export const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: Products = req.body;
-    const dataFormated = {
+    const dataFormated: ProductsToUpdate = {
       ...data,
       deleted: false,
+      createAt: new Date(Date.now()),
     }
 
     const [localDoc] = await Promise.all([
@@ -30,11 +31,12 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const updatedProductData: ProductsToUpdate = req.body;
+    const updateAt: Date = new Date(Date.now());
     const docRef = await db.collection('products').doc(id).get();
     if (!docRef) {
       throw new Error("No se encontró el producto");
     }
-    await db.collection('products').doc(id).update({ ...updatedProductData });
+    await db.collection('products').doc(id).update({ ...updatedProductData, updateAt: updateAt });
     res.status(200).json({ message: "Producto actualizado correctamente" });
   } catch (error) {
     console.error(error);

@@ -10,7 +10,8 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
         const dataFormated = {
             ...data,
             status: true,
-            travel: "pending"
+            travel: "pending",
+            createAd: new Date(Date.now()),
         }
 
         const [userDoc, chauffeurDoc] = await Promise.all([
@@ -24,6 +25,15 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
 
         if (!chauffeurDoc.exists) {
             throw new Error("El chofer no existe");
+        }
+
+        const chauffeurData = chauffeurDoc.data();
+
+        if (!chauffeurData.status) {
+            throw new Error("El chofer no está autorizado para realizar viajes");
+        }
+        if (chauffeurData.deleted) {
+            throw new Error("Este chofer esta eliminado");
         }
 
         const docRef = await db.collection("travels").add(dataFormated);
@@ -46,15 +56,17 @@ export const updateTravel = async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    const id = req.params.id;
-    const travelsCollection = db.collection("travels");
     try {
+        const updateAs: Date = new Date(Date.now())
+
+        const id = req.params.id;
+        const travelsCollection = db.collection("travels");
         const docRef = await travelsCollection.doc(id).get();
         const currentStatus = docRef.get("travel");
 
         const newStatus = currentStatus === "pending" ? "progress" : currentStatus === "progress" ? "finished" : (() => { throw new Error("El estado actual del viaje no es válido"); })();
 
-        await travelsCollection.doc(id).update({ travel: newStatus });
+        await travelsCollection.doc(id).update({ travel: newStatus, updateAs: updateAs });
 
         res.status(200).json({ message: "Viaje actualizado correctamente", newStatus });
     } catch (error) {
@@ -68,9 +80,11 @@ export const cancelTravel = async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    const id = req.params.id;
-    const travelsCollection = db.collection("travels");
     try {
+        const updateAs: Date = new Date(Date.now())
+
+        const id = req.params.id;
+        const travelsCollection = db.collection("travels");
         const docRef = await travelsCollection.doc(id).get();
         const currentStatus = docRef.get("travel");
 
@@ -78,7 +92,7 @@ export const cancelTravel = async (
             throw new Error("El viaje no se puede cancelar porque no está en estado pendiente");
         }
 
-        await travelsCollection.doc(id).update({ travel: "rejected" });
+        await travelsCollection.doc(id).update({ travel: "rejected", updateAs: updateAs });
 
         res.status(200).json({ message: "Viaje cancelado correctamente" });
     } catch (error) {

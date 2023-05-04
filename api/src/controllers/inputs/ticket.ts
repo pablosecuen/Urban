@@ -40,12 +40,13 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 export const aceptTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
+    const updateAt: Date = new Date(Date.now());
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
     if (!ticketDoc.exists) throw new Error("El ticket no existe");
 
-    await db.collection("tickets").doc(id).update({ status: "acepted" });
+    await db.collection("tickets").doc(id).update({ status: "acepted", updateAt: updateAt });
 
     res.status(201).json({ message: "Ticket actualizado" });
   } catch (error) {
@@ -57,12 +58,13 @@ export const aceptTicket = async (req: Request, res: Response): Promise<void> =>
 export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
+    const updateAt: Date = new Date(Date.now());
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
     if (!ticketDoc.exists) throw new Error("El ticket no existe");
 
-    await db.collection("tickets").doc(id).update({ status: "canceled" });
+    await db.collection("tickets").doc(id).update({ status: "canceled", updateAt: updateAt });
 
     res.status(201).json({ message: "Ticket cancelado" });
   } catch (error) {

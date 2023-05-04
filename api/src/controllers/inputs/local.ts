@@ -17,7 +17,8 @@ export const newLocal = async (req: Request, res: Response): Promise<void> => {
       bankAccount: {
         bankHolder: "",
         accountNumber: ""
-      }
+      },
+      createAt: new Date(Date.now()),
     };
     // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
@@ -38,6 +39,8 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
   try {
     const id: string = req.params.id; // Obtener ID del local a actualizar
     const data: LocalToUpdate = req.body; // Obtener datos actualizados del local
+    const updateAt: Date = new Date(Date.now());
+
 
     // Verificar si el local existe en Firestore
     const docRef = await db.collection("locals").doc(id).get();
@@ -46,7 +49,7 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
     }
 
     // Actualizar el local en Firestore
-    await db.collection("locals").doc(id).update({ ...data });
+    await db.collection("locals").doc(id).update({ ...data, updateAt: updateAt });
 
     res.status(200).json({ message: "Local actualizado correctamente" });
   } catch (error) {

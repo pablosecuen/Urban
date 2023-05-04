@@ -11,8 +11,10 @@ export interface VehicleToRegister {
 
 export interface Vehicle extends VehicleToRegister {
   deleted?: boolean;
+  createAt?: Date;
 }
 
 export interface VehicleToUpdate extends Partial<Vehicle> {
   documents: string[]
+  updateAt?: Date;
 }

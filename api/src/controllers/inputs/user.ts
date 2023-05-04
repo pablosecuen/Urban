@@ -72,7 +72,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
-
+    const updateAt: Date = new Date(Date.now()); // Obtener fecha actual
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
@@ -83,7 +83,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     await db
       .collection("users")
       .doc(id)
-      .update({ ...data });
+      .update({ ...data, updateAt: updateAt });
 
     res.status(200).json({ message: "Usuario actualizado correctamente" });
   } catch (error) {

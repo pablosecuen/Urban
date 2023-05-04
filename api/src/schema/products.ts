@@ -8,8 +8,10 @@ export interface Products {
   type: TypeProduct;
   localId: string;
   img: string;
+  createAt?: Date,
 }
 
 export interface ProductsToUpdate extends Partial<Products> {
-  deleted: boolean
+  deleted: boolean,
+  updateAt?: Date,
 }
