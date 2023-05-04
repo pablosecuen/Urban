@@ -8,6 +8,7 @@ import {
   isChauffeurIdValid,
   isOwnerIdValid,
   isArrayImgValid,
+  isImgValid,
 } from "./validators";
 
 export const newVehicleValidate = (req: Request, res: Response, next: NextFunction): void => {
@@ -22,6 +23,7 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       "img",
       "ownerId",
       "chauffeurId",
+      "documents",
       "deleted",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
@@ -33,7 +35,8 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       !isYearValid(data.year) ||
       !isOwnerIdValid(data.ownerId) ||
       !isChauffeurIdValid(data.chauffeurId) ||
-      !data.img
+      !isArrayImgValid(data.img) ||
+      !isArrayImgValid(data.documents)
     ) {
       throw new Error("Datos incompletos o no válidos");
     }
@@ -54,6 +57,7 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
       "img",
       "ownerId",
       "chauffeurId",
+      "documents",
       "deleted",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
@@ -65,7 +69,8 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
       (data?.year && !isYearValid(data.year)) ||
       (data?.ownerId && !isOwnerIdValid(data.ownerId)) ||
       (data?.chauffeurId && !isChauffeurIdValid(data.chauffeurId)) ||
-      (data?.img && !isArrayImgValid(data.img))
+      (data?.img && !isArrayImgValid(data.img)) ||
+      (data?.documents && !isArrayImgValid(data.documents))
     ) {
       throw new Error("Datos incompletos o no válidos");
     }
