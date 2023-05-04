@@ -1,40 +1,40 @@
 import {
   createSlice,
   createAsyncThunk,
-  AsyncThunkPayloadCreator,
   AsyncThunk,
-  ThunkDispatch,
 } from "@reduxjs/toolkit";
 import { getAllPassages } from "./passageActions";
-import { User } from "../../app/types/User";
+import { Passage } from "../../app/types/Passages";
 import { AxiosResponse } from "axios";
-interface UserState {
-  allUsers: User[]; // change any[] to your specific type
+
+interface PassageState {
+  allPassages: Passage[]; // change any[] to your specific type
 }
 
-const initialState: UserState = {
-  allUsers: [], // provide an empty array as the initial state value for allUsers
+const initialState: PassageState = {
+  allPassages: [], // provide an empty array as the initial state value for allUsers
 };
 
 type ResponseType = AxiosResponse<any, any>;
 
-export const fetchAllUsers: AsyncThunk<User[], void, {}> = createAsyncThunk(
-  "users/fetchAllUsers",
+export const fetchAllPassages: AsyncThunk<Passage[], void, {}> = createAsyncThunk(
+  "passage/fetchAllPassages",
   async () => {
     const response: ResponseType = await getAllPassages();
-    return response.data.users; // return the users array
+    console.log({fetchAllPassages: response});
+    return response.data.passages; // return the users array
   }
 );
 
-const userSlice = createSlice({
-  name: "users",
+const passageSlice = createSlice({
+  name: "passages",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-      state.allUsers = action.payload;
+    builder.addCase(fetchAllPassages.fulfilled, (state, action) => {
+      state.allPassages = action.payload;
     });
   },
 });
 
-export default userSlice.reducer;
+export default passageSlice.reducer;

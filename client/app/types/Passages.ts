@@ -12,7 +12,3 @@ export interface Passage {
     status: true
   }
   
-  export interface Passages {
-    passages: Passage[];
-  }
-  

@@ -1,9 +1,7 @@
 import {
   createSlice,
   createAsyncThunk,
-  AsyncThunkPayloadCreator,
   AsyncThunk,
-  ThunkDispatch,
 } from "@reduxjs/toolkit";
 import { getAllUsers, getUserById, getUserByName, getUserByPatent } from "./userActions";
 import { User } from "../../app/types/User";
