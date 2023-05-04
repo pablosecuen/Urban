@@ -12,11 +12,11 @@ export const newLocal = async (req: Request, res: Response): Promise<void> => {
     const dataFormated: Local = {
       ...data,
       history: [],
-      state: false,
+      status: false,
       deleted: false,
       bankAccount: {
         bankHolder: "",
-        accountNumber: ""
+        accountNumber: "",
       },
       createAt: new Date(Date.now()),
     };
@@ -41,7 +41,6 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
     const data: LocalToUpdate = req.body; // Obtener datos actualizados del local
     const updateAt: Date = new Date(Date.now());
 
-
     // Verificar si el local existe en Firestore
     const docRef = await db.collection("locals").doc(id).get();
     if (!docRef.exists) {
@@ -49,7 +48,10 @@ export const updateLocal = async (req: Request, res: Response): Promise<void> =>
     }
 
     // Actualizar el local en Firestore
-    await db.collection("locals").doc(id).update({ ...data, updateAt: updateAt });
+    await db
+      .collection("locals")
+      .doc(id)
+      .update({ ...data, updateAt: updateAt });
 
     res.status(200).json({ message: "Local actualizado correctamente" });
   } catch (error) {
