@@ -82,7 +82,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
             name="email"
             value={userData.email}
             onChange={handleInputChange}
-            className={`transition_all mt-1 px-2 text-black ${
+            className={`transition_all px-2 text-black ${
               errores.messageEmail && "focus-visible:outline-red-500 "
             }`}
           />
