@@ -9,7 +9,7 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
     const dataFormated: Vehicle = {
       ...data,
       deleted: false,
-      createAt: new Date(Date.now()),
+      createAt: new Date(Date.now()).toISOString(),
     };
 
     const [chauffeurDoc, ownerDoc] = await Promise.all([
@@ -48,7 +48,7 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
   try {
     const id: string = req.params.id;
     const data: VehicleToUpdate = req.body;
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
 
     const docRef = await db.collection("vehicle").doc(id).get();
 

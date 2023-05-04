@@ -17,13 +17,19 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
         expirationDate: "",
         securityCode: "",
       },
+      phone: {
+        areaCode: "",
+        number: "",
+        displayPhone: "",
+      },
       history: [],
       deleted: false,
       license: "",
       status: false,
       displayName: data.firstName + " " + data.lastName,
       vehicleType: "false",
-      createAt: new Date(Date.now())
+      createAt: new Date(Date.now()).toISOString(),
+      rating: 0,
     };
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
@@ -57,7 +63,7 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
     const data: Distributor = req.body; //datos de distribuidor a actualizar
-    const updateAt: Date = new Date(Date.now());
+    const updateAt: string = new Date(Date.now()).toISOString();
 
 
     //verificar si existe el usuario en la base de datos
@@ -69,7 +75,7 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
     await db
       .collection("distributors")
       .doc(id)
-      .update({ ...data, updateAd: updateAt });
+      .update({ ...data, updateAt: updateAt });
     res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el Distribuidor", error);
