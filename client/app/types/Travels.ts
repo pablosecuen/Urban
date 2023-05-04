@@ -36,7 +36,8 @@ export interface Travel {
   price: number;
   status: boolean;
   travel: TravelStatus;
-  createAd: Date;
+  createdAt: Date;
+  id: string;
 }
 
 export interface TravelToUpdate {
