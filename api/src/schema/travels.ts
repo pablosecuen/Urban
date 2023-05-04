@@ -8,10 +8,10 @@ export interface Travel {
   price: number;
   status: boolean;
   travel: TravelStatus;
-  createAd: Date;
+  createdAt: Date;
 }
 
 export interface TravelToUpdate {
   travel?: TravelStatus;
-  updateAd?: Date;
+  updatedAt?: Date;
 }
