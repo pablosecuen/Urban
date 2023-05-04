@@ -3,6 +3,7 @@ import { db } from "../../connection/connection";
 
 /**
  * Controlador para buscar un conductor por id
+ * @param id  id del conductor
  */
 export const searhBusDriver = async (req: Request, res: Response): Promise<void> => {
   try {
