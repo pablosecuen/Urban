@@ -93,7 +93,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         {/* Name */}
         <div className="flex gap-1">
           <div className="w-1/2">
-            <label className="">Name:</label>
+            <label className="px-1">Name:</label>
             <input
               className="px-1 text-black"
               type="text"
@@ -102,7 +102,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
             />
           </div>
           <div className="w-1/2">
-            <label htmlFor="">Lastname:</label>
+            <label htmlFor="" className="px-1">
+              Lastname:
+            </label>
             <input
               type="text"
               className="px-1 text-black"
@@ -113,7 +115,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         </div>
         {/* Email */}
         <div>
-          <label className="">Email:</label>
+          <label className="px-1">Email:</label>
           <input
             className="px-1 text-black"
             type="email"
@@ -123,7 +125,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         </div>
         {/* Password  */}
         <div>
-          <label className="">Password:</label>
+          <label className="px-1">Password:</label>
           <input
             className="px-1 text-black"
             type="password"
@@ -133,7 +135,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         </div>
         {/* Repeat Password   */}
         <div>
-          <label className="">Repeat Password:</label>
+          <label className="px-1">Repeat Password:</label>
           <input
             className="px-1 text-black"
             type="password"
