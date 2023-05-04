@@ -1,14 +1,16 @@
 import { Address, Phone } from "../types/types";
 
 export interface OwnerToRegister {
-  name: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
   email: string;
   phone: Phone;
   address: Address;
   cc: string;
   ce?: string;
   vehiclesId?: string[];
-  createAt?: Date
+  createAt?: Date;
 }
 
 export interface Owner extends OwnerToRegister {
@@ -16,7 +18,15 @@ export interface Owner extends OwnerToRegister {
   deleted?: boolean;
 }
 
-export interface OwnerToUpdate extends Partial<OwnerToRegister> {
+export interface OwnerToUpdate {
+  firstName?: string;
+  lastName?: string;
+  displayName?: string;
+  email?: string;
+  phone?: Phone;
   address?: Address;
-  updateAt?: Date
+  cc?: string;
+  ce?: string;
+  vehiclesId?: string[];
+  updateAt?: Date;
 }
