@@ -2,8 +2,8 @@
 import Login from "@component/components/Login/Login";
 import logo from "../assets/imagenes/UrbanLogo.png";
 import Image, { StaticImageData } from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@component/Redux/store/store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { AppDispatch, RootState } from "@component/Redux/store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 interface LoginProps {
@@ -14,10 +14,10 @@ interface LoginProps {
 }
 
 export default function LandingPage() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { entities } = useSelector((state: RootState) => state.user);
-
-  console.log(entities);
+  // useEffect(() => {
+  //   dispatch(fetchAllUsers());
+  // }, [dispatch]);
+  // console.log(allUsers);
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row">
