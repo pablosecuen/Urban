@@ -11,7 +11,9 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
             ...data,
             status: true,
             travel: "pending",
-            createAt: new Date(Date.now()).toISOString(),
+
+            createdAt: new Date(Date.now()),
+
         }
 
         const [userDoc, chauffeurDoc] = await Promise.all([
