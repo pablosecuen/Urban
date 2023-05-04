@@ -27,7 +27,8 @@ export default function Users() {
 
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickFunction = (user: User) => {
     setSelectedUser(user);
