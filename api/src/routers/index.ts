@@ -49,9 +49,6 @@ import ticketOutputRouter from "./outputs/ticket";
 import roadTripInputRouter from "./inputs/roadTrip";
 import roadTripOutputRouter from "./outputs/roadTrip";
 
-import ratingOutputRouter from "./outputs/rating";
-// import roadTripOutputRouter from "./outputs/roadTrip";
-
 const router = Router();
 
 // Rutas para entrada de datos
@@ -88,8 +85,6 @@ router.use("/passage", passageInputRouter);
 router.use("/ticket", ticketInputRouter);
 
 router.use("/roadtrip", roadTripInputRouter);
-
-router.use("/rating", ratingOutputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);

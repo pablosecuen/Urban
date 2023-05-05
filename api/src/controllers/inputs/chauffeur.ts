@@ -31,6 +31,7 @@ export const newChauffeur = async (req: Request, res: Response): Promise<void> =
       displayName: data.firstName + " " + data.lastName,
       status: false,
       rating: 0,
+      comments: [{}],
     };
     const snapshot = await db
       .collection("chauffeur")

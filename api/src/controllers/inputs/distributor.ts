@@ -30,6 +30,7 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
       vehicleType: "false",
       createdAt: new Date(Date.now()).toISOString(),
       rating: 0,
+      comments: [{}],
     };
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
