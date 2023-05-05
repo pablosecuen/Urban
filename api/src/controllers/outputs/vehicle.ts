@@ -96,14 +96,12 @@ export const searchVehicleByChauffeur = async (req: Request, res: Response): Pro
 
 export const searchVehicleByOwner = async (req: Request, res: Response): Promise<void> => {
   try {
-    const owner: string = req.params.ownerId;
-    const vehicleSnapshot = await db
-      .collection("vehicle")
-      .where("owner", "==", owner)
-      .where("deleted", "==", false)
-      .get();
+    const ownerId: string = req.params.ownerId;
+    const vehicleSnapshot = await db.collection("vehicle").where("ownerId", "==", ownerId).get();
     if (vehicleSnapshot.empty) {
-      res.status(404).json({ message: `No se encontró ningún vehículo en propiedad de ${owner}` });
+      res
+        .status(404)
+        .json({ message: `No se encontró ningún vehículo en propiedad de ${ownerId}` });
     }
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
