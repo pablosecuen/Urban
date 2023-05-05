@@ -176,7 +176,23 @@ export const isDateValid = (date: string): Boolean => {
   if (typeof date === "string") return true;
   return false;
 };
+export const isDepartureDateValid = (departureTime: string): Boolean => {
+  if (typeof departureTime === "string") return true;
+  return false;
+};
+export const isArrivalDateValid = (arrivalTime: string): Boolean => {
+  if (typeof arrivalTime === "string") return true;
+  return false;
+};
+export const isDurationValid = (duration: string): Boolean => {
+  if (typeof duration === "string") return true;
+  return false;
+};
 
+export const isNumberSeatValid = (numberSeat: number): Boolean => {
+  if (typeof numberSeat === "number") return true;
+  return false;
+};
 export const isPriceValid = (price: number): Boolean => {
   if (typeof price === "number" && price >= 0) return true;
   return false;
