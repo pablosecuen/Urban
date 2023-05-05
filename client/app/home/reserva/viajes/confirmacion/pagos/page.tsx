@@ -1,7 +1,7 @@
 "use client";
 export default function Pagos() {
   return (
-    <div className="flex flex-col justify-center items-center gap-4 w-4/5 text-center py-20 lg:py-0">
+    <div className="flex w-4/5 flex-col items-center justify-center gap-4 rounded-3xl border-2 px-6 py-20 text-center shadow-2xl shadow-black/40 lg:py-14">
       <span className="text-2xl">Valor a pagar: $50.000</span>
       <button>Bancolombia</button>
       <button>Mercado Pago</button>

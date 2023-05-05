@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useEffect } from "react";
-import { toast } from "sonner";
+
 export default function Home() {
   let token: any;
   if (typeof window !== "undefined") {
@@ -56,7 +56,6 @@ export default function Home() {
       <p className="mt-8 text-center text-lg font-bold">
         Selecciona el tipo de servicio para poder continuar
       </p>
-      <button onClick={() => toast.success("My first toast")}>Give me a toast</button>
     </div>
   );
 }

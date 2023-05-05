@@ -4,31 +4,31 @@ import Link from "next/link";
 
 export default function Confirmacion() {
   return (
-    <div className="flex flex-col justify-center items-center gap-4 py-20 lg:py-0">
-      <p className="font-bold lg:text-3xl text-center">Pedido especial confirmado</p>
+    <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border-2 py-20 shadow-2xl shadow-black/40 lg:p-10">
+      <p className="text-center font-bold lg:text-3xl">Pedido especial confirmado</p>
       <div className="flex justify-center">
-        <p className="font-bold lg:text-3xl text-center">Nombre del cadete</p>
-        <p className=" lg:text-3xl text-center">Luis martin</p>
+        <p className="text-center font-bold lg:text-3xl">Nombre del cadete</p>
+        <p className=" text-center lg:text-3xl">Luis martin</p>
       </div>
       <div className="flex justify-center">
-        <p className="font-bold lg:text-3xl text-center"> Hora de recogida</p>
-        <p className=" lg:text-3xl text-center">3:00 horas</p>
+        <p className="text-center font-bold lg:text-3xl"> Hora de recogida</p>
+        <p className=" text-center lg:text-3xl">3:00 horas</p>
       </div>
       <div className="flex justify-center">
-        <p className="font-bold lg:text-3xl text-center">Lugar de recogida</p>
-        <p className=" lg:text-3xl text-center">Lugar indicado</p>
+        <p className="text-center font-bold lg:text-3xl">Lugar de recogida</p>
+        <p className=" text-center lg:text-3xl">Lugar indicado</p>
       </div>
       <div className="flex justify-center">
-        <p className="font-bold lg:text-3xl text-center">Valor a pagar</p>
-        <p className=" lg:text-3xl text-center">un toco de plata</p>
+        <p className="text-center font-bold lg:text-3xl">Valor a pagar</p>
+        <p className=" text-center lg:text-3xl">un toco de plata</p>
       </div>
-      <p className="text-gray-400 text-center">
+      <p className="text-center text-gray-400">
         {" "}
         tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
       </p>
       <Link
         href="/home/especiales/confirmacion/pagos"
-        className="w-2/3 text-center bg-blue text-white rounded-md p-2"
+        className="w-2/3 rounded-md bg-blue p-2 text-center text-white"
       >
         Ir a pagar
       </Link>

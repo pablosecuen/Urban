@@ -1,6 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../user/userSlice";
 import travelReducer from "../travel/travelSlice";
+import passageReducer from "../passage/passageSlice";
+
+
+
 
 
 export function makeStore(){
@@ -8,6 +12,7 @@ export function makeStore(){
         reducer: {
             user: userReducer,
             travel: travelReducer,
+            passage: passageReducer,
         },
 
     })

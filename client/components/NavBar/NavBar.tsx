@@ -113,29 +113,29 @@ export default function NavBar() {
           </div>
         </nav>
       ) : (
-        <nav className="bg-verde py-2 ">
-          <div className="container mx-auto flex justify-between">
+        <nav className="w-full bg-verde py-2 lg:py-0">
+          <div className="container mx-auto flex justify-between ">
             <Image
               src={logo as StaticImageData}
               alt="logo"
-              className="h-10 w-auto self-center"
+              className="flex h-10 w-auto self-center"
               width={100}
               height={100}
             />
 
-            <ul className="flex w-1/3 items-center space-x-4">
+            <ul className="flex w-auto items-center justify-evenly lg:w-1/2 lg:gap-4 xl:w-2/5">
               {links.map((link) => (
                 <li
                   key={link.id}
                   className={`flex ${
                     pathname?.includes(link.route) && "border-b   border-celeste "
-                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste`}
+                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:w-auto lg:px-0`}
                 >
                   <Link
                     href={link.route}
                     className="flex items-center gap-1 text-sm font-semibold uppercase"
                   >
-                    <link.icon className="h-6 w-5" />
+                    <link.icon className="h-6 w-5 " />
                     {link.label}
                   </Link>
                 </li>
@@ -154,10 +154,13 @@ export default function NavBar() {
                       alt={userData?.name}
                       width={50}
                       height={50}
-                      className=" w-96 rounded-full border-2 border-blue"
+                      className=" rounded-full border-2 border-blue lg:h-14 lg:w-full"
                     />
                     <span className="mx-2">{userData?.name}</span>
-                    <button className="text-blue-500" onClick={handleLogout}>
+                    <button
+                      className="rounded bg-blue px-4 py-2 text-center text-white lg:w-auto"
+                      onClick={handleLogout}
+                    >
                       Logout
                     </button>
                   </li>
@@ -208,9 +211,12 @@ export default function NavBar() {
                   </div>
                 </>
               ) : (
-                <li className="my-2 flex items-center ">
-                  <span className="mx-2 font-semibold">Guest</span>
-                  <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                <li className="my-2 flex w-auto items-center">
+                  <span className="mx-2 font-semibold lg:w-auto">GUEST</span>
+                  <Link
+                    href="/"
+                    className="rounded bg-blue px-4 py-2 text-center text-white lg:w-auto"
+                  >
                     Login
                   </Link>
                 </li>

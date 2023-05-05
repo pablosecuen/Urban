@@ -1,95 +1,38 @@
-'use client'
-import axios from "axios";
+"use client";
 import Link from "next/link";
-
-import { Passages, Passage } from "@component/app/types/Travels";
-import { FaMotorcycle, FaCar, FaBus, FaTaxi } from "react-icons/fa";
-
-// Traigo los pasages de la API
-// const getPassages = async (): Promise<Passages> => {
-//   const data = await axios.get("http://localhost:3000/passage?pageSize=10000");
-//   const passages = data.data;
-//   return passages;
-// };
-
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import { fetchAllTravels } from "@component/Redux/travel/travelSlice";
+import { fetchAllPassages } from "@component/Redux/passage/passageSlice";
 
-// components
-
-export default async function Viajes() {
+export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allTravels = useSelector((state: RootState) => state.travel.allTravels);
+  const allPassages = useSelector((state: RootState) => state.passage.allPassages);
 
   useEffect(() => {
-    dispatch(fetchAllTravels());
-  }, [dispatch]);
-  console.log(allTravels);
+    dispatch(fetchAllPassages());
+  }, []);
 
-  // const data = await getPassages();
-  
 
   return (
-
-
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
       <div className="flex flex-col gap-4 ">
         <h1 className="text-center text-xl text-blue">
           Estas son las mejores opciones encontradas
         </h1>
 
-        {/* {data?.passages.map((passage: Passage) => (
-
-        <Link key={passage.id} href={`/home/viajes/confirmacion/${passage.id}`} className="flex flex-col items-center justify-center">
-          <div className="flex items-center gap-2">
-            <FaBus size="20" className="w-4 text-blue" />
-            <span className="text-lg font-semibold text-gray-600 capitalize">{passage.origin} - {passage.destination}</span>
-          </div>
-          <small className="pt-2 text-sm text-gray-600">
-            {passage.departureDate} - {passage.arrivalDate}
-          </small>
-        </Link>
-        ))} */}
-
-
-        {/* <hr />
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center gap-2">
-            <FaCar size="20" className="w-4 text-blue" />
-            <span className="text-lg font-semibold text-gray-600">Automovil privado</span>
-          </div>
-          <span className="pt-2 text-sm text-gray-600">
-            Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
-            Tiempo estimado: 4 horas
-          </span>
-        </div>
-        <hr />
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center gap-2">
-            <FaTaxi size="20" className="w-4 text-blue" />
-            <span className="text-lg font-semibold text-gray-600">Taxi Publico</span>
-          </div>
-          <span className="pt-2 text-sm text-gray-600">
-            Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
-            Tiempo estimado: 4 horas
-          </span>
-        </div>
-        <hr />
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center gap-2">
-            <FaMotorcycle size="20" className="w-4 text-blue" />
-            <span className="text-lg font-semibold text-gray-600">Motocicleta privada</span>
-          </div>
-          <span className="pt-2 text-sm text-gray-600">
-            Conductor: Luis G. Cootransandina - 1:00pm - Estrella St <br />
-            Tiempo estimado: 4 horas
-          </span>
-        </div> */}
+        {allPassages.map((passage) => (
+          <Link href={`/home/reserva/viajes/${passage.id}`} key={passage.id} className="flex w-full flex-col border border-black">
+            <h3 className="border capitalize">
+              {passage.origin} - {passage.destination}
+            </h3>
+            <small>
+              {passage.departureDate} {passage.duration}
+            </small>
+          </Link>
+        ))}
       </div>
       <div className="flex gap-2 pt-10">
         <button>Ver mas opciones</button>

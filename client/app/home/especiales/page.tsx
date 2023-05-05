@@ -8,27 +8,27 @@ import {
 
 export default function Especiales() {
   return (
-    <div className="lg:w-4/5 lg:mx-auto border-2 rounded-3xl shadow-2xl shadow-black/40 mb-8 lg:mb-0">
-      <h1 className="text-blue text-center text-xl mt-12">Llena el formulario para tu pedido</h1>
-      <form className="flex flex-col gap-5 pb-32 pt-12 items-center justify-center">
+    <div className="mb-8 w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:mx-auto lg:mt-10 lg:h-[450px] lg:w-3/4">
+      <h1 className="mt-12 text-center text-xl text-blue">Llena el formulario para tu pedido</h1>
+      <form className="flex flex-col items-center justify-center gap-5 pb-32 pt-12">
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Donde buscamos tu pedido..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Donde buscamos tu pedido..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Hasta que lugar..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Que producto necesitas?..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Que producto necesitas?..." type="text" />
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
-          <select className="pl-2 w-2/3 text-gray-400">
+          <select className="w-2/3 rounded-md border-b-2 pl-2 text-gray-400">
             <option hidden>Necesitas que paguemos tu pedido por vos?</option>
             <option>si</option>
             <option>no</option>
@@ -37,12 +37,12 @@ export default function Especiales() {
 
         <div className="flex items-center justify-center">
           <HiUserGroup className="w-10 text-blue" />
-          <input className="pl-2 w-2/3" placeholder="Comentarios para el cadete" type="text" />
+          <input className="w-2/3 pl-2" placeholder="Comentarios para el cadete" type="text" />
         </div>
 
         <Link
           href="/home/especiales/confirmacion"
-          className="w-1/2 bg-blue text-white rounded-lg p-2 text-center"
+          className="w-1/2 rounded-lg bg-blue p-2 text-center text-white"
         >
           Confirma tu pedido!
         </Link>
