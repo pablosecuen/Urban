@@ -1,9 +1,9 @@
 import { Router } from "express";
+import { updateAdminStatus } from "../../controllers/inputs/adminStatus";
 
 const router = Router();
 
-router.post("/");
-router.put("/");
+router.put("/", updateAdminStatus);
 router.delete("/");
 
 export default router;
