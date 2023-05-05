@@ -12,6 +12,7 @@ export interface VehicleToRegister {
 export interface Vehicle extends VehicleToRegister {
   deleted?: boolean;
   createdAt?: string;
+  status: boolean;
 }
 
 export interface VehicleToUpdate {
