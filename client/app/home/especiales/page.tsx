@@ -28,7 +28,7 @@ export default function Especiales() {
 
         <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
-          <select className="w-2/3 pl-2 text-gray-400">
+          <select className="w-2/3 rounded-md border-b-2 pl-2 text-gray-400">
             <option hidden>Necesitas que paguemos tu pedido por vos?</option>
             <option>si</option>
             <option>no</option>
