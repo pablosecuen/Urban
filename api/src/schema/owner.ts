@@ -16,6 +16,7 @@ export interface OwnerToRegister {
 export interface Owner extends OwnerToRegister {
   address: Address;
   deleted?: boolean;
+  status: boolean;
 }
 
 export interface OwnerToUpdate {
