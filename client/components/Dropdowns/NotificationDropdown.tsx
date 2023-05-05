@@ -1,31 +1,26 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
-import Image from "next/image";
 
-const UserDropdown = () => {
+const NotificationDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
+  const btnDropdownRef = React.useRef<HTMLAnchorElement>(null);
+  const popoverDropdownRef = React.useRef<HTMLDivElement>(null);
   const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
+    if (btnDropdownRef.current && popoverDropdownRef.current) {
+      createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+        placement: "bottom-start",
+      });
+      setDropdownPopoverShow(true);
+    }
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
   return (
-    <div
-      className="absolute -right-10 top-12 flex h-48 w-48 justify-end bg-black"
-      onClick={(e) => {
-        e.preventDefault();
-        dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-      }}
-    >
+    <>
       <a
-        className="block text-blueGray-500"
+        className="block px-3 py-1 text-blueGray-500"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -33,29 +28,19 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="flex items-center">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blueGray-200 text-sm text-white">
-            <Image
-              alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/team-1-800x800.jpg"
-              width={50}
-              height={50}
-            />
-          </span>
-        </div>
+        <i className="fas fa-bell"></i>
       </a>
       <div
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "min-w-48 z-50 float-left w-96 list-none rounded bg-white py-2 text-left text-base shadow-lg"
+          "min-w-48 z-50 float-left list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
         <a
           href="#pablo"
           className={
-            "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-white"
+            "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -90,8 +75,8 @@ const UserDropdown = () => {
           Seprated link
         </a>
       </div>
-    </div>
+    </>
   );
 };
 
-export default UserDropdown;
+export default NotificationDropdown;

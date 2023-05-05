@@ -1,5 +1,5 @@
 "use client";
-import CardUsers from "../../../components/Cards/CardUsers";
+import CardUsers from "../../../../components/Cards/CardUsers";
 import CardProfile from "@component/components/Cards/CardProfile";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

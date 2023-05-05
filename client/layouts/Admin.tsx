@@ -2,12 +2,13 @@ import React from "react";
 
 // components
 
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import HeaderStats from "components/Headers/HeaderStats.tsx";
-import FooterAdmin from "components/Footers/FooterAdmin.js";
+import AdminNavbar from "../components/Navbars/AdminNavbar";
 
-export default function Admin({ children }) {
+import HeaderStats from "../components/Headers/HeaderStats";
+import FooterAdmin from "../components/Footers/FooterAdmin";
+import Sidebar from "../components/Sidebar/Sidebar";
+
+export default function Admin({ children }: any) {
   return (
     <>
       <Sidebar />

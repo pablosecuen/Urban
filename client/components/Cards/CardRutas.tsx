@@ -3,9 +3,9 @@ import Image from "next/image";
 
 // components
 
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
+import TableDropdown from "../Dropdowns/TableDropdown";
 
-export default function CardTable({ color }) {
+export default function CardTable({ color }: any) {
   return (
     <>
       <div

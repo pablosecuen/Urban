@@ -5,13 +5,15 @@ import { createPopper } from "@popperjs/core";
 const IndexDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
+  const btnDropdownRef = React.useRef<HTMLAnchorElement>(null);
+  const popoverDropdownRef = React.useRef<HTMLDivElement>(null);
   const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
+    if (btnDropdownRef.current && popoverDropdownRef.current) {
+      createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+        placement: "bottom-start",
+      });
+      setDropdownPopoverShow(true);
+    }
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
@@ -19,7 +21,7 @@ const IndexDropdown = () => {
   return (
     <>
       <a
-        className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+        className="flex items-center px-3 py-4 text-xs font-bold uppercase text-blueGray-700 hover:text-blueGray-500 lg:py-2"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -33,12 +35,12 @@ const IndexDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+          "min-w-48 z-50 float-left list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "block w-full whitespace-nowrap bg-transparent px-4 pb-0 pt-2 text-sm font-bold text-blueGray-400"
           }
         >
           Admin Layout
@@ -47,7 +49,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Dashboard
@@ -57,7 +59,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Settings
@@ -67,7 +69,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Tables
@@ -77,16 +79,16 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Maps
           </a>
         </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
+        <div className="mx-4 my-2 h-0 border border-solid border-blueGray-100" />
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "block w-full whitespace-nowrap bg-transparent px-4 pb-0 pt-2 text-sm font-bold text-blueGray-400"
           }
         >
           Auth Layout
@@ -95,7 +97,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Login
@@ -105,16 +107,16 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Register
           </a>
         </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
+        <div className="mx-4 my-2 h-0 border border-solid border-blueGray-100" />
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "block w-full whitespace-nowrap bg-transparent px-4 pb-0 pt-2 text-sm font-bold text-blueGray-400"
           }
         >
           No Layout
@@ -123,7 +125,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Landing
@@ -133,7 +135,7 @@ const IndexDropdown = () => {
           <a
             href="#pablo"
             className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              "block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-blueGray-700"
             }
           >
             Profile

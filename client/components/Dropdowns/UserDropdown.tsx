@@ -5,13 +5,15 @@ import Image from "next/image";
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
+  const btnDropdownRef = React.useRef<HTMLAnchorElement>(null);
+  const popoverDropdownRef = React.useRef<HTMLDivElement>(null);
   const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
+    if (btnDropdownRef.current && popoverDropdownRef.current) {
+      createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+        placement: "bottom-start",
+      });
+      setDropdownPopoverShow(true);
+    }
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);

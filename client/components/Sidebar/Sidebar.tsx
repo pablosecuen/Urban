@@ -1,14 +1,30 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import NotificationDropdown from "../Dropdowns/TableDropdown";
+import UserDropdown from "../Dropdowns/UserDropdown";
 
-export default function Sidebar() {
-  const [collapseShow, setCollapseShow] = React.useState("hidden");
+interface SidebarProps {
+  // props
+}
+
+const Sidebar: React.VFC<SidebarProps> = (
+  {
+    /* destructured props */
+  }
+) => {
+  const [collapseShow, setCollapseShow] = useState<string>("hidden");
   const router = useRouter();
+
+  const handleCollapse = () => {
+    setCollapseShow("bg-white m-2 py-3 px-6");
+  };
+
+  const handleHideCollapse = () => {
+    setCollapseShow("hidden");
+  };
   return (
     <>
       <nav className="relative z-10 flex flex-wrap items-center justify-between bg-white px-6 py-4 shadow-xl md:fixed md:bottom-0 md:left-0 md:top-0 md:block md:w-64 md:flex-row md:flex-nowrap md:overflow-hidden md:overflow-y-auto">
@@ -110,7 +126,7 @@ export default function Sidebar() {
                     ></path>
                   </g>
                 </svg>
-                <Link href="/admin/users">Users</Link>
+                <Link href="/admin/dashboard/users">Users</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
@@ -130,7 +146,7 @@ export default function Sidebar() {
                     ></path>
                   </g>
                 </svg>
-                <Link href="/admin/travels">Travels</Link>
+                <Link href="/admin/dashboard/travels">Travels</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
@@ -152,7 +168,7 @@ export default function Sidebar() {
                     </g>{" "}
                   </g>
                 </svg>
-                <Link href="/admin/tables">Tables</Link>
+                <Link href="/admin/dashboard/tables">Tables</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
@@ -174,7 +190,7 @@ export default function Sidebar() {
                     </g>{" "}
                   </g>
                 </svg>
-                <Link href="/admin/maps">Maps</Link>
+                <Link href="/admin/dashboard/maps">Maps</Link>
               </li>
             </ul>
 
@@ -270,4 +286,6 @@ export default function Sidebar() {
       </nav>
     </>
   );
-}
+};
+
+export default Sidebar;
