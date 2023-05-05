@@ -1,17 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@component/Redux/store/store";
-import { fetchAllUsers } from "@component/Redux/user/userSlice";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "@reduxjs/toolkit";
 import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { User } from "../../app/types/User";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-import { CardUsersProps } from "@component/app/admin/users/page";
-import { Payment } from "@component/app/types/Payments";
+import { CardUsersProps } from "@component/app/admin/dashboard/users/page";
 
 // components
 
@@ -25,7 +17,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   };
 
   const filteredUsers = allUsers.filter(
-    (user) =>
+    (user: any) =>
       (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (user.id && user.id.toLowerCase().includes(searchTerm.toLowerCase()))
   );
@@ -58,7 +50,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
           {/* este es el render de los usuarios */}
         </div>
         <div style={{ height: "500px", overflow: "scroll" }}>
-          {filteredUsers.map((user) => (
+          {filteredUsers.map((user: any) => (
             <div
               onClick={() => handleClickFunction(user)}
               key={user.id}
