@@ -29,6 +29,7 @@ export interface Chauffeur extends ChauffeurToRegister {
   displayName: string,
   createdAt: string;
   rating: number,
+  comments: object[],
 }
 
 export interface ChauffeurToUpdate {
