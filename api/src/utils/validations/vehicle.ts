@@ -8,7 +8,6 @@ import {
   isChauffeurIdValid,
   isOwnerIdValid,
   isArrayImgValid,
-  isImgValid,
 } from "./validators";
 
 export const newVehicleValidate = (req: Request, res: Response, next: NextFunction): void => {
@@ -24,7 +23,6 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       "ownerId",
       "chauffeurId",
       "documents",
-      "deleted",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
