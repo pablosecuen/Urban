@@ -28,7 +28,7 @@ export default function CardUsers() {
   };
 
   const filteredTravels = allTravels.filter(
-    (travel) =>
+    (travel: any) =>
       (travel.origin && travel.origin.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (travel.userId && travel.userId.toLowerCase().includes(searchTerm.toLowerCase()))
   );
@@ -71,7 +71,7 @@ export default function CardUsers() {
           {/* este es el render de los travels */}
         </div>
         <div style={{ height: "500px", overflow: "scroll" }}>
-          {filteredTravels.map((travel) => (
+          {filteredTravels.map((travel: any) => (
             <div
               onClick={() => handleClick(travel)}
               key={travel.id}
