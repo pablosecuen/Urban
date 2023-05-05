@@ -1,12 +1,18 @@
 import { Router } from "express";
-import { enablePassage, newPassage, updatePassage,deletePassage } from "../../controllers/inputs/passage";
+import {
+  enablePassage,
+  newPassage,
+  updatePassage,
+  deletePassage,
+} from "../../controllers/inputs/passage";
+import { newAndUpdatePassageValidate } from "../../utils/validations/passage";
 
 const router = Router();
 
-//Ruta para crear bondis
+//Ruta para crear pasajes
 
-router.post("/", newPassage);
-router.put("/:id", updatePassage);
+router.post("/", newAndUpdatePassageValidate, newPassage);
+router.put("/:id", newAndUpdatePassageValidate, updatePassage);
 router.patch("/:id", enablePassage);
 router.delete("/:id", deletePassage);
 
