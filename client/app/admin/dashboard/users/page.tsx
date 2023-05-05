@@ -4,10 +4,11 @@ import CardProfile from "@component/components/Cards/CardProfile";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
-import { fetchAllUsers } from "@component/Redux/user/userSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { User } from "@component/app/types/User";
+
+import { getAllUsers, getUsersByCc, getUsersByEmail } from "../../../../Redux/user/userActions";
 
 // components
 export interface CardUsersProps {
@@ -23,10 +24,12 @@ export interface CardProfileProps {
 export default function Users() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allUsers = useSelector((state: RootState) => state.user.allUsers);
+
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {
-    dispatch(fetchAllUsers());
+    dispatch(getAllUsers());
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

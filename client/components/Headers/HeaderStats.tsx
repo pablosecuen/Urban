@@ -9,7 +9,8 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { fetchAllUsers } from "@component/Redux/user/userSlice";
+
+import { getAllUsers } from "@component/Redux/user/userActions";
 
 config.autoAddCss = false;
 
@@ -18,18 +19,16 @@ export default function HeaderStats(): JSX.Element {
   const allTravels = useSelector((state: RootState) => state.travel.allTravels);
   const allUsers = useSelector((state: RootState) => state.user.allUsers);
 
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [totalTravels, setTotalTravels] = useState(0);
+  const [totalUsers, setTotalUsers] = useState([] as any);
+  const [totalTravels, setTotalTravels] = useState([] as any);
 
   useEffect(() => {
     dispatch(fetchAllTravels());
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getAllUsers());
     setTotalUsers(allUsers.length);
     setTotalTravels(allTravels.length);
-  }, [allUsers, allTravels]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const today = new Date();
   const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
