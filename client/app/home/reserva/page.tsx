@@ -7,6 +7,18 @@ import {
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
 
+// const passageById: Passage | null = useSelector((state: RootState) => state.passage.passageById);
+
+// useEffect(() => {
+//   dispatch(fetchPassagesByQuery({ origin: "Medillin", destination: "Bolombolo" }));
+// }, []);
+//fido aca te dejo un ejemplo de como tenes que mandar las cosas a esta funcion del fetchPassagesByQuery, no tiene que ser objeto y que corresponda el nombre de la porpiedad del objeto del back, osea origin y destination son estos
+// destination
+//origin
+//price
+//departureDate
+//arrivalDate
+
 export default function Reserva() {
   return (
     <div className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
