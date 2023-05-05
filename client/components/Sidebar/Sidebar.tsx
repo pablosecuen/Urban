@@ -150,6 +150,14 @@ const Sidebar: React.VFC<SidebarProps> = (
               </li>
 
               <li className="flex items-center justify-start gap-2">
+                <svg viewBox="0 0 24 24" width="25px" height="25px" className="w-auto">
+                  <path d="M2.5 7.5l9.5-6.5 9.5 6.5v9l-9.5-3.5-9.5 3.5zM12 16.5v-5h-1v5h-2.5l3.5 2.5 3.5-2.5h-2.5z" />
+                </svg>
+
+                <Link href="/admin/dashboard/passages">Passages</Link>
+              </li>
+
+              <li className="flex items-center justify-start gap-2">
                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
