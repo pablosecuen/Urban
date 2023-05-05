@@ -4,18 +4,26 @@ import { AdminStatus } from "../../schema/adminStatus";
 
 /**
  *  Controlador para adminStatus
- *
+ * @param changes[], array de estring con los valores a modificar, ["enableBusses", "enableCarPulling", "enableOrders"]
+ * puede ser uno o 2 o todos
  */
-export const newAdminStatus = async (req: Request, res: Response) => {
+export const updateAdminStatus = async (req: Request, res: Response) => {
   try {
-    const data: AdminStatus = req.body;
+    const dataRef = await db.collection("adminStatus").doc("BECMkRXkiNt1QmsQjjZT");
+    const data = await dataRef.get();
+    const changes: string[] = req.body.changes;
 
-    const snapshot = db.collection("adminStatus");
-    if (snapshot) {
-      throw new Error("Admin status ya ha sido creada");
-    }
-    const docRef = await db.collection("adminStatus").add(data);
-    res.status(200).json({ id: docRef.id });
+    const updateData = {};
+    changes.forEach((change) => {
+      updateData[change] = !data.get(change);
+    });
+
+    const docRef = await db
+      .collection("adminStatus")
+      .doc("BECMkRXkiNt1QmsQjjZT")
+      .update({ ...updateData });
+    const doc = await db.collection("adminStatus").doc("BECMkRXkiNt1QmsQjjZT").get();
+    res.status(200).json(doc.data());
   } catch (error) {
     try {
       throw new Error(error.message);
