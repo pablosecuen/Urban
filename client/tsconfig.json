@@ -23,6 +23,6 @@
       "@component/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pages/[...nextauth].js", "app/pages/[...nextauth].js", "app/page.jsx", "components/Headers/HeaderStats.js", "layouts/Admin.tsx", "components/Sidebar/Sidebar.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pages/[...nextauth].js", "app/pages/[...nextauth].js", "app/page.jsx", "components/Headers/HeaderStats.js", "layouts/Admin.tsx", "components/Sidebar/Sidebar.tsx", "components/Cards/CardLineChart.js"],
   "exclude": ["node_modules"]
 }
