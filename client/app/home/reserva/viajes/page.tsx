@@ -15,7 +15,6 @@ export default function Viajes() {
     dispatch(fetchAllPassages());
   }, []);
 
-  console.log(allPassages);
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
