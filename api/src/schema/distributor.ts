@@ -25,6 +25,7 @@ export interface Distributor extends DistributorToRegister {
   status: boolean,
   createdAt: string;
   rating: number,
+  comments: object[],
 }
 
 export interface DistributorToUpdate {
