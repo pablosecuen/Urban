@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
+import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DistributorRating } from "../../schema/distributorRating";
 
@@ -69,66 +70,9 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// necesita validacion xq tiene datos por body
-export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { userId, distributorId } = req.params;
-    const data = req.body;
-
-    const dataFormatted: DistributorRating = {
-      userId,
-      distributorId,
-      ...data,
-      createdAt: new Date(Date.now()).toISOString(),
-    };
-
-    const [userDoc, distributorDoc] = await Promise.all([
-      db.collection("users").doc(dataFormatted.userId).get(),
-      db.collection("distributors").doc(dataFormatted.distributorId).get(),
-    ]);
-
-    if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!distributorDoc.exists) throw new Error("El distribuidor no existe");
-
-    const docRef = await db.collection("distributorRating").add(dataFormatted);
-
-    //Ahora sacamos el promedio de todos los rating del distribuidor
-    let distributorRatings: any = db
-      .collection("distributorRating")
-      .where("distributorId", "==", distributorId);
-    const prueba = await distributorRatings.get();
-    console.log({ prueba: prueba.doc });
-    // console.log({
-    //   distributorRatings: await distributorRatings.get(),
-    //   distributorRatings1: distributorRatings.docs,
-    //   //"distributorRatings.doc": distributorRatings.docs,
-    // });
-
-    // const totalRating = distributorRatings.docs.reduce((acc, curr) => {
-    //   console.log({
-    //     "curr.data()": curr.data(),
-    //     curr: curr,
-    //   });
-    //   return acc + curr.data().rating;
-    // }, 0);
-
-    //Esto no esta testeado Fede que Dios me perdone pero lo subo asi
-    // const averageRating = totalRating / distributorRatings.docs.length;
-
-    // await db.collection("distributors").doc(distributorId).update({
-    //   rating: averageRating,
-    // });
-
-    res.status(201).json({ id: docRef.id });
-  } catch (error) {
-    console.error("Error al generar rating", error);
-    res.status(500).json({ message: error.message });
-  }
-};
-
 /**
  * Controlador para actulizar un usuario en Firestore.
- */
+*/
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
@@ -184,3 +128,60 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
     res.status(400).json({ messege: error.message });
   }
 };
+
+export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, distributorId } = req.params;
+    const data = req.body;
+
+    const dataFormatted: DistributorRating = {
+      userId,
+      distributorId,
+      ...data,
+      createdAt: new Date().toISOString(),
+    };
+
+    const [userDoc, distributorDoc] = await Promise.all([
+      db.collection("users").doc(userId).get(),
+      db.collection("distributors").doc(distributorId).get(),
+    ]);
+
+    if (!userDoc.exists) throw new Error("El usuario no existe");
+    if (!distributorDoc.exists) throw new Error("El distribuidor no existe");
+
+    const docRef = await db.collection("distributorRating").add(dataFormatted);
+
+    const distributorRef = db.collection("distributors").doc(distributorId);
+    const distributorRatingsRef = db.collection("distributorRating").where("distributorId", "==", distributorId);
+
+    const [distributorData, distributorRatingsData] = await Promise.all([
+      distributorRef.get(),
+      distributorRatingsRef.get(),
+    ]);
+
+    const totalRating = distributorRatingsData.docs.reduce((acc, curr) => acc + curr.data().rating, 0);
+    const averageRating = totalRating / distributorRatingsData.size;
+
+    if (data.comment) {
+      const commentData = {
+        comment: data.comment,
+        userId,
+      };
+
+      await distributorRef.update({
+        rating: averageRating,
+        comments: firebase.firestore.FieldValue.arrayUnion(commentData),
+      });
+    } else {
+      await distributorRef.update({
+        rating: averageRating,
+      });
+    }
+
+    res.status(201).json({ id: docRef.id });
+  } catch (error) {
+    console.error("Error al generar rating", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
