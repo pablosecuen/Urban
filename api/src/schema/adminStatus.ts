@@ -1,4 +1,4 @@
-export interface ddmindStatus {
+export interface AdminStatus {
   //todo lo referido a los viajes en colectivo
   enableBusses: boolean;
   //todo lo de car pulling
