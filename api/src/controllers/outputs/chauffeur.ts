@@ -68,3 +68,19 @@ export const searchChauffeurByPatent = async (req: Request, res: Response): Prom
     res.status(500).json({ message: "Error al obtener el chofer" });
   }
 };
+
+export const searchChauffeurName = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const name: string = req.params.name;
+    const doc = await db.collection("chauffeur").where("displayname", "==", name).get();
+
+    if (doc.empty) {
+      res.status(404).json({ message: `No se encontró ningún chofer con el nombre ${name}` });
+    }
+    const chauffeurData = doc.docs[0].data() as Chauffeur;
+    res.json(chauffeurData);
+  } catch (error) {
+    console.error("Error al obtener el chofer", error);
+    res.status(500).json({ message: "Error al obtener el chofer" });
+  }
+};
