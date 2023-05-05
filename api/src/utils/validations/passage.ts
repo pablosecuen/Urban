@@ -31,7 +31,7 @@ export const newAndUpdatePassageValidate = (
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Propiedades no válidas");
-    if (!data.userId || !data.passageId) throw Error("Datos incompletos");
+    if (allowProperties.some((property) => !data[property])) throw Error("Datos incompletos");
     if (
       !isOriginValid(data.origin) ||
       !isStockValid(data.stock) ||
