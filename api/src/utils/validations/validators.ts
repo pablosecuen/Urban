@@ -189,8 +189,8 @@ export const isDurationValid = (duration: string): Boolean => {
   return false;
 };
 
-export const isNumberSeatValid = (numberSeat: string): Boolean => {
-  if (typeof numberSeat === "string") return true;
+export const isNumberSeatValid = (numberSeat: number): Boolean => {
+  if (typeof numberSeat === "number") return true;
   return false;
 };
 export const isPriceValid = (price: number): Boolean => {
