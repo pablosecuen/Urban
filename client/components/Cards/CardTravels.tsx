@@ -271,7 +271,7 @@ export default function CardUsers() {
                 <input
                   type="text"
                   className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue={selectedTravel ? selectedTravel.createAt?.toString() : ""}
+                  defaultValue={selectedTravel ? selectedTravel.createdAt?.toString() : ""}
                 />
               </div>
             </div>

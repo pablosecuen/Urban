@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
-import { Toaster } from "sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -14,8 +14,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <main className="max-w-screen-4xl mx-auto flex h-full flex-col items-center justify-center sm:flex-row ">
-          <Toaster position="bottom-right" expand={true} richColors className="absolute w-auto" />
-
           <Providers>{children}</Providers>
         </main>
       </body>
