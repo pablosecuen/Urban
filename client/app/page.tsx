@@ -5,7 +5,7 @@ import Image, { StaticImageData } from "next/image";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AppDispatch, RootState } from "@component/Redux/store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Toaster } from "sonner";
+
 
 interface LoginProps {
   onLogin: (email: string, password: string) => void;
