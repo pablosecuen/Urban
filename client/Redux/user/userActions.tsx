@@ -19,8 +19,3 @@ export const getUserByName = createAsyncThunk("users/getUserName", async (name: 
   return data;
 });
 
-export const getUserByPatent = createAsyncThunk("users/getUserByPatent", async (patent: string) => {
-  const response = await fetch(`/api/users?patent=${patent}`);
-  const data = await response.json();
-  return data;
-});
