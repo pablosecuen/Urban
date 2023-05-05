@@ -1,6 +1,6 @@
 
 import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
-import { getAllUsers, getUserById, getUserByName, getUserByPatent } from "./userActions";
+import { getAllUsers, getUserById, getUserByName } from "./userActions";
 
 import { User } from "../../app/types/User";
 import { AxiosResponse } from "axios";
