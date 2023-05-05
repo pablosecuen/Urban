@@ -9,6 +9,7 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
     const dataFormated: Vehicle = {
       ...data,
       deleted: false,
+      status: false,
       createdAt: new Date(Date.now()).toISOString(),
     };
 
@@ -32,9 +33,12 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
       "vehicle.patent": data.patent,
     });
 
-    await db.collection("owner").doc(dataFormated.ownerId).update({
-      vehiclesId: firebase.firestore.FieldValue.arrayUnion(docRef.id),
-    });
+    await db
+      .collection("owner")
+      .doc(dataFormated.ownerId)
+      .update({
+        vehiclesId: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+      });
 
     res.status(200).json({ message: "Vehículo creado correctamente", id: docRef.id });
   } catch (innerError) {
@@ -42,7 +46,6 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
     res.status(400).json({ message: innerError.message });
   }
 };
-
 
 export const updateVehicle = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -56,7 +59,10 @@ export const updateVehicle = async (req: Request, res: Response): Promise<void> 
       throw new Error("El vehículo no se actualizo");
     }
 
-    await db.collection("vehicle").doc(id).update({ ...data, updatedAt: updatedAt });
+    await db
+      .collection("vehicle")
+      .doc(id)
+      .update({ ...data, updatedAt: updatedAt });
     res.status(200).json({ message: "Vehículo actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el vehículo", innerError);
