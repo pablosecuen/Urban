@@ -185,3 +185,58 @@ export const newDistributorRating = async (req: Request, res: Response): Promise
   }
 };
 
+export const newChauffeurRating = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, chauffeurId } = req.params;
+    const data = req.body;
+
+    const dataFormatted: DistributorRating = {
+      userId,
+      chauffeurId,
+      ...data,
+      createdAt: new Date().toISOString(),
+    };
+
+    const [userDoc, chauffeurDoc] = await Promise.all([
+      db.collection("users").doc(userId).get(),
+      db.collection("chauffeur").doc(chauffeurId).get(),
+    ]);
+
+    if (!userDoc.exists) throw new Error("El usuario no existe");
+    if (!chauffeurDoc.exists) throw new Error("El distribuidor no existe");
+
+    const docRef = await db.collection("chauffeurRating").add(dataFormatted);
+
+    const chauffeurRef = db.collection("chauffeur").doc(chauffeurId);
+    const chauffeurRatingsRef = db.collection("chauffeurRating").where("chauffeurId", "==", chauffeurId);
+
+    const [chauffeurData, chauffeurRatingsData] = await Promise.all([
+      chauffeurRef.get(),
+      chauffeurRatingsRef.get(),
+    ]);
+
+    const totalRating = chauffeurRatingsData.docs.reduce((acc, curr) => acc + curr.data().rating, 0);
+    const averageRating = totalRating / chauffeurRatingsData.size;
+
+    if (data.comment) {
+      const commentData = {
+        comment: data.comment,
+        userId,
+      };
+
+      await chauffeurRef.update({
+        rating: averageRating,
+        comments: firebase.firestore.FieldValue.arrayUnion(commentData),
+      });
+    } else {
+      await chauffeurRef.update({
+        rating: averageRating,
+      });
+    }
+
+    res.status(201).json({ id: docRef.id });
+  } catch (error) {
+    console.error("Error al generar rating", error);
+    res.status(500).json({ message: error.message });
+  }
+};
