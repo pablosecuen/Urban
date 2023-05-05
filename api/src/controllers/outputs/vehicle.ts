@@ -5,10 +5,9 @@ import { Vehicle } from "../../schema/vehicle";
 
 export const getVehicles = async (req: Request, res: Response): Promise<void> => {
   try {
-    // posibles querys = {model:"string", brand: "marca", iYear: "2015", fYear: "2015"}
     const allProperties = Object.keys(req.query);
 
-    let query: any = db.collection("vehicle").where("deleted", "==", false)
+    let query: any = db.collection("vehicle").where("deleted", "==", false);
 
     allProperties.forEach((property) => {
       if (property === "page" || property === "pageSize") {
@@ -39,6 +38,22 @@ export const getVehicles = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
+export const getVehicleById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id;
+    const doc = await db.collection("vehicle").doc(id).get();
+    if (!doc.exists) {
+      res.status(404).json({ message: "Vehículo no encontrado" });
+    } else {
+      const vehicle = { id: doc.id, ...doc.data() };
+      res.status(200).json(vehicle);
+    }
+  } catch (innerError) {
+    console.error("Error al encontrar el vehículo por id", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
+
 export const searchVehicleByPatent = async (req: Request, res: Response): Promise<void> => {
   try {
     const patent: string = req.params.patent;
@@ -51,11 +66,30 @@ export const searchVehicleByPatent = async (req: Request, res: Response): Promis
       res.status(404).json({ message: `No se encontró ningún vehículo con la patente ${patent}` });
     }
     const vehicleData = doc.docs[0].data() as Vehicle;
-    console.log(vehicleData);
     const { ownerId, chauffeurId } = vehicleData;
     res.json({ ...vehicleData, ...{ ownerId, chauffeurId } });
   } catch (innerError) {
     console.error("Error al encontrar el vehículo por patente", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
+
+export const searchVehicleByChauffeur = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const chauffeur: string = req.params.chauffeurId;
+    const doc = await db
+      .collection("vehicle")
+      .where("chauffeurId", "==", chauffeur)
+      .where("deleted", "==", false)
+      .get();
+    if (doc.empty) {
+      res.status(404).json({ message: `No se encontró vehículo asignados a ${chauffeur}` });
+    }
+    const vehicleData = doc.docs[0].data() as Vehicle;
+    const { ownerId, chauffeurId } = vehicleData;
+    res.json({ ...vehicleData, ...{ ownerId, chauffeurId } });
+  } catch (innerError) {
+    console.error("Error al encontrar el vehículo por chofer", innerError);
     res.status(400).json({ message: innerError.message });
   }
 };
@@ -88,6 +122,35 @@ export const searchVehicleByOwner = async (req: Request, res: Response): Promise
   } catch (innerError) {
     console.error("Error al encontrar el vehículo por propietario", innerError);
     res.status(400).json;
+  }
+};
+
+export const searchVehicleByBrand = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const brand: string = req.params.brand;
+    const vehicleRef = db.collection("vehicle");
+    const vehicleSnapshot = await vehicleRef
+      .where("brand", "==", brand)
+      .where("deleted", "==", false)
+      .get();
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(vehicleSnapshot.docs.length / pageSize);
+
+    const vehicles = vehicleSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    res.status(200).json({ vehicles, totalPages });
+  } catch (innerError) {
+    console.error("Error al encontrar el vehículo por marca", innerError);
+    res.status(400).json({ message: innerError.message });
   }
 };
 
