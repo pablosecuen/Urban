@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { searchChauffeur, allChauffeur, searchChauffeurByPatent, searchChauffeurName, searchChauffeurCc } from "../../controllers/outputs/chauffeur";
+import { searchChauffeur, allChauffeur, searchChauffeurByPatent, searchChauffeurName, searchChauffeurCc, searchChauffeurCe } from "../../controllers/outputs/chauffeur";
 
 const router = Router();
 
@@ -8,6 +8,7 @@ router.get("/", allChauffeur);
 router.get("/:id", searchChauffeur);
 router.get("/:name", searchChauffeurName);
 router.get("/:cc", searchChauffeurCc);
+router.get("/:ce", searchChauffeurCe);
 router.get("/patent/:patent", searchChauffeurByPatent);
 
 export default router;
