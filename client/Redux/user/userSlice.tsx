@@ -14,6 +14,8 @@ const initialState: UserState = {
 
 type ResponseType = AxiosResponse<any, any>;
 
+
+
 export const fetchAllUsers: AsyncThunk<User[], void, {}> = createAsyncThunk(
   "users/fetchAllUsers",
   async () => {
