@@ -1,6 +1,6 @@
 import React from "react";
 
-import CardTravels from "../../../components/Cards/CardTravels";
+import CardTravels from "../../../../components/Cards/CardTravels";
 
 import CardProfile from "@component/components/Cards/CardProfile";
 
