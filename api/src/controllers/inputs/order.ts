@@ -24,20 +24,36 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       db.collection("locals").doc(dataFormated.localId).get(),
     ]);
 
-    if (!userDoc.exists) {
+
+    if (!userDoc.exists)
       res.status(404).json({ message: "El usuario no existe" });
-      return;
-    }
 
-    if (!distributorDoc.exists) {
+
+    if (!distributorDoc.exists)
       res.status(404).json({ message: "El distribuidor no existe" });
-      return;
-    }
 
-    if (!localDoc.exists) {
+
+    if (!localDoc.exists)
       res.status(404).json({ message: "El local no existe" });
-      return;
-    }
+
+
+    const distributorData = distributorDoc.data();
+
+    if (!distributorData.status)
+      res.status(400).json({ message: "El distribuidor no esta activo" });
+
+    if (distributorData.deleted)
+      res.status(400).json({ message: "El distribuidor esta eliminado" });
+
+    const localData = localDoc.data();
+
+    if (!localData.status)
+      res.status(400).json({ message: "El local no esta activo" });
+
+    if (localData.deleted)
+      res.status(400).json({ message: "El local esta eliminado" });
+
+
 
     const docRef = await db.collection("orders").add(dataFormated);
 

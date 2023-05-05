@@ -19,22 +19,22 @@ export const newTravel = async (req: Request, res: Response): Promise<void> => {
             db.collection("chauffeur").doc(dataFormated.chauffeurId).get(),
         ]);
 
-        if (!userDoc.exists) {
-            throw new Error("El usuario no existe");
-        }
+        if (!userDoc.exists)
+            res.status(404).json({ message: "El usuario no existe" });
 
-        if (!chauffeurDoc.exists) {
-            throw new Error("El  chofer no existe");
-        }
+
+        if (!chauffeurDoc.exists)
+            res.status(404).json({ message: "El chofer no existe" });
+
 
         const chauffeurData = chauffeurDoc.data();
 
-        if (!chauffeurData.status) {
-            throw new Error("El chofer no está autorizado para realizar viajes");
-        }
-        if (chauffeurData.deleted) {
-            throw new Error("Este chofer esta eliminado");
-        }
+        if (!chauffeurData.status)
+            res.status(400).json({ message: "El chofer esta inactivo" });
+
+        if (chauffeurData.deleted)
+            res.status(400).json({ message: "El chofer esta eliminado" });
+
 
         const docRef = await db.collection("travels").add(dataFormated);
 
