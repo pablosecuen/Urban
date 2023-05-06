@@ -15,7 +15,6 @@ export default function Viajes() {
     dispatch(fetchAllPassages());
   }, []);
 
-
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
       <div className="flex flex-col gap-4 ">
@@ -24,13 +23,15 @@ export default function Viajes() {
         </h1>
 
         {allPassages.map((passage) => (
-          <Link href={`/home/reserva/viajes/${passage.id}`} key={passage.id} className="flex w-full flex-col border border-black">
-            <h3 className="border capitalize">
+          <Link
+            href={`/home/reserva/viajes/${passage.id}`}
+            key={passage.id}
+            className="flex w-full flex-col rounded-xl border border-blueGray-700 px-3 py-1"
+          >
+            <h3 className="font-bold capitalize text-blueGray-700">
               {passage.origin} - {passage.destination}
             </h3>
-            <small>
-              {passage.departureDate} {passage.duration}
-            </small>
+            <small>{passage.departureDate}</small>
           </Link>
         ))}
       </div>
