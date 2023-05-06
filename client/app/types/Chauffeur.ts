@@ -22,3 +22,8 @@ export interface Chauffeur {
     vehicleId: string;
   };
 }
+
+export interface ChauffeursArrayResponse {
+  chauffeurs: Chauffeur[];
+  page: number;
+}
