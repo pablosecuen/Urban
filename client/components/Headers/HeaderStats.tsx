@@ -19,8 +19,8 @@ export default function HeaderStats(): JSX.Element {
   const allTravels = useSelector((state: RootState) => state.travel.allTravels);
   const allUsers = useSelector((state: RootState) => state.user.allUsers);
 
-  const [totalUsers, setTotalUsers] = useState([] as any);
-  const [totalTravels, setTotalTravels] = useState([] as any);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalTravels, setTotalTravels] = useState(0);
 
   useEffect(() => {
     dispatch(fetchAllTravels());
@@ -93,18 +93,20 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since last month"
                   statIconName="far fa-chart-bar"
                   statIconColor="bg-red-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="NEW USERS OF LAST WEEK"
-                  statTitle={usersLastWeek.toString()}
+                  statTitle={usersLastWeek}
                   statArrow={usersChange >= 0 ? "up" : "down"}
                   statPercent={`${Math.abs(usersChange).toFixed(2)}%`}
                   statPercentColor={usersChange >= 0 ? "text-emerald-500" : "text-red-500"}
                   statDescripiron="Since last week"
                   statIconName="fas fa-chart-pie"
                   statIconColor="bg-orange-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
@@ -117,6 +119,7 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since yesterday"
                   statIconName="fas fa-users"
                   statIconColor="bg-pink-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
@@ -129,6 +132,7 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since last month"
                   statIconName="fas fa-percent"
                   statIconColor="bg-blueGray-500"
+                  title={""}
                 />
               </div>
             </div>
