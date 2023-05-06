@@ -1,4 +1,4 @@
-import { Distributor, DistributorToUpdate } from "../../schema/distributor";
+import { Dealer, DealerToUpdate } from "../../schema/dealer";
 import { Request, Response, NextFunction } from "express";
 import {
   arePaymentsValid,
@@ -16,10 +16,10 @@ import {
   isVehicleTypeValid,
 } from "./validators";
 
-export const newDistributorValidate = (req: Request, res: Response, next: NextFunction): void => {
+export const newDealerValidate = (req: Request, res: Response, next: NextFunction): void => {
   // Validar que todas las propiedades tengan un valor válido
   try {
-    const data: Distributor = req.body;
+    const data: Dealer = req.body;
     const allowProperties = [
       "firstName",
       "lastName",
@@ -55,13 +55,13 @@ export const newDistributorValidate = (req: Request, res: Response, next: NextFu
   }
 };
 
-export const updateDistributorValidate = (
+export const updateDealerValidate = (
   req: Request,
   res: Response,
   next: NextFunction
 ): void => {
   try {
-    const data: DistributorToUpdate = req.body;
+    const data: DealerToUpdate = req.body;
     const allowProperties: string[] = [
       "phone",
       "address",

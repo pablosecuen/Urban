@@ -3,7 +3,7 @@ import { db } from "../../connection/connection";
 import { VehicleToRegister, Vehicle, VehicleToUpdate } from "../../schema/vehicle";
 import firebase from "firebase-admin";
 
-export const newVehicle = async (req: Request, res: Response): Promise<void> => {
+export const newVehicleByChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: VehicleToRegister = req.body;
     const dataFormated: Vehicle = {
@@ -29,6 +29,49 @@ export const newVehicle = async (req: Request, res: Response): Promise<void> => 
     const docRef = await db.collection("vehicle").add(dataFormated);
 
     await db.collection("chauffeur").doc(dataFormated.chauffeurId).update({
+      "vehicle.vehicleId": docRef.id,
+      "vehicle.patent": data.patent,
+    });
+
+    await db
+      .collection("owner")
+      .doc(dataFormated.ownerId)
+      .update({
+        vehiclesId: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+      });
+
+    res.status(200).json({ message: "Vehículo creado correctamente", id: docRef.id });
+  } catch (innerError) {
+    console.error("Error al crear el vehículo", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
+export const newVehicleByDelivery = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const data: VehicleToRegister = req.body;
+    const dataFormated: Vehicle = {
+      ...data,
+      deleted: false,
+      status: false,
+      createdAt: new Date(Date.now()).toISOString(),
+    };
+
+    const [dealerDoc, ownerDoc] = await Promise.all([
+      db.collection("dealers").doc(dataFormated.dealersId).get(),
+      db.collection("owner").doc(dataFormated.ownerId).get(),
+    ]);
+
+    if (!dealerDoc.exists) {
+      throw new Error("El repartidor no existe");
+    }
+
+    if (!ownerDoc.exists) {
+      throw new Error("El dueño no existe");
+    }
+
+    const docRef = await db.collection("vehicle").add(dataFormated);
+
+    await db.collection("dealers").doc(dataFormated.dealersId).update({
       "vehicle.vehicleId": docRef.id,
       "vehicle.patent": data.patent,
     });

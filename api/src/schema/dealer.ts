@@ -1,5 +1,5 @@
 import { Address, Payment, Phone, TypeVehicle } from "../types/types";
-export interface DistributorToRegister {
+export interface DealerToRegister {
   firstName: string,
   lastName: string,
   address: Address,
@@ -15,11 +15,11 @@ export interface DistributorToRegister {
   img: string,
   rating: number,
 }
-export interface Distributor extends DistributorToRegister {
+export interface Dealer extends DealerToRegister {
   displayName: string,
   license: string;
   payments: Payment;
-  vehicleType?: TypeVehicle;
+  vehicle: VehicleForDealer
   history: string[];
   deleted: boolean;
   status: boolean,
@@ -28,7 +28,7 @@ export interface Distributor extends DistributorToRegister {
   comments: object[],
 }
 
-export interface DistributorToUpdate {
+export interface DealerToUpdate {
   img: string,
   phone: Phone;
   license: string;
@@ -40,3 +40,7 @@ export interface DistributorToUpdate {
   rating: number,
 }
 
+export interface VehicleForDealer {
+  vehicleId: string,
+  patent: string,
+}

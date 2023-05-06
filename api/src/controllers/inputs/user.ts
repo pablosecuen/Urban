@@ -3,7 +3,7 @@ import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
 import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
-import { DistributorRating } from "../../schema/distributorRating";
+import { DealerRating } from "../../schema/dealerRating";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -129,12 +129,12 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
+export const newDealerRating = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId, distributorId } = req.params;
     const data = req.body;
 
-    const dataFormatted: DistributorRating = {
+    const dataFormatted: DealerRating = {
       userId,
       distributorId,
       ...data,
@@ -190,7 +190,7 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
     const { userId, chauffeurId } = req.params;
     const data = req.body;
 
-    const dataFormatted: DistributorRating = {
+    const dataFormatted: DealerRating = {
       userId,
       chauffeurId,
       ...data,
