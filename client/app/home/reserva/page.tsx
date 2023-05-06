@@ -54,24 +54,27 @@ const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
   return (
-    <div className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
+    <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
       <h1 className="mt-12 text-center text-xl text-blue">
         Llena el formulario para encontrar tu viaje
       </h1>
       <form className="flex flex-col items-center justify-center gap-5 pb-32 pt-12">
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Desde que lugar..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Desde que lugar..." type="text" 
+          onChange={handleOriginChange}/>
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" 
+          onChange={handleDestinationChange}/>
         </div>
 
         <div className="flex items-center justify-center">
           <HiOutlineCalendar className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Cuando?..." type="text" />
+          <input className="w-2/3 pl-2" placeholder="Cuando?..." type="text" 
+          onChange={handleDepartureDateChange}/>
         </div>
 
         <div className="flex items-center justify-center">
@@ -92,6 +95,6 @@ const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <button className="w-1/2 self-center">Buscar tu viaje!</button>
         </Link>
       </form>
-    </div>
+    </section>
   );
 }
