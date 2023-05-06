@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../user/userSlice";
 import travelReducer from "../travel/travelSlice";
 import passageReducer from "../passage/passageSlice";
-import chauffeurReducer from "../chauffeur/chauffeurSlice";
+import deliverySlice from "../delivery/deliverySlice";
+import chauffeurSlice from "../chauffeur/chauffeurSlice";
 
 export function makeStore() {
   return configureStore({
@@ -10,7 +11,8 @@ export function makeStore() {
       user: userReducer,
       travel: travelReducer,
       passage: passageReducer,
-      chauffeur: chauffeurReducer,
+      delivery: deliverySlice,
+      chauffeur: chauffeurSlice,
     },
   });
 }

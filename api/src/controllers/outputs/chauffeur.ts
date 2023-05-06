@@ -68,3 +68,50 @@ export const searchChauffeurByPatent = async (req: Request, res: Response): Prom
     res.status(500).json({ message: "Error al obtener el chofer" });
   }
 };
+
+export const searchChauffeurName = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const name: string = req.params.name;
+    const doc = await db.collection("chauffeur").where("displayname", "==", name).get();
+
+    if (doc.empty) {
+      res.status(404).json({ message: `No se encontró ningún chofer con el nombre ${name}` });
+    }
+    const chauffeurData = doc.docs[0].data() as Chauffeur;
+    res.json(chauffeurData);
+  } catch (error) {
+    console.error("Error al obtener el chofer", error);
+    res.status(500).json({ message: "Error al obtener el chofer" });
+  }
+};
+export const searchChauffeurCe = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const ce: string = req.params.ce;
+    const doc = await db.collection("chauffeur").where("ce", "==", ce).get();
+
+    if (doc.empty) {
+      res.status(404).json({ message: `No se encontró ningún chofer con esat cedula de extranjero ${ce}` });
+    }
+    const chauffeurData = doc.docs[0].data() as Chauffeur;
+    res.json(chauffeurData);
+  } catch (error) {
+    console.error("Error al obtener el chofer", error);
+    res.status(500).json({ message: "Error al obtener el chofer" });
+  }
+};
+
+export const searchChauffeurCc = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const cc: string = req.params.cc;
+    const doc = await db.collection("chauffeur").where("cc", "==", cc).get();
+
+    if (doc.empty) {
+      res.status(404).json({ message: `No se encontró ningún chofer con el documento de identidad ${cc}` });
+    }
+    const chauffeurData = doc.docs[0].data() as Chauffeur;
+    res.json(chauffeurData);
+  } catch (error) {
+    console.error("Error al obtener el chofer", error);
+    res.status(500).json({ message: "Error al obtener el chofer" });
+  }
+};

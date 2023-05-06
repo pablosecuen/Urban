@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { userData } from "../../app/types/User";
 import { links, linksMobile } from "../../assets/data";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { createPopper } from "@popperjs/core";
+import { createPopper } from "@popperjs/core/lib/popper-lite.js";
 
 import logo from "../../assets/imagenes/UrbanIso.png";
 

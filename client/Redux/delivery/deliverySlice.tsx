@@ -6,122 +6,122 @@ import {
   ThunkDispatch,
 } from "@reduxjs/toolkit";
 import {
-  getAllUsers,
-  getUserById,
-  getUsersByCc,
-  getUsersByEmail,
-  getUsersByName,
-} from "./userActions";
-import { User } from "../../app/types/User";
+  getAllDeliveries,
+  getDeliveryById,
+  getDeliveryByCc,
+  getDeliveryByEmail,
+  getDeliveryByName,
+} from "./deliveryActions";
+import { Distributor } from "../../app/types/Distributor";
 import { AxiosResponse } from "axios";
-interface UserState {
-  allUsers: User[];
-  userByName: User[];
-  userByCc: User | null;
-  userByEmail: User | null;
-  userById: { [key: string]: User | undefined };
+interface DistributorState {
+  allDeliveries: Distributor[];
+  deliveryById: { [key: string]: Distributor | undefined };
+  deliveryByName: Distributor[];
+  deliveryByCc: Distributor | null;
+  deliveryByEmail: Distributor | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null; // change any[] to your specific type
 }
 
-const initialState: UserState = {
-  allUsers: [],
-  userById: {},
-  userByName: [],
-  userByCc: null,
-  userByEmail: null,
+const initialState: DistributorState = {
+  allDeliveries: [],
+  deliveryById: {},
+  deliveryByName: [],
+  deliveryByCc: null,
+  deliveryByEmail: null,
   status: "idle",
   error: null, // provide an empty array as the initial state value for allUsers
 };
 
-type ResponseTypeAll = AxiosResponse<User[], any>;
-type ResponseTypeId = AxiosResponse<User, any>;
+type ResponseTypeAll = AxiosResponse<Distributor[], any>;
+type ResponseTypeId = AxiosResponse<Distributor, any>;
 
-const userSlice = createSlice({
-  name: "users",
+const deliverySlice = createSlice({
+  name: "delivery",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       // Handle the pending state
-      .addCase(getAllUsers.pending, (state) => {
+      .addCase(getAllDeliveries.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
-      .addCase(getAllUsers.fulfilled, (state, action) => {
+      .addCase(getAllDeliveries.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.allUsers = action.payload;
+        state.allDeliveries = action.payload;
       })
       // Handle the error state
-      .addCase(getAllUsers.rejected, (state, action) => {
+      .addCase(getAllDeliveries.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
     builder
       // Handle the pending state
-      .addCase(getUserById.pending, (state) => {
+      .addCase(getDeliveryById.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
-      .addCase(getUserById.fulfilled, (state, action) => {
+      .addCase(getDeliveryById.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.userById[action.payload.id] = action.payload;
+        state.deliveryById[action.payload.id] = action.payload;
       })
       // Handle the error state
-      .addCase(getUserById.rejected, (state, action) => {
+      .addCase(getDeliveryById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
     builder
       // Handle the pending state
-      .addCase(getUsersByName.pending, (state) => {
+      .addCase(getDeliveryByName.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
-      .addCase(getUsersByName.fulfilled, (state, action) => {
+      .addCase(getDeliveryByName.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.userByName = action.payload;
+        state.deliveryByName = action.payload;
       })
       // Handle the error state
-      .addCase(getUsersByName.rejected, (state, action) => {
+      .addCase(getDeliveryByName.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
     builder
       // Handle the pending state
-      .addCase(getUsersByCc.pending, (state) => {
+      .addCase(getDeliveryByCc.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
-      .addCase(getUsersByCc.fulfilled, (state, action) => {
+      .addCase(getDeliveryByCc.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.userByCc = action.payload[0];
+        state.deliveryByCc = action.payload[0];
       })
       // Handle the error state
-      .addCase(getUsersByCc.rejected, (state, action) => {
+      .addCase(getDeliveryByCc.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
     builder
       // Handle the pending state
-      .addCase(getUsersByEmail.pending, (state) => {
+      .addCase(getDeliveryByEmail.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
-      .addCase(getUsersByEmail.fulfilled, (state, action) => {
+      .addCase(getDeliveryByEmail.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.userByEmail = action.payload[0];
+        state.deliveryByEmail = action.payload[0];
       })
       // Handle the error state
-      .addCase(getUsersByEmail.rejected, (state, action) => {
+      .addCase(getDeliveryByEmail.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
   },
 });
 
-export default userSlice.reducer;
+export default deliverySlice.reducer;
