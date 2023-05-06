@@ -1,5 +1,5 @@
 import { Address, Payment, Phone, TypeVehicle } from "../types/types";
-export interface DealerToRegister {
+export interface DeliveryToRegister {
   firstName: string,
   lastName: string,
   address: Address,
@@ -15,11 +15,11 @@ export interface DealerToRegister {
   img: string,
   rating: number,
 }
-export interface Dealer extends DealerToRegister {
+export interface Delivery extends DeliveryToRegister {
   displayName: string,
   license: string;
   payments: Payment;
-  vehicle: VehicleForDealer
+  vehicle: VehicleForDelivery
   history: string[];
   deleted: boolean;
   status: boolean,
@@ -28,7 +28,7 @@ export interface Dealer extends DealerToRegister {
   comments: object[],
 }
 
-export interface DealerToUpdate {
+export interface DeliveryToUpdate {
   img: string,
   phone: Phone;
   license: string;
@@ -40,7 +40,7 @@ export interface DealerToUpdate {
   rating: number,
 }
 
-export interface VehicleForDealer {
+export interface VehicleForDelivery {
   vehicleId: string,
   patent: string,
 }

@@ -4,10 +4,9 @@ import passport from "passport";
 import { db } from "../../../connection/connection";
 import { Strategy } from "passport-local";
 import { compareSync } from "bcrypt";
-import { disconnect } from "process";
-import { Dealer } from "../../../schema/dealer";
+import { Delivery } from "../../../schema/delivery";
 
-const localDealer = new Strategy({ usernameField: "email" }, async (email, password, done) => {
+const localDelivery = new Strategy({ usernameField: "email" }, async (email, password, done) => {
   try {
     const distributorsRef = db.collection("distributors");
     const snapshot = await distributorsRef.where("email", "==", email).get();
@@ -25,9 +24,9 @@ const localDealer = new Strategy({ usernameField: "email" }, async (email, passw
     return done(error);
   }
 });
-passport.use("localDealer", localDealer);
+passport.use("localDelivery", localDelivery);
 
-passport.serializeUser((distributor: Dealer, done) => {
+passport.serializeUser((distributor: Delivery, done) => {
   done(null, distributor.email);
 });
 
@@ -46,8 +45,8 @@ passport.deserializeUser(async (email: string, done) => {
   }
 });
 
-export const loginDealer = async (req: Request, res: Response): Promise<void> => {
-  passport.authenticate("localDealer", (err: Error, distributor: Dealer) => {
+export const loginDelivery = async (req: Request, res: Response): Promise<void> => {
+  passport.authenticate("localDelivery", (err: Error, distributor: Delivery) => {
     if (err) {
       return res.status(500).json({ message: "Internal server error" });
     }

@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
-import { Dealer, DealerToRegister } from "../../schema/dealer";
+import { Delivery, DeliveryToRegister } from "../../schema/delivery";
 
 /**
  * Controlador para crear distribuidores
- * * @body datos para crear distribuidor tipo DealerToRegister
+ * * @body datos para crear distribuidor tipo DeliveryToRegister
  */
-export const newDealer = async (req: Request, res: Response): Promise<void> => {
+export const newDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: DealerToRegister = req.body;
-    const dataFormated: Dealer = {
+    const data: DeliveryToRegister = req.body;
+    const dataFormated: Delivery = {
       ...data,
       payments: {
         cardNumber: "",
@@ -38,7 +38,7 @@ export const newDealer = async (req: Request, res: Response): Promise<void> => {
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
     const snapshot = await db
-      .collection("dealers")
+      .collection("deliverys")
       .where("email", "==", dataFormated.email)
       .get();
     if (!snapshot.empty) {
@@ -50,7 +50,7 @@ export const newDealer = async (req: Request, res: Response): Promise<void> => {
     dataFormated.password = hashedPassword;
 
     //crear doocumento de distribuidor
-    const docRef = await db.collection("dealers").add(dataFormated);
+    const docRef = await db.collection("deliverys").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear el distribuidor", error);
@@ -61,23 +61,23 @@ export const newDealer = async (req: Request, res: Response): Promise<void> => {
 /**
  * Controlador para actualizar distribuidores
  * @param req Id tipo string
- * @body datos para actualizar distribuidor tipo DealerToUpdate
+ * @body datos para actualizar distribuidor tipo DeliveryToUpdate
  */
-export const updateDealer = async (req: Request, res: Response): Promise<void> => {
+export const updateDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
-    const data: Dealer = req.body; //datos de distribuidor a actualizar
+    const data: Delivery = req.body; //datos de distribuidor a actualizar
     const updatedAt: string = new Date(Date.now()).toISOString();
 
 
     //verificar si existe el usuario en la base de datos
-    const docRef = await db.collection("dealers").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
     await db
-      .collection("dealers")
+      .collection("deliverys")
       .doc(id)
       .update({ ...data, updatedAt: updatedAt });
     res.status(201).json({ menssage: "Repartidor actualizado correctamente" });
@@ -91,15 +91,15 @@ export const updateDealer = async (req: Request, res: Response): Promise<void> =
  * @param id del distribuidor
  *
  */
-export const enableDealer = async (req: Request, res: Response): Promise<void> => {
+export const enableDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
-    const docRef = await db.collection("dealers").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("dealers").doc(id).update({ deleted: false });
+    await db.collection("deliverys").doc(id).update({ deleted: false });
     res.status(201).json({ menssage: "Repartidor habilitado correctamente" });
   } catch (error) {
     console.error("Error al habilitar el Repartidor", error);
@@ -112,15 +112,15 @@ export const enableDealer = async (req: Request, res: Response): Promise<void> =
  
  * @param id del distribuidor a eliminar 
  */
-export const deleteDealer = async (req: Request, res: Response): Promise<void> => {
+export const deleteDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
-    const docRef = await db.collection("dealers").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("dealers").doc(id).update({ deleted: true });
+    await db.collection("deliverys").doc(id).update({ deleted: true });
     res.status(201).json({ menssage: "Repartidor eliminado correctamente" });
   } catch (error) {
     console.error("Error al borrar el Repartidor", error);

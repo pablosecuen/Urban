@@ -15,8 +15,8 @@ import chauffeurOutputRouter from "./outputs/chauffeur";
 import travelInputRouter from "./inputs/travels";
 import travelOutputRouter from "./outputs/travels";
 
-import dealerInputRouter from "./inputs/dealer";
-import dealerOutputRouter from "./outputs/dealer";
+import deliveryInputRouter from "./inputs/delivery";
+import deliveryOutputRouter from "./outputs/delivery";
 
 import orderInputRouter from "./inputs/order";
 import orderOutputRouter from "./outputs/order";
@@ -59,7 +59,7 @@ router.use("/user", userInputRouter);
 
 router.use("/travels", travelInputRouter);
 
-router.use("/dealer", dealerInputRouter);
+router.use("/delivery", deliveryInputRouter);
 
 router.use("/order", orderInputRouter);
 
@@ -106,7 +106,7 @@ router.use("/owner", ownerOutputRouter);
 
 router.use("/products", productOutputRouter);
 
-router.use("/dealer", dealerOutputRouter);
+router.use("/delivery", deliveryOutputRouter);
 
 router.use("/order", orderOutputRouter);
 
