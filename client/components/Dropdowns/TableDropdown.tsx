@@ -1,5 +1,5 @@
 import React from "react";
-import { createPopper } from "@popperjs/core";
+import { createPopper } from "@popperjs/core/lib/createPopper";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 const NotificationDropdown = () => {
