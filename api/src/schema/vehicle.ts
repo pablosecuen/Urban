@@ -8,7 +8,7 @@ export interface VehicleToRegister {
   img: string[];
   ownerId: string;
   chauffeurId?: string;
-  dealerId?: string;
+  deliveryId?: string;
   documents: string[];
   typeVehicle: TypeVehicle;
 }

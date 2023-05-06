@@ -2,7 +2,7 @@ import { OrderStatus } from "../types/types";
 
 export interface Order {
   userId: string;
-  dealersId: string;
+  deliveryId: string;
   productId: string;
   localId: string;
   date: string;

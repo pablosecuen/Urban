@@ -24,7 +24,7 @@ export const newVehicleValidateByDealer = (req: Request, res: Response, next: Ne
       "year",
       "img",
       "ownerId",
-      "dealerId",
+      "deliveryId",
       "documents",
       "typeVehicle"
     ];
@@ -36,7 +36,7 @@ export const newVehicleValidateByDealer = (req: Request, res: Response, next: Ne
       !isModelValid(data.model) ||
       !isYearValid(data.year) ||
       !isOwnerIdValid(data.ownerId) ||
-      !isDealerIdValid(data.dealerId) ||
+      !isDealerIdValid(data.deliveryId) ||
       !isArrayImgValid(data.img) ||
       !isArrayImgValid(data.documents) ||
       !isTypeVehicleValidByDealer(data.typeVehicle)

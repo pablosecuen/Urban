@@ -20,7 +20,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
 
     const [userDoc, distributorDoc, localDoc] = await Promise.all([
       db.collection("users").doc(dataFormated.userId).get(),
-      db.collection("dealers").doc(dataFormated.dealersId).get(),
+      db.collection("dealers").doc(dataFormated.deliveryId).get(),
       db.collection("locals").doc(dataFormated.localId).get(),
     ]);
 
@@ -65,8 +65,8 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
           "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
       db
-        .collection("distributors")
-        .doc(orderData.dealersId)
+        .collection("deliverys")
+        .doc(orderData.deliveryId)
         .update({
           "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
