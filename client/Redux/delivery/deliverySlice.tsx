@@ -37,8 +37,8 @@ const initialState: DistributorState = {
 type ResponseTypeAll = AxiosResponse<Distributor[], any>;
 type ResponseTypeId = AxiosResponse<Distributor, any>;
 
-const userSlice = createSlice({
-  name: "users",
+const deliverySlice = createSlice({
+  name: "delivery",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -124,4 +124,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export default deliverySlice.reducer;
