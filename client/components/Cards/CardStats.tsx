@@ -5,7 +5,7 @@ interface Props {
   title: string;
   description?: string;
   statSubtitle?: string;
-  statTitle?: string;
+  statTitle?: number | string;
   statArrow?: any;
   statPercent?: string;
   statPercentColor?: string;
