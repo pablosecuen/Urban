@@ -20,7 +20,7 @@ export const newOwner = async (req: Request, res: Response): Promise<void> => {
     };
     const snapshot = await db.collection("owner").where("cc", "==", dataFormated.cc).get();
     if (!snapshot.empty) {
-      throw new Error("El DNI ya está registrado");
+      throw new Error("El Cc ya está registrado");
     }
     const docRef = await db.collection("owner").add(dataFormated);
     res.status(201).json({ id: docRef.id });
