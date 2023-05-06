@@ -4,7 +4,7 @@ import {
   updateUser,
   deletedUser,
   enableUser,
-  newDistributorRating,
+  newDealerRating,
   newChauffeurRating,
 } from "../../controllers/inputs/user";
 import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
@@ -51,7 +51,7 @@ const router = Router();
  */
 router.post("/", newUserValidated, newUser);
 
-router.post("/rating/distributor/:userId/:distributorId", newDistributorRatingValidator, newDistributorRating);
+router.post("/rating/dealer/:userId/:dealerId", newDistributorRatingValidator, newDealerRating);
 
 router.post("/rating/chauffeur/:userId/:chauffeurId", newDistributorRatingValidator, newChauffeurRating);
 
