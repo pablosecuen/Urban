@@ -16,7 +16,7 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
     const data: Order = req.body;
     if (
       !data.userId ||
-      !data.distributorId ||
+      !data.dealersId ||
       !data.productId ||
       !data.localId ||
       !data.date ||
@@ -27,7 +27,7 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
     }
     if (
       !isUserIdValid(data.userId) ||
-      !isDistributorIdValid(data.distributorId) ||
+      !isDistributorIdValid(data.dealersId) ||
       !isProductIdValid(data.productId) ||
       !isLocalIdValid(data.localId) ||
       !isDateValid(data.date) ||

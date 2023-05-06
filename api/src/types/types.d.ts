@@ -4,7 +4,7 @@ export type OrderStatus = "pending" | "progress" | "finished" | "rejected";
 
 export type TypeProduct = "food" | "drink" | "snack" | "other" | "all";
 
-export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other" | "false";
+export type TypeVehicle = "motorcycle" | "car" | "bicycle" | "van" | "other";
 
 export type TicketStatus = "pending" | "acepted" | "canceled";
 
