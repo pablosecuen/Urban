@@ -13,19 +13,6 @@ import {
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
 
-// const passageById: Passage | null = useSelector((state: RootState) => state.passage.passageById);
-
-// useEffect(() => {
-//   dispatch(fetchPassagesByQuery({ origin: "Medillin", destination: "Bolombolo" }));
-// }, []);
-//fido aca te dejo un ejemplo de como tenes que mandar las cosas a esta funcion del fetchPassagesByQuery, no tiene que ser objeto y que corresponda el nombre de la porpiedad del objeto del back,
-// osea origin y destination son estos
-// destination
-//origin
-//price
-//departureDate
-//arrivalDate
-
 export default function Reserva() {
 
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
@@ -57,13 +44,6 @@ export default function Reserva() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
-
-    // const query = {
-    //   origin,
-    //   destination,
-    //   departureDate,
-    //   // Agrega las otras propiedades del formulario que deseas enviar
-    // };
 
     const query = {
       ...(origin && { origin }),
