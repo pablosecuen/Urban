@@ -9,7 +9,7 @@ import { Distributor } from "../../app/types/Distributor";
 // };
 
 export const getAllDeliveries = createAsyncThunk<Distributor[], void>(
-  "destributor/getAllDeliveries",
+  "delivery/getAllDeliveries",
   async () => {
     const response = await axios.get(`http://localhost:3000/distributor?page=1&pageSize=1000`);
     return response.data.distributors;
@@ -17,7 +17,7 @@ export const getAllDeliveries = createAsyncThunk<Distributor[], void>(
 );
 
 export const getDeliveryById = createAsyncThunk<Distributor, string>(
-  "distributor/getDeliveryById",
+  "delivery/getDeliveryById",
   async (userId) => {
     const response = await axios.get(`http://localhost:3000/distributor/${userId}`);
     return response.data;
@@ -25,20 +25,20 @@ export const getDeliveryById = createAsyncThunk<Distributor, string>(
 );
 
 export const getDeliveryByName = createAsyncThunk(
-  "distributor/getDeliveryByName",
+  "delivery/getDeliveryByName",
   async (name: string) => {
     const response = await axios.get(`http://localhost:3000/distributor?name=${name}`);
     return response.data.distributors;
   }
 );
 
-export const getDeliveryByCc = createAsyncThunk("distributor/getUsersByCc", async (cc: string) => {
+export const getDeliveryByCc = createAsyncThunk("delivery/getUsersByCc", async (cc: string) => {
   const response = await axios.get(`http://localhost:3000/distributor?cc=${cc}`);
   return response.data.distributors;
 });
 
 export const getDeliveryByEmail = createAsyncThunk(
-  "distributor/getDeliveryByEmail",
+  "delivery/getDeliveryByEmail",
   async (email: string) => {
     const response = await axios.get(`http://localhost:3000/distributor?email=${email}`);
     return response.data.distributors;
