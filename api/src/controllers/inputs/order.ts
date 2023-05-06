@@ -20,7 +20,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
 
     const [userDoc, distributorDoc, localDoc] = await Promise.all([
       db.collection("users").doc(dataFormated.userId).get(),
-      db.collection("distributors").doc(dataFormated.distributorId).get(),
+      db.collection("dealers").doc(dataFormated.dealersId).get(),
       db.collection("locals").doc(dataFormated.localId).get(),
     ]);
 
@@ -30,7 +30,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
 
 
     if (!distributorDoc.exists)
-      res.status(404).json({ message: "El distribuidor no existe" });
+      res.status(404).json({ message: "El repartidor no existe" });
 
 
     if (!localDoc.exists)
@@ -40,10 +40,10 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
     const distributorData = distributorDoc.data();
 
     if (!distributorData.status)
-      res.status(400).json({ message: "El distribuidor no esta activo" });
+      res.status(400).json({ message: "El repartidor no esta activo" });
 
     if (distributorData.deleted)
-      res.status(400).json({ message: "El distribuidor esta eliminado" });
+      res.status(400).json({ message: "El repartidor esta eliminado" });
 
     const localData = localDoc.data();
 
@@ -66,7 +66,7 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
         }),
       db
         .collection("distributors")
-        .doc(orderData.distributorId)
+        .doc(orderData.dealersId)
         .update({
           "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
