@@ -49,7 +49,7 @@ export default function Reserva() {
       ...(origin && { origin }),
       ...(destination && { destination }),
       ...(departureDate && { departureDate }),
-      // Agrega las otras propiedades del formulario que deseas enviar
+      // agrego al form SOLO las propiedades que contengan valor
     };
   
     dispatch(fetchPassagesByQuery(query));
