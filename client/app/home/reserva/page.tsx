@@ -3,6 +3,7 @@ import { fetchPassagesByQuery } from "@component/Redux/passage/passageSlice";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from 'redux';
 
 import {
   HiUserGroup,
@@ -26,7 +27,8 @@ import { MdPets } from "react-icons/md";
 //arrivalDate
 
 export default function Reserva() {
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -53,7 +55,25 @@ export default function Reserva() {
     setArrivalDate(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {};
+  const handleSubmit = (e: any) => {
+    e.preventDefault(); // evitar el envio del formulario predeterminado
+
+    // const query = {
+    //   origin,
+    //   destination,
+    //   departureDate,
+    //   // Agrega las otras propiedades del formulario que deseas enviar
+    // };
+
+    const query = {
+      ...(origin && { origin }),
+      ...(destination && { destination }),
+      ...(departureDate && { departureDate }),
+      // Agrega las otras propiedades del formulario que deseas enviar
+    };
+  
+    dispatch(fetchPassagesByQuery(query));
+  };
 
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
@@ -109,7 +129,7 @@ export default function Reserva() {
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div>
         <Link href="/home/reserva/viajes" className="flex justify-center">
-          <button className="w-1/2 self-center">Buscar tu viaje!</button>
+          <button onClick={handleSubmit} className="w-1/2 self-center">Buscar tu viaje!</button>
         </Link>
       </form>
     </section>
