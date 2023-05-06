@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   HiUserGroup,
@@ -30,6 +30,27 @@ const [destination, setDestination] = useState("");
 const [price, setPrice] = useState("");
 const [departureDate, setDepartureDate] = useState("");
 const [arrivalDate, setArrivalDate] = useState("");
+
+const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setOrigin(e.target.value);  
+}
+const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setDestination(e.target.value);
+}
+
+const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setPrice(e.target.value);
+}
+
+const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setDepartureDate(e.target.value);
+}
+
+const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setArrivalDate(e.target.value);
+}
+
+  const handleSubmit = (e: any) => {}
 
 
   return (
