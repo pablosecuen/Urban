@@ -30,13 +30,13 @@ export default async function Gestion() {
         {data?.travels.map((viaje: Travel) => (
           <Link key={viaje.id} href={`/home/gestion/${viaje.id}`}>
             <li className="group flex items-center justify-between gap-4 rounded-full border bg-white px-10 py-2 transition-all duration-200 hover:border-blue">
-              <div className="flex items-center">
+              <div className="flex items-center" >
                 <div>
-                  <small className="font-bold ">{viaje.destination}</small>
-                  <small className="flex">
-                    <span>Fecha: {viaje.date.slice(0, 10).split("-").reverse().join("-")}</span>
-                    <span>Horario: {viaje.date.slice(11, 16)}</span>
-                  </small>
+                  <small className="font-bold">{viaje.destination}</small>
+                  <span className="flex">
+                    <small>Fecha: {viaje.date.slice(0, 10).split("-").reverse().join("-")}</small>
+                    <small>Horario: {viaje.date.slice(11, 16)}</small>
+                  </span>
                 </div>
                 <small
                   className={`flex w-2/5 items-center justify-center text-center font-semibold uppercase tracking-wider ${
