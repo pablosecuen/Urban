@@ -1,4 +1,7 @@
+'use client'
 import Link from "next/link";
+import { useState } from "react";
+
 import {
   HiUserGroup,
   HiOutlineCalendar,
@@ -12,7 +15,8 @@ import { MdPets } from "react-icons/md";
 // useEffect(() => {
 //   dispatch(fetchPassagesByQuery({ origin: "Medillin", destination: "Bolombolo" }));
 // }, []);
-//fido aca te dejo un ejemplo de como tenes que mandar las cosas a esta funcion del fetchPassagesByQuery, no tiene que ser objeto y que corresponda el nombre de la porpiedad del objeto del back, osea origin y destination son estos
+//fido aca te dejo un ejemplo de como tenes que mandar las cosas a esta funcion del fetchPassagesByQuery, no tiene que ser objeto y que corresponda el nombre de la porpiedad del objeto del back,
+// osea origin y destination son estos
 // destination
 //origin
 //price
@@ -20,6 +24,14 @@ import { MdPets } from "react-icons/md";
 //arrivalDate
 
 export default function Reserva() {
+
+const [origin, setOrigin] = useState("");
+const [destination, setDestination] = useState("");
+const [price, setPrice] = useState("");
+const [departureDate, setDepartureDate] = useState("");
+const [arrivalDate, setArrivalDate] = useState("");
+
+
   return (
     <div className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
       <h1 className="mt-12 text-center text-xl text-blue">
