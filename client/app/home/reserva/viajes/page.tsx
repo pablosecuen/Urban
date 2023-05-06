@@ -26,9 +26,9 @@ export default function Viajes() {
           <Link
             href={`/home/reserva/viajes/${passage.id}`}
             key={passage.id}
-            className="flex w-full flex-col rounded-xl border border-blueGray-700 px-3 py-1"
+            className="group flex w-full flex-col rounded-xl border border-blueGray-300 bg-blueGray-100 px-3 py-1 transition-all duration-100 hover:border hover:border-blueGray-700"
           >
-            <h3 className="font-bold capitalize text-blueGray-700">
+            <h3 className="font-bold capitalize text-blueGray-700 ">
               {passage.origin} - {passage.destination}
             </h3>
             <small>{passage.departureDate}</small>
@@ -37,9 +37,9 @@ export default function Viajes() {
       </div>
       <div className="flex gap-2 pt-10">
         <button>Ver mas opciones</button>
-        <Link href="/home/reserva/viajes/confirmacion">
-          <button>Reservar</button>
-        </Link>
+        {/* <Link href="/home/reserva/viajes/confirmacion"> */}
+          {/* <button>Reservar</button> */}
+        {/* </Link> */}
       </div>
     </div>
   );
