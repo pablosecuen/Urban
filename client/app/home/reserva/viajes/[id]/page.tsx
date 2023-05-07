@@ -4,8 +4,8 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { fetchPassageById } from "@component/Redux/passage/passageSlice";
 import { Passage } from "@component/app/types/Passages";
+import { getPassagesId } from "@component/Redux/passage/passageActions";
 
 interface DetailPassageProps {
   params: {
@@ -19,7 +19,7 @@ export default function PassageDetail({ params }: DetailPassageProps) {
   const passageById: Passage | null = useSelector((state: RootState) => state.passage.passageById);
 
   useEffect(() => {
-    dispatch(fetchPassageById(id));
+    dispatch(getPassagesId(id));
   }, [id]);
 
   console.log(passageById);

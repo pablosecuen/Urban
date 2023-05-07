@@ -7,38 +7,19 @@ import { QueryParams } from "@component/app/types/QueryParams";
 interface PassageState {
   allPassages: Passage[];
   passageById: Passage | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null; 
 }
 
 const initialState: PassageState = {
   allPassages: [],
   passageById: null,
+  status: "idle",
+  error: null, 
 };
 
 type ResponseType = AxiosResponse<any, any>;
 
-export const fetchAllPassages: AsyncThunk<Passage[], void, {}> = createAsyncThunk(
-  "passage/fetchAllPassages",
-  async () => {
-    const response: ResponseType = await getAllPassages();
-    return response.data.passages;
-  }
-);
-
-export const fetchPassageById: AsyncThunk<Passage | null, string, {}> = createAsyncThunk(
-  "passage/fetchPassageById",
-  async (id: string) => {
-    const response: ResponseType = await getPassagesId(id);
-    return response.data;
-  }
-);
-
-export const fetchPassagesByQuery: AsyncThunk<Passage[], QueryParams, {}> = createAsyncThunk(
-  "passage/fetchPassagesByQuery",
-  async (queryParams) => {
-    const response: ResponseType = await getPassagesByQuery(queryParams);
-    return response.data.passages;
-  }
-);
 
 const passageSlice = createSlice({
   name: "passages",
@@ -46,14 +27,42 @@ const passageSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllPassages.fulfilled, (state, action) => {
+      .addCase(getAllPassages.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllPassages.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.allPassages = action.payload;
       })
-      .addCase(fetchPassageById.fulfilled, (state, action) => {
+      .addCase(getAllPassages.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Something went wrong";
+      });
+
+      builder
+      .addCase(getPassagesId.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getPassagesId.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.passageById = action.payload;
       })
-      .addCase(fetchPassagesByQuery.fulfilled, (state, action) => {
+      .addCase(getPassagesId.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Something went wrong";
+      });
+
+      builder
+      .addCase(getPassagesByQuery.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getPassagesByQuery.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.allPassages = action.payload;
+      })
+      .addCase(getPassagesByQuery.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Something went wrong";
       });
   },
 });
