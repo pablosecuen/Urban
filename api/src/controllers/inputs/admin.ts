@@ -33,3 +33,48 @@ export const updateAdminStatus = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const updateStatusChauffeur = async (req: Request, res: Response) => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("chauffeur").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontrón el chofer");
+    }
+    await db.collection("chauffeur").doc(id).update({ status: true });
+    res.status(200).json({ message: "Chofer habilitado correctamente" });
+  } catch (error) {
+    console.error("Error al activar el chofer el chofer", error);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const updateStatusDelivery = async (req: Request, res: Response) => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("deliverys").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontrón el repartidor");
+    }
+    await db.collection("chauffeur").doc(id).update({ status: true });
+    res.status(200).json({ message: "Repartidor habilitado correctamente" });
+  } catch (error) {
+    console.error("Error al activar el repartidor el chofer", error);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const updateStatusVehicle = async (req: Request, res: Response) => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("vehicle").doc(id).get();
+    if (!docRef.exists) {
+      throw new Error("No se encontrón el vehiculo");
+    }
+    await db.collection("chauffeur").doc(id).update({ status: true });
+    res.status(200).json({ message: "Vehiculo habilitado correctamente" });
+  } catch (error) {
+    console.error("Error al activar el Vehiculo", error);
+    res.status(400).json({ message: error.message });
+  }
+};

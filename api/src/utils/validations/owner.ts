@@ -16,10 +16,8 @@ export const newOwnerValidated = (req: Request, res: Response, next: NextFunctio
   try {
     const data: OwnerToRegister = req.body;
     const allowProperties = [
-      "vehiclesId",
       "firstName",
       "lastName",
-      "displayName",
       "email",
       "phone",
       "address",
@@ -31,13 +29,11 @@ export const newOwnerValidated = (req: Request, res: Response, next: NextFunctio
     if (
       !isFirstNameValid(data.firstName) ||
       !isLastNameValid(data.lastName) ||
-      !isDisplayNameValid(data.displayName) ||
       !isEmailValid(data.email) ||
       !isPhoneValid(data.phone) ||
       !isAddressValid(data.address) ||
       !isCcValid(data.cc) ||
-      !isCeValid(data.ce) ||
-      !isVehiclesIdValid(data.vehiclesId)
+      (data.ce && !isCeValid(data.ce))
     ) {
       throw new Error("Datos incompletos o no válidos");
     }

@@ -7,15 +7,9 @@ export const newOwner = async (req: Request, res: Response): Promise<void> => {
     const data: OwnerToRegister = req.body;
     const dataFormated = {
       ...data,
+      status: false,
       deleted: false,
-      address: {
-        postalCode: "",
-        location: "",
-        state: "",
-        street: "",
-        number: "",
-        department: "",
-      },
+      vehiclesId: [],
       createdAt: new Date(Date.now()).toISOString()
     };
     const snapshot = await db.collection("owner").where("cc", "==", dataFormated.cc).get();
