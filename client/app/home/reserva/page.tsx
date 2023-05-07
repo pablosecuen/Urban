@@ -94,20 +94,20 @@ export default function Reserva() {
             />
         </div>
 
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
           <HiUserGroup className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Cantidad de pasajeros..." type="number" />
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Equipaje..." type="text" />
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
           <MdPets className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
-        </div>
+        </div> */}
         <Link href="/home/reserva/viajes" className="flex justify-center">
           <button onClick={handleSubmit} className="w-1/2 self-center">Buscar tu viaje!</button>
         </Link>
