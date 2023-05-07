@@ -1,5 +1,4 @@
 "use client";
-import { fetchPassagesByQuery } from "@component/Redux/passage/passageSlice";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import {
   HiOutlineLocationMarker,
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
+import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
 
 export default function Reserva() {
 
@@ -52,7 +52,7 @@ export default function Reserva() {
       // agrego al form SOLO las propiedades que contengan valor
     };
   
-    dispatch(fetchPassagesByQuery(query));
+    dispatch(getPassagesByQuery(query));
   };
 
   return (
