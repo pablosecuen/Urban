@@ -57,7 +57,7 @@ export const newVehicleByDelivery = async (req: Request, res: Response): Promise
     };
 
     const [dealerDoc, ownerDoc] = await Promise.all([
-      db.collection("dealers").doc(dataFormated.deliveryId).get(),
+      db.collection("deliverys").doc(dataFormated.deliveryId).get(),
       db.collection("owner").doc(dataFormated.ownerId).get(),
     ]);
 
