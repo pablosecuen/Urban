@@ -4,7 +4,7 @@ import { updateAdminStatus, updateStatusChauffeur, updateStatusDelivery } from "
 const router = Router();
 
 router.put("/status", updateAdminStatus);
-router.delete("/changeStatusChauffeur/:id", updateStatusChauffeur);
-router.delete("/changeStatusDelivery/:id", updateStatusDelivery);
+router.patch("/changeStatusChauffeur/:id", updateStatusChauffeur);
+router.patch("/changeStatusDelivery/:id", updateStatusDelivery);
 
 export default router;
