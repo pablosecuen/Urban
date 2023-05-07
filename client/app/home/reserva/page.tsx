@@ -9,6 +9,9 @@ import {
   HiOutlineCalendar,
   HiOutlineBriefcase,
   HiOutlineLocationMarker,
+  HiTag,
+  HiTrendingUp,
+  HiTrendingDown
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
 import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
@@ -84,13 +87,35 @@ export default function Reserva() {
         </div>
 
         <div className="flex items-center justify-center">
-          <HiOutlineCalendar className="w-10 text-blue" />
+          <HiTrendingUp className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
-            placeholder="Cuando?..."
+            placeholder="Fecha de salida"
             type="text"
             value={departureDate}
             onChange={handleDepartureDateChange}
+            />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <HiTrendingDown className="w-10 text-blue" />
+          <input
+            className="w-2/3 pl-2"
+            placeholder="Fecha de llegada"
+            type="text"
+            value={arrivalDate}
+            onChange={handleArrivalDateChange}
+            />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <HiTag className="w-10 text-blue" />
+          <input
+            className="w-2/3 pl-2"
+            placeholder="Precio"
+            type="text"
+            value={price}
+            onChange={handlePriceChange}
             />
         </div>
 
@@ -108,6 +133,7 @@ export default function Reserva() {
           <MdPets className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div> */}
+
         <Link href="/home/reserva/viajes" className="flex justify-center">
           <button onClick={handleSubmit} className="w-1/2 self-center">Buscar tu viaje!</button>
         </Link>
