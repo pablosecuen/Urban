@@ -111,7 +111,7 @@ export default function Reserva() {
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
-            min={departureDate ? departureDate : currentDate}
+            min={currentDate}
             onChange={handleDepartureDateChange}
           />
         </div>
