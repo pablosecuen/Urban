@@ -5,6 +5,7 @@ import { userData } from "../../app/types/User";
 
 export default function Profile() {
   const [userData, setUserData] = useState<userData | null>(null);
+  const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
     const userDataString = localStorage.getItem("user");
@@ -13,26 +14,78 @@ export default function Profile() {
     }
   }, []);
 
+  const onClick = () => {
+    if (showInput === false) setShowInput(true);
+    else setShowInput(false);
+  };
+
   return (
-    <div className="flex h-1/3 flex-col items-center justify-center gap-2 bg-gray-200 p-2 shadow-md shadow-black/40 lg:h-3/5 lg:w-2/5 lg:gap-4 lg:px-8 lg:py-4">
-      <div className="relative flex  justify-center border-2">
+    <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-md shadow-black/40 lg:h-full lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
+      <div className="relative mt-10 flex justify-center border-2">
         {userData && (
           <Image
             alt="..."
             src={userData?.img}
-            className="max-w-150-px absolute -top-24 -m-16 -ml-20 h-48 w-48  overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16"
+            className="max-w-150-px absolute -top-24 -m-16 -ml-20 h-48 w-48 overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16 lg:h-40 lg:w-40"
             width={200}
             height={200}
           />
         )}
       </div>
 
-      <div className="mt-12 flex h-1/2 w-auto flex-col justify-between text-center ">
+      <div className="flex h-1/2 w-auto flex-col justify-between gap-2 text-center ">
         <h3 className=" w-auto  text-xl font-semibold leading-normal text-blueGray-700">
           {userData?.name}
         </h3>
+        <label htmlFor="">
+          Telefono
+          {showInput === true ? (
+            <input
+              type="text"
+              placeholder="Ingrese su numero"
+              className="text-center text-gray-800"
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Ingrese su numero"
+              className="text-center text-gray-800"
+              disabled
+            />
+          )}
+        </label>
+        <label htmlFor="">
+          Genero
+          {showInput === true ? (
+            <input
+              type="text"
+              placeholder="Ingrese su genero"
+              className="text-center text-gray-800"
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Ingrese su genero"
+              className="text-center text-gray-800"
+              disabled
+            />
+          )}
+        </label>
+        <label htmlFor="">
+          Cc:
+          {showInput === true ? (
+            <input type="text" placeholder="Ingrese su CC" className="text-center text-gray-800" />
+          ) : (
+            <input
+              type="text"
+              placeholder="Ingrese su CC"
+              className="text-center text-gray-800"
+              disabled
+            />
+          )}
+        </label>
 
-        <div className="mb-2 mt-0 flex w-auto justify-center  text-sm font-bold uppercase leading-normal text-blueGray-400">
+        <div className="flex w-auto justify-center text-sm font-bold uppercase leading-normal text-blueGray-400">
           <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" className="w-auto ">
             <path
               fill-rule="evenodd"
@@ -47,7 +100,20 @@ export default function Profile() {
               fill="gray"
             />
           </svg>
-          {userData?.adress}
+          {!userData?.adress ? (
+            showInput === true ? (
+              <input type="text" placeholder="Ingrese su direccion" className="text-center" />
+            ) : (
+              <input
+                type="text"
+                placeholder="Ingrese su direccion"
+                disabled
+                className="text-center"
+              />
+            )
+          ) : (
+            userData?.adress
+          )}
         </div>
         {/* <div className=" flex justify-center text-blueGray-600">
           <svg
@@ -90,7 +156,14 @@ export default function Profile() {
           University of Computer Science
         </div> */}
       </div>
-      <button className="mx-auto w-1/2 py-1">Edit Profile</button>
+      <div className="flex gap-4">
+        <button className="mx-auto w-1/2 py-1" onClick={onClick}>
+          Edit Profile
+        </button>
+        <button className="mx-auto w-1/2 py-1" onClick={onClick}>
+          Guardar
+        </button>
+      </div>
     </div>
     // <>
     //   <div className="relative mb-6 mt-16 flex   min-w-0 flex-col break-words rounded-lg bg-white shadow-xl">

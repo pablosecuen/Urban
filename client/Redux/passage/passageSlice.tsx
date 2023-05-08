@@ -27,20 +27,25 @@ const passageSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
       // Handle the pending state
       .addCase(getAllPassages.pending, (state) => {
         state.status = "loading";
       })
       // Handle the success state
+
       .addCase(getAllPassages.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.allPassages = action.payload;
       })
+
       // Handle the error state
+
       .addCase(getAllPassages.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
+
 
     builder
       // Handle the pending state
@@ -53,6 +58,7 @@ const passageSlice = createSlice({
         state.passageById[action.payload.id] = action.payload;
       })
       // Handle the error state
+
       .addCase(getPassagesId.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
@@ -69,6 +75,7 @@ const passageSlice = createSlice({
         state.allPassagesByQuery = action.payload;
       })
       // Handle the error state
+
       .addCase(getPassagesByQuery.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";

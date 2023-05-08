@@ -42,17 +42,83 @@ const options: swaggerJSDoc.Options = {
                             type: 'string',
                             description: 'ID del usuario'
                         },
+                        birthday: {
+                            type: 'string',
+                            description: 'Fecha de nacimiento del usuario'
+                        },
+                        firstName: {
+                            type: 'string',
+                            description: 'Nombre del usuario'
+                        },
+                        lastName: {
+                            type: 'string',
+                            description: 'Apellido del usuario'
+                        },
+                        email: {
+                            type: 'string',
+                            description: 'Email del usuario'
+                        },
+                        cc: {
+                            type: 'string',
+                            description: "Cédula de ciudadania del usuario"
+                        },
+                        gender: {
+                            type: 'string',
+                            description: 'Género del usuario'
+                        },
+                        ce: {
+                            type: 'string',
+                            description: 'Cédula de extranjería del usuario'
+                        },
+                        deleted: {
+                            type: 'boolean',
+                            description: 'Indica si el usuario está eliminado'
+                        },
+                        nationality: {
+                            type: 'string',
+                            description: 'Nacionalidad del usuario'
+                        },
+                        img: {
+                            type: 'string',
+                            description: 'Imagen del usuario'
+                        },
+                        createdAt: {
+                            type: 'string',
+                            description: 'Fecha de creación del usuario'
+                        },
                         password: {
                             type: 'string',
                             description: 'Contraseña del usuario'
                         },
-                        img: {
-                            type: 'string',
-                            description: 'URL de la imagen del usuario'
-                        },
-                        deleted: {
-                            type: 'boolean',
-                            description: 'Indica si el usuario ha sido eliminado'
+                        address: {
+                            type: 'object',
+                            properties: {
+                                number: {
+                                    type: 'string',
+                                    description: 'Numero de la calle'
+                                },
+                                street: {
+                                    type: 'string',
+                                    description: 'Nombre de calle'
+                                },
+                                postalCode: {
+                                    type: 'string',
+                                    description: 'Codigo posta de localidad'
+                                },
+                                location: {
+                                    type: 'string',
+                                    description: 'Localidad'
+                                },
+                                state: {
+                                    type: 'string',
+                                    description: 'Estado'
+                                },
+                                department: {
+                                    type: 'string',
+                                    description: 'Numero de departamento'
+                                }
+                            },
+                            description: 'Información de donde vive el usuario'
                         },
                         payments: {
                             type: 'object',
@@ -71,14 +137,6 @@ const options: swaggerJSDoc.Options = {
                                 }
                             },
                             description: 'Información de pagos del usuario'
-                        },
-                        name: {
-                            type: 'string',
-                            description: 'Nombre del usuario'
-                        },
-                        adress: {
-                            type: 'string',
-                            description: 'Dirección del usuario'
                         },
                         history: {
                             type: 'object',
@@ -101,14 +159,24 @@ const options: swaggerJSDoc.Options = {
                                 }
                             }
                         },
-                        email: {
-                            type: 'string',
-                            description: 'Correo electrónico del usuario'
+                        phone: {
+                            type: 'object',
+                            properties: {
+                                number: {
+                                    type: 'string',
+                                    description: 'Numero de principal de numero'
+                                },
+                                areaCode: {
+                                    type: 'string',
+                                    description: 'Area de codigo del numero'
+                                },
+                                displayPhone: {
+                                    type: 'string',
+                                    description: 'Numero completo del numero'
+                                }
+                            },
+                            description: 'Informacion del numero'
                         },
-                        DNI: {
-                            type: 'string',
-                            description: 'Número de documento de identidad del usuario'
-                        }
                     }
                 }
             },
