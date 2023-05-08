@@ -15,7 +15,7 @@ export default function Pagos() {
     return {
       id: item.id,
       title: item.name,
-      picture_url: item.img[0],
+      picture_url: item.img,
       unit_price: item.price,
       quantity: item.amount,
       currency_id: "COP",
