@@ -13,9 +13,9 @@ const postPayment = (req, res) => {
     items: products,
     back_urls: {
       // corregir redireccionamiento
-      success: `https://localhost:3000/success`,
+      success: `https://localhost:3001/home/especiales/confirmacion/pagos/checkout`,
 
-      failure: `https://localhost:3000/failure`,
+      failure: `https://localhost:3001/failure`,
       pending: ``,
     },
     auto_return: "approved",

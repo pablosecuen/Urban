@@ -38,21 +38,21 @@ app.use((_req, res, next) => {
 });
 
 app.use(express.json());
-// app.use((req, res, next) => {
-//     // Recorrer el cuerpo de la solicitud y convertir los valores a minúsculas
-//     function convertToLowerCase(obj) {
-//         for (let prop in obj) {
-//             if (typeof obj[prop] === "object") {
-//                 convertToLowerCase(obj[prop]);
-//             } else if (typeof obj[prop] === "string") {
-//                 obj[prop] = obj[prop].toLowerCase();
-//             }
-//         }
-//     }
+app.use((req, res, next) => {
+    // Recorrer el cuerpo de la solicitud y convertir los valores a minúsculas
+    function convertToLowerCase(obj) {
+        for (let prop in obj) {
+            if (typeof obj[prop] === "object") {
+                convertToLowerCase(obj[prop]);
+            } else if (typeof obj[prop] === "string") {
+                obj[prop] = obj[prop].toLowerCase();
+            }
+        }
+    }
 
-//     convertToLowerCase(req.body);
-//     next();
-// });
+    convertToLowerCase(req.body);
+    next();
+});
 app.use("/", router)
 
 app.listen(PORT, () => {
