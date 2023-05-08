@@ -14,10 +14,9 @@ export default function PickDate() {
   return (
     <DatePicker
       className="xl:ml-1 xl:w-[310px] xl:pl-2 "
-      dateFormat="dd/MM/yyyy h:mm aa"
+      dateFormat="dd/MM/yyyy"
       selected={fecha}
       onChange={handleFechaChange}
-      showTimeSelect
       showYearDropdown
       yearDropdownItemNumber={4}
       scrollableYearDropdown
