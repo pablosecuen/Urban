@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import PickDate from "@component/components/PickDate/PickDate";
 
 import {
   HiUserGroup,
@@ -17,7 +18,6 @@ import { MdPets } from "react-icons/md";
 import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
 
 export default function Reserva() {
-
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
@@ -57,7 +57,7 @@ const [currentDate, setCurrentDate] = useState(today);
       ...(departureDate && { departureDate }),
       // agrego al form SOLO las propiedades que contengan valor
     };
-  
+
     dispatch(getPassagesByQuery(query));
   };
 
@@ -86,18 +86,19 @@ const [currentDate, setCurrentDate] = useState(today);
             type="text"
             value={destination}
             onChange={handleDestinationChange}
-            />
+          />
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center xl:ml-[119px] ">
           <HiTrendingUp className="w-10 text-blue" />
+          <PickDate />
           <input
             className="w-2/3 pl-2"
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
             min={currentDate}
-            onChange={handleDepartureDateChange}
+            onChange={handleDepartureDateChange} 
             />
         </div>
 
@@ -140,7 +141,9 @@ const [currentDate, setCurrentDate] = useState(today);
         </div> */}
 
         <Link href="/home/reserva/viajes" className="flex justify-center">
-          <button onClick={handleSubmit} className="w-1/2 self-center">Buscar tu viaje!</button>
+          <button onClick={handleSubmit} className="w-1/2 self-center">
+            Buscar tu viaje!
+          </button>
         </Link>
       </form>
     </section>
