@@ -20,6 +20,9 @@ export default function Reserva() {
 
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
+  const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
+const [currentDate, setCurrentDate] = useState(today);
+
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [price, setPrice] = useState("");
@@ -27,10 +30,10 @@ export default function Reserva() {
   const [arrivalDate, setArrivalDate] = useState("");
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOrigin(e.target.value);
+    setOrigin(e.target.value.toLowerCase());
   };
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination(e.target.value);
+    setDestination(e.target.value.toLowerCase());
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,8 +94,9 @@ export default function Reserva() {
           <input
             className="w-2/3 pl-2"
             placeholder="Fecha de salida"
-            type="text"
+            type="date"
             value={departureDate}
+            min={currentDate}
             onChange={handleDepartureDateChange}
             />
         </div>
@@ -102,8 +106,9 @@ export default function Reserva() {
           <input
             className="w-2/3 pl-2"
             placeholder="Fecha de llegada"
-            type="text"
+            type="date"
             value={arrivalDate}
+            min={ departureDate ? departureDate : currentDate}
             onChange={handleArrivalDateChange}
             />
         </div>
