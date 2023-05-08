@@ -58,13 +58,18 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
       // agrego al form SOLO las propiedades que contengan valor
     };
     
-    if (Object.keys(query).length === 0) {
-      // dispatch de getAllPassages si query está vacío
-      dispatch(getAllPassages());
-    } else {
-      // dispatch de getPassagesByQuery con query como argumento
-      dispatch(getPassagesByQuery(query));
-    }
+    // if (Object.keys(query).length === 0) {
+    //   // dispatch de getAllPassages si query está vacío
+    //   dispatch(getAllPassages());
+    // } else {
+    //   // dispatch de getPassagesByQuery con query como argumento
+    //   dispatch(getPassagesByQuery(query));
+    // }
+    
+    Object.keys(query).length? 
+    dispatch(getPassagesByQuery(query)):
+    dispatch(getAllPassages())
+
   };
 
   return (
