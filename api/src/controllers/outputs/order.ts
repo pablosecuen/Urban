@@ -56,4 +56,37 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error al obtener las ordenes" });
   }
 };
+export const getOrdersByUserId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const allProperties = Object.keys(req.query);
 
+    let query: any = db.collection("orders")
+
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
+
+    // Se agrega una cláusula adicional para filtrar por el userId
+    query = query.where("userId", "==", req.params.userId);
+
+    const ordersSnapshot = await query.get();
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(ordersSnapshot.size / pageSize);
+
+    const ordersData = ordersSnapshot.docs
+      .slice(startIndex, endIndex)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    res.status(201).json({ orders: ordersData, totalPages });
+  } catch (error) {
+    console.error("Error al obtener las ordenes", error);
+    res.status(500).json({ message: "Error al obtener las ordenes" });
+  }
+};
