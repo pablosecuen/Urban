@@ -20,7 +20,7 @@ const UserDropdown = () => {
   };
   return (
     <div
-      className="flex w-auto justify-end  "
+      className="relative flex w-auto justify-end"
       onClick={(e) => {
         e.preventDefault();
         dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
@@ -51,7 +51,7 @@ const UserDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "min-w-48 z-50 float-left w-96 list-none rounded bg-white py-2 text-left text-base shadow-lg"
+          "min-w-48 absolute z-50 float-left mt-12 w-96 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
         <a
