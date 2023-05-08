@@ -1,6 +1,4 @@
-import {
-  createSlice,
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getAllUsers,
   getUserById,
@@ -30,8 +28,6 @@ const initialState: UserState = {
   error: null, // provide an empty array as the initial state value for allUsers
 };
 
-type ResponseTypeAll = AxiosResponse<User[], any>;
-type ResponseTypeId = AxiosResponse<User, any>;
 
 const userSlice = createSlice({
   name: "users",
@@ -39,84 +35,53 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Handle the pending state
-      .addCase(getAllUsers.pending, (state) => {
-        state.status = "loading";
-      })
-      // Handle the success state
-      .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.allUsers = action.payload;
-      })
-      // Handle the error state
-      .addCase(getAllUsers.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Something went wrong";
-      });
-
-    builder
-      // Handle the pending state
-      .addCase(getUserById.pending, (state) => {
-        state.status = "loading";
-      })
-      // Handle the success state
-      .addCase(getUserById.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.userById[action.payload.id] = action.payload;
-      })
-      // Handle the error state
-      .addCase(getUserById.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Something went wrong";
-      });
-
-    builder
-      // Handle the pending state
-      .addCase(getUsersByName.pending, (state) => {
-        state.status = "loading";
-      })
-      // Handle the success state
-      .addCase(getUsersByName.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.userByName = action.payload;
-      })
-      // Handle the error state
-      .addCase(getUsersByName.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Something went wrong";
-      });
-
-    builder
-      // Handle the pending state
-      .addCase(getUsersByCc.pending, (state) => {
-        state.status = "loading";
-      })
-      // Handle the success state
-      .addCase(getUsersByCc.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.userByCc = action.payload[0];
-      })
-      // Handle the error state
-      .addCase(getUsersByCc.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Something went wrong";
-      });
-
-    builder
-      // Handle the pending state
-      .addCase(getUsersByEmail.pending, (state) => {
-        state.status = "loading";
-      })
-      // Handle the success state
-      .addCase(getUsersByEmail.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.userByEmail = action.payload[0];
-      })
-      // Handle the error state
-      .addCase(getUsersByEmail.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Something went wrong";
-      });
+      .addMatcher(
+        (action) =>
+          [
+            getAllUsers.pending,
+            getUserById.pending,
+            getUsersByName.pending,
+            getUsersByCc.pending,
+            getUsersByEmail.pending,
+          ].includes(action.type),
+        (state) => {
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) =>
+          [
+            getAllUsers.fulfilled,
+            getUsersByName.fulfilled,
+            getUsersByCc.fulfilled,
+            getUsersByEmail.fulfilled,
+          ].includes(action.type),
+        (state, action) => {
+          state.status = "succeeded";
+          state.allUsers = action.payload;
+        }
+      )
+      .addMatcher(
+        (action) => getUserById.fulfilled.match(action),
+        (state, action) => {
+          state.status = "succeeded";
+          state.userById = action.payload;
+        }
+      )
+      .addMatcher(
+        (action) =>
+          [
+            getAllUsers.rejected,
+            getUserById.rejected,
+            getUsersByName.rejected,
+            getUsersByCc.rejected,
+            getUsersByEmail.rejected,
+          ].includes(action.type),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.payload as string;
+        }
+      );
   },
 });
 
