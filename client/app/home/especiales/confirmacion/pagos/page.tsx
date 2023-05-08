@@ -24,13 +24,14 @@ export default function Pagos() {
 
   const handleClickMP = async () => {
     if (token) {
+      //try
       const { data } = await axios.post("https://localhost:3000/payment", arrToDoPayment);
       window.location.href = await data.response.body.init_point;
     }
   };
   return (
     <div className="flex w-4/5 flex-col items-center justify-center gap-4 rounded-3xl border-2 py-20 text-center shadow-2xl shadow-black/40 lg:p-10">
-      <span className="text-2xl">Valor a pagar: $50.000</span>
+      <span className="text-2xl">Valor a pagar: ${totalPrice}</span>
       <button>Bancolombia</button>
       <button onClick={handleClickMP}>Mercado Pago</button>
       <button>Generar ticket Efecty</button>
