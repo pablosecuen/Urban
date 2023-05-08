@@ -38,21 +38,23 @@ app.use((_req, res, next) => {
 });
 
 app.use(express.json());
-// app.use((req, res, next) => {
-//     // Recorrer el cuerpo de la solicitud y convertir los valores a minúsculas
-//     function convertToLowerCase(obj) {
-//         for (let prop in obj) {
-//             if (typeof obj[prop] === "object") {
-//                 convertToLowerCase(obj[prop]);
-//             } else if (typeof obj[prop] === "string") {
-//                 obj[prop] = obj[prop].toLowerCase();
-//             }
-//         }
-//     }
 
-//     convertToLowerCase(req.body);
-//     next();
-// });
+app.use((req, res, next) => {
+    // Recorrer el cuerpo de la solicitud y convertir los valores a minúsculas e ignora cualquier key que tenga Id para evitar problemas
+    const convertToLowerCase = (obj) => {
+        Object.keys(obj).forEach((key) => {
+            if (typeof obj[key] === "object") {
+                convertToLowerCase(obj[key]);
+            } else if (typeof obj[key] === "string" && !key.includes("Id")) {
+                obj[key] = obj[key].toLowerCase();
+            }
+        });
+    }
+
+    convertToLowerCase(req.body);
+    next();
+});
+
 app.use("/", router)
 
 app.listen(PORT, () => {
