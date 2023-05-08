@@ -84,3 +84,5 @@ export default function Toastify() {
     </div>
   );
 }
+
+//Pueden hacer los cambios de estilos y posicionamiento de forma automatica en https://fkhadra.github.io/react-toastify/introduction
