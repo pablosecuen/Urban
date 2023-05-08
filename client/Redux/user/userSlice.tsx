@@ -28,7 +28,6 @@ const initialState: UserState = {
   error: null, // provide an empty array as the initial state value for allUsers
 };
 
-
 const userSlice = createSlice({
   name: "users",
   initialState,
