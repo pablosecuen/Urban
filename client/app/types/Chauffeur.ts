@@ -1,26 +1,33 @@
+import { Address, Phone, VehicleForChauffeur } from "./GeneralTypes";
+import { Payment } from "./Payments";
+
 export interface Chauffeur {
-  DNI: string;
-  address: string;
-  deleted: boolean;
+  firstName: string;
+  lastName: string;
   email: string;
-  history: {
-    travels: string[];
-  };
-  img: string;
-  license: string;
-  name: string;
-  ownerState: boolean;
   password: string;
-  payments: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
-  phone: string;
-  vehicle: {
-    patent: string;
-    vehicleId: string;
-  };
+  phone: Phone;
+  nationality: string;
+  birthday: string;
+  gender: string;
+  cc?: string;
+  ce?: string;
+  passport?: string;
+  license: string;
+  img: string;
+  typeChauffeur: string;
+  address: Address;
+  occupation: string;
+  payments: Payment;
+  history: string[];
+  ownerState: boolean;
+  vehicle: VehicleForChauffeur;
+  deleted: boolean;
+  status: boolean;
+  displayName: string;
+  createdAt: string;
+  rating: number;
+  comments: object[];
 }
 
 export interface ChauffeurFilters {
