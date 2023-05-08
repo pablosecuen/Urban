@@ -1,27 +1,23 @@
 "use client";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@component/Redux/store/store";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "@reduxjs/toolkit";
+import React from "react";
+
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Travel } from "../../app/types/Travels";
+
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-import { fetchAllTravels } from "@component/Redux/travel/travelSlice";
+
+import { CardTravelsProps } from "@component/app/admin/dashboard/travels/page";
 
 // components
 
-export default function CardUsers() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allTravels = useSelector((state: RootState) => state.travel.allTravels);
+const CardTravels: React.FC<CardTravelsProps> = ({
+  allTravels,
+  handleClickFunction,
+  selectedTravel,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedTravel, setSelectedTravel] = useState<Travel | null>(null);
-  const [showDropDown, setShowDropDown] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchAllTravels());
-  }, [dispatch]);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -32,10 +28,6 @@ export default function CardUsers() {
       (travel.origin && travel.origin.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (travel.userId && travel.userId.toLowerCase().includes(searchTerm.toLowerCase()))
   );
-
-  const handleClick = (travel: Travel) => {
-    setSelectedTravel(travel);
-  };
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
@@ -60,12 +52,6 @@ export default function CardUsers() {
                   onChange={handleSearchChange}
                 />
               </label>
-              {/* <button
-                className="mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-                type="button"
-              >
-                Settings
-              </button> */}
             </div>
           </div>
           {/* este es el render de los travels */}
@@ -73,7 +59,7 @@ export default function CardUsers() {
         <div style={{ height: "500px", overflow: "scroll" }}>
           {filteredTravels.map((travel: any) => (
             <div
-              onClick={() => handleClick(travel)}
+              onClick={() => handleClickFunction(travel)}
               key={travel.id}
               className="flex w-full cursor-pointer justify-between gap-4 border-2 px-4 py-2"
             >
@@ -280,4 +266,6 @@ export default function CardUsers() {
       </div>
     </div>
   );
-}
+};
+
+export default CardTravels;
