@@ -16,6 +16,10 @@ export default function PickDate() {
       dateFormat="dd/MM/yyyy"
       selected={fecha}
       onChange={handleFechaChange}
+      showTimeSelect
+      showYearDropdown
+      yearDropdownItemNumber={15}
+      scrollableYearDropdown
     />
   );
 }
