@@ -36,7 +36,10 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
     let queryParams = searchTerm ? { [searchProperty]: searchTerm } : {};
     dispatch(getChauffeurs(queryParams));
   };
-
+  const handleSetSearchProperty = (e: any) => {
+    setSearchProperty(e.target.value);
+  };
+  console.log(searchProperty);
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
   };
@@ -48,7 +51,7 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
         <div className="mb-0 rounded-t bg-white px-6 py-6">
           <div className="flex justify-between text-center">
             <h6 className="flex text-lg font-bold text-blueGray-700">Chauffeurs List</h6>
-            <div className="flex items-center">
+            <div className="flex flex-col items-center">
               <form onSubmit={handleSearch}>
                 <label htmlFor="search" className="flex items-center text-gray-500">
                   <FaSearch className="w-auto" />
@@ -56,12 +59,18 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                     type="text"
                     id="search"
                     className="ml-2 border-b-2 border-gray-500 focus:outline-none"
-                    placeholder="Buscar usuarios"
+                    placeholder="Buscar choferes"
                     value={searchTerm}
                     onChange={handleSearchChange}
                   />
                 </label>
               </form>
+              <select onChange={handleSetSearchProperty}>
+                <option value="name">nombre</option>
+                <option value="cc">cc</option>
+                <option value="ce">ce</option>
+                <option value="patent">patent</option>
+              </select>
             </div>
           </div>
           {/* este es el render de los usuarios */}
