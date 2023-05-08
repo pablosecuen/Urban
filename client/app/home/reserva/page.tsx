@@ -1,9 +1,9 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import PickDate from "@component/components/PickDate/PickDate";
+import { validateQuery } from "./Validation";
 
 import {
   HiUserGroup,

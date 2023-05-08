@@ -22,4 +22,3 @@ export const getPassagesByQuery = createAsyncThunk<Passage[], QueryParams, {}>("
   console.log(response.data.passages);
   return response.data;
 })
-
