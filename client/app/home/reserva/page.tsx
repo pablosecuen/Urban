@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import PickDate from "@component/components/PickDate/PickDate";
@@ -64,12 +64,16 @@ export default function Reserva() {
 
     try {
       console.log(validateQuery(query));
-      setIsComplete(validateQuery(query))
-      Object.keys(query).length && dispatch(getPassagesByQuery(query));
+      dispatch(getPassagesByQuery(query));
     } catch (error) {
       throw new Error("algo salio mal");
     }
   };
+  
+  useEffect(() => {
+    setIsComplete(validateQuery(query))
+
+  },[query])
 
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
@@ -99,19 +103,18 @@ export default function Reserva() {
           />
         </div>
 
-        <div className="flex items-center justify-center xl:ml-[119px] ">
+
+        <div className="flex items-center justify-center">
           <HiTrendingUp className="w-10 text-blue" />
-          <PickDate />
-          {/* <input
+          <input
             className="w-2/3 pl-2"
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
-            min={currentDate}
-            onChange={handleDepartureDateChange} 
-            /> */}
+            min={departureDate ? departureDate : currentDate}
+            onChange={handleDepartureDateChange}
+          />
         </div>
-
         <div className="flex items-center justify-center">
           <HiTrendingDown className="w-10 text-blue" />
           <input
@@ -150,7 +153,7 @@ export default function Reserva() {
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div> */}
 
-        <button onClick={handleSubmit} disabled={!validateQuery(query)} className="w-1/2 self-center">
+        <button onClick={handleSubmit} disabled={!isComplete} className="w-1/2 self-center cursor-pointer">
           {/* <Link  href="/home/reserva/viajes" className="flex justify-center"> */}
           Buscar tu viaje!
           {/* </Link> */}
