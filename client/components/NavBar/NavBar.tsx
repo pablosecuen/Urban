@@ -127,7 +127,7 @@ export default function NavBar() {
               height={100}
             />
 
-            <ul className="flex w-auto items-center justify-evenly lg:w-1/2 lg:gap-4 xl:w-2/5">
+            <ul className="flex w-auto items-center justify-evenly  lg:gap-4 ">
               {links.map((link) => (
                 <li
                   key={link.id}
@@ -147,7 +147,7 @@ export default function NavBar() {
               {userData ? (
                 <>
                   <li
-                    className="my-2 flex items-center justify-between "
+                    className="flex items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:w-auto lg:px-0"
                     onClick={(e) => {
                       e.preventDefault();
                       dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
@@ -160,7 +160,7 @@ export default function NavBar() {
                       height={50}
                       className=" rounded-full border-2 border-blue lg:h-14 lg:w-full"
                     />
-                    <span className="mx-2">{userData?.name}</span>
+                    <span className="mx-2 font-semibold lg:text-sm">{userData?.name}</span>
                     <button
                       className="rounded bg-blue px-4 py-2 text-center text-white lg:w-auto"
                       onClick={handleLogout}
