@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import PickDate from "@component/components/PickDate/PickDate";
 
@@ -21,7 +21,7 @@ export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-const [currentDate, setCurrentDate] = useState(today);
+const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
 
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
