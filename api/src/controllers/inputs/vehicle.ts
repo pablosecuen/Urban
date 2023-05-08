@@ -71,7 +71,7 @@ export const newVehicleByDelivery = async (req: Request, res: Response): Promise
 
     const docRef = await db.collection("vehicle").add(dataFormated);
 
-    await db.collection("dealers").doc(dataFormated.deliveryId).update({
+    await db.collection("deliverys").doc(dataFormated.deliveryId).update({
       "vehicle.vehicleId": docRef.id,
       "vehicle.patent": data.patent,
     });

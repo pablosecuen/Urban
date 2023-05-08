@@ -19,7 +19,6 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
       !data.deliveryId ||
       !data.productId ||
       !data.localId ||
-      !data.date ||
       !data.price ||
       !data.destination
     ) {
@@ -30,7 +29,6 @@ export const newOrderValidate = (req: Request, res: Response, next: NextFunction
       !isDistributorIdValid(data.deliveryId) ||
       !isProductIdValid(data.productId) ||
       !isLocalIdValid(data.localId) ||
-      !isDateValid(data.date) ||
       !isPriceValid(data.price) ||
       !isDestinationValid(data.destination)
     ) {
