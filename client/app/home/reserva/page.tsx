@@ -9,6 +9,9 @@ import {
   HiOutlineCalendar,
   HiOutlineBriefcase,
   HiOutlineLocationMarker,
+  HiTag,
+  HiTrendingUp,
+  HiTrendingDown
 } from "react-icons/hi";
 import { MdPets } from "react-icons/md";
 import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
@@ -17,6 +20,9 @@ export default function Reserva() {
 
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
+  const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
+const [currentDate, setCurrentDate] = useState(today);
+
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [price, setPrice] = useState("");
@@ -24,10 +30,10 @@ export default function Reserva() {
   const [arrivalDate, setArrivalDate] = useState("");
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOrigin(e.target.value);
+    setOrigin(e.target.value.toLowerCase());
   };
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination(e.target.value);
+    setDestination(e.target.value.toLowerCase());
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,30 +90,55 @@ export default function Reserva() {
         </div>
 
         <div className="flex items-center justify-center">
-          <HiOutlineCalendar className="w-10 text-blue" />
+          <HiTrendingUp className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
-            placeholder="Cuando?..."
-            type="text"
+            placeholder="Fecha de salida"
+            type="date"
             value={departureDate}
+            min={currentDate}
             onChange={handleDepartureDateChange}
             />
         </div>
 
         <div className="flex items-center justify-center">
+          <HiTrendingDown className="w-10 text-blue" />
+          <input
+            className="w-2/3 pl-2"
+            placeholder="Fecha de llegada"
+            type="date"
+            value={arrivalDate}
+            min={ departureDate ? departureDate : currentDate}
+            onChange={handleArrivalDateChange}
+            />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <HiTag className="w-10 text-blue" />
+          <input
+            className="w-2/3 pl-2"
+            placeholder="Precio"
+            type="text"
+            value={price}
+            onChange={handlePriceChange}
+            />
+        </div>
+
+        {/* <div className="flex items-center justify-center">
           <HiUserGroup className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Cantidad de pasajeros..." type="number" />
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
           <HiOutlineBriefcase className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Equipaje..." type="text" />
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
           <MdPets className="w-10 text-blue" />
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
-        </div>
+        </div> */}
+
         <Link href="/home/reserva/viajes" className="flex justify-center">
           <button onClick={handleSubmit} className="w-1/2 self-center">Buscar tu viaje!</button>
         </Link>
