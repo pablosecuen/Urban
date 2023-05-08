@@ -20,7 +20,10 @@ const options: swaggerJSDoc.Options = {
                 UserToRegister: {
                     type: 'object',
                     properties: {
-                        name: {
+                        firstName: {
+                            type: 'string'
+                        },
+                        lastName: {
                             type: 'string'
                         },
                         email: {
@@ -29,14 +32,6 @@ const options: swaggerJSDoc.Options = {
                         password: {
                             type: 'string'
                         },
-                        createdAt: {
-                            type: 'string',
-                            format: 'date-time'
-                        },
-                        updatedAt: {
-                            type: 'string',
-                            format: 'date-time'
-                        }
                     },
                     required: ['name', 'email', 'password']
                 },
