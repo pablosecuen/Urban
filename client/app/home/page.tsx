@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="shadow/30 mb-8 w-full justify-center rounded-3xl border-2 px-4 py-4 shadow-lg min-[420px]:mt-32 min-[420px]:w-4/5 xl:h-4/5 xl:w-full ">
-      <p className="my-2 text-center text-2xl font-bold">
+      <p className="my-2 text-center text-2xl font-bold xl:text-3xl">
         Bienvedios a <span className="text-verdeurban">U</span>
         <span className=" text-celeste">rban</span>!
       </p>
