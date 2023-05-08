@@ -22,3 +22,24 @@ export interface Chauffeur {
     vehicleId: string;
   };
 }
+
+export interface ChauffeurFilters {
+  name?: string;
+  id?: string;
+  cc?: string;
+  ce?: string;
+  patent?: string;
+}
+export interface FilteredChauffeurs {
+  chauffeurs: Chauffeur[];
+  currentPage: number;
+  totalPages: number;
+  activeFilters: ChauffeurFilters | null;
+}
+export type ChauffeurQueryParams = {
+  name?: string;
+  id?: string;
+  cc?: string;
+  ce?: string;
+  patent?: string;
+};

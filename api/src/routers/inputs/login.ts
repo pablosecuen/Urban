@@ -37,9 +37,10 @@ passport.use(
         if (!user.exists) {
           user = await db.collection("users").doc(profile.id).set({
             email: profile.emails[0].value,
-            name: profile.displayName,
+            firstName: profile.name.givenName,
+            lastName: profile.name.familyName,
+            diplayName: profile.displayName,
             img: profile.photos[0].value,
-            adress: "",
             payments: {
               cardNumber: "",
               expirationDate: "",
@@ -50,14 +51,30 @@ passport.use(
               orders: [],
               travels: [],
             },
-            DNI: "",
+            cc: "",
+          address: {
+              number: "",
+              street: "",
+              postalCode: "",
+              location: "",
+              state: "",
+              department: ""
+            },
+            nationality: "",
+            phone: {
+              number: "",
+              areaCode: "",
+              displayPhone: ""
+            },
             deleted: false
           });
         }
         const payload = {
           email: profile.emails[0].value,
-          name: profile.displayName,
-          id: profile.id
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          diplayName: profile.displayName,
+          img: profile.photos[0].value,
         }
         done(null, payload);
       } catch (error) {

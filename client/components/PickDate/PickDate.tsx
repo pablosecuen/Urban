@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function PickDate() {
   const [fecha, setFecha] = useState(new Date());
 
-  const handleFechaChange = (date) => {
+  const handleFechaChange = (date: any) => {
     setFecha(date);
   };
 
