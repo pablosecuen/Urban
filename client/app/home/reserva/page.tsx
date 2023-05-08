@@ -16,6 +16,7 @@ import {
 } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
 import { getPassagesByQuery, getAllPassages } from "@component/Redux/passage/passageActions";
+import { Query } from "@component/app/types/Passages";
 
 export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
@@ -51,13 +52,15 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    const query = {
+    const query : Query = {
       origin: origin.toLowerCase(),
       destination: destination.toLowerCase(),
       departureDate: departureDate.toLowerCase(),
       ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
       // agrego al form SOLO las propiedades que contengan valor
     };
+
+    validateQuery(query);
 
     Object.keys(query).length && dispatch(getPassagesByQuery(query));
   };
