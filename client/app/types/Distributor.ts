@@ -1,4 +1,5 @@
-import { Address, Payment, Phone, TypeVehicle } from "../types/types";
+import { Address, Payment, Phone, TypeVehicle } from "@component/../api/src/types/types";
+
 export interface DistributorToRegister {
   firstName: string;
   lastName: string;
@@ -25,6 +26,7 @@ export interface Distributor extends DistributorToRegister {
   createdAt: string;
   rating: number;
   comments: object[];
+  id: string;
 }
 
 export interface DistributorToUpdate {

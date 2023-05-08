@@ -17,7 +17,7 @@ router.get("/", getVehicles);
 router.get("/:id", getVehicleById);
 router.get("/patent/:patent", searchVehicleByPatent);
 router.get("/chauffeur/:chauffeurId", searchVehicleByChauffeur);
-router.get("/owner/:owner", searchVehicleByOwner);
+router.get("/owner/:ownerId", searchVehicleByOwner);
 router.get("/brand/:brand", searchVehicleByBrand);
 router.get("/year/:year", searchVehicleByYear);
 

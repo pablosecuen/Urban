@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
-import { Distributor, DistributorToRegister } from "../../schema/distributor";
+import { Delivery, DeliveryToRegister } from "../../schema/delivery";
 
 /**
  * Controlador para crear distribuidores
- * * @body datos para crear distribuidor tipo DistributorToRegister
+ * * @body datos para crear distribuidor tipo DeliveryToRegister
  */
-export const newDistributor = async (req: Request, res: Response): Promise<void> => {
+export const newDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: DistributorToRegister = req.body;
-    const dataFormated: Distributor = {
+    const data: DeliveryToRegister = req.body;
+    const dataFormated: Delivery = {
       ...data,
       payments: {
         cardNumber: "",
@@ -27,15 +27,18 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
       license: "",
       status: false,
       displayName: data.firstName + " " + data.lastName,
-      vehicleType: "false",
       createdAt: new Date(Date.now()).toISOString(),
       rating: 0,
       comments: [{}],
+      vehicle: {
+        vehicleId: "",
+        patent: "",
+      },
     };
 
     // Verificar si ya existe un distribuidor con el correo electrónico dado
     const snapshot = await db
-      .collection("distributors")
+      .collection("deliverys")
       .where("email", "==", dataFormated.email)
       .get();
     if (!snapshot.empty) {
@@ -47,7 +50,7 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
     dataFormated.password = hashedPassword;
 
     //crear doocumento de distribuidor
-    const docRef = await db.collection("distributors").add(dataFormated);
+    const docRef = await db.collection("deliverys").add(dataFormated);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear el distribuidor", error);
@@ -58,28 +61,28 @@ export const newDistributor = async (req: Request, res: Response): Promise<void>
 /**
  * Controlador para actualizar distribuidores
  * @param req Id tipo string
- * @body datos para actualizar distribuidor tipo DistributorToUpdate
+ * @body datos para actualizar distribuidor tipo DeliveryToUpdate
  */
-export const updateDistributor = async (req: Request, res: Response): Promise<void> => {
+export const updateDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
-    const data: Distributor = req.body; //datos de distribuidor a actualizar
+    const data: Delivery = req.body; //datos de distribuidor a actualizar
     const updatedAt: string = new Date(Date.now()).toISOString();
 
 
     //verificar si existe el usuario en la base de datos
-    const docRef = await db.collection("distributors").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
     await db
-      .collection("distributors")
+      .collection("deliverys")
       .doc(id)
       .update({ ...data, updatedAt: updatedAt });
-    res.status(201).json({ menssage: "Distribuidor actualizado correctamente" });
+    res.status(201).json({ menssage: "Repartidor actualizado correctamente" });
   } catch (error) {
-    console.error("Error al actualizar el Distribuidor", error);
+    console.error("Error al actualizar el Repartidor", error);
     res.status(400).json({ messege: error.message });
   }
 };
@@ -88,39 +91,39 @@ export const updateDistributor = async (req: Request, res: Response): Promise<vo
  * @param id del distribuidor
  *
  */
-export const enableDistributor = async (req: Request, res: Response): Promise<void> => {
+export const enableDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
-    const docRef = await db.collection("distributors").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("distributors").doc(id).update({ deleted: false });
-    res.status(201).json({ menssage: "Distribuidor habilitado correctamente" });
+    await db.collection("deliverys").doc(id).update({ deleted: false });
+    res.status(201).json({ menssage: "Repartidor habilitado correctamente" });
   } catch (error) {
-    console.error("Error al habilitar el Distribuidor", error);
+    console.error("Error al habilitar el Repartidor", error);
     res.status(400).json({ messege: error.message });
   }
 };
 
 /**
- * Controlador para eliminar un distribuidor por id
+ * Controlador para eliminar un repa por id
  
  * @param id del distribuidor a eliminar 
  */
-export const deleteDistributor = async (req: Request, res: Response): Promise<void> => {
+export const deleteDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; //obtener id del distribuidor a eliminar
-    const docRef = await db.collection("distributors").doc(id).get();
+    const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el distributor");
     }
     // Actualizar el usuario en Firestore
-    await db.collection("distributors").doc(id).update({ deleted: true });
-    res.status(201).json({ menssage: "Distribuidor eliminado correctamente" });
+    await db.collection("deliverys").doc(id).update({ deleted: true });
+    res.status(201).json({ menssage: "Repartidor eliminado correctamente" });
   } catch (error) {
-    console.error("Error al borrar el Distribuidor", error);
+    console.error("Error al borrar el Repartidor", error);
     res.status(400).json({ messege: error.message });
   }
 };

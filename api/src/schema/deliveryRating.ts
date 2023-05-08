@@ -1,6 +1,6 @@
-export interface DistributorRating {
+export interface DeliveryRating {
   userId: string;
-  distributorId: string;
+  deliveryId: string;
   rating: number;
   comment?: string;
   createdAt: string;

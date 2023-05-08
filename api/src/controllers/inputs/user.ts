@@ -3,7 +3,7 @@ import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
 import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
-import { DistributorRating } from "../../schema/distributorRating";
+import { DeliveryRating } from "../../schema/deliveryRating";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -129,34 +129,34 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-export const newDistributorRating = async (req: Request, res: Response): Promise<void> => {
+export const newDeliveryRating = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { userId, distributorId } = req.params;
+    const { userId, deliveryId } = req.params;
     const data = req.body;
 
-    const dataFormatted: DistributorRating = {
+    const dataFormatted: DeliveryRating = {
       userId,
-      distributorId,
+      deliveryId,
       ...data,
       createdAt: new Date().toISOString(),
     };
 
-    const [userDoc, distributorDoc] = await Promise.all([
+    const [userDoc, deliveryDoc] = await Promise.all([
       db.collection("users").doc(userId).get(),
-      db.collection("distributors").doc(distributorId).get(),
+      db.collection("deliverys").doc(deliveryId).get(),
     ]);
 
     if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!distributorDoc.exists) throw new Error("El distribuidor no existe");
+    if (!deliveryDoc.exists) throw new Error("El distribuidor no existe");
 
     const docRef = await db.collection("distributorRating").add(dataFormatted);
 
-    const distributorRef = db.collection("distributors").doc(distributorId);
-    const distributorRatingsRef = db.collection("distributorRating").where("distributorId", "==", distributorId);
+    const deliveryRef = db.collection("deliverys").doc(deliveryId);
+    const deliveryRatingsRef = db.collection("distributorRating").where("deliveryId", "==", deliveryId);
 
     const [distributorData, distributorRatingsData] = await Promise.all([
-      distributorRef.get(),
-      distributorRatingsRef.get(),
+      deliveryRef.get(),
+      deliveryRatingsRef.get(),
     ]);
 
     const totalRating = distributorRatingsData.docs.reduce((acc, curr) => acc + curr.data().rating, 0);
@@ -168,12 +168,12 @@ export const newDistributorRating = async (req: Request, res: Response): Promise
         userId,
       };
 
-      await distributorRef.update({
+      await deliveryRef.update({
         rating: averageRating,
         comments: firebase.firestore.FieldValue.arrayUnion(commentData),
       });
     } else {
-      await distributorRef.update({
+      await deliveryRef.update({
         rating: averageRating,
       });
     }
@@ -190,7 +190,7 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
     const { userId, chauffeurId } = req.params;
     const data = req.body;
 
-    const dataFormatted: DistributorRating = {
+    const dataFormatted: DeliveryRating = {
       userId,
       chauffeurId,
       ...data,

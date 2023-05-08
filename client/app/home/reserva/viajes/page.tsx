@@ -5,16 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import { fetchAllPassages } from "@component/Redux/passage/passageSlice";
+import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allPassages = useSelector((state: RootState) => state.passage.allPassages);
 
   useEffect(() => {
-    dispatch(fetchAllPassages());
+    dispatch(getAllPassages());
   }, []);
-
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
@@ -24,21 +23,20 @@ export default function Viajes() {
         </h1>
 
         {allPassages.map((passage) => (
-          <Link href={`/home/reserva/viajes/${passage.id}`} key={passage.id} className="flex w-full flex-col border border-black">
-            <h3 className="border capitalize">
+          <Link
+            href={`/home/reserva/viajes/${passage.id}`}
+            key={passage.id}
+            className="group flex items-center justify-between gap-4 rounded-full border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
+          >
+            <small className="font-bold capitalize text-blueGray-700 ">
               {passage.origin} - {passage.destination}
-            </h3>
-            <small>
-              {passage.departureDate} {passage.duration}
             </small>
+            <small>{passage.departureDate}</small>
           </Link>
         ))}
       </div>
       <div className="flex gap-2 pt-10">
         <button>Ver mas opciones</button>
-        <Link href="/home/reserva/viajes/confirmacion">
-          <button>Reservar</button>
-        </Link>
       </div>
     </div>
   );

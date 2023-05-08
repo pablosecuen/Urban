@@ -18,40 +18,48 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
       createdAt: new Date(Date.now()).toISOString(),
     };
 
-    const [userDoc, distributorDoc, localDoc] = await Promise.all([
+    const [userDoc, distributorDoc, productDoc, localDoc] = await Promise.all([
       db.collection("users").doc(dataFormated.userId).get(),
-      db.collection("distributors").doc(dataFormated.distributorId).get(),
+      db.collection("deliverys").doc(dataFormated.deliveryId).get(),
+      db.collection("products").doc(dataFormated.productId).get(),
       db.collection("locals").doc(dataFormated.localId).get(),
     ]);
 
 
     if (!userDoc.exists)
-      res.status(404).json({ message: "El usuario no existe" });
+      throw Error("El usuario no existe")
 
 
     if (!distributorDoc.exists)
-      res.status(404).json({ message: "El distribuidor no existe" });
+      throw Error("El repartidor no existe")
 
+    if (!productDoc.exists)
+      throw Error("El producto  no existe")
 
     if (!localDoc.exists)
-      res.status(404).json({ message: "El local no existe" });
-
+      throw Error("El local no existe")
 
     const distributorData = distributorDoc.data();
 
     if (!distributorData.status)
-      res.status(400).json({ message: "El distribuidor no esta activo" });
+      throw Error("El repartidor no esta activo")
+
 
     if (distributorData.deleted)
-      res.status(400).json({ message: "El distribuidor esta eliminado" });
+      throw Error("El repartidor ya no existe")
+
+    const productData = productDoc.data();
+
+    if (productData.deleted)
+      throw Error("El producto ya no existe")
 
     const localData = localDoc.data();
 
-    if (!localData.status)
-      res.status(400).json({ message: "El local no esta activo" });
-
     if (localData.deleted)
-      res.status(400).json({ message: "El local esta eliminado" });
+      throw Error("Esta eliminado")
+
+    if (!localData.status)
+      throw Error("El local no esta activo")
 
 
 
@@ -65,8 +73,8 @@ export const newOrder = async (req: Request, res: Response): Promise<void> => {
           "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
       db
-        .collection("distributors")
-        .doc(orderData.distributorId)
+        .collection("deliverys")
+        .doc(orderData.deliveryId)
         .update({
           "history.orders": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),

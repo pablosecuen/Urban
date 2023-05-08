@@ -9,7 +9,8 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { fetchAllUsers } from "@component/Redux/user/userSlice";
+
+import { getAllUsers } from "@component/Redux/user/userActions";
 
 config.autoAddCss = false;
 
@@ -23,13 +24,11 @@ export default function HeaderStats(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchAllTravels());
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getAllUsers());
     setTotalUsers(allUsers.length);
     setTotalTravels(allTravels.length);
-  }, [allUsers, allTravels]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const today = new Date();
   const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -94,18 +93,20 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since last month"
                   statIconName="far fa-chart-bar"
                   statIconColor="bg-red-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="NEW USERS OF LAST WEEK"
-                  statTitle={usersLastWeek.toString()}
+                  statTitle={usersLastWeek}
                   statArrow={usersChange >= 0 ? "up" : "down"}
                   statPercent={`${Math.abs(usersChange).toFixed(2)}%`}
                   statPercentColor={usersChange >= 0 ? "text-emerald-500" : "text-red-500"}
                   statDescripiron="Since last week"
                   statIconName="fas fa-chart-pie"
                   statIconColor="bg-orange-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
@@ -118,6 +119,7 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since yesterday"
                   statIconName="fas fa-users"
                   statIconColor="bg-pink-500"
+                  title={""}
                 />
               </div>
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
@@ -130,6 +132,7 @@ export default function HeaderStats(): JSX.Element {
                   statDescripiron="Since last month"
                   statIconName="fas fa-percent"
                   statIconColor="bg-blueGray-500"
+                  title={""}
                 />
               </div>
             </div>
