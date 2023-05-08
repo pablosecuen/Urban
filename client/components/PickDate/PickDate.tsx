@@ -10,5 +10,7 @@ export default function PickDate() {
     setFecha(date);
   };
 
-  return <DatePicker className="ml-1 w-[310px] " selected={fecha} onChange={handleFechaChange} />;
+  return (
+    <DatePicker className="xl:ml-1 xl:w-[310px] " selected={fecha} onChange={handleFechaChange} />
+  );
 }
