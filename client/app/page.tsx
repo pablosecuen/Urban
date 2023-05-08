@@ -6,7 +6,6 @@ import Image, { StaticImageData } from "next/image";
 // import { AppDispatch, RootState } from "@component/Redux/store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-
 interface LoginProps {
   onLogin: (email: string, password: string) => void;
   onRegisterClick: () => void;
@@ -26,7 +25,7 @@ export default function LandingPage() {
         clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
       >
         {" "}
-        <div className="mx-auto flex w-1/2 justify-center sm:h-full lg:h-full lg:pl-24">
+        <div className="mx-auto flex w-1/2 justify-center lg:justify-end lg:pr-28 ">
           <Image
             src={logo as StaticImageData}
             alt="logo"
