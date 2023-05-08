@@ -29,8 +29,10 @@ export default function Reserva() {
   const [price, setPrice] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [isComplete, setIsComplete] = useState(false)
+  
+  const isFormValid = origin && destination && departureDate;
 
+  
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
   };
@@ -50,30 +52,25 @@ export default function Reserva() {
     setArrivalDate(e.target.value);
   };
   
-  const query : Query = {
-    origin: origin.toLowerCase(),
-    destination: destination.toLowerCase(),
-    departureDate: departureDate.toLowerCase(),
-    ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
-    // agrego al form SOLO las propiedades que contengan valor
-  };
-
+  
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
-
-
+    
+    
     try {
-      console.log(validateQuery(query));
+      const query : Query = {
+        origin: origin.toLowerCase(),
+        destination: destination.toLowerCase(),
+        departureDate: departureDate.toLowerCase(),
+        ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
+        // agrego al form SOLO las propiedades que contengan valor
+      };
       dispatch(getPassagesByQuery(query));
     } catch (error) {
       throw new Error("algo salio mal");
     }
   };
   
-  useEffect(() => {
-    setIsComplete(validateQuery(query))
-
-  },[query])
 
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
@@ -138,25 +135,8 @@ export default function Reserva() {
           />
         </div>
 
-        {/* <div className="flex items-center justify-center">
-          <HiUserGroup className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Cantidad de pasajeros..." type="number" />
-        </div> */}
-
-        {/* <div className="flex items-center justify-center">
-          <HiOutlineBriefcase className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Equipaje..." type="text" />
-        </div> */}
-
-        {/* <div className="flex items-center justify-center">
-          <MdPets className="w-10 text-blue" />
-          <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
-        </div> */}
-
-        <button onClick={handleSubmit} disabled={!isComplete} className="w-1/2 self-center cursor-pointer">
-          {/* <Link  href="/home/reserva/viajes" className="flex justify-center"> */}
+        <button onClick={handleSubmit} disabled={!isFormValid} className="w-1/2 self-center cursor-pointer">
           Buscar tu viaje!
-          {/* </Link> */}
         </button>
       </form>
     </section>

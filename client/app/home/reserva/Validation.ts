@@ -1,6 +1,5 @@
 import { Query } from '../../types/Passages';
 
-export const validateQuery = (query: Query) => {
-    const { origin, destination, departureDate } = query;
+export const validateQuery = (origin: string, destination: string, departureDate: string) =>  {
     return origin && destination && departureDate ? true : false;
   };
