@@ -83,7 +83,7 @@ export default function Reserva() {
           />
         </div>
 
-        <div className="ml-[119px] flex items-center justify-center ">
+        <div className="flex items-center justify-center xl:ml-[119px] ">
           <HiOutlineCalendar className="w-10 text-blue" />
           <PickDate />
           {/* <input
