@@ -1,14 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import PickDate from "@component/components/PickDate/PickDate";
-import { validateQuery } from "./Validation";
+
 
 import {
-  HiUserGroup,
-  HiOutlineCalendar,
-  HiOutlineBriefcase,
+
   HiOutlineLocationMarker,
   HiTag,
   HiTrendingUp,
@@ -32,13 +29,6 @@ export default function Reserva() {
   
   const isFormValid = origin && destination && departureDate;
 
-  function formatDate(date: string) {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = (d.getMonth() + 1).toString().padStart(2, '0');
-    const day = d.getDate().toString().padStart(2, '0');
-    return `${day}-${month}-${year}`;
-  }
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
