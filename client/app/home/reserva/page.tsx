@@ -19,7 +19,6 @@ export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-  // const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
 
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -29,7 +28,7 @@ export default function Reserva() {
   
   const isFormValid = origin && destination && departureDate;
 
-
+// handlers para los estados locales
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
   };
@@ -53,21 +52,19 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
     
-    
     try {
       const query : Query = {
         origin: origin.toLowerCase(),
         destination: destination.toLowerCase(),
         departureDate: departureDate.split('-').reverse().join('/'),
-        ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
-        // agrego al form SOLO las propiedades que contengan valor
+        ...(arrivalDate && { arrivalDate: arrivalDate.split('-').reverse().join('/')}),
+        // armo la query y agrego las propiedades extras si las hay
       };
       dispatch(getPassagesByQuery(query));
     } catch (error) {
       throw new Error("algo salio mal");
     }
   };
-  
 
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
