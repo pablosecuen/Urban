@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import {
   HiUserGroup,
@@ -23,7 +21,6 @@ export default function Reserva() {
   const [price, setPrice] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [fecha, setFecha] = useState(new Date());
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
@@ -38,10 +35,6 @@ export default function Reserva() {
 
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDepartureDate(e.target.value);
-  };
-
-  const handleFechaChange = (date) => {
-    setFecha(date);
   };
 
   const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +84,6 @@ export default function Reserva() {
 
         <div className="flex items-center justify-center">
           <HiOutlineCalendar className="w-10 text-blue" />
-          <DatePicker selected={fecha} onChange={handleFechaChange} />
           <input
             className="w-2/3 pl-2"
             placeholder="Cuando?..."
