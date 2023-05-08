@@ -36,6 +36,8 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
       "payments",
       "gender",
       "img",
+      "cc",
+      "ce",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
@@ -45,7 +47,9 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
       (data?.payments) ||
       (data?.img && !isImgValid(data.img)) ||
       (data?.gender && data.gender !== "male" && data.gender !== "female") ||
-      (data?.phone && !isPhoneValid(data.phone))
+      (data?.phone && !isPhoneValid(data.phone)) ||
+      (data?.cc && !isCcValid(data.cc)) ||
+      (data?.ce && !isCcValid(data.ce))
     )
       throw Error("Datos no erroneos");
     next();
