@@ -12,7 +12,7 @@ import {
   HiOutlineLocationMarker,
   HiTag,
   HiTrendingUp,
-  HiTrendingDown
+  HiTrendingDown,
 } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
 import { getPassagesByQuery, getAllPassages } from "@component/Redux/passage/passageActions";
@@ -21,7 +21,7 @@ export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
+  const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
 
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -52,16 +52,16 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
     const query = {
-      ...(origin && { origin: origin.toLowerCase() }),
-      ...(destination && { destination: destination.toLowerCase() }),
-      ...(departureDate && { departureDate: departureDate.toLowerCase() }),
+      origin: origin.toLowerCase(),
+      destination: destination.toLowerCase(),
+      departureDate: departureDate.toLowerCase(),
+      ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
       // agrego al form SOLO las propiedades que contengan valor
     };
-    
-    Object.keys(query).length? 
-    dispatch(getPassagesByQuery(query)):
-    dispatch(getAllPassages())
+
+    Object.keys(query).length && dispatch(getPassagesByQuery(query));
   };
+
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
       <h1 className="mt-12 text-center text-xl text-blue">
@@ -110,9 +110,9 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
             placeholder="Fecha de llegada"
             type="date"
             value={arrivalDate}
-            min={ departureDate ? departureDate : currentDate}
+            min={departureDate ? departureDate : currentDate}
             onChange={handleArrivalDateChange}
-            />
+          />
         </div>
 
         <div className="flex items-center justify-center">
@@ -123,7 +123,7 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
             type="text"
             value={price}
             onChange={handlePriceChange}
-            />
+          />
         </div>
 
         {/* <div className="flex items-center justify-center">
@@ -141,11 +141,11 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div> */}
 
-        <Link href="/home/reserva/viajes" className="flex justify-center">
-          <button onClick={handleSubmit} className="w-1/2 self-center">
-            Buscar tu viaje!
-          </button>
-        </Link>
+        <button onClick={handleSubmit} className="w-1/2 self-center">
+          {/* <Link  href="/home/reserva/viajes" className="flex justify-center"> */}
+          Buscar tu viaje!
+          {/* </Link> */}
+        </button>
       </form>
     </section>
   );
