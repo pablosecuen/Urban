@@ -12,6 +12,25 @@ export default function Checkout() {
   const [dataState, setDataState] = useState({});
   const userId: string | null = "";
 
+  const getToken = async () => {
+    const { data } = await axios.get(`/token?merchantOrder=${merchantOrder}`);
+    setDataState(data);
+    const requestData = {
+      userId: userId,
+      /// reemplazar la variable objeto por data
+      products: data.items.map((product: any) => {
+        return {
+          id: product.id,
+          unitPrice: product.unit_price,
+          quantity: product.quantity,
+        };
+      }),
+      paymentId: paymentId,
+      merchantOrder: merchantOrder,
+      status: status,
+    };
+    return requestData;
+  };
   return (
     <div className="flex flex-col justify-center gap-8">
       <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p>
