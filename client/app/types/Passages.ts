@@ -30,5 +30,5 @@ export interface Query {
   destination: string,
   departureDate: string,
   arrivalDate?: string,
-  
+  price?: number,
 }
