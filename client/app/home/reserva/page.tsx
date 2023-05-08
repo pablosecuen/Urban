@@ -30,10 +30,10 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
   const [arrivalDate, setArrivalDate] = useState("");
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOrigin(e.target.value.toLowerCase());
+    setOrigin(e.target.value);
   };
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination(e.target.value.toLowerCase());
+    setDestination(e.target.value);
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,26 +52,16 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
     const query = {
-      ...(origin && { origin }),
-      ...(destination && { destination }),
-      ...(departureDate && { departureDate }),
+      ...(origin && { origin: origin.toLowerCase() }),
+      ...(destination && { destination: destination.toLowerCase() }),
+      ...(departureDate && { departureDate: departureDate.toLowerCase() }),
       // agrego al form SOLO las propiedades que contengan valor
     };
-    
-    // if (Object.keys(query).length === 0) {
-    //   // dispatch de getAllPassages si query está vacío
-    //   dispatch(getAllPassages());
-    // } else {
-    //   // dispatch de getPassagesByQuery con query como argumento
-    //   dispatch(getPassagesByQuery(query));
-    // }
     
     Object.keys(query).length? 
     dispatch(getPassagesByQuery(query)):
     dispatch(getAllPassages())
-
   };
-
   return (
     <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
       <h1 className="mt-12 text-center text-xl text-blue">
