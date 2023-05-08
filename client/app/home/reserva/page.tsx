@@ -14,8 +14,8 @@ import {
   HiTrendingUp,
   HiTrendingDown
 } from "react-icons/hi";
-import { MdPets } from "react-icons/md";
-import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
+// import { MdPets } from "react-icons/md";
+import { getPassagesByQuery, getAllPassages } from "@component/Redux/passage/passageActions";
 
 export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
@@ -57,8 +57,15 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
       ...(departureDate && { departureDate }),
       // agrego al form SOLO las propiedades que contengan valor
     };
+    
+    if (Object.keys(query).length === 0) {
+      // Realiza el dispatch de getAllPassages si query está vacío
+      dispatch(getAllPassages());
+    } else {
+      // Realiza el dispatch de getPassagesByQuery con query como argumento
+      dispatch(getPassagesByQuery(query));
+    }
 
-    dispatch(getPassagesByQuery(query));
   };
 
   return (
