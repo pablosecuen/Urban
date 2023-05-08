@@ -1,17 +1,19 @@
 import { Router } from "express";
 import {
-  newVehicle,
   updateVehicle,
   deleteVehicle,
   enableVehicle,
+  newVehicleByChauffeur,
+  newVehicleByDelivery,
 } from "../../controllers/inputs/vehicle";
-import { newVehicleValidate, updateVehicleValidate } from "../../utils/validations/vehicle";
+import { newVehicleValidateByChauffeur, newVehicleValidateByDealer, updateVehicleValidate } from "../../utils/validations/vehicle";
 
 const router = Router();
 
 // Ruta para crear vehiculos
 
-router.post("/", newVehicleValidate, newVehicle);
+router.post("/chauffeur", newVehicleValidateByChauffeur, newVehicleByChauffeur);
+router.post("/delivery", newVehicleValidateByDealer, newVehicleByDelivery);
 router.put("/:id", updateVehicleValidate, updateVehicle);
 router.patch("/enable/:id", enableVehicle);
 router.delete("/delete/:id", deleteVehicle);

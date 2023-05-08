@@ -15,8 +15,8 @@ import chauffeurOutputRouter from "./outputs/chauffeur";
 import travelInputRouter from "./inputs/travels";
 import travelOutputRouter from "./outputs/travels";
 
-import distributorInputRouter from "./inputs/distributor";
-import distributorOutputRouter from "./outputs/distributor";
+import deliveryInputRouter from "./inputs/delivery";
+import deliveryOutputRouter from "./outputs/delivery";
 
 import orderInputRouter from "./inputs/order";
 import orderOutputRouter from "./outputs/order";
@@ -49,8 +49,8 @@ import ticketOutputRouter from "./outputs/ticket";
 import roadTripInputRouter from "./inputs/roadTrip";
 import roadTripOutputRouter from "./outputs/roadTrip";
 
-import adminStatusInputRouter from "./inputs/adminStatus";
-import adminStatusOutputRouter from "./outputs/adminStatus";
+import adminInputRouter from "./inputs/admin";
+import adminOutputRouter from "./outputs/admin";
 
 const router = Router();
 
@@ -59,7 +59,7 @@ router.use("/user", userInputRouter);
 
 router.use("/travels", travelInputRouter);
 
-router.use("/distributor", distributorInputRouter);
+router.use("/delivery", deliveryInputRouter);
 
 router.use("/order", orderInputRouter);
 
@@ -89,7 +89,7 @@ router.use("/ticket", ticketInputRouter);
 
 router.use("/roadtrip", roadTripInputRouter);
 
-router.use("/adminStatus", adminStatusInputRouter);
+router.use("/admin", adminInputRouter);
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
@@ -106,7 +106,7 @@ router.use("/owner", ownerOutputRouter);
 
 router.use("/products", productOutputRouter);
 
-router.use("/distributor", distributorOutputRouter);
+router.use("/delivery", deliveryOutputRouter);
 
 router.use("/order", orderOutputRouter);
 
@@ -120,6 +120,6 @@ router.use("/ticket", ticketOutputRouter);
 
 router.use("/roadtrip", roadTripOutputRouter);
 
-router.use("/adminStatus", adminStatusOutputRouter);
+router.use("/admin", adminOutputRouter);
 
 export default router;

@@ -1,5 +1,5 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
-import { Address, Payment, Phone } from "../../types/types";
+import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
 
 export const isNameValid = (name: string): Boolean => {
   if (typeof name === "string" && name.length <= 50) return true;
@@ -136,8 +136,8 @@ export const isUserIdValid = (userId: string): Boolean => {
   return false;
 };
 
-export const isDistributorIdValid = (distributorId: string): Boolean => {
-  if (typeof distributorId === "string") return true;
+export const isDistributorIdValid = (dealerId: string): Boolean => {
+  if (typeof dealerId === "string") return true;
   return false;
 };
 
@@ -237,6 +237,10 @@ export const isChauffeurIdValid = (chauffeurId: string): Boolean => {
   if (typeof chauffeurId === "string") return true;
   return false;
 };
+export const isDealerIdValid = (chauffeurId: string): Boolean => {
+  if (typeof chauffeurId === "string") return true;
+  return false;
+};
 
 export const isOriginValid = (origin: string): Boolean => {
   if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return true;
@@ -289,4 +293,14 @@ export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean
   )
     return true;
   return false;
+};
+
+export const isTypeVehicleValidByChauffeur = (value: string): boolean => {
+  const validTypes: TypeVehicle[] = ["motorcycle", "car"];
+  return validTypes.includes(value as TypeVehicle);
+};
+
+export const isTypeVehicleValidByDealer = (value: string): boolean => {
+  const validTypes: TypeVehicle[] = ["motorcycle", "car", "bicycle", "van", "other"];
+  return validTypes.includes(value as TypeVehicle);
 };

@@ -1,3 +1,5 @@
+import { TypeVehicle } from "../types/types";
+
 export interface VehicleToRegister {
   patent: string;
   brand: string;
@@ -5,8 +7,10 @@ export interface VehicleToRegister {
   year: string;
   img: string[];
   ownerId: string;
-  chauffeurId: string;
+  chauffeurId?: string;
+  deliveryId?: string;
   documents: string[];
+  typeVehicle: TypeVehicle;
 }
 
 export interface Vehicle extends VehicleToRegister {

@@ -8,9 +8,48 @@ import {
   isChauffeurIdValid,
   isOwnerIdValid,
   isArrayImgValid,
+  isDealerIdValid,
+  isTypeVehicleValidByChauffeur,
+  isTypeVehicleValidByDealer,
 } from "./validators";
 
-export const newVehicleValidate = (req: Request, res: Response, next: NextFunction): void => {
+export const newVehicleValidateByDealer = (req: Request, res: Response, next: NextFunction): void => {
+  // Validar que todas las propiedades tengan un valor válido
+  try {
+    const data: Vehicle = req.body;
+    const allowProperties = [
+      "patent",
+      "brand",
+      "model",
+      "year",
+      "img",
+      "ownerId",
+      "deliveryId",
+      "documents",
+      "typeVehicle"
+    ];
+    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
+      throw Error("Datos no permitidos");
+    if (
+      !isPatentValid(data.patent) ||
+      !isBrandValid(data.brand) ||
+      !isModelValid(data.model) ||
+      !isYearValid(data.year) ||
+      !isOwnerIdValid(data.ownerId) ||
+      !isDealerIdValid(data.deliveryId) ||
+      !isArrayImgValid(data.img) ||
+      !isArrayImgValid(data.documents) ||
+      !isTypeVehicleValidByDealer(data.typeVehicle)
+    ) {
+      throw new Error("Datos incompletos o no válidos");
+    }
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const newVehicleValidateByChauffeur = (req: Request, res: Response, next: NextFunction): void => {
   // Validar que todas las propiedades tengan un valor válido
   try {
     const data: Vehicle = req.body;
@@ -23,6 +62,7 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       "ownerId",
       "chauffeurId",
       "documents",
+      "typeVehicle"
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
@@ -34,7 +74,8 @@ export const newVehicleValidate = (req: Request, res: Response, next: NextFuncti
       !isOwnerIdValid(data.ownerId) ||
       !isChauffeurIdValid(data.chauffeurId) ||
       !isArrayImgValid(data.img) ||
-      !isArrayImgValid(data.documents)
+      !isArrayImgValid(data.documents) ||
+      !isTypeVehicleValidByChauffeur(data.typeVehicle)
     ) {
       throw new Error("Datos incompletos o no válidos");
     }

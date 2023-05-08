@@ -7,38 +7,19 @@ import { QueryParams } from "@component/app/types/QueryParams";
 interface PassageState {
   allPassages: Passage[];
   passageById: Passage | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null; 
 }
 
 const initialState: PassageState = {
   allPassages: [],
   passageById: null,
+  status: "idle",
+  error: null, 
 };
 
 type ResponseType = AxiosResponse<any, any>;
 
-export const fetchAllPassages: AsyncThunk<Passage[], void, {}> = createAsyncThunk(
-  "passage/fetchAllPassages",
-  async () => {
-    const response: ResponseType = await getAllPassages();
-    return response.data.passages;
-  }
-);
-
-export const fetchPassageById: AsyncThunk<Passage | null, string, {}> = createAsyncThunk(
-  "passage/fetchPassageById",
-  async (id: string) => {
-    const response: ResponseType = await getPassagesId(id);
-    return response.data;
-  }
-);
-
-export const fetchPassagesByQuery: AsyncThunk<Passage[], QueryParams, {}> = createAsyncThunk(
-  "passage/fetchPassagesByQuery",
-  async (queryParams) => {
-    const response: ResponseType = await getPassagesByQuery(queryParams);
-    return response.data.passages;
-  }
-);
 
 const passageSlice = createSlice({
   name: "passages",
@@ -46,16 +27,35 @@ const passageSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllPassages.fulfilled, (state, action) => {
-        state.allPassages = action.payload;
-      })
-      .addCase(fetchPassageById.fulfilled, (state, action) => {
-        state.passageById = action.payload;
-      })
-      .addCase(fetchPassagesByQuery.fulfilled, (state, action) => {
-        state.allPassages = action.payload;
-      });
+      .addMatcher(
+        (action) => [getAllPassages.pending, getPassagesId.pending, getPassagesByQuery.pending].includes(action.type),
+        (state) => {
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) => [getAllPassages.fulfilled, getPassagesByQuery.fulfilled].includes(action.type),
+        (state, action) => {
+          state.status = "succeeded";
+          state.allPassages = action.payload;
+        }
+      )
+      .addMatcher(
+        (action) => getPassagesId.fulfilled.match(action),
+        (state, action) => {
+          state.status = "succeeded";
+          state.passageById = action.payload;
+        }
+      )
+      .addMatcher(
+        (action) => [getAllPassages.rejected, getPassagesId.rejected, getPassagesByQuery.rejected].includes(action.type),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.payload as string;
+        }
+      );
   },
 });
+
 
 export default passageSlice.reducer;

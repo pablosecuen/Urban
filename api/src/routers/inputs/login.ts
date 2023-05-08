@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { loginUser } from "../../controllers/inputs/login/loginUser";
 import { loginChauffeur } from "../../controllers/inputs/login/loginChauffeur";
-import { loginDistributor } from "../../controllers/inputs/login/loginDistributor";
+import { loginDelivery } from "../../controllers/inputs/login/loginDelivery";
 import { loginLocal } from "../../controllers/inputs/login/loginLocal";
 import { db } from "../../connection/connection";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
@@ -20,7 +20,7 @@ router.post("/user", loginUser);
 
 router.post("/chauffeur", loginChauffeur);
 
-router.post("/distributor", loginDistributor);
+router.post("/dealer", loginDelivery);
 
 router.post("/local", loginLocal);
 

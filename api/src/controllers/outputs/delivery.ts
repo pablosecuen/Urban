@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { Distributor } from "../../schema/distributor";
-import firebase from "firebase-admin";
+import { Delivery } from "../../schema/delivery";
 
 /**
  * Controlador para buscar un distribuidor por id
  */
-export const searchDistributor = async (req: Request, res: Response): Promise<void> => {
+export const searchDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
-    const doc = await db.collection("distributors").doc(id).get();
+    const doc = await db.collection("deliverys").doc(id).get();
     if (!doc.exists) {
       res.status(404).json({ message: "Distribuidor no encontrado" });
     } else {
-      const distribuidor = doc.data() as Distributor;
+      const distribuidor = doc.data() as Delivery;
       res.status(201).json(distribuidor);
     }
   } catch (error) {
@@ -27,13 +26,13 @@ export const searchDistributor = async (req: Request, res: Response): Promise<vo
  * con paginado
  */
 
-export const getDistributors = async (req: Request, res: Response): Promise<void> => {
+export const getDelivery = async (req: Request, res: Response): Promise<void> => {
   try {
     const { page = 1, pageSize = 10, ...filters } = req.query;
 
     const validFilters = Object.entries(filters).filter(([key, _]) => key !== "page" && key !== "pageSize");
 
-    let query: any = db.collection("distributors");
+    let query: any = db.collection("deliverys");
 
     validFilters.forEach(([property, value]) => {
       query = query.where(property, "==", value);
@@ -47,14 +46,14 @@ export const getDistributors = async (req: Request, res: Response): Promise<void
     const startIndex = (Number(page) - 1) * Number(pageSize);
     const endIndex = startIndex + Number(pageSize);
 
-    const distributors = distributorSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+    const deliverys = distributorSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
       return {
         id: doc.id,
         ...doc.data(),
       };
     });
 
-    res.status(200).json({ distributors, totalPages, totalItems });
+    res.status(200).json({ deliverys, totalPages, totalItems });
   } catch (error) {
     console.error("Error al obtener los distribuidores", error);
     res.status(500).json({ message: "Error al obtener los distribuidores" });

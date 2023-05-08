@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import { fetchAllPassages } from "@component/Redux/passage/passageSlice";
+import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allPassages = useSelector((state: RootState) => state.passage.allPassages);
 
   useEffect(() => {
-    dispatch(fetchAllPassages());
+    dispatch(getAllPassages());
   }, []);
 
   return (

@@ -1,6 +1,5 @@
-import { Address, Payment, Phone, TypeVehicle } from "@component/../api/src/types/types";
-
-export interface DistributorToRegister {
+import { Address, Payment, Phone, TypeVehicle } from "../types/types";
+export interface DeliveryToRegister {
   firstName: string;
   lastName: string;
   address: Address;
@@ -15,21 +14,20 @@ export interface DistributorToRegister {
   license: string;
   img: string;
 }
-export interface Distributor extends DistributorToRegister {
+export interface Delivery extends DeliveryToRegister {
   displayName: string;
   license: string;
   payments: Payment;
-  vehicleType?: TypeVehicle;
+  vehicle: VehicleForDelivery;
   history: string[];
   deleted: boolean;
   status: boolean;
   createdAt: string;
   rating: number;
   comments: object[];
-  id: string;
 }
 
-export interface DistributorToUpdate {
+export interface DeliveryToUpdate {
   img: string;
   phone: Phone;
   license: string;
@@ -39,4 +37,9 @@ export interface DistributorToUpdate {
   updatedAt: string;
   status?: boolean;
   rating: number;
+}
+
+export interface VehicleForDelivery {
+  vehicleId: string;
+  patent: string;
 }
