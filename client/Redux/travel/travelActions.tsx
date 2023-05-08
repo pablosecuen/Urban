@@ -6,7 +6,7 @@ import { Travel } from "@component/app/types/Travels";
 // Define async thunk actions to fetch user data
 export const getAllTravels = createAsyncThunk("travels/getAllTravels", async () => {
   const response = await axios.get("http://localhost:3000/travels?page=1&pageSize=10000");
-  return response.data; // return only the data from the response
+  return response.data.travels; // return only the data from the response
 });
 
 export const getTravelsById = createAsyncThunk("travels/getTravelsById", async (id: string) => {
