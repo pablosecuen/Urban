@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import PickDate from "@component/components/PickDate/PickDate";
 
 import {
   HiUserGroup,
@@ -84,6 +85,7 @@ export default function Reserva() {
 
         <div className="flex items-center justify-center">
           <HiOutlineCalendar className="w-10 text-blue" />
+          <PickDate />
           <input
             className="w-2/3 pl-2"
             placeholder="Cuando?..."
