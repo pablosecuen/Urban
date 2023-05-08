@@ -83,16 +83,16 @@ export default function Reserva() {
           />
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="ml-[119px] flex items-center justify-center ">
           <HiOutlineCalendar className="w-10 text-blue" />
           <PickDate />
-          <input
+          {/* <input
             className="w-2/3 pl-2"
             placeholder="Cuando?..."
             type="text"
             value={departureDate}
             onChange={handleDepartureDateChange}
-          />
+          /> */}
         </div>
 
         <div className="flex items-center justify-center">
