@@ -1,46 +1,45 @@
 import { Address, Payment, Phone, TypeVehicle } from "../types/types";
 export interface DeliveryToRegister {
-  firstName: string,
-  lastName: string,
-  address: Address,
+  firstName: string;
+  lastName: string;
+  address: Address;
   email: string;
   password: string;
   phone: Phone;
-  nationality: string,
-  birthday: string,
+  nationality: string;
+  birthday: string;
   cc?: string;
   ce?: string;
   passport?: string;
   license: string;
-  img: string,
-  rating: number,
+  img: string;
 }
 export interface Delivery extends DeliveryToRegister {
-  displayName: string,
+  displayName: string;
   license: string;
   payments: Payment;
-  vehicle: VehicleForDelivery
+  vehicle: VehicleForDelivery;
   history: string[];
   deleted: boolean;
-  status: boolean,
+  status: boolean;
   createdAt: string;
-  rating: number,
-  comments: object[],
+  rating: number;
+  comments: object[];
 }
 
 export interface DeliveryToUpdate {
-  img: string,
+  img: string;
   phone: Phone;
   license: string;
-  address: Address,
+  address: Address;
   payments: Payment;
   vehicleType?: TypeVehicle;
   updatedAt: string;
-  status?: boolean,
-  rating: number,
+  status?: boolean;
+  rating: number;
 }
 
 export interface VehicleForDelivery {
-  vehicleId: string,
-  patent: string,
+  vehicleId: string;
+  patent: string;
 }
