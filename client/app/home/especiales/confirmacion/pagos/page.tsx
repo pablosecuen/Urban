@@ -13,6 +13,17 @@ export default function Pagos() {
     toDoPayment[id];
   });
 
+  const arrToDoPayment = products.map((item) => {
+    return {
+      id: item.id,
+      title: item.name,
+      picture_url: item.img[0],
+      unit_price: item.price,
+      quantity: item.amount,
+      currency_id: "COP",
+    };
+  });
+
   return (
     <div className="flex w-4/5 flex-col items-center justify-center gap-4 rounded-3xl border-2 py-20 text-center shadow-2xl shadow-black/40 lg:p-10">
       <span className="text-2xl">Valor a pagar: $50.000</span>
