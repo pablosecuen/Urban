@@ -1,4 +1,4 @@
-
+"use client";
 import axios from "axios";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
