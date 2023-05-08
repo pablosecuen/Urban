@@ -59,13 +59,12 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
     };
     
     if (Object.keys(query).length === 0) {
-      // Realiza el dispatch de getAllPassages si query está vacío
+      // dispatch de getAllPassages si query está vacío
       dispatch(getAllPassages());
     } else {
-      // Realiza el dispatch de getPassagesByQuery con query como argumento
+      // dispatch de getPassagesByQuery con query como argumento
       dispatch(getPassagesByQuery(query));
     }
-
   };
 
   return (
