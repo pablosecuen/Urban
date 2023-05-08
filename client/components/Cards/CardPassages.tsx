@@ -8,7 +8,7 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Passage } from "../../app/types/Passages";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-import { fetchAllPassages } from "@component/Redux/passage/passageSlice";
+import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 // components
 
@@ -20,7 +20,7 @@ export default function CardUsers() {
   const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchAllPassages());
+    dispatch(getAllPassages());
   }, [dispatch]);
 
   const handleSearchChange = (event: any) => {

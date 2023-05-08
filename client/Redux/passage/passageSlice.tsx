@@ -1,25 +1,25 @@
-import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
 import { Passage } from "../../app/types/Passages";
 import { AxiosResponse } from "axios";
-import { QueryParams } from "@component/app/types/QueryParams";
 
 interface PassageState {
   allPassages: Passage[];
-  passageById: Passage | null;
+  allPassagesByQuery: Passage[];
+  passageById: { [key: string]: Passage | null };
   status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null; 
+  error: string | null;
 }
 
 const initialState: PassageState = {
   allPassages: [],
-  passageById: null,
+  allPassagesByQuery: [],
+  passageById: {},
   status: "idle",
-  error: null, 
+  error: null,
 };
 
 type ResponseType = AxiosResponse<any, any>;
-
 
 const passageSlice = createSlice({
   name: "passages",
@@ -27,39 +27,55 @@ const passageSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+      // Handle the pending state
       .addCase(getAllPassages.pending, (state) => {
         state.status = "loading";
       })
+      // Handle the success state
+
       .addCase(getAllPassages.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.allPassages = action.payload;
       })
+
+      // Handle the error state
+
       .addCase(getAllPassages.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
-      builder
+
+    builder
+      // Handle the pending state
       .addCase(getPassagesId.pending, (state) => {
         state.status = "loading";
       })
+      // Handle the success state
       .addCase(getPassagesId.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.passageById = action.payload;
+        state.passageById[action.payload.id] = action.payload;
       })
+      // Handle the error state
+
       .addCase(getPassagesId.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
 
-      builder
+    builder
+      // Handle the pending state
       .addCase(getPassagesByQuery.pending, (state) => {
         state.status = "loading";
       })
+      // Handle the success state
       .addCase(getPassagesByQuery.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.allPassages = action.payload;
+        state.allPassagesByQuery = action.payload;
       })
+      // Handle the error state
+
       .addCase(getPassagesByQuery.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
