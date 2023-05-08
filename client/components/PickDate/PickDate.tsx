@@ -11,6 +11,11 @@ export default function PickDate() {
   };
 
   return (
-    <DatePicker className="xl:ml-1 xl:w-[310px] " selected={fecha} onChange={handleFechaChange} />
+    <DatePicker
+      className="xl:ml-1 xl:w-[310px] xl:pl-2 "
+      dateFormat="dd/MM/yyyy"
+      selected={fecha}
+      onChange={handleFechaChange}
+    />
   );
 }
