@@ -43,7 +43,7 @@ export default function Home() {
         Bienvedios a <span className="text-verdeurban">U</span>
         <span className=" text-celeste">rban</span>!
       </p>
-      <p className="w-full text-center lg:text-xs xl:text-base 2xl:text-2xl ">
+      <p className="w-full text-center lg:text-xs xl:text-base 2xl:text-xl ">
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
         acercando a la oferta a la palma de su mano, <b>para empoderarte</b> con mayor información
         asistiendo en que tomes la mejor decision disponble dentro de tus necesidades, en nuestra
