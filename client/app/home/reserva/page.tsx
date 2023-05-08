@@ -22,7 +22,7 @@ export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-  const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
+  // const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro si es necesario pasar por este paso
 
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -32,7 +32,14 @@ export default function Reserva() {
   
   const isFormValid = origin && destination && departureDate;
 
-  
+  function formatDate(date: string) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${day}-${month}-${year}`;
+  }
+
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
   };
@@ -61,7 +68,7 @@ export default function Reserva() {
       const query : Query = {
         origin: origin.toLowerCase(),
         destination: destination.toLowerCase(),
-        departureDate: departureDate.toLowerCase(),
+        departureDate: departureDate.split('-').reverse().join('/'),
         ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
         // agrego al form SOLO las propiedades que contengan valor
       };
@@ -108,7 +115,7 @@ export default function Reserva() {
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
-            min={currentDate}
+            min={today}
             onChange={handleDepartureDateChange}
           />
         </div>
@@ -119,7 +126,7 @@ export default function Reserva() {
             placeholder="Fecha de llegada"
             type="date"
             value={arrivalDate}
-            min={departureDate ? departureDate : currentDate}
+            min={departureDate ? departureDate : today}
             onChange={handleArrivalDateChange}
           />
         </div>
