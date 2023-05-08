@@ -5,11 +5,11 @@ import setValidate from "./Validate";
 import Link from "next/link";
 import { Google } from "@component/assets/icons/svg/Google";
 
-interface UserToRegister {
-  name: string;
-  email: string;
-  password: string;
-}
+// interface UserToRegister {
+//   name: string;
+//   email: string;
+//   password: string;
+// }
 
 interface UserToLogin {
   email: string;
@@ -30,6 +30,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
   const [userData, setUserData] = useState<UserToLogin>({} as UserToLogin);
   const [errores, setErrores] = useState<LoginError>({} as LoginError);
   const router = useRouter();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toString();
     const name = e.target.name.toString();
