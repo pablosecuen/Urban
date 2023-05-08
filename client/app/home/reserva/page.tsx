@@ -92,14 +92,14 @@ const [currentDate, setCurrentDate] = useState(today); // aun no esstoy seguro s
         <div className="flex items-center justify-center xl:ml-[119px] ">
           <HiTrendingUp className="w-10 text-blue" />
           <PickDate />
-          <input
+          {/* <input
             className="w-2/3 pl-2"
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
             min={currentDate}
             onChange={handleDepartureDateChange} 
-            />
+            /> */}
         </div>
 
         <div className="flex items-center justify-center">
