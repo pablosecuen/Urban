@@ -14,7 +14,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
           <Image
             src={logo as StaticImageData}
             alt="logo"
-            className=" mt-48  w-24 lg:mt-10 lg:h-52 lg:w-56"
+            className=" mt-48  w-24 lg:mt-10 lg:h-52 lg:w-56 2xl:h-72 2xl:w-80"
           />
           <Menu />
         </div>
