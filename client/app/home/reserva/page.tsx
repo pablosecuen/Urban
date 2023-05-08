@@ -15,7 +15,7 @@ import {
   HiTrendingDown,
 } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
-import { getPassagesByQuery, getAllPassages } from "@component/Redux/passage/passageActions";
+import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
 import { Query } from "@component/app/types/Passages";
 
 export default function Reserva() {
@@ -29,6 +29,7 @@ export default function Reserva() {
   const [price, setPrice] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
+  const [isComplete, setIsComplete] = useState(false)
 
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
@@ -48,21 +49,26 @@ export default function Reserva() {
   const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArrivalDate(e.target.value);
   };
+  
+  const query : Query = {
+    origin: origin.toLowerCase(),
+    destination: destination.toLowerCase(),
+    departureDate: departureDate.toLowerCase(),
+    ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
+    // agrego al form SOLO las propiedades que contengan valor
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    const query : Query = {
-      origin: origin.toLowerCase(),
-      destination: destination.toLowerCase(),
-      departureDate: departureDate.toLowerCase(),
-      ...(arrivalDate && { arrivalDate: departureDate.toLowerCase() }),
-      // agrego al form SOLO las propiedades que contengan valor
-    };
 
-    validateQuery(query);
-
-    Object.keys(query).length && dispatch(getPassagesByQuery(query));
+    try {
+      console.log(validateQuery(query));
+      setIsComplete(validateQuery(query))
+      Object.keys(query).length && dispatch(getPassagesByQuery(query));
+    } catch (error) {
+      throw new Error("algo salio mal");
+    }
   };
 
   return (
@@ -144,7 +150,7 @@ export default function Reserva() {
           <input className="w-2/3 pl-2" placeholder="Mascotas..." type="text" />
         </div> */}
 
-        <button onClick={handleSubmit} className="w-1/2 self-center">
+        <button onClick={handleSubmit} disabled={!validateQuery(query)} className="w-1/2 self-center">
           {/* <Link  href="/home/reserva/viajes" className="flex justify-center"> */}
           Buscar tu viaje!
           {/* </Link> */}
