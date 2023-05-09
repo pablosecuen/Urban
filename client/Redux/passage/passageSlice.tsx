@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
-import { Passage } from "../../app/types/Passages";
+import {  PassageToRegister, PassageResponse } from "../../app/types/Passages";
 import { AxiosResponse } from "axios";
 
 interface PassageState {
-  allPassages: Passage[];
-  allPassagesByQuery: Passage[];
-  passageById: { [key: string]: Passage | null };
+  allPassages: PassageResponse ;
+  allPassagesByQuery: PassageResponse;
+  passageById: { [key: string]: PassageToRegister | null };
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: PassageState = {
-  allPassages: [],
-  allPassagesByQuery: [],
+  allPassages: { passages: [], totalPages: 0 },
+  allPassagesByQuery: { passages: [], totalPages: 0 },
   passageById: {},
   status: "idle",
   error: null,
@@ -72,7 +72,10 @@ const passageSlice = createSlice({
       // Handle the success state
       .addCase(getPassagesByQuery.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.allPassagesByQuery = action.payload;
+        state.allPassagesByQuery = {
+          passages: action.payload.passages,
+          totalPages: action.payload.totalPages,
+        };
       })
       // Handle the error state
 
