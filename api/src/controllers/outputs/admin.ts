@@ -48,3 +48,21 @@ export const getProfit = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Ha ocurrido un error' }); // Devolver un error 500 si ocurre algún problema
   }
 };
+
+export const getInactiveChauffeur = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const chauffeurRef = db.collection("chauffeur");
+    const querySnapshot = await chauffeurRef.where("state", "==", false).get();
+
+    const results: any[] = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      results.push(data);
+    });
+
+    res.status(200).json({ chauffeurs: results });
+  } catch (innerError) {
+    console.error("Error al buscar los choferes", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};

@@ -4,7 +4,8 @@ import { loginChauffeur } from "../../controllers/inputs/login/loginChauffeur";
 import { loginDelivery } from "../../controllers/inputs/login/loginDelivery";
 import { loginLocal } from "../../controllers/inputs/login/loginLocal";
 import { db } from "../../connection/connection";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+
+import loginGoogle from "../../controllers/inputs/login/loginGoogle";
 import FacebookStrategy from "passport-facebook";
 import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import passport from "passport";
@@ -24,74 +25,7 @@ router.post("/dealer", loginDelivery);
 
 router.post("/local", loginLocal);
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL: "http://localhost:3000/login/auth/google",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user: any = await db.collection("users").doc(profile.id).get();
-        if (!user.exists) {
-          user = await db.collection("users").doc(profile.id).set({
-            email: profile.emails[0].value,
-            firstName: profile.name.givenName,
-            lastName: profile.name.familyName,
-            diplayName: profile.displayName,
-            img: profile.photos[0].value,
-            payments: {
-              cardNumber: "",
-              expirationDate: "",
-              securityCode: "",
-            }
-            ,
-            history: {
-              orders: [],
-              travels: [],
-            },
-            cc: "",
-          address: {
-              number: "",
-              street: "",
-              postalCode: "",
-              location: "",
-              state: "",
-              department: ""
-            },
-            nationality: "",
-            phone: {
-              number: "",
-              areaCode: "",
-              displayPhone: ""
-            },
-            deleted: false
-          });
-        }
-        const payload = {
-          email: profile.emails[0].value,
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName,
-          diplayName: profile.displayName,
-          img: profile.photos[0].value,
-        }
-        done(null, payload);
-      } catch (error) {
-        console.log(error);
-        done(error);
-      }
-    }
-  )
-);
-router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/auth/google", (req, res) => {
-  const { user } = req;
-  console.log(user);
-  const token = jwt.sign(user, "clavemegasecreta");
-  // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
-  res.redirect(`http://localhost:3001/home?token=${token}`);
-});
+router.use("/auth/google", loginGoogle)
 
 // auth de facebook
 passport.use(
