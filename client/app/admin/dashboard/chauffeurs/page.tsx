@@ -7,6 +7,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { getChauffeurs } from "@component/Redux/chauffeur/chauffeurActions";
 import { Chauffeur } from "@component/app/types/Chauffeur";
 import CardChauffeurs from "@component/components/Cards/CardChauffeurs";
+import CardChauffeurProfile from "@component/components/Cards/CardChauffeurProfile";
 
 export interface CardChauffeursProps {
   allChauffeurs: Chauffeur[] | undefined;
@@ -14,14 +15,13 @@ export interface CardChauffeursProps {
   selectedChauffeur: Chauffeur | null;
 }
 
-export interface CardProfileProps {
+export interface CardChauffeurProfileProps {
   selectedChauffeur: Chauffeur | null;
 }
 
 export default function Chauffeurs() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allChauffeurs = useSelector((state: RootState) => state.chauffeur.chauffeurs?.data);
-  console.log(allChauffeurs);
 
   const [selectedChauffeur, setSelectedChauffeur] = useState<Chauffeur | null>(null);
 
@@ -45,7 +45,7 @@ export default function Chauffeurs() {
           />
         </div>
         <div className="w-full px-4 lg:w-4/12">
-          {/* <CardProfile selectedChauffeur={selectedChauffeur} /> */}
+          <CardChauffeurProfile selectedChauffeur={selectedChauffeur} />
         </div>
       </div>
     </>
