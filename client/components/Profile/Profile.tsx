@@ -31,12 +31,12 @@ export default function Profile() {
             height={200}
           />
         )}
-      </div>
-
-      <div className="flex h-auto w-auto flex-col justify-between gap-2 text-center ">
-        <h3 className=" w-auto  text-xl font-semibold leading-normal text-blueGray-700">
+        <h3 className=" w-auto text-xl font-semibold leading-normal text-blueGray-700">
           {userData?.name}
         </h3>
+      </div>
+
+      <div className="mb-8 flex h-auto w-auto flex-col justify-between gap-2 text-center ">
         <label htmlFor="">
           Telefono
           {showInput === true ? (
@@ -85,7 +85,7 @@ export default function Profile() {
           )}
         </label>
 
-        <div className="flex w-auto justify-center text-sm font-bold uppercase leading-normal text-blueGray-400">
+        <div className="mt-3 flex w-auto justify-center text-sm font-bold uppercase leading-normal text-blueGray-400">
           <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" className="w-auto ">
             <path
               fill-rule="evenodd"
@@ -155,7 +155,7 @@ export default function Profile() {
           </svg>
           University of Computer Science
         </div> */}
-        <div className="flex h-auto gap-4">
+        <div className="mt-8 flex h-auto gap-4">
           <button className="mx-auto w-1/2 py-1" onClick={onClick}>
             Edit Profile
           </button>
