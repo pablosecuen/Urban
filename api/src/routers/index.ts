@@ -53,6 +53,7 @@ import adminInputRouter from "./inputs/admin";
 import adminOutputRouter from "./outputs/admin";
 
 import notificationsInputRouter from "./inputs/notification";
+import notificationsOutputRouter from "./outputs/notification";
 
 const router = Router();
 
@@ -125,5 +126,8 @@ router.use("/ticket", ticketOutputRouter);
 router.use("/roadtrip", roadTripOutputRouter);
 
 router.use("/admin", adminOutputRouter);
+
+router.use("/notifications", notificationsOutputRouter)
+
 
 export default router;
