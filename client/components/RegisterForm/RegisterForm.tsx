@@ -1,32 +1,47 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import axios from "axios";
 import { Google } from "@component/assets/icons/svg/Google";
-
-interface UserToRegister {
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface UserToLogin {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  success: boolean;
-  message?: string;
-  token?: string;
-}
+import setValidate from "./Validate";
+import { UserToRegister } from "@component/app/types/LoginRegister";
+import { RegisterError } from "@component/app/types/LoginRegister";
 
 function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsRegister: any }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const userFromSessionStorage: UserToRegister | {} = JSON.parse(
+    sessionStorage.getItem("user") || "{}"
+  );
+  const [userData, setUserData] = useState<UserToRegister>(
+    userFromSessionStorage as UserToRegister
+  );
+  const [errores, setErrores] = useState<RegisterError>({} as RegisterError);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toString();
+    const name = e.target.name.toString();
+    const { repeatPassword } = userData;
+    let errorRepeatPassword = {};
+    if (name === "password") {
+      errorRepeatPassword = setValidateRepeatPassword(repeatPassword, value);
+    }
+    setUserData({ ...userData, [name]: value });
+    sessionStorage.setItem("user", JSON.stringify({ ...userData, [name]: value }));
+    setErrores({ ...errores, ...setValidate({ [name]: value }), ...errorRepeatPassword });
+  };
+  function setValidateRepeatPassword(repeatPassword: string, password: string) {
+    if (repeatPassword === password || repeatPassword === "") {
+      return { messageRepeatPassword: "" };
+    } else {
+      return { messageRepeatPassword: "La contraseña no coincide" };
+    }
+  }
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name.toString();
+    const value = e.target.value.toString();
+    setUserData({ ...userData, [name]: value });
+    const { password } = userData;
+    setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
+  };
 
   const router = useRouter();
 
@@ -34,55 +49,31 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     setIsRegister(!isRegister);
   };
 
-  const handleRegisterClick = () => {
-    setIsRegister(true);
-  };
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handleLastnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastname(e.target.value);
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleRepeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRepeatPassword(e.target.value);
-  };
-
   const handleRegister = async (e: any) => {
-    e.preventDefault();
-    console.log(password);
-    console.log(repeatPassword);
-    if (password === repeatPassword) {
-      const userData: UserToRegister = {
-        name,
-        email,
-        password,
-      };
-      await createUser(userData);
-    } else {
-      alert("Passwords do not match");
-    }
+    // e.preventDefault();
+    // console.log(password);
+    // console.log(repeatPassword);
+    // if (password === repeatPassword) {
+    //   const userData: UserToRegister = {
+    //     name,
+    //     email,
+    //     password,
+    //   };
+    //   await createUser(userData);
+    // } else {
+    //   alert("Passwords do not match");
+    // }
   };
 
-  const createUser = async (userData: UserToRegister) => {
-    try {
-      const response = await axios.post("http://localhost:3000/user", userData);
-      console.log(response.data); // the created user data
-      router.push("/home");
-    } catch (error) {
-      console.log("salio todo mal");
-    }
-  };
+  // const createUser = async (userData: UserToRegister) => {
+  //   try {
+  //     const response = await axios.post("http://localhost:3000/user", userData);
+  //     console.log(response.data); // the created user data
+  //     router.push("/home");
+  //   } catch (error) {
+  //     console.log("salio todo mal");
+  //   }
+  // };
   return (
     <form
       onSubmit={handleRegister}
@@ -90,58 +81,116 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     >
       {/* div que contiene todos los labels e inputs */}
       <div className="flex h-[250px] flex-col gap-5 px-5 pb-5">
-        {/* Name */}
+        {/* Name and lastName */}
         <div className="flex gap-1">
-          <div className="w-1/2">
+          {/* Name */}
+          <div className="relative w-1/2">
             <label className="px-1 ">Name:</label>
             <input
               className="px-1 text-black"
               type="text"
-              value={name}
-              onChange={handleNameChange}
+              name="name"
+              placeholder="Nombre"
+              value={userData.name}
+              onChange={handleInputChange}
             />
+            <small
+              className={`transition_all absolute text-right ${
+                errores.messageName ? "opacity-100" : "opacity-0"
+              } -bottom-6 left-0 text-left font-medium text-red-500`}
+            >
+              {errores.messageName}
+            </small>
           </div>
-          <div className="w-1/2">
+          {/* Lastname  */}
+          <div className="relative w-1/2">
             <label htmlFor="" className="px-1">
               Lastname:
             </label>
             <input
               type="text"
+              name="lastName"
+              placeholder="Apellido"
               className="px-1 text-black"
-              value={lastname}
-              onChange={handleLastnameChange}
+              value={userData.lastName}
+              onChange={handleInputChange}
             />
+            <small
+              className={`transition_all absolute text-right ${
+                errores.messageLastName ? "opacity-100" : "opacity-0"
+              } -bottom-6 left-0 text-left font-medium text-red-500`}
+            >
+              {errores.messageLastName}
+            </small>
           </div>
         </div>
         {/* Email */}
-        <div>
+        <div className="relative">
           <label className="px-1">Email:</label>
           <input
             className="px-1 text-black"
             type="email"
-            value={email}
-            onChange={handleEmailChange}
+            name="email"
+            placeholder="Ingresa tu email"
+            value={userData.email}
+            onChange={handleInputChange}
           />
+          <small
+            className={`transition_all absolute text-right ${
+              errores.messageEmail ? "opacity-100" : "opacity-0"
+            } -bottom-6 left-0 text-left font-medium text-red-500`}
+          >
+            {errores.messageEmail}
+          </small>
         </div>
         {/* Password  */}
-        <div>
+        <div className="relative">
           <label className="px-1">Password:</label>
           <input
             className="px-1 text-black"
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            name="password"
+            placeholder="Ingresa tu contraseña"
+            value={userData.password}
+            onChange={handleInputChange}
           />
+          <small
+            className={`transition_all absolute text-right ${
+              errores.messagePassword ? "opacity-100" : "opacity-0"
+            } -bottom-6 left-0 text-left font-medium text-red-500`}
+          >
+            {errores.messagePassword}
+          </small>
         </div>
         {/* Repeat Password   */}
-        <div>
+        <div className="relative">
           <label className="px-1">Repeat Password:</label>
           <input
             className="px-1 text-black"
             type="password"
-            value={repeatPassword}
-            onChange={handleRepeatPasswordChange}
+            name="repeatPassword"
+            placeholder="Repita su contraseña"
+            value={userData.repeatPassword}
+            onChange={handlePasswordChange}
           />
+          <div className="absolute -bottom-6 left-0 text-right">
+            <small
+              className={`transition_all  text-right ${
+                errores.messageRepeatPassword ? "opacity-100" : "opacity-0"
+              }  font-medium text-red-500`}
+            >
+              {errores.messageRepeatPassword}
+            </small>
+            <small
+              className={`transition_all  text-right ${
+                errores.messageRepeatPassword ? "opacity-0" : "opacity-100"
+              }  font-medium text-emerald-500`}
+            >
+              {errores.messageRepeatPassword == "" &&
+                userData.repeatPassword.length > 0 &&
+                "Las contraseñas coinciden"}
+            </small>
+          </div>
         </div>
       </div>
       {/*  Boton de registro */}

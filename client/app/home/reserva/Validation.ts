@@ -1,8 +1,5 @@
 import { Query } from '../../types/Passages';
 
-export const validateGetPassage = ( query: Query) => {
-    const { origin, destination, departureDate } = query
-    if (!origin || !destination || !departureDate) {
-        throw new Error('Missing parameters')
-    } 
-}
+export const validateQuery = (origin: string, destination: string, departureDate: string) =>  {
+    return origin && destination && departureDate ? true : false;
+  };

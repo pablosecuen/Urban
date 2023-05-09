@@ -9,7 +9,6 @@ import { CardUsersProps } from "@component/app/admin/dashboard/users/page";
 
 const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, selectedUser }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  // const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleSearchChange = (event: any) => {

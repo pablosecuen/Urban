@@ -44,7 +44,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       ce: "",
       cc: "",
       deleted: false,
-      displayName: data.firstName + " " + data.lastName,
+      name: data.firstName + " " + data.lastName,
       createdAt: new Date(Date.now()).toISOString(),
     };
 

@@ -4,13 +4,14 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
 import CardStats from "../Cards/CardStats";
-import { fetchAllTravels } from "@component/Redux/travel/travelSlice";
+
 import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 
 import { getAllUsers } from "@component/Redux/user/userActions";
+import { getAllTravels } from "@component/Redux/travel/travelActions";
 
 config.autoAddCss = false;
 
@@ -23,12 +24,15 @@ export default function HeaderStats(): JSX.Element {
   const [totalTravels, setTotalTravels] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchAllTravels());
+    dispatch(getAllTravels());
     dispatch(getAllUsers());
     setTotalUsers(allUsers.length);
     setTotalTravels(allTravels.length);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(allTravels);
 
   const today = new Date();
   const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);

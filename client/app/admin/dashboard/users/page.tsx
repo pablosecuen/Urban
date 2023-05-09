@@ -8,7 +8,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { User } from "@component/app/types/User";
 
-import { getAllUsers, getUsersByCc, getUsersByEmail } from "../../../../Redux/user/userActions";
+import { getAllUsers } from "../../../../Redux/user/userActions";
 
 // components
 export interface CardUsersProps {
@@ -29,9 +29,9 @@ export default function Users() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(allUsers);
 
   const handleClickFunction = (user: User) => {
     setSelectedUser(user);

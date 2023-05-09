@@ -12,12 +12,11 @@ import { createPopper } from "@popperjs/core/lib/popper-lite.js";
 import logo from "../../assets/imagenes/UrbanIso.png";
 
 export default function NavBar() {
+  const [showMenu, setShowMenu] = useState(false);
+  const [user, setUser] = useState<userData | null>(null);
+  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
   const pathname = usePathname();
-
-  const [showMenu, setShowMenu] = useState(false);
-  const [userData, setUserData] = useState<userData | null>(null);
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.useRef<HTMLButtonElement>(null);
   const popoverDropdownRef = React.useRef<HTMLDivElement>(null);
 
@@ -41,14 +40,17 @@ export default function NavBar() {
 
   useEffect(() => {
     const userDataString = localStorage.getItem("user");
+    console.log("userDataString:", userDataString);
     if (userDataString) {
-      setUserData(JSON.parse(userDataString));
+      const userDataObject = JSON.parse(userDataString);
+      console.log("userDataObject:", userDataObject);
+      setUser(userDataObject);
     }
-  }, []);
+  }, [setUser]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    setUserData(null);
+    setUser(null);
   };
 
   return (
@@ -74,17 +76,17 @@ export default function NavBar() {
             }`}
           >
             <ul className="flex flex-col items-center p-4">
-              {userData ? (
+              {user ? (
                 <li className="my-2 flex items-center justify-between ">
                   <Image
-                    src={userData?.img}
-                    alt={userData?.name}
+                    src={user?.img}
+                    alt={user?.name}
                     width={50}
                     height={50}
                     className=" w-96 rounded-full border-2 border-blue"
                   />
                   <div className="flex flex-col">
-                    <span className="mx-auto text-center">{userData?.name}</span>
+                    <span className="mx-auto text-center">{user?.name}</span>
                     <button className="text-blue-500 text-sm" onClick={handleLogout}>
                       Logout
                     </button>
@@ -105,6 +107,7 @@ export default function NavBar() {
                   </Link>
                 </li>
               )}
+
               {linksMobile.map((link) => (
                 <li key={link.id} className="my-2 flex items-center ">
                   <link.icon className="h-6 w-6" />
@@ -144,7 +147,7 @@ export default function NavBar() {
                   </Link>
                 </li>
               ))}
-              {userData ? (
+              {user ? (
                 <>
                   <li
                     className="flex items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:w-auto lg:px-0"
@@ -154,13 +157,13 @@ export default function NavBar() {
                     }}
                   >
                     <Image
-                      src={userData?.img}
-                      alt={userData?.name}
+                      src={user?.img}
+                      alt={user?.name}
                       width={50}
                       height={50}
                       className=" rounded-full border-2 border-blue lg:h-14 lg:w-full"
                     />
-                    <span className="mx-2 font-semibold lg:text-sm">{userData?.name}</span>
+                    <span className="mx-2 font-semibold lg:text-sm">{user?.name}</span>
                     <button
                       className="rounded bg-blue px-4 py-2 text-center text-white lg:w-auto"
                       onClick={handleLogout}

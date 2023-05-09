@@ -15,3 +15,54 @@ export const getAdminState = async (req: Request, res: Response): Promise<void> 
     res.status(500).json({ message: "Error al obtener el adminState" });
   }
 };
+
+export const getProfit = async (req: Request, res: Response) => {
+  try {
+    const mes = req.query.mes as string; // Obtener el mes de la query string
+
+    // Obtener datos de las tres colecciones
+    const ticketsSnap = await db.collection('tickets').get();
+    const ordersSnap = await db.collection('orders').get();
+    const travelsSnap = await db.collection('travels').get();
+
+    // Unir los datos de las tres colecciones
+    const entradas = [
+      ...ticketsSnap.docs.map(doc => ({ price: doc.data().price, createdAt: doc.data().createdAt })),
+      ...ordersSnap.docs.map(doc => ({ price: doc.data().price, createdAt: doc.data().createdAt })),
+      ...travelsSnap.docs.map(doc => ({ price: doc.data().price, createdAt: doc.data().createdAt })),
+    ];
+
+    // Filtrar las entradas por mes
+    const entradasDelMes = entradas.filter(entrada => {
+      const fecha = new Date(entrada.createdAt);
+      return fecha.getMonth() === parseInt(mes) - 1;
+    });
+
+    // Sumar los precios de las entradas del mes
+    const gananciasDelMes = entradasDelMes.reduce((total, entrada) => total + entrada.price, 0);
+
+    // Devolver las ganancias en formato JSON
+    res.json({ ganancias: gananciasDelMes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Ha ocurrido un error' }); // Devolver un error 500 si ocurre algún problema
+  }
+};
+
+export const getInactiveChauffeur = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const chauffeurRef = db.collection("chauffeur");
+    const querySnapshot = await chauffeurRef.where("state", "==", false).get();
+
+    const results: any[] = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      results.push(data);
+    });
+
+    res.status(200).json({ chauffeurs: results });
+  } catch (innerError) {
+    console.error("Error al buscar los choferes", innerError);
+    res.status(400).json({ message: innerError.message });
+  }
+};
