@@ -1,4 +1,4 @@
-interface PassageToRegister {
+export interface PassageToRegister {
   id: string;
   duration: string;
   numberSeat: number;
@@ -12,6 +12,11 @@ interface PassageToRegister {
   stock: number;
   arrivalDate: string;
   status: boolean;
+}
+
+export interface PassageResponse {
+  passages: PassageToRegister[];
+  totalPages: number;
 }
 
 export interface Passage extends PassageToRegister {
