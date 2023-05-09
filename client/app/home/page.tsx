@@ -38,7 +38,7 @@ export default function Home() {
   }, [token]);
 
   return (
-    <div className="shadow/30 mb-8 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-lg min-[420px]:mt-32 min-[420px]:w-4/5 xl:h-[450px] xl:w-full 2xl:h-4/5">
+    <div className="shadow/30 mb-8 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-lg min-[420px]:mt-32 min-[420px]:w-4/5 lg:h-[380px] xl:h-[450px] xl:w-full 2xl:h-4/5">
       <p className="text-center text-xl font-bold xl:text-2xl 2xl:text-3xl">
         Bienvedios a <span className="text-verdeurban">U</span>
         <span className=" text-celeste">rban</span>!
