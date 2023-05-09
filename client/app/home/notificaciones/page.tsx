@@ -9,11 +9,9 @@ import { ThunkDispatch } from "redux-thunk";
 
 export default function Notifications() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user") || "");
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    if (id !== null) {
-      dispatch(getAllNotificationsByUser(id));
-    }
+    dispatch(getAllNotificationsByUser(user.id));
   }, []);
 
   const notification = useSelector((state: RootState) => state.notifications.allNotifications);
