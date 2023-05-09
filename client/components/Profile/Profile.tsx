@@ -20,20 +20,20 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-md shadow-black/40 lg:h-full lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
-      <div className="relative mt-10 flex justify-center border-2">
+    <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-md shadow-black/40 lg:h-[450px] lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
+      <div className="relative mt-10 flex h-auto justify-center border-2">
         {userData && (
           <Image
             alt="..."
             src={userData?.img}
-            className="max-w-150-px absolute -top-24 -m-16 -ml-20 h-48 w-48 overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16 lg:h-40 lg:w-40"
+            className="max-w-150-px absolute -top-24 -m-16 -ml-20 h-48 w-48 overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40"
             width={200}
             height={200}
           />
         )}
       </div>
 
-      <div className="flex h-1/2 w-auto flex-col justify-between gap-2 text-center ">
+      <div className="flex h-auto w-auto flex-col justify-between gap-2 text-center ">
         <h3 className=" w-auto  text-xl font-semibold leading-normal text-blueGray-700">
           {userData?.name}
         </h3>
@@ -155,14 +155,14 @@ export default function Profile() {
           </svg>
           University of Computer Science
         </div> */}
-      </div>
-      <div className="flex gap-4">
-        <button className="mx-auto w-1/2 py-1" onClick={onClick}>
-          Edit Profile
-        </button>
-        <button className="mx-auto w-1/2 py-1" onClick={onClick}>
-          Guardar
-        </button>
+        <div className="flex h-auto gap-4">
+          <button className="mx-auto w-1/2 py-1" onClick={onClick}>
+            Edit Profile
+          </button>
+          <button className="mx-auto w-1/2 py-1" onClick={onClick}>
+            Guardar
+          </button>
+        </div>
       </div>
     </div>
     // <>
