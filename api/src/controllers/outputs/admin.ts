@@ -51,18 +51,34 @@ export const getProfit = async (req: Request, res: Response) => {
 
 export const getInactiveChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
-    const chauffeurRef = db.collection("chauffeur");
-    const querySnapshot = await chauffeurRef.where("state", "==", false).get();
+    const { page = 1, pageSize = 10, ...filters } = req.query;
 
-    const results: any[] = [];
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      results.push(data);
+    const validFilters = Object.entries(filters).filter(([key, _]) => key !== "page" && key !== "pageSize");
+
+    let query: any = db.collection("chauffeur").where("status", "==", false);
+
+    validFilters.forEach(([property, value]) => {
+      query = query.where(property, "==", value);
     });
 
-    res.status(200).json({ chauffeurs: results });
-  } catch (innerError) {
-    console.error("Error al buscar los choferes", innerError);
-    res.status(400).json({ message: innerError.message });
+    const chauffeurSnapshot = await query.get();
+
+    const totalItems = chauffeurSnapshot.docs.length;
+    const totalPages = Math.ceil(totalItems / Number(pageSize));
+
+    const startIndex = (Number(page) - 1) * Number(pageSize);
+    const endIndex = startIndex + Number(pageSize);
+
+    const chauffeur = chauffeurSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    res.status(200).json({ chauffeur, totalPages });
+  } catch (error) {
+    console.error("Error al obtener los distribuidores", error);
+    res.status(500).json({ message: "Error al obtener los distribuidores" });
   }
 };
