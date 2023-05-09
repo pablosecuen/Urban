@@ -77,7 +77,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
       <div className="relative mb-6 flex min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-100 shadow-lg">
         <div className="mb-0 rounded-t bg-white px-6 py-6">
           <div className="flex justify-between  text-center">
-            <h6 className="flex text-lg font-bold text-blueGray-700">Travel details</h6>
+            <h6 className="flex text-lg font-bold text-blueGray-700">Detalles del viaje</h6>
             <button
               className="relative mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
               type="button"
@@ -91,7 +91,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
         <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
           <form>
             <h6 className="mb-6 mt-3 text-sm font-bold uppercase text-blueGray-400">
-              User Information
+              Informacion del Viaje
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full px-4 lg:w-6/12">
@@ -100,7 +100,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Nombre
+                    ID del viaje
                   </label>
                   <input
                     type="text"
@@ -115,7 +115,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Email
+                    Id del chofer que realizo el viaje
                   </label>
                   <input
                     type="email"
@@ -130,12 +130,12 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Nombre
+                    Nombre del chofer
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.id : ""}
+                    defaultValue={selectedTravel ? selectedTravel.origin : ""}
                   />
                 </div>
               </div>
@@ -145,12 +145,12 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Fecha de nacimiento
+                    Apellido del chofer
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.userId : ""}
+                    defaultValue={selectedTravel ? selectedTravel.destination : ""}
                   />
                 </div>
               </div>
@@ -162,7 +162,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
               Contact Information
             </h6>
             <div className="flex flex-wrap">
-              <div className="lg:w-12/12 w-full px-4">
+              {/* <div className="lg:w-12/12 w-full px-4">
                 <div className="relative mb-3 w-full">
                   <label
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
@@ -180,14 +180,14 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     }
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="w-full px-4 lg:w-4/12">
                 <div className="relative mb-3 w-full">
                   <label
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Género
+                    Origen
                   </label>
                   <input
                     type="email"
@@ -202,7 +202,7 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Nacionalidad
+                    Destino
                   </label>
                   <input
                     type="text"
@@ -217,12 +217,12 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    C.C.
+                    Precio
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.travel : ""}
+                    defaultValue={selectedTravel ? selectedTravel.price : ""}
                   />
                 </div>
               </div>
@@ -232,33 +232,14 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    C.E.
+                    Estado del viaje
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.price : ""}
+                    defaultValue={selectedTravel ? selectedTravel.travel : ""}
                   />
                 </div>
-              </div>
-            </div>
-
-            <hr className="border-b-1 mt-6 border-blueGray-300" />
-
-            <h6 className="mb-6 mt-3 text-sm font-bold uppercase text-blueGray-400">About Me</h6>
-            <div className="w-full px-4 lg:w-4/12">
-              <div className="relative mb-3 w-full">
-                <label
-                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
-                  htmlFor="grid-password"
-                >
-                  C.E.
-                </label>
-                <input
-                  type="text"
-                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue={selectedTravel ? selectedTravel.createdAt?.toString() : ""}
-                />
               </div>
             </div>
           </form>

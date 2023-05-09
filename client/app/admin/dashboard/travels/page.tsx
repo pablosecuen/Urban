@@ -23,6 +23,7 @@ export interface CardTravelProps {
 export default function Travels() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allTravels = useSelector((state: RootState) => state.travel.allTravels);
+
   const [selectedTravel, setSelectedTravel] = useState<Travel | null>(null);
 
   useEffect(() => {

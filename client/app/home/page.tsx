@@ -35,22 +35,22 @@ export default function Home() {
   }, [token]);
 
   return (
-    <div className="shadow/30 mb-8 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-lg min-[420px]:mt-32 min-[420px]:w-4/5 xl:h-[450px] xl:w-full 2xl:h-4/5">
-      <p className="text-center text-xl font-bold xl:text-2xl 2xl:text-3xl">
+    <div className="mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-0 xl:h-[450px] xl:w-full 2xl:h-4/5">
+      <p className="text-center text-xl font-bold xl:text-2xl 2xl:text-2xl">
         Bienvedios a <span className="text-verdeurban">U</span>
         <span className=" text-celeste">rban</span>!
       </p>
-      <p className="w-full text-center lg:text-xs xl:text-base 2xl:text-xl ">
+      <p className="w-full px-4 text-center lg:text-xs xl:text-base 2xl:text-lg ">
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
         acercando a la oferta a la palma de su mano, <b>para empoderarte</b> con mayor información
         asistiendo en que tomes la mejor decision disponble dentro de tus necesidades, en nuestra
         app podras encontrar todo tipo de servicios de transporte, desde
         <b> buses intermunicipales, taxis publicos, transportes privados</b>, inclusive una
-        <b>seccion de cadeteria</b>, para que puedas encontrar <b>soluciones reales</b> a tus
-        problemas cotidianos en la menor cantidad de tiempo posibles, acercando a tu mano un poder
+        <b> sección de cadeteria</b>, para que puedas encontrar <b>soluciones reales</b> a tus
+        problemas cotidianos en la menor cantidad de tiempo posibles, entregando al cliente un poder
         increible para <b>gestionar</b> tu tiempo y tus días de la mejor manera posible
       </p>
-      <p className="text-center text-lg font-bold 2xl:text-2xl">
+      <p className="text-center text-lg font-bold 2xl:text-xl">
         {"<-- "}Selecciona el tipo de servicio para poder continuar
       </p>
     </div>

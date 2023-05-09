@@ -17,7 +17,6 @@ import sos from "./icons/sos.png";
 import escudo from "./icons/escudo.png";
 import planet from "./icons/planet.png";
 import contract from "./icons/contract.png";
-import Viajes from "@component/app/home/reserva/viajes/page";
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -116,12 +115,12 @@ export const iconsData = [
   },
   {
     image: planet,
-    alt: "sos",
+    alt: "planet",
     description: "Viajando con nuestros aliados contribuyes al cuidado del medio ambiente",
   },
   {
     image: contract,
-    alt: "sos",
+    alt: "contract",
     description: "Nuestras políticas",
   },
 ];
@@ -165,14 +164,14 @@ export const contenidoHistorialPerfil = [
     title: "historial de Taxis tomados",
     p: "Historial de viajes",
     placeHolder: `aca van las cards del historial de viajes en taxi`,
-    id: "1",
+    id: "3",
   },
   {
     name: "Car-pool",
     title: "historial de viajes",
     p: "Historial de viajes en Car-pool",
     placeHolder: `aca van las cards del historial de viajes en car-pool`,
-    id: "1",
+    id: "4",
   },
 ];
 

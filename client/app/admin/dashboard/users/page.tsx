@@ -11,15 +11,6 @@ import { User } from "@component/app/types/User";
 import { getAllUsers } from "../../../../Redux/user/userActions";
 
 // components
-export interface CardUsersProps {
-  allUsers: User[];
-  handleClickFunction: (user: User) => void;
-  selectedUser: User | null;
-}
-
-export interface CardProfileProps {
-  selectedUser: User | null;
-}
 
 export default function Users() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
