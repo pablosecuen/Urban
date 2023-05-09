@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 
-export const seartNotifications = async (req: Request, res: Response): Promise<void> => {
+export const searchNotifications = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
 
