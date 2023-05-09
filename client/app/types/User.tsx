@@ -36,4 +36,13 @@ export interface User extends UserToRegister {
   id: string;
 }
 
+export interface CardUsersProps {
+  allUsers: User[];
+  handleClickFunction: (user: User) => void;
+  selectedUser: User | null;
+}
+
+export interface CardProfileProps {
+  selectedUser: User | null;
+}
 export interface UserToUpdate extends Partial<UserToRegister> {}
