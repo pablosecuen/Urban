@@ -2,15 +2,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
+import { useRouter } from "next/router";
 
-
-import {
-
-  HiOutlineLocationMarker,
-  HiTag,
-  HiTrendingUp,
-  HiTrendingDown,
-} from "react-icons/hi";
+import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
 import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
 import { Query } from "@component/app/types/Passages";
@@ -20,15 +14,17 @@ export default function Reserva() {
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
 
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [price, setPrice] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [arrivalDate, setArrivalDate] = useState("");
-  
-  const isFormValid = origin && destination && departureDate;
+  const [origin, setOrigin] = useState<string>("");
+  const [destination, setDestination] = useState<string>("");
+  const [price, setPrice] = useState<number | undefined>();
+  const [departureDate, setDepartureDate] = useState<string>("");
+  const [arrivalDate, setArrivalDate] = useState<string>("");
 
-// handlers para los estados locales
+  const isFormValid = origin && destination && departureDate ? true : false;
+
+  console.log(isFormValid);
+
+  // - - - - - - - - - - - - -  HANDLERS DE LOS INPUTS - - - - - - - - - - - - -
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
   };
@@ -36,10 +32,10 @@ export default function Reserva() {
     setDestination(e.target.value);
   };
 
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value);
   };
-
+ */
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDepartureDate(e.target.value);
   };
@@ -47,17 +43,18 @@ export default function Reserva() {
   const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArrivalDate(e.target.value);
   };
-  
-  
+
+  // - - - - - - - - - - - - -  HANDLE SUBMIT - - - - - - - - - - - - -
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
-    
+
     try {
-      const query : Query = {
+      const query: Query = {
         origin: origin.toLowerCase(),
         destination: destination.toLowerCase(),
-        departureDate: departureDate.split('-').reverse().join('/'),
-        ...(arrivalDate && { arrivalDate: arrivalDate.split('-').reverse().join('/')}),
+        departureDate: departureDate.split("-").reverse().join("/"),
+        ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
+        ...(price && { price }),
         // armo la query y agrego las propiedades extras si las hay
       };
       dispatch(getPassagesByQuery(query));
@@ -94,7 +91,6 @@ export default function Reserva() {
           />
         </div>
 
-
         <div className="flex items-center justify-center">
           <HiTrendingUp className="w-10 text-blue" />
           <input
@@ -118,18 +114,22 @@ export default function Reserva() {
           />
         </div>
 
-        <div className="flex items-center justify-center">
+        {/*      <div className="flex items-center justify-center">
           <HiTag className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
             placeholder="Precio"
-            type="text"
+            type="number"
             value={price}
             onChange={handlePriceChange}
           />
-        </div>
+        </div> */}
 
-        <button onClick={handleSubmit} disabled={!isFormValid} className="w-1/2 self-center cursor-pointer">
+        <button
+          onClick={handleSubmit}
+          disabled={!isFormValid}
+          className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
+        >
           Buscar tu viaje!
         </button>
       </form>
