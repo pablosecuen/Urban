@@ -6,7 +6,6 @@ export const getAllNotificationsByUser = createAsyncThunk<Notifications[], strin
   "notifications/getAllNotificationsByUser",
   async (userId) => {
     const response = await axios.get(`http://localhost:3000/notifications/user/${userId}`);
-    console.log(response.data);
     return response.data.notifications;
   }
 );
