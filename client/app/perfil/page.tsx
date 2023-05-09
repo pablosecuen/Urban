@@ -5,6 +5,7 @@ import { pestañasHistorialPerfil, contenidoHistorialPerfil } from "../../assets
 import { RootState } from "@component/Redux/store/store";
 import { getTravelsByUserId } from "../../Redux/travel/travelActions";
 import { Dispatch } from "@reduxjs/toolkit";
+import { type } from "os";
 
 export default function Perfil() {
   const [loading, setLoading] = useState(true);
@@ -60,19 +61,32 @@ export default function Perfil() {
               title={item.title}
             >
               <h4 className="border-y-2 border-gray-400 font-semibold">{item.p}</h4>
-              <div className=" flex h-full w-full flex-col items-center justify-center gap-3 overflow-scroll border-2 pb-5">
-                {userTravels.map((item, id) => (
-                  <div className="my-2 h-1/4 w-4/5 bg-gray-300 p-2 shadow-xl" key={id}>
-                    <h1>{item.travel}</h1>
-                    <h1>Precio: ${item.price}</h1>
-                    <div className="flex">
-                      <h1>Desde: {item.origin}</h1>
-                      <p>TO</p>
-                      <h1>Hasta: {item.destination}</h1>
+
+              {activeTab === "Viajes" && (
+                <div
+                  className={`flex h-full w-full flex-col items-center justify-evenly gap-3 ${
+                    userTravels.length > 3 && "overflow-scroll"
+                  } border-2 pb-5`}
+                >
+                  {userTravels.map((item, id) => (
+                    <div
+                      // onClick={asdas}
+                      className="my-2 flex h-1/4 w-4/5 justify-between bg-gray-300 p-2 py-8 shadow-xl hover:cursor-pointer"
+                      key={id}
+                    >
+                      <p>
+                        Desde: <span className="font-semibold">{item.origin}</span>
+                      </p>
+                      <p>
+                        Hasta: <span className="font-semibold">{item.destination}</span>
+                      </p>
+                      <p>
+                        Precio: <span className="font-semibold">${item.price}</span>
+                      </p>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </>
