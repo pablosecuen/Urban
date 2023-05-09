@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
@@ -11,6 +11,7 @@ import { Query } from "@component/app/types/Passages";
 
 export default function Reserva() {
   const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
+  const router = useRouter();
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
 
@@ -21,8 +22,6 @@ export default function Reserva() {
   const [arrivalDate, setArrivalDate] = useState<string>("");
 
   const isFormValid = origin && destination && departureDate ? true : false;
-
-  console.log(isFormValid);
 
   // - - - - - - - - - - - - -  HANDLERS DE LOS INPUTS - - - - - - - - - - - - -
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +47,6 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    try {
       const query: Query = {
         origin: origin.toLowerCase(),
         destination: destination.toLowerCase(),
@@ -58,9 +56,7 @@ export default function Reserva() {
         // armo la query y agrego las propiedades extras si las hay
       };
       dispatch(getPassagesByQuery(query));
-    } catch (error) {
-      throw new Error("algo salio mal");
-    }
+      router.push("home/reserva/viajes"); 
   };
 
   return (
