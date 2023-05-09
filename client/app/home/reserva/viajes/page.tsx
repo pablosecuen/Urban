@@ -9,7 +9,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
- const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery);
+ const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
   const status = useSelector((state: RootState) => state.passage.status);
 const error = useSelector((state: RootState) => state.passage.error);
 
