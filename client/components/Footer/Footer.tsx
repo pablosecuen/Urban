@@ -21,22 +21,22 @@ export default function Footer() {
           <ul className=" flex flex-col gap-4">
             <li>
               <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
-                Acerca de nosotros
+                <Link href="/empresa/#acerca-de-nosotros">acerca de notroso</Link>
               </span>
             </li>
             <li>
               <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
-                Preguntas frecuentes
+                <Link href="/empresa/#preguntas-frecuentes">Preguntas frecuentes</Link>
               </span>
             </li>
             <li>
               <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
-                Ayuda por emergencia
+                <Link href="/empresa/#ayuda-por-emergencia">Ayuda por emergencia</Link>
               </span>
             </li>
             <li>
               <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
-                Nuestra mision
+                <Link href="/empresa/#terminos-y-condiciones">Terminos y condiciones</Link>
               </span>
             </li>
           </ul>
