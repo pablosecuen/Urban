@@ -52,6 +52,8 @@ import roadTripOutputRouter from "./outputs/roadTrip";
 import adminInputRouter from "./inputs/admin";
 import adminOutputRouter from "./outputs/admin";
 
+import notificationsInputRouter from "./inputs/notification";
+
 const router = Router();
 
 // Rutas para entrada de datos
@@ -90,6 +92,8 @@ router.use("/ticket", ticketInputRouter);
 router.use("/roadtrip", roadTripInputRouter);
 
 router.use("/admin", adminInputRouter);
+
+router.use("/notifications", notificationsInputRouter)
 
 // Rutas para salida de datos
 router.use("/user", userOutputRouter);
