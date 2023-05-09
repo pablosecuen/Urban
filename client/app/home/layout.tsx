@@ -9,7 +9,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <NavBar />
-      <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20 lg:gap-2 xl:gap-10">
+      <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:gap-2 lg:pb-20 xl:gap-10">
         <div className="flex w-1/3 flex-col items-center justify-center gap-4">
           <Image
             src={logo as StaticImageData}
