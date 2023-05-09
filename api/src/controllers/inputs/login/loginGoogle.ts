@@ -22,7 +22,7 @@ passport.use(
             email: profile.emails[0].value,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
-            diplayName: profile.displayName,
+            displayName: profile.displayName,
             img: profile.photos[0].value,
             payments: {
               cardNumber: "",
@@ -56,8 +56,9 @@ passport.use(
           email: profile.emails[0].value,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          diplayName: profile.displayName,
+          displayName: profile.displayName,
           img: profile.photos[0].value,
+          id: profile.id
         }
         done(null, payload);
       } catch (error) {
@@ -72,7 +73,7 @@ router.get("/", (req, res) => {
   const { user } = req;
   console.log(user);
   const token = jwt.sign(user, "clavemegasecreta");
-  // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
+  console.log(token);
   res.redirect(`http://localhost:3001/home?token=${token}`);
 });
 
