@@ -36,76 +36,86 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-verde">
+    <header className="bg-blue">
       {isMobile ? (
-        <nav className="flex h-12 w-full justify-between bg-verde ">
-          <Image src={logo} alt="logo" className="h-10 w-auto self-center" width={50} height={50} />
-
-          <HiMenuAlt1
-            onClick={toggleMenu}
-            className="top-0 z-50 mr-4 h-full w-1/12 cursor-pointer  text-xl md:hidden"
-          />
-
-          <div
-            className={`absolute left-0 top-12 h-full w-0 overflow-hidden  bg-white transition-all  duration-1000 ease-in-out md:hidden ${
-              showMenu && "w-1/2 shadow-custom-md"
-            }`}
-          >
-            <ul className="flex flex-col items-center p-4">
-              {user ? (
-                <li className="my-2 flex items-center justify-between ">
-                  <Image
-                    src={user?.img}
-                    alt={user?.name}
-                    width={50}
-                    height={50}
-                    className=" w-96 rounded-full border-2 border-blue"
-                  />
-                  <div className="flex flex-col">
-                    <span className="mx-auto text-center">{user?.name}</span>
-                    <button className="text-blue-500 text-sm" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </div>
-                </li>
-              ) : (
-                <li className="my-2 flex items-center ">
-                  <Image
-                    src="/placeholder.png"
-                    alt="placeholder"
-                    width={50}
-                    height={50}
-                    className="h-6 w-6 rounded-full"
-                  />
-                  <span className="mx-2">Guest</span>
-                  <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
-                    Login
-                  </Link>
-                </li>
-              )}
-
-              {linksMobile.map((link) => (
-                <li key={link.id} className="my-2 flex items-center ">
-                  <link.icon className="h-6 w-6" />
-                  <Link href={link.route} onClick={toggleMenu}>
-                    <span className="mx-2">{link.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      ) : (
-        <nav className="w-full bg-verde py-2 lg:py-0">
-          <div className="container mx-auto flex justify-between ">
+        <>
+          <h1>
             <Image
-              src="../../assets/imagenes/UrbanIso.png"
+              src={logo}
               alt="logo"
-              className="flex h-10 w-auto self-center"
-              width={100}
-              height={100}
+              className="absolute left-0 top-1 z-50 h-10 w-auto  self-center"
+              width={50}
+              height={50}
             />
+          </h1>
+          <nav className="relative flex h-12 w-full justify-between bg-verde ">
+            <HiMenuAlt1
+              onClick={toggleMenu}
+              className="absolute right-0 top-0  z-50 mr-4 h-full w-1/12 cursor-pointer  text-xl md:hidden"
+            />
+            <div
+              className={`absolute left-0 top-12 h-screen w-0 overflow-hidden  bg-white transition-all  duration-1000 ease-in-out md:hidden ${
+                showMenu && "w-1/2 shadow-custom-md"
+              }`}
+            >
+              <ul className="flex flex-col items-center p-4">
+                {user ? (
+                  <li className="my-2 flex items-center justify-between ">
+                    <Image
+                      src={user?.img}
+                      alt={user?.name}
+                      width={50}
+                      height={50}
+                      className=" w-96 rounded-full border-2 border-blue"
+                    />
+                    <div className="flex flex-col">
+                      <span className="mx-auto text-center">{user?.name}</span>
+                      <button className="text-blue-500 text-sm" onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </div>
+                  </li>
+                ) : (
+                  <li className="my-2 flex items-center ">
+                    <Image
+                      src="/placeholder.png"
+                      alt="placeholder"
+                      width={50}
+                      height={50}
+                      className="h-6 w-6 rounded-full"
+                    />
+                    <span className="mx-2">Guest</span>
+                    <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                      Login
+                    </Link>
+                  </li>
+                )}
 
+                {linksMobile.map((link) => (
+                  <li key={link.id} className="my-2 flex items-center ">
+                    <link.icon className="h-6 w-6" />
+                    <Link href={link.route} onClick={toggleMenu}>
+                      <span className="mx-2">{link.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </>
+      ) : (
+        <div className="container mx-auto flex justify-between ">
+          <nav className="w-full bg-verde py-2 lg:py-0">
+            <h1>
+              {" "}
+              <Image
+                src="../../assets/imagenes/UrbanIso.png"
+                alt="logo"
+                className="flex h-10 w-auto self-center"
+                width={100}
+                height={100}
+              />
+            </h1>
             <ul className="flex w-auto items-center justify-evenly  lg:gap-4 ">
               {links.map((link) => (
                 <li
@@ -154,8 +164,8 @@ export default function NavBar() {
                 </li>
               )}
             </ul>
-          </div>
-        </nav>
+          </nav>
+        </div>
       )}
     </header>
   );
