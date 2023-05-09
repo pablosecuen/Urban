@@ -36,7 +36,7 @@ export default function Perfil() {
   }
 
   return (
-    <div className="h-96">
+    <div className="h-full shadow-lg shadow-black/40">
       {/* Tabs */}
       <div className="flex w-full ">
         {pestañasHistorialPerfil.map((item, index) => (
@@ -57,7 +57,7 @@ export default function Perfil() {
         <>
           {activeTab === `${item.name}` && (
             <div
-              className="h-full w-full overflow-hidden border-2 bg-gray-200 text-center"
+              className="h-full w-full overflow-hidden border-2 bg-gray-200 text-center shadow-lg shadow-black/40"
               title={item.title}
             >
               <h4 className="border-y-2 border-gray-400 font-semibold">{item.p}</h4>
