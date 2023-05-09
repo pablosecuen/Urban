@@ -17,9 +17,7 @@ export default function Home() {
             Authorization: "Bearer " + token,
           },
         })
-        .then((data) => {
-          console.log(data.data);
-        });
+        .then((data) => {});
   }, [token]);
 
   useEffect(() => {
@@ -31,7 +29,6 @@ export default function Home() {
           },
         })
         .then((data) => {
-          console.log(data.data);
           const userData = data.data;
           localStorage.setItem("user", JSON.stringify(userData));
         });
