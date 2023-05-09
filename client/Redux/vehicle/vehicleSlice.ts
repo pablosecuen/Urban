@@ -103,3 +103,5 @@ const vehicleSlice = createSlice({
       );
   },
 });
+
+export default vehicleSlice.reducer;

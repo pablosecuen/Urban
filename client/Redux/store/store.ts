@@ -4,6 +4,8 @@ import travelReducer from "../travel/travelSlice";
 import passageReducer from "../passage/passageSlice";
 import deliverySlice from "../delivery/deliverySlice";
 import chauffeurSlice from "../chauffeur/chauffeurSlice";
+import notificationsSlice from "../notifications/notificationsSlice";
+import vehicleSlice from "../vehicle/vehicleSlice";
 
 export function makeStore() {
   return configureStore({
@@ -13,6 +15,8 @@ export function makeStore() {
       passage: passageReducer,
       delivery: deliverySlice,
       chauffeur: chauffeurSlice,
+      vehicle: vehicleSlice,
+      notifications: notificationsSlice,
     },
   });
 }
