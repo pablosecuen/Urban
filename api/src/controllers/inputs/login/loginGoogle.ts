@@ -22,7 +22,7 @@ passport.use(
             email: profile.emails[0].value,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
-            displayName: profile.displayName,
+            name: profile.displayName,
             img: profile.photos[0].value,
             payments: {
               cardNumber: "",
@@ -56,7 +56,7 @@ passport.use(
           email: profile.emails[0].value,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          displayName: profile.displayName,
+          name: profile.displayName,
           img: profile.photos[0].value,
           id: profile.id
         }

@@ -1,19 +1,23 @@
 import { Address, Payment, Phone } from "../../../api/src/types/types.d";
 
 export interface UserToRegister {
+  firstName: string;
+  lastName: string;
   name: string;
-  email: string;
   password: string;
   createdAt?: string;
   updatedAt?: string;
 }
 export interface userData {
+  firstName: string;
+  lastName: string;
   name: string;
   img: string;
-  email: string;
-  adress: string;
+  email?: string;
+  address?: Address;
 }
 export interface User extends UserToRegister {
+  name: string;
   address: Address;
   payments: Payment[];
   history: {

@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { seartNotifications } from "../../controllers/outputs/notification";
-
+import { searchNotifications } from "../../controllers/outputs/notification";
 
 const router = Router();
 
-router.get("/user/:id", seartNotifications)
+router.get("/user/:id", searchNotifications);
 
 export default router;

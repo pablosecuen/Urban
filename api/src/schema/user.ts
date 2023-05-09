@@ -3,7 +3,7 @@ import { Address, Payment, Phone } from "../types/types";
 export interface UserToRegister {
   firstName: string,
   lastName: string,
-  displayName: string,
+  name: string,
   email: string,
   password: string,
 }
