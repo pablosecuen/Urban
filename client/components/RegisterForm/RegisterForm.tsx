@@ -28,7 +28,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     setErrores({ ...errores, ...setValidate({ [name]: value }), ...errorRepeatPassword });
   };
   function setValidateRepeatPassword(repeatPassword: string, password: string) {
-    // console.log(repeatPassword + " = " + password);
     if (repeatPassword === password || repeatPassword === "") {
       return { messageRepeatPassword: "" };
     } else {
