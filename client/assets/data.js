@@ -17,7 +17,6 @@ import sos from "./icons/sos.png";
 import escudo from "./icons/escudo.png";
 import planet from "./icons/planet.png";
 import contract from "./icons/contract.png";
-import Viajes from "@component/app/home/reserva/viajes/page";
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
