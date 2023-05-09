@@ -25,3 +25,13 @@ export const getTravelsByQuery = createAsyncThunk<Travel[], QueryParams, {}>(
     return response.data;
   }
 );
+
+export const getTravelsByUserId = createAsyncThunk<Travel[], string, {}>(
+  "travels/getTravelsByUserId",
+  async (userId: string) => {
+    const response = await axios.get(
+      `http://localhost:3000/travels/user/${userId}?page=1&pageSize=100`
+    );
+    return response.data.travels;
+  }
+);
