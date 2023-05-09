@@ -3,14 +3,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-// import ChauffeurDropDownSettings from "../Dropdowns/ChauffeurDropDownSettings"; // crear
-
 import { CardChauffeursProps } from "@component/app/admin/dashboard/chauffeurs/page";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";
 import { getChauffeurs } from "@component/Redux/chauffeur/chauffeurActions";
+import ChauffeurDropDownSettings from "../Dropdowns/ChauffeurDropDownSettings";
 
 // components
 
@@ -91,7 +90,7 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   alt="profile pc"
                   className="h-12 w-12 rounded-full"
                 />
-                <h3 className="">{chauffeur.name}</h3>
+                <h3 className="">{chauffeur.displayName}</h3>
               </div>
               <div className="flex w-80 items-center justify-around border-2">
                 <p className="flex ">
@@ -115,7 +114,7 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
             >
               Settings
             </button>
-            {/* {showDropDown && <ChauffeurDropDownSettings />} // crear componente  */}
+            {showDropDown && <ChauffeurDropDownSettings />}
           </div>
         </div>
         <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
