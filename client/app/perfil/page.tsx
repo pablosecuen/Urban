@@ -55,13 +55,16 @@ export default function Perfil() {
       {contenidoHistorialPerfil.map((item, index) => (
         <>
           {activeTab === `${item.name}` && (
-            <div className="h-full w-full overflow-hidden border-2 bg-gray-200 " title={item.title}>
-              <h4>{item.p}</h4>
-              <div className=" h-full w-full overflow-scroll border-2">
+            <div
+              className="h-full w-full overflow-hidden border-2 bg-gray-200 text-center"
+              title={item.title}
+            >
+              <h4 className="border-y-2 border-gray-400 font-semibold">{item.p}</h4>
+              <div className=" flex h-full w-full flex-col items-center justify-center gap-3 overflow-scroll border-2 pb-5">
                 {userTravels.map((item, id) => (
-                  <div className="my-2 p-2 shadow-xl" key={id}>
+                  <div className="my-2 h-1/4 w-4/5 bg-gray-300 p-2 shadow-xl" key={id}>
                     <h1>{item.travel}</h1>
-                    <h1>{item.price}</h1>
+                    <h1>Precio: ${item.price}</h1>
                     <div className="flex">
                       <h1>Desde: {item.origin}</h1>
                       <p>TO</p>
