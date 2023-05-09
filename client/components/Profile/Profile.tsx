@@ -20,7 +20,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-md shadow-black/40 lg:h-[450px] lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
+    <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[450px] lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
       <div className="relative mt-10 flex h-auto justify-center border-2">
         {userData && (
           <Image
