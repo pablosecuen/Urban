@@ -9,11 +9,18 @@ import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allPassages = useSelector((state: RootState) => state.passage.allPassages);
+  // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
+  const passages = useSelector((state: RootState) => state.passage.allPassages);
+const status = useSelector((state: RootState) => state.passage.status);
+const error = useSelector((state: RootState) => state.passage.error);
 
-  useEffect(() => {
-    dispatch(getAllPassages());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllPassages());
+  // }, []);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
@@ -22,7 +29,7 @@ export default function Viajes() {
           Estas son las mejores opciones encontradas
         </h1>
 
-        {allPassages.map((passage) => (
+        {passages.map((passage) => (
           <Link
             href={`/home/reserva/viajes/${passage.id}`}
             key={passage.id}
