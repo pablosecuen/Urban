@@ -41,12 +41,12 @@ export default function Perfil() {
         {pestañasHistorialPerfil.map((item, index) => (
           <div
             key={item.id}
-            className={`w-full cursor-pointer rounded-t-xl border px-2 py-1 transition duration-500 ${
-              activeTab === `${item.name}` && "bg-gray-200"
+            className={`w-full cursor-pointer rounded-t-xl border border-gray-200 px-2 py-1 transition duration-500 ${
+              activeTab === `${item.name}` && "bg-gray-200 font-bold"
             }`}
             onClick={() => handleTabClick(`${item.name}`)}
           >
-            <h3>{item.name}</h3>
+            <h3 className="text-center">{item.name}</h3>
           </div>
         ))}
       </div>
@@ -55,7 +55,7 @@ export default function Perfil() {
       {contenidoHistorialPerfil.map((item, index) => (
         <>
           {activeTab === `${item.name}` && (
-            <div className="h-full w-full overflow-hidden border-2 bg-red-300 " title={item.title}>
+            <div className="h-full w-full overflow-hidden border-2 bg-gray-200 " title={item.title}>
               <h4>{item.p}</h4>
               <div className=" h-full w-full overflow-scroll border-2">
                 {userTravels.map((item, id) => (
