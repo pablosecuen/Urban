@@ -1,36 +1,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import axios from "axios";
 import { Google } from "@component/assets/icons/svg/Google";
 import setValidate from "./Validate";
-
-interface UserToRegister {
-  name: string;
-  lastName: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
-
-interface UserToLogin {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  success: boolean;
-  message?: string;
-  token?: string;
-}
-
-interface RegisterError {
-  messageName?: string;
-  messageLastName?: string;
-  messageEmail?: string;
-  messagePassword?: string;
-  messageRepeatPassword?: string;
-}
+import { UserToRegister } from "@component/app/types/LoginRegister";
+import { RegisterError } from "@component/app/types/LoginRegister";
 
 function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsRegister: any }) {
   const userFromSessionStorage: UserToRegister | {} = JSON.parse(
@@ -47,8 +21,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     const { repeatPassword } = userData;
     let errorRepeatPassword = {};
     if (name === "password") {
-      console.log(repeatPassword + " == " + value);
-
       errorRepeatPassword = setValidateRepeatPassword(repeatPassword, value);
     }
     setUserData({ ...userData, [name]: value });
@@ -56,8 +28,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     setErrores({ ...errores, ...setValidate({ [name]: value }), ...errorRepeatPassword });
   };
   function setValidateRepeatPassword(repeatPassword: string, password: string) {
-    console.log("setValidateRepeatPassword");
-    // console.log(repeatPassword + " = " + password);
     if (repeatPassword === password || repeatPassword === "") {
       return { messageRepeatPassword: "" };
     } else {
@@ -66,7 +36,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   }
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     const name = e.target.name.toString();
     const value = e.target.value.toString();
     setUserData({ ...userData, [name]: value });
@@ -74,7 +43,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
   };
 
-  console.log(errores);
   const router = useRouter();
 
   const handleLoginClick = () => {
