@@ -17,7 +17,7 @@ export default function Footer() {
         </div>
         <hr className="h-[2px] bg-black/30 text-black md:hidden" />
         <div className="flex flex-col gap-3 md:w-1/4 ">
-          <h3 className="font-semibold uppercase">Compañía</h3>
+          <h3 className="px-2 font-semibold uppercase">Compañía</h3>
           <ul className=" flex flex-col gap-4">
             <li>
               <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
