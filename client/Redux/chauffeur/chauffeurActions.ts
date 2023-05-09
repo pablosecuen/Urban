@@ -6,9 +6,11 @@ export const getChauffeurs = createAsyncThunk<FilteredChauffeurs, ChauffeurQuery
   "chauffeur/getFilteredChauffeurs",
   async (queryParams: ChauffeurQueryParams): Promise<FilteredChauffeurs> => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
-    const response: AxiosResponse = await axios.get(
-      `http://localhost:3000/chauffeur?page=1&pageSize=10${urlSearchParams.toString()}`
-    );
+    let URL = "http://localhost:3000/chauffeur?";
+    URL += "page=1&pageSize=10";
+    const URLParams = urlSearchParams.toString();
+    if (URLParams) URL += "&" + URLParams;
+    const response: AxiosResponse = await axios.get(URL);
 
     const formatedRes: FilteredChauffeurs = {
       data: response.data.chauffeur,
