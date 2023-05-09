@@ -1,17 +1,16 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 export default function Viajes() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
-  const passages = useSelector((state: RootState) => state.passage.allPassages);
-const status = useSelector((state: RootState) => state.passage.status);
+ const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery);
+  const status = useSelector((state: RootState) => state.passage.status);
 const error = useSelector((state: RootState) => state.passage.error);
 
   // useEffect(() => {
@@ -21,6 +20,8 @@ const error = useSelector((state: RootState) => state.passage.error);
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
+  console.log(passages);
+  
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
