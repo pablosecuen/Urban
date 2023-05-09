@@ -82,3 +82,37 @@ export const getInactiveChauffeur = async (req: Request, res: Response): Promise
     res.status(500).json({ message: "Error al obtener los distribuidores" });
   }
 };
+
+export const getInactiveDeliverys = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { page = 1, pageSize = 10, ...filters } = req.query;
+
+    const validFilters = Object.entries(filters).filter(([key, _]) => key !== "page" && key !== "pageSize");
+
+    let query: any = db.collection("deliverys").where("status", "==", false);
+
+    validFilters.forEach(([property, value]) => {
+      query = query.where(property, "==", value);
+    });
+
+    const deliverySnapshot = await query.get();
+
+    const totalItems = deliverySnapshot.docs.length;
+    const totalPages = Math.ceil(totalItems / Number(pageSize));
+
+    const startIndex = (Number(page) - 1) * Number(pageSize);
+    const endIndex = startIndex + Number(pageSize);
+
+    const delivery = deliverySnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    res.status(200).json({ delivery, totalPages });
+  } catch (error) {
+    console.error("Error al obtener los distribuidores", error);
+    res.status(500).json({ message: "Error al obtener los distribuidores" });
+  }
+};
