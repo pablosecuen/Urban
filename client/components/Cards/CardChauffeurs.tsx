@@ -19,12 +19,14 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
   handleSelectChauffeur,
   selectedChauffeur,
 }) => {
-  const [searchProperty, setSearchProperty] = useState<"name" | "cc" | "ce" | "patent">("name");
+  const [searchProperty, setSearchProperty] = useState<"displayName" | "cc" | "ce" | "patent">(
+    "displayName"
+  );
   const [searchTerm, setSearchTerm] = useState(""); //   => QueryParams
-  // const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showDropDown, setShowDropDown] = useState(false);
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
 
+  console.log(selectedChauffeur);
   const handleSearchChange = (event: any) => {
     const value = event.target.value;
     setSearchTerm(value);
@@ -39,7 +41,6 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
   const handleSetSearchProperty = (e: any) => {
     setSearchProperty(e.target.value);
   };
-  console.log(searchProperty);
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
   };
@@ -66,7 +67,7 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                 </label>
               </form>
               <select onChange={handleSetSearchProperty}>
-                <option value="name">nombre</option>
+                <option value="displayName">nombre</option>
                 <option value="cc">cc</option>
                 <option value="ce">ce</option>
                 <option value="patent">patent</option>
@@ -114,7 +115,7 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
             >
               Settings
             </button>
-            {/* {showDropDown && <ChauffeurDropDownSettings />} */}
+            {/* {showDropDown && <ChauffeurDropDownSettings />} // crear componente  */}
           </div>
         </div>
         <div className="flex-auto px-4 py-10 pt-0 lg:px-10">

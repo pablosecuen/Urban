@@ -38,7 +38,7 @@ export interface ChauffeurFilters {
   patent?: string;
 }
 export interface FilteredChauffeurs {
-  chauffeurs: Chauffeur[];
+  data: Chauffeur[];
   currentPage: number;
   totalPages: number;
   activeFilters: ChauffeurFilters | null;
