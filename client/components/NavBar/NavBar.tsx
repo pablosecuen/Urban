@@ -36,7 +36,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-blue">
+    <header className="bg-verde">
       {isMobile ? (
         <>
           <h1>
@@ -104,19 +104,19 @@ export default function NavBar() {
           </nav>
         </>
       ) : (
-        <div className="container mx-auto flex justify-between ">
-          <nav className="w-full bg-verde py-2 lg:py-0">
+        <div className="flex w-full justify-between bg-verde px-4 py-2 lg:py-0">
+          <nav className=" ">
             <h1>
               {" "}
               <Image
-                src="../../assets/imagenes/UrbanIso.png"
+                src={logo}
                 alt="logo"
-                className="flex h-10 w-auto self-center"
+                className="absolute top-2  z-50 flex h-10 w-auto self-center"
                 width={100}
                 height={100}
               />
             </h1>
-            <ul className="flex w-auto items-center justify-evenly  lg:gap-4 ">
+            <ul className="flex w-auto items-center justify-end  lg:gap-4 ">
               {links.map((link) => (
                 <li
                   key={link.id}
@@ -141,11 +141,11 @@ export default function NavBar() {
                       alt={user?.name}
                       width={50}
                       height={50}
-                      className=" rounded-full border-2 border-blue lg:h-14 lg:w-full"
+                      className=" rounded-full border-2 border-blue lg:h-12 lg:w-12"
                     />
                     <span className="mx-2 font-semibold lg:text-sm">{user?.name}</span>
                     <button
-                      className="rounded bg-blue px-4 py-2 text-center text-white lg:w-auto"
+                      className="rounded bg-blue px-2 py-1 text-center text-white lg:w-auto"
                       onClick={handleLogout}
                     >
                       Logout
