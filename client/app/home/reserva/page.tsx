@@ -14,7 +14,9 @@ export default function Reserva() {
   const router = useRouter();
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-
+  
+  // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
+  
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
   const [price, setPrice] = useState<number | undefined>();
@@ -24,6 +26,7 @@ export default function Reserva() {
   const isFormValid = origin && destination && departureDate ? true : false;
 
   // - - - - - - - - - - - - -  HANDLERS DE LOS INPUTS - - - - - - - - - - - - -
+
   const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrigin(e.target.value);
   };
