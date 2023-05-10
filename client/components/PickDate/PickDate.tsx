@@ -29,6 +29,8 @@ export default function PickDate() {
       fromYear={2023}
       toYear={2026}
       footer={footer}
+      showOutsideDays
+      fixedWeeks
     />
   );
 }
