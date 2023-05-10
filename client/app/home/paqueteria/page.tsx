@@ -19,7 +19,7 @@ export default function Paqueteria() {
           <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" />
         </div>
 
-        <div className="flex items-center justify-center xl:ml-[119px]">
+        <div className="flex items-center justify-center xl:ml-[150px]">
           <HiOutlineCalendar className="w-10 text-blue" />
           <PickDate />
           {/* <input className="pl-2 w-2/3" placeholder="Cuando?..." type="text" /> */}
