@@ -1,9 +1,6 @@
-"use client";
+
 import Image from "next/image";
-import foto from "../../assets/imagenes/perfil.png";
-import { User } from "../../app/types/User";
-import { CardProfileProps } from "../../app/admin/dashboard/users/page";
-import { Address } from "../../../api/src/types/types";
+import { CardProfileProps } from "../../app/types/User";
 
 // components
 
