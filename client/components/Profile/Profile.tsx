@@ -21,12 +21,12 @@ export default function Profile() {
 
   return (
     <div className="flex flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[450px] lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
-      <div className="relative mt-10 flex h-auto justify-center border-2">
+      <div className="flex flex-col items-center justify-center border-2">
         {userData && (
           <Image
             alt="..."
             src={userData?.img}
-            className="max-w-150-px absolute -top-24 -m-16 -ml-20 h-48 w-48 overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40"
+            className="max-w-150-px  my-auto h-20 w-20 overflow-hidden rounded-full border-none align-middle shadow-xl lg:-top-24 lg:-m-16 lg:-ml-16 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40"
             width={200}
             height={200}
           />
