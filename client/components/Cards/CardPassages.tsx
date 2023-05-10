@@ -1,41 +1,14 @@
-"use client";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@component/Redux/store/store";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "@reduxjs/toolkit";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Passage } from "../../app/types/Passages";
+
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-import { getAllPassages } from "@component/Redux/passage/passageActions";
 
 // components
 
-export default function CardUsers() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const allPassages = useSelector((state: RootState) => state.passage.allPassages);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPassage, setSelectedPassage] = useState<Passage | null>(null);
+export default function CadPassages(props: any) {
+  const { selectedPassage, handleClick, handleSearchChange, searchTerm, filteredPassages } = props;
+
   const [showDropDown, setShowDropDown] = useState(false);
-
-  useEffect(() => {
-    dispatch(getAllPassages());
-  }, [dispatch]);
-
-  const handleSearchChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredPassages = allPassages.filter(
-    (passage: any) =>
-      (passage.origin && passage.origin.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (passage.userId && passage.userId.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
-  const handleClick = (passage: Passage) => {
-    setSelectedPassage(passage);
-  };
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
@@ -105,7 +78,7 @@ export default function CardUsers() {
         <div className="flex flex-wrap px-4 py-10 pt-0 lg:px-10">
           <form>
             <h6 className="mb-6 mt-3 text-sm font-bold uppercase text-blueGray-400">
-              User Information
+              Informacion del pasaje
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full px-4 lg:w-6/12">
