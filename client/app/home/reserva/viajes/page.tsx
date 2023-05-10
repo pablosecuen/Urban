@@ -1,27 +1,33 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
+import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
+import { QueryParams } from "@component/app/types/QueryParams";
 
 export default function Viajes() {
+  const allPassages = useSelector((state: RootState) => state.passage.allPassages);
+  const error = useSelector((state: RootState) => state.passage.error);
+
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
- const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
+  const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
   const status = useSelector((state: RootState) => state.passage.status);
-const error = useSelector((state: RootState) => state.passage.error);
 
-  // useEffect(() => {
-  //   dispatch(getAllPassages());
-  // }, []);
+  const queryParams: QueryParams = {
+    origin: "Cartagena",
+    destination: "Medellin",
+  };
 
-  if (status === 'loading') {
+  useEffect(() => {
+    dispatch(getPassagesByQuery(queryParams));
+  }, []);
+
+  if (status === "loading") {
     return <div>Loading...</div>;
   }
-  console.log(passages);
-  
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">

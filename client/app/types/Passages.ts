@@ -25,15 +25,14 @@ export interface Passage extends PassageToRegister {
   id: string;
 }
 
-
 export interface PassageToUpdate extends Partial<PassageToRegister> {
   updatedAt: string;
 }
 
 export interface Query {
-  origin: string,
-  destination: string,
-  departureDate: string,
-  arrivalDate?: string,
-  price?: number,
+  origin: string;
+  destination: string;
+  departureDate?: string;
+  arrivalDate?: string;
+  price?: number;
 }
