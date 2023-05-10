@@ -21,10 +21,6 @@ export default function LandingPage() {
   console.log(router);
   console.log(user);
 
-  // useEffect(() => {
-  //   dispatch(fetchAllUsers());
-  // }, [dispatch]);
-  // console.log(allUsers);
   useEffect(() => {
     if (user) {
       router.push("/home");
