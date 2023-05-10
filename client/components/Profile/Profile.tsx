@@ -20,7 +20,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="mt-5 flex w-3/5 flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[460px] lg:w-2/5 lg:gap-2 lg:px-8 lg:py-4">
+    <div className="flex w-3/5 flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4">
       <div className="flex flex-col items-center justify-center border-2">
         {userData && (
           <Image
@@ -155,8 +155,8 @@ export default function Profile() {
           </svg>
           University of Computer Science
         </div> */}
-        <div className="mt-8 flex h-auto gap-1">
-          <button className=" w-1/2 text-sm lg:py-1" onClick={onClick}>
+        <div className="mt-8 flex h-auto w-full gap-1">
+          <button className="w-1/2 text-sm lg:py-1" onClick={onClick}>
             Edit Profile
           </button>
           <button className="w-1/2 text-sm lg:py-1" onClick={onClick}>
