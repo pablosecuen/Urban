@@ -4,7 +4,9 @@ import { PassageToRegister, PassageToUpdate } from "../../schema/passage";
 
 export const newPassage = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: PassageToRegister = req.body;
+    const dataString: string = req.body.data; // Obtener la cadena JSON de la solicitud
+    const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
+    // const data: PassageToRegister = req.body;
     const dataFormated = {
       ...data,
       status: true,
@@ -12,10 +14,11 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       createdAt: new Date(Date.now()).toISOString(),
     };
 
-    // Upload the image to Google Cloud Storage
+    // Upload the image to Firebase Storage
     const file: Express.Multer.File = req.file;
+    const bucket = storage;
     const filename = "passages/" + Date.now() + "-" + file.originalname;
-    const fileUpload = storage.file(filename);
+    const fileUpload = bucket.file(filename);
     const blobStream = fileUpload.createWriteStream({
       metadata: {
         contentType: file.mimetype,
@@ -26,14 +29,20 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       res.status(500).json({ message: "Error uploading image" });
     });
     blobStream.on("finish", async () => {
-      const img = `https://storage.googleapis.com/${storage.name}/${filename}`;
+      // Make the uploaded image publicly accessible
+      await fileUpload.makePublic();
+
+      // Get the public URL of the uploaded image
+      const imageUrl = `https://storage.googleapis.com/${bucket.name}/${filename}`;
+
       const passageRef = await db.collection("passages").add({
         ...dataFormated,
-        img,
+        imageUrl,
       });
       res.status(200).json({
         message: "Pasaje creado correctamente",
         id: passageRef.id,
+        imageUrl,
       });
     });
     blobStream.end(file.buffer);
