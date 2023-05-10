@@ -32,7 +32,6 @@ export default function LandingPage() {
       <GoogleOAuthProvider
         clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
       >
-        {" "}
         <div className="mx-auto flex w-1/2 justify-center lg:justify-end lg:pr-28 ">
           <Image
             src={logo as StaticImageData}
