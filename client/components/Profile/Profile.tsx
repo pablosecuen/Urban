@@ -26,7 +26,7 @@ export default function Profile() {
           <Image
             alt="..."
             src={userData?.img}
-            className="max-w-150-px h-20 w-20 overflow-hidden rounded-full shadow-xl lg:h-20 lg:w-20 2xl:h-40 2xl:w-40"
+            className="max-w-150-px h-20 w-20 overflow-hidden rounded-full shadow-xl lg:h-20 lg:w-20"
             width={200}
             height={200}
           />
