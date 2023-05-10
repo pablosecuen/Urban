@@ -1,6 +1,5 @@
 import { HiOutlineLocationMarker, HiOutlineCalendar, HiOutlineBriefcase } from "react-icons/hi";
 import Link from "next/link";
-import PickDate from "@component/components/PickDate/PickDate";
 
 export default function Paqueteria() {
   return (
@@ -19,10 +18,16 @@ export default function Paqueteria() {
           <input className="w-2/3 pl-2" placeholder="Hasta que lugar..." type="text" />
         </div>
 
-        <div className="flex items-center justify-center xl:ml-[150px]">
+        <div className="flex items-center justify-center">
           <HiOutlineCalendar className="w-10 text-blue" />
-          <PickDate />
-          {/* <input className="pl-2 w-2/3" placeholder="Cuando?..." type="text" /> */}
+          <input
+            className="w-2/3 pl-2"
+            placeholder="Fecha"
+            type="date"
+            // value={departureDate}
+            // min={today}
+            // onChange={handleDepartureDateChange}
+          />
         </div>
 
         <div className="flex items-center justify-center">
