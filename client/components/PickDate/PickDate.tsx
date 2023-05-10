@@ -8,12 +8,14 @@ import { es } from "date-fns/locale";
 export default function PickDate() {
   const today = new Date();
   const nextMonth = addMonths(new Date(), 1);
-  const [selected, setSelected] = useState<Date>();
+  const [days, setDays] = useState<Date[]>();
 
-  let footer = <p>Por favor elige un dia.</p>;
-  if (selected) {
-    footer = <p>seleccionaste {format(selected, "PP", { locale: es })}.</p>;
-  }
+  const footer =
+    days && days.length > 0 ? (
+      <p>Seleccionaste {days.length} dia(s).</p>
+    ) : (
+      <p>Por favor elige uno o mas dias.</p>
+    );
 
   const defaultDate = new Date(2023, 4);
 
@@ -21,11 +23,13 @@ export default function PickDate() {
     <DayPicker
       captionLayout="dropdown-buttons"
       locale={es}
-      mode="single"
+      mode="multiple"
       defaultMonth={defaultDate}
       fromMonth={defaultDate}
-      selected={selected}
-      onSelect={setSelected}
+      selected={days}
+      min={1}
+      max={7}
+      onSelect={setDays}
       fromYear={2023}
       toYear={2026}
       footer={footer}
