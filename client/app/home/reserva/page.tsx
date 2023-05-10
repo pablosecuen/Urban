@@ -14,9 +14,9 @@ export default function Reserva() {
   const router = useRouter();
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-  
+
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
-  
+
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
   const [price, setPrice] = useState<number | undefined>();
@@ -50,16 +50,16 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-      const query: Query = {
-        origin: origin.toLowerCase(),
-        destination: destination.toLowerCase(),
-        departureDate: departureDate.split("-").reverse().join("/"),
-        ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
-        ...(price && { price }),
-        // armo la query y agrego las propiedades extras si las hay
-      };
-      dispatch(getPassagesByQuery(query));
-      router.push("home/reserva/viajes"); 
+    const query: Query = {
+      origin: origin.toLowerCase(),
+      destination: destination.toLowerCase(),
+      departureDate: departureDate.split("-").reverse().join("/"),
+      ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
+      ...(price && { price }),
+      // armo la query y agrego las propiedades extras si las hay
+    };
+    dispatch(getPassagesByQuery(query));
+    router.push("home/reserva/viajes");
   };
 
   return (
@@ -127,7 +127,9 @@ export default function Reserva() {
         <button
           onClick={handleSubmit}
           disabled={!isFormValid}
-          className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
+          //   className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
+          // >
+          className="transition_all w-1/2 cursor-pointer self-center"
         >
           Buscar tu viaje!
         </button>
