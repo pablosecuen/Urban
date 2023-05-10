@@ -53,7 +53,9 @@ export default function Reserva() {
     const query: Query = {
       origin: origin.toLowerCase(),
       destination: destination.toLowerCase(),
-      //departureDate: departureDate.split("-").reverse().join("/"),
+
+      departureDate: departureDate.split("-").reverse().join("/"),
+
       ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
       ...(price && { price }),
       // armo la query y agrego las propiedades extras si las hay
@@ -127,9 +129,11 @@ export default function Reserva() {
         <button
           onClick={handleSubmit}
           disabled={!isFormValid}
-          className={`transition_all w-1/2 self-center ${
-            !isFormValid ? "!bg-gray-500" : "cursor-pointer"
-          }`}
+
+          //   className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
+          // >
+          className="transition_all w-1/2 cursor-pointer self-center"
+
         >
           Buscar tu viaje!
         </button>

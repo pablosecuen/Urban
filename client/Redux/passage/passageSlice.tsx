@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
-import {  PassageToRegister, PassageResponse } from "../../app/types/Passages";
+import { PassageToRegister, PassageResponse } from "../../app/types/Passages";
 import { AxiosResponse } from "axios";
 
 interface PassageState {
-  allPassages: PassageResponse ;
+  allPassages: PassageResponse[];
   allPassagesByQuery: PassageResponse;
   passageById: { [key: string]: PassageToRegister | null };
   status: "idle" | "loading" | "succeeded" | "failed";
@@ -12,7 +12,7 @@ interface PassageState {
 }
 
 const initialState: PassageState = {
-  allPassages: { passages: [], totalPages: 0 },
+  allPassages: [],
   allPassagesByQuery: { passages: [], totalPages: 0 },
   passageById: {},
   status: "idle",
@@ -45,7 +45,6 @@ const passageSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
       });
-
 
     builder
       // Handle the pending state

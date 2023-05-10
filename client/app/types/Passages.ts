@@ -30,9 +30,15 @@ export interface PassageToUpdate extends Partial<PassageToRegister> {
 }
 
 export interface Query {
-  origin: string;
-  destination: string;
-  departureDate?: string;
-  arrivalDate?: string;
-  price?: number;
+
+  origin: string,
+  destination: string,
+  departureDate: string,
+  arrivalDate?: string,
+  price?: number,
 }
+
+export interface CardProfilePropsPassage {
+  selectedPassage: Passage | null;  
+}
+

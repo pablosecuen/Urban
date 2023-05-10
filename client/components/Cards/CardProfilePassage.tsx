@@ -1,11 +1,11 @@
-
+"use client";
+import { CardProfilePropsPassage } from "@component/app/types/Passages";
 import Image from "next/image";
-import { CardProfileProps } from "../../app/types/User";
 
 // components
 
-const CardProfile: React.FC<CardProfileProps> = (props) => {
-  const { selectedUser } = props;
+const CardProfilePassage: React.FC<CardProfilePropsPassage> = (props) => {
+  const { selectedPassage } = props;
 
   return (
     <>
@@ -14,19 +14,7 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
           <div className="flex flex-wrap justify-center">
             <div className="flex w-full justify-center px-4">
               <div className="relative flex  justify-center border-2">
-                {selectedUser ? (
-                  <div>
-                    <Image
-                      src={selectedUser.img}
-                      alt="imagen de perfil"
-                      className="absolute -top-10 right-44 -m-16 h-auto w-48  overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16"
-                      width={100}
-                      height={100}
-                    />
-                  </div>
-                ) : (
-                  <p>No user selected</p>
-                )}
+                {selectedPassage ? <div>{selectedPassage.id}</div> : <p>No passage selected</p>}
               </div>
             </div>
             <div className="mt-20 w-full px-4 text-center">
@@ -53,19 +41,19 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
             </div>
           </div>
           <div className="w.aut mt-12 flex flex-col gap-8 text-center ">
-            {selectedUser ? (
+            {selectedPassage ? (
               <>
                 <h3 className=" w-auto  text-xl font-semibold leading-normal text-blueGray-700">
-                  {selectedUser.name}
+                  {selectedPassage.origin}
                 </h3>
                 {/* render other details of selected user */}
               </>
             ) : (
-              <p>No user selected</p>
+              <p>No passage selected</p>
             )}
 
             <div className="mb-2 mt-0 flex w-auto justify-center  text-sm font-bold uppercase leading-normal text-blueGray-400">
-              {selectedUser ? (
+              {selectedPassage ? (
                 <div className="flex justify-center">
                   <svg
                     width="20px"
@@ -88,16 +76,16 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
                     />
                   </svg>
                   <h2 className="flex w-auto justify-center">
-                    {selectedUser.nationality || "Nacionalidad"}
+                    {selectedPassage.destination || "destino"}
                   </h2>
                   {/* render other details of selected user */}
                 </div>
               ) : (
-                <p>No user selected</p>
+                <p>No passage selected</p>
               )}
             </div>
             <div className="mb-2 mt-0 flex w-auto justify-center  text-sm font-bold uppercase leading-normal text-blueGray-400">
-              {selectedUser ? (
+              {selectedPassage ? (
                 <div className="flex justify-center">
                   <svg
                     width="20px"
@@ -120,12 +108,12 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
                     />
                   </svg>
                   <h2 className="flex w-auto justify-center">
-                    {selectedUser.address ? String(selectedUser.address) : "Direccion"}
+                    {selectedPassage.price || "precio"}
                   </h2>
                   {/* render other details of selected user */}
                 </div>
               ) : (
-                <p>No user selected</p>
+                <p>No passage selected</p>
               )}
             </div>
             <div className=" flex justify-center text-blueGray-600"></div>
@@ -136,4 +124,4 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
   );
 };
 
-export default CardProfile;
+export default CardProfilePassage;
