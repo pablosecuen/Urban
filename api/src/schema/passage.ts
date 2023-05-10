@@ -6,15 +6,15 @@ export interface PassageToRegister {
   departureDate: string;
   arrivalDate: string;
   duration: string;
+  img: string;
   price: number;
   numberSeat: number;
-  createdAt: string
+  createdAt: string;
 }
 export interface Passage extends PassageToRegister {
   deleted: boolean;
   status: boolean;
 }
-
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
   updatedAt: string;

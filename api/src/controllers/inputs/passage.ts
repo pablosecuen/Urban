@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../../connection/connection";
-import firebase from "firebase-admin";
+import { db, storage } from "../../connection/connection";
 import { PassageToRegister, PassageToUpdate } from "../../schema/passage";
 
 export const newPassage = async (req: Request, res: Response): Promise<void> => {
@@ -10,14 +9,37 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       ...data,
       status: true,
       deleted: false,
-      createdAt: new Date(Date.now()).toISOString()
+      createdAt: new Date(Date.now()).toISOString(),
     };
-    const docRef = await db.collection("passages").add(dataFormated);
 
-    res.status(200).json({ message: "Pasaje creado correctamente", id: docRef.id });
-  } catch (innerError) {
-    console.error("Error al crear el pasaje", innerError);
-    res.status(400).json({ message: innerError.message });
+    // Upload the image to Google Cloud Storage
+    const file: Express.Multer.File = req.file;
+    const filename = "passages/" + Date.now() + "-" + file.originalname;
+    const fileUpload = storage.file(filename);
+    const blobStream = fileUpload.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+      },
+    });
+    blobStream.on("error", (error) => {
+      console.error("Error uploading image:", error);
+      res.status(500).json({ message: "Error uploading image" });
+    });
+    blobStream.on("finish", async () => {
+      const img = `https://storage.googleapis.com/${storage.name}/${filename}`;
+      const passageRef = await db.collection("passages").add({
+        ...dataFormated,
+        img,
+      });
+      res.status(200).json({
+        message: "Pasaje creado correctamente",
+        id: passageRef.id,
+      });
+    });
+    blobStream.end(file.buffer);
+  } catch (error) {
+    console.error("Error al crear el pasaje", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -30,7 +52,10 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
     if (!docRef.exists) {
       throw new Error("El bus no se actualizó");
     }
-    await db.collection("bus").doc(id).update({ ...data, updatedAt: updatedAt });
+    await db
+      .collection("bus")
+      .doc(id)
+      .update({ ...data, updatedAt: updatedAt });
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
   } catch (innerError) {
     console.error("Error al actualizar el Pasaje", innerError);
