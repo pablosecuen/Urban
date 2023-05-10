@@ -5,6 +5,7 @@ import { Google } from "@component/assets/icons/svg/Google";
 import setValidate from "./Validate";
 import { UserToRegister } from "@component/app/types/LoginRegister";
 import { RegisterError } from "@component/app/types/LoginRegister";
+import axios from "axios";
 
 function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsRegister: any }) {
   const userFromSessionStorage: UserToRegister | {} = JSON.parse(
@@ -50,30 +51,34 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   };
 
   const handleRegister = async (e: any) => {
-    // e.preventDefault();
-    // console.log(password);
-    // console.log(repeatPassword);
-    // if (password === repeatPassword) {
-    //   const userData: UserToRegister = {
-    //     name,
-    //     email,
-    //     password,
-    //   };
-    //   await createUser(userData);
-    // } else {
-    //   alert("Passwords do not match");
-    // }
+    e.preventDefault();
+    const { name, lastName, email, password } = userData;
+    if (userData.password === userData.repeatPassword) {
+      const userData = {
+        firstName: name,
+        lastName,
+        email,
+        password,
+      };
+      await createUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("isRegister");
+    } else {
+      alert("Passwords do not match");
+    }
   };
+  // firstName: name, LastName: lastName, name: firstName + lastName, email, password
 
-  // const createUser = async (userData: UserToRegister) => {
-  //   try {
-  //     const response = await axios.post("http://localhost:3000/user", userData);
-  //     console.log(response.data); // the created user data
-  //     router.push("/home");
-  //   } catch (error) {
-  //     console.log("salio todo mal");
-  //   }
-  // };
+  const createUser = async (userData: any) => {
+    try {
+      const response = await axios.post("http://localhost:3000/user", userData);
+      console.log(response.data); // the created user data
+      router.push("/home");
+    } catch (error) {
+      console.log("salio todo mal");
+    }
+  };
   return (
     <form
       onSubmit={handleRegister}
