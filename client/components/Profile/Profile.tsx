@@ -119,6 +119,7 @@ export default function Profile() {
             userData?.adress
           )}
         </div>
+
         <div className="mt-8 flex h-auto w-full gap-1">
           <button className="w-1/2 text-sm lg:py-1 2xl:text-base" onClick={onClick}>
             Edit Profile
