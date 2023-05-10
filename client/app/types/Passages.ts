@@ -37,3 +37,7 @@ export interface Query {
   arrivalDate?: string,
   price?: number,
 }
+
+export interface CardProfilePropsPassage {
+  selectedPassage: Passage | null;  
+}
