@@ -2,15 +2,14 @@ export interface PassageToRegister {
   origin: string;
   stock: number;
   destination: string;
-  description: string;
   departureDate: string;
   arrivalDate: string;
   duration: string;
   img: string;
   price: number;
   numberSeat: number;
-  checkIn: string,
-  departureTime: string,
+  checkIn: string;
+  departureTime: string;
   createdAt: string;
 }
 export interface Passage extends PassageToRegister {
