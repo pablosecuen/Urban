@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getAllNotificationsByUser } from "./notificationsActions";
 import { Notifications } from "@component/app/types/Notifications";
 

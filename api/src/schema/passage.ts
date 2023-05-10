@@ -9,6 +9,8 @@ export interface PassageToRegister {
   img: string;
   price: number;
   numberSeat: number;
+  checkIn: string,
+  departureTime: string,
   createdAt: string;
 }
 export interface Passage extends PassageToRegister {

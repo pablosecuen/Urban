@@ -4,7 +4,7 @@ import { newTicketValidate } from "../../utils/validations/ticket";
 
 const router = Router();
 
-router.post("/", newTicketValidate, newTicket);
+router.post("/", newTicket);
 
 router.patch("/acept/:id", aceptTicket);
 
