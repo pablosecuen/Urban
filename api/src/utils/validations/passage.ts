@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import {
+  iCheckInValid,
   isArrivalDateValid,
   isDepartureDateValid,
+  isDepartureTimeValid,
   isDescriptionValid,
   isDestinationValid,
   isDurationValid,
@@ -10,6 +12,7 @@ import {
   isPriceValid,
   isStockValid,
 } from "./validators";
+import { PassageToRegister } from "../../schema/passage";
 
 export const newAndUpdatePassageValidate = (
   req: Request,
@@ -17,17 +20,29 @@ export const newAndUpdatePassageValidate = (
   next: NextFunction
 ): void => {
   try {
-    const data = req.body;
+    // const data = req.body;
+    const dataString: string = req.body.data; // Solo usar cuando se necesite probar con insomia
+    // Obtener la cadena JSON de la solicitud
+    const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
+
+    for (const key in data) {
+      // Solo usar cuando se necesite probar con insomia
+      if (typeof data[key] === "string") {
+        data[key] = data[key].toLowerCase();
+      }
+    }
+    console.log(data);
     const allowProperties = [
       "origin",
       "stock",
       "destination",
-      "description",
       "departureDate",
       "arrivalDate",
       "duration",
       "price",
       "numberSeat",
+      "checkIn",
+      "departureTime",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Propiedades no válidas");
@@ -36,15 +51,15 @@ export const newAndUpdatePassageValidate = (
       !isOriginValid(data.origin) ||
       !isStockValid(data.stock) ||
       !isDestinationValid(data.destination) ||
-      !isDescriptionValid(data.description) ||
       !isDepartureDateValid(data.departureDate) ||
       !isArrivalDateValid(data.arrivalDate) ||
       !isDurationValid(data.duration) ||
       !isPriceValid(data.price) ||
-      !isNumberSeatValid(data.numberSeat)
-    ) {
+      !isNumberSeatValid(data.numberSeat) ||
+      !iCheckInValid(data.checkIn) ||
+      !isDepartureTimeValid(data.departureTime)
+    )
       throw new Error("Datos no validos");
-    }
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });

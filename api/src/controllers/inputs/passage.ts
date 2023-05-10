@@ -33,16 +33,16 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       await fileUpload.makePublic();
 
       // Get the public URL of the uploaded image
-      const imageUrl = `https://storage.googleapis.com/${bucket.name}/${filename}`;
+      const img = `https://storage.googleapis.com/${bucket.name}/${filename}`;
 
       const passageRef = await db.collection("passages").add({
         ...dataFormated,
-        imageUrl,
+        img,
       });
       res.status(200).json({
         message: "Pasaje creado correctamente",
         id: passageRef.id,
-        imageUrl,
+        img,
       });
     });
     blobStream.end(file.buffer);

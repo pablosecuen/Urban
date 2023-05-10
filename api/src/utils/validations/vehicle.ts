@@ -13,7 +13,11 @@ import {
   isTypeVehicleValidByDealer,
 } from "./validators";
 
-export const newVehicleValidateByDealer = (req: Request, res: Response, next: NextFunction): void => {
+export const newVehicleValidateByDealer = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   // Validar que todas las propiedades tengan un valor válido
   try {
     const data: Vehicle = req.body;
@@ -26,7 +30,7 @@ export const newVehicleValidateByDealer = (req: Request, res: Response, next: Ne
       "ownerId",
       "deliveryId",
       "documents",
-      "typeVehicle"
+      "typeVehicle",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
@@ -49,7 +53,11 @@ export const newVehicleValidateByDealer = (req: Request, res: Response, next: Ne
   }
 };
 
-export const newVehicleValidateByChauffeur = (req: Request, res: Response, next: NextFunction): void => {
+export const newVehicleValidateByChauffeur = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   // Validar que todas las propiedades tengan un valor válido
   try {
     const data: Vehicle = req.body;
@@ -58,11 +66,10 @@ export const newVehicleValidateByChauffeur = (req: Request, res: Response, next:
       "brand",
       "model",
       "year",
-      "img",
       "ownerId",
       "chauffeurId",
       "documents",
-      "typeVehicle"
+      "typeVehicle",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
@@ -73,7 +80,6 @@ export const newVehicleValidateByChauffeur = (req: Request, res: Response, next:
       !isYearValid(data.year) ||
       !isOwnerIdValid(data.ownerId) ||
       !isChauffeurIdValid(data.chauffeurId) ||
-      !isArrayImgValid(data.img) ||
       !isArrayImgValid(data.documents) ||
       !isTypeVehicleValidByChauffeur(data.typeVehicle)
     ) {
@@ -93,7 +99,6 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
       "brand",
       "model",
       "year",
-      "img",
       "ownerId",
       "chauffeurId",
       "documents",
@@ -107,7 +112,6 @@ export const updateVehicleValidate = (req: Request, res: Response, next: NextFun
       (data?.year && !isYearValid(data.year)) ||
       (data?.ownerId && !isOwnerIdValid(data.ownerId)) ||
       (data?.chauffeurId && !isChauffeurIdValid(data.chauffeurId)) ||
-      (data?.img && !isArrayImgValid(data.img)) ||
       (data?.documents && !isArrayImgValid(data.documents))
     ) {
       throw new Error("Datos incompletos o no válidos");

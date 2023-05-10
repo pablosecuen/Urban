@@ -6,26 +6,28 @@ import firebase from "firebase-admin";
 export const newTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: TicketToRegister = req.body;
-    const dataFormatted: Ticket = {
-      ...data,
-      status: "pending",
-      createdAt: new Date(Date.now()).toISOString(),
-      updatedAt: "",
-    };
 
     const [userDoc, passageDoc] = await Promise.all([
-      db.collection("users").doc(dataFormatted.userId).get(),
-      db.collection("passages").doc(dataFormatted.passageId).get(),
+      db.collection("users").doc(data.userId).get(),
+      db.collection("passages").doc(data.passageId).get(),
     ]);
 
     if (!userDoc.exists) throw new Error("El usuario no existe");
     if (!passageDoc.exists) throw new Error("El pasaje no existe");
 
-    // Restar uno al stock del pasaje
     const passageData = passageDoc.data();
-    const updatedStock = passageData.stock - 1;
+    const ticketPrice = passageData.price;
+
+    const dataFormatted: Ticket = {
+      ...data,
+      status: "pending",
+      createdAt: new Date(Date.now()).toISOString(),
+      updatedAt: "",
+      price: ticketPrice,
+    };
 
     const docRef = await db.collection("tickets").add(dataFormatted);
+
     await Promise.all([
       db
         .collection("users")
@@ -33,8 +35,11 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
         .update({
           "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
+      db
+        .collection("passages")
+        .doc(data.passageId)
+        .update({ stock: passageData.stock - 1 }),
     ]);
-    await db.collection("passages").doc(dataFormatted.passageId).update({ stock: updatedStock });
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {
