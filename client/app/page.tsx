@@ -5,6 +5,8 @@ import Image, { StaticImageData } from "next/image";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AppDispatch, RootState } from "@component/Redux/store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface LoginProps {
   onLogin: (email: string, password: string) => void;
@@ -14,10 +16,20 @@ interface LoginProps {
 }
 
 export default function LandingPage() {
+  const user = localStorage.getItem("user");
+  const router = useRouter();
+  console.log(router);
+  console.log(user);
+
   // useEffect(() => {
   //   dispatch(fetchAllUsers());
   // }, [dispatch]);
   // console.log(allUsers);
+  useEffect(() => {
+    if (user) {
+      router.push("/home");
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row">
