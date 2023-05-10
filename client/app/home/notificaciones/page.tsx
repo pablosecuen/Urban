@@ -15,12 +15,13 @@ export default function Notifications() {
 
   useEffect(() => {
     dispatch(getAllNotificationsByUser(user.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       {notification.map((e) => {
-        return <div>{e.notification}</div>;
+        return <div key={e.notification}>{e.notification}</div>;
       })}
     </div>
   );

@@ -2,11 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../user/userSlice";
 import travelReducer from "../travel/travelSlice";
 import passageReducer from "../passage/passageSlice";
-import deliverySlice from "../delivery/deliverySlice";
-import chauffeurSlice from "../chauffeur/chauffeurSlice";
-import notificationsSlice from "../notifications/notificationsSlice";
-import vehicleSlice from "../vehicle/vehicleSlice";
-import ticketSlice from "../ticket/ticketSlice";
+import deliveryReducer from "../delivery/deliverySlice";
+import chauffeurReducer from "../chauffeur/chauffeurSlice";
+import notificationsReducer from "../notifications/notificationsSlice";
+import vehicleReducer from "../vehicle/vehicleSlice";
+import ticketReducer from "../ticket/ticketSlice";
 
 export function makeStore() {
   return configureStore({
@@ -14,11 +14,11 @@ export function makeStore() {
       user: userReducer,
       travel: travelReducer,
       passage: passageReducer,
-      ticket: ticketSlice,
-      delivery: deliverySlice,
-      chauffeur: chauffeurSlice,
-      vehicle: vehicleSlice,
-      notifications: notificationsSlice,
+      ticket: ticketReducer,
+      delivery: deliveryReducer,
+      chauffeur: chauffeurReducer,
+      vehicle: vehicleReducer,
+      notifications: notificationsReducer,
     },
   });
 }

@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Define async thunk actions to fetch user data
-export const getAllPassages = createAsyncThunk<PassageResponse, void, {}>(
+export const getAllPassages = createAsyncThunk<PassageResponse[], void>(
   "passage/getAllPassages",
   async () => {
     const response = await axios.get("http://localhost:3000/passage?page=1&pageSize=10000");
@@ -12,16 +12,15 @@ export const getAllPassages = createAsyncThunk<PassageResponse, void, {}>(
   }
 );
 
-export const getPassagesId = createAsyncThunk<PassageToRegister, string, {}>(
+export const getPassagesId = createAsyncThunk<PassageToRegister, string>(
   "passage/getPassagesId",
   async (id: string) => {
     const response = await axios.get(`http://localhost:3000/passage/${id}`);
     return response.data;
-
   }
 );
 
-export const getPassagesByQuery = createAsyncThunk<PassageResponse, QueryParams, {}>(
+export const getPassagesByQuery = createAsyncThunk<PassageResponse, QueryParams>(
   "passage/fetchPassagesByQuery",
   async (queryParams: QueryParams) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
