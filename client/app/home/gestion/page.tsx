@@ -50,7 +50,7 @@ export default function Gestion() {
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF("p", "mm", "a4");
         pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        pdf.save("ticket-Urban.pdf");
+        pdf.save(`ticket-Urban-id-${allTickets[0].id}.pdf`);
       });
     }
   };
