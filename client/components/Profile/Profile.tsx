@@ -20,13 +20,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex w-3/5 flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4">
+    <div className="flex w-3/5 flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 2xl:h-full 2xl:w-1/3">
       <div className="flex flex-col items-center justify-center border-2">
         {userData && (
           <Image
             alt="..."
             src={userData?.img}
-            className="max-w-150-px h-20 w-20 overflow-hidden rounded-full shadow-xl lg:h-20 lg:w-20"
+            className="max-w-150-px h-20 w-20 overflow-hidden rounded-full shadow-xl lg:h-20 lg:w-20 2xl:h-28 2xl:w-28"
             width={200}
             height={200}
           />
@@ -36,7 +36,7 @@ export default function Profile() {
         </h3>
       </div>
 
-      <div className="mb-8 flex h-auto w-auto flex-col justify-between gap-2 text-center lg:mb-0 ">
+      <div className="mb-8 flex h-auto w-auto flex-col justify-between gap-2 text-center lg:mb-0 2xl:text-lg ">
         <label htmlFor="">
           Telefono
           {showInput === true ? (
@@ -102,13 +102,17 @@ export default function Profile() {
           </svg>
           {!userData?.adress ? (
             showInput === true ? (
-              <input type="text" placeholder="Ingrese su direccion" className="text-center" />
+              <input
+                type="text"
+                placeholder="Ingrese su direccion"
+                className="text-center text-lg font-semibold"
+              />
             ) : (
               <input
                 type="text"
                 placeholder="Ingrese su direccion"
                 disabled
-                className="text-center"
+                className="text-center text-lg font-semibold"
               />
             )
           ) : (
@@ -156,10 +160,10 @@ export default function Profile() {
           University of Computer Science
         </div> */}
         <div className="mt-8 flex h-auto w-full gap-1">
-          <button className="w-1/2 text-sm lg:py-1" onClick={onClick}>
+          <button className="w-1/2 text-sm lg:py-1 2xl:text-base" onClick={onClick}>
             Edit Profile
           </button>
-          <button className="w-1/2 text-sm lg:py-1" onClick={onClick}>
+          <button className="w-1/2 text-sm lg:py-1 2xl:text-base" onClick={onClick}>
             Guardar
           </button>
         </div>
