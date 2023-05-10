@@ -20,7 +20,12 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     if (!userDoc.exists) throw new Error("El usuario no existe");
     if (!passageDoc.exists) throw new Error("El pasaje no existe");
 
+    // Restar uno al stock del pasaje
+    const passageData = passageDoc.data();
+    const updatedStock = passageData.stock - 1;
+
     const docRef = await db.collection("tickets").add(dataFormatted);
+    await db.collection("passages").doc(dataFormatted.passageId).update({ stock: updatedStock });
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {
@@ -50,7 +55,7 @@ export const aceptTicket = async (req: Request, res: Response): Promise<void> =>
 export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const updatedAt: string = new Date(Date.now()).toISOString()
+    const updatedAt: string = new Date(Date.now()).toISOString();
 
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
