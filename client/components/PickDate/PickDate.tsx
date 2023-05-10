@@ -10,11 +10,18 @@ export default function PickDate() {
   const nextMonth = addMonths(new Date(), 1);
   const [days, setDays] = useState<Date[]>();
 
+  const handleResetClick = () => setDays([]);
+
   const footer =
     days && days.length > 0 ? (
-      <p>Seleccionaste {days.length} dia(s).</p>
+      <p>
+        Seleccionaste {days.length} dia(s).{" "}
+        <button onClick={handleResetClick} className="font-bold text-violet-700">
+          Reset
+        </button>
+      </p>
     ) : (
-      <p>Por favor elige uno o mas dias.</p>
+      <p>Por favor elige uno o mas dias. </p>
     );
 
   const defaultDate = new Date(2023, 4);
@@ -27,6 +34,7 @@ export default function PickDate() {
       defaultMonth={defaultDate}
       fromMonth={defaultDate}
       selected={days}
+      onDayClick={handleResetClick}
       min={1}
       max={7}
       onSelect={setDays}
