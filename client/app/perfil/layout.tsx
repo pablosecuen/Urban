@@ -9,7 +9,7 @@ const layoutPerfil = ({ children }: any) => {
       <div className="flex items-center justify-center pb-32 ">
         <div className="flex h-full flex-col items-center justify-center gap-5 px-4 lg:mt-20 lg:w-4/5 lg:flex-row xl:w-3/5">
           <Profile />
-          <div className="flex h-[450px] flex-col items-center justify-center shadow-lg shadow-black/40">
+          <div className="flex flex-col items-center justify-center shadow-lg shadow-black/40 2xl:h-[450px]">
             {children}
           </div>
         </div>
