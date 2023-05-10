@@ -5,6 +5,7 @@ import {
   isAddressValid,
   isBirthdayValid,
   isCcValid,
+  isCeValid,
   isEmailValid,
   isFirstNameValid,
   isImgValid,
@@ -17,8 +18,14 @@ import {
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: UserToRegister = req.body;
-    if (!data.firstName || !data.lastName || !data.email || !data.password) throw Error("Datos incompletos");
-    if (!isFirstNameValid(data.firstName) || !isNameValid(data.lastName) || !isEmailValid(data.email) || !isPasswordValid(data.password)) {
+    if (!data.firstName || !data.lastName || !data.email || !data.password)
+      throw Error("Datos incompletos");
+    if (
+      !isFirstNameValid(data.firstName) ||
+      !isNameValid(data.lastName) ||
+      !isEmailValid(data.email) ||
+      !isPasswordValid(data.password)
+    ) {
       throw new Error("Datos no validos");
     }
     next();
@@ -30,26 +37,18 @@ export const newUserValidated = (req: Request, res: Response, next: NextFunction
 export const updateUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: UserToUpdate = req.body;
-    const allowProperties = [
-      "address",
-      "phone",
-      "payments",
-      "gender",
-      "img",
-      "cc",
-      "ce",
-    ];
+    const allowProperties = ["address", "phone", "payments", "gender", "img", "cc", "ce"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
     if (
       //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
       (data?.address && !isAddressValid(data.address)) ||
-      (data?.payments) ||
+      data?.payments ||
       (data?.img && !isImgValid(data.img)) ||
       (data?.gender && data.gender !== "male" && data.gender !== "female") ||
       (data?.phone && !isPhoneValid(data.phone)) ||
       (data?.cc && !isCcValid(data.cc)) ||
-      (data?.ce && !isCcValid(data.ce))
+      (data?.ce && !isCeValid(data.ce))
     )
       throw Error("Datos no erroneos");
     next();
