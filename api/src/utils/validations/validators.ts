@@ -180,6 +180,14 @@ export const isDepartureDateValid = (departureTime: string): Boolean => {
   if (typeof departureTime === "string") return true;
   return false;
 };
+export const iCheckInValid = (checkIn: string): Boolean => {
+  if (typeof checkIn === "string") return true;
+  return false;
+};
+export const isDepartureTimeValid = (departureTime: string): Boolean => {
+  if (typeof departureTime === "string") return true;
+  return false;
+};
 export const isArrivalDateValid = (arrivalTime: string): Boolean => {
   if (typeof arrivalTime === "string") return true;
   return false;
