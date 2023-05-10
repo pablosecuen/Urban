@@ -6,6 +6,7 @@ import deliverySlice from "../delivery/deliverySlice";
 import chauffeurSlice from "../chauffeur/chauffeurSlice";
 import notificationsSlice from "../notifications/notificationsSlice";
 import vehicleSlice from "../vehicle/vehicleSlice";
+import ticketSlice from "../ticket/ticketSlice";
 
 export function makeStore() {
   return configureStore({
@@ -13,6 +14,7 @@ export function makeStore() {
       user: userReducer,
       travel: travelReducer,
       passage: passageReducer,
+      ticket: ticketSlice,
       delivery: deliverySlice,
       chauffeur: chauffeurSlice,
       vehicle: vehicleSlice,
