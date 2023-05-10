@@ -92,7 +92,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
           <div className="relative w-1/2">
             <label className="px-1 ">Name:</label>
             <input
-              className="px-1 text-black"
+              className={`px-1 text-black ${
+                errores.messageName ? "border-red-500 focus-visible:outline-red-500" : ""
+              }`}
               type="text"
               name="name"
               placeholder="Nombre"
@@ -116,7 +118,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
               type="text"
               name="lastName"
               placeholder="Apellido"
-              className="px-1 text-black"
+              className={`px-1 text-black ${
+                errores.messageLastName ? "border-red-500 focus-visible:outline-red-500" : ""
+              }`}
               value={userData.lastName}
               onChange={handleInputChange}
             />
@@ -133,7 +137,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Email:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messageEmail ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="email"
             name="email"
             placeholder="Ingresa tu email"
@@ -152,7 +158,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Password:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messagePassword ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="password"
             name="password"
             placeholder="Ingresa tu contraseña"
@@ -171,7 +179,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Repeat Password:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="password"
             name="repeatPassword"
             placeholder="Repita su contraseña"
