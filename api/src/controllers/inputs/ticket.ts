@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Ticket, TicketToRegister } from "../../schema/ticket";
 import { db } from "../../connection/connection";
+import firebase from "firebase-admin";
 
 export const newTicket = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -25,6 +26,14 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     const updatedStock = passageData.stock - 1;
 
     const docRef = await db.collection("tickets").add(dataFormatted);
+    await Promise.all([
+      db
+        .collection("users")
+        .doc(data.userId)
+        .update({
+          "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
+        }),
+    ]);
     await db.collection("passages").doc(dataFormatted.passageId).update({ stock: updatedStock });
 
     res.status(201).json({ id: docRef.id });
