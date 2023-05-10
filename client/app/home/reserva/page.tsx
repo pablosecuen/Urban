@@ -14,16 +14,16 @@ export default function Reserva() {
   const router = useRouter();
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-
+  
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
-
+  
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
   const [price, setPrice] = useState<number | undefined>();
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
 
-  const isFormValid = origin && destination ? true : false;
+  const isFormValid = origin && destination && departureDate ? true : false;
 
   // - - - - - - - - - - - - -  HANDLERS DE LOS INPUTS - - - - - - - - - - - - -
 
@@ -38,30 +38,28 @@ export default function Reserva() {
     setPrice(e.target.value);
   };
  */
-  // const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setDepartureDate(e.target.value);
-  // };
+  const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDepartureDate(e.target.value);
+  };
 
-  // const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setArrivalDate(e.target.value);
-  // };
+  const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArrivalDate(e.target.value);
+  };
 
   // - - - - - - - - - - - - -  HANDLE SUBMIT - - - - - - - - - - - - -
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    const query: Query = {
-      origin: origin.toLowerCase(),
-      destination: destination.toLowerCase(),
-
-      departureDate: departureDate.split("-").reverse().join("/"),
-
-      ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
-      ...(price && { price }),
-      // armo la query y agrego las propiedades extras si las hay
-    };
-    dispatch(getPassagesByQuery(query));
-    router.push("home/reserva/viajes");
+      const query: Query = {
+        origin: origin.toLowerCase(),
+        destination: destination.toLowerCase(),
+        departureDate: departureDate.split("-").reverse().join("/"),
+        ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("/") }),
+        ...(price && { price }),
+        // armo la query y agrego las propiedades extras si las hay
+      };
+      dispatch(getPassagesByQuery(query));
+      router.push("home/reserva/viajes"); 
   };
 
   return (
@@ -92,7 +90,7 @@ export default function Reserva() {
           />
         </div>
 
-        {/* <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <HiTrendingUp className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -102,8 +100,8 @@ export default function Reserva() {
             min={today}
             onChange={handleDepartureDateChange}
           />
-        </div> */}
-        {/* <div className="flex items-center justify-center">
+        </div>
+        <div className="flex items-center justify-center">
           <HiTrendingDown className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -113,7 +111,7 @@ export default function Reserva() {
             min={departureDate ? departureDate : today}
             onChange={handleArrivalDateChange}
           />
-        </div> */}
+        </div>
 
         {/*      <div className="flex items-center justify-center">
           <HiTag className="w-10 text-blue" />
@@ -129,11 +127,7 @@ export default function Reserva() {
         <button
           onClick={handleSubmit}
           disabled={!isFormValid}
-
-          //   className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
-          // >
-          className="transition_all w-1/2 cursor-pointer self-center"
-
+          className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
         >
           Buscar tu viaje!
         </button>
