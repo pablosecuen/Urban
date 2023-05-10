@@ -13,11 +13,18 @@ export const getTicketByUserId = async (req: Request, res: Response): Promise<vo
     const endIndex = page * pageSize;
     const totalPages = Math.ceil(snapshot.docs.length / pageSize);
 
-    const tickets = snapshot.docs.slice(startIndex, endIndex).map((doc) => {
-      return { id: doc.id, ...doc.data() };
+    const tickets = snapshot.docs.slice(startIndex, endIndex).map(async (doc) => {
+      const ticketData = doc.data();
+      const passageSnapshot = await db.collection("passages").doc(ticketData.passageId).get();
+      const passageData = passageSnapshot.data();
+
+      return { id: doc.id, ...ticketData, passageInfo: passageData };
     });
 
-    res.status(200).json({ tickets, totalPages });
+    // Esperar a que todas las promesas de obtener los pasajes se resuelvan
+    const resolvedTickets = await Promise.all(tickets);
+
+    res.status(200).json({ tickets: resolvedTickets, totalPages });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al obtener los viajes del usuario");
