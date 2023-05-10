@@ -34,15 +34,17 @@ export const getTicketByUserId = async (req: Request, res: Response): Promise<vo
 };
 
 export const getTicketById = async (req: Request, res: Response): Promise<void> => {
+  const id: string = req.params.id;
+
   try {
-    const id: string = req.params.id;
     const doc = await db.collection("tickets").doc(id).get();
+
     if (!doc.exists) {
       res.status(404).json({ message: "Ticket no encontrado" });
-    } else {
-      const ticket = { id: doc.id, ...doc.data() };
-      res.status(200).json(ticket);
     }
+
+    const ticket = { id: doc.id, ...doc.data() };
+    res.status(200).json(ticket);
   } catch (error) {
     console.error("Error al obtener el ticket", error);
     res.status(500).json({ message: "Error al obtener el ticket" });
