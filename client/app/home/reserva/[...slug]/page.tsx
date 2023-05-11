@@ -7,18 +7,18 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { Query } from "@component/app/types/Passages";
 
-export default function SearchResults({params}: {params: {slug: string}}) {
+export default function SearchResults({ params }: { params: { slug: string } }) {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
-//  const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
-//   const status = useSelector((state: RootState) => state.passage.status);
-// const error = useSelector((state: RootState) => state.passage.error);
+  //  const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
+  //   const status = useSelector((state: RootState) => state.passage.status);
+  // const error = useSelector((state: RootState) => state.passage.error);
 
   // if (status === 'loading') {
   //   return <div>Loading...</div>;
   // }
   // console.log(passages);
-  
+
   const query: Query = {
     origin: params.slug[0],
     destination: params.slug[1],

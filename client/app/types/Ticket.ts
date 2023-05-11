@@ -1,4 +1,5 @@
 import { TicketStatus } from "@component/../api/src/types/types";
+import { Passage } from "./Passages";
 
 
 export interface TicketToRegister {
@@ -8,7 +9,7 @@ export interface TicketToRegister {
 }
 
 export interface Ticket extends TicketToRegister {
-  passageInfo: any;
+  passageInfo: Passage;
   id: string;
   status: TicketStatus;
   createdAt: string;

@@ -18,13 +18,12 @@ interface LoginProps {
 export default function LandingPage() {
   const user = localStorage.getItem("user");
   const router = useRouter();
-  console.log(router);
-  console.log(user);
 
   useEffect(() => {
     if (user) {
       router.push("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -5,7 +5,7 @@ import { Ticket } from "@component/app/types/Ticket";
 export const getTicketsByUserId = createAsyncThunk<Ticket[], string>(
   "tickets/getTicketByUserId",
   async (userId: string) => {
-    const response = await axios.get(`http://localhost:3000/ticket/user/${userId}`);
+    const response = await axios.get(`http://localhost:3000/ticket/user/${userId}?page=1&pageSize=1000`);
     return response.data.tickets;
   }
 );
