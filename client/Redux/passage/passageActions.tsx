@@ -1,4 +1,4 @@
-import { PassageResponse, PassageToRegister } from "@component/app/types/Passages";
+import { Passage, PassageResponse } from "@component/app/types/Passages";
 import { QueryParams } from "@component/app/types/QueryParams";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -12,10 +12,12 @@ export const getAllPassages = createAsyncThunk<PassageResponse[], void>(
   }
 );
 
-export const getPassagesId = createAsyncThunk<PassageToRegister, string>(
+export const getPassagesId = createAsyncThunk<Passage, string>(
   "passage/getPassagesId",
   async (id: string) => {
     const response = await axios.get(`http://localhost:3000/passage/${id}`);
+    console.log(response.data);
+
     return response.data;
   }
 );
