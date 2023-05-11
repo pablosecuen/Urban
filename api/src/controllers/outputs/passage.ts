@@ -18,29 +18,30 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
 
     const startIndex = (Number(page) - 1) * Number(pageSize);
     const endIndex = Number(page) * Number(pageSize);
+    let passagesRef: firebase.firestore.Query<firebase.firestore.DocumentData> =
+      db.collection("passages");
 
-    const passagesRef = db.collection("passages").where("deleted", "==", false);
+    if (Object.keys(filters).length > 0) {
+      Object.keys(filters).forEach((key) => {
+        passagesRef = passagesRef.where(key, "==", filters[key]);
+      });
+    }
 
-    Object.entries(filters).forEach(([key, value]) => {
-      passagesRef.where(key, "==", value);
-    });
+    passagesRef = passagesRef.where("deleted", "==", false);
 
-    const [passagesSnapshot, totalPassagesSnapshot] = await Promise.all([
-      passagesRef.limit(endIndex).get(),
-      passagesRef.get(),
-    ]);
+    const totalPassagesSnapshot = await passagesRef.get();
+    const totalFilteredPassages = totalPassagesSnapshot.size;
+    const totalPages = Math.ceil(totalFilteredPassages / Number(pageSize));
 
-    const totalPassages = totalPassagesSnapshot.size;
-    const totalPages = Math.ceil(totalPassages / Number(pageSize));
-
+    const passagesSnapshot = await passagesRef.limit(endIndex).get();
     const passagesData = passagesSnapshot.docs
       .slice(startIndex, endIndex)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
 
     res.json({ passages: passagesData, totalPages });
   } catch (error) {
-    console.error("Error al obtener los pasajes", error);
-    res.status(500).json({ message: "Error al obtener los pasajes" });
+    console.error("Error al obtener los usuarios", error);
+    res.status(500).json({ message: "Error al obtener los usuarios" });
   }
 };
 
