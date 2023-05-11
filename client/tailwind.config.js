@@ -31,6 +31,9 @@ module.exports = {
       },
       boxShadow: {
         "custom-md": "5px 13px 20px black",
+        "inner-sm": "inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+        "inner-md": "inset 0 2px 4px rgba(0, 0, 0, 0.1)",
+        "inner-lg": "inset 0 4px 8px rgba(0, 0, 0, 0.1)",
       },
     },
     container: {
