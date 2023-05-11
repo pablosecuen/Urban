@@ -1,6 +1,29 @@
-import { ChauffeurQueryParams, FilteredChauffeurs } from "@component/app/types/Chauffeur";
+import {
+  Chauffeur,
+  ChauffeurQueryParams,
+  FilteredChauffeurs,
+} from "@component/app/types/Chauffeur";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
+//Hay que refactorizar el codigo, tiene que haber actions unicamente para GetAll, GetById, y GetByQueryParams
+
+export const getAllChauffeurs = createAsyncThunk<Chauffeur[], void>(
+  "vehicles/getAllChauffeurs",
+  async () => {
+    const response = await axios.get(`http://localhost:3000/chauffeur?page=1&pageSize=1000`);
+    return response.data.chauffeurs;
+  }
+  //Falta hacer su slice
+);
+
+export const getChauffeurById = createAsyncThunk<Chauffeur, string>(
+  "vehicles/getChauffeurById",
+  async (chauffeurId: string) => {
+    const response = await axios.get(`http://localhost:3000/chauffeur/${chauffeurId}`);
+    return response.data;
+  }
+  //Falta hacer su slice
+);
 
 export const getChauffeurs = createAsyncThunk<FilteredChauffeurs, ChauffeurQueryParams>(
   "chauffeur/getFilteredChauffeurs",
