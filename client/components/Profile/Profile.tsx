@@ -43,7 +43,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su numero"
-              className="text-center text-gray-800"
+              className="border-b-0 text-center text-gray-800"
             />
           ) : (
             <input
@@ -60,7 +60,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su genero"
-              className="text-center text-gray-800"
+              className="border-b-0 text-center text-gray-800"
             />
           ) : (
             <input
@@ -74,7 +74,11 @@ export default function Profile() {
         <label htmlFor="">
           Cc:
           {showInput === true ? (
-            <input type="text" placeholder="Ingrese su CC" className="text-center text-gray-800" />
+            <input
+              type="text"
+              placeholder="Ingrese su CC"
+              className="border-b-0 text-center text-gray-800"
+            />
           ) : (
             <input
               type="text"
@@ -105,7 +109,7 @@ export default function Profile() {
               <input
                 type="text"
                 placeholder="Ingrese su direccion"
-                className="text-center text-lg font-semibold"
+                className="border-b-0 text-center text-lg font-semibold"
               />
             ) : (
               <input
@@ -120,11 +124,17 @@ export default function Profile() {
           )}
         </div>
 
-        <div className="mt-8 flex h-auto w-full gap-1">
-          <button className="w-1/2 text-sm lg:py-1 2xl:text-base" onClick={onClick}>
+        <div className="mt-8 flex h-auto w-full gap-1 ">
+          <button
+            className="w-1/2 text-sm hover:bg-sky-500 lg:py-1 2xl:text-base"
+            onClick={onClick}
+          >
             Edit Profile
           </button>
-          <button className="w-1/2 text-sm lg:py-1 2xl:text-base" onClick={onClick}>
+          <button
+            className="w-1/2 text-sm hover:bg-sky-500 lg:py-1 2xl:text-base"
+            onClick={onClick}
+          >
             Guardar
           </button>
         </div>
