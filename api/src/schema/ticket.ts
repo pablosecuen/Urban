@@ -4,7 +4,6 @@ export interface TicketToRegister {
   userId: string;
   passageId: string;
   price: number;
-  quantity: number;
 }
 
 export interface Ticket extends TicketToRegister {
