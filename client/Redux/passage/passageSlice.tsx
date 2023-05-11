@@ -19,8 +19,6 @@ const initialState: PassageState = {
   error: null,
 };
 
-type ResponseType = AxiosResponse<any, any>;
-
 const passageSlice = createSlice({
   name: "passages",
   initialState,
