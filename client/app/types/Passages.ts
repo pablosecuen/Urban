@@ -17,6 +17,12 @@ export interface PassageToRegister {
 }
 
 export interface PassageResponse {
+  price: any;
+  img: any;
+  imageUrl: any;
+  destination: any;
+  origin: any;
+  id: any;
   passages: PassageToRegister[];
   totalPages: number;
 }
