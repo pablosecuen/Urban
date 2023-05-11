@@ -1,6 +1,7 @@
 //Padre
 "use client";
-import { getPassagesId } from "@component/Redux/passage/passageActions";
+import { Passage, PassageToRegister } from "@component/app/types/Passages";
+import { getAllPassages, getPassagesId } from "@component/Redux/passage/passageActions";
 import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -12,51 +13,65 @@ import { ThunkDispatch } from "redux-thunk";
 export default function Pagos() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const user = JSON.parse(localStorage.getItem("user") || "");
+  const passages = useSelector((state: RootState) => state.passage.allPassages);
+
   useEffect(() => {
-    dispatch(getPassagesId("pGK0OgHP5P5zoKVBhVow"));
+    dispatch(getAllPassages());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const passage = useSelector((state: RootState) => state.passage.passageById);
+
+  interface ToPay {
+    passageId: string; // Update the type to a string or the appropriate type for passageId
+    id: any;
+    name: string | Passage;
+    img: string | Passage | null;
+    unit_price: number | Passage | null;
+    quantity: number | Passage;
+  }
 
   const token: string = `${user.id}`;
-  const toPay: any = {
-    //Informacion de la compra
-    id: passage.id,
-    name: `De ${passage.origin} a ${passage.destination}`,
-    img: passage.img,
-    price: passage.price,
-    quantity: 1,
-  };
 
-  const totalPrice = toPay.price * toPay.quantity;
-  /* const passages = [
-    {
-      id: toPay.id,
-      title: `De ${toPay.origin} a ${toPay.destination}`,
-      picture_url: toPay.img,
-      unit_price: toPay.price,
-      quantity: toPay.quantity,
-      currency_id: "COP",
-    },
-  ]; */
+  let toPay: ToPay[] = [];
 
-  /* const arrToPay = passages.map((item) => {
+  if (passages) {
+    toPay = passages.slice(0, 2).map((passage) => {
+      return {
+        passageId: passage.id,
+        id: passage.id,
+        name: `De ${passage.origin} a ${passage.destination}`,
+        img: passage.img,
+        unit_price: passage.price,
+        quantity: 1,
+      };
+    });
+  }
+
+  const totalPrice = toPay.reduce((total, item) => {
+    const unitPrice = typeof item.unit_price === "number" ? item.unit_price : 0;
+    return total + unitPrice;
+  }, 0);
+
+  const arrToPay = toPay.map((item) => {
     return {
       id: item.id,
-      title: item.title,
-      picture_url: item.picture_url,
+      title: item.name,
+      picture_url: item.img,
       unit_price: item.unit_price,
       quantity: item.quantity,
-      currency_id: "COP",
+      // currency_id: "COP",
     };
-  }); */
+  });
   //Va la alerta unicamente si falla
   //Si es exitoso te redirecciona a mercadopago
-  //Unicamente se puede probar con el deploy de por medio?
+
   const handleClickMP = async () => {
-    if (token) {
-      //try
-      const { data } = await axios.post("https://localhost:3000/payment/new", toPay);
-      window.location.href = await data.response.body.init_point;
+    try {
+      if (token) {
+        const { data } = await axios.post("http://localhost:3000/payment/new", arrToPay);
+        window.location.href = await data.response.body.init_point;
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   };
 
