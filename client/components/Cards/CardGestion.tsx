@@ -65,14 +65,25 @@ export default function CardGestion() {
           {allTickets.map((ticket) => (
             <div
               key={ticket.id}
-              className="my-2 flex h-96 flex-col gap-2 rounded-3xl bg-white px-4  py-2 shadow-xl shadow-black/30"
+              className=" my-2 flex flex-col rounded-3xl bg-white px-4 py-2 text-sm  shadow-xl shadow-black/30 md:text-base"
             >
               <div className="flex flex-row items-center justify-between">
-                <strong className="flex w-auto flex-col">{ticket.passageInfo.origin}</strong>
-                <p className="text-center">hacia</p>
-                <strong className="flex flex-col ">{ticket.passageInfo.destination}</strong>
-                <div className="flex flex-col">{ticket.passageInfo.departureDate}</div>
-                <button onClick={() => handleOpenModal(ticket)}>Ticket</button>
+                <strong className="flex w-1/4 flex-col justify-start">
+                  {ticket.passageInfo.origin}
+                </strong>
+                <p className="flex w-1/4 justify-start text-center">hacia</p>
+                <strong className="flex w-1/4 flex-col justify-start">
+                  {ticket.passageInfo.destination}
+                </strong>
+                <div className="hidden w-1/4 flex-col justify-start sm:flex">
+                  {ticket.passageInfo.departureDate}
+                </div>
+                <button
+                  className="w-auto shadow-transparent"
+                  onClick={() => handleOpenModal(ticket)}
+                >
+                  Ticket
+                </button>
               </div>
             </div>
           ))}
