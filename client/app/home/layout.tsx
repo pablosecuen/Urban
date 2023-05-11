@@ -1,3 +1,4 @@
+"use client";
 import NavBar from "@component/components/NavBar/NavBar";
 import Footer from "@component/components/Footer/Footer";
 import logo from "../../assets/imagenes/UrbanIsoLogo.png";
