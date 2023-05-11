@@ -61,7 +61,11 @@ export default function CardGestion() {
     <div className="flex flex-col gap-2">
       <h3 className="rounded-3xl p-4  text-left font-bold tracking-widest">Historial de viajes</h3>
       <div className="flex h-[550px] items-center justify-center  rounded-3xl border-2 bg-slate-100  shadow-inner-lg  shadow-black/40 ">
-        <section className="container flex h-80 w-full flex-col gap-2 overflow-y-scroll rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10">
+        <section
+          className={`container flex h-80 w-full flex-col gap-2 ${
+            allTickets.length > 4 ? "overflow-y-scroll" : ""
+          } rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10`}
+        >
           {allTickets.map((ticket) => (
             <div
               key={ticket.id}
