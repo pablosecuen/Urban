@@ -15,8 +15,6 @@ export default function Perfil() {
   const dispatch = useDispatch<Dispatch<any>>();
   const userTravels = useSelector((state: RootState) => state.travel.userTravels);
 
-  console.log({ userTravels: userTravels });
-
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
