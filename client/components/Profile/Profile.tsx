@@ -20,8 +20,8 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex w-3/5 flex-col items-center justify-evenly bg-gray-200 p-2 shadow-lg shadow-black/40 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 2xl:h-full 2xl:w-1/3">
-      <div className="flex flex-col items-center justify-center border-2">
+    <div className="mt-32 flex w-3/5 flex-col items-center justify-evenly bg-gray-300 p-2 shadow-lg shadow-black/40 lg:mt-0 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 xl:bg-gray-200 2xl:h-full 2xl:w-1/3">
+      <div className="flex flex-col items-center justify-center">
         {userData && (
           <Image
             alt="..."
@@ -36,7 +36,7 @@ export default function Profile() {
         </h3>
       </div>
 
-      <div className="mb-8 flex h-auto w-auto flex-col justify-between gap-2 text-center lg:mb-0 2xl:text-lg ">
+      <div className="flex h-auto w-auto flex-col justify-between gap-2 text-center lg:mb-0 2xl:text-lg ">
         <label htmlFor="">
           Telefono
           {showInput === true ? (
@@ -49,7 +49,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su numero"
-              className="text-center text-gray-800"
+              className="border-b-0 bg-gray-300 text-center text-gray-800 xl:bg-gray-200"
               disabled
             />
           )}
@@ -66,7 +66,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su genero"
-              className="text-center text-gray-800"
+              className="border-b-0 bg-gray-300 text-center text-gray-800 xl:bg-gray-200"
               disabled
             />
           )}
@@ -79,7 +79,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su CC"
-              className="text-center text-gray-800"
+              className="border-b-0 bg-gray-300 text-center text-gray-800 xl:bg-gray-200"
               disabled
             />
           )}
@@ -112,7 +112,7 @@ export default function Profile() {
                 type="text"
                 placeholder="Ingrese su direccion"
                 disabled
-                className="text-center text-lg font-semibold"
+                className="border-b-0 bg-gray-300 text-center text-lg font-semibold xl:bg-gray-200"
               />
             )
           ) : (
