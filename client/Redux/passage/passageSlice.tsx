@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
 import { PassageToRegister, PassageResponse } from "../../app/types/Passages";
-import { AxiosResponse } from "axios";
 
 interface PassageState {
   allPassages: PassageResponse[];
