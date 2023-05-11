@@ -15,8 +15,6 @@ export default function Perfil() {
   const dispatch = useDispatch<Dispatch<any>>();
   const userTravels = useSelector((state: RootState) => state.travel.userTravels);
 
-  console.log({ userTravels: userTravels });
-
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
@@ -42,7 +40,7 @@ export default function Perfil() {
         {pestañasHistorialPerfil.map((item, index) => (
           <div
             key={item.id}
-            className={`w-full cursor-pointer rounded-t-xl border border-gray-300 px-2 py-1 transition duration-500 xl:border-gray-200 ${
+            className={`w-full cursor-pointer rounded-t-xl border border-gray-300 px-2 py-1 transition duration-500 lg:hover:bg-gray-300 xl:border-gray-200 ${
               activeTab === `${item.name}` && "bg-blue font-semibold text-white"
             }`}
             onClick={() => handleTabClick(`${item.name}`)}
@@ -57,7 +55,7 @@ export default function Perfil() {
         <>
           {activeTab === `${item.name}` && (
             <div
-              className="text-35 h-[416px] w-full overflow-hidden border-2 bg-gray-300 xl:bg-gray-200"
+              className="text-35 h-[416px] w-full overflow-hidden bg-gray-300 xl:border-2 xl:bg-gray-200"
               title={item.title}
             >
               <h4 className="border-y-2 border-blue text-center text-lg font-semibold">{item.p}</h4>
@@ -66,12 +64,12 @@ export default function Perfil() {
                 <div
                   className={`flex h-full w-full flex-col items-center justify-evenly gap-3 ${
                     userTravels.length > 3 && "overflow-scroll"
-                  } border-2 pb-4`}
+                  } pb-4 xl:border-2`}
                 >
                   {userTravels.map((item, id) => (
                     <div
                       // onClick={asdas}
-                      className="my-2 flex h-1/4 w-4/5 items-center rounded-lg bg-blueGray-300 py-12 font-mono shadow-xl shadow-black/20 hover:cursor-pointer xl:bg-gradient-to-r xl:from-blueGray-300 xl:to-blueGray-200"
+                      className="my-2 flex h-1/4 w-4/5 items-center rounded-lg bg-blueGray-300 py-12 font-mono shadow-xl shadow-black/20 hover:animate-pulse hover:cursor-pointer xl:bg-gradient-to-r xl:from-blueGray-300 xl:to-blueGray-200"
                       key={id}
                     >
                       <p className="text-center font-semibold">
