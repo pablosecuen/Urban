@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 
 interface PassageState {
   allPassages: PassageResponse[];
-  allPassagesByQuery: PassageResponse;
+  allPassagesByQuery: PassageResponse[];
   passageById: Passage | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
@@ -13,7 +13,7 @@ interface PassageState {
 
 const initialState: PassageState = {
   allPassages: [],
-  allPassagesByQuery: { passages: [], totalPages: 0 },
+  allPassagesByQuery: [],
   passageById: null,
   status: "idle",
   error: null,
@@ -71,10 +71,7 @@ const passageSlice = createSlice({
       // Handle the success state
       .addCase(getPassagesByQuery.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.allPassagesByQuery = {
-          passages: action.payload.passages,
-          totalPages: action.payload.totalPages,
-        };
+        state.allPassagesByQuery = action.payload;
       })
       // Handle the error state
 
