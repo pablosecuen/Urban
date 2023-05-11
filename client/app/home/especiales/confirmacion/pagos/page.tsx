@@ -1,17 +1,27 @@
 "use client";
+import { RootState } from "@component/Redux/store/store";
 import axios from "axios";
 
 export default function Pagos() {
-  const token: string = "";
-  const toDoPayment: any = {};
+  const user = JSON.parse(localStorage.getItem("user") || "");
 
-  const productsIds = Object.keys(toDoPayment);
+  const token: string = `${user.id}`;
+  const toPay: any = {
+    id: "",
+    name: "",
+    img: "",
+    price: "",
+    quantity: "",
+  };
+  //Objeto con la informacion de la compra, id del item, nombre de lo que paga, imagen?, precio unitario, cantidad
+
+  const passagesIds = Object.keys(toPay);
   let totalPrice = 0;
-  const products = productsIds.map((id) => {
-    totalPrice += toDoPayment[id].amount * toDoPayment[id].price;
-    return toDoPayment[id];
+  const passages = passagesIds.map((id) => {
+    totalPrice += toPay[id].amount * toPay[id].price;
+    return toPay[id];
   });
-  const arrToDoPayment = products.map((item) => {
+  const arrToPay = passages.map((item) => {
     return {
       id: item.id,
       title: item.name,
@@ -21,11 +31,13 @@ export default function Pagos() {
       currency_id: "COP",
     };
   });
-
+  //Va la alerta unicamente si falla
+  //Si es exitoso te redirecciona a mercadopago
+  //Unicamente se puede probar con el deploy de por medio?
   const handleClickMP = async () => {
     if (token) {
       //try
-      const { data } = await axios.post("https://localhost:3000/payment", arrToDoPayment);
+      const { data } = await axios.post("https://localhost:3000/payment", arrToPay);
       window.location.href = await data.response.body.init_point;
     }
   };
