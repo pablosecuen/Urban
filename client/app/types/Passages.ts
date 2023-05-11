@@ -13,10 +13,17 @@ export interface PassageToRegister {
   stock: number;
   arrivalDate: string;
   status: boolean;
+  img: string;
 }
 
 export interface PassageResponse {
-  passages: PassageToRegister[];
+  price: number;
+  img: string;
+  imageUrl: string;
+  destination: string;
+  origin: string;
+  id: string;
+  passages?: PassageToRegister[];
   totalPages: number;
 }
 
