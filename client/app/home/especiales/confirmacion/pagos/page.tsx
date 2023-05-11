@@ -4,19 +4,20 @@ import axios from "axios";
 
 export default function Pagos() {
   const user = JSON.parse(localStorage.getItem("user") || "");
+  const passage = JSON.parse(sessionStorage.getItem("passage") || "");
 
   const token: string = `${user.id}`;
   const toPay: any = {
-    id: "",
-    name: "",
-    img: "",
-    price: "",
-    quantity: "",
+    id: passage.id,
+    name: `De ${passage.origin} a ${passage.destination}`,
+    img: passage.img,
+    price: passage.price,
+    quantity: 1,
   };
   //Objeto con la informacion de la compra, id del item, nombre de lo que paga, imagen?, precio unitario, cantidad
 
   const passagesIds = Object.keys(toPay);
-  let totalPrice = 0;
+  let totalPrice = toPay.price * toPay.quantity;
   const passages = passagesIds.map((id) => {
     totalPrice += toPay[id].amount * toPay[id].price;
     return toPay[id];
