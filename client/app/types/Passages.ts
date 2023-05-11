@@ -9,6 +9,7 @@ export interface PassageToRegister {
   destination: string;
   description: string;
   departureDate: string;
+  departureTime: string;
   stock: number;
   arrivalDate: string;
   status: boolean;
