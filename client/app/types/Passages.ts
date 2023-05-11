@@ -13,6 +13,7 @@ export interface PassageToRegister {
   stock: number;
   arrivalDate: string;
   status: boolean;
+  img: string;
 }
 
 export interface PassageResponse {
