@@ -8,7 +8,7 @@ export interface PassageToRegister {
   img: string;
   price: number;
   numberSeat: number;
-  checkIn: string;
+  arrivalTime: string;
   departureTime: string;
   createdAt: string;
 }
