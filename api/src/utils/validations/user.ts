@@ -16,23 +16,42 @@ import {
 } from "./validators";
 
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
+  let errors = "";
+
   try {
     const data: UserToRegister = req.body;
-    if (!data.firstName || !data.lastName || !data.email || !data.password)
-      throw Error("Datos incompletos");
-    if (
-      !isFirstNameValid(data.firstName) ||
-      !isNameValid(data.lastName) ||
-      !isEmailValid(data.email) ||
-      !isPasswordValid(data.password)
-    ) {
-      throw new Error("Datos no validos");
+
+    const firstNameError = isFirstNameValid(data.firstName);
+    if (firstNameError) {
+      errors = firstNameError;
     }
+
+    const lastNameError = isNameValid(data.lastName);
+    if (lastNameError) {
+      errors = lastNameError;
+    }
+
+    const passwordError = isPasswordValid(data.password);
+    if (passwordError) {
+      errors = passwordError;
+    }
+
+    const emailError = isEmailValid(data.email);
+    if (emailError) {
+      errors = emailError;
+    }
+
+    if (errors !== "") {
+      throw new Error("Datos no válidos");
+    }
+
     next();
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message, errors: errors });
   }
 };
+
+
 
 export const updateUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
