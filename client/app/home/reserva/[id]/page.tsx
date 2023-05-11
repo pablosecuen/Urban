@@ -1,6 +1,16 @@
-import React from 'react'
+'use client'
+import axios from  'axios'
 
-export const page = () => {
+const fetchPassageById = async (id:string) => {
+    const response = await axios.get(`http://localhost:3000/passage/${id}`);
+    return response.data
+}
+
+
+export const Detail = ({params}:any) => {
+const {id} = params
+console.log(id);
+
   return (
     <div>page</div>
   )
