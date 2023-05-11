@@ -53,22 +53,23 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
 };
 
 export const updatePassage = async (req: Request, res: Response): Promise<void> => {
+  const id = req.params.id;
+  const data = req.body;
+  const updatedAt = new Date().toISOString();
+
   try {
-    const id: string = req.params.id;
-    const data: PassageToUpdate = req.body;
-    const updatedAt: string = new Date(Date.now()).toISOString();
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El bus no se actualizó");
+      throw new Error("El pasaje no existe");
     }
     await db
-      .collection("bus")
+      .collection("passages")
       .doc(id)
-      .update({ ...data, updatedAt: updatedAt });
+      .update({ ...data, updatedAt });
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
-  } catch (innerError) {
-    console.error("Error al actualizar el Pasaje", innerError);
-    res.status(400).json({ message: innerError.message });
+  } catch (error) {
+    console.error("Error al actualizar el pasaje", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
