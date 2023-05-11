@@ -6,16 +6,18 @@ import success from "../../../../../../../assets/imagenes/success.png";
 import { useState } from "react";
 
 export default function Checkout() {
+  //datos mercadopago
   const queryParams = new URLSearchParams(location.search);
-  const paymentId: string | null = queryParams.get("payment_id");
-  const merchantOrder: string | null = queryParams.get("merchant_order_id");
-  const status: string | null = queryParams.get("status");
+  const paymentId: string | null = queryParams.get("payment_id"); //id del pago de mp
+  const merchantOrder: string | null = queryParams.get("merchant_order_id"); //codigo factura
+  const status: string | null = queryParams.get("status"); //estado de exito o no
   const [dataState, setDataState] = useState({});
   const userId: string | null = "";
 
   const getToken = async () => {
     const { data } = await axios.get(`/token?merchantOrder=${merchantOrder}`);
-    setDataState(data);
+    //este axios pueeeede llegar a ser a mercadopago
+    setDataState(data); //aca se guarda la info y con esto generamos la factura
     const requestData = {
       userId: userId,
       /// reemplazar la variable objeto por data
