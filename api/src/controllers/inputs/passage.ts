@@ -74,20 +74,22 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
 };
 
 export const deletePassage = async (req: Request, res: Response): Promise<void> => {
+  const id: string = req.params.id;
+
   try {
-    const id: string = req.params.id;
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El pasaje no se econtró");
+      throw new Error("El pasaje no se encontró");
     }
+
     await db.collection("passages").doc(id).update({ deleted: true });
+
     res.status(200).json({ message: "Pasaje deshabilitado correctamente" });
-  } catch (innerError) {
-    console.error("Error al deshabilitar el pasaje", innerError);
-    res.status(400).json({ message: innerError.message });
+  } catch (error) {
+    console.error("Error al deshabilitar el pasaje", error);
+    res.status(400).json({ message: error.message });
   }
 };
-
 export const enablePassage = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id;
