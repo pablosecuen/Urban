@@ -1,19 +1,34 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
 
-export const isNameValid = (name: string): Boolean => {
-  if (typeof name === "string" && name.length <= 50) return true;
-  return false;
+export const isNameValid = (name: string): string | null => {
+  if (typeof name !== "string") {
+    return "El nombre debe ser una cadena de texto";
+  }
+  if (name.length > 50) {
+    return "El nombre no puede tener más de 50 caracteres";
+  }
+  return null; // Sin errores
 };
 
-export const isFirstNameValid = (firstName: string): Boolean => {
-  if (typeof firstName === "string" && firstName.length <= 50) return true;
-  return false;
+export const isFirstNameValid = (firstName: string): string | null => {
+  if (typeof firstName !== "string") {
+    return "El primer nombre debe ser una cadena de texto";
+  }
+  if (firstName.length > 50) {
+    return "El primer nombre no puede tener más de 50 caracteres";
+  }
+  return null; // Sin errores
 };
 
-export const isLastNameValid = (lastName: string): Boolean => {
-  if (typeof lastName === "string" && lastName.length <= 50) return true;
-  return false;
+export const isPasswordValid = (password: string): string | null => {
+  if (typeof password !== "string") {
+    return "La contraseña debe ser una cadena de texto";
+  }
+  if (password.length > 50) {
+    return "La contraseña no puede tener más de 50 caracteres";
+  }
+  return null; // Sin errores
 };
 
 export const isDisplayNameValid = (displayName: string): Boolean => {
@@ -21,15 +36,15 @@ export const isDisplayNameValid = (displayName: string): Boolean => {
   return false;
 };
 
-export const isEmailValid = (email: string): Boolean => {
+export const isEmailValid = (email: string): string | null => {
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  if (typeof email === "string" && emailRegex.test(email)) return true;
-  return false;
-};
-
-export const isPasswordValid = (password: string): Boolean => {
-  if (typeof password === "string" && password.length <= 50) return true;
-  return false;
+  if (typeof email !== "string") {
+    return ("El correo electrónico debe ser una cadena de texto");
+  }
+  if (!emailRegex.test(email)) {
+    return  ("El correo electrónico no es válido");
+  }
+  return null; // Sin errores
 };
 
 // numero de telefono en string de entre 8 y 20 caracteres
