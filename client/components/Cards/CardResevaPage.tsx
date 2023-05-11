@@ -1,18 +1,13 @@
 "use client";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 import { useRouter } from "next/navigation";
 
 import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
-
 import { Query } from "@component/app/types/Passages";
 
-export default function CardReservaPage() {
-  const dispatch = useDispatch<Dispatch<any>>(); // idea de chatGPT
+export default function Reserva() {
   const router = useRouter();
-
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
 
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
@@ -34,10 +29,6 @@ export default function CardReservaPage() {
     setDestination(e.target.value);
   };
 
-  /*   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value);
-  };
- */
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDepartureDate(e.target.value);
   };
@@ -113,17 +104,6 @@ export default function CardReservaPage() {
             onChange={handleArrivalDateChange}
           />
         </div>
-
-        {/*      <div className="flex items-center justify-center">
-          <HiTag className="w-10 text-blue" />
-          <input
-            className="w-2/3 pl-2"
-            placeholder="Precio"
-            type="number"
-            value={price}
-            onChange={handlePriceChange}
-          />
-        </div> */}
 
         <button
           onClick={handleSubmit}
