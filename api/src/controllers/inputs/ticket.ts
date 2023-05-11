@@ -24,6 +24,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
       createdAt: new Date(Date.now()).toISOString(),
       updatedAt: "",
       price: ticketPrice,
+      quantity: 1,
     };
 
     const docRef = await db.collection("tickets").add(dataFormatted);
