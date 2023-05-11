@@ -17,22 +17,12 @@ export default function Home() {
             Authorization: "Bearer " + token,
           },
         })
-        .then((data) => {});
-  }, [token]);
-
-  useEffect(() => {
-    token &&
-      axios
-        .get("http://localhost:3000/user/decoding", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
         .then((data) => {
           const userData = data.data;
           localStorage.setItem("user", JSON.stringify(userData));
+          location.replace("/home");
         });
-  }, [token]);
+  }, []);
 
   return (
     <div className="mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5">
