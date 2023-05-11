@@ -71,11 +71,11 @@ export default function Perfil() {
                   {userTravels.map((item, id) => (
                     <div
                       // onClick={asdas}
-                      className="my-2 flex h-1/4 w-4/5 items-center rounded-lg bg-blueGray-300 py-12 shadow-xl shadow-black/20 hover:cursor-pointer xl:bg-gradient-to-r xl:from-blueGray-300 xl:to-blueGray-200"
+                      className="my-2 flex h-1/4 w-4/5 items-center rounded-lg bg-blueGray-300 py-12 font-mono shadow-xl shadow-black/20 hover:cursor-pointer xl:bg-gradient-to-r xl:from-blueGray-300 xl:to-blueGray-200"
                       key={id}
                     >
                       <p className="text-center font-semibold">
-                        Desde: <span className="font-serif font-normal">{item.origin}</span>
+                        Desde: <span className="font-normal">{item.origin}</span>
                       </p>
                       <p className="text-center font-semibold">
                         Hasta: <span className="font-normal">{item.destination}</span>
