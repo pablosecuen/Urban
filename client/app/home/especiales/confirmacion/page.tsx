@@ -1,5 +1,5 @@
-import CardEspeciales from "@component/components/Cards/CardEspeciales";
+import CardConfirmacionEspeciales from "@component/components/Cards/CardConfirmacionEspeciales";
 
 export default function Confirmacion() {
-  return <CardEspeciales />;
+  return <CardConfirmacionEspeciales />;
 }
