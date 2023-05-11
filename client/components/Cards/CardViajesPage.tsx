@@ -13,10 +13,6 @@ export default function CardViajesPage() {
   const status = useSelector((state: RootState) => state.passage.status);
   const error = useSelector((state: RootState) => state.passage.error);
 
-  // useEffect(() => {
-  //   dispatch(getAllPassages());
-  // }, []);
-
   if (status === "loading") {
     return <div>Loading...</div>;
   }
