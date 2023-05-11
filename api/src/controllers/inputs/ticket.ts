@@ -12,8 +12,13 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
       db.collection("passages").doc(data.passageId).get(),
     ]);
 
-    if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!passageDoc.exists) throw new Error("El pasaje no existe");
+    if (!userDoc.exists) {
+      throw new Error("El usuario no existe");
+    }
+
+    if (!passageDoc.exists) {
+      throw new Error("El pasaje no existe");
+    }
 
     const passageData = passageDoc.data();
     const ticketPrice = passageData.price;
@@ -21,7 +26,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     const dataFormatted: Ticket = {
       ...data,
       status: "pending",
-      createdAt: new Date(Date.now()).toISOString(),
+      createdAt: new Date().toISOString(),
       updatedAt: "",
       price: ticketPrice,
     };
@@ -38,7 +43,9 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
       db
         .collection("passages")
         .doc(data.passageId)
-        .update({ stock: passageData.stock - 1 }),
+        .update({
+          stock: passageData.stock - 1,
+        }),
     ]);
 
     res.status(201).json({ id: docRef.id });
