@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { allPassage, getPassageById } from "../../controllers/outputs/passage";
+import { getAllPassages, getPassageById } from "../../controllers/outputs/passage";
 
 const router = Router();
 
 //Ruta para crear bondis
 
-router.get("/", allPassage);
+router.get("/", getAllPassages);
 router.get("/:id", getPassageById);
-
-
 
 export default router;

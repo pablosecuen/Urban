@@ -51,49 +51,49 @@ export const links = [
 //  NavBar Mobile
 export const linksMobile = [
   {
-    label: "home",
+    label: "Home",
     route: "/home",
     icon: HiOutlineHome,
     id: "1",
   },
   {
-    label: "perfil",
+    label: "Perfil",
     route: "/perfil",
     icon: HiUserCircle,
     id: "2",
   },
   {
-    label: "notificaciones",
+    label: "Notificaciones",
     route: "/notificaciones",
     icon: HiOutlineBell,
     id: "3",
   },
   {
-    label: "ayuda",
+    label: "Ayuda",
     route: "/ayuda",
     icon: HiOutlineAnnotation,
     id: "4",
   },
   {
-    label: "reserva",
+    label: "Reserva",
     route: "/home/reserva",
     icon: HiOutlineClipboardCheck,
     id: "5",
   },
   {
-    label: "paqueteria",
+    label: "Paqueteria",
     route: "/home/paqueteria",
     icon: HiOutlineInbox,
     id: "6",
   },
   {
-    label: "especiales",
+    label: "Especiales",
     route: "/home/especiales",
     icon: HiShoppingBag,
     id: "7",
   },
   {
-    label: "gestion",
+    label: "Gestion",
     route: "/home/gestion",
     icon: HiOutlineAnnotation,
     id: "8",

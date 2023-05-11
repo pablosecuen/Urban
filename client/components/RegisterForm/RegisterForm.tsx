@@ -5,6 +5,7 @@ import { Google } from "@component/assets/icons/svg/Google";
 import setValidate from "./Validate";
 import { UserToRegister } from "@component/app/types/LoginRegister";
 import { RegisterError } from "@component/app/types/LoginRegister";
+import axios from "axios";
 
 function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsRegister: any }) {
   const userFromSessionStorage: UserToRegister | {} = JSON.parse(
@@ -50,30 +51,34 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   };
 
   const handleRegister = async (e: any) => {
-    // e.preventDefault();
-    // console.log(password);
-    // console.log(repeatPassword);
-    // if (password === repeatPassword) {
-    //   const userData: UserToRegister = {
-    //     name,
-    //     email,
-    //     password,
-    //   };
-    //   await createUser(userData);
-    // } else {
-    //   alert("Passwords do not match");
-    // }
+    e.preventDefault();
+    const { name, lastName, email, password } = userData;
+    if (userData.password === userData.repeatPassword) {
+      const userData = {
+        firstName: name,
+        lastName,
+        email,
+        password,
+      };
+      await createUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("isRegister");
+    } else {
+      alert("Passwords do not match");
+    }
   };
+  // firstName: name, LastName: lastName, name: firstName + lastName, email, password
 
-  // const createUser = async (userData: UserToRegister) => {
-  //   try {
-  //     const response = await axios.post("http://localhost:3000/user", userData);
-  //     console.log(response.data); // the created user data
-  //     router.push("/home");
-  //   } catch (error) {
-  //     console.log("salio todo mal");
-  //   }
-  // };
+  const createUser = async (userData: any) => {
+    try {
+      const response = await axios.post("http://localhost:3000/user", userData);
+      console.log(response.data); // the created user data
+      router.push("/home");
+    } catch (error) {
+      console.log("salio todo mal");
+    }
+  };
   return (
     <form
       onSubmit={handleRegister}
@@ -87,7 +92,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
           <div className="relative w-1/2">
             <label className="px-1 ">Name:</label>
             <input
-              className="px-1 text-black"
+              className={`px-1 text-black ${
+                errores.messageName ? "border-red-500 focus-visible:outline-red-500" : ""
+              }`}
               type="text"
               name="name"
               placeholder="Nombre"
@@ -111,7 +118,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
               type="text"
               name="lastName"
               placeholder="Apellido"
-              className="px-1 text-black"
+              className={`px-1 text-black ${
+                errores.messageLastName ? "border-red-500 focus-visible:outline-red-500" : ""
+              }`}
               value={userData.lastName}
               onChange={handleInputChange}
             />
@@ -128,7 +137,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Email:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messageEmail ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="email"
             name="email"
             placeholder="Ingresa tu email"
@@ -147,7 +158,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Password:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messagePassword ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="password"
             name="password"
             placeholder="Ingresa tu contraseña"
@@ -166,7 +179,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         <div className="relative">
           <label className="px-1">Repeat Password:</label>
           <input
-            className="px-1 text-black"
+            className={`px-1 text-black ${
+              errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
+            }`}
             type="password"
             name="repeatPassword"
             placeholder="Repita su contraseña"

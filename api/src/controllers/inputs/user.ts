@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DeliveryRating } from "../../schema/deliveryRating";
+import { Delivery } from "../../schema/delivery";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -11,7 +12,12 @@ import { DeliveryRating } from "../../schema/deliveryRating";
 export const newUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: UserToRegister = req.body;
-    const dataFormated: User = {
+    const existingUser = await db.collection("users").where("email", "==", data.email).get();
+    if (!existingUser.empty) {
+      throw new Error("El correo electrónico ya está registrado");
+    }
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const user: User = {
       ...data,
       address: {
         postalCode: "",
@@ -39,40 +45,27 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       history: {
         orders: [],
         travels: [],
+        tickets: [],
       },
       img: "",
       ce: "",
       cc: "",
       deleted: false,
-      name: data.firstName + " " + data.lastName,
+      name: `${data.firstName} ${data.lastName}`,
       createdAt: new Date(Date.now()).toISOString(),
+      password: hashedPassword,
     };
-
-    // Verificar si ya existe un usuario con el correo electrónico dado
-    const snapshot = await db.collection("users").where("email", "==", dataFormated.email).get();
-    if (!snapshot.empty) {
-      throw new Error("El correo electrónico ya está registrado");
-    }
-
-    // Encriptar la contraseña
-    const hashedPassword = await bcrypt.hash(dataFormated.password, 10);
-    dataFormated.password = hashedPassword;
-
-    const docRef = await db.collection("users").add(dataFormated);
+    const docRef = await db.collection("users").add(user);
     res.status(201).json({ id: docRef.id });
   } catch (error) {
-    try {
-      throw new Error(error.message);
-    } catch (innerError) {
-      console.error("Error al crear el usuario", innerError);
-      res.status(400).json({ message: innerError.message });
-    }
+    console.error("Error al crear el usuario", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
 /**
  * Controlador para actulizar un usuario en Firestore.
-*/
+ */
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
@@ -100,17 +93,20 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
  * Controlador para hacer un borrado logico de un usuario en Firestore.
  */
 export const enableUser = async (req: Request, res: Response): Promise<void> => {
+  const id: string = req.params.id;
+
   try {
-    const id: string = req.params.id;
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
       throw new Error("El usuario no se encontró");
     }
+
     await db.collection("locals").doc(id).update({ deleted: false });
+
     res.status(200).json({ message: "Usuario habilitado correctamente" });
-  } catch (innerError) {
-    console.error("Error al habilitar el usuario", innerError);
-    res.status(400).json({ message: innerError.message });
+  } catch (error) {
+    console.error("Error al habilitar el usuario", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -130,57 +126,75 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
 };
 
 export const newDeliveryRating = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { userId, deliveryId } = req.params;
-    const data = req.body;
+  const { userId, deliveryId } = req.params;
+  const data = req.body;
 
-    const dataFormatted: DeliveryRating = {
+  try {
+    const [userDoc, deliveryDoc] = await Promise.all([
+      db.collection("users").doc(userId).get(),
+      db.collection("deliverys").doc(deliveryId).get(),
+    ]);
+
+    if (!userDoc.exists) {
+      throw new Error("User not found");
+    }
+
+    if (!deliveryDoc.exists) {
+      throw new Error("Delivery not found");
+    }
+
+    const deliveryData = deliveryDoc.data() as Delivery;
+    const deliveryRatingsRef = db
+      .collection("deliveryRatings")
+      .where("deliveryId", "==", deliveryId);
+    const deliveryRatingsSnapshot = await deliveryRatingsRef.get();
+
+    const totalRating = deliveryRatingsSnapshot.docs.reduce(
+      (acc, curr) => acc + curr.data().rating,
+      0
+    );
+    const averageRating = totalRating / deliveryRatingsSnapshot.size;
+
+    const ratingData: DeliveryRating = {
       userId,
       deliveryId,
       ...data,
       createdAt: new Date().toISOString(),
     };
 
-    const [userDoc, deliveryDoc] = await Promise.all([
-      db.collection("users").doc(userId).get(),
-      db.collection("deliverys").doc(deliveryId).get(),
-    ]);
-
-    if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!deliveryDoc.exists) throw new Error("El distribuidor no existe");
-
-    const docRef = await db.collection("distributorRating").add(dataFormatted);
-
-    const deliveryRef = db.collection("deliverys").doc(deliveryId);
-    const deliveryRatingsRef = db.collection("distributorRating").where("deliveryId", "==", deliveryId);
-
-    const [distributorData, distributorRatingsData] = await Promise.all([
-      deliveryRef.get(),
-      deliveryRatingsRef.get(),
-    ]);
-
-    const totalRating = distributorRatingsData.docs.reduce((acc, curr) => acc + curr.data().rating, 0);
-    const averageRating = totalRating / distributorRatingsData.size;
+    const ratingRef = await db.collection("deliveryRatings").add(ratingData);
 
     if (data.comment) {
       const commentData = {
         comment: data.comment,
         userId,
+        createdAt: new Date().toISOString(),
       };
 
-      await deliveryRef.update({
+      await db.collection("deliveryComments").add(commentData);
+
+      const commentsSnapshot = await db
+        .collection("deliveryComments")
+        .where("deliveryId", "==", deliveryId)
+        .orderBy("createdAt", "desc")
+        .limit(10)
+        .get();
+
+      const comments = commentsSnapshot.docs.map((doc) => doc.data());
+
+      await deliveryDoc.ref.update({
         rating: averageRating,
-        comments: firebase.firestore.FieldValue.arrayUnion(commentData),
+        comments,
       });
     } else {
-      await deliveryRef.update({
+      await deliveryDoc.ref.update({
         rating: averageRating,
       });
     }
 
-    res.status(201).json({ id: docRef.id });
+    res.status(201).json({ id: ratingRef.id });
   } catch (error) {
-    console.error("Error al generar rating", error);
+    console.error("Error creating delivery rating", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -208,14 +222,19 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
     const docRef = await db.collection("chauffeurRating").add(dataFormatted);
 
     const chauffeurRef = db.collection("chauffeur").doc(chauffeurId);
-    const chauffeurRatingsRef = db.collection("chauffeurRating").where("chauffeurId", "==", chauffeurId);
+    const chauffeurRatingsRef = db
+      .collection("chauffeurRating")
+      .where("chauffeurId", "==", chauffeurId);
 
     const [chauffeurData, chauffeurRatingsData] = await Promise.all([
       chauffeurRef.get(),
       chauffeurRatingsRef.get(),
     ]);
 
-    const totalRating = chauffeurRatingsData.docs.reduce((acc, curr) => acc + curr.data().rating, 0);
+    const totalRating = chauffeurRatingsData.docs.reduce(
+      (acc, curr) => acc + curr.data().rating,
+      0
+    );
     const averageRating = totalRating / chauffeurRatingsData.size;
 
     if (data.comment) {

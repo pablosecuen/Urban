@@ -37,13 +37,13 @@ export default function setValidate(values: { [key: string]: string }): Object{
     },
     email:  (value: string):  setErrores => {
       if(!regexEmail.test(value) && value != ""){
-        return {messageEmail: "El email no es correcto"}
+        return {messageEmail: "El email es incorrecto"}
       }
       return {messageEmail: ""}
     },
       password: (value: string):  setErrores=>{
         if(!regexPassword.test(value) && value != ""){
-          return {messagePassword: "La contraseña no es correcta"}
+          return {messagePassword: "La contraseña es incorrecta"}
         }
         return {messagePassword: ""}
     },
