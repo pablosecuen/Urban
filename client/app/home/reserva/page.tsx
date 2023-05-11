@@ -14,9 +14,9 @@ export default function Reserva() {
   const router = useRouter();
 
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
-  
+
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
-  
+
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
   const [price, setPrice] = useState<number | undefined>();
@@ -50,25 +50,25 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-      const query: Query = {
-        origin: origin.toLowerCase(),
-        destination: destination.toLowerCase(),
-        departureDate: departureDate.split("-").reverse().join("-"),
-        ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
-        ...(price && { price }),
-        // armo la query y agrego las propiedades extras si las hay
-      };
-      const URL = Object.values(query).join("/");
-      
-      router.push(`/home/reserva/${URL}`) 
+    const query: Query = {
+      origin: origin.toLowerCase(),
+      destination: destination.toLowerCase(),
+      departureDate: departureDate.split("-").reverse().join("-"),
+      ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
+      ...(price && { price }),
+      // armo la query y agrego las propiedades extras si las hay
+    };
+    const URL = Object.values(query).join("/");
+
+    router.push(`/home/reserva/${URL}`);
   };
 
   return (
-    <section className="mx-auto w-4/5 rounded-3xl border-2 shadow-2xl shadow-black/40 lg:h-[510px]">
-      <h1 className="mt-12 text-center text-xl text-blue">
+    <section className="mx-auto mt-5 w-11/12 rounded-3xl border-2 px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-0 lg:h-[510px]">
+      <h1 className="px-8 text-center text-blue lg:px-0 lg:text-xl">
         Llena el formulario para encontrar tu viaje
       </h1>
-      <form className="flex flex-col items-center justify-center gap-5 pb-32 pt-12">
+      <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           <input
@@ -128,7 +128,9 @@ export default function Reserva() {
         <button
           onClick={handleSubmit}
           disabled={!isFormValid}
-          className={`w-1/2 self-center transition_all ${!isFormValid ? "!bg-gray-500" : "cursor-pointer"}`}
+          className={`transition_all w-1/2 self-center ${
+            !isFormValid ? "!bg-gray-500" : "cursor-pointer"
+          }`}
         >
           Buscar tu viaje!
         </button>
