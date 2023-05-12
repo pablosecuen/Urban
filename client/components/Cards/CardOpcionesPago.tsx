@@ -1,7 +1,7 @@
 //Padre
 "use client";
-import { Passage, PassageToRegister } from "@component/app/types/Passages";
-import { getAllPassages, getPassagesId } from "@component/Redux/passage/passageActions";
+import { Passage } from "@component/app/types/Passages";
+import { getAllPassages } from "@component/Redux/passage/passageActions";
 import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";
 import axios from "axios";
