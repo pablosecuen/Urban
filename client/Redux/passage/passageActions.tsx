@@ -1,10 +1,10 @@
-import { PassageResponse, PassageToRegister } from "@component/app/types/Passages";
+import { PassageResponse, PassageToRegister, Passage } from "@component/app/types/Passages";
 import { QueryParams } from "@component/app/types/QueryParams";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Define async thunk actions to fetch user data
-export const getAllPassages = createAsyncThunk<PassageResponse[], void>(
+export const getAllPassages = createAsyncThunk<Passage[], void>(
   "passage/getAllPassages",
   async () => {
     const response = await axios.get("http://localhost:3000/passage?page=1&pageSize=10000");
