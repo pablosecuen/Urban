@@ -31,20 +31,30 @@ export const isPasswordValid = (password: string): string | null => {
   return null; // Sin errores
 };
 
-export const isDisplayNameValid = (displayName: string): Boolean => {
-  if (typeof displayName === "string" && displayName.length <= 50) return true;
-  return false;
-};
-
 export const isEmailValid = (email: string): string | null => {
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (typeof email !== "string") {
-    return ("El correo electrónico debe ser una cadena de texto");
+    return "El correo electrónico debe ser una cadena de texto";
   }
   if (!emailRegex.test(email)) {
-    return  ("El correo electrónico no es válido");
+    return "El correo electrónico no es válido";
   }
   return null; // Sin errores
+};
+
+export const isAddressValid = (address: Address): Boolean => {
+  const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
+  if (
+    typeof address === "object" &&
+    Object.keys(address).every((key) => allowProperties.includes(key)) &&
+    Object.values(address).every((value) => typeof value === "string")
+  )
+    return true;
+  return false;
+};
+export const isDisplayNameValid = (displayName: string): Boolean => {
+  if (typeof displayName === "string" && displayName.length <= 50) return true;
+  return false;
 };
 
 // numero de telefono en string de entre 8 y 20 caracteres
@@ -100,18 +110,6 @@ export const isLicenseValid = (license: string): Boolean => {
 
 export const isTypeChauffeurValid = (typeChauffeur: string): Boolean => {
   if (typeof typeChauffeur === "string" && typeChauffeur.length <= 300) return true;
-  return false;
-};
-
-// cumple con la interface Address
-export const isAddressValid = (address: Address): Boolean => {
-  const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
-  if (
-    typeof address === "object" &&
-    Object.keys(address).every((key) => allowProperties.includes(key)) &&
-    Object.values(address).every((value) => typeof value === "string")
-  )
-    return true;
   return false;
 };
 
