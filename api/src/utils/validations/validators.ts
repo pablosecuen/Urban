@@ -204,10 +204,11 @@ export const isDateValid = (date: string): string | null => {
   return "La fecha no es válida";
 };
 
-export const isDepartureDateValid = (departureTime: string): Boolean => {
-  if (typeof departureTime === "string") return true;
-  return false;
+export const isDepartureDateValid = (departureTime: string): string | null => {
+  if (typeof departureTime === "string") return null;
+  return "La fecha de salida no es válida";
 };
+
 export const iCheckInValid = (checkIn: string): Boolean => {
   if (typeof checkIn === "string") return true;
   return false;
