@@ -199,10 +199,11 @@ export const areVehiclesIdValid = (vehiclesId: string[]): string | null => {
 };
 
 //IMPORTANTE: definir formato de fecha
-export const isDateValid = (date: string): Boolean => {
-  if (typeof date === "string") return true;
-  return false;
+export const isDateValid = (date: string): string | null => {
+  if (typeof date === "string") return null;
+  return "La fecha no es válida";
 };
+
 export const isDepartureDateValid = (departureTime: string): Boolean => {
   if (typeof departureTime === "string") return true;
   return false;
