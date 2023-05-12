@@ -20,7 +20,7 @@ export default function Notifications() {
 
   return (
     <div>
-      {notification.map((e) => {
+      {notification?.map((e) => {
         return <div key={e.notification}>{e.notification}</div>;
       })}
     </div>
