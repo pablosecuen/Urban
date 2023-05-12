@@ -183,9 +183,9 @@ export const isProductIdValid = (productId: string): string | null => {
   return "El id del producto no es válido";
 };
 
-export const isLocalIdValid = (localId: string): Boolean => {
-  if (typeof localId === "string") return true;
-  return false;
+export const isLocalIdValid = (localId: string): string | null => {
+  if (typeof localId === "string") return null;
+  return "El id del local no es válido";
 };
 
 export const isPassageIdValid = (localId: string): Boolean => {
