@@ -1,4 +1,3 @@
-
 export interface Passage  {
   id: string;
   origin: string;
@@ -32,15 +31,6 @@ export interface PassageToRegister extends Passage {
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
   updatedAt: string;
-}
-
-export interface Query {
-
-  origin: string,
-  destination: string,
-  departureDate: string,
-  arrivalDate?: string,
-  price?: number,
 }
 
 export interface CardProfilePropsPassage {
