@@ -16,42 +16,28 @@ import {
 } from "./validators";
 
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
-  let errors = "";
+  const data: UserToRegister = req.body;
 
-  try {
-    const data: UserToRegister = req.body;
+  const validations = [
+    { field: "firstName", validator: isFirstNameValid },
+    { field: "lastName", validator: isNameValid },
+    { field: "password", validator: isPasswordValid },
+    { field: "email", validator: isEmailValid },
+  ];
 
-    const firstNameError = isFirstNameValid(data.firstName);
-    if (firstNameError) {
-      errors = firstNameError;
-    }
+  const errors = validations
+    .map((validation) => {
+      const error = validation.validator(data[validation.field]);
+      return error ? { field: validation.field, message: error } : null;
+    })
+    .filter((error) => error !== null);
 
-    const lastNameError = isNameValid(data.lastName);
-    if (lastNameError) {
-      errors = lastNameError;
-    }
-
-    const passwordError = isPasswordValid(data.password);
-    if (passwordError) {
-      errors = passwordError;
-    }
-
-    const emailError = isEmailValid(data.email);
-    if (emailError) {
-      errors = emailError;
-    }
-
-    if (errors !== "") {
-      throw new Error("Datos no válidos");
-    }
-
+  if (errors.length > 0) {
+    res.status(400).json({ message: "Por favor revisa los datos", errors });
+  } else {
     next();
-  } catch (error) {
-    res.status(400).json({ message: error.message, errors: errors });
   }
 };
-
-
 
 export const updateUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
@@ -63,7 +49,6 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
       //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
       (data?.address && !isAddressValid(data.address)) ||
       data?.payments ||
-      (data?.img && !isImgValid(data.img)) ||
       (data?.gender && data.gender !== "male" && data.gender !== "female") ||
       (data?.phone && !isPhoneValid(data.phone)) ||
       (data?.cc && !isCcValid(data.cc)) ||
