@@ -146,16 +146,16 @@ export const isVehicleTypeValid = (vehicleType: string): string | null => {
 };
 
 // IMPORTANTE! => por ahora solo verifica que es un objeto (falta definir el formato)
-export const arePaymentsValid = (payments: Payment): Boolean => {
+export const arePaymentsValid = (payments: Payment): string | null => {
   const allowProperties = ["cardNumber", "expirationDate", "securityCode"];
   if (
     typeof payments === "object" &&
     Object.keys(payments).every((key) => allowProperties.includes(key)) &&
     Object.values(payments).every((value) => typeof value === "string")
   ) {
-    return true;
+    return null;
   }
-  return false;
+  return "Los pagos no son válidos";
 };
 
 export const isUserIdValid = (userId: string): Boolean => {
