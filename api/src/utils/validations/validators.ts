@@ -224,9 +224,9 @@ export const isArrivalDateValid = (arrivalTime: string): string | null => {
   return "La fecha de llegada no es válida";
 };
 
-export const isDurationValid = (duration: string): Boolean => {
-  if (typeof duration === "string") return true;
-  return false;
+export const isDurationValid = (duration: string): string | null => {
+  if (typeof duration === "string") return null;
+  return "La duración no es válida";
 };
 
 export const isNumberSeatValid = (numberSeat: number): Boolean => {
