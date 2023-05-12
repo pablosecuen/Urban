@@ -90,14 +90,14 @@ export const isGenderValid = (gender: string): string | null => {
   return null; // Sin errores
 };
 
-export const isDisplayNameValid = (displayName: string): Boolean => {
-  if (typeof displayName === "string" && displayName.length <= 50) return true;
-  return false;
+export const isDisplayNameValid = (displayName: string): string | null => {
+  if (typeof displayName === "string" && displayName.length <= 50) return null;
+  return "El nombre de usuario no es válido";
 };
 
-export const isNationalityValid = (nationality: string): Boolean => {
-  if (typeof nationality === "string" && nationality.length <= 50) return true;
-  return false;
+export const isNationalityValid = (nationality: string): string | null => {
+  if (typeof nationality === "string" && nationality.length <= 50) return null;
+  return "La nacionalidad no es válida";
 };
 
 export const isGenderVality = (gender: string): Boolean => {
@@ -105,72 +105,72 @@ export const isGenderVality = (gender: string): Boolean => {
   return false;
 };
 
-export const isBirthdayValid = (birthday: string): Boolean => {
-  if (typeof birthday === "string" && birthday.length <= 50) return true;
-  return false;
+export const isBirthdayValid = (birthday: string): string | null => {
+  if (typeof birthday === "string" && birthday.length <= 50) return null;
+  return "La fecha de nacimiento no es válida";
 };
 
-export const isPassportValid = (passport: string): Boolean => {
-  if (typeof passport === "string" && passport.length <= 100) return true;
-  return false;
+export const isPassportValid = (passport: string): string | null => {
+  if (typeof passport === "string" && passport.length <= 50) return null;
+  return "El pasaporte no es válido";
 };
 
 // IMPORTANTE! comprobar el formato de las licencias de Colombia
 //actualmente permite string entre 5 y 20 caracteres
-export const isLicenseValid = (license: string): Boolean => {
-  if (typeof license === "string" && license.length >= 5 && license.length <= 20) return true;
-  return false;
+export const isLicenseValid = (license: string): string | null => {
+  if (typeof license === "string" && license.length >= 5 && license.length <= 20) return null;
+  return "La licencia no es válida";
 };
 
-export const isTypeChauffeurValid = (typeChauffeur: string): Boolean => {
-  if (typeof typeChauffeur === "string" && typeChauffeur.length <= 300) return true;
-  return false;
+export const isTypeChauffeurValid = (typeChauffeur: string): string | null => {
+  if (typeof typeChauffeur === "string" && typeChauffeur.length <= 50) return null;
+  return "El tipo de chauffeur no es válido";
 };
 
 // string de entre 5 y 1000 caracteres (por si se usan links)
-export const isImgValid = (img: string): Boolean => {
-  if (typeof img === "string" && img.length >= 5 && img.length <= 1000) return true;
-  return false;
+export const isImgValid = (img: string): String | Boolean => {
+  if (typeof img === "string" && img.length >= 5 && img.length <= 1000) return null;
+  return "La imagen no es válida";
 };
 
-export const isArrayImgValid = (imgs: string[]): Boolean => {
-  if (imgs.every((i) => typeof i === "string")) return true;
-  return false;
+export const isArrayImgValid = (imgs: string[]): string | Boolean => {
+  if (imgs.every((i) => typeof i === "string")) return null;
+  return "La imagen no es válida";
 };
 
 // string de entre 5 y 50 caracteres
-export const isVehicleTypeValid = (vehicleType: string): Boolean => {
-  const allowValues = ["motorcycle", "car", "bicycle", "van", "other"];
-  if (allowValues.includes(vehicleType)) return true;
-  return false;
+export const isVehicleTypeValid = (vehicleType: string): string | null => {
+  if (typeof vehicleType === "string" && vehicleType.length >= 5 && vehicleType.length <= 50)
+    return null;
+  return "El tipo de vehículo no es válido";
 };
 
 // IMPORTANTE! => por ahora solo verifica que es un objeto (falta definir el formato)
-export const arePaymentsValid = (payments: Payment): Boolean => {
+export const arePaymentsValid = (payments: Payment): string | null => {
   const allowProperties = ["cardNumber", "expirationDate", "securityCode"];
   if (
     typeof payments === "object" &&
     Object.keys(payments).every((key) => allowProperties.includes(key)) &&
     Object.values(payments).every((value) => typeof value === "string")
   ) {
-    return true;
+    return null;
   }
-  return false;
+  return "Los pagos no son válidos";
 };
 
-export const isUserIdValid = (userId: string): Boolean => {
-  if (typeof userId === "string") return true;
-  return false;
+export const isUserIdValid = (userId: string): string | null => {
+  if (typeof userId === "string") return null;
+  return "El id del usuario no es válido";
 };
 
-export const isDistributorIdValid = (dealerId: string): Boolean => {
-  if (typeof dealerId === "string") return true;
-  return false;
+export const isDistributorIdValid = (dealerId: string): string | null => {
+  if (typeof dealerId === "string") return null;
+  return "El id del distribuidor no es válido";
 };
 
-export const isRatingValid = (rating: number): Boolean => {
-  if (typeof rating === "number" && rating >= 0 && rating <= 5) return true;
-  return false;
+export const isRatingValid = (rating: number): string | null => {
+  if (typeof rating === "number" && rating >= 0 && rating <= 5) return null;
+  return "El rating no es válido";
 };
 
 export const isCommentValid = (comment: string): Boolean => {
