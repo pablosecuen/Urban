@@ -229,10 +229,11 @@ export const isDurationValid = (duration: string): string | null => {
   return "La duración no es válida";
 };
 
-export const isNumberSeatValid = (numberSeat: number): Boolean => {
-  if (typeof numberSeat === "number") return true;
-  return false;
+export const isNumberSeatValid = (numberSeat: number): string | null => {
+  if (typeof numberSeat === "number") return null;
+  return "El nÚmero de asientos no es válido";
 };
+
 export const isPriceValid = (price: number): Boolean => {
   if (typeof price === "number" && price >= 0) return true;
   return false;
