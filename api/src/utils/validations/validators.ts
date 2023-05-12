@@ -54,20 +54,20 @@ export const isAddressValid = (address: Address): string | null => {
   return "La dirección no es válida";
 };
 
-export const isDisplayNameValid = (displayName: string): Boolean => {
-  if (typeof displayName === "string" && displayName.length <= 50) return true;
-  return false;
-};
-
-// numero de telefono en string de entre 8 y 20 caracteres
-export const isPhoneValid = (phone: Phone): Boolean => {
+export const isPhoneValid = (phone: Phone): string | null => {
   const allowProperties = ["areaCode", "number", "displayPhone"];
   if (
     typeof phone === "object" &&
     Object.keys(phone).every((key) => allowProperties.includes(key)) &&
     Object.values(phone).every((value) => typeof value === "string")
-  )
-    return true;
+  ) {
+    return null; // Sin errores
+  }
+  return "El teléfono no es válido";
+};
+
+export const isDisplayNameValid = (displayName: string): Boolean => {
+  if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
 };
 
