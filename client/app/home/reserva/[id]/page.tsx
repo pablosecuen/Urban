@@ -1,17 +1,6 @@
-'use client'
-import axios from  'axios'
+import CardConfirmacionViajes from "@component/components/Cards/CardConfirmacionReserva";
 
-const fetchPassageById = async (id:string) => {
-    const response = await axios.get(`http://localhost:3000/passage/${id}`);
-    return response.data
-}
-
-
-export const Detail = ({params}:any) => {
-const {id} = params
-console.log(id);
-
-  return (
-    <div>page</div>
-  )
+export default function Confirmacion({ params }: { params: { id: string } }) {
+  const {id} = params
+  return <CardConfirmacionViajes id={id}/> ;
 }

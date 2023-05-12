@@ -24,7 +24,6 @@ export default function SearchResults({ params }: { params: { slug: string } }) 
   useEffect(() => {
     dispatch(getPassagesByQuery(query))
   },[])
-    console.log(passages);
 
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
@@ -35,7 +34,7 @@ export default function SearchResults({ params }: { params: { slug: string } }) 
 
          {passages.map((passage) => (
           <Link
-            href={`/home/reserva/viajes/${passage.id}`}
+            href={`/home/reserva/${passage.id}`}
             key={passage.id}
             className="group flex items-center justify-between gap-4 rounded-full border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
           >

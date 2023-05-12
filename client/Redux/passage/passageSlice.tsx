@@ -5,7 +5,7 @@ import { PassageToRegister, PassageResponse, Passage } from "../../app/types/Pas
 interface PassageState {
   allPassages: Passage[];
   allPassagesByQuery: PassageResponse;
-  passageById: PassageToRegister | null;
+  passageById: Passage | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
