@@ -18,7 +18,7 @@ const upload = multer({
 //Ruta para crear pasajes
 
 router.post("/", upload.single("img"), newPassage);
-router.put("/:id", newAndUpdatePassageValidate, updatePassage);
+router.put("/:id", updatePassage);
 router.patch("/:id", enablePassage);
 router.delete("/:id", deletePassage);
 

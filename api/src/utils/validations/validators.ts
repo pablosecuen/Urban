@@ -42,30 +42,56 @@ export const isEmailValid = (email: string): string | null => {
   return null; // Sin errores
 };
 
-export const isAddressValid = (address: Address): Boolean => {
+export const isAddressValid = (address: Address): string | null => {
   const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
   if (
     typeof address === "object" &&
     Object.keys(address).every((key) => allowProperties.includes(key)) &&
     Object.values(address).every((value) => typeof value === "string")
-  )
-    return true;
-  return false;
-};
-export const isDisplayNameValid = (displayName: string): Boolean => {
-  if (typeof displayName === "string" && displayName.length <= 50) return true;
-  return false;
+  ) {
+    return null; // Sin errores
+  }
+  return "La dirección no es válida";
 };
 
-// numero de telefono en string de entre 8 y 20 caracteres
-export const isPhoneValid = (phone: Phone): Boolean => {
+export const isPhoneValid = (phone: Phone): string | null => {
   const allowProperties = ["areaCode", "number", "displayPhone"];
   if (
     typeof phone === "object" &&
     Object.keys(phone).every((key) => allowProperties.includes(key)) &&
     Object.values(phone).every((value) => typeof value === "string")
-  )
-    return true;
+  ) {
+    return null; // Sin errores
+  }
+  return "El teléfono no es válido";
+};
+
+export const isCcValid = (cc: string): string | null => {
+  if (typeof cc !== "string") {
+    return "El cc debe ser una cadena de texto";
+  }
+  if (cc.length > 8) {
+    return "El cc no puede tener más de 50 caracteres";
+  }
+  return null; // Sin errores
+};
+
+export const isCeValid = (ce: string): string | null => {
+  if (typeof ce === "string" && ce.length === 8) {
+    return null; // Sin errores
+  }
+  return "El número de CE no es válido";
+};
+
+export const isGenderValid = (gender: string): string | null => {
+  if (gender !== "male" && gender !== "female") {
+    return "El género debe ser 'male' o 'female'";
+  }
+  return null; // Sin errores
+};
+
+export const isDisplayNameValid = (displayName: string): Boolean => {
+  if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
 };
 
@@ -81,18 +107,6 @@ export const isGenderVality = (gender: string): Boolean => {
 
 export const isBirthdayValid = (birthday: string): Boolean => {
   if (typeof birthday === "string" && birthday.length <= 50) return true;
-  return false;
-};
-
-// IMPORTANTE!  solo permite cc de 8 dígitos en formato string, preguntar como es en Colombia
-export const isCcValid = (cc: string): Boolean => {
-  if (typeof cc === "string" && cc.length === 8) return true;
-  return false;
-};
-
-// IMPORTANTE!  solo permite ce de 8 dígitos en formato string, preguntar como es en Colombia
-export const isCeValid = (ce: string): Boolean => {
-  if (typeof ce === "string" && ce.length === 8) return true;
   return false;
 };
 

@@ -24,14 +24,9 @@ const upload = multer({
 
 // Ruta para crear vehiculos
 
-router.post(
-  "/chauffeur",
-  newVehicleValidateByChauffeur,
-  upload.single("img"),
-  newVehicleByChauffeur
-);
-router.post("/delivery", newVehicleValidateByDealer, newVehicleByDelivery);
-router.put("/:id", updateVehicleValidate, updateVehicle);
+router.post("/chauffeur", upload.single("img"), newVehicleByChauffeur);
+router.post("/delivery", newVehicleByDelivery);
+router.put("/:id", updateVehicle);
 router.patch("/enable/:id", enableVehicle);
 router.delete("/delete/:id", deleteVehicle);
 
