@@ -193,9 +193,9 @@ export const isPassageIdValid = (localId: string): string | null => {
   return "El id del pasaje no es válido";
 };
 
-export const areVehiclesIdValid = (vehiclesId: string[]): Boolean => {
-  if (vehiclesId.some((id) => typeof id !== "string")) return true;
-  return false;
+export const areVehiclesIdValid = (vehiclesId: string[]): string | null => {
+  if (vehiclesId.every((id) => typeof id === "string")) return null;
+  return "El id del vehículo no es válido";
 };
 
 //IMPORTANTE: definir formato de fecha
