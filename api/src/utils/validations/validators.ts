@@ -264,10 +264,10 @@ export const isProductTypeValid = (type: string): string | null => {
 };
 
 //IMPORTANTE: verificar funcionamiento
-export const isTravelTravelValid = (travel: string): Boolean => {
-  const allowTravelStatus = ["pending", "progress", "approved", "rejected"];
-  if (typeof travel === "string" && allowTravelStatus.includes(travel)) return true;
-  return false;
+export const isTravelTravelValid = (travel: string): string | null => {
+  const allowTravelTypes = ["food", "drink", "snack", "other", "all"];
+  if (typeof travel === "string" && allowTravelTypes.includes(travel)) return null;
+  return "El tipo de viaje no es válido";
 };
 
 export const isDeletedValid = (deleted: boolean): Boolean => typeof deleted === "boolean";
