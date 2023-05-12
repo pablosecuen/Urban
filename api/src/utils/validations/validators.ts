@@ -178,9 +178,9 @@ export const isCommentValid = (comment: string): string | null => {
   return "El comentario no es válido";
 };
 
-export const isProductIdValid = (productId: string): Boolean => {
-  if (typeof productId === "string") return true;
-  return false;
+export const isProductIdValid = (productId: string): string | null => {
+  if (typeof productId === "string") return null;
+  return "El id del producto no es válido";
 };
 
 export const isLocalIdValid = (localId: string): Boolean => {
