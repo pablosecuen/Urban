@@ -7,7 +7,7 @@ export interface Passage  {
   arrivalDate: string;
   departureDate: string;
   departureTime: string;
-  
+  quantity: number;
   numberSeat: number;
   price: number;
   stock: number;
@@ -17,6 +17,12 @@ export interface Passage  {
   deleted: boolean;
   status: boolean;
 }
+
+export interface PassagePayload {
+  passageId: string;
+  quantity: number;
+}
+
 
 export interface PassageResponse   {
   passages: Passage[];
