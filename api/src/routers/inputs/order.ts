@@ -5,7 +5,7 @@ import { newOrderValidate } from "../../utils/validations/order";
 const router = Router();
 
 //Ruta creancion Orden
-router.post("/", newOrderValidate, newOrder);
+router.post("/", newOrder);
 //Ruta actualizar Orden
 router.put("/:id", updateOrder);
 //Ruta de actualizar estado de Orden
