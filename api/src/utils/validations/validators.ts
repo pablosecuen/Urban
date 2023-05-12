@@ -42,16 +42,18 @@ export const isEmailValid = (email: string): string | null => {
   return null; // Sin errores
 };
 
-export const isAddressValid = (address: Address): Boolean => {
+export const isAddressValid = (address: Address): string | null => {
   const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
   if (
     typeof address === "object" &&
     Object.keys(address).every((key) => allowProperties.includes(key)) &&
     Object.values(address).every((value) => typeof value === "string")
-  )
-    return true;
-  return false;
+  ) {
+    return null; // Sin errores
+  }
+  return "La dirección no es válida";
 };
+
 export const isDisplayNameValid = (displayName: string): Boolean => {
   if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
