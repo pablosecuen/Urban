@@ -239,10 +239,10 @@ export const isPriceValid = (price: number): string | null => {
   return "El precio no es válido";
 };
 
-export const isDestinationValid = (destination: string): Boolean => {
+export const isDestinationValid = (destination: string): string | null => {
   if (typeof destination === "string" && destination.length >= 5 && destination.length <= 50)
-    return true;
-  return false;
+    return null;
+  return "La destino no es válido";
 };
 
 export const isDescriptionValid = (description: string): Boolean => {
