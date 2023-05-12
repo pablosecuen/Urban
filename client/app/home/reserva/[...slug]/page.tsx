@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
-import { Query } from "@component/app/types/Passages";
 import { getPassagesByQuery } from "@component/Redux/passage/passageActions";
+import { QueryParams } from "@component/app/types/QueryParams";
 
 export default function SearchResults({ params }: { params: { slug: string } }) {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
 
-  const query: Query = {
+  const query: QueryParams = {
     origin: params.slug[0],
     destination: params.slug[1],
     departureDate: params.slug[2].split("-").join("/"),
