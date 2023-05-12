@@ -173,105 +173,118 @@ export const isRatingValid = (rating: number): string | null => {
   return "El rating no es válido";
 };
 
-export const isCommentValid = (comment: string): Boolean => {
-  if (typeof comment === "string" && comment.length <= 200) return true;
-  return false;
+export const isCommentValid = (comment: string): string | null => {
+  if (typeof comment === "string" && comment.length <= 200) return null;
+  return "El comentario no es válido";
 };
 
-export const isProductIdValid = (productId: string): Boolean => {
-  if (typeof productId === "string") return true;
-  return false;
+export const isProductIdValid = (productId: string): string | null => {
+  if (typeof productId === "string") return null;
+  return "El id del producto no es válido";
 };
 
-export const isLocalIdValid = (localId: string): Boolean => {
-  if (typeof localId === "string") return true;
-  return false;
+export const isLocalIdValid = (localId: string): string | null => {
+  if (typeof localId === "string") return null;
+  return "El id del local no es válido";
 };
 
-export const isPassageIdValid = (localId: string): Boolean => {
-  if (typeof localId === "string") return true;
-  return false;
+export const isPassageIdValid = (localId: string): string | null => {
+  if (typeof localId === "string") return null;
+  return "El id del pasaje no es válido";
 };
 
-export const areVehiclesIdValid = (vehiclesId: string[]): Boolean => {
-  if (vehiclesId.some((id) => typeof id !== "string")) return true;
-  return false;
+export const areVehiclesIdValid = (vehiclesId: string[]): string | null => {
+  if (vehiclesId.every((id) => typeof id === "string")) return null;
+  return "El id del vehículo no es válido";
 };
 
 //IMPORTANTE: definir formato de fecha
-export const isDateValid = (date: string): Boolean => {
-  if (typeof date === "string") return true;
-  return false;
-};
-export const isDepartureDateValid = (departureTime: string): Boolean => {
-  if (typeof departureTime === "string") return true;
-  return false;
-};
-export const iCheckInValid = (checkIn: string): Boolean => {
-  if (typeof checkIn === "string") return true;
-  return false;
-};
-export const isDepartureTimeValid = (departureTime: string): Boolean => {
-  if (typeof departureTime === "string") return true;
-  return false;
-};
-export const isArrivalDateValid = (arrivalTime: string): Boolean => {
-  if (typeof arrivalTime === "string") return true;
-  return false;
-};
-export const isDurationValid = (duration: string): Boolean => {
-  if (typeof duration === "string") return true;
-  return false;
+export const isDateValid = (date: string): string | null => {
+  if (typeof date === "string") return null;
+  return "La fecha no es válida";
 };
 
-export const isNumberSeatValid = (numberSeat: number): Boolean => {
-  if (typeof numberSeat === "number") return true;
-  return false;
-};
-export const isPriceValid = (price: number): Boolean => {
-  if (typeof price === "number" && price >= 0) return true;
-  return false;
+export const isDepartureDateValid = (departureTime: string): string | null => {
+  if (typeof departureTime === "string") return null;
+  return "La fecha de salida no es válida";
 };
 
-export const isDestinationValid = (destination: string): Boolean => {
+export const iCheckInValid = (checkIn: string): string | null => {
+  if (typeof checkIn === "string") return null;
+  return "El check in no es válido";
+};
+
+export const isDepartureTimeValid = (departureTime: string): string | null => {
+  if (typeof departureTime === "string") return null;
+  return "La hora de salida no es válida";
+};
+
+export const isArrivalDateValid = (arrivalTime: string): string | null => {
+  if (typeof arrivalTime === "string") return null;
+  return "La fecha de llegada no es válida";
+};
+
+export const isDurationValid = (duration: string): string | null => {
+  if (typeof duration === "string") return null;
+  return "La duración no es válida";
+};
+
+export const isNumberSeatValid = (numberSeat: number): string | null => {
+  if (typeof numberSeat === "number") return null;
+  return "El nÚmero de asientos no es válido";
+};
+
+export const isPriceValid = (price: number): string | null => {
+  if (typeof price === "number") return null;
+  return "El precio no es válido";
+};
+
+export const isDestinationValid = (destination: string): string | null => {
   if (typeof destination === "string" && destination.length >= 5 && destination.length <= 50)
-    return true;
-  return false;
+    return null;
+  return "La destino no es válido";
 };
 
-export const isDescriptionValid = (description: string): Boolean => {
+export const isDescriptionValid = (description: string): string | null => {
   if (typeof description === "string" && description.length >= 5 && description.length <= 1000)
-    return true;
-  return false;
+    return null;
+  return "La descripción no es válida";
 };
 
-export const isStockValid = (stock: number): Boolean => {
-  if (typeof stock === "number" && stock >= 0) return true;
-  return false;
+export const isStockValid = (stock: number): string | null => {
+  if (typeof stock === "number") return null;
+  return "El stock no es válido";
 };
 
 //IMPORTANTE: verificar funcionamiento
-export const isProductTypeValid = (type: string): Boolean => {
+export const isProductTypeValid = (type: string): string | null => {
   const allowProductTypes = ["food", "drink", "snack", "other", "all"];
-  if (typeof type === "string" && allowProductTypes.includes(type)) return true;
-  return false;
+  if (typeof type === "string" && allowProductTypes.includes(type)) return null;
+  return "El tipo de producto no es válido";
 };
 
 //IMPORTANTE: verificar funcionamiento
-export const isTravelTravelValid = (travel: string): Boolean => {
-  const allowTravelStatus = ["pending", "progress", "approved", "rejected"];
-  if (typeof travel === "string" && allowTravelStatus.includes(travel)) return true;
-  return false;
+export const isTravelTravelValid = (travel: string): string | null => {
+  const allowTravelTypes = ["food", "drink", "snack", "other", "all"];
+  if (typeof travel === "string" && allowTravelTypes.includes(travel)) return null;
+  return "El tipo de viaje no es válido";
 };
 
-export const isDeletedValid = (deleted: boolean): Boolean => typeof deleted === "boolean";
-
-export const isTravelStatusValid = (status: boolean): Boolean => typeof status === "boolean";
-
-export const isChauffeurIdValid = (chauffeurId: string): Boolean => {
-  if (typeof chauffeurId === "string") return true;
-  return false;
+export const isDeletedValid = (deleted: boolean): string | null => {
+  if (typeof deleted === "boolean") return null;
+  return "El estado no es válido";
 };
+
+export const isTravelStatusValid = (status: boolean): string | null => {
+  if (typeof status === "boolean") return null;
+  return "El estado no es válido";
+};
+
+export const isChauffeurIdValid = (chauffeurId: string): string | null => {
+  if (typeof chauffeurId === "string") return null;
+  return "El id del chofer no es válido";
+};
+
 export const isDealerIdValid = (chauffeurId: string): Boolean => {
   if (typeof chauffeurId === "string") return true;
   return false;
