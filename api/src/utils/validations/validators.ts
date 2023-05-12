@@ -90,8 +90,8 @@ export const isGenderValid = (gender: string): string | null => {
   return null; // Sin errores
 };
 
-export const isDisplayNameValid = (displayName: string): string | null  => {
-  if(typeof  displayName === "string" && displayName.length <= 50) return null;
+export const isDisplayNameValid = (displayName: string): string | null => {
+  if (typeof displayName === "string" && displayName.length <= 50) return null;
   return "El nombre de usuario no es válido";
 };
 
@@ -105,21 +105,21 @@ export const isGenderVality = (gender: string): Boolean => {
   return false;
 };
 
-export const isBirthdayValid = (birthday: string): string | null=> {
+export const isBirthdayValid = (birthday: string): string | null => {
   if (typeof birthday === "string" && birthday.length <= 50) return null;
   return "La fecha de nacimiento no es válida";
 };
 
-export const isPassportValid = (passport: string): string | null=> {
+export const isPassportValid = (passport: string): string | null => {
   if (typeof passport === "string" && passport.length <= 50) return null;
   return "El pasaporte no es válido";
-} 
+};
 
 // IMPORTANTE! comprobar el formato de las licencias de Colombia
 //actualmente permite string entre 5 y 20 caracteres
-export const isLicenseValid = (license: string): Boolean => {
-  if (typeof license === "string" && license.length >= 5 && license.length <= 20) return true;
-  return false;
+export const isLicenseValid = (license: string): string | null => {
+  if (typeof license === "string" && license.length >= 5 && license.length <= 20) return null;
+  return "La licencia no es válida";
 };
 
 export const isTypeChauffeurValid = (typeChauffeur: string): Boolean => {
