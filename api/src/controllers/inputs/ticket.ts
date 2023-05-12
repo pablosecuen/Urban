@@ -40,12 +40,6 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
         .update({
           "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
-      db
-        .collection("passages")
-        .doc(data.passageId)
-        .update({
-          stock: passageData.stock - 1,
-        }),
     ]);
 
     res.status(201).json({ id: docRef.id });

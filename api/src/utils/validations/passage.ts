@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import {
-  iCheckInValid,
   isArrivalDateValid,
   isDepartureDateValid,
   isDepartureTimeValid,
-  isDescriptionValid,
   isDestinationValid,
   isDurationValid,
   isNumberSeatValid,
@@ -56,7 +54,6 @@ export const newAndUpdatePassageValidate = (
       !isDurationValid(data.duration) ||
       !isPriceValid(data.price) ||
       !isNumberSeatValid(data.numberSeat) ||
-      !iCheckInValid(data.checkIn) ||
       !isDepartureTimeValid(data.departureTime)
     )
       throw new Error("Datos no validos");
