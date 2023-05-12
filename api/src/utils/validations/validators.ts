@@ -275,7 +275,10 @@ export const isDeletedValid = (deleted: boolean): string | null => {
   return "El estado no es válido";
 };
 
-export const isTravelStatusValid = (status: boolean): Boolean => typeof status === "boolean";
+export const isTravelStatusValid = (status: boolean): string | null => {
+  if (typeof status === "boolean") return null;
+  return "El estado no es válido";
+};
 
 export const isChauffeurIdValid = (chauffeurId: string): Boolean => {
   if (typeof chauffeurId === "string") return true;
