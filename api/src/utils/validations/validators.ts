@@ -110,10 +110,10 @@ export const isBirthdayValid = (birthday: string): string | null=> {
   return "La fecha de nacimiento no es válida";
 };
 
-export const isPassportValid = (passport: string): Boolean => {
-  if (typeof passport === "string" && passport.length <= 100) return true;
-  return false;
-};
+export const isPassportValid = (passport: string): string | null=> {
+  if (typeof passport === "string" && passport.length <= 50) return null;
+  return "El pasaporte no es válido";
+} 
 
 // IMPORTANTE! comprobar el formato de las licencias de Colombia
 //actualmente permite string entre 5 y 20 caracteres
