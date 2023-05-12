@@ -8,7 +8,6 @@ import {
   isEmailValid,
   isFirstNameValid,
   isImgValid,
-  isLastNameValid,
   isLicenseValid,
   isNationalityValid,
   isPasswordValid,
@@ -37,7 +36,7 @@ export const newDeliveryValidate = (req: Request, res: Response, next: NextFunct
       throw new Error("Datos no permitidos");
     if (
       !isFirstNameValid(data.firstName) ||
-      !isLastNameValid(data.lastName) ||
+      // !isLastNameValid(data.lastName) ||
       !isAddressValid(data.address) ||
       !isEmailValid(data.email) ||
       !isPasswordValid(data.password) ||
@@ -55,11 +54,7 @@ export const newDeliveryValidate = (req: Request, res: Response, next: NextFunct
   }
 };
 
-export const updateDeliveryValidate = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
+export const updateDeliveryValidate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: DeliveryToUpdate = req.body;
     const allowProperties: string[] = [
