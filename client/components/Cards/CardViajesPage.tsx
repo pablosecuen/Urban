@@ -7,8 +7,6 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 
 export default function CardViajesPage() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  // const allPassages = useSelector((state: RootState) => state.passage.allPassages);
   const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
   const status = useSelector((state: RootState) => state.passage.status);
   const error = useSelector((state: RootState) => state.passage.error);
