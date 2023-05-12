@@ -5,8 +5,8 @@ import { newOwnerValidated, updateOwnerValidated } from "../../utils/validations
 const router = Router();
 
 // Ruta para crear y actualizar choferes
-router.post("/", newOwnerValidated, newOwner);
-router.put("/:id", updateOwnerValidated, updateOwner);
+router.post("/", newOwner);
+router.put("/:id", updateOwner);
 router.patch("enable/:id", enableOwner);
 router.delete("/delete/:id", deleteOwner);
 
