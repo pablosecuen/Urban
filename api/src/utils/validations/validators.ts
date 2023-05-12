@@ -122,9 +122,9 @@ export const isLicenseValid = (license: string): string | null => {
   return "La licencia no es válida";
 };
 
-export const isTypeChauffeurValid = (typeChauffeur: string): Boolean => {
-  if (typeof typeChauffeur === "string" && typeChauffeur.length <= 300) return true;
-  return false;
+export const isTypeChauffeurValid = (typeChauffeur: string): string | null => {
+  if (typeof typeChauffeur === "string" && typeChauffeur.length <= 50) return null;
+  return "El tipo de chauffeur no es válido";
 };
 
 // string de entre 5 y 1000 caracteres (por si se usan links)
