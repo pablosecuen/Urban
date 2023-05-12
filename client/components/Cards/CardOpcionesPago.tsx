@@ -9,8 +9,6 @@ export default function Pagos() {
   const user = JSON.parse(localStorage.getItem("user") || "");
   const passages = useSelector((state: RootState) => state.payment.passageById);
 
-  console.log(passages);
-
   interface ToPay {
     passageId: string; // Update the type to a string or the appropriate type for passageId
     id: any;

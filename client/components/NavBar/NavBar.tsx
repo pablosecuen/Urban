@@ -36,7 +36,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-verde">
+    <header className=" bg-verde">
       {isMobile ? (
         <>
           <Image
@@ -112,7 +112,7 @@ export default function NavBar() {
           </nav>
         </>
       ) : (
-        <div className="flex w-full justify-between bg-verde px-4 py-2 lg:py-0">
+        <div className="flex h-16 w-full items-center justify-between bg-verde px-4 py-2 lg:py-0">
           <div>
             <Image
               src={logo}
