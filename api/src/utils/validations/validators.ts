@@ -251,9 +251,9 @@ export const isDescriptionValid = (description: string): string | null => {
   return "La descripción no es válida";
 };
 
-export const isStockValid = (stock: number): Boolean => {
-  if (typeof stock === "number" && stock >= 0) return true;
-  return false;
+export const isStockValid = (stock: number): string | null => {
+  if (typeof stock === "number") return null;
+  return "El stock no es válido";
 };
 
 //IMPORTANTE: verificar funcionamiento
