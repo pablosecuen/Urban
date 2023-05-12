@@ -234,9 +234,9 @@ export const isNumberSeatValid = (numberSeat: number): string | null => {
   return "El nÚmero de asientos no es válido";
 };
 
-export const isPriceValid = (price: number): Boolean => {
-  if (typeof price === "number" && price >= 0) return true;
-  return false;
+export const isPriceValid = (price: number): string | null => {
+  if (typeof price === "number") return null;
+  return "El precio no es válido";
 };
 
 export const isDestinationValid = (destination: string): Boolean => {
