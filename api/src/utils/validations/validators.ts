@@ -67,10 +67,13 @@ export const isPhoneValid = (phone: Phone): string | null => {
 };
 
 export const isCcValid = (cc: string): string | null => {
-  if (typeof cc === "string" && cc.length === 8) {
-    return null; // Sin errores
+  if (typeof cc !== "string") {
+    return "El cc debe ser una cadena de texto";
   }
-  return "El número de CC no es válido";
+  if (cc.length > 8) {
+    return "El cc no puede tener más de 50 caracteres";
+  }
+  return null; // Sin errores
 };
 
 export const isCeValid = (ce: string): string | null => {
