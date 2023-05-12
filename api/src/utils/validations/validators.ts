@@ -80,6 +80,13 @@ export const isCeValid = (ce: string): string | null => {
   return "El número de CE no es válido";
 };
 
+export const isGenderValid = (gender: string): string | null => {
+  if (gender !== "male" && gender !== "female") {
+    return "El género debe ser 'male' o 'female'";
+  }
+  return null; // Sin errores
+};
+
 export const isDisplayNameValid = (displayName: string): Boolean => {
   if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
