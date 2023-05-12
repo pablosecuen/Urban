@@ -51,17 +51,9 @@ const router = Router();
  */
 router.post("/", newUserValidated, newUser);
 
-router.post(
-  "/rating/delivery/:userId/:deliveryId",
-  newDistributorRatingValidator,
-  newDeliveryRating
-);
+router.post("/rating/delivery/:userId/:deliveryId", newDeliveryRating);
 
-router.post(
-  "/rating/chauffeur/:userId/:chauffeurId",
-  newDistributorRatingValidator,
-  newChauffeurRating
-);
+router.post("/rating/chauffeur/:userId/:chauffeurId", newChauffeurRating);
 
 /**
  * @swagger
