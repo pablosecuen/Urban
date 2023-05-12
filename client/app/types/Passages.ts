@@ -12,17 +12,34 @@ export interface PassageToRegister {
   stock: number;
   arrivalDate: string;
   status: boolean;
+  img: string;
 }
 
-export interface PassageResponse {
-  passages: PassageToRegister[];
+export interface PassageResponse   {
+  passages: Passage[];
   totalPages: number;
+  
 }
 
-export interface Passage extends PassageToRegister {
+export interface Passage  {
+  departureTime: string;
   deleted: boolean;
   status: boolean;
   id: string;
+  
+  duration: string;
+  numberSeat: number;
+  createdAt: string;
+
+  price: number;
+  origin: string;
+  destination: string;
+  description: string;
+  departureDate: string;
+  stock: number;
+  arrivalDate: string;
+
+  img: string;
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
