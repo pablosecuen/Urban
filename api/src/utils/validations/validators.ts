@@ -139,10 +139,10 @@ export const isArrayImgValid = (imgs: string[]): string | Boolean => {
 };
 
 // string de entre 5 y 50 caracteres
-export const isVehicleTypeValid = (vehicleType: string): Boolean => {
-  const allowValues = ["motorcycle", "car", "bicycle", "van", "other"];
-  if (allowValues.includes(vehicleType)) return true;
-  return false;
+export const isVehicleTypeValid = (vehicleType: string): string | null => {
+  if (typeof vehicleType === "string" && vehicleType.length >= 5 && vehicleType.length <= 50)
+    return null;
+  return "El tipo de vehículo no es válido";
 };
 
 // IMPORTANTE! => por ahora solo verifica que es un objeto (falta definir el formato)
