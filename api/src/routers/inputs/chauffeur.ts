@@ -10,8 +10,8 @@ import { newChauffeurValidated, updateChauffeurValidated } from "../../utils/val
 const router = Router();
 
 // Ruta para crear y actualizar choferes
-router.post("/", newChauffeurValidated, newChauffeur);
-router.put("/:id", updateChauffeurValidated, updateChauffeur);
+router.post("/", newChauffeur);
+router.put("/:id", updateChauffeur);
 router.patch("/enable/:id", enableChauffeur);
 router.delete("/delete/:id", deleteChauffeur);
 
