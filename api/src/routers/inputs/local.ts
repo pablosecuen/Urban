@@ -4,8 +4,8 @@ import { newLocalValidate, updateLocalValidate } from "../../utils/validations/l
 
 const router = Router();
 
-router.post("/", newLocalValidate, newLocal);
-router.put("/:id", updateLocalValidate, updateLocal);
+router.post("/", newLocal);
+router.put("/:id", updateLocal);
 router.patch("/enable/:id", enableLocal);
 router.delete("/delete/:id", deleteLocal);
 
