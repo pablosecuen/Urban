@@ -90,9 +90,9 @@ export const isGenderValid = (gender: string): string | null => {
   return null; // Sin errores
 };
 
-export const isDisplayNameValid = (displayName: string): Boolean => {
-  if (typeof displayName === "string" && displayName.length <= 50) return true;
-  return false;
+export const isDisplayNameValid = (displayName: string): string | null  => {
+  if(typeof  displayName === "string" && displayName.length <= 50) return null;
+  return "El nombre de usuario no es válido";
 };
 
 export const isNationalityValid = (nationality: string): Boolean => {
