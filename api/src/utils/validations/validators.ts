@@ -73,6 +73,13 @@ export const isCcValid = (cc: string): string | null => {
   return "El número de CC no es válido";
 };
 
+export const isCeValid = (ce: string): string | null => {
+  if (typeof ce === "string" && ce.length === 8) {
+    return null; // Sin errores
+  }
+  return "El número de CE no es válido";
+};
+
 export const isDisplayNameValid = (displayName: string): Boolean => {
   if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
