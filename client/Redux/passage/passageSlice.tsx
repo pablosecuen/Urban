@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
-import { PassageToRegister, PassageResponse } from "../../app/types/Passages";
-import { AxiosResponse } from "axios";
+import { PassageToRegister, PassageResponse, Passage } from "../../app/types/Passages";
 
 interface PassageState {
-  allPassages: PassageResponse[];
+  allPassages: Passage[];
   allPassagesByQuery: PassageResponse;
-  passageById: PassageToRegister |null
+  passageById: PassageToRegister | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -18,8 +17,6 @@ const initialState: PassageState = {
   status: "idle",
   error: null,
 };
-
-type ResponseType = AxiosResponse<any, any>;
 
 const passageSlice = createSlice({
   name: "passages",

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   HiUserGroup,
-  HiOutlineCalendar,
   HiOutlineBriefcase,
   HiOutlineLocationMarker,
 } from "react-icons/hi";

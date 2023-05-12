@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import foto from "../../assets/imagenes/perfil.png";
+
 import { CardChauffeurProfileProps } from "@component/app/admin/dashboard/chauffeurs/page";
 
 const CardChauffeurProfile: React.FC<CardChauffeurProfileProps> = ({ selectedChauffeur }) => {
