@@ -66,6 +66,13 @@ export const isPhoneValid = (phone: Phone): string | null => {
   return "El teléfono no es válido";
 };
 
+export const isCcValid = (cc: string): string | null => {
+  if (typeof cc === "string" && cc.length === 8) {
+    return null; // Sin errores
+  }
+  return "El número de CC no es válido";
+};
+
 export const isDisplayNameValid = (displayName: string): Boolean => {
   if (typeof displayName === "string" && displayName.length <= 50) return true;
   return false;
@@ -83,18 +90,6 @@ export const isGenderVality = (gender: string): Boolean => {
 
 export const isBirthdayValid = (birthday: string): Boolean => {
   if (typeof birthday === "string" && birthday.length <= 50) return true;
-  return false;
-};
-
-// IMPORTANTE!  solo permite cc de 8 dígitos en formato string, preguntar como es en Colombia
-export const isCcValid = (cc: string): Boolean => {
-  if (typeof cc === "string" && cc.length === 8) return true;
-  return false;
-};
-
-// IMPORTANTE!  solo permite ce de 8 dígitos en formato string, preguntar como es en Colombia
-export const isCeValid = (ce: string): Boolean => {
-  if (typeof ce === "string" && ce.length === 8) return true;
   return false;
 };
 
