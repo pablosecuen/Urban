@@ -128,14 +128,14 @@ export const isTypeChauffeurValid = (typeChauffeur: string): string | null => {
 };
 
 // string de entre 5 y 1000 caracteres (por si se usan links)
-export const isImgValid = (img: string): Boolean => {
-  if (typeof img === "string" && img.length >= 5 && img.length <= 1000) return true;
-  return false;
+export const isImgValid = (img: string): String | Boolean => {
+  if (typeof img === "string" && img.length >= 5 && img.length <= 1000) return null;
+  return "La imagen no es válida";
 };
 
-export const isArrayImgValid = (imgs: string[]): Boolean => {
-  if (imgs.every((i) => typeof i === "string")) return true;
-  return false;
+export const isArrayImgValid = (imgs: string[]): string | Boolean => {
+  if (imgs.every((i) => typeof i === "string")) return null;
+  return "La imagen no es válida";
 };
 
 // string de entre 5 y 50 caracteres
