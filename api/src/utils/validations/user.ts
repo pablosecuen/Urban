@@ -8,6 +8,7 @@ import {
   isCeValid,
   isEmailValid,
   isFirstNameValid,
+  isGenderValid,
   isImgValid,
   isNameValid,
   isNationalityValid,
@@ -40,23 +41,30 @@ export const newUserValidated = (req: Request, res: Response, next: NextFunction
 };
 
 export const updateUserValidated = (req: Request, res: Response, next: NextFunction): void => {
-  try {
-    const data: UserToUpdate = req.body;
-    const allowProperties = ["address", "phone", "payments", "gender", "img", "cc", "ce"];
-    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-      throw Error("Datos no permitidos");
-    if (
-      //Tuve dudas sobre como manejar los Payment asi que lo deje sin hacer, gozá el commit Fede
-      (data?.address && !isAddressValid(data.address)) ||
-      data?.payments ||
-      (data?.gender && data.gender !== "male" && data.gender !== "female") ||
-      (data?.phone && !isPhoneValid(data.phone)) ||
-      (data?.cc && !isCcValid(data.cc)) ||
-      (data?.ce && !isCeValid(data.ce))
-    )
-      throw Error("Datos no erroneos");
+  const data: UserToUpdate = req.body;
+
+  const errors = [];
+
+  const validators = {
+    cc: isCcValid,
+    address: isAddressValid,
+    phone: isPhoneValid,
+    gender: isGenderValid,
+    ce: isCeValid,
+  };
+
+  for (const [field, validator] of Object.entries(validators)) {
+    if (data[field]) {
+      const error = validator(data[field]);
+      if (error) {
+        errors.push({ field, message: error });
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    res.status(400).json({ message: "Por favor revisa los datos", errors });
+  } else {
     next();
-  } catch (error) {
-    res.status(400).json({ message: error.message });
   }
 };
