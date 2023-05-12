@@ -257,10 +257,10 @@ export const isStockValid = (stock: number): string | null => {
 };
 
 //IMPORTANTE: verificar funcionamiento
-export const isProductTypeValid = (type: string): Boolean => {
+export const isProductTypeValid = (type: string): string | null => {
   const allowProductTypes = ["food", "drink", "snack", "other", "all"];
-  if (typeof type === "string" && allowProductTypes.includes(type)) return true;
-  return false;
+  if (typeof type === "string" && allowProductTypes.includes(type)) return null;
+  return "El tipo de producto no es válido";
 };
 
 //IMPORTANTE: verificar funcionamiento
