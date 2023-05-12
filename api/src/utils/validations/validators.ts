@@ -270,7 +270,10 @@ export const isTravelTravelValid = (travel: string): string | null => {
   return "El tipo de viaje no es válido";
 };
 
-export const isDeletedValid = (deleted: boolean): Boolean => typeof deleted === "boolean";
+export const isDeletedValid = (deleted: boolean): string | null => {
+  if (typeof deleted === "boolean") return null;
+  return "El estado no es válido";
+};
 
 export const isTravelStatusValid = (status: boolean): Boolean => typeof status === "boolean";
 
