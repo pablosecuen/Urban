@@ -173,9 +173,9 @@ export const isRatingValid = (rating: number): string | null => {
   return "El rating no es válido";
 };
 
-export const isCommentValid = (comment: string): Boolean => {
-  if (typeof comment === "string" && comment.length <= 200) return true;
-  return false;
+export const isCommentValid = (comment: string): string | null => {
+  if (typeof comment === "string" && comment.length <= 200) return null;
+  return "El comentario no es válido";
 };
 
 export const isProductIdValid = (productId: string): Boolean => {
