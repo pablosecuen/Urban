@@ -214,10 +214,11 @@ export const iCheckInValid = (checkIn: string): string | null => {
   return "El check in no es válido";
 };
 
-export const isDepartureTimeValid = (departureTime: string): Boolean => {
-  if (typeof departureTime === "string") return true;
-  return false;
+export const isDepartureTimeValid = (departureTime: string): string | null => {
+  if (typeof departureTime === "string") return null;
+  return "La hora de salida no es válida";
 };
+
 export const isArrivalDateValid = (arrivalTime: string): Boolean => {
   if (typeof arrivalTime === "string") return true;
   return false;
