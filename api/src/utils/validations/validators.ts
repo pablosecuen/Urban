@@ -163,9 +163,9 @@ export const isUserIdValid = (userId: string): string | null => {
   return "El id del usuario no es válido";
 };
 
-export const isDistributorIdValid = (dealerId: string): Boolean => {
-  if (typeof dealerId === "string") return true;
-  return false;
+export const isDistributorIdValid = (dealerId: string): string | null => {
+  if (typeof dealerId === "string") return null;
+  return "El id del distribuidor no es válido";
 };
 
 export const isRatingValid = (rating: number): Boolean => {
