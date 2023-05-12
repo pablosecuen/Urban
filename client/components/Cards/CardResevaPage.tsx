@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
-import { Query } from "@component/app/types/Passages";
+import { QueryParams } from "@component/app/types/QueryParams";
 
 export default function Reserva() {
   const router = useRouter();
@@ -41,7 +41,7 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    const query: Query = {
+    const query: QueryParams = {
       origin: origin.toLowerCase(),
       destination: destination.toLowerCase(),
       departureDate: departureDate.split("-").reverse().join("-"),
