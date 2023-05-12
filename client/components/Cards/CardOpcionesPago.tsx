@@ -1,24 +1,15 @@
 //Padre
 "use client";
 import { Passage } from "@component/app/types/Passages";
-import { getAllPassages } from "@component/Redux/passage/passageActions";
 import { RootState } from "@component/Redux/store/store";
-import { AnyAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
 
 export default function Pagos() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const user = JSON.parse(localStorage.getItem("user") || "");
-  const passages = useSelector((state: RootState) => state.passage.allPassages);
+  const passages = useSelector((state: RootState) => state.payment.passageById);
 
-  useEffect(() => {
-    dispatch(getAllPassages());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  console.log(passages);
 
   interface ToPay {
     passageId: string; // Update the type to a string or the appropriate type for passageId
@@ -41,14 +32,15 @@ export default function Pagos() {
         name: `De ${passage.origin} a ${passage.destination}`,
         img: passage.img,
         unit_price: passage.price,
-        quantity: 1,
+        quantity: passage.quantity,
       };
     });
   }
 
   const totalPrice = toPay.reduce((total, item) => {
     const unitPrice = typeof item.unit_price === "number" ? item.unit_price : 0;
-    return total + unitPrice;
+    const quantity = typeof item.quantity === "number" ? item.quantity : 0;
+    return total + unitPrice * quantity;
   }, 0);
 
   const arrToPay = toPay.map((item) => {
@@ -61,8 +53,6 @@ export default function Pagos() {
       // currency_id: "COP",
     };
   });
-  //Va la alerta unicamente si falla
-  //Si es exitoso te redirecciona a mercadopago
 
   const handleClickMP = async () => {
     try {
