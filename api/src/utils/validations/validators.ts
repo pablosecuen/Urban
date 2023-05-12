@@ -245,10 +245,10 @@ export const isDestinationValid = (destination: string): string | null => {
   return "La destino no es válido";
 };
 
-export const isDescriptionValid = (description: string): Boolean => {
+export const isDescriptionValid = (description: string): string | null => {
   if (typeof description === "string" && description.length >= 5 && description.length <= 1000)
-    return true;
-  return false;
+    return null;
+  return "La descripción no es válida";
 };
 
 export const isStockValid = (stock: number): Boolean => {
