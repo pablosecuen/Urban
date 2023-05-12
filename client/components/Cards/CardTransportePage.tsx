@@ -5,9 +5,9 @@ export default function CardTransportePage() {
   return (
     <div className=" mx-auto mt-10 rounded-3xl border-2 p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
       <div className="flex scroll-my-10 flex-col gap-6">
-        <h1 className="text-center text-xl font-semibold text-blue">
+        <h2 className="text-center text-xl font-semibold text-blue">
           Estas son las mejores opciones encontradas
-        </h1>
+        </h2>
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-2">
             <FaCar size="30" className="w-20 text-blue" />
