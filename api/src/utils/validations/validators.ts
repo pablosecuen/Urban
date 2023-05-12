@@ -188,9 +188,9 @@ export const isLocalIdValid = (localId: string): string | null => {
   return "El id del local no es válido";
 };
 
-export const isPassageIdValid = (localId: string): Boolean => {
-  if (typeof localId === "string") return true;
-  return false;
+export const isPassageIdValid = (localId: string): string | null => {
+  if (typeof localId === "string") return null;
+  return "El id del pasaje no es válido";
 };
 
 export const areVehiclesIdValid = (vehiclesId: string[]): Boolean => {
