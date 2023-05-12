@@ -219,10 +219,11 @@ export const isDepartureTimeValid = (departureTime: string): string | null => {
   return "La hora de salida no es válida";
 };
 
-export const isArrivalDateValid = (arrivalTime: string): Boolean => {
-  if (typeof arrivalTime === "string") return true;
-  return false;
+export const isArrivalDateValid = (arrivalTime: string): string | null => {
+  if (typeof arrivalTime === "string") return null;
+  return "La fecha de llegada no es válida";
 };
+
 export const isDurationValid = (duration: string): Boolean => {
   if (typeof duration === "string") return true;
   return false;
