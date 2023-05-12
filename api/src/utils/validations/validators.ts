@@ -158,9 +158,9 @@ export const arePaymentsValid = (payments: Payment): string | null => {
   return "Los pagos no son válidos";
 };
 
-export const isUserIdValid = (userId: string): Boolean => {
-  if (typeof userId === "string") return true;
-  return false;
+export const isUserIdValid = (userId: string): string | null => {
+  if (typeof userId === "string") return null;
+  return "El id del usuario no es válido";
 };
 
 export const isDistributorIdValid = (dealerId: string): Boolean => {
