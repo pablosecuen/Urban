@@ -105,9 +105,9 @@ export const isGenderVality = (gender: string): Boolean => {
   return false;
 };
 
-export const isBirthdayValid = (birthday: string): Boolean => {
-  if (typeof birthday === "string" && birthday.length <= 50) return true;
-  return false;
+export const isBirthdayValid = (birthday: string): string | null=> {
+  if (typeof birthday === "string" && birthday.length <= 50) return null;
+  return "La fecha de nacimiento no es válida";
 };
 
 export const isPassportValid = (passport: string): Boolean => {
