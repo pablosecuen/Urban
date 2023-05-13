@@ -17,6 +17,7 @@ export interface userData {
   address?: Address;
 }
 export interface User extends UserToRegister {
+  email: string | number | readonly string[] | undefined;
   name: string;
   address: Address;
   payments: Payment[];
