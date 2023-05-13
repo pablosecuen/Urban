@@ -347,7 +347,8 @@ export const isTypeVehicleValidByChauffeur = (value: string): string | null => {
   return "El tipo de vehiculo no es válido";
 };
 
-export const isTypeVehicleValidByDealer = (value: string): boolean => {
+export const isTypeVehicleValidByDealer = (value: string): string | null => {
   const validTypes: TypeVehicle[] = ["motorcycle", "car", "bicycle", "van", "other"];
-  return validTypes.includes(value as TypeVehicle);
+  if (validTypes.includes(value as TypeVehicle)) return null;
+  return "El tipo de vehiculo no es válido";
 };
