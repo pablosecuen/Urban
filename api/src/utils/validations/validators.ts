@@ -320,9 +320,9 @@ export const isBrandValid = (brand: string): string | null => {
   return "La marca no es válida";
 };
 
-export const isModelValid = (model: string): Boolean => {
-  if (typeof model === "string" && model.length >= 5 && model.length <= 50) return true;
-  return false;
+export const isModelValid = (model: string): string | null => {
+  if (typeof model === "string" && model.length >= 5 && model.length <= 50) return null;
+  return "El modelo no es válido";
 };
 
 export const isYearValid = (year: string): Boolean => {
