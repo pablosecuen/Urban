@@ -285,14 +285,14 @@ export const isChauffeurIdValid = (chauffeurId: string): string | null => {
   return "El id del chofer no es válido";
 };
 
-export const isDealerIdValid = (chauffeurId: string): Boolean => {
-  if (typeof chauffeurId === "string") return true;
-  return false;
+export const isDealerIdValid = (chauffeurId: string): string | null => {
+  if (typeof chauffeurId === "string") return null;
+  return "El id del chofer no es válido";
 };
 
-export const isOriginValid = (origin: string): Boolean => {
-  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return true;
-  return false;
+export const isOriginValid = (origin: string): string | null => {
+  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return null;
+  return "La origen no es válido";
 };
 
 export const isOcupationValid = (ocupation: string): Boolean => {
