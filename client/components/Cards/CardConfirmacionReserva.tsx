@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
 import { ThunkDispatch } from "redux-thunk";
@@ -33,34 +32,35 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
 
   return (
     <>
-      <div className=" flex justify-center gap-2 ">
-        <p className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </p>
+    
+      <article className=" flex justify-center gap-2 ">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.departureTime}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Origen: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Origen: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.origin}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Destino: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Destino: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.destination}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Fecha de salida: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de salida: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.departureDate}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Fecha de llegada: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de llegada: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.arrivalDate}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Valor a pagar: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Valor a pagar: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.price}</p>
-      </div>
-      <div className="flex justify-center gap-2">
-        <p className="lg:text-right lg:text-lg lg:font-bold">Stock: </p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Stock: </h5>
         <p className=" lg:text-left lg:text-lg">{passage?.stock}</p>
-      </div>
+      </article>
       <div className="flex w-auto items-center justify-center text-center">
         <button onClick={handleDecrement} className="w-auto">
           -
