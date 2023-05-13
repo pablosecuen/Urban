@@ -20,12 +20,12 @@ const CardSelectedTravel: React.FC<CardTravelProps> = (props) => {
           <span className="block text-xl font-bold uppercase tracking-wide text-blueGray-600">
             Id del chofer
           </span>
-          <span className="text-sm text-blueGray-400">{selectedTravel?.chauffeurId}</span>
+          <p className="text-sm text-blueGray-400">{selectedTravel?.chauffeurId}</p>
 
           <span className="block text-xl font-bold uppercase tracking-wide text-blueGray-600">
             Origen:
           </span>
-          <span className="text-sm text-blueGray-400">{selectedTravel?.origin}</span>
+          <p className="text-sm text-blueGray-400">{selectedTravel?.origin}</p>
 
           <span className="block text-xl font-bold uppercase tracking-wide text-blueGray-600">
             Destino:
