@@ -20,22 +20,22 @@ export default function Footer() {
           <h3 className="px-2 font-semibold uppercase">Compañía</h3>
           <ul className=" flex flex-col gap-4">
             <li>
-              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
-                <Link href="/empresa/#acerca-de-nosotros">acerca de notroso</Link>
+              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:text-white hover:shadow-md hover:shadow-black/30">
+                <Link href="/empresa/#acerca-de-nosotros">Acerca de notrosos</Link>
               </span>
             </li>
             <li>
-              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
+              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:text-white hover:shadow-md hover:shadow-black/30">
                 <Link href="/empresa/#preguntas-frecuentes">Preguntas frecuentes</Link>
               </span>
             </li>
             <li>
-              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
+              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:text-white hover:shadow-md hover:shadow-black/30">
                 <Link href="/empresa/#ayuda-por-emergencia">Ayuda por emergencia</Link>
               </span>
             </li>
             <li>
-              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:shadow-md hover:shadow-black/30">
+              <span className="transition_all rounded-md px-2 py-1 hover:cursor-pointer hover:bg-celeste hover:text-white hover:shadow-md hover:shadow-black/30">
                 <Link href="/empresa/#terminos-y-condiciones">Terminos y condiciones</Link>
               </span>
             </li>
