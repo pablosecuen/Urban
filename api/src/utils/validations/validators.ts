@@ -310,9 +310,9 @@ export const isVehiclesIdValid = (vehiclesId: any): string | null => {
   return "Los id de los vehículos no son válidos";
 };
 
-export const isPatentValid = (patent: string): Boolean => {
-  if (typeof patent === "string" && patent.length >= 5 && patent.length <= 10) return true;
-  return false;
+export const isPatentValid = (patent: string): string | null => {
+  if (typeof patent === "string" && patent.length >= 5 && patent.length <= 10) return null;
+  return "El patente no es válido";
 };
 
 export const isBrandValid = (brand: string): Boolean => {
