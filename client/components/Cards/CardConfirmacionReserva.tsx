@@ -32,9 +32,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   }, [count, id]); // Include 'count' and 'id' in the dependency array
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border-2 py-4 shadow-2xl shadow-black/40">
-      <h3 className="lg:text-center lg:text-3xl lg:font-bold">Pasaje disponible!</h3>
-
+    <>
       <div className=" flex justify-center gap-2 ">
         <p className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </p>
         <p className=" lg:text-left lg:text-lg">{passage?.departureTime}</p>
@@ -72,13 +70,6 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
           +
         </button>
       </div>
-
-      <p className="w-4/5 text-center text-gray-400">
-        tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
-      </p>
-      <Link href="/home/reserva/viajes/confirmacion/pagos" className="flex justify-center">
-        <button className="mt-10 w-1/2">Ir a pagar</button>
-      </Link>
-    </div>
+    </>
   );
 }
