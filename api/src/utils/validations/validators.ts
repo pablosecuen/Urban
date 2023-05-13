@@ -315,9 +315,9 @@ export const isPatentValid = (patent: string): string | null => {
   return "El patente no es válido";
 };
 
-export const isBrandValid = (brand: string): Boolean => {
-  if (typeof brand === "string" && brand.length >= 5 && brand.length <= 50) return true;
-  return false;
+export const isBrandValid = (brand: string): string | null => {
+  if (typeof brand === "string" && brand.length >= 5 && brand.length <= 50) return null;
+  return "La marca no es válida";
 };
 
 export const isModelValid = (model: string): Boolean => {
