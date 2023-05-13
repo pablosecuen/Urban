@@ -305,11 +305,9 @@ export const isOwnerIdValid = (ownerId: string): string | null => {
   return "El id del propietario no es válido";
 };
 
-export const isVehiclesIdValid = (vehiclesId: any): boolean => {
-  if (Array.isArray(vehiclesId)) {
-    return true;
-  }
-  return false;
+export const isVehiclesIdValid = (vehiclesId: any): string | null => {
+  if (Array.isArray(vehiclesId)) return null;
+  return "Los id de los vehículos no son válidos";
 };
 
 export const isPatentValid = (patent: string): Boolean => {
