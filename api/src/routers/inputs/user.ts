@@ -8,7 +8,7 @@ import {
   newChauffeurRating,
 } from "../../controllers/inputs/user";
 import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
-import { newDistributorRatingValidator } from "../../utils/validations/rating";
+import { newRatingValidator } from "../../utils/validations/rating";
 
 const router = Router();
 
@@ -51,9 +51,9 @@ const router = Router();
  */
 router.post("/", newUserValidated, newUser);
 
-router.post("/rating/delivery/:userId/:deliveryId", newDeliveryRating);
+router.post("/rating/delivery/:userId/:deliveryId", newRatingValidator, newDeliveryRating);
 
-router.post("/rating/chauffeur/:userId/:chauffeurId", newChauffeurRating);
+router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newChauffeurRating);
 
 /**
  * @swagger

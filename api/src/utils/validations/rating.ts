@@ -1,21 +1,28 @@
 import { Request, Response, NextFunction } from "express";
 import { isCommentValid, isRatingValid } from "./validators";
 
-export const newDistributorRatingValidator = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  try {
-    const data = req.body;
-    const allowProperties = ["rating", "comment"];
-    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-      throw Error("Propiedades no válidas");
-    if (!isRatingValid(data.rating) || (data.comment && !isCommentValid(data.comment))) {
-      throw new Error("Datos no validos");
+export const newRatingValidator = (req: Request, res: Response, next: NextFunction): void => {
+  const data = req.body;
+
+  const errors = [];
+
+  const validators = {
+    rating: isRatingValid,
+    comment: isCommentValid,
+  };
+
+  for (const field in validators) {
+    if (data[field]) {
+      const error = validators[field](data[field]);
+      if (error) {
+        errors.push({ field, message: error });
+      }
     }
+  }
+
+  if (errors.length > 0) {
+    res.status(400).json({ message: "Por favor revisa los datos", errors });
+  } else {
     next();
-  } catch (error) {
-    res.status(400).json({ message: error.message });
   }
 };

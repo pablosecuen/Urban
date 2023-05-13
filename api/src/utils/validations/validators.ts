@@ -285,70 +285,70 @@ export const isChauffeurIdValid = (chauffeurId: string): string | null => {
   return "El id del chofer no es válido";
 };
 
-export const isDealerIdValid = (chauffeurId: string): Boolean => {
-  if (typeof chauffeurId === "string") return true;
-  return false;
+export const isDealerIdValid = (chauffeurId: string): string | null => {
+  if (typeof chauffeurId === "string") return null;
+  return "El id del chofer no es válido";
 };
 
-export const isOriginValid = (origin: string): Boolean => {
-  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return true;
-  return false;
+export const isOriginValid = (origin: string): string | null => {
+  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return null;
+  return "La origen no es válido";
 };
 
-export const isOcupationValid = (ocupation: string): Boolean => {
-  if (typeof ocupation === "string") return true;
-  return false;
+export const isOcupationValid = (ocupation: string): string | null => {
+  if (typeof ocupation === "string" && ocupation.length >= 5 && ocupation.length <= 50) return null;
+  return "La ocupación no es válido";
 };
 
-export const isOwnerIdValid = (ownerId: string): Boolean => {
-  if (typeof ownerId === "string") return true;
-  return false;
+export const isOwnerIdValid = (ownerId: string): string | null => {
+  if (typeof ownerId === "string") return null;
+  return "El id del propietario no es válido";
 };
 
-export const isVehiclesIdValid = (vehiclesId: any): boolean => {
-  if (Array.isArray(vehiclesId)) {
-    return true;
-  }
-  return false;
+export const isVehiclesIdValid = (vehiclesId: any): string | null => {
+  if (Array.isArray(vehiclesId)) return null;
+  return "Los id de los vehículos no son válidos";
 };
 
-export const isPatentValid = (patent: string): Boolean => {
-  if (typeof patent === "string" && patent.length >= 5 && patent.length <= 10) return true;
-  return false;
+export const isPatentValid = (patent: string): string | null => {
+  if (typeof patent === "string" && patent.length >= 5 && patent.length <= 10) return null;
+  return "El patente no es válido";
 };
 
-export const isBrandValid = (brand: string): Boolean => {
-  if (typeof brand === "string" && brand.length >= 5 && brand.length <= 50) return true;
-  return false;
+export const isBrandValid = (brand: string): string | null => {
+  if (typeof brand === "string" && brand.length >= 5 && brand.length <= 50) return null;
+  return "La marca no es válida";
 };
 
-export const isModelValid = (model: string): Boolean => {
-  if (typeof model === "string" && model.length >= 5 && model.length <= 50) return true;
-  return false;
+export const isModelValid = (model: string): string | null => {
+  if (typeof model === "string" && model.length >= 5 && model.length <= 50) return null;
+  return "El modelo no es válido";
 };
 
-export const isYearValid = (year: string): Boolean => {
-  if (typeof year === "string" && year.length >= 2 && year.length <= 4) return true;
-  return false;
+export const isYearValid = (year: string): string | null => {
+  if (typeof year === "string" && year.length >= 2 && year.length <= 4) return null;
+  return "El año no es válido";
 };
 
-export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean => {
+export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): string | null => {
   const allowProperties = ["vehicleId", "patent"];
   if (
     typeof vehicle === "object" &&
     Object.keys(vehicle).every((key) => allowProperties.includes(key)) &&
     Object.values(vehicle).every((value) => typeof value === "string")
   )
-    return true;
-  return false;
+    return null;
+  return "Los datos para el vehiculo no son correctos";
 };
 
-export const isTypeVehicleValidByChauffeur = (value: string): boolean => {
-  const validTypes: TypeVehicle[] = ["motorcycle", "car"];
-  return validTypes.includes(value as TypeVehicle);
+export const isTypeVehicleValidByChauffeur = (value: string): string | null => {
+  const validTypes: TypeVehicle[] = ["motorcycle", "car", "bicycle"];
+  if (validTypes.includes(value as TypeVehicle)) return null;
+  return "El tipo de vehiculo no es válido";
 };
 
-export const isTypeVehicleValidByDealer = (value: string): boolean => {
+export const isTypeVehicleValidByDealer = (value: string): string | null => {
   const validTypes: TypeVehicle[] = ["motorcycle", "car", "bicycle", "van", "other"];
-  return validTypes.includes(value as TypeVehicle);
+  if (validTypes.includes(value as TypeVehicle)) return null;
+  return "El tipo de vehiculo no es válido";
 };
