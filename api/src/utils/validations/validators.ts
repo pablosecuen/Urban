@@ -325,9 +325,9 @@ export const isModelValid = (model: string): string | null => {
   return "El modelo no es válido";
 };
 
-export const isYearValid = (year: string): Boolean => {
-  if (typeof year === "string" && year.length >= 2 && year.length <= 4) return true;
-  return false;
+export const isYearValid = (year: string): string | null => {
+  if (typeof year === "string" && year.length >= 2 && year.length <= 4) return null;
+  return "El año no es válido";
 };
 
 export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean => {
