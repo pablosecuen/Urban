@@ -295,9 +295,9 @@ export const isOriginValid = (origin: string): string | null => {
   return "La origen no es válido";
 };
 
-export const isOcupationValid = (ocupation: string): Boolean => {
-  if (typeof ocupation === "string") return true;
-  return false;
+export const isOcupationValid = (ocupation: string): string | null => {
+  if (typeof ocupation === "string" && ocupation.length >= 5 && ocupation.length <= 50) return null;
+  return "La ocupación no es válido";
 };
 
 export const isOwnerIdValid = (ownerId: string): Boolean => {
