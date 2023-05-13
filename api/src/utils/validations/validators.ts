@@ -300,9 +300,9 @@ export const isOcupationValid = (ocupation: string): string | null => {
   return "La ocupación no es válido";
 };
 
-export const isOwnerIdValid = (ownerId: string): Boolean => {
-  if (typeof ownerId === "string") return true;
-  return false;
+export const isOwnerIdValid = (ownerId: string): string | null => {
+  if (typeof ownerId === "string") return null;
+  return "El id del propietario no es válido";
 };
 
 export const isVehiclesIdValid = (vehiclesId: any): boolean => {
