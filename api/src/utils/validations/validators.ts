@@ -330,20 +330,21 @@ export const isYearValid = (year: string): string | null => {
   return "El año no es válido";
 };
 
-export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): Boolean => {
+export const isVehicleToChauffeurValid = (vehicle: VehicleForChauffeur): string | null => {
   const allowProperties = ["vehicleId", "patent"];
   if (
     typeof vehicle === "object" &&
     Object.keys(vehicle).every((key) => allowProperties.includes(key)) &&
     Object.values(vehicle).every((value) => typeof value === "string")
   )
-    return true;
-  return false;
+    return null;
+  return "Los datos para el vehiculo no son correctos";
 };
 
-export const isTypeVehicleValidByChauffeur = (value: string): boolean => {
-  const validTypes: TypeVehicle[] = ["motorcycle", "car"];
-  return validTypes.includes(value as TypeVehicle);
+export const isTypeVehicleValidByChauffeur = (value: string): string | null => {
+  const validTypes: TypeVehicle[] = ["motorcycle", "car", "bicycle"];
+  if (validTypes.includes(value as TypeVehicle)) return null;
+  return "El tipo de vehiculo no es válido";
 };
 
 export const isTypeVehicleValidByDealer = (value: string): boolean => {
