@@ -21,7 +21,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
   const query: QueryParams = {
     origin: params.slug[0],
     destination: params.slug[1],
-    departureDate: params.slug[2].split("-").join("/"),
+    ...(params.slug[2] && { departureDate: params.slug[2].split("-").join("/") }),
     ...(params.slug[3] && { arrivalDate: params.slug[3] }),
     // armo la query y agrego las propiedades extras si las hay
   };
