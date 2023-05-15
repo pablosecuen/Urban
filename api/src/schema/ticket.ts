@@ -7,7 +7,7 @@ export interface TicketToRegister {
   quantity: number;
   paymentId: number;
   merchantOrden: number;
-  status: string;
+  statusMp: string;
 }
 
 export interface Ticket extends TicketToRegister {
