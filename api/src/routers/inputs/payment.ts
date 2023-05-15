@@ -1,4 +1,4 @@
-import postPayment from "../../controllers/inputs/payment";
+import { postPayment, getMerchantOrderData } from "../../controllers/inputs/payment";
 
 const { Router } = require("express");
 
@@ -13,4 +13,6 @@ paymentInputRouter.get("/feedback", function (req, res) {
     MerchantOrder: req.query.merchant_order_id,
   });
 });
+
+paymentInputRouter.get("/merchantOrder", getMerchantOrderData);
 export default paymentInputRouter;
