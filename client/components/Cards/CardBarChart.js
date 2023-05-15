@@ -1,21 +1,14 @@
 "use client";
 import React from "react";
 import { Chart } from "chart.js/auto";
+import axios from "axios";
 
 export default function CardBarChart() {
   React.useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      // const { data: revenue } = await axios.get("http://localhost:3000/ingresosPorMes");
-
-      // ------------    simulacion de data fetching    ------------  //
-      const fetchData = new Promise((res, rej) => {
-        setTimeout(() => {
-          res({ data: [150, 100, 120, 110, 150, 180, 150, 100, 120, 110, 150, 180] });
-        }, 300);
-      });
-      const { data: revenue } = await fetchData;
-      // ------------    simulacion de data fetching    ------------  //
+      const { data: revenue } = await axios.get("http://localhost:3000/admin/profit?mes=5");
+      const { tickets, orders, travels } = revenue;
 
       console.log({ fetchData: revenue });
       let config = {
@@ -37,19 +30,27 @@ export default function CardBarChart() {
           ],
           datasets: [
             {
-              label: "Ingresos",
+              label: "Tickets",
               backgroundColor: "#ed64a6",
               borderColor: "#ed64a6",
-              data: revenue,
+              data: tickets,
               fill: false,
               barThickness: 8,
             },
             {
-              label: "Otro",
+              label: "Orders",
+              backgroundColor: "#ed64a6",
+              borderColor: "#ed64a6",
+              data: orders,
               fill: false,
-              backgroundColor: "#4c51bf",
-              borderColor: "#4c51bf",
-              data: [27, 68, 86, 74, 10, 4, 87],
+              barThickness: 8,
+            },
+            {
+              label: "Travels",
+              backgroundColor: "#ed64a6",
+              borderColor: "#ed64a6",
+              data: travels,
+              fill: false,
               barThickness: 8,
             },
           ],
@@ -128,7 +129,7 @@ export default function CardBarChart() {
               <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">
                 Performance
               </h6>
-              <h2 className="text-xl font-semibold text-blueGray-700">Operaciones totales</h2>
+              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos totales</h2>
             </div>
           </div>
         </div>
