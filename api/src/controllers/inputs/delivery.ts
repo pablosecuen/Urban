@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
 import { Delivery, DeliveryToRegister } from "../../schema/delivery";
+import { successDeliveryRegister } from "../../utils/middelware/sendMail";
 
 /**
  * Controlador para crear distribuidores
@@ -51,6 +52,9 @@ export const newDelivery = async (req: Request, res: Response): Promise<void> =>
 
     //crear doocumento de distribuidor
     const docRef = await db.collection("deliverys").add(dataFormated);
+
+    await successDeliveryRegister(dataFormated.email, dataFormated.displayName);
+
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear el distribuidor", error);
@@ -68,7 +72,6 @@ export const updateDelivery = async (req: Request, res: Response): Promise<void>
     const id: string = req.params.id; // obtener id del distribuidor que se va a actualizar
     const data: Delivery = req.body; //datos de distribuidor a actualizar
     const updatedAt: string = new Date(Date.now()).toISOString();
-
 
     //verificar si existe el usuario en la base de datos
     const docRef = await db.collection("deliverys").doc(id).get();
