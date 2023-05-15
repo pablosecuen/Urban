@@ -15,6 +15,7 @@ export default function Pagos() {
     img: string | Passage | null;
     unit_price: number | Passage | null;
     quantity: number | Passage;
+    description: number | Passage | null;
   }
 
   const token: string = `${user.id}`;
@@ -30,6 +31,7 @@ export default function Pagos() {
         img: passage.img,
         unit_price: passage.price,
         quantity: passage.quantity,
+        description: passage.numberSeat,
       };
     });
   }
@@ -47,7 +49,8 @@ export default function Pagos() {
       picture_url: item.img,
       unit_price: item.unit_price,
       quantity: item.quantity,
-      // currency_id: "COP",
+      //currency_id: "COP",
+      description: item.description,
     };
   });
 

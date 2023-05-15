@@ -5,9 +5,9 @@ import {
   getUsersByCc,
   getUsersByEmail,
   getUsersByName,
+  deleteUserById,
 } from "./userActions";
 import { User } from "../../app/types/User";
-import { AxiosResponse } from "axios";
 interface UserState {
   allUsers: User[];
   userByName: User[];
@@ -111,6 +111,19 @@ const userSlice = createSlice({
       .addCase(getUsersByEmail.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
+      });
+
+    builder
+      .addCase(deleteUserById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteUserById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.userById[action.payload.id] = action.payload;
+      })
+      .addCase(deleteUserById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error al bannear usuario";
       });
   },
 });
