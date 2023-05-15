@@ -1,4 +1,11 @@
 import CardGestion from "@component/components/Cards/CardGestion";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Urban | Historial de viajes",
+  description: "Historial de viajes del usuario en la que puede ver los viajes que ha realizado",
+  keywords: "urban, historial, viajes, usuario,  gestion de viajes, gestion de viajes del usuario",
+};
 
 // Traigo todos los viajes del usuario
 
