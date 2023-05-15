@@ -27,6 +27,6 @@ export const getPassagesByQuery = createAsyncThunk<Passage[], QueryParams>(
     const response = await axios.get(
       `http://localhost:3000/passage?page=1&pageSize=10000&${urlSearchParams.toString()}`
     );
-    return response.data;
+    return response.data.passages;
   }
 );
