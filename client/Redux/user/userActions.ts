@@ -32,3 +32,8 @@ export const getUsersByEmail = createAsyncThunk("users/getUsersByEmail", async (
   const response = await axios.get(`http://localhost:3000/user?email=${email}`);
   return response.data.users;
 });
+
+export const deleteUserById = createAsyncThunk("users/deleteUser", async (userId: string) => {
+  const response = await axios.delete(`http://localhost:3000/user/delete/${userId}`);
+  return response.data;
+});
