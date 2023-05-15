@@ -4,12 +4,19 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-
-// components
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "@component/Redux/store/store";
+import { AnyAction } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { deleteUserById } from "@component/Redux/user/userActions";
+import { ToastContainer, toast } from "react-toastify";
 
 const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, selectedUser }) => {
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
+  const [bannId, setBannId] = useState("");
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -22,7 +29,12 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   );
 
   const handleSettingsClick = () => {
-    setShowDropDown(!showDropDown); // toggle state variable on click
+    setShowDropDown(!showDropDown);
+  };
+
+  const handleBann = () => {
+    setBannId(filteredUsers[0].id);
+    dispatch(deleteUserById(bannId));
   };
 
   return (
@@ -86,6 +98,13 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
               onClick={handleSettingsClick}
             >
               Settings
+            </button>
+            <button
+              className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+              type="button"
+              onClick={handleBann}
+            >
+              Ban
             </button>
             {showDropDown && <UserDropDownSettings />}
           </div>
