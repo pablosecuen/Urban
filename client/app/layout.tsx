@@ -1,10 +1,10 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
-
+import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Urban",
   description: "Solucion en tranportes a tu alcance ",
 };
