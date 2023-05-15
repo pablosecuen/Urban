@@ -12,13 +12,11 @@ export default function Checkout() {
   const paymentId: string | null = queryParams.get("payment_id"); //id del usuario de mp
   const merchantOrder: string | null = queryParams.get("merchant_order_id"); //codigo factura
   const status: string | null = queryParams.get("status"); //estado de exito o no
-  const [dataState, setDataState] = useState({});
   const userId: string | null = "";
 
   const getToken = async () => {
     try {
       const { data } = await axios.get(`/payment/merchantOrder?merchantOrder=${merchantOrder}`);
-      setDataState(data);
       //este axios pueeeede llegar a ser a mercadopago
       //aca se guarda la info y con esto generamos la factura
       const requestData = {
