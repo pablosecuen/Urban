@@ -16,9 +16,7 @@ export default function Gestion() {
         Historial de viajes
       </h2>
 
-      <section className=" flex h-full w-full flex-col gap-2 overflow-y-scroll rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10">
-        <CardGestion />
-      </section>
+      <CardGestion />
     </div>
   );
 }
