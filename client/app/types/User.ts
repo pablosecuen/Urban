@@ -1,4 +1,4 @@
-import { Address, Payment, Phone } from "../../../api/src/types/types.d";
+import { Address, Payment, Phone } from "../../../api/src/types/types";
 
 export interface UserToRegister {
   firstName: string;
@@ -17,7 +17,7 @@ export interface userData {
   address?: Address;
 }
 export interface User extends UserToRegister {
-  email: string | number | readonly string[] | undefined;
+  email: string;
   name: string;
   address: Address;
   payments: Payment[];

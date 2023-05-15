@@ -1,4 +1,11 @@
 import CardGestion from "@component/components/Cards/CardGestion";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Urban | Historial de viajes",
+  description: "Historial de viajes del usuario en la que puede ver los viajes que ha realizado",
+  keywords: "urban, historial, viajes, usuario,  gestion de viajes, gestion de viajes del usuario",
+};
 
 // Traigo todos los viajes del usuario
 
@@ -9,9 +16,7 @@ export default function Gestion() {
         Historial de viajes
       </h2>
 
-      <section className=" flex h-full w-full flex-col gap-2 overflow-y-scroll rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10">
-        <CardGestion />
-      </section>
+      <CardGestion />
     </div>
   );
 }
