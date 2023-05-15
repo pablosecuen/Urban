@@ -20,7 +20,7 @@ export const getPassagesId = createAsyncThunk<PassageToRegister, string>(
   }
 );
 
-export const getPassagesByQuery = createAsyncThunk<PassageResponse, QueryParams>(
+export const getPassagesByQuery = createAsyncThunk<Passage[], QueryParams>(
   "passage/fetchPassagesByQuery",
   async (queryParams: QueryParams) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
