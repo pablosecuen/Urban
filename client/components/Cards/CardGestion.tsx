@@ -59,7 +59,11 @@ export default function CardGestion() {
   };
 
   return (
-    <>
+    <section
+      className={` flex h-full w-full flex-col gap-2  ${
+        allTickets.length > 4 ? "scrollbar overflow-y-scroll" : ""
+      } rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10`}
+    >
       {allTickets.map((ticket) => (
         <>
           <div key={ticket.id} className="flex  items-center justify-center align-middle ">
@@ -131,6 +135,6 @@ export default function CardGestion() {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 }
