@@ -1,4 +1,3 @@
-"use client";
 import BtnMp from "./components/btnMp.pasajes";
 
 export default function Pagos() {
