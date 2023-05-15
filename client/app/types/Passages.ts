@@ -1,49 +1,42 @@
-export interface PassageToRegister {
+export interface Passage  {
   id: string;
-  duration: string;
-  numberSeat: number;
-  createdAt: string;
-  deleted: boolean;
-  price: number;
   origin: string;
   destination: string;
   description: string;
+  duration: string;
+  arrivalDate: string;
   departureDate: string;
   departureTime: string;
-  stock: number;
-  arrivalDate: string;
-  status: boolean;
-  img: string;
-}
-
-export interface PassageResponse {
+  quantity: number;
+  numberSeat: number;
   price: number;
+  stock: number;
   img: string;
-  imageUrl: string;
-  destination: string;
-  origin: string;
-  id: string;
-  passages?: PassageToRegister[];
-  totalPages: number;
-}
-
-export interface Passage extends PassageToRegister {
+  
+  createdAt: string;
   deleted: boolean;
   status: boolean;
-  id: string;
+}
+
+export interface PassagePayload {
+  passageId: string;
+  quantity: number;
+}
+
+
+export interface PassageResponse   {
+  passages: Passage[];
+  totalPages: number;
+  
+}
+export interface PassageToRegister extends Passage {
+
+  departureTime: string;
+
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
   updatedAt: string;
-}
-
-export interface Query {
-
-  origin: string,
-  destination: string,
-  departureDate: string,
-  arrivalDate?: string,
-  price?: number,
 }
 
 export interface CardProfilePropsPassage {

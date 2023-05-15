@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Ticket, TicketToRegister } from "../../schema/ticket";
 import { db } from "../../connection/connection";
 import firebase from "firebase-admin";
+import { successTicket } from "../../utils/middelware/sendMail";
 
 export const newTicket = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -40,13 +41,13 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
         .update({
           "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
-      db
-        .collection("passages")
-        .doc(data.passageId)
-        .update({
-          stock: passageData.stock - 1,
-        }),
+      db.collection("passages").doc(data.passageId).update({
+        stock: data.quantity,
+      }),
     ]);
+
+    const userData = userDoc.data();
+    await successTicket(userData.email, userData.name);
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {

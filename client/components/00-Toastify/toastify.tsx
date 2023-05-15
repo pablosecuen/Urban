@@ -80,6 +80,7 @@ export default function Toastify() {
         pauseOnHover
         //Light, dark o colored... elijan el mas conveniente, recuerden cambiar esto tambien en el toast
         theme="light"
+        closeButton={false}
       />
     </div>
   );

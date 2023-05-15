@@ -1,24 +1,12 @@
-//Padre
 "use client";
-import { Passage, PassageToRegister } from "@component/app/types/Passages";
-import { getAllPassages, getPassagesId } from "@component/Redux/passage/passageActions";
+import { Passage } from "@component/app/types/Passages";
 import { RootState } from "@component/Redux/store/store";
-import { AnyAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
 
 export default function Pagos() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const user = JSON.parse(localStorage.getItem("user") || "");
-  const passages = useSelector((state: RootState) => state.passage.allPassages);
-
-  useEffect(() => {
-    dispatch(getAllPassages());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const passages = useSelector((state: RootState) => state.payment.passageById);
 
   interface ToPay {
     passageId: string; // Update the type to a string or the appropriate type for passageId
@@ -41,14 +29,15 @@ export default function Pagos() {
         name: `De ${passage.origin} a ${passage.destination}`,
         img: passage.img,
         unit_price: passage.price,
-        quantity: 1,
+        quantity: passage.quantity,
       };
     });
   }
 
   const totalPrice = toPay.reduce((total, item) => {
     const unitPrice = typeof item.unit_price === "number" ? item.unit_price : 0;
-    return total + unitPrice;
+    const quantity = typeof item.quantity === "number" ? item.quantity : 0;
+    return total + unitPrice * quantity;
   }, 0);
 
   const arrToPay = toPay.map((item) => {
@@ -61,8 +50,6 @@ export default function Pagos() {
       // currency_id: "COP",
     };
   });
-  //Va la alerta unicamente si falla
-  //Si es exitoso te redirecciona a mercadopago
 
   const handleClickMP = async () => {
     try {
@@ -76,14 +63,9 @@ export default function Pagos() {
   };
 
   return (
-    <div className="flex w-4/5 flex-col items-center justify-center gap-4 rounded-3xl border-2 py-20 text-center shadow-2xl shadow-black/40 lg:p-10">
+    <>
       <span className="text-2xl">Valor a pagar: ${totalPrice}</span>
-      <button>Bancolombia</button>
       <button onClick={handleClickMP}>Mercado Pago</button>
-      <button>Generar ticket Efecty</button>
-      <button>PSE</button>
-      <button>Efectivo</button>
-      <span className="font-bold">Cuando tu pago sea acreditado podrás gestionar tu viaje</span>
-    </div>
+    </>
   );
 }

@@ -131,11 +131,11 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     Nombre
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.displayName : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {" "}
+                    {selectedChauffeur ? selectedChauffeur.displayName : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -146,11 +146,11 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     Email
                   </label>
-                  <input
-                    type="email"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.email : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {" "}
+                    {selectedChauffeur ? selectedChauffeur.email : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -159,24 +159,23 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Medios de pago
+                    Vehiculo
                   </label>
                   <div className="flex flex-col gap-2">
-                    <input
-                      type="text"
-                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      defaultValue={selectedChauffeur?.payments?.cardNumber ?? ""}
-                    />
-                    <input
-                      type="text"
-                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      defaultValue={selectedChauffeur?.payments?.expirationDate ?? ""}
-                    />
-                    <input
-                      type="text"
-                      className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      defaultValue={selectedChauffeur?.payments?.securityCode ?? ""}
-                    />
+                    <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                      {" "}
+                      auto hardodeado
+                    </p>
+
+                    <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                      {" "}
+                      modelo hardodeado
+                    </p>
+
+                    <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                      {" "}
+                      patente hardodeado
+                    </p>
                   </div>
 
                   <div className="flex justify-center">
@@ -230,15 +229,12 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     Dirección
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={
-                      typeof selectedChauffeur?.address === "string"
-                        ? selectedChauffeur.address
-                        : selectedChauffeur?.address?.street
-                    }
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {typeof selectedChauffeur?.address === "string"
+                      ? selectedChauffeur.address
+                      : selectedChauffeur?.address?.street}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -249,11 +245,10 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     Género
                   </label>
-                  <input
-                    type="email"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.gender : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedChauffeur ? selectedChauffeur.gender : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -264,11 +259,10 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     Nacionalidad
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.nationality : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedChauffeur ? selectedChauffeur.nationality : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -279,11 +273,10 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     C.C.
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.cc : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedChauffeur ? selectedChauffeur.cc : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -294,31 +287,67 @@ const CardChauffeurs: React.FC<CardChauffeursProps> = ({
                   >
                     C.E.
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedChauffeur ? selectedChauffeur.ce : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedChauffeur ? selectedChauffeur.ce : ""}
+                  </p>
                 </div>
               </div>
             </div>
 
             <hr className="border-b-1 mt-6 border-blueGray-300" />
 
-            <h6 className="mb-6 mt-3 text-sm font-bold uppercase text-blueGray-400">About Me</h6>
-            <div className="w-full px-4 lg:w-4/12">
-              <div className="relative mb-3 w-full">
+            <h6 className="mb-6 mt-3 text-sm font-bold uppercase text-blueGray-400">
+              Informacion extra
+            </h6>
+            <div className="flex w-full flex-wrap  ">
+              <div className="relative mb-3 w-1/2 px-4">
                 <label
                   className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                   htmlFor="grid-password"
                 >
-                  C.E.
+                  Ocupacion
                 </label>
-                <input
-                  type="text"
-                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue="notas especiales del usuario"
-                />
+
+                <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                  {selectedChauffeur ? selectedChauffeur.occupation : ""}
+                </p>
+              </div>
+              <div className="relative mb-3 w-1/2  px-4">
+                <label
+                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                  htmlFor="grid-password"
+                >
+                  Tipo de choffer
+                </label>
+
+                <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                  {selectedChauffeur ? selectedChauffeur.typeChauffeur : ""}
+                </p>
+              </div>
+              <div className="relative mb-3 w-1/2  px-4">
+                <label
+                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                  htmlFor="grid-password"
+                >
+                  Rating
+                </label>
+
+                <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                  {selectedChauffeur ? selectedChauffeur.rating : ""}
+                </p>
+              </div>
+              <div className="relative mb-3 w-1/2  px-4">
+                <label
+                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                  htmlFor="grid-password"
+                >
+                  Historial
+                </label>
+
+                <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                  {selectedChauffeur ? selectedChauffeur.history : ""}
+                </p>
               </div>
             </div>
           </form>

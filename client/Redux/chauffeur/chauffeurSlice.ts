@@ -2,6 +2,10 @@ import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 import { Chauffeur, FilteredChauffeurs } from "@component/app/types/Chauffeur";
 import { getChauffeurs } from "./chauffeurActions";
 
+//!!!!!!!!!!!!!!!
+//Hay que refactorizar el codigo, tiene que haber actions unicamente para GetAll, GetById, y GetByQueryParams
+//!!!!!!!!!!!!!!!
+
 interface ChauffeurInitialState {
   chauffeurs: FilteredChauffeurs | null;
   chauffeursPendingPayment: Chauffeur[]; // van a traer el balance desde el back? sino adaptar

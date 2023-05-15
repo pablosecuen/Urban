@@ -1,5 +1,3 @@
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * I M P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
 // Icons NavBar
 import {
   HiMenuAlt1,
@@ -30,19 +28,19 @@ export const links = [
   },
   {
     label: "perfil",
-    route: "/perfil",
+    route: "/home/perfil",
     icon: HiUserCircle,
     id: "2",
   },
   {
     label: "notificaciones",
-    route: "/notificaciones",
+    route: "/home/notificaciones",
     icon: HiOutlineBell,
     id: "3",
   },
   {
     label: "ayuda",
-    route: "/ayuda",
+    route: "/home/ayuda",
     icon: HiOutlineAnnotation,
     id: "4",
   },
@@ -58,19 +56,19 @@ export const linksMobile = [
   },
   {
     label: "Perfil",
-    route: "/perfil",
+    route: "/home/perfil",
     icon: HiUserCircle,
     id: "2",
   },
   {
     label: "Notificaciones",
-    route: "/notificaciones",
+    route: "/home/notificaciones",
     icon: HiOutlineBell,
     id: "3",
   },
   {
     label: "Ayuda",
-    route: "/ayuda",
+    route: "/home/ayuda",
     icon: HiOutlineAnnotation,
     id: "4",
   },

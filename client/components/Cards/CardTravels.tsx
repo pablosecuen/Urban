@@ -102,11 +102,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     ID del viaje
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.userId : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.userId : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -117,11 +116,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Id del chofer que realizo el viaje
                   </label>
-                  <input
-                    type="email"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.chauffeurId : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.chauffeurId : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -132,11 +130,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Nombre del chofer
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.origin : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.origin : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -147,11 +144,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Apellido del chofer
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.destination : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.destination : ""}
+                  </p>
                 </div>
               </div>
             </div>
@@ -189,11 +185,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Origen
                   </label>
-                  <input
-                    type="email"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.origin : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.origin : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -204,11 +199,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Destino
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.destination : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.destination : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -219,11 +213,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Precio
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.price : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.price : ""}
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-4/12">
@@ -234,11 +227,10 @@ const CardTravels: React.FC<CardTravelsProps> = ({
                   >
                     Estado del viaje
                   </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedTravel ? selectedTravel.travel : ""}
-                  />
+
+                  <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                    {selectedTravel ? selectedTravel.travel : ""}
+                  </p>
                 </div>
               </div>
             </div>

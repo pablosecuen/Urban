@@ -7,6 +7,7 @@ import chauffeurReducer from "../chauffeur/chauffeurSlice";
 import notificationsReducer from "../notifications/notificationsSlice";
 import vehicleReducer from "../vehicle/vehicleSlice";
 import ticketReducer from "../ticket/ticketSlice";
+import paymentReducer from "../payment/paymentSlice";
 
 export function makeStore() {
   return configureStore({
@@ -19,6 +20,7 @@ export function makeStore() {
       chauffeur: chauffeurReducer,
       vehicle: vehicleReducer,
       notifications: notificationsReducer,
+      payment: paymentReducer,
     },
   });
 }

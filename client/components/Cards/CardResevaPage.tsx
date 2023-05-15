@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
-import { Query } from "@component/app/types/Passages";
+import { QueryParams } from "@component/app/types/QueryParams";
 
 export default function Reserva() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function Reserva() {
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
 
-  const isFormValid = origin && destination && departureDate ? true : false;
+  const isFormValid = origin && destination ? true : false;
 
   // - - - - - - - - - - - - -  HANDLERS DE LOS INPUTS - - - - - - - - - - - - -
 
@@ -41,10 +41,10 @@ export default function Reserva() {
   const handleSubmit = (e: any) => {
     e.preventDefault(); // evitar el envio del formulario predeterminado
 
-    const query: Query = {
+    const query: QueryParams = {
       origin: origin.toLowerCase(),
       destination: destination.toLowerCase(),
-      departureDate: departureDate.split("-").reverse().join("-"),
+      ...(departureDate && {departureDate: departureDate.split("-").reverse().join("-")}),
       ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
       ...(price && { price }),
       // armo la query y agrego las propiedades extras si las hay

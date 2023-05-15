@@ -5,6 +5,7 @@ import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DeliveryRating } from "../../schema/deliveryRating";
 import { Delivery } from "../../schema/delivery";
+import { successRegister } from "../../utils/middelware/sendMail";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -56,6 +57,9 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       password: hashedPassword,
     };
     const docRef = await db.collection("users").add(user);
+    /////////////
+    await successRegister(user.email, user.name);
+    /////////////        ACA ESTAAAAA
     res.status(201).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al crear el usuario", error);

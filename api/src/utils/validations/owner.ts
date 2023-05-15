@@ -7,7 +7,6 @@ import {
   isDisplayNameValid,
   isEmailValid,
   isFirstNameValid,
-  isLastNameValid,
   isPhoneValid,
   isVehiclesIdValid,
 } from "./validators";
@@ -15,20 +14,12 @@ import {
 export const newOwnerValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: OwnerToRegister = req.body;
-    const allowProperties = [
-      "firstName",
-      "lastName",
-      "email",
-      "phone",
-      "address",
-      "cc",
-      "ce",
-    ];
+    const allowProperties = ["firstName", "lastName", "email", "phone", "address", "cc", "ce"];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
     if (
       !isFirstNameValid(data.firstName) ||
-      !isLastNameValid(data.lastName) ||
+      // !isLastNameValid(data.lastName) ||
       !isEmailValid(data.email) ||
       !isPhoneValid(data.phone) ||
       !isAddressValid(data.address) ||

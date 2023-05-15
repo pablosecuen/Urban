@@ -27,6 +27,7 @@ export default function Perfil() {
     if (userDataString) {
       setUserData(JSON.parse(userDataString));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

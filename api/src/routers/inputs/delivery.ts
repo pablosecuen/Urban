@@ -1,20 +1,13 @@
 import { Router } from "express";
-import {
-  deleteDelivery,
-  newDelivery,
-  updateDelivery,
-} from "../../controllers/inputs/delivery";
-import {
-  newDeliveryValidate,
-  updateDeliveryValidate,
-} from "../../utils/validations/delivery";
+import { deleteDelivery, newDelivery, updateDelivery } from "../../controllers/inputs/delivery";
+import { newDeliveryValidate, updateDeliveryValidate } from "../../utils/validations/delivery";
 
 const router = Router();
 
 //Ruta creancion distribuidor
-router.post("/", newDeliveryValidate, newDelivery);
+router.post("/", newDelivery);
 //Ruta actualizar distribuidor
-router.put("/:id", updateDeliveryValidate, updateDelivery);
+router.put("/:id", updateDelivery);
 //Ruta habilitar distribuidor
 router.patch("/enable/:id", deleteDelivery);
 //Ruta eliminar distribuido

@@ -9,6 +9,6 @@ const router = Router();
 router.post("/", newTravelValidated, newTravel);
 
 router.patch("/:id", updateTravelValidated, updateTravel);
-router.patch("/reject/:id", updateTravelValidated, cancelTravel);
+router.patch("/reject/:id", cancelTravel);
 
 export default router;

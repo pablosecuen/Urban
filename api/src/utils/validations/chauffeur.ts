@@ -8,7 +8,6 @@ import {
   isEmailValid,
   isFirstNameValid,
   isImgValid,
-  isLastNameValid,
   isLicenseValid,
   isNationalityValid,
   isOcupationValid,
@@ -16,7 +15,7 @@ import {
   isPhoneValid,
   isTypeChauffeurValid,
   isVehicleToChauffeurValid,
-  isGenderVality
+  isGenderVality,
 } from "./validators";
 
 export const newChauffeurValidated = (req: Request, res: Response, next: NextFunction): void => {
@@ -34,7 +33,7 @@ export const newChauffeurValidated = (req: Request, res: Response, next: NextFun
       "cc",
       "img",
       "license",
-      "gender"
+      "gender",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Datos no permitidos");
@@ -42,7 +41,7 @@ export const newChauffeurValidated = (req: Request, res: Response, next: NextFun
     console.log(isCcValid(data.cc));
     if (
       !isFirstNameValid(data.firstName) ||
-      !isLastNameValid(data.lastName) ||
+      // !isLastNameValid(data.lastName) ||
       !isAddressValid(data.address) ||
       !isEmailValid(data.email) ||
       !isPasswordValid(data.password) ||

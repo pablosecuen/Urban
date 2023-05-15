@@ -9,14 +9,13 @@ mercadopago.configure({
 const postPayment = (req, res) => {
   const products = req.body;
   console.log(req.body);
-  
+
   // preference
   let preference = {
     items: products,
     back_urls: {
       // corregir redireccionamiento
-      success: `http://localhost:3001/home/especiales/confirmacion/pagos/checkout`,
-
+      success: `http://localhost:3001/home/reserva/viajes/confirmacion/pagos/checkout`,
       failure: `http://localhost:3001/failure`,
       pending: ``,
     },

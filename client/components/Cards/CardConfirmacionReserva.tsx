@@ -1,33 +1,75 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@component/Redux/store/store";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "@reduxjs/toolkit";
+import { getPassagesId } from "@component/Redux/passage/passageActions";
+import { useEffect, useState } from "react";
+import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
+export default function CardConfirmacionReserva({ id }: { id: string }) {
+  const [count, setCount] = useState(0);
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const passage = useSelector((state: RootState) => state.passage.passageById);
+  const stock: any = passage?.stock; // Stock disponible del objeto (ejemplo)
 
-import Link from "next/link";
+  const handleIncrement = () => {
+    if (count < stock) {
+      setCount(count + 1);
+    }
+  };
 
-export default function CardConfirmacionReserva() {
+  const handleDecrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getPassagesId(id));
+    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
+  }, [count, id]); // Include 'count' and 'id' in the dependency array
+
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border-2 py-4 shadow-2xl shadow-black/40">
-      <p className="lg:text-center lg:text-3xl lg:font-bold">Viaje Confirmado</p>
-      <div className="flex justify-center">
-        <p className="lg:text-center lg:text-3xl lg:font-bold">Nombre del conductor</p>
-        <p className=" lg:text-center lg:text-3xl">Luis martin</p>
+    <>
+    
+      <article className=" flex justify-center gap-2 ">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.departureTime}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Origen: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.origin}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Destino: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.destination}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de salida: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.departureDate}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de llegada: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.arrivalDate}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Valor a pagar: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.price}</p>
+      </article>
+      <article className="flex justify-center gap-2">
+        <h5 className="lg:text-right lg:text-lg lg:font-bold">Stock: </h5>
+        <p className=" lg:text-left lg:text-lg">{passage?.stock}</p>
+      </article>
+      <div className="flex w-auto items-center justify-center text-center">
+        <button onClick={handleDecrement} className="w-auto">
+          -
+        </button>
+        <p className="p-4">{count}</p>
+        <button onClick={handleIncrement} className="w-auto">
+          +
+        </button>
       </div>
-      <div className="flex justify-center">
-        <p className="lg:text-center lg:text-3xl lg:font-bold"> Hora de recogida</p>
-        <p className=" lg:text-center lg:text-3xl">3:00 horas</p>
-      </div>
-      <div className="flex justify-center">
-        <p className="lg:text-center lg:text-3xl lg:font-bold">Lugar de recogida</p>
-        <p className=" lg:text-center lg:text-3xl">la casa de ima</p>
-      </div>
-      <div className="flex justify-center">
-        <p className="lg:text-center lg:text-3xl lg:font-bold">Valor a pagar</p>
-        <p className=" lg:text-center lg:text-3xl">un toco de plata</p>
-      </div>
-      <p className="text-center text-gray-400">
-        tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
-      </p>
-      <Link href="/home/reserva/viajes/confirmacion/pagos" className="flex justify-center">
-        <button className="mt-10 w-1/2">Ir a pagar</button>
-      </Link>
-    </div>
+    </>
   );
 }
