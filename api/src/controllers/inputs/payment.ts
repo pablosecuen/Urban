@@ -16,7 +16,6 @@ const postPayment = (req, res) => {
     back_urls: {
       // corregir redireccionamiento
       success: `http://localhost:3001/home/reserva/viajes/confirmacion/pagos/checkout`,
-
       failure: `http://localhost:3001/failure`,
       pending: ``,
     },
