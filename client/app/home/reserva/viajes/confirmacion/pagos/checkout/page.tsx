@@ -1,8 +1,6 @@
 "use client";
 import axios from "axios";
-import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import success from "../../../../../../../assets/imagenes/success.png";
 import { useEffect, useState } from "react";
 //import CardCheckout from "@component/components/Cards/CardCheckout";
 
@@ -19,22 +17,7 @@ export default function Checkout() {
   const userId: string | null = "";
 
   // - - - - - - - - - - - - NOTIFICACIONES - - - - - - - - - - - -
-  const notifyError = () =>
-    toast.error("Notificacion de Error", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
   const notifySuccess = () =>
-    //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
-    //Si miran cada Toast solo con cambiar el success, error, warn o info, cambie su funcion
-    //No hace falta cambiar el ToastContainer a la par si solo se cambia el Toast
     toast.success(`Su pago ha sido realizado con éxito!`, {
       position: "bottom-center",
       autoClose: 5000,
