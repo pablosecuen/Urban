@@ -16,7 +16,7 @@ interface CardReservaSlugProps {
 
 export default function CardReservaSlug({ params }: CardReservaSlugProps) {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery.passages);
+  const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery);
 
   const query: QueryParams = {
     origin: params.slug[0],
