@@ -9,6 +9,11 @@ import { User } from "../../app/types/User";
 // };
 
 export const getAllUsers = createAsyncThunk<User[], void>("users/getAllUsers", async () => {
+  const response = await axios.get(`http://localhost:3000/user?page=1&pageSize=1000`);
+  return response.data.users;
+});
+
+export const getAllDeletedUsers = createAsyncThunk<User[], void>("users/getAllUsers", async () => {
   const response = await axios.get(`http://localhost:3000/user?page=1&pageSize=1000&deleted=true`);
   return response.data.users;
 });

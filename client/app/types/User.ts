@@ -9,6 +9,7 @@ export interface UserToRegister {
   updatedAt?: string;
 }
 export interface userData {
+  id: string;
   firstName: string;
   lastName: string;
   name: string;
