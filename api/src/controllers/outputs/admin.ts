@@ -59,8 +59,8 @@ export const getProfit = async (req: Request, res: Response) => {
   }
 };
 
-// getRevenue recibe un año como query string y retorna los ingresos de cada mes de ese año de tickets, orders y travels
-export const getRevenue = async (req: Request, res: Response) => {
+// getGrossIncome recibe un año como query string y retorna los ingresos de cada mes de ese año de tickets, orders y travels
+export const getGrossIncome = async (req: Request, res: Response) => {
   try {
     const year = req.query.year as string;
     const ticketsSnap = await db
