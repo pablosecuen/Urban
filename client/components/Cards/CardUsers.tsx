@@ -21,7 +21,6 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   const [enableId, setEnableId] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(allUsers);
 
-
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
   };
@@ -114,9 +113,9 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </button>
                 )}
               </div>
-              <div className="flex w-80 items-center justify-around border-2">
-                <p className="flex ">
-                  <p className=" font-bold">id: </p>
+              <div className="flex  items-center justify-start ">
+                <p className="flex-start flex">
+                  <strong className="w-auto">id: </strong>
                   {user.id}
                 </p>
               </div>
