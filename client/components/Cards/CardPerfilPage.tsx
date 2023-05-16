@@ -6,11 +6,13 @@ import { RootState } from "@component/Redux/store/store";
 import { getTravelsByUserId } from "../../Redux/travel/travelActions";
 import { Dispatch } from "@reduxjs/toolkit";
 import { type } from "os";
+import CardHistorialTickets from "./CardHistorialTickets";
+import { User, userData } from "@component/app/types/User";
 
 export default function Perfil() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Viajes");
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<userData | null>(null);
 
   const dispatch = useDispatch<Dispatch<any>>();
   const userTravels = useSelector((state: RootState) => state.travel.userTravels);
@@ -19,16 +21,19 @@ export default function Perfil() {
     setActiveTab(tabName);
   };
 
-  const BENJAUSER = "112977155091916444768";
+
+
   useEffect(() => {
-    dispatch(getTravelsByUserId("112977155091916444768"));
-    setLoading(false);
     const userDataString = localStorage.getItem("user");
+    setLoading(false);
     if (userDataString) {
       setUserData(JSON.parse(userDataString));
     }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(userData);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -56,7 +61,7 @@ export default function Perfil() {
         <>
           {activeTab === `${item.name}` && (
             <div
-              className="text-35 h-[416px] w-full overflow-hidden bg-gray-300 xl:border-2 xl:bg-gray-200"
+              className="text-35 h-[416px] w-full overflow-hidden bg-gray-white xl:border-2"
               title={item.title}
             >
               <h4 className="border-y-2 border-blue text-center text-lg font-semibold">{item.p}</h4>
@@ -67,23 +72,8 @@ export default function Perfil() {
                     userTravels.length > 3 && "overflow-scroll"
                   } pb-4 xl:border-2`}
                 >
-                  {userTravels.map((item, id) => (
-                    <div
-                      // onClick={asdas}
-                      className="my-2 flex h-1/4 w-4/5 items-center rounded-lg bg-blueGray-300 py-12 font-mono shadow-xl shadow-black/20 hover:animate-pulse hover:cursor-pointer xl:bg-gradient-to-r xl:from-blueGray-300 xl:to-blueGray-200"
-                      key={id}
-                    >
-                      <p className="text-center font-semibold">
-                        Desde: <span className="font-normal">{item.origin}</span>
-                      </p>
-                      <p className="text-center font-semibold">
-                        Hasta: <span className="font-normal">{item.destination}</span>
-                      </p>
-                      <p className="text-center font-semibold">
-                        Precio: <span className="font-normal">${item.price}</span>
-                      </p>
-                    </div>
-                  ))}
+             <CardHistorialTickets />
+
                 </div>
               )}
             </div>
