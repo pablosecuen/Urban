@@ -9,7 +9,7 @@ import { User } from "../../app/types/User";
 // };
 
 export const getAllUsers = createAsyncThunk<User[], void>("users/getAllUsers", async () => {
-  const response = await axios.get(`http://localhost:3000/user?page=1&pageSize=1000`);
+  const response = await axios.get(`http://localhost:3000/user?page=1&pageSize=1000&deleted=true`);
   return response.data.users;
 });
 
@@ -39,6 +39,6 @@ export const deleteUserById = createAsyncThunk("users/deleteUserById", async (us
 });
 
 export const enableUserById = createAsyncThunk("users/enableUserById", async (userId: string) => {
-  const response = await axios.put(`http://localhost:3000/user/enable/${userId}`);
+  const response = await axios.patch(`http://localhost:3000/user/enable/${userId}`);
   return response.data;
 });
