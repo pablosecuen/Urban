@@ -106,7 +106,7 @@ const Sidebar: React.VFC<SidebarProps> = (
                     ></path>{" "}
                   </g>
                 </svg>{" "}
-                <Link href="/admin">Dashboard</Link>
+                <Link href="/admin/dashboard">Dashboard</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
