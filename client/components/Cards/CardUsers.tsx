@@ -115,7 +115,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
               </div>
               <div className="flex  items-center justify-start ">
                 <p className="flex-start flex">
-                  <strong className="w-auto">id: </strong>
+                  <strong className="w-auto pr-2">id: </strong>
                   {user.id}
                 </p>
               </div>
