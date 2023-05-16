@@ -11,12 +11,13 @@ export default function CardHome() {
   }
 
   const user = JSON.parse(localStorage.getItem("user")!);
+  console.log(user);
 
   const notifySuccess = () =>
     //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
     //Si miran cada Toast solo con cambiar el success, error, warn o info, cambie su funcion
     //No hace falta cambiar el ToastContainer a la par si solo se cambia el Toast
-    toast.success(`Bienvenido a ${user.name}`, {
+    toast.success(`Bienvenido ${user?.name} `, {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,

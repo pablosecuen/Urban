@@ -59,8 +59,8 @@ export const getProfit = async (req: Request, res: Response) => {
   }
 };
 
-// getRevenue recibe un año como query string y retorna los ingresos de cada mes de ese año de tickets, orders y travels
-export const getRevenue = async (req: Request, res: Response) => {
+// getGrossIncome recibe un año como query string y retorna los ingresos de cada mes de ese año de tickets, orders y travels
+export const getGrossIncome = async (req: Request, res: Response) => {
   try {
     const year = req.query.year as string;
     const ticketsSnap = await db
@@ -113,6 +113,77 @@ export const getRevenue = async (req: Request, res: Response) => {
   }
 };
 
+export const getOperations = async (req: Request, res: Response) => {
+  try {
+    const year = req.query.year as string;
+    const ticketsSnap = await db
+      .collection("tickets")
+      .where("createdAt", ">=", year)
+      .where("createdAt", "<", year + 1)
+      .get();
+
+    const ticketsPerMonth = {};
+    ticketsSnap.docs.forEach((doc) => {
+      const month = new Date(doc.data().createdAt).getMonth();
+      ticketsPerMonth[month] = ticketsPerMonth[month] ? ticketsPerMonth[month] + 1 : 1;
+    });
+
+    const ordersSnap = await db
+      .collection("orders")
+      .where("createdAt", ">=", year)
+      .where("createdAt", "<", year + 1)
+      .get();
+
+    const ordersPerMonth = {};
+    ordersSnap.docs.forEach((doc) => {
+      const month = new Date(doc.data().createdAt).getMonth();
+      ordersPerMonth[month] = ordersPerMonth[month] ? ordersPerMonth[month] + 1 : 1;
+    });
+
+    const travelsSnap = await db
+      .collection("travels")
+      .where("createdAt", ">=", year)
+      .where("createdAt", "<", year + 1)
+      .get();
+
+    const travelsPerMonth = {};
+    travelsSnap.docs.forEach((doc) => {
+      const month = new Date(doc.data().createdAt).getMonth();
+      travelsPerMonth[month] = travelsPerMonth[month] ? travelsPerMonth[month] + 1 : 1;
+    });
+
+    // months van del 0 al 11
+    res.status(200).json({ ticketsPerMonth, ordersPerMonth, travelsPerMonth });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Ha ocurrido un error" });
+  }
+};
+
+export const getUserRecords = async (req: Request, res: Response) => {
+  try {
+    const year = req.query.year as string;
+    const usersSnap = await db
+      .collection("users")
+      .where("createdAt", ">=", year)
+      .where("createdAt", "<", year + 1)
+      .get();
+
+    const usersRecordsPerMonth = {};
+    usersSnap.docs.forEach((doc) => {
+      const month = new Date(doc.data().createdAt).getMonth();
+      usersRecordsPerMonth[month] = usersRecordsPerMonth[month]
+        ? usersRecordsPerMonth[month] + 1
+        : 1;
+    });
+
+    // months van del 0 al 11
+    res.status(200).json({ usersRecordsPerMonth });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Ha ocurrido un error" });
+  }
+};
 export const getInactiveChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
     const { page = 1, pageSize = 10, ...filters } = req.query;

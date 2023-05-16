@@ -61,7 +61,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         password,
       };
       await createUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+
       sessionStorage.removeItem("user");
       sessionStorage.removeItem("isRegister");
     } else {
@@ -73,10 +73,12 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   const createUser = async (userData: any) => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
-      console.log(response.data); // the created user data
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       router.push("/home");
-    } catch (error) {
-      console.log("salio todo mal");
+    } catch (error: any) {
+      console.log(error);
+      // Este mismo error pero con la alerta de notificacion
+      alert(error?.response?.data?.message);
     }
   };
   return (
