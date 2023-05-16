@@ -47,7 +47,8 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     ]);
 
     const userData = userDoc.data();
-    await successTicket(userData.email, userData.name);
+    //comentamos el mail porq tira errores del token
+    //await successTicket(userData.email, userData.name);
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {
