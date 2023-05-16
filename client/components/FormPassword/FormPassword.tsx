@@ -27,6 +27,12 @@ export default function FormPassword() {
     >
       <div className="flex h-full flex-col justify-center gap-8">
         <div className="flex flex-col items-center gap-2">
+          <label htmlFor="" className="text-center">
+            Email:
+          </label>
+          <input type="text" name="email" className="pl-2" />
+        </div>
+        <div className="flex flex-col items-center gap-2">
           <label className="text-center">Contraseña:</label>
           <div className="relative flex">
             <input
@@ -79,6 +85,12 @@ export default function FormPassword() {
         <div>
           <button>Guardar contraseña</button>
         </div>
+        <small>
+          Quieres volver al inicio?{" "}
+          <Link href={"http://localhost:3001"}>
+            <span className="text-blue hover:cursor-pointer hover:underline">Click aqui</span>
+          </Link>
+        </small>
       </div>
     </form>
   );
