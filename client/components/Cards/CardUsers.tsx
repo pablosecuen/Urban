@@ -16,9 +16,11 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
 
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
+
   const [bannId, setBannId] = useState("");
   const [enableId, setEnableId] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(allUsers);
+
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -37,14 +39,16 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
     setShowDropDown(!showDropDown);
   };
 
-  const handleBann = () => {
-    setBannId(filteredUsers[0].id);
-    dispatch(deleteUserById(bannId));
+  const handleBann = (id: string) => {
+    console.log(id);
+    dispatch(deleteUserById(id));
+    console.log("Borrado");
   };
 
-  const handleEnable = () => {
-    setEnableId(filteredUsers[0].id);
-    dispatch(enableUserById(enableId));
+  const handleEnable = (id: string) => {
+    console.log(id);
+    dispatch(enableUserById(id));
+    console.log("Habilitado");
   };
 
   return (
@@ -87,6 +91,29 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                 />
                 <h3 className="">{user.name}</h3>
               </div>
+              <div>
+                {user && user?.deleted ? (
+                  <button
+                    className="relative mr-1 w-auto rounded bg-green-900 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+                    type="button"
+                    onClick={() => {
+                      handleEnable(user.id);
+                    }}
+                  >
+                    Habilitar
+                  </button>
+                ) : (
+                  <button
+                    className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+                    type="button"
+                    onClick={() => {
+                      handleBann(user.id);
+                    }}
+                  >
+                    Ban
+                  </button>
+                )}
+              </div>
               <div className="flex w-80 items-center justify-around border-2">
                 <p className="flex ">
                   <p className=" font-bold">id: </p>
@@ -108,20 +135,6 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
               onClick={handleSettingsClick}
             >
               Settings
-            </button>
-            <button
-              className="relative mr-1 w-auto rounded bg-green-900 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-              type="button"
-              onClick={handleBann}
-            >
-              Habilitar
-            </button>
-            <button
-              className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-              type="button"
-              onClick={handleEnable}
-            >
-              Ban
             </button>
             {showDropDown && <UserDropDownSettings />}
           </div>

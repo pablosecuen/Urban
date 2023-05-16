@@ -62,3 +62,32 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
     res.status(500).json({ message: "Error al obtener el Pasaje" });
   }
 };
+
+export const getLocations = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { destination } = req.query;
+
+    const passagesRef: firebase.firestore.Query<firebase.firestore.DocumentData> =
+      db.collection("passages");
+    const passagesSnapshot = await passagesRef.get();
+    const passagesData = passagesSnapshot.docs.map((doc) => ({ ...doc.data() }));
+
+    const locationsSet = new Set<string>();
+
+    passagesData.forEach((passage) => {
+      const destinations = passage.destination;
+      if (destinations.toLowerCase().includes((destination as string).toLowerCase())) {
+        locationsSet.add(destinations);
+      }
+    });
+
+    const locations = Array.from(locationsSet);
+    if (locations.length === 0) {
+      throw new Error("No se encontraron resultados...");
+    }
+    res.json({ locations: locations });
+  } catch (error) {
+    console.error("No se encontraron resultados...", error);
+    res.status(400).json({ message: "No se encontraron resultados..." });
+  }
+};

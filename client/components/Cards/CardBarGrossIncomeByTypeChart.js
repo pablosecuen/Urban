@@ -5,20 +5,19 @@ import axios from "axios";
 
 // function to render products an prices in html divs
 
-export default function CardBarChart() {
-  // tiene que mostrar las operaciones por tipo
+export default function CardBarGrossIncomeByTypeChart() {
   React.useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      const { data } = await axios.get("http://localhost:3000/admin/operations?year=2023");
-      const { ticketsPerMonth, ordersPerMonth, travelsPerMonth } = data;
+      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const ticketsValues = [];
       const ordersValues = [];
       const travelsValues = [];
       for (let i = 0; i < 12; i++) {
-        ticketsValues.push(ticketsPerMonth[i] || 0);
-        ordersValues.push(ordersPerMonth[i] || 0);
-        travelsValues.push(travelsPerMonth[i] || 0);
+        ticketsValues.push(ticketsRevenuePerMonth[i] || 0);
+        ordersValues.push(ordersRevenuePerMonth[i] || 0);
+        travelsValues.push(travelsRevenuePerMonth[i] || 0);
       }
       let config = {
         type: "bar",
@@ -48,8 +47,8 @@ export default function CardBarChart() {
             },
             {
               label: "Orders",
-              backgroundColor: "#12BA82",
-              borderColor: "#12BA82",
+              backgroundColor: "#10B981",
+              borderColor: "#10B981",
               data: ordersValues,
               fill: false,
               barThickness: 8,
@@ -125,7 +124,7 @@ export default function CardBarChart() {
           },
         },
       };
-      let ctx = document.getElementById("bar-chart").getContext("2d");
+      let ctx = document.getElementById("barGrossIncomeByType-chart").getContext("2d");
       window.myBar = new Chart(ctx, config);
     })();
   }, []);
@@ -135,17 +134,15 @@ export default function CardBarChart() {
         <div className="mb-0 rounded-t bg-transparent px-4 py-3">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">
-                Operaciones
-              </h6>
-              <h2 className="text-xl font-semibold text-blueGray-700">Operaciones por mes</h2>
+              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">Ingresos</h6>
+              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos brutos por tipo</h2>
             </div>
           </div>
         </div>
         <div className="flex-auto p-4">
           {/* Chart */}
           <div className="relative h-[350px]">
-            <canvas id="bar-chart"></canvas>
+            <canvas id="barGrossIncomeByType-chart"></canvas>
           </div>
         </div>
       </div>
