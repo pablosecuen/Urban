@@ -38,7 +38,7 @@ const Sidebar: React.VFC<SidebarProps> = (
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
-          <Link href="/">La tengo gigante</Link>
+          <Link href="/admin/dashboard">Urban Administración</Link>
           {/* User */}
           <ul className="flex list-none flex-wrap items-center md:hidden">
             <li className="relative inline-block">
@@ -106,7 +106,7 @@ const Sidebar: React.VFC<SidebarProps> = (
                     ></path>{" "}
                   </g>
                 </svg>{" "}
-                <Link href="/admin">Dashboard</Link>
+                <Link href="/admin/dashboard">Dashboard</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">

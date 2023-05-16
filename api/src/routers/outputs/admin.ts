@@ -4,14 +4,16 @@ import {
   getInactiveChauffeur,
   getInactiveDeliverys,
   getProfit,
-  getRevenue,
+  getGrossIncome,
+  getUserRecords,
 } from "../../controllers/outputs/admin";
 
 const router = Router();
 
 router.get("/status", getAdminState);
 router.get("/profit", getProfit);
-router.get("/revenue", getRevenue);
+router.get("/grossIncome", getGrossIncome);
+router.get("/userRecords", getUserRecords);
 router.get("/chaufeur", getInactiveChauffeur);
 router.get("/deliverys", getInactiveDeliverys);
 

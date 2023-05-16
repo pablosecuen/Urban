@@ -3,19 +3,20 @@ import React from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
-export default function CardLineChart() {
+export default function CardGrossIncomeChart() {
+  // tiene que mostrar los ingresos brutos totales por mes
   React.useEffect(() => {
     (async () => {
-      const { data: userRecords } = await axios.get(
-        "http://localhost:3000/admin/userRecords?year=2023"
-      );
-
-      const { usersRecordsPerMonth } = userRecords;
-      const userRecordsValues = [];
+      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
+      const grossIncomeValues = [];
       for (let i = 0; i < 12; i++) {
-        userRecordsValues.push(usersRecordsPerMonth[i] || 0);
+        grossIncomeValues.push(
+          (ticketsRevenuePerMonth[i] || 0) +
+            (ordersRevenuePerMonth[i] || 0) +
+            (travelsRevenuePerMonth[i] || 0)
+        );
       }
-
       var config = {
         type: "line",
         data: {
@@ -38,7 +39,7 @@ export default function CardLineChart() {
               label: new Date().getFullYear(),
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: userRecordsValues,
+              data: grossIncomeValues,
               fill: false,
             },
             {
@@ -46,7 +47,7 @@ export default function CardLineChart() {
               fill: false,
               backgroundColor: "#fff",
               borderColor: "#fff",
-              data: [4, 6, 8, 7, 5, 6, 8, 4, 6, 8, 7, 5, 6, 8],
+              data: [40, 68, 86, 74, 56, 60, 87, 40, 68, 86, 74, 56, 60, 87],
             },
           ],
         },
@@ -121,7 +122,7 @@ export default function CardLineChart() {
           },
         },
       };
-      var ctx = document.getElementById("line-chart").getContext("2d");
+      var ctx = document.getElementById("grossIncome-chart").getContext("2d");
       window.myLine = new Chart(ctx, config);
     })();
   }, []);
@@ -131,15 +132,15 @@ export default function CardLineChart() {
         <div className="mb-0 rounded-t bg-transparent px-4 py-3">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Usuarios</h6>
-              <h2 className="text-xl font-semibold text-white">Cantidad de registros</h2>
+              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Ingresos</h6>
+              <h2 className="text-xl font-semibold text-white">Ingresos brutos totales</h2>
             </div>
           </div>
         </div>
         <div className="flex-auto p-4">
           {/* Chart */}
           <div className="relative h-[350px]">
-            <canvas id="line-chart"></canvas>
+            <canvas id="grossIncome-chart"></canvas>
           </div>
         </div>
       </div>
