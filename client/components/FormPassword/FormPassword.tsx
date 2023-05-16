@@ -60,9 +60,9 @@ export default function FormPassword() {
   return (
     <form
       onSubmit={handlePasswordChange}
-      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 xl:w-1/3 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
+      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 xl:w-1/3 2xl:h-4/5 2xl:w-2/5 2xl:gap-14 2xl:px-20 2xl:text-lg"
     >
-      <Image src={logo} alt="logo" className="w-24 lg:w-28" />
+      <Image src={logo} alt="logo" className="w-24 lg:w-28 2xl:w-48" />
       <div className="flex flex-col justify-center gap-8">
         <div className="flex flex-col items-center gap-2">
           <label htmlFor="" className="text-center">
@@ -99,7 +99,7 @@ export default function FormPassword() {
             />
             <button
               onClick={visiblePassword}
-              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20 2xl:right-24"
             >
               {!showPassword1 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
@@ -126,7 +126,7 @@ export default function FormPassword() {
             />
             <button
               onClick={visiblePassword2}
-              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20 2xl:right-24"
             >
               {!showPassword2 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
@@ -153,7 +153,7 @@ export default function FormPassword() {
         <div className="flex items-center justify-center gap-2">
           <button className="w-2/3">Enviar contraseña</button>
         </div>
-        <small className="pl-5">
+        <small className="pl-5 2xl:mt-5">
           Quieres volver al inicio?{" "}
           <Link href={"http://localhost:3001"}>
             <span className="text-blue hover:cursor-pointer hover:underline">Click aqui</span>
