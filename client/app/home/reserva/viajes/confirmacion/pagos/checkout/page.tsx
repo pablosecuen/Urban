@@ -55,7 +55,6 @@ export default function Checkout() {
   useEffect(() => {
     (async () => {
       const ticket = await getToken();
-      console.log(ticket);
       axios.post("http://localhost:3000/ticket", ticket);
     })();
 
