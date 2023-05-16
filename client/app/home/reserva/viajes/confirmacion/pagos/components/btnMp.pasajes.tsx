@@ -24,6 +24,8 @@ export default function Pagos() {
 
   if (passages) {
     toPay = passages.slice(0, 2).map((passage) => {
+      console.log(passage.id);
+
       return {
         passageId: passage.id,
         id: passage.id,
@@ -43,6 +45,8 @@ export default function Pagos() {
   }, 0);
 
   const arrToPay = toPay.map((item) => {
+    console.log(item.id);
+
     return {
       id: item.id,
       title: item.name,
