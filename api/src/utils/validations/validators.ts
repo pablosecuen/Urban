@@ -183,6 +183,11 @@ export const isProductIdValid = (productId: string): string | null => {
   return "El id del producto no es válido";
 };
 
+export const isCompanyIdValid = (companyId: string): string | null => {
+  if (typeof companyId === "string") return null;
+  return "El id de la compañía no es válido";
+};
+
 export const isLocalIdValid = (localId: string): string | null => {
   if (typeof localId === "string") return null;
   return "El id del local no es válido";
