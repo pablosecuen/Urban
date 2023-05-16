@@ -1,6 +1,7 @@
 import React from "react";
 import { createPopper } from "@popperjs/core/lib/createPopper.js";
 import Image from "next/image";
+import logo from "../../assets/imagenes/UrbanIsoLogo.png";
 
 const UserDropdown = () => {
   // dropdown props
@@ -35,14 +36,14 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="flex items-center">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blueGray-200 text-sm text-white">
+        <div className="flex h-20 w-20 items-center ">
+          <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-slate-400 p-2 text-sm shadow-lg shadow-black ">
             <Image
               alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/team-1-800x800.jpg"
-              width={40}
-              height={40}
+              className=" w-full border-none p-1 align-middle bg-blend-overlay"
+              src={logo}
+              width={100}
+              height={100}
             />
           </span>
         </div>
@@ -51,7 +52,7 @@ const UserDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "min-w-48 absolute z-50 float-left mt-12 w-96 list-none rounded bg-white py-2 text-left text-base shadow-lg"
+          "min-w-48 absolute top-8 z-50 float-left mt-12 w-96 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
         <a
