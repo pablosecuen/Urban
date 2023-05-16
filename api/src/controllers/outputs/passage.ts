@@ -40,8 +40,8 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
 
     res.json({ passages: passagesData, totalPages });
   } catch (error) {
-    console.error("Error al obtener los usuarios", error);
-    res.status(500).json({ message: "Error al obtener los usuarios" });
+    console.error("Error al obtener los pasajes", error);
+    res.status(400).json({ message: "Error al obtener los pasajes" });
   }
 };
 
@@ -52,14 +52,14 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
     const doc = await db.collection("passages").doc(id).get();
 
     if (!doc.exists) {
-      res.status(404).json({ message: "Pasaje no encontrado" });
+      throw new Error("Pasaje no encontrado");
     }
 
     const passage = { id: doc.id, ...doc.data() };
     res.json(passage);
   } catch (error) {
     console.error("Error al obtener el Pasaje", error);
-    res.status(500).json({ message: "Error al obtener el Pasaje" });
+    res.status(400).json({ message: "Error al obtener el Pasaje" });
   }
 };
 
