@@ -5,7 +5,7 @@ import { query, where, collection, getDocs } from "firebase/firestore";
 export const searchAllOwners = async (req: Request, res: Response): Promise<void> => {
   try {
     const allProperties = Object.keys(req.query);
-    let query: any = db.collection("owner").where("deleted", "==", false)
+    let query: any = db.collection("owner").where("deleted", "==", false);
 
     allProperties.forEach((property) => {
       if (property === "page" || property === "pageSize") {
@@ -41,7 +41,7 @@ export const searchOwner = async (req: Request, res: Response): Promise<void> =>
     const id: string = req.params.id;
     const doc = await db.collection("owner").doc(id).get();
     if (!doc.exists) {
-      res.status(404).json({ message: "Propietario no encontrado" });
+      throw new Error("Propietario no encontrado");
     } else {
       const ownerData = { id: doc.id, ...doc.data() };
       res.json(ownerData);
