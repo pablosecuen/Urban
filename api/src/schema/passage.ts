@@ -11,6 +11,7 @@ export interface PassageToRegister {
   arrivalTime: string;
   departureTime: string;
   createdAt: string;
+  companyId: string;
 }
 export interface Passage extends PassageToRegister {
   deleted: boolean;

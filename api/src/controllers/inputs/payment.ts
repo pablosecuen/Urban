@@ -48,7 +48,7 @@ export const getMerchantOrderData = async (req, res): Promise<void> => {
         },
       }
     );
-
+    //max te dejo un comentario paara que lo veas, vamos a ver bien mañana que nos devuelve la api de mercado pago y en caso de devolver todo correcto vamos hacer un doble endpoint aca
     return res.status(200).json(data);
   } catch (error) {
     res.status(500).send(error.message);
