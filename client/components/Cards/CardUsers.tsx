@@ -69,9 +69,9 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                 />
                 <h3 className="">{user.name}</h3>
               </div>
-              <div className="flex w-80 items-center justify-around border-2">
-                <p className="flex ">
-                  <p className=" font-bold">id: </p>
+              <div className="flex  items-center justify-start ">
+                <p className="flex-start flex">
+                  <strong className="w-auto pr-2">id: </strong>
                   {user.id}
                 </p>
               </div>
