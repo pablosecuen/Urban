@@ -8,32 +8,28 @@ export const metadata: Metadata = {
 };
 export default function Home() {
   return (
-    <div>
-      <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
-        <div className="flex w-full flex-col items-center justify-center gap-4">
-          <h2>Acerca de nosotros</h2>
-          <p>
-            Somos la solución perfecta para hacer tus viajes intermunicipales terrestres más fáciles
-            y seguros. Con solo 1 clic te ofrecemos una oferta multimodal de transporte (bus, taxi o
-            vehículo particular) que se ajustara a tus necesidades económicas y de itinerario. Somos
-            la única solución en Colombia que te permite realizar viajes compartidos en vehículos
-            privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
-            comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
-          </p>
-          <h2>Preguntas frecuentes</h2>
-          <h3>¿Es segura la plataforma?</h3>
-          <p>
-            Para nosotros, tu seguridad es lo mas importante. Por eso, implementamos un sistema de
-            validación de identidad y antecedentes, del conductor y del vehículo que te transporta,
-            que nos permite, dentro de lo posible, reconocer que la prestación del servicio será
-            exitosa y sin contratiempos. Sabemos que pueden ocurrir eventos inesperados, por eso
-            habilitamos líneas de emergencia de atención inmediata para poder ayudarte con
-            compromiso y diligencia.
-          </p>
-        </div>
-        <div className="flex h-full w-full items-center justify-center"></div>
+    <div className="scrollbar mb-8 mt-10 flex w-full flex-col items-center justify-evenly overflow-y-scroll rounded-3xl border-2 px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5">
+      <div className="">
+        <h2>Acerca de nosotros</h2>
+        <p>
+          Somos la solución perfecta para hacer tus viajes intermunicipales terrestres más fáciles y
+          seguros. Con solo 1 clic te ofrecemos una oferta multimodal de transporte (bus, taxi o
+          vehículo particular) que se ajustara a tus necesidades económicas y de itinerario. Somos
+          la única solución en Colombia que te permite realizar viajes compartidos en vehículos
+          privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
+          comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
+        </p>
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Es segura la plataforma?</h3>
+        <p>
+          Para nosotros, tu seguridad es lo mas importante. Por eso, implementamos un sistema de
+          validación de identidad y antecedentes, del conductor y del vehículo que te transporta,
+          que nos permite, dentro de lo posible, reconocer que la prestación del servicio será
+          exitosa y sin contratiempos. Sabemos que pueden ocurrir eventos inesperados, por eso
+          habilitamos líneas de emergencia de atención inmediata para poder ayudarte con compromiso
+          y diligencia.
+        </p>
       </div>
-      <div className="mt-48 lg:mt-0"></div>
     </div>
   );
 }
