@@ -1,5 +1,6 @@
 import jpg from "../../../../../../../../assets/imagenes/falloElPago.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Failed() {
   return (
@@ -8,6 +9,9 @@ export default function Failed() {
       <p className="text-center font-mono text-xl font-semibold text-red-500 2xl:text-3xl">
         Hubo un problema con el pago, lo sentimos. Intentelo de nuevo mas tarde!
       </p>
+      <Link href={"https://localhost:3001/home"} className="flex justify-center">
+        <button className="w-1/2 2xl:mt-10 2xl:text-xl"> Volver al inicio</button>
+      </Link>
     </div>
   );
 }
