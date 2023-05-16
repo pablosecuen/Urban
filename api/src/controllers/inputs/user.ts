@@ -64,7 +64,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
 
     await successRegister(user.email, user.name, docRef.id);
 
-    res.status(201).json({ id: docRef.id, user: userData });
+    res.status(200).json({ id: docRef.id, user: userData });
   } catch (error) {
     console.error("Error al crear el usuario", error);
     res.status(400).json({ message: error.message });
@@ -124,7 +124,7 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
       throw new Error("No se encontró el usuario");
     }
     await db.collection("users").doc(id).update({ deleted: true });
-    res.status(201).json({ menssage: "Usuario eliminado correctamente" });
+    res.status(200).json({ menssage: "Usuario eliminado correctamente" });
   } catch (error) {
     console.error("Error al borrar el Usuario", error);
     res.status(400).json({ messege: error.message });
@@ -198,10 +198,10 @@ export const newDeliveryRating = async (req: Request, res: Response): Promise<vo
       });
     }
 
-    res.status(201).json({ id: ratingRef.id });
+    res.status(200).json({ id: ratingRef.id });
   } catch (error) {
     console.error("Error creating delivery rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -259,10 +259,10 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
       });
     }
 
-    res.status(201).json({ id: docRef.id });
+    res.status(200).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al generar rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -320,9 +320,9 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
       });
     }
 
-    res.status(201).json({ id: docRef.id });
+    res.status(200).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al generar rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
