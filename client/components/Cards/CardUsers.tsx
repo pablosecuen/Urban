@@ -17,15 +17,23 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
 
+  const [bannId, setBannId] = useState("");
+  const [enableId, setEnableId] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState(allUsers);
+
+
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredUsers = allUsers.filter(
-    (user: any) =>
-      (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (user.id && user.id.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  useEffect(() => {
+    const filteredUsers = allUsers.filter(
+      (user: any) =>
+        (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (user.id && user.id.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    setFilteredUsers(filteredUsers);
+  }, [allUsers, searchTerm]);
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown);
@@ -146,7 +154,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                     Nombre
                   </label>
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.name : ""}
+                    {selectedUser?.name}
                   </p>
                 </div>
               </div>
@@ -160,7 +168,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.email : ""}
+                    {selectedUser?.email}
                   </p>
                 </div>
               </div>
@@ -174,15 +182,15 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
                   <div className="flex flex-col gap-2">
                     <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                      {selectedUser?.payments[0]?.cardNumber ?? ""}
+                      {selectedUser?.payments[0]?.cardNumber}
                     </p>
 
                     <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                      {selectedUser?.payments[0]?.expirationDate ?? ""}
+                      {selectedUser?.payments[0]?.expirationDate}
                     </p>
 
                     <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                      {selectedUser?.payments[0]?.securityCode ?? ""}
+                      {selectedUser?.payments[0]?.securityCode}
                     </p>
                   </div>
 
@@ -192,15 +200,14 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                       height="24px"
                       viewBox="0 0 24 24"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                       stroke="#626062"
                       className="w-auto "
                     >
-                      <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                        {selectedUser ? selectedUser.name : ""}
-                      </p>
                       {/* Icono de usuario */}
                     </svg>
+                    {/* <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                      {selectedUser?.name}
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -214,7 +221,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.birthday : ""}
+                    {selectedUser?.birthday}
                   </p>
                 </div>
               </div>
@@ -236,9 +243,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {typeof selectedUser?.address === "string"
-                      ? selectedUser.address
-                      : selectedUser?.address?.street}
+                    {selectedUser?.address?.street}
                   </p>
                 </div>
               </div>
@@ -252,7 +257,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.gender : ""}
+                    {selectedUser?.gender}
                   </p>
                 </div>
               </div>
@@ -266,7 +271,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.nationality : ""}
+                    {selectedUser?.nationality}
                   </p>
                 </div>
               </div>
@@ -280,7 +285,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.cc : ""}
+                    {selectedUser?.cc}
                   </p>
                 </div>
               </div>
@@ -294,7 +299,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   </label>
 
                   <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
-                    {selectedUser ? selectedUser.ce : ""}
+                    {selectedUser?.ce}
                   </p>
                 </div>
               </div>
@@ -309,13 +314,12 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                   className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                   htmlFor="grid-password"
                 >
-                  C.E.
+                  Notas especiales del usuario
                 </label>
-                <input
-                  type="text"
-                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue="notas especiales del usuario"
-                />
+
+                <p className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring">
+                  por ahora no existe esta prop
+                </p>
               </div>
             </div>
           </form>
