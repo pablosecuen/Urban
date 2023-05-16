@@ -6,19 +6,16 @@ import axios from "axios";
 export default function CardLineChart() {
   React.useEffect(() => {
     (async () => {
-      // Crear endpoint en backend que retorne un array con las cantidades de registros de usuarios por mes
-      // const { data: userRecords } = await axios.get("http://localhost:3000/user/numRegisterPerMonth");
+      const { data: userRecords } = await axios.get(
+        "http://localhost:3000/admin/userRecords?year=2023"
+      );
 
-      // ------------    simulacion de data fetching    ------------  //
-      const fetchData = new Promise((res, rej) => {
-        setTimeout(() => {
-          res({ data: [150, 100, 120, 110, 150, 180, 150, 100, 120, 110, 150, 180] });
-        }, 300);
-      });
-      const { data: userRecords } = await fetchData;
-      // ------------    simulacion de data fetching    ------------  //
+      const { usersRecordsPerMonth } = userRecords;
+      const userRecordsValues = [];
+      for (let i = 0; i < 12; i++) {
+        userRecordsValues.push(usersRecordsPerMonth[i] || 0);
+      }
 
-      console.log({ fetchData: userRecords });
       var config = {
         type: "line",
         data: {
@@ -41,7 +38,7 @@ export default function CardLineChart() {
               label: new Date().getFullYear(),
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: userRecords,
+              data: userRecordsValues,
               fill: false,
             },
             {
@@ -49,7 +46,7 @@ export default function CardLineChart() {
               fill: false,
               backgroundColor: "#fff",
               borderColor: "#fff",
-              data: [40, 68, 86, 74, 56, 60, 87, 40, 68, 86, 74, 56, 60, 87],
+              data: [4, 6, 8, 7, 5, 6, 8, 4, 6, 8, 7, 5, 6, 8],
             },
           ],
         },
