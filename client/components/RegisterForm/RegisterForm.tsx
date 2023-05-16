@@ -75,8 +75,10 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
       const response = await axios.post("http://localhost:3000/user", userData);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       router.push("/home");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      // Este mismo error pero con la alerta de notificacion
+      alert(error?.response?.data?.message);
     }
   };
   return (
