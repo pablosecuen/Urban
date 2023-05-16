@@ -20,6 +20,16 @@ export default function Home() {
             privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
             comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
           </p>
+          <h2>Preguntas frecuentes</h2>
+          <h3>¿Es segura la plataforma?</h3>
+          <p>
+            Para nosotros, tu seguridad es lo mas importante. Por eso, implementamos un sistema de
+            validación de identidad y antecedentes, del conductor y del vehículo que te transporta,
+            que nos permite, dentro de lo posible, reconocer que la prestación del servicio será
+            exitosa y sin contratiempos. Sabemos que pueden ocurrir eventos inesperados, por eso
+            habilitamos líneas de emergencia de atención inmediata para poder ayudarte con
+            compromiso y diligencia.
+          </p>
         </div>
         <div className="flex h-full w-full items-center justify-center"></div>
       </div>
