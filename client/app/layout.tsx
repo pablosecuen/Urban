@@ -6,7 +6,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Urban",
-  description: "Solucion en tranportes a tu alcance ",
+  description:
+    "Descubre la libertad de elegir tu medio de transporte con nuestra aplicación: ¡empodérate con información y toma decisiones informadas! Encuentra una amplia variedad de servicios de transporte, desde buses intermunicipales, taxis públicos y transportes privados, hasta una sección de cadetería. Resuelve tus problemas cotidianos de manera rápida y eficiente con soluciones reales, mientras gestionas tu tiempo y optimizas tus días. ¡Experimenta el poder de decidir y mejorar tu vida con nuestra app!",
+  keywords:
+    "transporte, medio de transporte, aplicacion de transporte, servicios de transporte, buses intermunicipales, taxis publicos, transportes privados, cadeteria, soluciones reales, gestionar tiempo, optimizar días.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

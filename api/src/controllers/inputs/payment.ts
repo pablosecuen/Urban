@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const { MP_TOKEN } = process.env;
 // SDK de Mercado Pago
 const mercadopago = require("mercadopago");
@@ -6,7 +8,7 @@ mercadopago.configure({
   access_token: MP_TOKEN,
 });
 
-const postPayment = (req, res) => {
+export const postPayment = (req, res) => {
   const products = req.body;
   console.log(req.body);
 
@@ -35,4 +37,20 @@ const postPayment = (req, res) => {
     });
 };
 
-export default postPayment;
+export const getMerchantOrderData = async (req, res): Promise<void> => {
+  const { merchantOrder } = req.query;
+  try {
+    const { data } = await axios.get(
+      `https://api.mercadopago.com/merchant_orders/${merchantOrder}`,
+      {
+        headers: {
+          Authorization: `Bearer ${MP_TOKEN}`,
+        },
+      }
+    );
+    //max te dejo un comentario paara que lo veas, vamos a ver bien mañana que nos devuelve la api de mercado pago y en caso de devolver todo correcto vamos hacer un doble endpoint aca
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
