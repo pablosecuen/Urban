@@ -14,13 +14,14 @@ export default function Profile() {
     }
   }, []);
 
+  
   const onClick = () => {
     if (showInput === false) setShowInput(true);
     else setShowInput(false);
   };
 
   return (
-    <div className="mt-32 flex w-3/5 flex-col items-center justify-evenly bg-gray-300 p-2 shadow-lg shadow-black/40 lg:mt-0 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 xl:bg-gray-200 2xl:h-full 2xl:w-1/3">
+    <div className="mt-32 flex w-3/5 flex-col items-center justify-evenly 300 p-2 shadow-lg shadow-black/40 lg:mt-0 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 2xl:h-full 2xl:w-1/3">
       <div className="flex flex-col items-center justify-center">
         {userData && (
           <Image
@@ -43,7 +44,7 @@ export default function Profile() {
             <input
               type="text"
               placeholder="Ingrese su numero"
-              className="border-b-0 text-center text-gray-800"
+              className="border-b-0 text-center text-gray-800 bg-white"
             />
           ) : (
             <input
@@ -104,23 +105,24 @@ export default function Profile() {
               fill="gray"
             />
           </svg>
-          {!userData?.adress ? (
+          {!userData?.address ? (
             showInput === true ? (
               <input
                 type="text"
-                placeholder="Ingrese su direccion"
-                className="border-b-0 text-center text-lg font-semibold"
+                className="border-b-0 bg-blue text-center text-lg font-semibold"
               />
             ) : (
               <input
                 type="text"
-                placeholder="Ingrese su direccion"
                 disabled
-                className="border-b-0 bg-gray-300 text-center text-lg font-semibold xl:bg-gray-200"
+                placeholder={userData?.address?.number}
+                className="border-b-0 bg-blue text-center text-lg font-semibold xl:bg-gray-200"
               />
             )
           ) : (
-            userData?.adress
+            <span className="border-b-1 border-gray-300  bg-blue text-center text-lg font-semibold xl:bg-gray-200">
+              {userData?.address?.number}
+            </span>
           )}
         </div>
 
