@@ -60,7 +60,7 @@ export default function FormPassword() {
   return (
     <form
       onSubmit={handlePasswordChange}
-      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
+      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 xl:w-1/3 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
     >
       <Image src={logo} alt="logo" className="w-24 lg:w-28" />
       <div className="flex flex-col justify-center gap-8">
