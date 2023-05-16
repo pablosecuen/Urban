@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import NotificationDropdown from "../Dropdowns/TableDropdown";
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { HiBriefcase, HiOutlineMap, HiUserCircle } from "react-icons/hi";
 
 interface SidebarProps {
   // props
@@ -110,69 +111,22 @@ const Sidebar: React.VFC<SidebarProps> = (
               </li>
 
               <li className="flex items-center justify-start gap-2">
-                <svg
-                  width="25px"
-                  height="25px"
-                  viewBox="0 0 1024 1024"
-                  fill="#000000"
-                  className="w-auto"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      fill="#000000"
-                      d="M764.416 254.72a351.68 351.68 0 0 1 86.336 149.184H960v192.064H850.752a351.68 351.68 0 0 1-86.336 149.312l54.72 94.72-166.272 96-54.592-94.72a352.64 352.64 0 0 1-172.48 0L371.136 936l-166.272-96 54.72-94.72a351.68 351.68 0 0 1-86.336-149.312H64v-192h109.248a351.68 351.68 0 0 1 86.336-149.312L204.8 160l166.208-96h.192l54.656 94.592a352.64 352.64 0 0 1 172.48 0L652.8 64h.128L819.2 160l-54.72 94.72zM704 499.968a192 192 0 1 0-384 0 192 192 0 0 0 384 0z"
-                    ></path>
-                  </g>
-                </svg>
+                {<HiUserCircle className="h-7 w-7" />}
                 <Link href="/admin/dashboard/users">Users</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
-                <svg
-                  width="25px"
-                  height="25px"
-                  viewBox="0 0 1024 1024"
-                  fill="#000000"
-                  className="w-auto"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      fill="#000000"
-                      d="M764.416 254.72a351.68 351.68 0 0 1 86.336 149.184H960v192.064H850.752a351.68 351.68 0 0 1-86.336 149.312l54.72 94.72-166.272 96-54.592-94.72a352.64 352.64 0 0 1-172.48 0L371.136 936l-166.272-96 54.72-94.72a351.68 351.68 0 0 1-86.336-149.312H64v-192h109.248a351.68 351.68 0 0 1 86.336-149.312L204.8 160l166.208-96h.192l54.656 94.592a352.64 352.64 0 0 1 172.48 0L652.8 64h.128L819.2 160l-54.72 94.72zM704 499.968a192 192 0 1 0-384 0 192 192 0 0 0 384 0z"
-                    ></path>
-                  </g>
-                </svg>
+                {<HiUserCircle className="h-7 w-7" />}
                 <Link href="/admin/dashboard/chauffeurs">Chauffeurs</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
-                <svg
-                  width="25px"
-                  height="25px"
-                  viewBox="0 0 1024 1024"
-                  fill="#000000"
-                  className="w-auto"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      fill="#000000"
-                      d="M764.416 254.72a351.68 351.68 0 0 1 86.336 149.184H960v192.064H850.752a351.68 351.68 0 0 1-86.336 149.312l54.72 94.72-166.272 96-54.592-94.72a352.64 352.64 0 0 1-172.48 0L371.136 936l-166.272-96 54.72-94.72a351.68 351.68 0 0 1-86.336-149.312H64v-192h109.248a351.68 351.68 0 0 1 86.336-149.312L204.8 160l166.208-96h.192l54.656 94.592a352.64 352.64 0 0 1 172.48 0L652.8 64h.128L819.2 160l-54.72 94.72zM704 499.968a192 192 0 1 0-384 0 192 192 0 0 0 384 0z"
-                    ></path>
-                  </g>
-                </svg>
+                {<HiBriefcase className="h-7 w-7" />}
                 <Link href="/admin/dashboard/travels">Travels</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
-                <svg viewBox="0 0 24 24" width="25px" height="25px" className="w-auto">
-                  <path d="M2.5 7.5l9.5-6.5 9.5 6.5v9l-9.5-3.5-9.5 3.5zM12 16.5v-5h-1v5h-2.5l3.5 2.5 3.5-2.5h-2.5z" />
-                </svg>
+                {<HiBriefcase className="h-7 w-7" />}
 
                 <Link href="/admin/dashboard/passages">Passages</Link>
               </li>
@@ -200,24 +154,7 @@ const Sidebar: React.VFC<SidebarProps> = (
               </li>
 
               <li className="flex items-center justify-start gap-2">
-                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" className="w-auto">
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    {" "}
-                    <g id="Navigation / Map">
-                      {" "}
-                      <path
-                        id="Vector"
-                        d="M15 6V21M15 6L21 3V18L15 21M15 6L9 3M15 21L9 18M9 18L3 21V6L9 3M9 18V3"
-                        stroke="#000000"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>{" "}
-                    </g>{" "}
-                  </g>
-                </svg>
+                {<HiOutlineMap className="h-7 w-7" />}
                 <Link href="/admin/dashboard/maps">Maps</Link>
               </li>
             </ul>
@@ -260,7 +197,7 @@ const Sidebar: React.VFC<SidebarProps> = (
                     </g>{" "}
                   </g>
                 </svg>
-                <Link href="/">Landing Page</Link>
+                <Link href="/home">Landing Page</Link>
               </li>
 
               <li className="flex items-center justify-start gap-2">
