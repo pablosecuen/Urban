@@ -4,21 +4,19 @@ import { Chart } from "chart.js/auto";
 import axios from "axios";
 
 export default function CardGrossIncomeChart() {
+  // tiene que mostrar los ingresos brutos totales por mes
   React.useEffect(() => {
     (async () => {
-      // Crear endpoint en backend que retorne un array con las cantidades de registros de usuarios por mes
-      // const { data: userRecords } = await axios.get("http://localhost:3000/user/numRegisterPerMonth");
-
-      // ------------    simulacion de data fetching    ------------  //
-      const fetchData = new Promise((res, rej) => {
-        setTimeout(() => {
-          res({ data: [150, 100, 120, 110, 150, 180, 150, 100, 120, 110, 150, 180] });
-        }, 300);
-      });
-      const { data: userRecords } = await fetchData;
-      // ------------    simulacion de data fetching    ------------  //
-
-      console.log({ fetchData: userRecords });
+      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
+      const grossIncomeValues = [];
+      for (let i = 0; i < 12; i++) {
+        grossIncomeValues.push(
+          (ticketsRevenuePerMonth[i] || 0) +
+            (ordersRevenuePerMonth[i] || 0) +
+            (travelsRevenuePerMonth[i] || 0)
+        );
+      }
       var config = {
         type: "line",
         data: {
@@ -41,7 +39,7 @@ export default function CardGrossIncomeChart() {
               label: new Date().getFullYear(),
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: userRecords,
+              data: grossIncomeValues,
               fill: false,
             },
             {
@@ -134,8 +132,8 @@ export default function CardGrossIncomeChart() {
         <div className="mb-0 rounded-t bg-transparent px-4 py-3">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Usuarios</h6>
-              <h2 className="text-xl font-semibold text-white">Cantidad de registros</h2>
+              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Ingresos</h6>
+              <h2 className="text-xl font-semibold text-white">Ingresos brutos totales</h2>
             </div>
           </div>
         </div>
