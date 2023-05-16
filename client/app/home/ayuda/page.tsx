@@ -10,7 +10,17 @@ export default function Home() {
   return (
     <div>
       <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
-        <div className="flex w-full flex-col items-center justify-center gap-4">algo</div>
+        <div className="flex w-full flex-col items-center justify-center gap-4">
+          <h2>Acerca de nosotros</h2>
+          <p>
+            Somos la solución perfecta para hacer tus viajes intermunicipales terrestres más fáciles
+            y seguros. Con solo 1 clic te ofrecemos una oferta multimodal de transporte (bus, taxi o
+            vehículo particular) que se ajustara a tus necesidades económicas y de itinerario. Somos
+            la única solución en Colombia que te permite realizar viajes compartidos en vehículos
+            privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
+            comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
+          </p>
+        </div>
         <div className="flex h-full w-full items-center justify-center"></div>
       </div>
       <div className="mt-48 lg:mt-0"></div>
