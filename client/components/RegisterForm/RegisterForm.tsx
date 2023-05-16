@@ -61,7 +61,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         password,
       };
       await createUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+
       sessionStorage.removeItem("user");
       sessionStorage.removeItem("isRegister");
     } else {
@@ -73,10 +73,10 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   const createUser = async (userData: any) => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
-      console.log(response.data); // the created user data
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       router.push("/home");
     } catch (error) {
-      console.log("salio todo mal");
+      console.log(error);
     }
   };
   return (

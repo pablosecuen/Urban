@@ -28,7 +28,7 @@ export const links = [
   },
   {
     label: "perfil",
-    route: "/home/perfil",
+    route: "/perfil",
     icon: HiUserCircle,
     id: "2",
   },
@@ -56,7 +56,7 @@ export const linksMobile = [
   },
   {
     label: "Perfil",
-    route: "/home/perfil",
+    route: "/perfil",
     icon: HiUserCircle,
     id: "2",
   },

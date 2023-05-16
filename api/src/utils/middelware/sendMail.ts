@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import nodemailer from "nodemailer";
+import BodyHtml from './BodyMail';
 
 const CLIENT_ID = process.env.NODEMAILER_CLIENT_ID;
 const CLIENT_SECRET = process.env.NODEMAILER_CLIENT_SECRET;
@@ -8,7 +9,7 @@ const REFRESH_TOKEN = process.env.NODEMAILER_REFRESH_TOKEN;
 
 const OAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
-export function successRegister(email: string, name: string): Promise<any> {
+export function successRegister(email: string, name: string, id: string): Promise<any> {
   OAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
   return new Promise((resolve, reject) => {
     const accessToken = OAuth2Client.getAccessToken();
@@ -34,7 +35,7 @@ export function successRegister(email: string, name: string): Promise<any> {
       to: `${email}`,
       subject: "Registro exitoso",
       text: `Hola ${name}, tu registro ha sido exitoso. ¡Bienvenido!`,
-      html: "<p>HTML version of the message</p>",
+      html: BodyHtml(name, id),
     };
 
     transporter.sendMail(mailOptions, (error: Error | null, info: any) => {
