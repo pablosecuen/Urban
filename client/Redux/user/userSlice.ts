@@ -6,6 +6,7 @@ import {
   getUsersByEmail,
   getUsersByName,
   deleteUserById,
+  enableUserById,
 } from "./userActions";
 import { User } from "../../app/types/User";
 interface UserState {
@@ -124,6 +125,19 @@ const userSlice = createSlice({
       .addCase(deleteUserById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Error al bannear usuario";
+      });
+
+    builder
+      .addCase(enableUserById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(enableUserById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.userById[action.payload.id] = action.payload;
+      })
+      .addCase(enableUserById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error al habilitar usuario";
       });
   },
 });
