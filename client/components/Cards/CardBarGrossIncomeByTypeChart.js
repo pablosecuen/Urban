@@ -9,7 +9,7 @@ export default function CardBarGrossIncomeByTypeChart() {
   React.useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      const { data } = await axios.get("http://localhost:3000/admin/revenue?year=2023");
+      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const ticketsValues = [];
       const ordersValues = [];
@@ -39,24 +39,24 @@ export default function CardBarGrossIncomeByTypeChart() {
           datasets: [
             {
               label: "Tickets",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
+              backgroundColor: "#EF4444",
+              borderColor: "#EF4444",
               data: ticketsValues,
               fill: false,
               barThickness: 8,
             },
             {
               label: "Orders",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
+              backgroundColor: "#10B981",
+              borderColor: "#10B981",
               data: ordersValues,
               fill: false,
               barThickness: 8,
             },
             {
               label: "Travels",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
+              backgroundColor: "#A855F7",
+              borderColor: "#A855F7",
               data: travelsValues,
               fill: false,
               barThickness: 8,
@@ -134,10 +134,8 @@ export default function CardBarGrossIncomeByTypeChart() {
         <div className="mb-0 rounded-t bg-transparent px-4 py-3">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">
-                Performance
-              </h6>
-              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos totales</h2>
+              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">Ingresos</h6>
+              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos brutos por tipo</h2>
             </div>
           </div>
         </div>
