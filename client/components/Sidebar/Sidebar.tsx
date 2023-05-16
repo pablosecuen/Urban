@@ -38,7 +38,7 @@ const Sidebar: React.VFC<SidebarProps> = (
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
-          <Link href="/">La tengo gigante</Link>
+          <Link href="/admin/dashboard">Urban Administración</Link>
           {/* User */}
           <ul className="flex list-none flex-wrap items-center md:hidden">
             <li className="relative inline-block">
