@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getAllUsers,
+  getAllDeletedUsers,
   getUserById,
   getUsersByCc,
   getUsersByEmail,
@@ -11,6 +12,7 @@ import {
 import { User } from "../../app/types/User";
 interface UserState {
   allUsers: User[];
+  allDeletedUsers: User[];
   userByName: User[];
   userByCc: User | null;
   userByEmail: User | null;
@@ -21,6 +23,7 @@ interface UserState {
 
 const initialState: UserState = {
   allUsers: [],
+  allDeletedUsers: [],
   userById: {},
   userByName: [],
   userByCc: null,
@@ -48,6 +51,19 @@ const userSlice = createSlice({
       .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
+      });
+
+    builder
+      .addCase(getAllDeletedUsers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllDeletedUsers.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.allDeletedUsers = action.payload;
+      })
+      .addCase(getAllDeletedUsers.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error al traer los usuarios suspendidos";
       });
 
     builder
