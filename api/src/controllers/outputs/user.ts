@@ -29,21 +29,22 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     let usersRef: firebase.firestore.Query<firebase.firestore.DocumentData> =
       db.collection("users");
 
-    let deletedFilter = false; // Valor predeterminado de deleted en false
+    //let deletedFilter = false; // Valor predeterminado de deleted en false
 
     if (Object.keys(req.query).length > 2) {
       const filters = Object.keys(req.query).filter((key) => key !== "page" && key !== "pageSize");
       filters.forEach((key) => {
-        if (key === "deleted") {
-          // Si se proporciona el parámetro "deleted" en la consulta, se sobrescribe el valor predeterminado
-          deletedFilter = req.query.deleted === "true";
-        } else {
-          usersRef = usersRef.where(key, "==", req.query[key]);
-        }
+        usersRef = usersRef.where(key, "==", req.query[key]);
+        // if (key === "deleted") {
+        //   // Si se proporciona el parámetro "deleted" en la consulta, se sobrescribe el valor predeterminado
+        //   deletedFilter = req.query.deleted === "true";
+        // } else {
+        //   usersRef = usersRef.where(key, "==", req.query[key]);
+        // }
       });
     }
 
-    usersRef = usersRef.where("deleted", "==", deletedFilter);
+    //usersRef = usersRef.where("deleted", "==", deletedFilter);
 
     const totalUsersSnapshot = await usersRef.get();
     const totalFilteredUsers = totalUsersSnapshot.size;
