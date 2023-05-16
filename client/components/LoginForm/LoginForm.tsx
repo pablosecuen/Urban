@@ -151,15 +151,25 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
           Login with Facebook
         </Link>
       </div>
-      <small className="absolute bottom-5 right-5 block pt-2 text-right text-black">
-        No tienes cuenta?{" "}
-        <span
-          onClick={handleRegisterClick}
-          className="font-semibold text-blue hover:cursor-pointer hover:underline"
-        >
-          Registrate aqui
-        </span>
-      </small>
+      <div className="mt-2 flex">
+        <small className="bottom-5 right-5 block pt-2 text-right text-black">
+          Olvidaste tu contraseña?{" "}
+          <Link href="http://localhost:3001/recuperacion">
+            <span className="font-semibold text-blue hover:cursor-pointer hover:underline">
+              Click aqui
+            </span>
+          </Link>
+        </small>
+        <small className="bottom-5 right-5 block pt-2 text-right text-black">
+          No tienes cuenta?{" "}
+          <span
+            onClick={handleRegisterClick}
+            className="font-semibold text-blue hover:cursor-pointer hover:underline"
+          >
+            Registrate aqui
+          </span>
+        </small>
+      </div>
       {/* <button onClick={handleRegisterClick}>Facebook</button> */}
     </form>
   );

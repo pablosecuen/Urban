@@ -5,7 +5,7 @@ import { PassageToRegister, PassageToUpdate } from "../../schema/passage";
 export const newPassage = async (req: Request, res: Response): Promise<void> => {
   try {
     const dataString: string = req.body.data; // Obtener la cadena JSON de la solicitud
-    const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
+    const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con Insomnia
     // const data: PassageToRegister = req.body;
     const dataFormated = {
       ...data,
@@ -13,6 +13,15 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       deleted: false,
       createdAt: new Date(Date.now()).toISOString(),
     };
+
+    const companyId: string = data.companyId;
+
+    // Verificar si el companyId existe en la colección "companies"
+    const companySnapshot = await db.collection("companies").doc(companyId).get();
+    if (!companySnapshot.exists) {
+      res.status(404).json({ message: "La compañía no existe" });
+      return;
+    }
 
     // Upload the image to Firebase Storage
     const file: Express.Multer.File = req.file;
