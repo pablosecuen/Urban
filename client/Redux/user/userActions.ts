@@ -33,7 +33,12 @@ export const getUsersByEmail = createAsyncThunk("users/getUsersByEmail", async (
   return response.data.users;
 });
 
-export const deleteUserById = createAsyncThunk("users/deleteUser", async (userId: string) => {
+export const deleteUserById = createAsyncThunk("users/deleteUserById", async (userId: string) => {
   const response = await axios.delete(`http://localhost:3000/user/delete/${userId}`);
+  return response.data;
+});
+
+export const enableUserById = createAsyncThunk("users/enableUserById", async (userId: string) => {
+  const response = await axios.put(`http://localhost:3000/user/enable/${userId}`);
   return response.data;
 });
