@@ -5,6 +5,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import setValidate from "./Validate";
 import Link from "next/link";
+import logo from "../../assets/imagenes/UrbanIsoLogo.png";
+import Image from "next/image";
 
 interface UserToPassword {
   email: string;
@@ -58,9 +60,10 @@ export default function FormPassword() {
   return (
     <form
       onSubmit={handlePasswordChange}
-      className="flex h-1/2 w-1/3 items-center justify-center rounded-lg border-2 px-20 text-lg shadow-xl shadow-black/40"
+      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
     >
-      <div className="flex h-full flex-col justify-center gap-8">
+      <Image src={logo} alt="logo" className="w-24" />
+      <div className="flex flex-col justify-center gap-8">
         <div className="flex flex-col items-center gap-2">
           <label htmlFor="" className="text-center">
             Email:
@@ -70,10 +73,12 @@ export default function FormPassword() {
             name="email"
             value={userData.email}
             onChange={handleInputChange}
-            className={`pl-2 ${errores.messageEmail && "focus-visible:outline-red-500"}`}
+            className={`w-3/4 border-gray-400 pl-2 ${
+              errores.messageEmail && "focus-visible:outline-red-500"
+            }`}
           />
           <small
-            className={`pl-2 ${
+            className={`transition_all text-right ${
               errores.messageEmail ? "opacity-100" : "opacity-0"
             } -bottom-6 left-0 text-left font-medium text-red-500`}
           >
@@ -88,13 +93,13 @@ export default function FormPassword() {
               name="password"
               value={userData.password}
               onChange={handleInputChange}
-              className={`transition_all px-1 text-black ${
+              className={`mx-auto w-3/4 border-gray-400 pl-2 ${
                 errores.messagePassword && " focus-visible:outline-red-500"
               }`}
             />
             <button
               onClick={visiblePassword}
-              className="absolute right-1 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-1"
             >
               {!showPassword1 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
@@ -115,13 +120,13 @@ export default function FormPassword() {
               name="repeatPassword"
               value={userData.repeatPassword}
               onChange={handlePasswordChange}
-              className={`px-1 text-black ${
+              className={`mx-auto w-3/4 border-gray-400 pl-2  ${
                 errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
               }`}
             />
             <button
               onClick={visiblePassword2}
-              className="absolute right-1 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-1"
             >
               {!showPassword2 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
@@ -145,10 +150,10 @@ export default function FormPassword() {
             </div>
           </div>
         </div>
-        <div>
-          <button>Enviar contraseña</button>
+        <div className="flex items-center justify-center gap-2">
+          <button className="w-2/3">Enviar contraseña</button>
         </div>
-        <small>
+        <small className="pl-5">
           Quieres volver al inicio?{" "}
           <Link href={"http://localhost:3001"}>
             <span className="text-blue hover:cursor-pointer hover:underline">Click aqui</span>
