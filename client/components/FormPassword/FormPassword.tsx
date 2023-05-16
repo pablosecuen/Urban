@@ -60,9 +60,9 @@ export default function FormPassword() {
   return (
     <form
       onSubmit={handlePasswordChange}
-      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
+      className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 2xl:h-1/2 2xl:w-1/3 2xl:px-20 2xl:text-lg"
     >
-      <Image src={logo} alt="logo" className="w-24" />
+      <Image src={logo} alt="logo" className="w-24 lg:w-28" />
       <div className="flex flex-col justify-center gap-8">
         <div className="flex flex-col items-center gap-2">
           <label htmlFor="" className="text-center">
@@ -73,7 +73,7 @@ export default function FormPassword() {
             name="email"
             value={userData.email}
             onChange={handleInputChange}
-            className={`w-3/4 border-gray-400 pl-2 ${
+            className={`w-3/4 border-gray-400 pl-2 lg:w-2/3 ${
               errores.messageEmail && "focus-visible:outline-red-500"
             }`}
           />
@@ -93,13 +93,13 @@ export default function FormPassword() {
               name="password"
               value={userData.password}
               onChange={handleInputChange}
-              className={`mx-auto w-3/4 border-gray-400 pl-2 ${
+              className={`mx-auto w-3/4 border-gray-400 pl-2 lg:w-2/3 ${
                 errores.messagePassword && " focus-visible:outline-red-500"
               }`}
             />
             <button
               onClick={visiblePassword}
-              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-1"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20"
             >
               {!showPassword1 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
@@ -120,13 +120,13 @@ export default function FormPassword() {
               name="repeatPassword"
               value={userData.repeatPassword}
               onChange={handlePasswordChange}
-              className={`mx-auto w-3/4 border-gray-400 pl-2  ${
+              className={`mx-auto w-3/4 border-gray-400 pl-2 lg:w-2/3  ${
                 errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
               }`}
             />
             <button
               onClick={visiblePassword2}
-              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-1"
+              className="absolute right-10 flex w-8 justify-center bg-transparent px-0 text-center text-blue shadow-none lg:right-20"
             >
               {!showPassword2 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
