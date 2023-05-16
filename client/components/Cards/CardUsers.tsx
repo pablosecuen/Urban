@@ -8,7 +8,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { deleteUserById } from "@component/Redux/user/userActions";
+import { deleteUserById, enableUserById } from "@component/Redux/user/userActions";
 import { ToastContainer, toast } from "react-toastify";
 
 const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, selectedUser }) => {
@@ -17,6 +17,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
   const [bannId, setBannId] = useState("");
+  const [enableId, setEnableId] = useState("");
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -35,6 +36,11 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
   const handleBann = () => {
     setBannId(filteredUsers[0].id);
     dispatch(deleteUserById(bannId));
+  };
+
+  const handleEnable = () => {
+    setEnableId(filteredUsers[0].id);
+    dispatch(enableUserById(enableId));
   };
 
   return (
@@ -100,9 +106,16 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
               Settings
             </button>
             <button
-              className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+              className="relative mr-1 w-auto rounded bg-green-900 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
               type="button"
               onClick={handleBann}
+            >
+              Habilitar
+            </button>
+            <button
+              className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
+              type="button"
+              onClick={handleEnable}
             >
               Ban
             </button>
