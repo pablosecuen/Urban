@@ -3,14 +3,23 @@ import React from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
+// function to render products an prices in html divs
+
 export default function CardBarChart() {
+  // tiene que mostrar las operaciones por tipo
   React.useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      const { data: revenue } = await axios.get("http://localhost:3000/admin/profit?mes=5");
-      const { tickets, orders, travels } = revenue;
-
-      console.log({ fetchData: revenue });
+      const { data } = await axios.get("http://localhost:3000/admin/operations?year=2023");
+      const { ticketsPerMonth, ordersPerMonth, travelsPerMonth } = data;
+      const ticketsValues = [];
+      const ordersValues = [];
+      const travelsValues = [];
+      for (let i = 0; i < 12; i++) {
+        ticketsValues.push(ticketsPerMonth[i] || 0);
+        ordersValues.push(ordersPerMonth[i] || 0);
+        travelsValues.push(travelsPerMonth[i] || 0);
+      }
       let config = {
         type: "bar",
         data: {
@@ -31,25 +40,25 @@ export default function CardBarChart() {
           datasets: [
             {
               label: "Tickets",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
-              data: tickets,
+              backgroundColor: "#EF4444",
+              borderColor: "#EF4444",
+              data: ticketsValues,
               fill: false,
               barThickness: 8,
             },
             {
               label: "Orders",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
-              data: orders,
+              backgroundColor: "#12BA82",
+              borderColor: "#12BA82",
+              data: ordersValues,
               fill: false,
               barThickness: 8,
             },
             {
               label: "Travels",
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
-              data: travels,
+              backgroundColor: "#A855F7",
+              borderColor: "#A855F7",
+              data: travelsValues,
               fill: false,
               barThickness: 8,
             },
@@ -127,9 +136,9 @@ export default function CardBarChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-1 flex-grow">
               <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">
-                Performance
+                Operaciones
               </h6>
-              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos totales</h2>
+              <h2 className="text-xl font-semibold text-blueGray-700">Operaciones por mes</h2>
             </div>
           </div>
         </div>
