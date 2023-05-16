@@ -8,14 +8,14 @@ export const searchUser = async (req: Request, res: Response): Promise<void> => 
     const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
     if (!doc.exists) {
-      res.status(404).json({ message: "Usuario no encontrado" });
+      throw new Error("El usuario no existe");
     } else {
       const usuario = { id: doc.id, ...doc.data() };
       res.status(200).json(usuario);
     }
   } catch (error) {
     console.error("Error al obtener el usuario", error);
-    res.status(500).json({ message: "Error al obtener el usuario" });
+    res.status(400).json({ message: "Error al obtener el usuario" });
   }
 };
 
@@ -57,7 +57,7 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
     res.json({ users: usersData, totalPages });
   } catch (error) {
     console.error("Error al obtener los usuarios", error);
-    res.status(500).json({ message: "Error al obtener los usuarios" });
+    res.status(400).json({ message: "Error al obtener los usuarios" });
   }
 };
 
@@ -68,7 +68,7 @@ export const decodingUser = async (req: Request, res: Response): Promise<void> =
     const decoded: any = jwt.verify(token, "clavemegasecreta");
     const doc = await db.collection("users").doc(decoded.id).get();
     if (!doc.exists) {
-      res.status(404).json({ message: "Usuario no encontrado" });
+      throw new Error("Usuario no encontrado");
     } else {
       const usuario = { id: doc.id, ...doc.data() };
       res.json(usuario);
