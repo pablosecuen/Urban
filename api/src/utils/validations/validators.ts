@@ -188,8 +188,8 @@ export const isLocalIdValid = (localId: string): string | null => {
   return "El id del local no es válido";
 };
 
-export const isPassageIdValid = (localId: string): string | null => {
-  if (typeof localId === "string") return null;
+export const isPassageIdValid = (passageId: string): string | null => {
+  if (typeof passageId === "string") return null;
   return "El id del pasaje no es válido";
 };
 
