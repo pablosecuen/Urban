@@ -101,15 +101,13 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
  * Controlador para hacer un borrado logico de un usuario en Firestore.
  */
 export const enableUser = async (req: Request, res: Response): Promise<void> => {
-  const id: string = req.params.id;
-
   try {
+    const id: string = req.params.id;
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
       throw new Error("El usuario no se encontró");
     }
-
-    await db.collection("locals").doc(id).update({ deleted: false });
+    await db.collection("users").doc(id).update({ deleted: false });
 
     res.status(200).json({ message: "Usuario habilitado correctamente" });
   } catch (error) {
