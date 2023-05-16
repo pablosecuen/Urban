@@ -4,21 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "@component/Redux/store/store";
-import { AnyAction } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import { deleteUserById, enableUserById } from "@component/Redux/user/userActions";
 import { ToastContainer, toast } from "react-toastify";
 
 const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, selectedUser }) => {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
 
-  const [bannId, setBannId] = useState("");
-  const [enableId, setEnableId] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(allUsers);
 
   const handleSearchChange = (event: any) => {
@@ -36,18 +27,6 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown);
-  };
-
-  const handleBann = (id: string) => {
-    console.log(id);
-    dispatch(deleteUserById(id));
-    console.log("Borrado");
-  };
-
-  const handleEnable = (id: string) => {
-    console.log(id);
-    dispatch(enableUserById(id));
-    console.log("Habilitado");
   };
 
   return (
@@ -90,29 +69,6 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
                 />
                 <h3 className="">{user.name}</h3>
               </div>
-              <div>
-                {user && user?.deleted ? (
-                  <button
-                    className="relative mr-1 w-auto rounded bg-green-900 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-                    type="button"
-                    onClick={() => {
-                      handleEnable(user.id);
-                    }}
-                  >
-                    Habilitar
-                  </button>
-                ) : (
-                  <button
-                    className="relative mr-1 w-auto rounded bg-red-950 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
-                    type="button"
-                    onClick={() => {
-                      handleBann(user.id);
-                    }}
-                  >
-                    Ban
-                  </button>
-                )}
-              </div>
               <div className="flex  items-center justify-start ">
                 <p className="flex-start flex">
                   <strong className="w-auto pr-2">id: </strong>
@@ -135,7 +91,7 @@ const CardUsers: React.FC<CardUsersProps> = ({ allUsers, handleClickFunction, se
             >
               Settings
             </button>
-            {showDropDown && <UserDropDownSettings />}
+            {showDropDown && <UserDropDownSettings user={selectedUser} />}
           </div>
         </div>
         <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
