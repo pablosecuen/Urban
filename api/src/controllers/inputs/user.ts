@@ -57,10 +57,14 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
       password: hashedPassword,
     };
     const docRef = await db.collection("users").add(user);
-    /////////////
+
+    // Obtiene los datos del documento recién creado
+    const userSnapshot = await docRef.get();
+    const userData = userSnapshot.data();
+
     await successRegister(user.email, user.name);
-    /////////////        ACA ESTAAAAA
-    res.status(201).json({ id: docRef.id });
+
+    res.status(201).json({ id: docRef.id, user: userData });
   } catch (error) {
     console.error("Error al crear el usuario", error);
     res.status(400).json({ message: error.message });
