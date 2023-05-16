@@ -113,6 +113,30 @@ export const getGrossIncome = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserRecords = async (req: Request, res: Response) => {
+  try {
+    const year = req.query.year as string;
+    const usersSnap = await db
+      .collection("users")
+      .where("createdAt", ">=", year)
+      .where("createdAt", "<", year + 1)
+      .get();
+
+    const usersRecordsPerMonth = {};
+    usersSnap.docs.forEach((doc) => {
+      const month = new Date(doc.data().createdAt).getMonth();
+      usersRecordsPerMonth[month] = usersRecordsPerMonth[month]
+        ? usersRecordsPerMonth[month] + 1
+        : 1;
+    });
+
+    // months van del 0 al 11
+    res.status(200).json({ usersRecordsPerMonth });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Ha ocurrido un error" });
+  }
+};
 export const getInactiveChauffeur = async (req: Request, res: Response): Promise<void> => {
   try {
     const { page = 1, pageSize = 10, ...filters } = req.query;
