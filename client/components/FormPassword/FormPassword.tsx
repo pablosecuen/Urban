@@ -161,7 +161,9 @@ export default function FormPassword() {
           </div>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <button className="w-2/3">Enviar contraseña</button>
+          <button onClick={handlePasswordChange} className="w-2/3">
+            Enviar contraseña
+          </button>
         </div>
         <small className="pl-5 2xl:mt-5">
           Quieres volver al inicio?{" "}
