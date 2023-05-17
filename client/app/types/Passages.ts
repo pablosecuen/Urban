@@ -1,4 +1,5 @@
-export interface Passage  {
+export interface Passage {
+  companyId: string;
   id: string;
   origin: string;
   destination: string;
@@ -12,7 +13,7 @@ export interface Passage  {
   price: number;
   stock: number;
   img: string;
-  
+
   createdAt: string;
   deleted: boolean;
   status: boolean;
@@ -23,16 +24,12 @@ export interface PassagePayload {
   quantity: number;
 }
 
-
-export interface PassageResponse   {
+export interface PassageResponse {
   passages: Passage[];
   totalPages: number;
-  
 }
 export interface PassageToRegister extends Passage {
-
   departureTime: string;
-
 }
 
 export interface PassageToUpdate extends Partial<PassageToRegister> {
@@ -40,6 +37,5 @@ export interface PassageToUpdate extends Partial<PassageToRegister> {
 }
 
 export interface CardProfilePropsPassage {
-  selectedPassage: Passage | null;  
+  selectedPassage: Passage | null;
 }
-
