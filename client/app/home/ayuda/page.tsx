@@ -19,8 +19,7 @@ export default function Home() {
           privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
           comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
         </p>
-        <h2 className="py-2 text-center text-xl font-bold">Preguntas frecuentes</h2>
-        <h3 className="py-2 text-lg font-bold">¿Es segura la plataforma?</h3>
+        <h3 className="py-2  text-center text-xl font-bold">¿Es segura la plataforma?</h3>
         <p className="p-2 text-justify">
           Para nosotros, tu seguridad es lo mas importante. Por eso, implementamos un sistema de
           validación de identidad y antecedentes, del conductor y del vehículo que te transporta,

@@ -13,9 +13,10 @@ import jsPDF from "jspdf";
 import { Ticket } from "@component/app/types/Ticket";
 import { FaBus, FaCar, FaTaxi } from "react-icons/fa";
 import RatingStars from "../RatingStars/RatingStars";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import ToastComponent from "../00-Toastify/ToastComponent";
 import axios, { AxiosError } from "axios";
+import { User } from "@component/app/types/User";
 
 interface ValuationData {
   rating: number;
@@ -33,6 +34,7 @@ export default function CardGestion() {
     rating: 0,
     comment: "",
   });
+  const [userData, setUserData] = useState<User | null>(null);
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allTickets = useSelector((state: RootState) => state.ticket.allTickets) as Ticket[];
   const modalRef = useRef<HTMLDivElement>(null);
@@ -43,6 +45,7 @@ export default function CardGestion() {
     if (userString) {
       const user = JSON.parse(userString);
       dispatch(getTicketsByUserId(user.id));
+      setUserData(user);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,6 +92,8 @@ export default function CardGestion() {
         axios
           .post(`http://localhost:3000/user/rating/company/${userId}/${companyId}`, valuationData)
           .then(() => {
+            console.log("asdasd");
+            notifySuccess();
             // alerta con mensaje de éxito
           });
       } catch (error: AxiosError | any) {
@@ -97,6 +102,22 @@ export default function CardGestion() {
       }
     }
   };
+
+  const notifySuccess = () =>
+    //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
+    //Si miran cada Toast solo con cambiar el success, error, warn o info, cambie su funcion
+    //No hace falta cambiar el ToastContainer a la par si solo se cambia el Toast
+    toast.success(`Gracias por tu valoración`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
   return (
     <section
       className={` flex h-full w-full flex-col gap-2  ${
@@ -156,10 +177,11 @@ export default function CardGestion() {
                   />
                   <textarea
                     onChange={handleChangeValuationComment}
-                    className="border"
+                    className="border p-1"
                     cols={30}
                     rows={4}
                     value={valuationData.comment}
+                    placeholder="tu feedback nos ayuda a mejorar la calidad de nuestro servicio"
                   />
                 </div>
                 <button onClick={sendValuation}>Enviar Valoración</button>
@@ -168,6 +190,19 @@ export default function CardGestion() {
           </div>
         </div>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        closeButton={false}
+      />
     </section>
   );
 }
