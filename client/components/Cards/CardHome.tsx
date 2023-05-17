@@ -11,7 +11,6 @@ export default function CardHome() {
   }
 
   const user = JSON.parse(localStorage.getItem("user")!);
-  console.log(user);
 
   const notifySuccess = () =>
     //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
