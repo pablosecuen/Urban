@@ -34,8 +34,8 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
       },
     });
     blobStream.on("error", (error) => {
-      console.error("Error uploading image:", error);
-      res.status(500).json({ message: "Error uploading image" });
+      console.error("Error al subir la imagen:", error);
+      res.status(500).json({ message: "Error al subir la imagen" });
     });
     blobStream.on("finish", async () => {
       // Make the uploaded image publicly accessible
