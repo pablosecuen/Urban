@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <div className="scrollbar mb-8 mt-10 flex w-full flex-col items-center justify-evenly overflow-y-scroll rounded-3xl border-2 px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5">
       <div className="">
-        <h2>Acerca de nosotros</h2>
-        <p>
+        <h2 className="py-2 text-center text-xl font-bold">Acerca de nosotros</h2>
+        <p className="p-2 text-justify">
           Somos la solución perfecta para hacer tus viajes intermunicipales terrestres más fáciles y
           seguros. Con solo 1 clic te ofrecemos una oferta multimodal de transporte (bus, taxi o
           vehículo particular) que se ajustara a tus necesidades económicas y de itinerario. Somos
@@ -19,9 +19,9 @@ export default function Home() {
           privados con estrictas condiciones de seguridad, de esta forma contribuimos a tu
           comodidad, pero, más importante aún, generamos eficiencias económicas y ambientales.
         </p>
-        <h2>Preguntas frecuentes</h2>
-        <h3>¿Es segura la plataforma?</h3>
-        <p>
+        <h2 className="py-2 text-center text-xl font-bold">Preguntas frecuentes</h2>
+        <h3 className="py-2 text-lg font-bold">¿Es segura la plataforma?</h3>
+        <p className="p-2 text-justify">
           Para nosotros, tu seguridad es lo mas importante. Por eso, implementamos un sistema de
           validación de identidad y antecedentes, del conductor y del vehículo que te transporta,
           que nos permite, dentro de lo posible, reconocer que la prestación del servicio será
