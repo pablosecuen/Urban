@@ -6,9 +6,9 @@ dotenv.config();
 const serviceAccountKey = JSON.parse(process.env.SERVICE_ACCOUNT_KEY);
 
 firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccountKey),
-  databaseURL: "https://pruebadedatabase.firebaseio.com",
-  storageBucket: "gs://pruebadedatabase.appspot.com",
+  credential: firebase.credential.cert(serviceAccountKey), //estocambiar despues de que la base de datos original ande
+  databaseURL: "https://pruebadedatabase3.firebaseio.com", //estocambiar despues de que la base de datos original ande
+  storageBucket: "gs://pruebadedatabase3.appspot.com", //estocambiar despues de que la base de datos original ande
 });
 
 const db = firebase.firestore();

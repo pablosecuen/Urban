@@ -46,21 +46,27 @@ passport.deserializeUser(async (email: string, done) => {
 }); //todo esto despues se hara un middlware de auth de passport
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
-  passport.authenticate("userStretegy", (err: Error, user: User) => {
+  passport.authenticate("userStretegy", async (err: Error, user: User) => {
     if (err) {
       return res.status(500).json(err);
     }
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Credenciales inválidas" });
     }
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(500).json(err);
+    try {
+      const userSnapshot = await db.collection("users").where("email", "==", user.email).get();
+      if (userSnapshot.empty) {
+        throw new Error("Usuario no encontrado");
       }
+      const userData = userSnapshot.docs[0].data();
+      const userId = userSnapshot.docs[0].id;
       const jwt = jsonwebtoken;
-      const secretKey = "mySecretKey"; // despues se cambiara por otra secrekey bien elaborada y especial para user
+      const secretKey = "mySecretKey"; // Cambiar por una clave secreta segura y única
       const token = jwt.sign({ email: user.email }, secretKey);
-      return res.json({ token, user });
-    });
+      return res.json({ token, user: { ...userData, id: userId } });
+    } catch (error) {
+      console.error("Error logueo del user", error);
+      return res.status(500).json({ message: "Error logueo del user" });
+    }
   })(req, res);
 };

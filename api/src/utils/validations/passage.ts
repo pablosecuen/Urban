@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   isArrivalDateValid,
+  isCompanyIdValid,
   isDepartureDateValid,
   isDepartureTimeValid,
   isDestinationValid,
@@ -41,6 +42,7 @@ export const newAndUpdatePassageValidate = (
       "numberSeat",
       "checkIn",
       "departureTime",
+      "companyId",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Propiedades no válidas");
@@ -54,7 +56,8 @@ export const newAndUpdatePassageValidate = (
       !isDurationValid(data.duration) ||
       !isPriceValid(data.price) ||
       !isNumberSeatValid(data.numberSeat) ||
-      !isDepartureTimeValid(data.departureTime)
+      !isDepartureTimeValid(data.departureTime) ||
+      !isCompanyIdValid(data.companyId)
     )
       throw new Error("Datos no validos");
     next();

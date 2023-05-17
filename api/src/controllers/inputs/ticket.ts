@@ -23,6 +23,11 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 
     const passageData = passageDoc.data();
     const ticketPrice = passageData.price;
+    const currentStock = passageData.stock;
+
+    if (currentStock < data.quantity) {
+      throw new Error("No hay suficiente stock disponible");
+    }
 
     const dataFormatted: Ticket = {
       ...data,
@@ -34,6 +39,8 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 
     const docRef = await db.collection("tickets").add(dataFormatted);
 
+    const updatedStock = currentStock - data.quantity;
+
     await Promise.all([
       db
         .collection("users")
@@ -42,7 +49,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
           "history.tickets": firebase.firestore.FieldValue.arrayUnion(docRef.id),
         }),
       db.collection("passages").doc(data.passageId).update({
-        stock: data.quantity,
+        stock: updatedStock,
       }),
     ]);
 

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DeliveryRating } from "../../schema/deliveryRating";
@@ -64,7 +65,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
 
     await successRegister(user.email, user.name, docRef.id);
 
-    res.status(201).json({ id: docRef.id, user: userData });
+    res.status(200).json({ id: docRef.id, user: userData });
   } catch (error) {
     console.error("Error al crear el usuario", error);
     res.status(400).json({ message: error.message });
@@ -124,7 +125,7 @@ export const deletedUser = async (req: Request, res: Response): Promise<void> =>
       throw new Error("No se encontró el usuario");
     }
     await db.collection("users").doc(id).update({ deleted: true });
-    res.status(201).json({ menssage: "Usuario eliminado correctamente" });
+    res.status(200).json({ menssage: "Usuario eliminado correctamente" });
   } catch (error) {
     console.error("Error al borrar el Usuario", error);
     res.status(400).json({ messege: error.message });
@@ -198,10 +199,10 @@ export const newDeliveryRating = async (req: Request, res: Response): Promise<vo
       });
     }
 
-    res.status(201).json({ id: ratingRef.id });
+    res.status(200).json({ id: ratingRef.id });
   } catch (error) {
     console.error("Error creating delivery rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -259,10 +260,10 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
       });
     }
 
-    res.status(201).json({ id: docRef.id });
+    res.status(200).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al generar rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -320,9 +321,69 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
       });
     }
 
-    res.status(201).json({ id: docRef.id });
+    res.status(200).json({ id: docRef.id });
   } catch (error) {
     console.error("Error al generar rating", error);
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  try {
+    // Verificar si el correo electrónico está registrado en la base de datos
+    const user = await db.collection("users").where("email", "==", email).limit(1).get();
+
+    if (user.empty) {
+      // El correo electrónico no está registrado
+      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+    }
+
+    // Generar un token de restablecimiento de contraseña válido por 1 hora
+    const token = jwt.sign({ email }, "secreto", { expiresIn: "1h" });
+
+    // Construir el enlace de restablecimiento de contraseña
+    const resetLink = ``; //link de form de recuperacion
+
+    return res
+      .status(200)
+      .json({ message: "Se ha enviado un enlace para restablecer la contraseña" });
+  } catch (error) {
+    console.error("Error al solicitar restablecer la contraseña:", error);
+    res
+      .status(500)
+      .json({ message: "Ha ocurrido un error al solicitar restablecer la contraseña" });
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  const { token, newPassword } = req.body;
+
+  try {
+    // Verificar y decodificar el token de restablecimiento de contraseña
+    const decodedToken: any = jwt.verify(token, "secreto");
+
+    // Verificar si el correo electrónico del token está registrado en la base de datos
+    const user = await db
+      .collection("users")
+      .where("email", "==", decodedToken.email)
+      .limit(1)
+      .get();
+
+    if (user.empty) {
+      // El correo electrónico no está registrado
+      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+    }
+
+    // Actualizar la contraseña del usuario en la base de datos
+    const userId = user.docs[0].id;
+    await db.collection("users").doc(userId).update({ password: newPassword });
+
+    // Respuesta exitosa
+    return res.status(200).json({ message: "Contraseña restablecida exitosamente" });
+  } catch (error) {
+    console.error("Error al restablecer la contraseña:", error);
+    res.status(500).json({ message: "Error al restablecer la contraseña" });
   }
 };

@@ -29,7 +29,7 @@ export const getTicketByUserId = async (req: Request, res: Response): Promise<vo
     res.status(200).json({ tickets, totalPages });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al obtener los viajes del usuario");
+    res.status(400).send("Error al obtener los viajes del usuario");
   }
 };
 
@@ -40,13 +40,45 @@ export const getTicketById = async (req: Request, res: Response): Promise<void> 
     const doc = await db.collection("tickets").doc(id).get();
 
     if (!doc.exists) {
-      res.status(404).json({ message: "Ticket no encontrado" });
+      throw new Error("El ticket no existe");
     }
 
     const ticket = { id: doc.id, ...doc.data() };
     res.status(200).json(ticket);
   } catch (error) {
     console.error("Error al obtener el ticket", error);
-    res.status(500).json({ message: "Error al obtener el ticket" });
+    res.status(400).json({ message: "Error al obtener el ticket" });
+  }
+};
+
+export const getAllTickets = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const allProperties = Object.keys(req.query);
+
+    let query: any = db.collection("tickets");
+
+    allProperties.forEach((property) => {
+      if (property === "page" || property === "pageSize") {
+        return;
+      }
+      query = query.where(property, "==", req.query[property]);
+    });
+
+    const ticketsSnapshot = await query.get();
+
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 2;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const totalPages = Math.ceil(ticketsSnapshot.size / pageSize);
+
+    const ticketData = ticketsSnapshot.docs
+      .slice(startIndex, endIndex)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    res.status(201).json({ tickets: ticketData, totalPages });
+  } catch (error) {
+    console.error("Error al obtener las ordenes", error);
+    res.status(500).json({ message: "Error al obtener las ordenes" });
   }
 };
