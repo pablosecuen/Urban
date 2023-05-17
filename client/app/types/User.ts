@@ -16,6 +16,8 @@ export interface userData {
   img: string;
   email?: string;
   address?: Address;
+  phone?: string;
+  cc?:string;
 }
 export interface User extends UserToRegister {
   email: string;
