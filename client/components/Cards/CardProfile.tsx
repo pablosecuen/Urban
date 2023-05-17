@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { CardProfileProps } from "../../app/types/User";
 
@@ -9,7 +8,7 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
 
   return (
     <>
-      <div className="relative mb-6 mt-16 flex  min-w-0 flex-col break-words rounded-lg bg-white shadow-xl">
+      <div className=" mb-6 mt-16 flex  min-w-0 flex-col break-words rounded-lg bg-white shadow-xl">
         <div className="px-6">
           <div className="flex flex-wrap justify-center">
             <div className="flex w-full justify-center px-4">
@@ -19,7 +18,7 @@ const CardProfile: React.FC<CardProfileProps> = (props) => {
                     <Image
                       src={selectedUser.img}
                       alt="imagen de perfil"
-                      className="absolute -top-10 right-44 -m-16 h-auto w-48  overflow-hidden rounded-full border-none align-middle shadow-xl lg:-ml-16"
+                      className="-translate-x-[%50] absolute -top-10 left-[40%] -m-16 h-auto w-48  overflow-hidden rounded-full border-none align-middle shadow-xl "
                       width={100}
                       height={100}
                     />
