@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 import firebase from "firebase-admin";
 import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DeliveryRating } from "../../schema/deliveryRating";
@@ -324,5 +325,34 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
   } catch (error) {
     console.error("Error al generar rating", error);
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  try {
+    // Verificar si el correo electrónico está registrado en la base de datos
+    const user = await db.collection("users").where("email", "==", email).limit(1).get();
+
+    if (user.empty) {
+      // El correo electrónico no está registrado
+      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+    }
+
+    // Generar un token de restablecimiento de contraseña válido por 1 hora
+    const token = jwt.sign({ email }, "secreto", { expiresIn: "1h" });
+
+    // Construir el enlace de restablecimiento de contraseña
+    const resetLink = ``; //link de form de recuperacion
+
+    return res
+      .status(200)
+      .json({ message: "Se ha enviado un enlace para restablecer la contraseña" });
+  } catch (error) {
+    console.error("Error al solicitar restablecer la contraseña:", error);
+    return res
+      .status(500)
+      .json({ message: "Ha ocurrido un error al solicitar restablecer la contraseña" });
   }
 };
