@@ -11,7 +11,9 @@ mercadopago.configure({
 export const postPayment = (req, res) => {
   const products = req.body;
   console.log(req.body);
-
+  products.forEach((product) => {
+    product.description = product.description.toString();
+  });
   // preference
   let preference = {
     items: products,
