@@ -6,6 +6,7 @@ import { UserToRegister, User, UserToUpdate } from "../../schema/user";
 import { DeliveryRating } from "../../schema/deliveryRating";
 import { Delivery } from "../../schema/delivery";
 import { successRegister } from "../../utils/middelware/sendMail";
+import { CompanyRating } from "../../schema/companyRating";
 
 /**
  * Controlador para crear un usuario en Firestore.
@@ -271,7 +272,7 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
     const { userId, companyId } = req.params;
     const data = req.body;
 
-    const dataFormatted: DeliveryRating = {
+    const dataFormatted: CompanyRating = {
       userId,
       companyId,
       ...data,
