@@ -88,7 +88,7 @@ export default function FormPassword() {
             }`}
           />
           <small
-            className={`pr-8 text-right transition-all ${
+            className={`pr-8 text-right transition-all lg:pr-20 ${
               errores.messageEmail ? "opacity-100" : "opacity-0"
             } -bottom-6 text-left font-medium text-red-500`}
           >
@@ -114,7 +114,7 @@ export default function FormPassword() {
               {!showPassword1 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
             <small
-              className={`transition_all pr-8 text-right ${
+              className={`transition_all pr-8 text-right lg:pr-20 ${
                 errores.messagePassword ? "opacity-100" : "opacity-0"
               } absolute -bottom-6 left-0 text-left font-medium text-red-500`}
             >
@@ -142,7 +142,7 @@ export default function FormPassword() {
             </button>
             <div className="absolute -bottom-6 left-0 text-right">
               <small
-                className={`transition_all pr-8 text-right ${
+                className={`transition_all pr-8 text-right lg:pr-20 ${
                   errores.messageRepeatPassword ? "opacity-100" : "opacity-0"
                 }  font-medium text-red-500`}
               >
@@ -150,7 +150,7 @@ export default function FormPassword() {
               </small>
               <small
                 className={`transition_all text-right ${
-                  errores.messageRepeatPassword ? "opacity-0" : "pr-8 opacity-100"
+                  errores.messageRepeatPassword ? "opacity-0" : "pr-8 opacity-100 lg:pr-20"
                 }  font-medium text-emerald-500`}
               >
                 {errores.messageRepeatPassword == "" &&
