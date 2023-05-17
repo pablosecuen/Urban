@@ -39,7 +39,6 @@ export const newAndUpdatePassageValidate = (
       "arrivalDate",
       "duration",
       "price",
-      "numberSeat",
       "checkIn",
       "departureTime",
       "companyId",
@@ -55,7 +54,6 @@ export const newAndUpdatePassageValidate = (
       !isArrivalDateValid(data.arrivalDate) ||
       !isDurationValid(data.duration) ||
       !isPriceValid(data.price) ||
-      !isNumberSeatValid(data.numberSeat) ||
       !isDepartureTimeValid(data.departureTime) ||
       !isCompanyIdValid(data.companyId)
     )
