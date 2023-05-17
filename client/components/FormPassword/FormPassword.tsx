@@ -11,6 +11,7 @@ import Image from "next/image";
 interface UserToPassword {
   email: string;
   password: string;
+  repeatPassword: string;
 }
 
 interface LoginResponse {
@@ -22,6 +23,7 @@ interface LoginResponse {
 interface PasswordError {
   messageEmail?: string;
   messagePassword?: string;
+  messageRepeatPassword?: string;
 }
 
 export default function FormPassword() {
@@ -46,6 +48,14 @@ export default function FormPassword() {
     const { password } = userData;
     setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
   };
+
+  function setValidateRepeatPassword(repeatPassword: string, password: string) {
+    if (repeatPassword === password || repeatPassword === "") {
+      return { messageRepeatPassword: "" };
+    } else {
+      return { messageRepeatPassword: "La contraseña no coincide" };
+    }
+  }
 
   const visiblePassword = (e) => {
     e.preventDefault();
@@ -78,9 +88,9 @@ export default function FormPassword() {
             }`}
           />
           <small
-            className={`transition_all text-right ${
+            className={`pr-8 text-right transition-all lg:pr-20 ${
               errores.messageEmail ? "opacity-100" : "opacity-0"
-            } -bottom-6 left-0 text-left font-medium text-red-500`}
+            } -bottom-6 text-left font-medium text-red-500`}
           >
             {errores.messageEmail}
           </small>
@@ -104,7 +114,7 @@ export default function FormPassword() {
               {!showPassword1 ? <HiEyeOff className="w-full" /> : <HiEye className="w-full" />}
             </button>
             <small
-              className={`transition_all text-right ${
+              className={`transition_all pr-8 text-right lg:pr-20 ${
                 errores.messagePassword ? "opacity-100" : "opacity-0"
               } absolute -bottom-6 left-0 text-left font-medium text-red-500`}
             >
@@ -132,15 +142,15 @@ export default function FormPassword() {
             </button>
             <div className="absolute -bottom-6 left-0 text-right">
               <small
-                className={`transition_all  text-right ${
+                className={`transition_all pr-8 text-right lg:pr-20 ${
                   errores.messageRepeatPassword ? "opacity-100" : "opacity-0"
                 }  font-medium text-red-500`}
               >
                 {errores.messageRepeatPassword}
               </small>
               <small
-                className={`transition_all  text-right ${
-                  errores.messageRepeatPassword ? "opacity-0" : "opacity-100"
+                className={`transition_all text-right ${
+                  errores.messageRepeatPassword ? "opacity-0" : "pr-8 opacity-100 lg:pr-20"
                 }  font-medium text-emerald-500`}
               >
                 {errores.messageRepeatPassword == "" &&
@@ -151,7 +161,9 @@ export default function FormPassword() {
           </div>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <button className="w-2/3">Enviar contraseña</button>
+          <button onClick={handlePasswordChange} className="w-2/3">
+            Enviar contraseña
+          </button>
         </div>
         <small className="pl-5 2xl:mt-5">
           Quieres volver al inicio?{" "}

@@ -123,13 +123,13 @@ export default function NavBar() {
             />
           </div>
           <nav>
-            <ul className="flex w-auto items-center justify-end  lg:gap-4 ">
+            <ul className="flex w-auto items-center justify-end lg:gap-4 ">
               {links.map((link) => (
                 <li
                   key={link.id}
                   className={`flex ${
-                    pathname?.includes(link.route) && "border-b   border-celeste "
-                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:w-auto lg:px-0`}
+                    pathname?.includes(link.route) && "border-b border-celeste "
+                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:mr-3 lg:w-auto lg:px-0`}
                 >
                   <Link
                     href={link.route}
@@ -142,7 +142,7 @@ export default function NavBar() {
               ))}
               {user ? (
                 <>
-                  <li className="flex items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:w-auto lg:px-0">
+                  <li className="flex items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:mr-4 lg:w-auto lg:px-0">
                     <Image
                       src={user?.img}
                       alt={user?.name}
