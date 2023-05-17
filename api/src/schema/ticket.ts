@@ -5,6 +5,7 @@ export interface TicketToRegister {
   passageId: string;
   price: number;
   quantity: number;
+  numberSeat: string[];
   paymentId: number;
   merchantOrden: number;
   statusMp: string;
