@@ -149,8 +149,8 @@ export default function FormPassword() {
                 {errores.messageRepeatPassword}
               </small>
               <small
-                className={`transition_all  text-right ${
-                  errores.messageRepeatPassword ? "opacity-0" : "opacity-100"
+                className={`transition_all text-right ${
+                  errores.messageRepeatPassword ? "opacity-0" : "pr-8 opacity-100"
                 }  font-medium text-emerald-500`}
               >
                 {errores.messageRepeatPassword == "" &&
