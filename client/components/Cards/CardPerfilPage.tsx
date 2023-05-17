@@ -9,7 +9,7 @@ import { type } from "os";
 import CardHistorialTickets from "./CardHistorialTickets";
 import { User, userData } from "@component/app/types/User";
 
-export default function Perfil() {
+export default function PerfilPage() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Viajes");
   const [userData, setUserData] = useState<userData | null>(null);
@@ -21,19 +21,15 @@ export default function Perfil() {
     setActiveTab(tabName);
   };
 
-
-
   useEffect(() => {
     const userDataString = localStorage.getItem("user");
     setLoading(false);
     if (userDataString) {
       setUserData(JSON.parse(userDataString));
     }
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(userData);
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -45,7 +41,7 @@ export default function Perfil() {
       <div className="flex w-full ">
         {pestañasHistorialPerfil.map((item, index) => (
           <div
-            key={item.id}
+            key={index}
             className={`w-full cursor-pointer rounded-t-xl border border-gray-300 px-2 py-1 transition duration-500 lg:hover:bg-gray-300 xl:border-gray-200 ${
               activeTab === `${item.name}` && "bg-blue font-semibold text-white"
             }`}
@@ -61,7 +57,8 @@ export default function Perfil() {
         <>
           {activeTab === `${item.name}` && (
             <div
-              className="text-35 h-[416px] w-full overflow-hidden bg-gray-white xl:border-2"
+              key={index}
+              className="text-35 bg-gray-white h-[416px] w-full overflow-hidden xl:border-2"
               title={item.title}
             >
               <h4 className="border-y-2 border-blue text-center text-lg font-semibold">{item.p}</h4>
@@ -72,8 +69,7 @@ export default function Perfil() {
                     userTravels.length > 3 && "overflow-scroll"
                   } pb-4 xl:border-2`}
                 >
-             <CardHistorialTickets />
-
+                  <CardHistorialTickets />
                 </div>
               )}
             </div>
