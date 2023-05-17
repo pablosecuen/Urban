@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Profile() {
@@ -51,9 +51,9 @@ export default function Profile() {
   return (
     <form
       onSubmit={onSubmit}
-      className="mt-32 flex h-full w-full flex-col items-center justify-evenly p-2 py-4 shadow-lg shadow-black/40 lg:mt-0 lg:h-[460px] lg:w-1/2 lg:gap-2 lg:px-8 lg:py-4 2xl:h-full 2xl:w-1/3"
+      className=" flex w-full flex-col items-center justify-evenly gap-4 rounded-xl py-8 shadow-xl  shadow-black/40 xl:h-[600px]  xl:flex-col"
     >
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center ">
         {userData && (
           <Image
             alt="..."
@@ -68,7 +68,7 @@ export default function Profile() {
         </h3>
       </div>
 
-      <div className="flex h-auto w-auto flex-col justify-between gap-2 text-center lg:mb-0 2xl:text-lg ">
+      <div className="flex h-auto w-[350px] flex-wrap justify-center gap-2 text-center lg:mb-0 lg:w-2/3 lg:justify-between xl:w-auto xl:flex-col 2xl:text-lg ">
         {/* <label htmlFor="">
           Telefono
           {showInput === true ? (
@@ -89,8 +89,8 @@ export default function Profile() {
           )}
         </label> */}
 
-        <label htmlFor="">
-          Cc:
+        <div className="max-w-[90px]">
+          <label htmlFor="">Cc:</label>
           {showInput === true ? (
             <input
               name="cc"
@@ -109,10 +109,9 @@ export default function Profile() {
               value={userData?.cc}
             />
           )}
-        </label>
-
-        <label htmlFor="">
-          Location
+        </div>
+        <div className="max-w-[90px]">
+          <label htmlFor="">Location</label>
           {showInput === true ? (
             <input
               name="location"
@@ -131,9 +130,10 @@ export default function Profile() {
               value={userData?.location}
             />
           )}
-        </label>
-        <label htmlFor="">
-          State
+        </div>
+
+        <div className="max-w-[90px]">
+          <label htmlFor="">State</label>
           {showInput === true ? (
             <input
               name="state"
@@ -152,9 +152,10 @@ export default function Profile() {
               value={userData?.state}
             />
           )}
-        </label>
-        <label htmlFor="">
-          Calle
+        </div>
+
+        <div className="max-w-[90px]">
+          <label htmlFor="">Calle</label>
           {showInput === true ? (
             <input
               name="street"
@@ -173,9 +174,9 @@ export default function Profile() {
               value={userData?.street}
             />
           )}
-        </label>
-        <label htmlFor="">
-          Numero
+        </div>
+        <div className="max-w-[90px]">
+          <label htmlFor="">Numero</label>
           {showInput === true ? (
             <input
               name="number"
@@ -194,18 +195,17 @@ export default function Profile() {
               value={userData?.number}
             />
           )}
-        </label>
-
-        <div className="mt-8 flex h-auto w-full gap-1 ">
-          <button
-            type="button"
-            className="w-1/2 bg-blue text-sm hover:bg-sky-500 lg:py-1 2xl:text-base"
-            onClick={onClick}
-          >
-            Edit Profile
-          </button>
-          <button className="w-1/2 text-sm hover:bg-sky-500 lg:py-1 2xl:text-base">Guardar</button>
         </div>
+      </div>
+      <div className="mx-auto mt-8 flex  h-auto w-1/2  gap-1 ">
+        <button
+          type="button"
+          className="w-1/2 bg-blue text-sm hover:bg-sky-500 lg:py-1 2xl:text-base"
+          onClick={onClick}
+        >
+          Editar
+        </button>
+        <button className="w-1/2 text-sm hover:bg-sky-500 lg:py-1 2xl:text-base">Guardar</button>
       </div>
     </form>
 
