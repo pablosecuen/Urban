@@ -3,11 +3,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pestañasHistorialPerfil, contenidoHistorialPerfil } from "../../assets/data";
 import { RootState } from "@component/Redux/store/store";
-import { getTravelsByUserId } from "../../Redux/travel/travelActions";
 import { Dispatch } from "@reduxjs/toolkit";
-import { type } from "os";
 import CardHistorialTickets from "./CardHistorialTickets";
-import { User, userData } from "@component/app/types/User";
+import { userData } from "@component/app/types/User";
 
 export default function PerfilPage() {
   const [loading, setLoading] = useState(true);
@@ -36,9 +34,9 @@ export default function PerfilPage() {
   }
 
   return (
-    <div className="h-full">
+    <div className=" rounded-xl shadow-xl shadow-black/40 xl:h-[600px]">
       {/* Tabs */}
-      <div className="flex w-full ">
+      <div className="flex  ">
         {pestañasHistorialPerfil.map((item, index) => (
           <div
             key={index}
@@ -58,7 +56,7 @@ export default function PerfilPage() {
           {activeTab === `${item.name}` && (
             <div
               key={index}
-              className="text-35 bg-gray-white h-[416px] w-full overflow-hidden xl:border-2"
+              className="text-35 bg-gray-white h-[570px] w-full overflow-hidden"
               title={item.title}
             >
               <h4 className="border-y-2 border-blue text-center text-lg font-semibold">{item.p}</h4>
@@ -67,7 +65,7 @@ export default function PerfilPage() {
                 <div
                   className={`flex h-full w-full flex-col items-center justify-evenly gap-3 ${
                     userTravels.length > 3 && "overflow-scroll"
-                  } pb-4 xl:border-2`}
+                  } pb-4 `}
                 >
                   <CardHistorialTickets />
                 </div>
