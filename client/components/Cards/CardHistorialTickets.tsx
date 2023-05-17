@@ -13,7 +13,7 @@ import jsPDF from "jspdf";
 import { Ticket } from "@component/app/types/Ticket";
 import { FaBus, FaCar, FaTaxi } from "react-icons/fa";
 
-export default function CardHistorialTickets( ) {
+export default function CardHistorialTickets() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
