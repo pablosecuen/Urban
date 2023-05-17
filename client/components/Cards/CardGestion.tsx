@@ -15,20 +15,20 @@ import { FaBus, FaCar, FaTaxi } from "react-icons/fa";
 import RatingStars from "../RatingStars/RatingStars";
 import { toast } from "react-toastify";
 import ToastComponent from "../00-Toastify/ToastComponent";
+import axios, { AxiosError } from "axios";
 
 interface ValuationData {
   rating: number;
   comment: string;
 }
-interface TicketAndCompanyIds {
-  ticketId: string;
+interface UserAndCompanyIds {
+  userId: string;
   companyId: string;
 }
 
 export default function CardGestion() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTicketAndCompanyIds, setSelectedTicketAndCompanyIds] =
-    useState<TicketAndCompanyIds | null>();
+  const [userAndCompanyIds, setUserAndCompanyIds] = useState<UserAndCompanyIds | null>();
   const [valuationData, setValuationData] = useState<ValuationData>({
     rating: 0,
     comment: "",
@@ -47,13 +47,13 @@ export default function CardGestion() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenModal = ({ ticketId, companyId }: TicketAndCompanyIds) => {
-    setSelectedTicketAndCompanyIds({ ticketId, companyId });
+  const handleOpenModal = ({ userId, companyId }: UserAndCompanyIds) => {
+    setUserAndCompanyIds({ userId, companyId });
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedTicketAndCompanyIds(null);
+    setUserAndCompanyIds(null);
     setIsModalOpen(false);
     setValuationData({ rating: 0, comment: "" });
   };
@@ -81,6 +81,22 @@ export default function CardGestion() {
       // mostrar alerta de cantidad máxima de caracteres alcanzada
     }
   };
+
+  const sendValuation = () => {
+    if (userAndCompanyIds?.userId && userAndCompanyIds?.companyId) {
+      try {
+        const { userId, companyId } = userAndCompanyIds;
+        axios
+          .post(`http://localhost:3000/user/rating/company/${userId}/${companyId}`, valuationData)
+          .then(() => {
+            // alerta con mensaje de éxito
+          });
+      } catch (error: AxiosError | any) {
+        // alerta con el error
+        console.log(error);
+      }
+    }
+  };
   return (
     <section
       className={` flex h-full w-full flex-col gap-2  ${
@@ -106,7 +122,10 @@ export default function CardGestion() {
               <button
                 className="w-auto shadow-transparent "
                 onClick={() =>
-                  handleOpenModal({ ticketId: ticket.id, companyId: ticket.passageInfo.companyId })
+                  handleOpenModal({
+                    userId: ticket.userId,
+                    companyId: ticket.passageInfo.companyId,
+                  })
                 }
               >
                 Valorar
@@ -126,7 +145,7 @@ export default function CardGestion() {
             className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
             onClick={(e) => e.stopPropagation()}
           >
-            {selectedTicketAndCompanyIds && (
+            {userAndCompanyIds && (
               <article className="p-6 ">
                 <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
                 <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
@@ -143,7 +162,7 @@ export default function CardGestion() {
                     value={valuationData.comment}
                   />
                 </div>
-                <button onClick={() => {}}>Enviar Valoración</button>
+                <button onClick={sendValuation}>Enviar Valoración</button>
               </article>
             )}
           </div>
