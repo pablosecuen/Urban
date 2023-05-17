@@ -351,8 +351,39 @@ export const forgotPassword = async (req: Request, res: Response) => {
       .json({ message: "Se ha enviado un enlace para restablecer la contraseña" });
   } catch (error) {
     console.error("Error al solicitar restablecer la contraseña:", error);
-    return res
+    res
       .status(500)
       .json({ message: "Ha ocurrido un error al solicitar restablecer la contraseña" });
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  const { token, newPassword } = req.body;
+
+  try {
+    // Verificar y decodificar el token de restablecimiento de contraseña
+    const decodedToken: any = jwt.verify(token, "secreto");
+
+    // Verificar si el correo electrónico del token está registrado en la base de datos
+    const user = await db
+      .collection("users")
+      .where("email", "==", decodedToken.email)
+      .limit(1)
+      .get();
+
+    if (user.empty) {
+      // El correo electrónico no está registrado
+      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+    }
+
+    // Actualizar la contraseña del usuario en la base de datos
+    const userId = user.docs[0].id;
+    await db.collection("users").doc(userId).update({ password: newPassword });
+
+    // Respuesta exitosa
+    return res.status(200).json({ message: "Contraseña restablecida exitosamente" });
+  } catch (error) {
+    console.error("Error al restablecer la contraseña:", error);
+    res.status(500).json({ message: "Error al restablecer la contraseña" });
   }
 };
