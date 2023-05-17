@@ -8,6 +8,7 @@ import {
   newChauffeurRating,
   newCompanyRating,
   forgotPassword,
+  resetPassword,
 } from "../../controllers/inputs/user";
 import { newUserValidated, updateUserValidated } from "../../utils/validations/user";
 import { newRatingValidator } from "../../utils/validations/rating";
@@ -60,6 +61,8 @@ router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newCha
 router.post("/rating/company/:userId/:companyId", newRatingValidator, newCompanyRating);
 
 router.post("/forgot-password", forgotPassword);
+
+router.post("/reset-password", resetPassword);
 
 /**
  * @swagger
