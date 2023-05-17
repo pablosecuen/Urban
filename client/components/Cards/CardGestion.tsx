@@ -4,7 +4,7 @@ import { RootState } from "@component/Redux/store/store";
 import { getTicketsByUserId } from "@component/Redux/ticket/ticketActions";
 import { AnyAction } from "@reduxjs/toolkit";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import logo from "../../assets/imagenes/UrbanIsoLogo.png";
@@ -12,13 +12,29 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Ticket } from "@component/app/types/Ticket";
 import { FaBus, FaCar, FaTaxi } from "react-icons/fa";
+import RatingStars from "../RatingStars/RatingStars";
+import { toast } from "react-toastify";
+import ToastComponent from "../00-Toastify/ToastComponent";
+
+interface ValuationData {
+  rating: number;
+  comment: string;
+}
+interface TicketAndCompanyIds {
+  ticketId: string;
+  companyId: string;
+}
 
 export default function CardGestion() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
+  const [selectedTicketAndCompanyIds, setSelectedTicketAndCompanyIds] =
+    useState<TicketAndCompanyIds | null>();
+  const [valuationData, setValuationData] = useState<ValuationData>({
+    rating: 0,
+    comment: "",
+  });
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const allTickets = useSelector((state: RootState) => state.ticket.allTickets) as Ticket[];
-
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,13 +47,13 @@ export default function CardGestion() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenModal = (ticket: any) => {
-    setSelectedTicket(ticket); // Set the selected ticket
+  const handleOpenModal = ({ ticketId, companyId }: TicketAndCompanyIds) => {
+    setSelectedTicketAndCompanyIds({ ticketId, companyId });
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedTicket(null);
+    setSelectedTicketAndCompanyIds(null);
     setIsModalOpen(false);
   };
 
@@ -47,17 +63,23 @@ export default function CardGestion() {
     }
   };
 
-  const saveAsPDF = () => {
-    if (modalRef.current) {
-      html2canvas(modalRef.current).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        pdf.save(`ticket-Urban-id-${allTickets[0].id}.pdf`);
+  // se necesita prop valued en tickets para evitar valoracion infinita
+  const proximamenteTicket = { valued: false };
+
+  const onClickFuntionToRatingStars = (value: number) => {
+    setValuationData((prev) => {
+      return { ...prev, rating: value };
+    });
+  };
+  const handleChangeValuationComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+    if (target.value.length < 200) {
+      setValuationData((prev) => {
+        return { ...prev, comment: target.value };
       });
+    } else {
+      // mostrar alerta de cantidad máxima de caracteres alcanzada
     }
   };
-
   return (
     <section
       className={` flex h-full w-full flex-col gap-2  ${
@@ -79,10 +101,16 @@ export default function CardGestion() {
                 Tiempo estimado: {ticket.passageInfo.duration}
               </span>
             </div>
-
-            <button className="w-auto shadow-transparent " onClick={() => handleOpenModal(ticket)}>
-              Ticket
-            </button>
+            {!proximamenteTicket.valued && (
+              <button
+                className="w-auto shadow-transparent "
+                onClick={() =>
+                  handleOpenModal({ ticketId: ticket.id, companyId: ticket.passageInfo.companyId })
+                }
+              >
+                Valorar
+              </button>
+            )}
           </div>
           <hr className="mb-4" />
         </>
@@ -97,39 +125,24 @@ export default function CardGestion() {
             className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
             onClick={(e) => e.stopPropagation()}
           >
-            {selectedTicket && (
-              <article key={selectedTicket.id} className="p-6 ">
+            {selectedTicketAndCompanyIds && (
+              <article className="p-6 ">
                 <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
-                <h2 className="mb-4 text-center text-2xl font-bold">
-                  <>
-                    {selectedTicket.passageInfo.origin} to {selectedTicket.passageInfo.destination}
-                  </>
-                </h2>
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="">
-                    <p className="mb-2 flex flex-col">
-                      <strong>Fecha de salida:</strong> {selectedTicket.passageInfo.departureDate}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Horario de salida:</strong> {selectedTicket.passageInfo.departureTime}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Duracion del viaje:</strong> {selectedTicket.passageInfo.duration}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Ticket ID:</strong> {selectedTicket.id}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Precio:</strong> ${selectedTicket.price}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Número de asiento:</strong> {selectedTicket.passageInfo.numberSeat}
-                    </p>
-                  </div>
+                <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
+                <div className="">
+                  <RatingStars
+                    onClickFunction={onClickFuntionToRatingStars}
+                    stateValue={valuationData?.rating || 0}
+                  />
+                  <textarea
+                    onChange={handleChangeValuationComment}
+                    className="border"
+                    cols={30}
+                    rows={4}
+                    value={valuationData.comment}
+                  />
                 </div>
-                <button onClick={saveAsPDF}>Guardar Ticket</button>
+                <button onClick={() => {}}>Enviar Valoración</button>
               </article>
             )}
           </div>
