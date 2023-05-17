@@ -145,38 +145,41 @@ export default function CardGestion() {
         </>
       ))}
       {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          onClick={handleModalClick}
-          ref={modalRef}
-        >
+        <>
+          <div onClick={closeModal} className="absolute left-0 top-0 h-screen bg-black/30"></div>
           <div
-            className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            onClick={handleModalClick}
+            ref={modalRef}
           >
-            {userAndCompanyIds && (
-              <article className="p-6 ">
-                <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
-                <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
-                <div className="">
-                  <RatingStars
-                    onClickFunction={onClickFuntionToRatingStars}
-                    stateValue={valuationData?.rating || 0}
-                  />
-                  <textarea
-                    onChange={handleChangeValuationComment}
-                    className="border p-1"
-                    cols={30}
-                    rows={4}
-                    value={valuationData.comment}
-                    placeholder="tu feedback nos ayuda a mejorar la calidad de nuestro servicio"
-                  />
-                </div>
-                <button onClick={sendValuation}>Enviar Valoración</button>
-              </article>
-            )}
+            <div
+              className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {userAndCompanyIds && (
+                <article className="p-6 ">
+                  <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
+                  <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
+                  <div className="">
+                    <RatingStars
+                      onClickFunction={onClickFuntionToRatingStars}
+                      stateValue={valuationData?.rating || 0}
+                    />
+                    <textarea
+                      onChange={handleChangeValuationComment}
+                      className="border p-1"
+                      cols={30}
+                      rows={4}
+                      value={valuationData.comment}
+                      placeholder="tu feedback nos ayuda a mejorar la calidad de nuestro servicio"
+                    />
+                  </div>
+                  <button onClick={sendValuation}>Enviar Valoración</button>
+                </article>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
       <ToastComponent />
     </section>

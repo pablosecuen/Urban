@@ -89,7 +89,7 @@ export default function Profile() {
           )}
         </label> */}
 
-        <div className="max-w-[90px]">
+        <div className="w-24 md:w-52">
           <label htmlFor="">Cc:</label>
           {showInput === true ? (
             <input
@@ -110,7 +110,7 @@ export default function Profile() {
             />
           )}
         </div>
-        <div className="max-w-[90px]">
+        <div className="w-24  md:w-52">
           <label htmlFor="">Location</label>
           {showInput === true ? (
             <input
@@ -132,7 +132,7 @@ export default function Profile() {
           )}
         </div>
 
-        <div className="max-w-[90px]">
+        <div className="w-24  md:w-52">
           <label htmlFor="">State</label>
           {showInput === true ? (
             <input
@@ -154,7 +154,7 @@ export default function Profile() {
           )}
         </div>
 
-        <div className="max-w-[90px]">
+        <div className="w-24  md:w-52">
           <label htmlFor="">Calle</label>
           {showInput === true ? (
             <input
@@ -175,7 +175,7 @@ export default function Profile() {
             />
           )}
         </div>
-        <div className="max-w-[90px]">
+        <div className="w-24  md:w-52">
           <label htmlFor="">Numero</label>
           {showInput === true ? (
             <input

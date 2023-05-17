@@ -11,7 +11,7 @@ export default function Perfil() {
         <section className="xl:w-1/3">
           <Profile />
         </section>
-        <section className="xl:w-2/3">
+        <section className="xl:w-2/3 ">
           <CardPerfilPage />
         </section>
       </div>

@@ -60,7 +60,7 @@ export default function CardHistorialTickets() {
 
   return (
     <section
-      className={` flex h-full w-full flex-col gap-2  ${
+      className={` flex h-full w-full flex-col gap-2 p-2  ${
         allTickets.length > 4 ? "scrollbar overflow-y-scroll" : ""
       } rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10`}
     >
@@ -88,52 +88,57 @@ export default function CardHistorialTickets() {
         </>
       ))}
       {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          onClick={handleModalClick}
-          ref={modalRef}
-        >
+        <>
+          <div onClick={closeModal} className="absolute left-0 top-0 h-screen bg-black/30"></div>
           <div
-            className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            onClick={handleModalClick}
+            ref={modalRef}
           >
-            {selectedTicket && (
-              <article key={selectedTicket.id} className="p-6 ">
-                <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
-                <h2 className="mb-4 text-center text-2xl font-bold">
-                  <>
-                    {selectedTicket.passageInfo.origin} to {selectedTicket.passageInfo.destination}
-                  </>
-                </h2>
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="">
-                    <p className="mb-2 flex flex-col">
-                      <strong>Fecha de salida:</strong> {selectedTicket.passageInfo.departureDate}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Horario de salida:</strong> {selectedTicket.passageInfo.departureTime}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Duracion del viaje:</strong> {selectedTicket.passageInfo.duration}
-                    </p>
+            <div
+              className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {selectedTicket && (
+                <article key={selectedTicket.id} className="p-6 ">
+                  <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
+                  <h2 className="mb-4 text-center text-2xl font-bold">
+                    <>
+                      {selectedTicket.passageInfo.origin} to{" "}
+                      {selectedTicket.passageInfo.destination}
+                    </>
+                  </h2>
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className="">
+                      <p className="mb-2 flex flex-col">
+                        <strong>Fecha de salida:</strong> {selectedTicket.passageInfo.departureDate}
+                      </p>
+                      <p className="mb-2 flex flex-col">
+                        <strong>Horario de salida:</strong>{" "}
+                        {selectedTicket.passageInfo.departureTime}
+                      </p>
+                      <p className="mb-2 flex flex-col">
+                        <strong>Duracion del viaje:</strong> {selectedTicket.passageInfo.duration}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="mb-2 flex flex-col">
+                        <strong>Ticket ID:</strong> {selectedTicket.id}
+                      </p>
+                      <p className="mb-2 flex flex-col">
+                        <strong>Precio:</strong> ${selectedTicket.price}
+                      </p>
+                      <p className="mb-2 flex flex-col">
+                        <strong>Número de asiento:</strong> {selectedTicket.passageInfo.numberSeat}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Ticket ID:</strong> {selectedTicket.id}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Precio:</strong> ${selectedTicket.price}
-                    </p>
-                    <p className="mb-2 flex flex-col">
-                      <strong>Número de asiento:</strong> {selectedTicket.passageInfo.numberSeat}
-                    </p>
-                  </div>
-                </div>
-                <button onClick={saveAsPDF}>Guardar Ticket</button>
-              </article>
-            )}
+                  <button onClick={saveAsPDF}>Guardar Ticket</button>
+                </article>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </section>
   );
