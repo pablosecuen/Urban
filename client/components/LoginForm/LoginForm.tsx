@@ -46,8 +46,9 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
     e.preventDefault();
     const user: UserToLogin = userData;
     try {
-      const response = await axios.post<LoginResponse>("http://localhost:3000/login/user", user);
+      const response = await axios.post("http://localhost:3000/login/user", user);
       const { token } = response.data;
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       if (token) {
         console.log("Login successful");
         // store the user object in local storage
