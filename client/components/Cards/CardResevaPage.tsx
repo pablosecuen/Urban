@@ -72,6 +72,7 @@ export default function Reserva() {
   const handleLocationOriginSelected = (e: string) => {
     setOrigin(e);
     setLocationOrigin([]);
+    setErrorDestination("");
   };
   let typingTimerDestination: any;
   const handleKeyUpDestination = () => {
@@ -171,7 +172,7 @@ export default function Reserva() {
                   <p
                     key={item}
                     className="px-2 py-1 text-black hover:cursor-pointer hover:bg-gray-300"
-                    onClick={() => handleLocationDestinationSelected(item)}
+                    onClick={() => handleLocationOriginSelected(item)}
                   >
                     {item}
                     <hr className="" />
@@ -211,7 +212,7 @@ export default function Reserva() {
                     <p
                       key={item}
                       className="px-2 py-1 text-black hover:cursor-pointer hover:bg-gray-300"
-                      onClick={() => handleLocationOriginSelected(item)}
+                      onClick={() => handleLocationDestinationSelected(item)}
                     >
                       {item}
                     </p>
