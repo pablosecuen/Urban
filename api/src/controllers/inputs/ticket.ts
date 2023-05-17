@@ -41,6 +41,11 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 
     const updatedStock = currentStock - data.quantity;
 
+    // Eliminar los números de asientos seleccionados del pasaje
+    const selectedSeats = data.numberSeat;
+    const updatedNumberSeat = passageData.numberSeat.filter(
+      (seat) => !selectedSeats.includes(seat)
+    );
     await Promise.all([
       db
         .collection("users")
@@ -50,6 +55,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
         }),
       db.collection("passages").doc(data.passageId).update({
         stock: updatedStock,
+        numberSeat: updatedNumberSeat,
       }),
     ]);
 

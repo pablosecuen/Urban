@@ -7,7 +7,7 @@ export interface PassageToRegister {
   duration: string;
   img: string;
   price: number;
-  numberSeat: number;
+  numberSeat: string[];
   arrivalTime: string;
   departureTime: string;
   createdAt: string;
