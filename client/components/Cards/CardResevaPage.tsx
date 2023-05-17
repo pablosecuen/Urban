@@ -23,6 +23,8 @@ export default function Reserva() {
   const [arrivalDate, setArrivalDate] = useState<string>("");
   const [locationOrigin, setLocationOrigin] = useState<any>([]);
   const [locationDestination, setLocationDestination] = useState<any>([]);
+  const [errorOrigin, setErrorOrigin] = useState<string>("");
+  const [errorDestination, setErrorDestination] = useState<string>("");
   const isFormValid = origin && destination ? true : false;
 
   //  - - - - - - - - - - - - -  ENDPOINT DE BACK - - - - - - - - - - - - -
@@ -36,6 +38,7 @@ export default function Reserva() {
     setOrigin(value);
     if (value.length < 3) {
       setLocationOrigin([]);
+      setErrorOrigin("");
     }
   };
   let typingTimerOrigin: any;
@@ -55,7 +58,7 @@ export default function Reserva() {
       const locationArray = data.locations;
       setLocationOrigin(locationArray);
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      setErrorOrigin(error.response.data.message);
     }
   };
 
@@ -85,11 +88,17 @@ export default function Reserva() {
       const { data } = response;
       const destinationArray = data.locations;
       setLocationDestination(destinationArray);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      setErrorDestination(error.response.data.message);
     }
   };
-  // ---------- Handle Key Down Origin ----------
+  // ---------- Handle Location Destination Selected ----------
+  const handleLocationDestinationSelected = (e: string) => {
+    setDestination(e);
+    setLocationDestination([]);
+    setErrorDestination("");
+  };
+  // ---------- Handle Key Down Destination ----------
   const handleKeyDownDestination = () => {
     clearTimeout(typingTimerDestination);
   };
@@ -98,6 +107,7 @@ export default function Reserva() {
     setDestination(value);
     if (value.length < 3) {
       setLocationDestination([]);
+      setErrorDestination("");
     }
   };
   // ---------- Handle Departure ----------
@@ -148,20 +158,26 @@ export default function Reserva() {
             />
 
             <div
-              className={`transition_all scrollbar absolute -left-[1px] top-[23px] mx-auto h-0 overflow-hidden rounded-b-md border border-[#0000ff] bg-white shadow-2xl xl:w-[429px] ${
-                locationOrigin.length > 0 ? "h-max opacity-100" : "h-0 border-none opacity-0"
+              className={`transition_all scrollbar absolute -left-[1px] top-[23px] z-10 mx-auto h-0 overflow-hidden rounded-b-md border border-[#0000ff] bg-white shadow-2xl xl:w-[429px] ${
+                locationOrigin.length > 0 || errorOrigin.length > 0
+                  ? "h-max opacity-100"
+                  : "h-0 border-none opacity-0"
               } ${locationOrigin.length > 3 ? "h-36 overflow-y-scroll" : ""}  `}
             >
-              {locationOrigin.map((item: string) => (
-                <p
-                  key={item}
-                  className="px-4 text-black hover:cursor-pointer hover:bg-gray-300"
-                  onClick={() => handleLocationOriginSelected(item)}
-                >
-                  {item}
-                  <hr className="" />
-                </p>
-              ))}
+              {errorOrigin.length > 0 ? (
+                <p className="p-2">{errorOrigin}</p>
+              ) : (
+                locationOrigin.map((item: string) => (
+                  <p
+                    key={item}
+                    className="px-2 py-1 text-black hover:cursor-pointer hover:bg-gray-300"
+                    onClick={() => handleLocationDestinationSelected(item)}
+                  >
+                    {item}
+                    <hr className="" />
+                  </p>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -181,20 +197,28 @@ export default function Reserva() {
             />
 
             <div
-              className={`transition_all scrollbar absolute -left-[1px] top-[23px] mx-auto h-0 overflow-hidden rounded-b-md border border-[#0000ff] bg-white shadow-2xl xl:w-[429px] ${
-                locationDestination.length > 0 ? "h-max opacity-100" : "h-0 border-none opacity-0"
+              className={`transition_all scrollbar absolute -left-[1px] top-[23px] z-10 mx-auto h-0 overflow-hidden rounded-b-md border border-[#0000ff] bg-white shadow-2xl xl:w-[429px] ${
+                locationDestination.length > 0 || errorDestination.length > 0
+                  ? "h-max opacity-100"
+                  : "h-0 border-none opacity-0"
               } ${locationDestination.length > 3 ? "h-36 overflow-y-scroll" : ""}  `}
             >
-              {locationDestination.map((item: string) => (
-                <p
-                  key={item}
-                  className="px-4 text-black hover:cursor-pointer hover:bg-gray-300"
-                  onClick={() => handleLocationOriginSelected(item)}
-                >
-                  {item}
-                  <hr className="" />
-                </p>
-              ))}
+              {errorDestination.length > 0 ? (
+                <p className=" p-2">{errorDestination}</p>
+              ) : (
+                locationDestination.map((item: string) => (
+                  <>
+                    <p
+                      key={item}
+                      className="px-2 py-1 text-black hover:cursor-pointer hover:bg-gray-300"
+                      onClick={() => handleLocationOriginSelected(item)}
+                    >
+                      {item}
+                    </p>
+                    <hr className="h-[1.7px] bg-black" />
+                  </>
+                ))
+              )}
             </div>
           </div>
         </div>
