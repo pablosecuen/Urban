@@ -58,7 +58,7 @@ export default function NavBar() {
 
             <div
               className={`absolute left-0 top-0  h-screen bg-black/30 transition-all duration-700 ease-in-out ${
-                !showMenu ? "opacity-0" : "opacity-100"
+                !showMenu ? "hidden opacity-0" : "opacity-100"
               }`}
             ></div>
             <div
