@@ -55,6 +55,7 @@ export default function CardGestion() {
   const closeModal = () => {
     setSelectedTicketAndCompanyIds(null);
     setIsModalOpen(false);
+    setValuationData({ rating: 0, comment: "" });
   };
 
   const handleModalClick = (event: any) => {
