@@ -1,11 +1,10 @@
-"use client";
 import NavBar from "@component/components/NavBar/NavBar";
 import Footer from "@component/components/Footer/Footer";
 import logo from "../../assets/imagenes/UrbanIsoLogo.png";
 import Image from "next/image";
 
 import Menu from "@component/components/Menu/Menu";
-import { useMediaQuery } from "react-responsive";
+
 import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Urban | Inicio",
@@ -15,12 +14,10 @@ export const metadata: Metadata = {
     "inicio, página de inicio, transporte, aplicación de transporte, servicios de transporte, buses intermunicipales, taxis públicos, transportes privados, cadetería, soluciones reales, gestionar tiempo, optimizar días, experiencia de transporte.",
 };
 export default function Home({ children }: { children: React.ReactNode }) {
-  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   return (
     <div>
       <NavBar />
-
-      <div className="mx-auto flex h-[92vh] flex-col items-center justify-center py-10 lg:container lg:flex-row lg:pb-20">
+      <div className="mx-auto flex min-h-[92vh] flex-col items-center justify-center gap-5 py-10 lg:container lg:flex-row lg:pb-20">
         <div className="flex w-full flex-col items-center justify-center gap-4">
           <Image
             src={logo}

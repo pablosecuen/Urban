@@ -32,44 +32,48 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
 
   return (
     <>
-    
-      <article className=" flex justify-center gap-2 ">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.departureTime}</p>
+      <article className="lg:flex">
+        <div className="lg:max-w-[49%]">
+          <section className=" flex justify-center gap-2 ">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold "> Hora de salida: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.departureTime}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Origen: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.origin}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Destino: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.destination}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de salida: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.departureDate}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de llegada: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.arrivalDate}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Valor a pagar: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.price}</p>
+          </section>
+          <section className="flex justify-center gap-2">
+            <h5 className="lg:text-right lg:text-lg lg:font-bold">Stock: </h5>
+            <p className=" lg:text-left lg:text-lg">{passage?.stock}</p>
+          </section>
+          <div className="flex w-auto items-center justify-center text-center">
+            <button onClick={handleDecrement} className="w-auto">
+              -
+            </button>
+            <p className="p-4">{count}</p>
+            <button onClick={handleIncrement} className="w-auto">
+              +
+            </button>
+          </div>
+        </div>
+        <div className="lg:max-w-[49%]"></div>
       </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Origen: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.origin}</p>
-      </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Destino: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.destination}</p>
-      </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de salida: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.departureDate}</p>
-      </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Fecha de llegada: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.arrivalDate}</p>
-      </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Valor a pagar: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.price}</p>
-      </article>
-      <article className="flex justify-center gap-2">
-        <h5 className="lg:text-right lg:text-lg lg:font-bold">Stock: </h5>
-        <p className=" lg:text-left lg:text-lg">{passage?.stock}</p>
-      </article>
-      <div className="flex w-auto items-center justify-center text-center">
-        <button onClick={handleDecrement} className="w-auto">
-          -
-        </button>
-        <p className="p-4">{count}</p>
-        <button onClick={handleIncrement} className="w-auto">
-          +
-        </button>
-      </div>
     </>
   );
 }
