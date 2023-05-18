@@ -45,7 +45,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   return (
     <>
       <article className="lg:flex">
-        <div className="flex flex-col border-2 border-violet-500 p-2 lg:w-1/2 lg:p-4">
+        <div className="flex flex-col p-2 lg:w-1/2 lg:p-4">
           <section className="flex p-2 lg:p-4">
             <div className=" mx-auto flex w-20 flex-col text-center">
               <small className=" font-semibold">Origen: </small>
@@ -92,51 +92,35 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             </button>
           </div>
         </div>
-        <div className="border-2 border-red-500 lg:w-1/2">
-          <section className="mx-auto flex h-1/3 w-36 justify-center">
+        <div className="lg:w-1/2">
+          <section className="mx-auto flex h-1/3 w-64 justify-center">
             <Image
               onClick={handleOpenModal}
-              src={passage?.img}
+              src={passage?.img !== undefined ? passage.img : ""}
               alt="amaga-bolombolo"
-              className="cursor-pointer duration-700 hover:scale-110"
-              width={200}
-              height={200}
+              className={`cursor-pointer ${isModalOpen ? "duration-700 hover:scale-110" : ""}`}
+              width={250}
+              height={250}
             />
             {isModalOpen && (
               <>
                 <div
                   onClick={closeModal}
-                  className="absolute left-0 top-0 h-screen bg-black/30"
+                  className="absolute left-0 top-0 h-screen bg-black/30 transition-opacity duration-700"
                 ></div>
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
-                  <div className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60">
-                    <article className="p-6 ">
-                      <div className="grid grid-cols-2 gap-4 text-center">
-                        <div className="">
-                          <p className="mb-2 flex flex-col">
-                            <strong>Fecha de salida:</strong>{" "}
-                          </p>
-                          <p className="mb-2 flex flex-col">
-                            <strong>Horario de salida:</strong>{" "}
-                          </p>
-                          <p className="mb-2 flex flex-col">
-                            <strong>Duracion del viaje:</strong>{" "}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-2 flex flex-col">
-                            <strong>Ticket ID:</strong>
-                          </p>
-                          <p className="mb-2 flex flex-col">
-                            <strong>Precio:</strong> $
-                          </p>
-                          <p className="mb-2 flex flex-col">
-                            <strong>NÃºmero de asiento:</strong>{" "}
-                          </p>
-                        </div>
-                      </div>
-                      <button>Guardar Ticket</button>
-                    </article>
+                <div
+                  className="t fixed inset-0 z-50 flex items-center justify-center"
+                  onClick={closeModal}
+                >
+                  <div className="flex w-[800px] items-center justify-center ">
+                    <Image
+                      onClick={handleOpenModal}
+                      src={passage?.img !== undefined ? passage.img : ""}
+                      alt="amaga-bolombolo"
+                      className="w-full"
+                      width={800}
+                      height={800}
+                    />
                   </div>
                 </div>
               </>
