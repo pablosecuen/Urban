@@ -9,6 +9,7 @@ import {
   isNumberSeatValid,
   isOriginValid,
   isPriceValid,
+  isServiceValid,
   isStockValid,
 } from "./validators";
 import { PassageToRegister } from "../../schema/passage";
@@ -20,16 +21,8 @@ export const newAndUpdatePassageValidate = (
 ): void => {
   try {
     // const data = req.body;
-    const dataString: string = req.body.data; // Solo usar cuando se necesite probar con insomia
-    // Obtener la cadena JSON de la solicitud
+    const dataString: string = req.body.data; // Solo usar cuando se necesite probar con insomia Obtener la cadena JSON de la solicitud
     const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
-
-    for (const key in data) {
-      // Solo usar cuando se necesite probar con insomia
-      if (typeof data[key] === "string") {
-        data[key] = data[key].toLowerCase();
-      }
-    }
     console.log(data);
     const allowProperties = [
       "origin",
@@ -42,6 +35,7 @@ export const newAndUpdatePassageValidate = (
       "checkIn",
       "departureTime",
       "companyId",
+      "service",
     ];
     if (Object.keys(data).some((key) => !allowProperties.includes(key)))
       throw Error("Propiedades no válidas");
@@ -55,7 +49,8 @@ export const newAndUpdatePassageValidate = (
       !isDurationValid(data.duration) ||
       !isPriceValid(data.price) ||
       !isDepartureTimeValid(data.departureTime) ||
-      !isCompanyIdValid(data.companyId)
+      !isCompanyIdValid(data.companyId) ||
+      !isServiceValid(data.service)
     )
       throw new Error("Datos no validos");
     next();
