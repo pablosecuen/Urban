@@ -8,6 +8,7 @@ export interface Passage {
   arrivalDate: string;
   departureDate: string;
   departureTime: string;
+  arrivalTime: string;
   quantity: number;
   numberSeat: number;
   price: number;
