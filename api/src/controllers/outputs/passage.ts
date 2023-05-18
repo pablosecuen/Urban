@@ -18,8 +18,7 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
 
     const startIndex = (Number(page) - 1) * Number(pageSize);
     const endIndex = Number(page) * Number(pageSize);
-    let passagesRef: firebase.firestore.Query<firebase.firestore.DocumentData> =
-      db.collection("passages");
+    let passagesRef: any = db.collection("passages");
 
     if (Object.keys(filters).length > 0) {
       Object.keys(filters).forEach((key) => {
@@ -33,10 +32,18 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
     const totalFilteredPassages = totalPassagesSnapshot.size;
     const totalPages = Math.ceil(totalFilteredPassages / Number(pageSize));
 
-    const passagesSnapshot = await passagesRef.limit(endIndex).get();
-    const passagesData = passagesSnapshot.docs
-      .slice(startIndex, endIndex)
-      .map((doc) => ({ id: doc.id, ...doc.data() }));
+    const passagesData = await Promise.all(
+      totalPassagesSnapshot.docs.slice(startIndex, endIndex).map(async (doc) => {
+        const passageData = { id: doc.id, ...doc.data() };
+
+        // Obtener información de la compañía
+        const companyId = passageData.companyId;
+        const companyDoc = await db.collection("companies").doc(companyId).get();
+        const companyData = companyDoc.exists ? companyDoc.data() : null;
+
+        return { ...passageData, companyId, company: companyData };
+      })
+    );
 
     res.json({ passages: passagesData, totalPages });
   } catch (error) {
