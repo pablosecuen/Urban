@@ -60,6 +60,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
             <div>
               <small>Pasajes: {passage.stock}</small>
             </div>
+            <div>Tipo de servicio</div>
             <div>Precio: {passage.price}</div>
           </div>
         </Link>

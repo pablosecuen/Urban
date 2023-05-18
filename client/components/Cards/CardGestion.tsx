@@ -116,7 +116,6 @@ export default function CardGestion() {
         <>
           <div key={ticket.id} className="flex  items-center justify-center align-middle ">
             <div className="flex flex-col">
-              {" "}
               <div className="flex items-center gap-2 ">
                 <FaBus size="30" className=" w-auto pr-2 text-blue" />
                 <span className="text-xl font-semibold text-gray-600">Bus intermunicipal</span>
