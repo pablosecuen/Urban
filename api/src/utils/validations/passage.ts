@@ -9,7 +9,9 @@ import {
   isNumberSeatValid,
   isOriginValid,
   isPriceValid,
+  isServiceValid,
   isStockValid,
+  isValidNumberSeat,
 } from "./validators";
 import { PassageToRegister } from "../../schema/passage";
 
@@ -18,48 +20,38 @@ export const newAndUpdatePassageValidate = (
   res: Response,
   next: NextFunction
 ): void => {
-  try {
-    // const data = req.body;
-    const dataString: string = req.body.data; // Solo usar cuando se necesite probar con insomia
-    // Obtener la cadena JSON de la solicitud
-    const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
+  // const data = req.body;
+  const dataString: string = req.body.data; // Solo usar cuando se necesite probar con insomia Obtener la cadena JSON de la solicitud
+  const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
+  const errors = [];
 
-    for (const key in data) {
-      // Solo usar cuando se necesite probar con insomia
-      if (typeof data[key] === "string") {
-        data[key] = data[key].toLowerCase();
+  const validators: { [key: string]: (value: any, stock?: number) => string | null } = {
+    origin: isOriginValid,
+    stock: isStockValid,
+    destination: isDestinationValid,
+    departureDate: isDepartureDateValid,
+    arrivalDate: isArrivalDateValid,
+    duration: isDurationValid,
+    price: isPriceValid,
+    departureTime: isDepartureTimeValid,
+    companyId: isCompanyIdValid,
+    service: isServiceValid,
+    numberSeat: (value: string[]) => isValidNumberSeat(value, data.stock),
+  };
+
+  for (const key in validators) {
+    if (data[key]) {
+      const validator = validators[key];
+      const error = validator(data[key]);
+      if (error) {
+        errors.push({ field: key, message: error });
       }
     }
-    console.log(data);
-    const allowProperties = [
-      "origin",
-      "stock",
-      "destination",
-      "departureDate",
-      "arrivalDate",
-      "duration",
-      "price",
-      "checkIn",
-      "departureTime",
-      "companyId",
-    ];
-    if (Object.keys(data).some((key) => !allowProperties.includes(key)))
-      throw Error("Propiedades no válidas");
-    if (allowProperties.some((property) => !data[property])) throw Error("Datos incompletos");
-    if (
-      !isOriginValid(data.origin) ||
-      !isStockValid(data.stock) ||
-      !isDestinationValid(data.destination) ||
-      !isDepartureDateValid(data.departureDate) ||
-      !isArrivalDateValid(data.arrivalDate) ||
-      !isDurationValid(data.duration) ||
-      !isPriceValid(data.price) ||
-      !isDepartureTimeValid(data.departureTime) ||
-      !isCompanyIdValid(data.companyId)
-    )
-      throw new Error("Datos no validos");
+  }
+
+  if (errors.length > 0) {
+    res.status(400).json({ message: "Por favor revisa los datos", errors });
+  } else {
     next();
-  } catch (error) {
-    res.status(400).json({ message: error.message });
   }
 };
