@@ -7,6 +7,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { getPassagesByQuery } from "../../Redux/passage/passageActions";
 import { QueryParams } from "../../app/types/QueryParams";
+import { FaBus } from "react-icons/fa";
 
 interface CardReservaSlugProps {
   params: {
@@ -29,6 +30,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
   useEffect(() => {
     dispatch(getPassagesByQuery(query));
   }, []);
+  console.log(passages);
 
   return (
     <>
@@ -36,12 +38,31 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
         <Link
           href={`/home/reserva/${passage.id}`}
           key={passage.id}
-          className="group flex items-center justify-between gap-4 rounded-full border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
+          className="group flex items-center justify-between gap-4 rounded-md border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
         >
-          <small className="font-bold capitalize text-blueGray-700 ">
-            {passage.origin} - {passage.destination}
-          </small>
-          <small>{passage.departureDate}</small>
+          <div className="flex  items-center justify-center align-middle ">
+            <div>
+              <small className="flex items-center justify-center align-middle font-bold capitalize  text-blueGray-700 ">
+                <FaBus size="60" className=" w-auto pr-2 text-blue" />
+                Nombre de la empresa
+              </small>
+            </div>
+            <div>
+              <small>
+                {passage.departureDate} {passage.departureTime}
+              </small>
+            </div>
+            <div>
+              <small>
+                {passage.arrivalDate} {passage.arrivalTime}
+              </small>
+            </div>
+            <div>
+              <small>Pasajes: {passage.stock}</small>
+            </div>
+            <div>Tipo de servicio</div>
+            <div>Precio: {passage.price}</div>
+          </div>
         </Link>
       ))}
     </>
