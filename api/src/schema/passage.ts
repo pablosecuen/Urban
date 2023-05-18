@@ -12,6 +12,7 @@ export interface PassageToRegister {
   departureTime: string;
   createdAt: string;
   companyId: string;
+  service: string;
 }
 export interface Passage extends PassageToRegister {
   deleted: boolean;
