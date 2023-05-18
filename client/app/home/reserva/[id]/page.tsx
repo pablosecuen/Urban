@@ -9,10 +9,11 @@ export const metadata: Metadata = {
   keywords:
     "gestión de viajes, confirmación de viajes, detalles de viaje, opciones de transporte, cantidad de pasajes, destinos, origen, fechas de viaje, horarios, personalizar viaje, control de viaje, experiencia de viaje, viaje cómodo, herramienta de confirmación de viajes.",
 };
+
 export default function Confirmacion({ params }: { params: { id: string } }) {
   const { id } = params;
   return (
-    <div className="flex w-11/12 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 py-4 shadow-xl shadow-black/40 lg:w-full xl:h-[510px] xl:justify-between">
+    <div className="flex w-11/12 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 py-4 shadow-xl shadow-black/40 xl:h-[510px] xl:justify-between">
       <h3 className="text-center font-bold lg:text-xl 2xl:bg-black">Pasaje disponible!</h3>
       <CardConfirmacionViajes id={id} />
 
@@ -24,7 +25,7 @@ export default function Confirmacion({ params }: { params: { id: string } }) {
           href="/home/reserva/viajes/confirmacion/pagos"
           className="flex justify-center 2xl:bg-black"
         >
-          <button className="w-2/5 text-sm">Ir a pagar</button>
+          <button className="w-2/5 text-sm">Siguiente paso</button>
         </Link>
       </div>
     </div>
