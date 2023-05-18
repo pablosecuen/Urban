@@ -48,7 +48,7 @@ export default function CardHome() {
 
   return (
     <div className="mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5">
-      <p className="text-center text-xl font-bold xl:text-2xl 2xl:text-2xl">
+      <p className="py-4 text-center text-xl font-bold xl:text-2xl 2xl:text-2xl">
         Bienvedios a <span className="text-verdeurban">U</span>
         <span className=" text-celeste">rban</span>!
       </p>
@@ -62,7 +62,7 @@ export default function CardHome() {
         problemas cotidianos en la menor cantidad de tiempo posibles, entregando al cliente un poder
         increible para <b>gestionar</b> tu tiempo y tus días de la mejor manera posible
       </p>
-      <p className="text-center text-lg font-bold 2xl:text-xl">
+      <p className="py-4 text-center text-lg font-bold 2xl:text-xl">
         {"<-- "}Selecciona el tipo de servicio para poder continuar
       </p>
       <ToastContainer

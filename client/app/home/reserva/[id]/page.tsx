@@ -14,17 +14,14 @@ export default function Confirmacion({ params }: { params: { id: string } }) {
   const { id } = params;
   return (
     <div className="flex w-11/12 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 py-4 shadow-xl shadow-black/40 xl:h-[510px] xl:justify-between">
-      <h3 className="text-center font-bold lg:text-xl 2xl:bg-black">Pasaje disponible!</h3>
+      <h3 className="text-center font-bold lg:text-xl ">Pasaje disponible!</h3>
       <CardConfirmacionViajes id={id} />
 
       <div className="flex flex-col items-center justify-center gap-2">
-        <p className="w-11/12 text-center text-xs text-gray-400 lg:w-3/4 2xl:bg-blue">
+        <p className="w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4">
           Tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
         </p>
-        <Link
-          href="/home/reserva/viajes/confirmacion/pagos"
-          className="flex justify-center 2xl:bg-black"
-        >
+        <Link href="/home/reserva/viajes/confirmacion/pagos" className="flex justify-center ">
           <button className="w-2/5 text-sm">Siguiente paso</button>
         </Link>
       </div>

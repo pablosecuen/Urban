@@ -1,20 +1,15 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@component/Redux/store/store";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "@reduxjs/toolkit";
-import slugPassageSkeleton from "../Skeleton/slugPassageSkeleton"
 
 export default function CardViajesPage() {
   const passages = useSelector((state: RootState) => state.passage.allPassagesByQuery);
   const status = useSelector((state: RootState) => state.passage.status);
-  const error = useSelector((state: RootState) => state.passage.error);
-console.log(status);
 
   if (status === "loading") {
-    return (<span>loadin</span>);
+    return <span>loadin</span>;
   }
 
   return (
