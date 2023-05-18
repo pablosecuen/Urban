@@ -1,211 +1,22 @@
-import React from "react";
-import { FaBus } from "react-icons/fa";
-import seat from "../../../assets/icons/seat.png";
-import Image from "next/image";
+import PlantaAlta from "./PlantaAlta";
+import PlantaBaja from "./PlantaBaja";
 
-export default function busLayout() {
+export default function BusLayout() {
+  // return <div className="grid-container">{arr}</div>;
   return (
-    <div className="grid-rows-10 grid w-96 grid-cols-5 gap-0">
-      <div className="div1 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div2 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div3 bg-gray-300"></div>
-      <div className="div4 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div5 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div6 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div7 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div8 bg-gray-300"></div>
-      <div className="div9 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div10 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div11 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div12 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div13 bg-gray-300"></div>
-      <div className="div14 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div15 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div16 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div17 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div18 bg-gray-300"></div>
-      <div className="div19 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div20 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div21 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div22 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div23 bg-gray-300"></div>
-      <div className="div24 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div25 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div26 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div27 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div28 bg-gray-300"></div>
-      <div className="div29 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div30 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div31 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div32 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div33 bg-gray-300"></div>
-      <div className="div34 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div35 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div36 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div37 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div38 bg-gray-300"></div>
-      <div className="div39 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
-      <div className="div40 flex cursor-pointer justify-center bg-gray-300 py-1">
-        <>
-          <input type="checkbox" hidden />
-          <Image src={seat} alt="..." className="h-8 w-8" />
-        </>
-      </div>
+    <div className="mx-auto flex w-11/12 flex-col items-center justify-center gap-5 rounded-3xl border-2 py-10 text-center shadow-2xl shadow-black/40 ">
+      <h1>Elige tu asiento</h1>
+      <section className="flex flex-col gap-4 px-4 xl:flex-row">
+        <article className="flex flex-col items-center justify-center gap-10 rounded-2xl border-2 border-blue/30 py-2  text-center shadow-inner-md">
+          <h3 className="tracking-wider xl:text-lg">Planta Alta</h3>
+          <PlantaAlta />
+        </article>
+        <article className="flex flex-col items-center justify-center gap-10 rounded-2xl border-2 border-blue/30 py-2 text-center shadow-inner-md ">
+          <h3 className="tracking-wider xl:text-lg">Planta Baja</h3>
+          <PlantaBaja />
+        </article>
+      </section>
+      <button className="w-auto">Seguir con la compra</button>
     </div>
   );
 }
