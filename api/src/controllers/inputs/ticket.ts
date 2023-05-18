@@ -31,6 +31,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 
     const dataFormatted: Ticket = {
       ...data,
+      reviewSent: false,
       status: "pending",
       createdAt: new Date().toISOString(),
       updatedAt: "",
