@@ -41,7 +41,7 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
         const companyDoc = await db.collection("companies").doc(companyId).get();
         const companyData = companyDoc.exists ? companyDoc.data() : null;
 
-        return { ...passageData, companyId, company: companyData };
+        return { ...passageData, companyId, companyData: companyData };
       })
     );
 
