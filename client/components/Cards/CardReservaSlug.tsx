@@ -42,9 +42,9 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
         >
           <div className="flex  items-center justify-center align-middle ">
             <div>
-              <small className="flex font-bold capitalize text-blueGray-700 ">
+              <small className="flex items-center justify-center align-middle font-bold capitalize  text-blueGray-700 ">
                 <FaBus size="60" className=" w-auto pr-2 text-blue" />
-                {passage.origin} - {passage.destination}
+                Nombre de la empresa
               </small>
             </div>
             <div>
@@ -53,7 +53,6 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
               </small>
             </div>
             <div>
-              {" "}
               <small>
                 {passage.arrivalDate} {passage.arrivalTime}
               </small>
@@ -61,7 +60,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
             <div>
               <small>Pasajes: {passage.stock}</small>
             </div>
-            <div></div>
+            <div>Precio: {passage.price}</div>
           </div>
         </Link>
       ))}
