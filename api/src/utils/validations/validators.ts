@@ -357,3 +357,14 @@ export const isTypeVehicleValidByDealer = (value: string): string | null => {
   if (validTypes.includes(value as TypeVehicle)) return null;
   return "El tipo de vehiculo no es válido";
 };
+
+export const isServiceValid = (service: string): string | null => {
+  if (typeof service !== "string") {
+    return "El tipo de servicio no es válido";
+  }
+  const validServices = ["semi cama", "cama", "cama ejecutivo"];
+  if (!validServices.includes(service.toLowerCase())) {
+    return "El tipo de servicio no es válido";
+  }
+  return null;
+};
