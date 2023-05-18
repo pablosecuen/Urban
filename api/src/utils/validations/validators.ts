@@ -368,3 +368,21 @@ export const isServiceValid = (service: string): string | null => {
   }
   return null;
 };
+
+export const isValidNumberSeat = (numberSeat: string[], stock: number): string | null => {
+  if (!Array.isArray(numberSeat)) {
+    return "El número de asientos debe ser un array";
+  }
+
+  if (numberSeat.length !== stock) {
+    return "La longitud del número de asientos debe ser igual al stock";
+  }
+
+  for (const seat of numberSeat) {
+    if (typeof seat !== "string") {
+      return "Cada valor del número de asientos debe ser una cadena de texto";
+    }
+  }
+
+  return null; // El número de asientos es válido
+};
