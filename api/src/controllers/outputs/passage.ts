@@ -49,14 +49,27 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
   const id: string = req.params.id;
 
   try {
-    const doc = await db.collection("passages").doc(id).get();
+    const passageDoc = await db.collection("passages").doc(id).get();
 
-    if (!doc.exists) {
+    if (!passageDoc.exists) {
       throw new Error("Pasaje no encontrado");
     }
 
-    const passage = { id: doc.id, ...doc.data() };
-    res.json(passage);
+    const passage = { id: passageDoc.id, ...passageDoc.data() };
+
+    const passageSnapshot = passageDoc.data();
+
+    const companyDoc = await db.collection("companies").doc(passageSnapshot.companyId).get();
+
+    if (!companyDoc.exists) {
+      throw new Error("Compañía no encontrada");
+    }
+
+    const companyData = companyDoc.data();
+
+    const passageWithCompanyData = { ...passage, companyData };
+
+    res.json(passageWithCompanyData);
   } catch (error) {
     console.error("Error al obtener el Pasaje", error);
     res.status(400).json({ message: "Error al obtener el Pasaje" });
