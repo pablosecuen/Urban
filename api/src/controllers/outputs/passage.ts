@@ -85,23 +85,29 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
 
 export const getLocations = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { destination } = req.query;
-
-    const passagesRef: firebase.firestore.Query<firebase.firestore.DocumentData> =
-      db.collection("passages");
+    const passagesRef = db.collection("passages");
     const passagesSnapshot = await passagesRef.get();
-    const passagesData = passagesSnapshot.docs.map((doc) => ({ ...doc.data() }));
+    const passagesData = passagesSnapshot.docs.map((doc) => doc.data());
 
-    const locationsSet = new Set<string>();
-
+    const destinationsSet = new Set<string>();
+    const originsSet = new Set<string>();
+    
     passagesData.forEach((passage) => {
-      const destinations = passage.destination;
-      if (destinations.toLowerCase().includes((destination as string).toLowerCase())) {
-        locationsSet.add(destinations);
+      const destination = passage.destination;
+      const origin = passage.origin;
+    
+      if (destination) {
+        destinationsSet.add(destination);
+      }
+    
+      if (origin) {
+        originsSet.add(origin);
       }
     });
-
-    const locations = Array.from(locationsSet);
+    
+    const combinedSet = new Set<string>([...destinationsSet, ...originsSet]);
+    const locations = Array.from(combinedSet);
+    
     if (locations.length === 0) {
       throw new Error("No se encontraron resultados...");
     }
