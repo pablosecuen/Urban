@@ -38,21 +38,21 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
         <Link
           href={`/home/reserva/${passage.id}`}
           key={passage.id}
-          className="group flex items-center gap-4 rounded-md border bg-white px-5 py-2 transition-all duration-200 hover:border-blue"
+          className="group flex items-center justify-between gap-4 rounded-md border bg-white px-2 py-2 transition-all duration-200 hover:border-blue"
         >
           <div className="flex  items-center align-middle ">
             <div className="flex items-center px-1 align-middle">
-              <small className="flex items-center justify-around px-1 align-middle font-bold capitalize  text-blueGray-700 ">
-                <FaBus size="60" className=" w-auto pr-2 text-blue" />
+              <small className="flex items-center justify-between px-1 align-middle font-bold capitalize  text-blueGray-700 ">
+                <FaBus size="40" className=" w-auto pr-2 text-blue" />
                 {passage.companyData?.name}
               </small>
             </div>
-            <div>
-              <small className="flex items-center justify-around px-1">
+            <div className="flex flex-col">
+              <small className="px-1">
                 {passage.departureDate} {passage.departureTime}
               </small>
             </div>
-            <div>
+            <div className="flex flex-col">
               <small className="flex items-center justify-around px-1">
                 {passage.arrivalDate} {passage.arrivalTime}
               </small>
