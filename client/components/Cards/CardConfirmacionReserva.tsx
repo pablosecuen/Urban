@@ -92,16 +92,18 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             </button>
           </div>
         </div>
-        <div className="lg:w-1/2">
+        <div className="flex flex-col gap-5 lg:w-1/2">
           <section className="mx-auto flex h-1/3 w-64 justify-center">
-            <Image
-              onClick={handleOpenModal}
-              src={passage?.img !== undefined ? passage.img : ""}
-              alt="amaga-bolombolo"
-              className={`cursor-pointer ${isModalOpen ? "duration-700 hover:scale-110" : ""}`}
-              width={250}
-              height={250}
-            />
+            <div className="flex h-32 w-64  items-center justify-center overflow-hidden ">
+              <Image
+                onClick={handleOpenModal}
+                src={passage?.img !== undefined ? passage.img : ""}
+                alt="amaga-bolombolo"
+                className="transition_all  cursor-zoom-in hover:scale-125"
+                width={250}
+                height={250}
+              />
+            </div>
             {isModalOpen && (
               <>
                 <div
@@ -109,7 +111,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
                   className="absolute left-0 top-0 h-screen bg-black/30 transition-opacity duration-700"
                 ></div>
                 <div
-                  className="t fixed inset-0 z-50 flex items-center justify-center"
+                  className=" fixed inset-0 z-50 flex items-center justify-center  "
                   onClick={closeModal}
                 >
                   <div className="flex w-[800px] items-center justify-center ">
@@ -117,7 +119,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
                       onClick={handleOpenModal}
                       src={passage?.img !== undefined ? passage.img : ""}
                       alt="amaga-bolombolo"
-                      className="w-full"
+                      className="w-full rounded-3xl shadow-2xl shadow-black/40"
                       width={800}
                       height={800}
                     />
