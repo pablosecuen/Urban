@@ -17,7 +17,7 @@ export interface Passage {
   price: number;
   stock: number;
   img: string;
-
+  service: string;
   createdAt: string;
   deleted: boolean;
   status: boolean;
