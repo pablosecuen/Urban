@@ -91,26 +91,23 @@ export const getLocations = async (req: Request, res: Response): Promise<void> =
 
     const destinationsSet = new Set<string>();
     const originsSet = new Set<string>();
-
+    
     passagesData.forEach((passage) => {
       const destination = passage.destination;
       const origin = passage.origin;
-
+    
       if (destination) {
-        if (!destinationsSet.has(destination)) {
-          destinationsSet.add(destination);
-        }
+        destinationsSet.add(destination);
       }
+    
       if (origin) {
-        if (!originsSet.has(origin)) {
-          originsSet.add(origin);
-        }
+        originsSet.add(origin);
       }
     });
-
+    
     const combinedSet = new Set<string>([...destinationsSet, ...originsSet]);
     const locations = Array.from(combinedSet);
-
+    
     if (locations.length === 0) {
       throw new Error("No se encontraron resultados...");
     }
