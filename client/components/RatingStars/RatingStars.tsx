@@ -9,7 +9,7 @@ export default function RatingStars({ onClickFunction, stateValue }: RatingStars
   const enableColor = "#FEBC0B";
   const disabledColor = "gray";
   return (
-    <div className="mx-auto mb-4 flex w-2/3 items-center justify-self-center ">
+    <div className="mb-4 flex  w-2/3 items-center justify-center ">
       <label htmlFor="q1" onClick={() => onClickFunction(1)}>
         <RatingStar
           title="1"
