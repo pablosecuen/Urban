@@ -9,11 +9,16 @@ export const metadata: Metadata = {
     "gestión de viajes, viajes disponibles, opciones de transporte, buses intermunicipales, taxis públicos, transportes privados, destinos, fechas de viaje, horarios, planificar viajes, elegir opciones de viaje, experiencia de viaje, herramienta de gestión de viajes.",
 };
 export default function SearchResults({ params }: { params: { slug: string } }) {
+  const localilades: any = params.slug;
+  console.log(localilades);
+  const capitalizedString = localilades.map((localidad: any) =>
+    localidad.replace(/^\w/, (c: any) => c.toUpperCase())
+  );
   return (
     <div className="mx-auto h-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
       <div className="flex flex-col gap-4 ">
         <h1 className="text-center text-xl text-blue">
-          Estas son las mejores opciones encontradas
+          Opciones encontradas desde {capitalizedString[0]} hasta {capitalizedString[1]}
         </h1>
         <CardReservaSlug params={params} />
       </div>

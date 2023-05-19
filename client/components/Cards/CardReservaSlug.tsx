@@ -38,30 +38,35 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
         <Link
           href={`/home/reserva/${passage.id}`}
           key={passage.id}
-          className="group flex items-center  gap-4 rounded-md border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
+          className="group flex items-center justify-between gap-4 rounded-md border bg-white px-2 py-2 transition-all duration-200 hover:border-blue"
         >
-          <div className="flex  items-center  justify-around align-middle ">
-            <div>
-              <small className="flex items-center justify-center align-middle font-bold capitalize  text-blueGray-700 ">
-                <FaBus size="60" className=" w-auto pr-2 text-blue" />
+          <div className="flex  items-center align-middle ">
+            <div className="flex items-center px-1 align-middle">
+              <small className="flex items-center justify-between px-1 align-middle font-bold capitalize  text-blueGray-700 ">
+                <FaBus size="40" className=" w-auto pr-2 text-blue" />
                 {passage.companyData?.name}
               </small>
             </div>
-            <div>
-              <small>
+            <div className="flex flex-col">
+              <small className="px-1">
                 {passage.departureDate} {passage.departureTime}
               </small>
             </div>
-            <div>
-              <small>
+            <div className="flex flex-col">
+              <small className="flex items-center justify-around px-1">
                 {passage.arrivalDate} {passage.arrivalTime}
               </small>
             </div>
-            <div>
-              <small>Pasajes: {passage.stock}</small>
+            <div className="flex flex-row items-center justify-around px-1">
+              <small>
+                Pasajes:{" "}
+                <small className="rounded-md bg-blue px-1.5 text-center text-sm font-bold text-white ">
+                  {passage.stock}
+                </small>
+              </small>
             </div>
-            <div>{passage.service}</div>
-            <div>Precio: {passage.price}</div>
+            <div className="flex items-center justify-around px-1">{passage.service}</div>
+            <div className="flex items-center justify-around px-1">Precio: {passage.price}</div>
           </div>
         </Link>
       ))}

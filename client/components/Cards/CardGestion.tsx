@@ -110,10 +110,10 @@ export default function CardGestion() {
     >
       {allTickets.map((ticket) => (
         <>
-          <div key={ticket.id} className="flex  items-center justify-center align-middle ">
+          <div key={ticket.id} className="flex items-center justify-around  align-middle ">
+            <FaBus size="40" className=" w-auto pr-2 text-blue" />
             <div className="flex flex-col">
               <div className="flex items-center gap-2 ">
-                <FaBus size="30" className=" w-auto pr-2 text-blue" />
                 <span className="text-xl font-semibold text-gray-600">Bus intermunicipal</span>
               </div>
               <span className="pt-2 text-gray-600">
@@ -136,28 +136,31 @@ export default function CardGestion() {
       ))}
       {isModalOpen && (
         <>
-          <div onClick={closeModal} className="absolute left-0 top-0 h-screen bg-black/30"></div>
+          <div
+            onClick={closeModal}
+            className="absolute left-0 top-0 h-screen w-screen bg-black/30"
+          ></div>
           <div
             className="fixed inset-0 z-50 flex items-center justify-center"
             onClick={handleModalClick}
             ref={modalRef}
           >
             <div
-              className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
+              className="mx-auto h-96 w-96 rounded-2xl  bg-white shadow-2xl shadow-black/60"
               onClick={(e) => e.stopPropagation()}
             >
               {selectedTicket && (
                 <article className="p-6 ">
                   <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
                   <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
-                  <div className="">
+                  <div className="flex flex-col items-center justify-center ">
                     <RatingStars
                       onClickFunction={onClickFuntionToRatingStars}
                       stateValue={valuationData?.rating || 0}
                     />
                     <textarea
                       onChange={handleChangeValuationComment}
-                      className="border p-1"
+                      className="p- border"
                       cols={30}
                       rows={4}
                       value={valuationData.comment}
