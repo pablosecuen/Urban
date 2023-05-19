@@ -64,7 +64,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const userSnapshot = await docRef.get();
     const userData = userSnapshot.data();
 
-    await successRegister(user.email, user.name, docRef.id);
+    // await successRegister(user.email, user.name, docRef.id);
 
     res.status(200).json({ id: docRef.id, user: userData });
   } catch (error) {
