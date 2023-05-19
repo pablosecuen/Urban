@@ -32,12 +32,14 @@ export default function Reserva() {
   // const isFormValid = origin && destination ? true : false;
 
   // ------------ Handle Location Origin Selected -------------
-  const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
-    e && setOrigin(e.target.value); 
+  const handleOriginChange = (e: SingleValue<Location> | null ) => {
+    const value = e?.value ?? null;
+    setOrigin(value); 
   };
   // ---------- Handle Location Destination Selected ----------
   const handleDestinationChange = (e: SingleValue<Location> | null) => {
-    e && setDestination(e.value);
+    const value = e?.value ?? null;
+    setDestination(value)
   };
   // ------------------- Handle Departure ----------------------
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,14 +86,13 @@ export default function Reserva() {
       <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
         <div className="flex items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          {/* <div> */}
           <Select
             options={locations}
             placeholder="Origen..."
             className="capitalize"
-            // onChange={handleOriginChange}
+            onChange={handleOriginChange}
             isClearable
-            // value={origin ? { value: origin, label: origin } : null}
+            value={origin ? { value: origin, label: origin } : null}
           />
         </div>
         <div className="flex items-center justify-center">
