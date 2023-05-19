@@ -20,7 +20,13 @@ const ticketSlice = createSlice({
   name: "ticket",
   initialState,
 
-  reducers: {},
+  reducers: {
+    updateReviewSent: (state, { type, payload }) => {
+      state.allTickets = state.allTickets.map((t) =>
+        t.id === payload ? { ...t, reviewSent: false } : t
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTicketsByUserId.pending, (state) => {
@@ -50,3 +56,4 @@ const ticketSlice = createSlice({
 });
 
 export default ticketSlice.reducer;
+export const { updateReviewSent } = ticketSlice.actions;
