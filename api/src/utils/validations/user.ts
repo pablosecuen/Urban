@@ -53,13 +53,8 @@ export const updateUserValidated = (req: Request, res: Response, next: NextFunct
     ce: isCeValid,
   };
 
-  const validFields = Object.keys(validators);
-
-  for (const field in data) {
-    if (!validFields.includes(field)) {
-      errors.push({ field, message: "Propiedad no válida" });
-    } else {
-      const validator = validators[field];
+  for (const [field, validator] of Object.entries(validators)) {
+    if (data[field]) {
       const error = validator(data[field]);
       if (error) {
         errors.push({ field, message: error });
