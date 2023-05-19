@@ -10,6 +10,7 @@ import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPassages } from "@component/Redux/passage/passageActions";
+import FormCreatePassage from "@component/components/Forms/FormCreatePassage";
 
 // components
 
@@ -53,6 +54,9 @@ export default function Passages() {
         </div>
         <div className="w-full px-4 lg:w-4/12">
           <CardProfilePassage selectedPassage={selectedPassage} />
+        </div>
+        <div>
+          <FormCreatePassage />
         </div>
       </div>
     </>
