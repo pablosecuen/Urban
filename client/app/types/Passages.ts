@@ -1,5 +1,6 @@
 export interface Passage {
   companyId: string;
+  companyData: object;
   id: string;
   origin: string;
   destination: string;

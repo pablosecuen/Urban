@@ -357,3 +357,32 @@ export const isTypeVehicleValidByDealer = (value: string): string | null => {
   if (validTypes.includes(value as TypeVehicle)) return null;
   return "El tipo de vehiculo no es válido";
 };
+
+export const isServiceValid = (service: string): string | null => {
+  if (typeof service !== "string") {
+    return "El tipo de servicio no es válido";
+  }
+  const validServices = ["semi cama", "cama", "cama ejecutivo"];
+  if (!validServices.includes(service.toLowerCase())) {
+    return "El tipo de servicio no es válido";
+  }
+  return null;
+};
+
+export const isValidNumberSeat = (numberSeat: string[], stock: number): string | null => {
+  if (!Array.isArray(numberSeat)) {
+    return "El número de asientos debe ser un array";
+  }
+
+  if (numberSeat.length !== stock) {
+    return "La longitud del número de asientos debe ser igual al stock";
+  }
+
+  for (const seat of numberSeat) {
+    if (typeof seat !== "string") {
+      return "Cada valor del número de asientos debe ser una cadena de texto";
+    }
+  }
+
+  return null; // El número de asientos es válido
+};

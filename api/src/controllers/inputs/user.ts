@@ -307,18 +307,24 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
     const averageRating = totalRating / companiesRatingsData.size;
 
     if (data.comment) {
-      const commentData = {
+      const evaluationData = {
         comment: data.comment,
         userId,
+        rating: data.rating,
       };
 
       await companiesRef.update({
         rating: averageRating,
-        comments: firebase.firestore.FieldValue.arrayUnion(commentData),
+        evaluation: firebase.firestore.FieldValue.arrayUnion(evaluationData),
       });
     } else {
+      const evaluationData = {
+        userId,
+        rating: data.rating,
+      };
       await companiesRef.update({
         rating: averageRating,
+        evaluation: firebase.firestore.FieldValue.arrayUnion(evaluationData),
       });
     }
 

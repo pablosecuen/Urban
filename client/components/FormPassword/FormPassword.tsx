@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { HiEyeOff, HiEye } from "react-icons/hi";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import setValidate from "./Validate";
 import Link from "next/link";
 import logo from "../../assets/imagenes/UrbanIsoLogo.png";
@@ -13,13 +11,6 @@ interface UserToPassword {
   password: string;
   repeatPassword: string;
 }
-
-interface LoginResponse {
-  success: boolean;
-  message?: string;
-  token?: string;
-}
-
 interface PasswordError {
   messageEmail?: string;
   messagePassword?: string;
@@ -31,7 +22,6 @@ export default function FormPassword() {
   const [showPassword2, setShowPassword2] = useState(false);
   const [userData, setUserData] = useState<UserToPassword>({} as UserToPassword);
   const [errores, setErrores] = useState<PasswordError>({} as PasswordError);
-  const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toString();
@@ -41,14 +31,6 @@ export default function FormPassword() {
     setErrores({ ...errores, ...setValidate({ [name]: value }) });
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name.toString();
-    const value = e.target.value.toString();
-    setUserData({ ...userData, [name]: value });
-    const { password } = userData;
-    setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
-  };
-
   function setValidateRepeatPassword(repeatPassword: string, password: string) {
     if (repeatPassword === password || repeatPassword === "") {
       return { messageRepeatPassword: "" };
@@ -56,6 +38,14 @@ export default function FormPassword() {
       return { messageRepeatPassword: "La contraseña no coincide" };
     }
   }
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name.toString();
+    const value = e.target.value.toString();
+    setUserData({ ...userData, [name]: value });
+    const { password } = userData;
+    setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
+  };
 
   const visiblePassword = (e) => {
     e.preventDefault();

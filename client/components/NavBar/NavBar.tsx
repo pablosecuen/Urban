@@ -129,7 +129,7 @@ export default function NavBar() {
                   key={link.id}
                   className={`flex ${
                     pathname?.includes(link.route) && "border-b border-celeste "
-                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:mr-3 lg:w-auto lg:px-0`}
+                  } items-center justify-center px-2 py-1 transition-all duration-150 hover:border-b hover:border-celeste lg:mr-3 lg:w-auto lg:px-0 xl:mr-0`}
                 >
                   <Link
                     href={link.route}
