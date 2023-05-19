@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 // import { MdPets } from "react-icons/md";
 import { QueryParams } from "@component/app/types/QueryParams";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 import getLocations from "../../services/api/locations"
 import ToastComponent from "../00-Toastify/ToastComponent";
 
@@ -22,8 +22,8 @@ export default function Reserva() {
 
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
 
-  // const [origin, setOrigin] = useState<string>("");
-  // const [destination, setDestination] = useState<string>("");
+  const [origin, setOrigin] = useState<string | null>();
+  const [destination, setDestination] = useState<string>("");
   // const [price, setPrice] = useState<number | undefined>();
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
@@ -32,7 +32,17 @@ export default function Reserva() {
 
   // const isFormValid = origin && destination ? true : false;
 
+  // ---------- Handle Location Origin Selected ----------
+  const handleOriginChange = (e: SingleValue<Location> | null) => {
+    e && setOrigin(e.value); 
+    console.log(origin);
+    
+  };
+
   // ---------- Handle Location Destination Selected ----------
+  const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDestination(e.target.value);
+  }
 
   // ---------- Handle Departure ----------
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +93,7 @@ const adapter: Location[] = [];
         <div className="flex items-center justify-center">
           {/* <HiOutlineLocationMarker className="w-10 text-blue" /> */}
           {/* <div> */}
-            <Select options={locations} placeholder="Desde que lugar..." className="capitalize"/>
+            <Select options={locations} placeholder="Origen..." className="capitalize" onChange={handleOriginChange} isClearable />
 
             {/* <input
               name="origin"
