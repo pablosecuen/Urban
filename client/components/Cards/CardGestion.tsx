@@ -66,14 +66,12 @@ export default function CardGestion() {
     }
   };
 
-  // se necesita prop valued en tickets para evitar valoracion infinita
-  const proximamenteTicket = { valued: false };
-
   const onClickFuntionToRatingStars = (value: number) => {
     setValuationData((prev) => {
       return { ...prev, rating: value };
     });
   };
+
   const handleChangeValuationComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
     if (target.value.length < 200) {
       setValuationData((prev) => {
@@ -126,7 +124,7 @@ export default function CardGestion() {
                 Tiempo estimado: {ticket.passageInfo.duration}
               </span>
             </div>
-            {!proximamenteTicket.valued && (
+            {!ticket.reviewSent && (
               <button
                 className="w-auto shadow-transparent "
                 onClick={() =>

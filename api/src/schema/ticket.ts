@@ -13,6 +13,7 @@ export interface TicketToRegister {
 
 export interface Ticket extends TicketToRegister {
   status: TicketStatus;
+  reviewSent: Boolean;
   createdAt: string;
   updatedAt: string;
 }
