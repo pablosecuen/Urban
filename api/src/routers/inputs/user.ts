@@ -58,7 +58,7 @@ router.post("/rating/delivery/:userId/:deliveryId", newRatingValidator, newDeliv
 
 router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newChauffeurRating);
 
-router.post("/rating/company/:userId/:companyId", newRatingValidator, newCompanyRating);
+router.post("/rating/company/:ticketId/:companyId", newRatingValidator, newCompanyRating);
 
 router.post("/forgot-password", forgotPassword);
 
