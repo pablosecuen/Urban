@@ -44,7 +44,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
             <div>
               <small className="flex items-center justify-center align-middle font-bold capitalize  text-blueGray-700 ">
                 <FaBus size="60" className=" w-auto pr-2 text-blue" />
-                Nombre de la empresa
+                {passage.companyData?.name}
               </small>
             </div>
             <div>
