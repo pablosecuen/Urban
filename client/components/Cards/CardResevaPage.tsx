@@ -120,7 +120,7 @@ export default function Reserva() {
             onChange={handleDepartureDateChange}
           />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <HiTrendingDown className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
