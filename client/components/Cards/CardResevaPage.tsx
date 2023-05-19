@@ -29,7 +29,7 @@ export default function Reserva() {
   const [arrivalDate, setArrivalDate] = useState<string>("");
   const [locations, setLocations] = useState<Location[]>([]);
 
-  // const isFormValid = origin && destination ? true : false;
+  const isFormValid = origin && destination ? true : false;
 
   // ------------ Handle Location Origin Selected -------------
   const handleOriginChange = (e: SingleValue<Location> | null ) => {
@@ -51,21 +51,21 @@ export default function Reserva() {
   };
 
   // - - - - - - - - - - - - -  HANDLE SUBMIT - - - - - - - - - - - - -
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault(); // evitar el envio del formulario predeterminado
+  const handleSubmit = (e: any) => {
+    e.preventDefault(); // evitar el envio del formulario predeterminado
 
-  //   const query: QueryParams = {
-  //     origin: origin.toLowerCase(),
-  //     destination: destination.toLowerCase(),
-  //     ...(departureDate && { departureDate: departureDate.split("-").reverse().join("-") }),
-  //     ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
-  //     ...(price && { price }),
-  //     // armo la query y agrego las propiedades extras si las hay
-  //   };
-  //   const URL = Object.values(query).join("/");
+    const query: QueryParams = {
+      origin: origin?.toLowerCase(),
+      destination: destination?.toLowerCase(),
+      ...(departureDate && { departureDate: departureDate.split("-").reverse().join("-") }),
+      ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
+      // ...(price && { price }),
+      // armo la query y agrego las propiedades extras si las hay
+    };
+    const URL = Object.values(query).join("/");
 
-  //   router.push(`/home/reserva/${URL}`);
-  // };
+    router.push(`/home/reserva/${URL}`);
+  };
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -84,44 +84,32 @@ export default function Reserva() {
   return (
     <>
       <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           <Select
             options={locations}
             placeholder="Origen..."
-            className="capitalize"
+            className="capitalize w-2/3"
             onChange={handleOriginChange}
             isClearable
             value={origin ? { value: origin, label: origin } : null}
           />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           {/* <div> */}
           <Select
             options={locations}
             placeholder="Destino..."
-            className="capitalize"
+            className="capitalize w-2/3"
             onChange={handleDestinationChange}
             isClearable
+            
             value={destination ? { value: destination, label: destination } : null}
           />
         </div>
 
-        {/* <div className="flex items-center justify-center">
-          <HiOutlineLocationMarker className="w-10 text-blue" />
-          <div className="relative w-2/3">
-            <input
-              className="pl-2"
-              placeholder="Hasta que lugar..."
-              type="text"
-              value={destination}
-              autoComplete="off"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <HiTrendingUp className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -132,7 +120,7 @@ export default function Reserva() {
             onChange={handleDepartureDateChange}
           />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <HiTrendingDown className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -142,9 +130,9 @@ export default function Reserva() {
             min={departureDate ? departureDate : today}
             onChange={handleArrivalDateChange}
           />
-        </div> */}
+        </div>
 
-        {/* <button
+        <button
           onClick={handleSubmit}
           disabled={!isFormValid}
           className={`transition_all w-1/2 self-center ${
@@ -152,7 +140,7 @@ export default function Reserva() {
           }`}
         >
           Buscar tu viaje!
-        </button> */}
+        </button>
       </form>
 
       {/* Tostadora */}
