@@ -1,6 +1,8 @@
+import { Company } from "./Company";
+
 export interface Passage {
   companyId: string;
-  companyData: object;
+  companyData: Company;
   id: string;
   origin: string;
   destination: string;
@@ -15,7 +17,7 @@ export interface Passage {
   price: number;
   stock: number;
   img: string;
-
+  service: string;
   createdAt: string;
   deleted: boolean;
   status: boolean;
