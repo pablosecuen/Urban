@@ -31,21 +31,19 @@ export default function Reserva() {
 
   // const isFormValid = origin && destination ? true : false;
 
-  // ---------- Handle Location Origin Selected ----------
-  const handleOriginChange = (e: SingleValue<Location> | null) => {
-    e && setOrigin(e.value);
+  // ------------ Handle Location Origin Selected -------------
+  const handleOriginChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
+    e && setOrigin(e.target.value); 
   };
-
   // ---------- Handle Location Destination Selected ----------
   const handleDestinationChange = (e: SingleValue<Location> | null) => {
     e && setDestination(e.value);
   };
-
-  // ---------- Handle Departure ----------
+  // ------------------- Handle Departure ----------------------
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDepartureDate(e.target.value);
   };
-  // ---------- Handle Arrival ----------
+  // --------------------- Handle Arrival ----------------------
   const handleArrivalDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArrivalDate(e.target.value);
   };
@@ -91,9 +89,9 @@ export default function Reserva() {
             options={locations}
             placeholder="Origen..."
             className="capitalize"
-            onChange={handleOriginChange}
+            // onChange={handleOriginChange}
             isClearable
-            value={origin ? { value: origin, label: origin } : null}
+            // value={origin ? { value: origin, label: origin } : null}
           />
         </div>
         <div className="flex items-center justify-center">
