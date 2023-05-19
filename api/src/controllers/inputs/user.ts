@@ -81,10 +81,16 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
     const updatedAt: string = new Date(Date.now()).toISOString(); // Obtener fecha actual
+
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el usuario");
+    }
+
+    // Agregar la propiedad "displayPhone" si se proporciona "areaCode" y "number"
+    if (data.phone && data.phone.areaCode && data.phone.number) {
+      data.phone.displayPhone = `${data.phone.areaCode} ${data.phone.number}`;
     }
 
     // Actualizar el usuario en Firestore
