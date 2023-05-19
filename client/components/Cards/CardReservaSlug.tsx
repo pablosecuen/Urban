@@ -38,9 +38,9 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
         <Link
           href={`/home/reserva/${passage.id}`}
           key={passage.id}
-          className="group flex items-center justify-between gap-4 rounded-md border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
+          className="group flex items-center  gap-4 rounded-md border bg-white px-10 py-2 transition-all duration-200 hover:border-blue"
         >
-          <div className="flex  items-center justify-center align-middle ">
+          <div className="flex  items-center  justify-around align-middle ">
             <div>
               <small className="flex items-center justify-center align-middle font-bold capitalize  text-blueGray-700 ">
                 <FaBus size="60" className=" w-auto pr-2 text-blue" />
@@ -60,7 +60,7 @@ export default function CardReservaSlug({ params }: CardReservaSlugProps) {
             <div>
               <small>Pasajes: {passage.stock}</small>
             </div>
-            <div>Tipo de servicio</div>
+            <div>{passage.service}</div>
             <div>Precio: {passage.price}</div>
           </div>
         </Link>
