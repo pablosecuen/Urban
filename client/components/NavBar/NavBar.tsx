@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,7 +36,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className=" bg-verde">
+    <header className="  bg-verde">
       {isMobile ? (
         <>
           <Image
