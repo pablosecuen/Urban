@@ -6,12 +6,12 @@ import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "re
 // import { MdPets } from "react-icons/md";
 import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
-import getLocations from "../../services/api/locations"
+import getLocations from "../../services/api/locations";
 import ToastComponent from "../00-Toastify/ToastComponent";
 
 interface Location {
- label: string;
- value: string;
+  label: string;
+  value: string;
 }
 
 export default function Reserva() {
@@ -23,26 +23,23 @@ export default function Reserva() {
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
 
   const [origin, setOrigin] = useState<string | null>();
-  const [destination, setDestination] = useState<string>("");
+  const [destination, setDestination] = useState<string | null>();
   // const [price, setPrice] = useState<number | undefined>();
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
   const [locations, setLocations] = useState<Location[]>([]);
 
-
   // const isFormValid = origin && destination ? true : false;
 
   // ---------- Handle Location Origin Selected ----------
   const handleOriginChange = (e: SingleValue<Location> | null) => {
-    e && setOrigin(e.value); 
-    console.log(origin);
-    
+    e && setOrigin(e.value);
   };
 
   // ---------- Handle Location Destination Selected ----------
-  const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination(e.target.value);
-  }
+  const handleDestinationChange = (e: SingleValue<Location> | null) => {
+    e && setDestination(e.value);
+  };
 
   // ---------- Handle Departure ----------
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,39 +67,46 @@ export default function Reserva() {
   //   router.push(`/home/reserva/${URL}`);
   // };
 
-  
-useEffect(() => {
-   const fetchLocations = async () => {
-const adapter: Location[] = [];
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const adapter: Location[] = [];
 
-    const locations = await getLocations();
-    locations.map((location: string)=>{
-      adapter.push({label: location, value: location})
-    })
+      const locations = await getLocations();
+      locations.map((location: string) => {
+        adapter.push({ label: location, value: location });
+      });
 
-    setLocations(adapter);
-  };
-  fetchLocations();
-},[])
-
-
+      setLocations(adapter);
+    };
+    fetchLocations();
+  }, []);
 
   return (
     <>
       <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
         <div className="flex items-center justify-center">
-          {/* <HiOutlineLocationMarker className="w-10 text-blue" /> */}
+          <HiOutlineLocationMarker className="w-10 text-blue" />
           {/* <div> */}
-            <Select options={locations} placeholder="Origen..." className="capitalize" onChange={handleOriginChange} isClearable />
-
-            {/* <input
-              name="origin"
-              className="pl-2"
-              placeholder="Desde que lugar..."
-              type="text"
-              value={origin}
-            /> */}
-          {/* </div> */}
+          <Select
+            options={locations}
+            placeholder="Origen..."
+            className="capitalize"
+            onChange={handleOriginChange}
+            isClearable
+            value={origin ? { value: origin, label: origin } : null}
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <HiOutlineLocationMarker className="w-10 text-blue" />
+          {/* <div> */}
+          <Select
+            options={locations}
+            placeholder="Destino..."
+            className="capitalize"
+            onChange={handleDestinationChange}
+            isClearable
+            value={destination ? { value: destination, label: destination } : null}
+          />
         </div>
 
         {/* <div className="flex items-center justify-center">
