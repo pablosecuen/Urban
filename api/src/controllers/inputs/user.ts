@@ -64,7 +64,7 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
     const userSnapshot = await docRef.get();
     const userData = userSnapshot.data();
 
-    await successRegister(user.email, user.name, docRef.id);
+    // await successRegister(user.email, user.name, docRef.id);
 
     res.status(200).json({ id: docRef.id, user: userData });
   } catch (error) {
@@ -81,10 +81,16 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
     const updatedAt: string = new Date(Date.now()).toISOString(); // Obtener fecha actual
+
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
       throw new Error("No se encontró el usuario");
+    }
+
+    // Agregar la propiedad "displayPhone" si se proporciona "areaCode" y "number"
+    if (data.phone && data.phone.areaCode && data.phone.number) {
+      data.phone.displayPhone = `${data.phone.areaCode} ${data.phone.number}`;
     }
 
     // Actualizar el usuario en Firestore
@@ -270,23 +276,25 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
 
 export const newCompanyRating = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { userId, companyId } = req.params;
+    const { ticketId, companyId } = req.params;
     const data = req.body;
 
+    const [ticketDoc, companiesDoc] = await Promise.all([
+      db.collection("tickets").doc(ticketId).get(),
+      db.collection("companies").doc(companyId).get(),
+    ]);
+
+    if (!ticketDoc.exists) throw new Error("El ticket no existe");
+    if (ticketDoc.data().reviewSent === true)
+      throw new Error("No se puede enviar mas de una review por ticket");
+    if (!companiesDoc.exists) throw new Error("La compañia no existe");
+
     const dataFormatted: CompanyRating = {
-      userId,
+      userId: ticketDoc.data().userId,
       companyId,
       ...data,
       createdAt: new Date().toISOString(),
     };
-
-    const [userDoc, companiesDoc] = await Promise.all([
-      db.collection("users").doc(userId).get(),
-      db.collection("companies").doc(companyId).get(),
-    ]);
-
-    if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!companiesDoc.exists) throw new Error("La compañia no existe");
 
     const docRef = await db.collection("companiesRating").add(dataFormatted);
 
@@ -309,7 +317,7 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
     if (data.comment) {
       const evaluationData = {
         comment: data.comment,
-        userId,
+        userId: ticketDoc.data().userId,
         rating: data.rating,
       };
 
@@ -319,7 +327,7 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
       });
     } else {
       const evaluationData = {
-        userId,
+        userId: ticketDoc.data().userId,
         rating: data.rating,
       };
       await companiesRef.update({
@@ -327,6 +335,7 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
         evaluation: firebase.firestore.FieldValue.arrayUnion(evaluationData),
       });
     }
+    await db.collection("tickets").doc(ticketId).update({ reviewSent: true });
 
     res.status(200).json({ id: docRef.id });
   } catch (error) {

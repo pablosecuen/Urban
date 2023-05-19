@@ -16,6 +16,7 @@ import ToastComponent from "../00-Toastify/ToastComponent";
 import axios, { AxiosError } from "axios";
 import { User } from "@component/app/types/User";
 import "react-toastify/dist/ReactToastify.css";
+import { updateReviewSent } from "@component/Redux/ticket/ticketSlice";
 
 interface ValuationData {
   rating: number;
@@ -28,7 +29,7 @@ interface UserAndCompanyIds {
 
 export default function CardGestion() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userAndCompanyIds, setUserAndCompanyIds] = useState<UserAndCompanyIds | null>();
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>();
   const [valuationData, setValuationData] = useState<ValuationData>({
     rating: 0,
     comment: "",
@@ -49,13 +50,13 @@ export default function CardGestion() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenModal = ({ userId, companyId }: UserAndCompanyIds) => {
-    setUserAndCompanyIds({ userId, companyId });
+  const handleOpenModal = (ticket: Ticket) => {
+    setSelectedTicket(ticket);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setUserAndCompanyIds(null);
+    setSelectedTicket(null);
     setIsModalOpen(false);
     setValuationData({ rating: 0, comment: "" });
   };
@@ -77,24 +78,21 @@ export default function CardGestion() {
       setValuationData((prev) => {
         return { ...prev, comment: target.value };
       });
-    } else {
-      // mostrar alerta de cantidad máxima de caracteres alcanzada
     }
   };
 
   const sendValuation = () => {
-    if (userAndCompanyIds?.userId && userAndCompanyIds?.companyId) {
-      const { userId, companyId } = userAndCompanyIds;
+    if (selectedTicket) {
+      const { id: ticketId, passageInfo } = selectedTicket;
+      const { companyId } = passageInfo;
       axios
-        .post(`http://localhost:3000/user/rating/company/${userId}/${companyId}`, valuationData)
+        .post(`http://localhost:3000/user/rating/company/${ticketId}/${companyId}`, valuationData)
         .then(() => {
-          console.log("asdasd");
           notifySuccess();
           closeModal();
-          // alerta con mensaje de éxito
+          dispatch(updateReviewSent(ticketId));
         })
         .catch((error: AxiosError | any) => {
-          // alerta con el error
           console.log(error);
         });
     }
@@ -127,12 +125,7 @@ export default function CardGestion() {
             {!ticket.reviewSent && (
               <button
                 className="w-auto shadow-transparent "
-                onClick={() =>
-                  handleOpenModal({
-                    userId: ticket.userId,
-                    companyId: ticket.passageInfo.companyId,
-                  })
-                }
+                onClick={() => handleOpenModal(ticket)}
               >
                 Valorar
               </button>
@@ -156,9 +149,9 @@ export default function CardGestion() {
               className="mx-auto h-96 w-96 rounded-2xl  bg-white shadow-2xl shadow-black/60"
               onClick={(e) => e.stopPropagation()}
             >
-              {userAndCompanyIds && (
-                <article className="flex flex-col items-center justify-center gap-2 p-6 ">
-                  <Image src={logo} alt="logo" className="mx-auto  w-16  py-2" />
+              {selectedTicket && (
+                <article className="p-6 ">
+                  <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
                   <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
                   <div className="flex flex-col items-center justify-center ">
                     <RatingStars
