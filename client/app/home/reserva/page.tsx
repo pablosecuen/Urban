@@ -9,5 +9,12 @@ export const metadata: Metadata = {
     "gestión de viajes, buscar viajes, destino, origen, fecha de salida, fecha de regreso, opciones de transporte, buses intermunicipales, taxis públicos, transportes privados, planificar viaje, tomar decisiones informadas, optimizar viajes, experiencia de viaje.",
 };
 export default function Reserva() {
-  return <CardReservaPage />;
+  return( 
+    <section className="mx-auto mt-5 w-11/12 rounded-3xl border-2 px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-0 lg:h-[510px]">
+    <h1 className="px-8 text-center text-blue lg:px-0 lg:text-xl">
+      Llena el formulario para encontrar tu viaje
+    </h1>
+  <CardReservaPage />
+  </section>
+  );
 }
