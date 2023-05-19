@@ -40,7 +40,7 @@ export default function PerfilPage() {
         {pestañasHistorialPerfil.map((item, index) => (
           <div
             key={index}
-            className={`w-full cursor-pointer rounded-t-xl border border-gray-300 px-2 py-1 transition duration-500 lg:hover:bg-gray-300 xl:border-gray-200 ${
+            className={`flex  w-full cursor-pointer items-center rounded-t-xl border border-gray-300 px-2 py-1 align-middle transition duration-500 md:py-1 lg:hover:bg-gray-300 xl:border-gray-200 ${
               activeTab === `${item.name}` && "bg-blue font-semibold text-white"
             }`}
             onClick={() => handleTabClick(`${item.name}`)}

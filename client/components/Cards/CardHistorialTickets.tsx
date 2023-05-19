@@ -60,36 +60,52 @@ export default function CardHistorialTickets() {
 
   return (
     <section
-      className={` flex h-full w-full flex-col gap-2 p-2  ${
+      className={`  flex h-full w-full flex-col  gap-2 p-2  ${
         allTickets.length > 4 ? "scrollbar overflow-y-scroll" : ""
-      } rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10`}
+      } overflow-y-scroll rounded-3xl  bg-transparent lg:container  lg:mx-auto lg:h-[500px] lg:p-10`}
     >
       {allTickets.map((ticket) => (
         <>
-          <div key={ticket.id} className="flex  items-center justify-center align-middle ">
+          <div
+            key={ticket.id}
+            className="flex h-full flex-col items-center justify-around gap-2  py-4 align-middle lg:h-24 lg:flex-row"
+          >
+            <div className="flex flex-col items-center justify-center gap-1">
+              <FaBus size="40" className=" w-auto  text-blue" />
+              <small className="w-full text-right md:w-auto ">
+                {ticket.passageInfo.departureDate}
+              </small>
+            </div>
+            <div className="flex items-center gap-2 ">
+              <span className="text-xl font-semibold text-gray-600">Bus</span>
+            </div>
             <div className="flex flex-col">
               {" "}
-              <div className="flex items-center gap-2 ">
-                <FaBus size="30" className=" w-auto pr-2 text-blue" />
-                <span className="text-xl font-semibold text-gray-600">Bus intermunicipal</span>
-              </div>
-              <span className="pt-2 text-gray-600">
-                Origen: {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella
-                St <br />
-                Tiempo estimado: {ticket.passageInfo.duration}
+              <span className="flex flex-col items-center justify-between  text-gray-600 md:flex-row">
+                <div className="flex flex-col items-center justify-center">
+                  <strong className="px-2"> Origen:</strong>
+                  <p>
+                    {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella St{" "}
+                    <br />
+                  </p>{" "}
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <strong className="px-2">Tiempo estimado: </strong>
+                  <p>{ticket.passageInfo.duration}</p>
+                </div>
               </span>
             </div>
-
-            <button className="w-auto shadow-transparent " onClick={() => handleOpenModal(ticket)}>
-              Ticket
-            </button>
+            <button onClick={() => handleOpenModal(ticket)}>Ticket</button>
           </div>
-          <hr className="mb-4" />
+          <hr className="py-4" />
         </>
       ))}
       {isModalOpen && (
         <>
-          <div onClick={closeModal} className="absolute left-0 top-0 h-screen bg-black/30"></div>
+          <div
+            onClick={closeModal}
+            className="absolute left-0 top-0 z-10 h-screen w-screen bg-black/30"
+          ></div>
           <div
             className="fixed inset-0 z-50 flex items-center justify-center"
             onClick={handleModalClick}
@@ -100,7 +116,10 @@ export default function CardHistorialTickets() {
               onClick={(e) => e.stopPropagation()}
             >
               {selectedTicket && (
-                <article key={selectedTicket.id} className="p-6 ">
+                <article
+                  key={selectedTicket.id}
+                  className="flex flex-col items-center justify-center p-6 "
+                >
                   <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
                   <h2 className="mb-4 text-center text-2xl font-bold">
                     <>
@@ -108,8 +127,9 @@ export default function CardHistorialTickets() {
                       {selectedTicket.passageInfo.destination}
                     </>
                   </h2>
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div className="">
+
+                  <div className="grid w-full grid-cols-2 gap-4 text-center">
+                    <div className="w-full">
                       <p className="mb-2 flex flex-col">
                         <strong>Fecha de salida:</strong> {selectedTicket.passageInfo.departureDate}
                       </p>
@@ -133,7 +153,9 @@ export default function CardHistorialTickets() {
                       </p>
                     </div>
                   </div>
-                  <button onClick={saveAsPDF}>Guardar Ticket</button>
+                  <div className="mx-auto flex w-full justify-center ">
+                    <button onClick={saveAsPDF}>Guardar Ticket</button>
+                  </div>
                 </article>
               )}
             </div>

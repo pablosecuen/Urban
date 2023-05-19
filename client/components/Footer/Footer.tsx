@@ -5,7 +5,7 @@ import { HiPhone, HiDevicePhoneMobile, HiEnvelope } from "react-icons/hi2";
 
 export default function Footer() {
   return (
-    <footer className={"flex  flex-col justify-around gap-5 bg-verde px-5 py-10 tracking-wide"}>
+    <footer className="flex  flex-col justify-around gap-5 bg-verde px-5 py-10 tracking-wide">
       <div className="flex flex-col gap-10 md:flex-row md:justify-between ">
         <div className="mx-auto flex max-w-md flex-col gap-5 text-center">
           <h4 className="font-semibold uppercase">Nuestra misión</h4>
