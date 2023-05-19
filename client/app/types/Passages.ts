@@ -1,6 +1,8 @@
+import { Company } from "./Company";
+
 export interface Passage {
   companyId: string;
-  companyData: object;
+  companyData: Company;
   id: string;
   origin: string;
   destination: string;
