@@ -2,8 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { HiOutlineLocationMarker, HiTag, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
-// import { MdPets } from "react-icons/md";
+import { HiOutlineLocationMarker, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
 import getLocations from "../../services/api/locations";
@@ -18,13 +17,10 @@ export default function Reserva() {
   const router = useRouter();
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
 
-  // const locations = await getLocations();
-
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
 
   const [origin, setOrigin] = useState<string | null>();
   const [destination, setDestination] = useState<string | null>();
-  // const [price, setPrice] = useState<number | undefined>();
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
   const [locations, setLocations] = useState<Location[]>([]);
@@ -32,14 +28,14 @@ export default function Reserva() {
   const isFormValid = origin && destination ? true : false;
 
   // ------------ Handle Location Origin Selected -------------
-  const handleOriginChange = (e: SingleValue<Location> | null ) => {
+  const handleOriginChange = (e: SingleValue<Location> | null) => {
     const value = e?.value ?? null;
-    setOrigin(value); 
+    setOrigin(value);
   };
   // ---------- Handle Location Destination Selected ----------
   const handleDestinationChange = (e: SingleValue<Location> | null) => {
     const value = e?.value ?? null;
-    setDestination(value)
+    setDestination(value);
   };
   // ------------------- Handle Departure ----------------------
   const handleDepartureDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +55,6 @@ export default function Reserva() {
       destination: destination?.toLowerCase(),
       ...(departureDate && { departureDate: departureDate.split("-").reverse().join("-") }),
       ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
-      // ...(price && { price }),
       // armo la query y agrego las propiedades extras si las hay
     };
     const URL = Object.values(query).join("/");
@@ -84,32 +79,30 @@ export default function Reserva() {
   return (
     <>
       <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           <Select
             options={locations}
             placeholder="Origen..."
-            className="capitalize w-2/3"
+            className="w-2/3 capitalize"
             onChange={handleOriginChange}
             isClearable
             value={origin ? { value: origin, label: origin } : null}
           />
         </div>
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
-          {/* <div> */}
           <Select
             options={locations}
             placeholder="Destino..."
-            className="capitalize w-2/3"
+            className="w-2/3 capitalize"
             onChange={handleDestinationChange}
             isClearable
-            
             value={destination ? { value: destination, label: destination } : null}
           />
         </div>
 
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
           <HiTrendingUp className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -120,7 +113,7 @@ export default function Reserva() {
             onChange={handleDepartureDateChange}
           />
         </div>
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
           <HiTrendingDown className="w-10 text-blue" />
           <input
             className="w-2/3 pl-2"
@@ -143,7 +136,6 @@ export default function Reserva() {
         </button>
       </form>
 
-      {/* Tostadora */}
       <ToastComponent />
     </>
   );
