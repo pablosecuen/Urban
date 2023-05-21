@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import router from "./routers";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
+import { isHttpError } from "http-errors";
 import { swaggerSpec } from "./swaggerOptions";
 
 dotenv.config();
@@ -53,6 +54,17 @@ app.use((req, res, next) => {
 });
 
 app.use("/", router);
+
+app.use((error: unknown, _req, res, _next) => {
+  console.log(error);
+  let errorMessage = "Ocurrio un error";
+  let statusCode = 500;
+  if (isHttpError(error)) {
+    statusCode = error.status;
+    errorMessage = error.message;
+  }
+  res.status(statusCode).json({ error: errorMessage });
+});
 
 app.listen(PORT, () => {
   console.log(`server running in ${PORT}`);
