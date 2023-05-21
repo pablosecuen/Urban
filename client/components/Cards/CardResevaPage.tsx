@@ -7,11 +7,7 @@ import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
 import getLocations from "../../services/api/locations";
 import ToastComponent from "../00-Toastify/ToastComponent";
-
-interface Location {
-  label: string;
-  value: string;
-}
+import { Location } from "@component/app/types/Select";
 
 export default function Reserva() {
   const router = useRouter();

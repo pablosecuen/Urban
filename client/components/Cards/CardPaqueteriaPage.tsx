@@ -7,11 +7,8 @@ import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
 import getLocations from "../../services/api/locations";
 import ToastComponent from "../00-Toastify/ToastComponent";
+import { Location } from "@component/app/types/Select";
 
-interface Location {
-  label: string;
-  value: string;
-}
 
 export default function Reserva() {
   const router = useRouter();
@@ -21,7 +18,6 @@ export default function Reserva() {
 
   const [origin, setOrigin] = useState<string | null>();
   const [destination, setDestination] = useState<string | null>();
-  // const [price, setPrice] = useState<number | undefined>();
   const [departureDate, setDepartureDate] = useState<string>("");
   const [arrivalDate, setArrivalDate] = useState<string>("");
   const [locations, setLocations] = useState<Location[]>([]);
