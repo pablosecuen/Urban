@@ -1,25 +1,25 @@
-import { Request, Response, query } from "express";
+import { NextFunction, Request, Response, query } from "express";
 import { db } from "../../connection/connection";
 import jwt from "jsonwebtoken";
 import firebase from "firebase-admin";
+import createHttpError from "http-errors";
 
-export const searchUser = async (req: Request, res: Response): Promise<void> => {
+export const searchUser = async (req: Request, res: Response, next): Promise<void> => {
   try {
     const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
     if (!doc.exists) {
-      throw new Error("El usuario no existe");
+      throw createHttpError(404, "El usuario no existe");
     } else {
       const usuario = { id: doc.id, ...doc.data() };
       res.status(200).json(usuario);
     }
   } catch (error) {
-    console.error("Error al obtener el usuario", error);
-    res.status(400).json({ message: "Error al obtener el usuario" });
+    next(error);
   }
 };
 
-export const allUsers = async (req: Request, res: Response): Promise<void> => {
+export const allUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
@@ -57,8 +57,7 @@ export const allUsers = async (req: Request, res: Response): Promise<void> => {
 
     res.json({ users: usersData, totalPages });
   } catch (error) {
-    console.error("Error al obtener los usuarios", error);
-    res.status(400).json({ message: "Error al obtener los usuarios" });
+    next(error);
   }
 };
 
