@@ -40,7 +40,7 @@ export const newAndUpdatePassageValidate = (
       { field: "arrivalTime", validator: isArrivalTimeValid },
       { field: "companyId", validator: isCompanyIdValid },
       { field: "service", validator: isServiceValid },
-      { field: "numberSeat", validator: isValidNumberSeat },
+      //{ field: "numberSeat", validator: isValidNumberSeat },
     ];
 
     for (const validation of validations) {

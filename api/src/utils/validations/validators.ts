@@ -2,6 +2,7 @@ import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
 import createHttpError from "http-errors";
 import { Request, Response, NextFunction } from "express";
+import { arrayRemove } from "firebase/firestore";
 
 export const isNameValid = (req: Request, res: Response): void => {
   const name: string = req.body.lastName;
@@ -268,7 +269,7 @@ export const isDurationValid = (req: Request, res: Response): void => {
 
 export const isNumberSeatValid = (req: Request, res: Response): void => {
   const numberSeat = req.body.numberSeat;
-  if (typeof numberSeat !== "number") {
+  if (!Array.isArray(numberSeat)) {
     throw createHttpError(400, "El nÚmero de asientos no es válido");
   }
 };
