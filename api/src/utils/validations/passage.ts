@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   isArrivalDateValid,
+  isArrivalTimeValid,
   isCompanyIdValid,
   isDepartureDateValid,
   isDepartureTimeValid,
@@ -36,6 +37,7 @@ export const newAndUpdatePassageValidate = (
       { field: "duration", validator: isDurationValid },
       { field: "price", validator: isPriceValid },
       { field: "departureTime", validator: isDepartureTimeValid },
+      { field: "arrivalTime", validator: isArrivalTimeValid },
       { field: "companyId", validator: isCompanyIdValid },
       { field: "service", validator: isServiceValid },
       { field: "numberSeat", validator: (value: string[]) => isValidNumberSeat(value, data.stock) },
