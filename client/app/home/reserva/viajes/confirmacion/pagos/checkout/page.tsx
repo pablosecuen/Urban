@@ -60,6 +60,7 @@ export default function Checkout() {
 
     notifySuccess();
     //post con el endpoint del ticket usando requestData
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
