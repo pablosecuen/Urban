@@ -240,6 +240,11 @@ export const isDepartureTimeValid = (departureTime: string): string | null => {
   return "La hora de salida no es válida";
 };
 
+export const isArrivalTimeValid = (arrivalTime: string): string | null => {
+  if (typeof arrivalTime === "string") return null;
+  return "La hora de salida no es válida";
+};
+
 export const isArrivalDateValid = (req: Request, res: Response): void => {
   const arrivalDate = req.body.arrivalDate;
   if (typeof arrivalDate === "string") {
