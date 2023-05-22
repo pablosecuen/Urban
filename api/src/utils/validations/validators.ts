@@ -338,9 +338,11 @@ export const isTravelStatusValid = (status: boolean): string | null => {
   return "El estado no es válido";
 };
 
-export const isChauffeurIdValid = (chauffeurId: string): string | null => {
-  if (typeof chauffeurId === "string") return null;
-  return "El id del chofer no es válido";
+export const isChauffeurIdValid = (req: Request, res: Response): void => {
+  const chauffeurId = req.body.chauffeurId;
+  if (typeof chauffeurId !== "string") {
+    throw createHttpError(400, "El id del chofer no es válido");
+  }
 };
 
 export const isDealerIdValid = (chauffeurId: string): string | null => {
