@@ -395,15 +395,15 @@ export const isTypeVehicleValidByDealer = (value: string): string | null => {
   return "El tipo de vehiculo no es válido";
 };
 
-export const isServiceValid = (service: string): string | null => {
+export const isServiceValid = (req: Request, res: Response): void => {
+  const service = req.body.service;
   if (typeof service !== "string") {
-    return "El tipo de servicio no es válido";
+    throw createHttpError(400, "El servicio no es válido");
   }
   const validServices = ["semi cama", "cama", "cama ejecutivo"];
   if (!validServices.includes(service.toLowerCase())) {
-    return "El tipo de servicio no es válido";
+    throw createHttpError(400, "El servicio no es válido");
   }
-  return null;
 };
 
 export const isValidNumberSeat = (numberSeat: string[], stock: number): string | null => {
