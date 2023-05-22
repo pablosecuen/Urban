@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { db } from "../../connection/connection";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
@@ -8,16 +8,17 @@ import { DeliveryRating } from "../../schema/deliveryRating";
 import { Delivery } from "../../schema/delivery";
 import { successRegister } from "../../utils/middelware/sendMail";
 import { CompanyRating } from "../../schema/companyRating";
+import createHttpError from "http-errors";
 
 /**
  * Controlador para crear un usuario en Firestore.
  */
-export const newUser = async (req: Request, res: Response): Promise<void> => {
+export const newUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const data: UserToRegister = req.body;
     const existingUser = await db.collection("users").where("email", "==", data.email).get();
     if (!existingUser.empty) {
-      throw new Error("El correo electrónico ya está registrado");
+      throw createHttpError(400, "El correo electrónico ya está registrado");
     }
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user: User = {
@@ -68,15 +69,18 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
 
     res.status(200).json({ id: docRef.id, user: userData });
   } catch (error) {
-    console.error("Error al crear el usuario", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
 /**
  * Controlador para actulizar un usuario en Firestore.
  */
-export const updateUser = async (req: Request, res: Response): Promise<void> => {
+export const updateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const id: string = req.params.id; // Obtener ID del usuario a actualizar
     const data: UserToUpdate = req.body; // Obtener datos actualizados del usuario
@@ -85,7 +89,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     // Verificar si el usuario existe en Firestore
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("No se encontró el usuario");
+      throw createHttpError(400, "No se encontró el usuario");
     }
 
     // Agregar la propiedad "displayPhone" si se proporciona "areaCode" y "number"
@@ -101,45 +105,54 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
 
     res.status(200).json({ message: "Usuario actualizado correctamente" });
   } catch (error) {
-    console.error("Error al actualizar el usuario", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 /**
  * Controlador para hacer un borrado logico de un usuario en Firestore.
  */
-export const enableUser = async (req: Request, res: Response): Promise<void> => {
+export const enableUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El usuario no se encontró");
+      throw createHttpError(404, "El usuario no se encontró");
     }
     await db.collection("users").doc(id).update({ deleted: false });
 
     res.status(200).json({ message: "Usuario habilitado correctamente" });
   } catch (error) {
-    console.error("Error al habilitar el usuario", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const deletedUser = async (req: Request, res: Response): Promise<void> => {
+export const deletedUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("users").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("No se encontró el usuario");
+      throw createHttpError(404, "No se encontró el usuario");
     }
     await db.collection("users").doc(id).update({ deleted: true });
     res.status(200).json({ menssage: "Usuario eliminado correctamente" });
   } catch (error) {
-    console.error("Error al borrar el Usuario", error);
-    res.status(400).json({ messege: error.message });
+    next(error);
   }
 };
 
-export const newDeliveryRating = async (req: Request, res: Response): Promise<void> => {
+export const newDeliveryRating = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const { userId, deliveryId } = req.params;
   const data = req.body;
 
@@ -150,11 +163,11 @@ export const newDeliveryRating = async (req: Request, res: Response): Promise<vo
     ]);
 
     if (!userDoc.exists) {
-      throw new Error("User not found");
+      throw createHttpError(404, "Usuario no encontrado");
     }
 
     if (!deliveryDoc.exists) {
-      throw new Error("Delivery not found");
+      throw createHttpError(404, "Repartidor no encontrado");
     }
 
     const deliveryData = deliveryDoc.data() as Delivery;
@@ -208,12 +221,15 @@ export const newDeliveryRating = async (req: Request, res: Response): Promise<vo
 
     res.status(200).json({ id: ratingRef.id });
   } catch (error) {
-    console.error("Error creating delivery rating", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const newChauffeurRating = async (req: Request, res: Response): Promise<void> => {
+export const newChauffeurRating = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { userId, chauffeurId } = req.params;
     const data = req.body;
@@ -230,8 +246,12 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
       db.collection("chauffeur").doc(chauffeurId).get(),
     ]);
 
-    if (!userDoc.exists) throw new Error("El usuario no existe");
-    if (!chauffeurDoc.exists) throw new Error("El distribuidor no existe");
+    if (!userDoc.exists) {
+      throw createHttpError(404, "El usuario no fue encontrado");
+    }
+    if (!chauffeurDoc.exists) {
+      throw createHttpError(404, "El distribuidor no existe");
+    }
 
     const docRef = await db.collection("chauffeurRating").add(dataFormatted);
 
@@ -269,12 +289,15 @@ export const newChauffeurRating = async (req: Request, res: Response): Promise<v
 
     res.status(200).json({ id: docRef.id });
   } catch (error) {
-    console.error("Error al generar rating", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const newCompanyRating = async (req: Request, res: Response): Promise<void> => {
+export const newCompanyRating = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { ticketId, companyId } = req.params;
     const data = req.body;
@@ -284,10 +307,10 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
       db.collection("companies").doc(companyId).get(),
     ]);
 
-    if (!ticketDoc.exists) throw new Error("El ticket no existe");
+    if (!ticketDoc.exists) throw createHttpError(404, "El ticket no existe");
     if (ticketDoc.data().reviewSent === true)
       throw new Error("No se puede enviar mas de una review por ticket");
-    if (!companiesDoc.exists) throw new Error("La compañia no existe");
+    if (!companiesDoc.exists) throw createHttpError(404, "La compañia no existe");
 
     const dataFormatted: CompanyRating = {
       userId: ticketDoc.data().userId,
@@ -339,12 +362,11 @@ export const newCompanyRating = async (req: Request, res: Response): Promise<voi
 
     res.status(200).json({ id: docRef.id });
   } catch (error) {
-    console.error("Error al generar rating", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const forgotPassword = async (req: Request, res: Response) => {
+export const forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
 
   try {
@@ -353,7 +375,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     if (user.empty) {
       // El correo electrónico no está registrado
-      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+      throw createHttpError(404, "El correo electrónico no está registrado");
     }
 
     // Generar un token de restablecimiento de contraseña válido por 1 hora
@@ -366,14 +388,11 @@ export const forgotPassword = async (req: Request, res: Response) => {
       .status(200)
       .json({ message: "Se ha enviado un enlace para restablecer la contraseña" });
   } catch (error) {
-    console.error("Error al solicitar restablecer la contraseña:", error);
-    res
-      .status(500)
-      .json({ message: "Ha ocurrido un error al solicitar restablecer la contraseña" });
+    next(error);
   }
 };
 
-export const resetPassword = async (req: Request, res: Response) => {
+export const resetPassword = async (req: Request, res: Response, next: NextFunction) => {
   const { token, newPassword } = req.body;
 
   try {
@@ -389,7 +408,7 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     if (user.empty) {
       // El correo electrónico no está registrado
-      return res.status(404).json({ message: "El correo electrónico no está registrado" });
+      throw createHttpError(404, "El correion electronico no esta registrado");
     }
 
     // Actualizar la contraseña del usuario en la base de datos
@@ -399,7 +418,6 @@ export const resetPassword = async (req: Request, res: Response) => {
     // Respuesta exitosa
     return res.status(200).json({ message: "Contraseña restablecida exitosamente" });
   } catch (error) {
-    console.error("Error al restablecer la contraseña:", error);
-    res.status(500).json({ message: "Error al restablecer la contraseña" });
+    next(error);
   }
 };

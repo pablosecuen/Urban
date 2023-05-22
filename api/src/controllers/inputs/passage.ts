@@ -1,8 +1,13 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { db, storage } from "../../connection/connection";
 import { PassageToRegister, PassageToUpdate } from "../../schema/passage";
+import createHttpError from "http-errors";
 
-export const newPassage = async (req: Request, res: Response): Promise<void> => {
+export const newPassage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const dataString: string = req.body.data; // Obtener la cadena JSON de la solicitud
     const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con Insomnia
@@ -19,8 +24,7 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
     // Verificar si el companyId existe en la colección "companies"
     const companySnapshot = await db.collection("companies").doc(companyId).get();
     if (!companySnapshot.exists) {
-      res.status(404).json({ message: "La compañía no existe" });
-      return;
+      throw createHttpError(404, "La compañia no existe");
     }
 
     // Upload the image to Firebase Storage
@@ -56,12 +60,15 @@ export const newPassage = async (req: Request, res: Response): Promise<void> => 
     });
     blobStream.end(file.buffer);
   } catch (error) {
-    console.error("Error al crear el pasaje", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const updatePassage = async (req: Request, res: Response): Promise<void> => {
+export const updatePassage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id = req.params.id;
   const data = req.body;
   const updatedAt = new Date().toISOString();
@@ -69,7 +76,7 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
   try {
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El pasaje no existe");
+      throw createHttpError(404, "El pasaje no existe");
     }
     await db
       .collection("passages")
@@ -77,45 +84,49 @@ export const updatePassage = async (req: Request, res: Response): Promise<void> 
       .update({ ...data, updatedAt });
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
   } catch (error) {
-    console.error("Error al actualizar el pasaje", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const deletePassage = async (req: Request, res: Response): Promise<void> => {
+export const deletePassage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id: string = req.params.id;
 
   try {
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("El pasaje no se encontró");
+      throw createHttpError(404, "El pasaje no se encontró");
     }
 
     await db.collection("passages").doc(id).update({ deleted: true });
 
     res.status(200).json({ message: "Pasaje deshabilitado correctamente" });
   } catch (error) {
-    console.error("Error al deshabilitar el pasaje", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const enablePassage = async (req: Request, res: Response): Promise<void> => {
+export const enablePassage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id: string = req.params.id;
 
   try {
     const docRef = await db.collection("passages").doc(id).get();
 
     if (!docRef.exists) {
-      throw new Error("El pasaje no se encontró");
+      throw createHttpError(404, "El pasaje no se encontró");
     }
 
     await db.collection("passages").doc(id).update({ deleted: false });
 
     res.status(200).json({ message: "Pasaje habilitado correctamente" });
   } catch (error) {
-    console.error("Error al habilitar el Pasaje", error);
-
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };

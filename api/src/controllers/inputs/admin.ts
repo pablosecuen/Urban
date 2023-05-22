@@ -1,15 +1,16 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { db } from "../../connection/connection";
 import { AdminStatus } from "../../schema/adminStatus";
+import createHttpError from "http-errors";
 
 /**
  *  Controlador para adminStatus
  * @param changes[], array de estring con los valores a modificar, ["enableBusses", "enableCarPulling", "enableOrders"]
  * puede ser uno o 2 o todos
  */
-export const updateAdminStatus = async (req: Request, res: Response) => {
+export const updateAdminStatus = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const dataRef = await db.collection("adminStatus").doc("BECMkRXkiNt1QmsQjjZT");
+    const dataRef = db.collection("adminStatus").doc("BECMkRXkiNt1QmsQjjZT");
     const data = await dataRef.get();
     const changes: string[] = req.body.changes;
 
@@ -26,55 +27,51 @@ export const updateAdminStatus = async (req: Request, res: Response) => {
     res.status(200).json(doc.data());
   } catch (error) {
     try {
-      throw new Error(error.message);
+      throw createHttpError(404, error.message);
     } catch (innerError) {
-      console.error("Error al crear el adminStatus", innerError);
-      res.status(400).json({ message: innerError.message });
+      next(innerError);
     }
   }
 };
 
-export const updateStatusChauffeur = async (req: Request, res: Response) => {
+export const updateStatusChauffeur = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("chauffeur").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("No se encontrón el chofer");
+      throw createHttpError(404, "No se encontrón el chofer");
     }
     await db.collection("chauffeur").doc(id).update({ status: true });
     res.status(200).json({ message: "Chofer habilitado correctamente" });
   } catch (error) {
-    console.error("Error al activar el chofer el chofer", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const updateStatusDelivery = async (req: Request, res: Response) => {
+export const updateStatusDelivery = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("deliverys").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("No se encontrón el repartidor");
+      throw createHttpError(404, "No se encontrón el repartidor");
     }
     await db.collection("chauffeur").doc(id).update({ status: true });
     res.status(200).json({ message: "Repartidor habilitado correctamente" });
   } catch (error) {
-    console.error("Error al activar el repartidor el chofer", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
-export const updateStatusVehicle = async (req: Request, res: Response) => {
+export const updateStatusVehicle = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = req.params.id;
     const docRef = await db.collection("vehicle").doc(id).get();
     if (!docRef.exists) {
-      throw new Error("No se encontrón el vehiculo");
+      throw createHttpError(404, "No se encontrón el vehiculo");
     }
     await db.collection("chauffeur").doc(id).update({ status: true });
     res.status(200).json({ message: "Vehiculo habilitado correctamente" });
   } catch (error) {
-    console.error("Error al activar el Vehiculo", error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
