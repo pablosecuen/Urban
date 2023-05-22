@@ -1,45 +1,50 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
+import createHttpError from "http-errors";
+import { Request, Response, NextFunction } from "express";
 
-export const isNameValid = (name: string): string | null => {
+export const isNameValid = (req: Request, res: Response): void => {
+  const name: string = req.body.lastName;
   if (typeof name !== "string") {
-    return "El nombre debe ser una cadena de texto";
+    throw createHttpError(400, "El nombre debe ser una cadena de texto");
   }
   if (name.length > 50) {
-    return "El nombre no puede tener más de 50 caracteres";
+    throw createHttpError(400, "El nombre no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isFirstNameValid = (firstName: string): string | null => {
-  if (typeof firstName !== "string") {
-    return "El primer nombre debe ser una cadena de texto";
+export const isFirstNameValid = (req: Request, res: Response): void => {
+  const name: string = req.body.firstName;
+
+  if (typeof name !== "string") {
+    throw createHttpError(400, "El nombre debe ser una cadena de texto");
   }
-  if (firstName.length > 50) {
-    return "El primer nombre no puede tener más de 50 caracteres";
+  if (name.length > 50) {
+    throw createHttpError(400, "El nombre no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isPasswordValid = (password: string): string | null => {
+export const isPasswordValid = (req: Request, res: Response): void => {
+  const password: string = req.body.password;
+
   if (typeof password !== "string") {
-    return "La contraseña debe ser una cadena de texto";
+    throw createHttpError(400, "La contraseña debe ser una cadena de texto");
   }
   if (password.length > 50) {
-    return "La contraseña no puede tener más de 50 caracteres";
+    throw createHttpError(400, "La contraseña no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isEmailValid = (email: string): string | null => {
+export const isEmailValid = (req: Request, res: Response): void => {
+  const email: string = req.body.email;
+
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (typeof email !== "string") {
-    return "El correo electrónico debe ser una cadena de texto";
+    throw createHttpError(400, "El correo debe ser una cadena de texto");
   }
   if (!emailRegex.test(email)) {
-    return "El correo electrónico no es válido";
+    throw createHttpError(400, "El correo no es válido");
   }
-  return null; // Sin errores
 };
 
 export const isAddressValid = (address: Address): string | null => {
