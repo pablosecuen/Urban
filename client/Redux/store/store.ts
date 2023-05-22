@@ -8,6 +8,7 @@ import notificationsReducer from "../notifications/notificationsSlice";
 import vehicleReducer from "../vehicle/vehicleSlice";
 import ticketReducer from "../ticket/ticketSlice";
 import paymentReducer from "../payment/paymentSlice";
+import companySlice from "../company/companySlice";
 
 export function makeStore() {
   return configureStore({
@@ -21,6 +22,7 @@ export function makeStore() {
       vehicle: vehicleReducer,
       notifications: notificationsReducer,
       payment: paymentReducer,
+      companies: companySlice,
     },
   });
 }
