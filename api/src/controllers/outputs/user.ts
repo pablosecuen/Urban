@@ -4,7 +4,11 @@ import jwt from "jsonwebtoken";
 import firebase from "firebase-admin";
 import createHttpError from "http-errors";
 
-export const searchUser = async (req: Request, res: Response, next): Promise<void> => {
+export const searchUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const id: string = req.params.id;
     const doc = await db.collection("users").doc(id).get();
@@ -47,6 +51,10 @@ export const allUsers = async (req: Request, res: Response, next: NextFunction):
     //usersRef = usersRef.where("deleted", "==", deletedFilter);
 
     const totalUsersSnapshot = await usersRef.get();
+    if (totalUsersSnapshot.empty) {
+      throw createHttpError(404, "No hay usuarios registrados");
+    }
+
     const totalFilteredUsers = totalUsersSnapshot.size;
     const totalPages = Math.ceil(totalFilteredUsers / pageSize);
 
@@ -61,20 +69,23 @@ export const allUsers = async (req: Request, res: Response, next: NextFunction):
   }
 };
 
-export const decodingUser = async (req: Request, res: Response): Promise<void> => {
+export const decodingUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { authorization }: any = req.headers;
     const token = authorization.slice(7);
     const decoded: any = jwt.verify(token, "clavemegasecreta");
     const doc = await db.collection("users").doc(decoded.id).get();
     if (!doc.exists) {
-      throw new Error("Usuario no encontrado");
+      throw createHttpError(404, "Usuario no encontrado");
     } else {
       const usuario = { id: doc.id, ...doc.data() };
       res.json(usuario);
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
