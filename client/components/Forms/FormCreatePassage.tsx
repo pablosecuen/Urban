@@ -1,6 +1,45 @@
-import { useState } from "react";
+import { getAllCompanies } from "@component/Redux/company/companyActions";
+import { RootState } from "@component/Redux/store/store";
+import { AnyAction } from "@reduxjs/toolkit";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
 
 export default function FormCreatePassage() {
+  const times = [
+    "00:00 am",
+    "01:00 am",
+    "02:00 am",
+    "03:00 am",
+    "04:00 am",
+    "05:00 am",
+    "06:00 am",
+    "07:00 am",
+    "08:00 am",
+    "09:00 am",
+    "10:00 am",
+    "11:00 am",
+    "13:00 pm",
+    "14:00 pm",
+    "15:00 pm",
+    "16:00 pm",
+    "17:00 pm",
+    "18:00 pm",
+    "19:00 pm",
+    "20:00 pm",
+    "21:00 pm",
+    "22:00 pm",
+    "23:00 pm",
+  ];
+
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const companies = useSelector((state: RootState) => state.companies.allCompanies);
+
+  useEffect(() => {
+    dispatch(getAllCompanies());
+  }, []);
+
   const [newPassage, setNewPassage] = useState({
     stock: 0,
     price: 0,
@@ -43,7 +82,6 @@ export default function FormCreatePassage() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(newPassage);
     setNewPassage({
       stock: 0,
       price: 0,
@@ -124,58 +162,18 @@ export default function FormCreatePassage() {
           <section>
             <label htmlFor="">HORARIO DE SALIDA: </label>
             <select name="arrivalTime" value={newPassage.arrivalTime} onChange={handleChange}>
-              <option value="00:00 am">00:00 AM</option>
-              <option value="01:00 am">00:00 AM</option>
-              <option value="02:00 am">00:00 AM</option>
-              <option value="03:00 am">00:00 AM</option>
-              <option value="04:00 am">00:00 AM</option>
-              <option value="05:00 am">00:00 AM</option>
-              <option value="06:00 am">06:00 AM</option>
-              <option value="07:00 am">07:00 AM</option>
-              <option value="08:00 am">08:00 AM</option>
-              <option value="09:00 am">09:00 AM</option>
-              <option value="10:00 am">10:00 AM</option>
-              <option value="11:00 am">12:00 PM</option>
-              <option value="13:00 pm">13:00 PM</option>
-              <option value="14:00 pm">14:00 PM</option>
-              <option value="15:00 pm">15:00 PM</option>
-              <option value="16:00 pm">16:00 PM</option>
-              <option value="17:00 pm">17:00 PM</option>
-              <option value="18:00 pm">18:00 PM</option>
-              <option value="19:00 pm">19:00 PM</option>
-              <option value="20:00 pm">20:00 PM</option>
-              <option value="21:00 pm">21:00 PM</option>
-              <option value="22:00 pm">22:00 PM</option>
-              <option value="23:00 pm">23:00 PM</option>
+              {times?.map((i) => {
+                return <option value={i}>{i}</option>;
+              })}
             </select>
             <small>{""}</small>
           </section>
           <section>
             <label htmlFor="">HORARIO DE LLEGADA: </label>
             <select name="departureTime" value={newPassage.departureTime} onChange={handleChange}>
-              <option value="00:00 am">00:00 AM</option>
-              <option value="01:00 am">00:00 AM</option>
-              <option value="02:00 am">00:00 AM</option>
-              <option value="03:00 am">00:00 AM</option>
-              <option value="04:00 am">00:00 AM</option>
-              <option value="05:00 am">00:00 AM</option>
-              <option value="06:00 am">06:00 AM</option>
-              <option value="07:00 am">07:00 AM</option>
-              <option value="08:00 am">08:00 AM</option>
-              <option value="09:00 am">09:00 AM</option>
-              <option value="10:00 am">10:00 AM</option>
-              <option value="11:00 am">12:00 PM</option>
-              <option value="13:00 pm">13:00 PM</option>
-              <option value="14:00 pm">14:00 PM</option>
-              <option value="15:00 pm">15:00 PM</option>
-              <option value="16:00 pm">16:00 PM</option>
-              <option value="17:00 pm">17:00 PM</option>
-              <option value="18:00 pm">18:00 PM</option>
-              <option value="19:00 pm">19:00 PM</option>
-              <option value="20:00 pm">20:00 PM</option>
-              <option value="21:00 pm">21:00 PM</option>
-              <option value="22:00 pm">22:00 PM</option>
-              <option value="23:00 pm">23:00 PM</option>
+              {times?.map((i) => {
+                return <option value={i}>{i}</option>;
+              })}
             </select>
             <small>{""}</small>
           </section>
@@ -199,6 +197,17 @@ export default function FormCreatePassage() {
               <option value="semi-cama">Semi-cama</option>
               <option value="cama">Cama</option>
               <option value="cama-ejecutivo">Cama-ejecutivo</option>
+            </select>
+            <small>{""}</small>
+          </section>
+        </div>
+        <div className="flex justify-between">
+          <section>
+            <label htmlFor="">EMPRESA: </label>
+            <select name="companyId" value={newPassage.companyId} onChange={handleChange}>
+              {companies?.map((company) => {
+                return <option value={company.id}>{company.name}</option>;
+              })}
             </select>
             <small>{""}</small>
           </section>
