@@ -6,9 +6,9 @@ const router = Router();
 
 // Ruta para crear un nuevo usuario
 
-router.post("/", newTravelValidated, newTravel);
+router.post("/", newTravel);
 
-router.patch("/:id", updateTravelValidated, updateTravel);
+router.patch("/:id", updateTravel);
 router.patch("/reject/:id", cancelTravel);
 
 export default router;
