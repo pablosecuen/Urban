@@ -1,93 +1,107 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
+import createHttpError from "http-errors";
+import { Request, Response, NextFunction } from "express";
 
-export const isNameValid = (name: string): string | null => {
+export const isNameValid = (req: Request, res: Response): void => {
+  const name: string = req.body.lastName;
   if (typeof name !== "string") {
-    return "El nombre debe ser una cadena de texto";
+    throw createHttpError(400, "El nombre debe ser una cadena de texto");
   }
   if (name.length > 50) {
-    return "El nombre no puede tener más de 50 caracteres";
+    throw createHttpError(400, "El nombre no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isFirstNameValid = (firstName: string): string | null => {
-  if (typeof firstName !== "string") {
-    return "El primer nombre debe ser una cadena de texto";
+export const isFirstNameValid = (req: Request, res: Response): void => {
+  const name: string = req.body.firstName;
+
+  if (typeof name !== "string") {
+    throw createHttpError(400, "El nombre debe ser una cadena de texto");
   }
-  if (firstName.length > 50) {
-    return "El primer nombre no puede tener más de 50 caracteres";
+  if (name.length > 50) {
+    throw createHttpError(400, "El nombre no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isPasswordValid = (password: string): string | null => {
+export const isPasswordValid = (req: Request, res: Response): void => {
+  const password: string = req.body.password;
+
   if (typeof password !== "string") {
-    return "La contraseña debe ser una cadena de texto";
+    throw createHttpError(400, "La contraseña debe ser una cadena de texto");
   }
   if (password.length > 50) {
-    return "La contraseña no puede tener más de 50 caracteres";
+    throw createHttpError(400, "La contraseña no puede tener más de 50 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isEmailValid = (email: string): string | null => {
+export const isEmailValid = (req: Request, res: Response): void => {
+  const email: string = req.body.email;
+
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (typeof email !== "string") {
-    return "El correo electrónico debe ser una cadena de texto";
+    throw createHttpError(400, "El correo debe ser una cadena de texto");
   }
   if (!emailRegex.test(email)) {
-    return "El correo electrónico no es válido";
+    throw createHttpError(400, "El correo no es válido");
   }
-  return null; // Sin errores
 };
 
-export const isAddressValid = (address: Address): string | null => {
+export const isAddressValid = (req: Request, res: Response): void => {
+  const address: Address = req.body.address;
+
   const allowProperties = ["postalCode", "location", "state", "street", "number", "department"];
   if (
     typeof address === "object" &&
     Object.keys(address).every((key) => allowProperties.includes(key)) &&
     Object.values(address).every((value) => typeof value === "string")
   ) {
-    return null; // Sin errores
+    return; // Sin errores
   }
-  return "La dirección no es válida";
+  throw createHttpError(400, "La dirección no es válida");
 };
 
-export const isPhoneValid = (phone: Phone): string | null => {
-  const allowProperties = ["areaCode", "number", "displayPhone"];
+export const isPhoneValid = (req: Request, res: Response): void => {
+  const phone: Phone = req.body.phone;
+
+  const allowProperties = ["number", "areaCode"];
   if (
     typeof phone === "object" &&
     Object.keys(phone).every((key) => allowProperties.includes(key)) &&
     Object.values(phone).every((value) => typeof value === "string")
   ) {
-    return null; // Sin errores
+    return; // Sin errores
   }
-  return "El teléfono no es válido";
+  throw createHttpError(400, "El teléfono no es válido");
 };
 
-export const isCcValid = (cc: string): string | null => {
+export const isCcValid = (req: Request, res: Response): void => {
+  const cc: string = req.body.cc;
+
   if (typeof cc !== "string") {
-    return "El cc debe ser una cadena de texto";
+    throw createHttpError(400, "El cc debe ser una cadena de texto");
   }
   if (cc.length > 8) {
-    return "El cc no puede tener más de 50 caracteres";
+    throw createHttpError(400, "El cc no puede tener más de 8 caracteres");
   }
-  return null; // Sin errores
 };
 
-export const isCeValid = (ce: string): string | null => {
-  if (typeof ce === "string" && ce.length === 8) {
-    return null; // Sin errores
+export const isCeValid = (req: Request, res: Response): void => {
+  const ce: string = req.body.ce;
+
+  if (typeof ce !== "string") {
+    throw createHttpError(400, "El ce debe ser una cadena de texto");
   }
-  return "El número de CE no es válido";
+  if (ce.length > 8) {
+    throw createHttpError(400, "El ce no puede tener más de 8 caracteres");
+  }
 };
 
-export const isGenderValid = (gender: string): string | null => {
+export const isGenderValid = (req: Request, res: Response): void => {
+  const gender: string = req.body.gender;
   if (gender !== "male" && gender !== "female") {
-    return "El género debe ser 'male' o 'female'";
+    throw createHttpError(400, "El género debe ser 'male' o 'female'");
   }
-  return null; // Sin errores
 };
 
 export const isDisplayNameValid = (displayName: string): string | null => {
