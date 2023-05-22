@@ -258,10 +258,14 @@ export const isPriceValid = (price: number): string | null => {
   return "El precio no es válido";
 };
 
-export const isDestinationValid = (destination: string): string | null => {
-  if (typeof destination === "string" && destination.length >= 5 && destination.length <= 50)
-    return null;
-  return "La destino no es válido";
+export const isDestinationValid = (req: Request, res: Response): void => {
+  const destination = req.body.destination;
+  if (typeof destination === "string") {
+    throw createHttpError(400, "La destino no es válido");
+  }
+  if (destination.length >= 5 && destination.length <= 50) {
+    throw createHttpError(400, "La destino no es válido");
+  }
 };
 
 export const isDescriptionValid = (description: string): string | null => {
