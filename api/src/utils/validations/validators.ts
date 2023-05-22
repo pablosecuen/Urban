@@ -258,9 +258,10 @@ export const isNumberSeatValid = (numberSeat: number): string | null => {
   return "El nÚmero de asientos no es válido";
 };
 
-export const isPriceValid = (price: number): string | null => {
-  if (typeof price === "number") return null;
-  return "El precio no es válido";
+export const isPriceValid = (req: Request, res: Response): void => {
+  const price = req.body.price;
+  if (typeof price === "number") return;
+  throw createHttpError(400, "El precio no es válido");
 };
 
 export const isDestinationValid = (req: Request, res: Response): void => {
