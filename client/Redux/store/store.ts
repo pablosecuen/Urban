@@ -8,7 +8,7 @@ import notificationsReducer from "../notifications/notificationsSlice";
 import vehicleReducer from "../vehicle/vehicleSlice";
 import ticketReducer from "../ticket/ticketSlice";
 import paymentReducer from "../payment/paymentSlice";
-
+import companyReducer from "../company/companySlice";
 import seatsReducer from "../seats/seatsSlice";
 
 
@@ -24,7 +24,7 @@ export function makeStore() {
       vehicle: vehicleReducer,
       notifications: notificationsReducer,
       payment: paymentReducer,
-
+      company: companyReducer,
       seats: seatsReducer,
 
 
