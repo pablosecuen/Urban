@@ -18,7 +18,7 @@ import contract from "./icons/contract.png";
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-//  NavBar
+//  NavBar para renderizar elementos
 export const links = [
   {
     label: "home",
@@ -46,7 +46,7 @@ export const links = [
   },
 ];
 
-//  NavBar Mobile
+//  NavBar Mobile array para renderizar elementos
 export const linksMobile = [
   {
     label: "Home",
@@ -123,6 +123,7 @@ export const iconsData = [
   },
 ];
 
+//pestañas de historial de perfil
 export const pestañasHistorialPerfil = [
   {
     name: "Viajes",
@@ -142,6 +143,7 @@ export const pestañasHistorialPerfil = [
   },
 ];
 
+//array para mostrar el contenido de cada pestaña de historial de perfil
 export const contenidoHistorialPerfil = [
   {
     name: "Viajes",
@@ -173,9 +175,31 @@ export const contenidoHistorialPerfil = [
   },
 ];
 
+//array para lista en dashboard, son metricas que mas adelante deberan ser dinamicas obtenidas desde google analitycs
 export const pageData = [
   { name: "/especiales", visits: "0", uniqueUsers: "0", bounceRate: "50", id: "1" },
   { name: "/gestion", visits: "0", uniqueUsers: "0", bounceRate: "-13", id: "2" },
   { name: "/paqueteria", visits: "0", uniqueUsers: "0", bounceRate: "22", id: "3" },
   { name: "/reserva", visits: "0", uniqueUsers: "0", bounceRate: "-35", id: "4" },
 ];
+
+//esta funcion nos arma los array para generar los asientos del bus
+const generarArraysPlantasBus = () => {
+  const plantaBaja = [];
+  const plantaAlta = [];
+
+  // Generar array plantaBaja
+  for (let i = 1; i <= 40; i++) {
+    plantaBaja.push(`b${i}`);
+  }
+
+  // Generar array plantaAlta
+  for (let i = 1; i <= 40; i++) {
+    plantaAlta.push(`a${i}`);
+  }
+
+  return [plantaBaja, plantaAlta];
+};
+
+export const plantaBaja = generarArraysPlantasBus()[0];
+export const plantaAlta = generarArraysPlantasBus()[1];
