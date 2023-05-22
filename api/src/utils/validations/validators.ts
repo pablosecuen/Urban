@@ -1,5 +1,5 @@
 import { VehicleForChauffeur } from "../../schema/chauffeur";
-import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
+import { Address, Passenger, Payment, Phone, TypeVehicle } from "../../types/types";
 import createHttpError from "http-errors";
 import { Request, Response, NextFunction } from "express";
 import { arrayRemove } from "firebase/firestore";
@@ -110,19 +110,26 @@ export const isDisplayNameValid = (displayName: string): string | null => {
   return "El nombre de usuario no es válido";
 };
 
-export const isNationalityValid = (nationality: string): string | null => {
-  if (typeof nationality === "string" && nationality.length <= 50) return null;
-  return "La nacionalidad no es válida";
+export const isNationalityValid = (req: Request, res: Response): void => {
+  const nationality: string = req.body.nationality;
+
+  if (typeof nationality !== "string") {
+    throw createHttpError(400, "La nacionalidad debe ser una cadena de texto");
+  }
+  if (nationality.length > 50) {
+    throw createHttpError(400, "La nacionalidad no puede tener más de 50 caracteres");
+  }
 };
 
-export const isGenderVality = (gender: string): Boolean => {
-  if (typeof gender === "string" && gender.length <= 40) return true;
-  return false;
-};
+export const isBirthdayValid = (req: Request, res: Response): void => {
+  const birthday: Date = req.body.birthday;
 
-export const isBirthdayValid = (birthday: string): string | null => {
-  if (typeof birthday === "string" && birthday.length <= 50) return null;
-  return "La fecha de nacimiento no es válida";
+  if (typeof birthday !== "object") {
+    throw createHttpError(400, "La fecha de nacimiento debe ser una fecha");
+  }
+  if (birthday.getFullYear() < 1900) {
+    throw createHttpError(400, "La fecha de nacimiento no puede ser anterior a 1900");
+  }
 };
 
 export const isPassportValid = (passport: string): string | null => {
@@ -173,9 +180,11 @@ export const arePaymentsValid = (payments: Payment): string | null => {
   return "Los pagos no son válidos";
 };
 
-export const isUserIdValid = (userId: string): string | null => {
-  if (typeof userId === "string") return null;
-  return "El id del usuario no es válido";
+export const isUserIdValid = (req: Request, res: Response): void => {
+  const userId = req.body.userId;
+  if (typeof userId !== "string") {
+    throw createHttpError(400, "El id del usuario no es válido");
+  }
 };
 
 export const isDistributorIdValid = (dealerId: string): string | null => {
@@ -210,9 +219,11 @@ export const isLocalIdValid = (localId: string): string | null => {
   return "El id del local no es válido";
 };
 
-export const isPassageIdValid = (passageId: string): string | null => {
-  if (typeof passageId === "string") return null;
-  return "El id del pasaje no es válido";
+export const isPassageIdValid = (req: Request, res: Response): void => {
+  const passageId = req.body.passageId;
+  if (typeof passageId !== "string") {
+    throw createHttpError(400, "El id del pasaje no es válido");
+  }
 };
 
 export const areVehiclesIdValid = (vehiclesId: string[]): string | null => {
@@ -432,4 +443,36 @@ export const isValidNumberSeat = (numberSeat: string[], stock: number): string |
   }
 
   return null; // El número de asientos es válido
+};
+
+export const isQuantityValid = (req: Request, res: Response): void => {
+  const quantity = req.body.quantity;
+  if (typeof quantity !== "number") {
+    throw createHttpError(400, "La cantidad no es válida");
+  }
+};
+
+export const isPassengersDataValid = (req: Request, res: Response): void => {
+  const passengersData: Passenger[] = req.body.passengersData;
+
+  for (const passenger of passengersData) {
+    const { cc, ce } = passenger;
+
+    isFirstNameValid(req, res);
+    isNameValid(req, res);
+    isNationalityValid(req, res);
+
+    if (cc) {
+      isCcValid(req, res);
+    }
+
+    if (ce) {
+      isCeValid(req, res);
+    }
+
+    isEmailValid(req, res);
+    isGenderValid(req, res);
+    isBirthdayValid(req, res);
+    isPhoneValid(req, res);
+  }
 };
