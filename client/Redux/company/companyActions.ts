@@ -7,6 +7,6 @@ export const getAllCompanies = createAsyncThunk<Company[], void>(
   "companies/getAllCompanies",
   async () => {
     const response = await axios.get(`http://localhost:3000/company`);
-    return response.data.buses;
+    return response.data.companies;
   }
 );
