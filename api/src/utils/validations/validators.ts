@@ -247,9 +247,10 @@ export const isArrivalDateValid = (req: Request, res: Response): void => {
   }
 };
 
-export const isDurationValid = (duration: string): string | null => {
-  if (typeof duration === "string") return null;
-  return "La duración no es válida";
+export const isDurationValid = (req: Request, res: Response): void => {
+  const duration = req.body.duration;
+  if (typeof duration === "string") return;
+  throw createHttpError(400, "La duración no es válida");
 };
 
 export const isNumberSeatValid = (numberSeat: number): string | null => {
