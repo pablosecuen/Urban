@@ -72,7 +72,9 @@ export default function Pagos() {
   return (
     <>
       <span className="text-2xl">Valor a pagar: ${totalPrice}</span>
-      <button onClick={handleClickMP}>Mercado Pago</button>
+      <button onClick={handleClickMP} className="w-48">
+        Mercado Pago
+      </button>
     </>
   );
 }
