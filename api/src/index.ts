@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import router from "./routers";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
-import { isHttpError } from "http-errors";
+import createError, { HttpError } from "http-errors";
 import { swaggerSpec } from "./swaggerOptions";
 
 dotenv.config();
@@ -56,14 +56,25 @@ app.use((req, res, next) => {
 app.use("/", router);
 
 app.use((error: unknown, _req, res, _next) => {
-  console.log(error);
-  let errorMessage = "Ocurrio un error";
-  let statusCode = 500;
-  if (isHttpError(error)) {
-    statusCode = error.status;
-    errorMessage = error.message;
+  console.error(error);
+  if (error instanceof HttpError) {
+    const statusCode = error.statusCode || 500;
+    const errorMessage = error.message || "Ocurrió un error";
+    const errorResponse = {
+      error: {
+        code: statusCode,
+        message: errorMessage,
+      },
+    };
+    return res.status(statusCode).json(errorResponse);
   }
-  res.status(statusCode).json({ error: errorMessage });
+  const errorResponse = {
+    error: {
+      code: 500,
+      message: "Ocurrió un error",
+    },
+  };
+  return res.status(500).json(errorResponse);
 });
 
 app.listen(PORT, () => {
