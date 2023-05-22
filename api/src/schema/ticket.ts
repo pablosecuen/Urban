@@ -1,4 +1,4 @@
-import { TicketStatus } from "../types/types";
+import { Passenger, TicketStatus } from "../types/types";
 
 export interface TicketToRegister {
   userId: string;
@@ -9,7 +9,7 @@ export interface TicketToRegister {
   paymentId: number;
   merchantOrden: number;
   statusMp: string;
-  passengersData: [{}];
+  passengersData: Passenger[];
 }
 
 export interface Ticket extends TicketToRegister {
@@ -17,7 +17,7 @@ export interface Ticket extends TicketToRegister {
   reviewSent: Boolean;
   createdAt: string;
   updatedAt: string;
-  passengersData: [{}];
+  passengersData: Passenger[];
 }
 
 export interface TicketToUpdate {

@@ -34,3 +34,15 @@ export type Evaluation = {
   rating: number;
   comment: string;
 };
+
+export type Passenger = {
+  firstName: string;
+  lastName: string;
+  nationality: string;
+  cc?: string;
+  ce?: string;
+  email: string;
+  gender: string;
+  birthDate: string;
+  phone: Phone;
+};
