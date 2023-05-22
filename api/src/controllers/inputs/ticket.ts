@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Ticket, TicketToRegister } from "../../schema/ticket";
 import { db } from "../../connection/connection";
 import firebase from "firebase-admin";
 import { successTicket } from "../../utils/middelware/sendMail";
+import createHttpError from "http-errors";
 
-export const newTicket = async (req: Request, res: Response): Promise<void> => {
+export const newTicket = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const data: TicketToRegister = req.body;
 
@@ -14,11 +15,11 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     ]);
 
     if (!userDoc.exists) {
-      throw new Error("El usuario no existe");
+      throw createHttpError(404, "El usuario no existe");
     }
 
     if (!passageDoc.exists) {
-      throw new Error("El pasaje no existe");
+      throw createHttpError(404, "El pasaje no existe");
     }
 
     const passageData = passageDoc.data();
@@ -26,7 +27,7 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
     const currentStock = passageData.stock;
 
     if (currentStock < data.quantity) {
-      throw new Error("No hay suficiente stock disponible");
+      throw createHttpError(404, "No hay suficiente stock disponible");
     }
 
     const dataFormatted: Ticket = {
@@ -66,41 +67,42 @@ export const newTicket = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({ id: docRef.id });
   } catch (error) {
-    console.error("Error al generar ticket", error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
-export const acceptTicket = async (req: Request, res: Response): Promise<void> => {
+export const acceptTicket = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { id } = req.params;
     const updatedAt = new Date().toISOString();
-
     const ticketRef = db.collection("tickets").doc(id);
     const ticketDoc = await ticketRef.get();
-
     if (!ticketDoc.exists) {
-      throw new Error("El ticket no existe");
+      throw createHttpError(404, "El ticket no existe");
     }
-
     await ticketRef.update({ status: "acepted", updatedAt });
-
     res.status(201).json({ message: "Ticket actualizado" });
   } catch (error) {
-    console.error("Error al modificar ticket", error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
-export const cancelTicket = async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
-  const updatedAt = new Date().toISOString();
-
+export const cancelTicket = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
+    const { id } = req.params;
+    const updatedAt = new Date().toISOString();
     const ticketDoc = await db.collection("tickets").doc(id).get();
 
     if (!ticketDoc.exists) {
-      throw new Error("El ticket no existe");
+      throw createHttpError(404, "El ticket no existe");
     }
 
     await db.collection("tickets").doc(id).update({
@@ -110,7 +112,6 @@ export const cancelTicket = async (req: Request, res: Response): Promise<void> =
 
     res.status(201).json({ message: "Ticket cancelado" });
   } catch (error) {
-    console.error("Error al cancelar ticket", error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };

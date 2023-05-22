@@ -1,22 +1,12 @@
 "use client";
-import { Passage } from "@component/app/types/Passages";
 import { RootState } from "@component/Redux/store/store";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import { ToPay } from "@component/app/types/MercadoPago"
 export default function Pagos() {
   const user = JSON.parse(localStorage.getItem("user") || "");
   const passages = useSelector((state: RootState) => state.payment.passageById);
 
-  interface ToPay {
-    passageId: string; // Update the type to a string or the appropriate type for passageId
-    id: any;
-    name: string | Passage;
-    img: string | Passage | null;
-    unit_price: number | Passage | null;
-    quantity: number | Passage;
-    description: number | Passage | null;
-  }
 
   const token: string = `${user.id}`;
 

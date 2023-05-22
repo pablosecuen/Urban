@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { db } from "../../connection/connection";
 import { Passage } from "../../schema/passage";
-import firebase from "firebase-admin";
+import createHttpError from "http-errors";
 
 /**
  * Funcion que traer los pasajes con opciones de filtrado por query
@@ -12,7 +12,11 @@ import firebase from "firebase-admin";
  *  @query departureDate: fecha de partida del pasaje
  * @query arrivalDate: fecha de llegada del pasaje
  *  */
-export const getAllPassages = async (req: Request, res: Response): Promise<void> => {
+export const getAllPassages = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { page = 1, pageSize = 5, ...filters } = req.query;
 
@@ -29,6 +33,11 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
     passagesRef = passagesRef.where("deleted", "==", false);
 
     const totalPassagesSnapshot = await passagesRef.get();
+
+    if (totalPassagesSnapshot.empty) {
+      throw createHttpError(404, "No se encontraron pasajes");
+    }
+
     const totalFilteredPassages = totalPassagesSnapshot.size;
     const totalPages = Math.ceil(totalFilteredPassages / Number(pageSize));
 
@@ -47,19 +56,22 @@ export const getAllPassages = async (req: Request, res: Response): Promise<void>
 
     res.json({ passages: passagesData, totalPages });
   } catch (error) {
-    console.error("Error al obtener los pasajes", error);
-    res.status(400).json({ message: "Error al obtener los pasajes" });
+    next(error);
   }
 };
 
-export const getPassageById = async (req: Request, res: Response): Promise<void> => {
+export const getPassageById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id: string = req.params.id;
 
   try {
     const passageDoc = await db.collection("passages").doc(id).get();
 
     if (!passageDoc.exists) {
-      throw new Error("Pasaje no encontrado");
+      throw createHttpError(404, "Pasaje no encontrado");
     }
 
     const passage = { id: passageDoc.id, ...passageDoc.data() };
@@ -69,7 +81,7 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
     const companyDoc = await db.collection("companies").doc(passageSnapshot.companyId).get();
 
     if (!companyDoc.exists) {
-      throw new Error("Compañía no encontrada");
+      throw createHttpError(404, "Compañía no encontrada");
     }
 
     const companyData = companyDoc.data();
@@ -78,12 +90,15 @@ export const getPassageById = async (req: Request, res: Response): Promise<void>
 
     res.json(passageWithCompanyData);
   } catch (error) {
-    console.error("Error al obtener el Pasaje", error);
-    res.status(400).json({ message: "Error al obtener el Pasaje" });
+    next(error);
   }
 };
 
-export const getLocations = async (req: Request, res: Response): Promise<void> => {
+export const getLocations = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const passagesRef = db.collection("passages");
     const passagesSnapshot = await passagesRef.get();
@@ -91,29 +106,28 @@ export const getLocations = async (req: Request, res: Response): Promise<void> =
 
     const destinationsSet = new Set<string>();
     const originsSet = new Set<string>();
-    
+
     passagesData.forEach((passage) => {
       const destination = passage.destination;
       const origin = passage.origin;
-    
+
       if (destination) {
         destinationsSet.add(destination);
       }
-    
+
       if (origin) {
         originsSet.add(origin);
       }
     });
-    
+
     const combinedSet = new Set<string>([...destinationsSet, ...originsSet]);
     const locations = Array.from(combinedSet);
-    
+
     if (locations.length === 0) {
-      throw new Error("No se encontraron resultados...");
+      throw createHttpError(404, "No se encontraron resultados...");
     }
     res.json({ locations: locations });
   } catch (error) {
-    console.error("No se encontraron resultados...", error);
-    res.status(400).json({ message: "No se encontraron resultados..." });
+    next(error);
   }
 };

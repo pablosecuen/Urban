@@ -6,6 +6,7 @@ import { getPassagesIdForPayment } from "./paymentActions";
 
 interface PassageState {
   payment: Passage[];
+  count: number;
   passageById: Passage[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
@@ -13,6 +14,7 @@ interface PassageState {
 
 const initialState: PassageState = {
     payment: [],
+    count: 0,
     passageById: [],
     status: "idle",
     error: null
