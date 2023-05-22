@@ -2,6 +2,7 @@ import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Payment, Phone, TypeVehicle } from "../../types/types";
 import createHttpError from "http-errors";
 import { Request, Response, NextFunction } from "express";
+import { arrayRemove } from "firebase/firestore";
 
 export const isNameValid = (req: Request, res: Response): void => {
   const name: string = req.body.lastName;
@@ -197,9 +198,11 @@ export const isProductIdValid = (productId: string): string | null => {
   return "El id del producto no es válido";
 };
 
-export const isCompanyIdValid = (companyId: string): string | null => {
-  if (typeof companyId === "string") return null;
-  return "El id de la compañía no es válido";
+export const isCompanyIdValid = (req: Request, res: Response): void => {
+  const companyId = req.body.companyId;
+  if (typeof companyId !== "string") {
+    throw createHttpError(400, "El id de la compañía no es válido");
+  }
 };
 
 export const isLocalIdValid = (localId: string): string | null => {
@@ -223,9 +226,11 @@ export const isDateValid = (date: string): string | null => {
   return "La fecha no es válida";
 };
 
-export const isDepartureDateValid = (departureTime: string): string | null => {
-  if (typeof departureTime === "string") return null;
-  return "La fecha de salida no es válida";
+export const isDepartureDateValid = (req: Request, res: Response): void => {
+  const departureDate = req.body.departureDate;
+  if (typeof departureDate !== "string") {
+    throw createHttpError(400, "La fecha de salida no es válida");
+  }
 };
 
 export const iCheckInValid = (checkIn: string): string | null => {
@@ -233,35 +238,57 @@ export const iCheckInValid = (checkIn: string): string | null => {
   return "El check in no es válido";
 };
 
-export const isDepartureTimeValid = (departureTime: string): string | null => {
-  if (typeof departureTime === "string") return null;
-  return "La hora de salida no es válida";
+export const isDepartureTimeValid = (req: Request, res: Response): void => {
+  const departureTime = req.body.departureTime;
+  if (typeof departureTime !== "string") {
+    throw createHttpError(400, "La hora de salida no es válida");
+  }
+  return;
 };
 
-export const isArrivalDateValid = (arrivalTime: string): string | null => {
-  if (typeof arrivalTime === "string") return null;
-  return "La fecha de llegada no es válida";
+export const isArrivalTimeValid = (req: Request, res: Response): void => {
+  const arrivalTime = req.body.arrivalTime;
+  if (typeof arrivalTime !== "string") {
+    throw createHttpError(400, "La hora de llegada no es válida");
+  }
 };
 
-export const isDurationValid = (duration: string): string | null => {
-  if (typeof duration === "string") return null;
-  return "La duración no es válida";
+export const isArrivalDateValid = (req: Request, res: Response): void => {
+  const arrivalDate = req.body.arrivalDate;
+  if (typeof arrivalDate !== "string") {
+    throw createHttpError(400, "La fecha de llegada no es válida");
+  }
 };
 
-export const isNumberSeatValid = (numberSeat: number): string | null => {
-  if (typeof numberSeat === "number") return null;
-  return "El nÚmero de asientos no es válido";
+export const isDurationValid = (req: Request, res: Response): void => {
+  const duration = req.body.duration;
+  if (typeof duration !== "string") {
+    throw createHttpError(400, "La duración no es válida");
+  }
 };
 
-export const isPriceValid = (price: number): string | null => {
-  if (typeof price === "number") return null;
-  return "El precio no es válido";
+export const isNumberSeatValid = (req: Request, res: Response): void => {
+  const numberSeat = req.body.numberSeat;
+  if (!Array.isArray(numberSeat)) {
+    throw createHttpError(400, "El nÚmero de asientos no es válido");
+  }
 };
 
-export const isDestinationValid = (destination: string): string | null => {
-  if (typeof destination === "string" && destination.length >= 5 && destination.length <= 50)
-    return null;
-  return "La destino no es válido";
+export const isPriceValid = (req: Request, res: Response): void => {
+  const price = req.body.price;
+  if (typeof price !== "number") {
+    throw createHttpError(400, "El precio no es válido");
+  }
+};
+
+export const isDestinationValid = (req: Request, res: Response): void => {
+  const destination = req.body.destination;
+  if (typeof destination !== "string") {
+    throw createHttpError(400, "La destino no es válido");
+  }
+  if (destination.length >= 5 && destination.length <= 50) {
+    throw createHttpError(400, "La destino no es válido");
+  }
 };
 
 export const isDescriptionValid = (description: string): string | null => {
@@ -270,9 +297,10 @@ export const isDescriptionValid = (description: string): string | null => {
   return "La descripción no es válida";
 };
 
-export const isStockValid = (stock: number): string | null => {
-  if (typeof stock === "number") return null;
-  return "El stock no es válido";
+export const isStockValid = (req: Request, res: Response): void => {
+  const stock = req.body.stock;
+  if (typeof stock !== "number") return;
+  throw createHttpError(400, "El stock no es válido");
 };
 
 //IMPORTANTE: verificar funcionamiento
@@ -309,9 +337,14 @@ export const isDealerIdValid = (chauffeurId: string): string | null => {
   return "El id del chofer no es válido";
 };
 
-export const isOriginValid = (origin: string): string | null => {
-  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return null;
-  return "La origen no es válido";
+export const isOriginValid = (req: Request, res: Response): void => {
+  const origin = req.body.origin;
+  if (typeof origin === "string") {
+    throw createHttpError(400, "El origen debe ser una cadena de texto");
+  }
+  if (origin.length >= 5 && origin.length <= 50) {
+    throw createHttpError(400, "El origen debe tener entre 5 y 50 caracteres");
+  }
 };
 
 export const isOcupationValid = (ocupation: string): string | null => {
@@ -372,15 +405,15 @@ export const isTypeVehicleValidByDealer = (value: string): string | null => {
   return "El tipo de vehiculo no es válido";
 };
 
-export const isServiceValid = (service: string): string | null => {
+export const isServiceValid = (req: Request, res: Response): void => {
+  const service = req.body.service;
   if (typeof service !== "string") {
-    return "El tipo de servicio no es válido";
+    throw createHttpError(400, "El servicio no es válido");
   }
   const validServices = ["semi cama", "cama", "cama ejecutivo"];
   if (!validServices.includes(service.toLowerCase())) {
-    return "El tipo de servicio no es válido";
+    throw createHttpError(400, "El servicio no es válido");
   }
-  return null;
 };
 
 export const isValidNumberSeat = (numberSeat: string[], stock: number): string | null => {
