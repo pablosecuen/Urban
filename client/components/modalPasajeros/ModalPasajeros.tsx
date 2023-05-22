@@ -1,8 +1,14 @@
 "use client";
 import { PassengerFormData, PassengerFormModalProps } from "@component/app/types/Passenger";
+
 import React, { useState } from "react";
 
-const ModalPasajeros: React.FC<PassengerFormModalProps> = ({ isOpen, onFormSubmit, onCancel }) => {
+const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
+  isOpen,
+  onFormSubmit,
+  onCancel,
+  seat,
+}) => {
   const [formData, setFormData] = useState<PassengerFormData>({
     nombre: "",
     apellido: "",
@@ -14,6 +20,7 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({ isOpen, onFormSubmi
     telefono: "",
     email: "",
     cc: "",
+    quantity: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -52,7 +59,7 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({ isOpen, onFormSubmi
                 value={formData.nombre}
                 onChange={handleChange}
                 className="w-full rounded border border-gray-300 px-3 py-1"
-                maxLength={50}
+                maxLength={25}
                 required
               />
             </div>
@@ -67,7 +74,7 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({ isOpen, onFormSubmi
                 value={formData.apellido}
                 onChange={handleChange}
                 className="w-full rounded border border-gray-300 px-3 py-1"
-                maxLength={50}
+                maxLength={25}
                 required
               />
             </div>
