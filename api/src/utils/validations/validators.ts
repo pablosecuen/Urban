@@ -199,7 +199,7 @@ export const isProductIdValid = (productId: string): string | null => {
 
 export const isCompanyIdValid = (req: Request, res: Response): void => {
   const companyId = req.body.companyId;
-  if (typeof companyId === "string") {
+  if (typeof companyId !== "string") {
     throw createHttpError(400, "El id de la compañía no es válido");
   }
 };
@@ -227,7 +227,7 @@ export const isDateValid = (date: string): string | null => {
 
 export const isDepartureDateValid = (req: Request, res: Response): void => {
   const departureDate = req.body.departureDate;
-  if (typeof departureDate === "string") {
+  if (typeof departureDate !== "string") {
     throw createHttpError(400, "La fecha de salida no es válida");
   }
 };
