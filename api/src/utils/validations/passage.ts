@@ -15,6 +15,7 @@ import {
 } from "./validators";
 import { PassageToRegister } from "../../schema/passage";
 
+// Middleware de validación de datos
 export const newAndUpdatePassageValidate = (
   req: Request,
   res: Response,
@@ -25,33 +26,17 @@ export const newAndUpdatePassageValidate = (
   const data: PassageToRegister = JSON.parse(dataString); // Solo usar cuando se necesite probar con insomia
   const errors = [];
 
-  const validators: { [key: string]: (value: any, stock?: number) => string | null } = {
-    origin: isOriginValid,
-    stock: isStockValid,
-    destination: isDestinationValid,
-    departureDate: isDepartureDateValid,
-    arrivalDate: isArrivalDateValid,
-    duration: isDurationValid,
-    price: isPriceValid,
-    departureTime: isDepartureTimeValid,
-    companyId: isCompanyIdValid,
-    service: isServiceValid,
-    numberSeat: (value: string[]) => isValidNumberSeat(value, data.stock),
-  };
-
-  for (const key in validators) {
-    if (data[key]) {
-      const validator = validators[key];
-      const error = validator(data[key]);
-      if (error) {
-        errors.push({ field: key, message: error });
-      }
-    }
-  }
-
-  if (errors.length > 0) {
-    res.status(400).json({ message: "Por favor revisa los datos", errors });
-  } else {
-    next();
-  }
+  const validators = [
+    { field: "origin", validator: isOriginValid },
+    { field: "stock", validator: isStockValid },
+    { field: "destination", validator: isDestinationValid },
+    { field: "departureDate", validator: isDepartureDateValid },
+    { field: "arrivalDate", validator: isArrivalDateValid },
+    { field: "duration", validator: isDurationValid },
+    { field: "price", validator: isPriceValid },
+    { field: "departureTime", validator: isDepartureTimeValid },
+    { field: "companyId", validator: isCompanyIdValid },
+    { field: "service", validator: isServiceValid },
+    { field: "numberSeat", validator: (value: string[]) => isValidNumberSeat(value, data.stock) },
+  ];
 };
