@@ -240,9 +240,11 @@ export const isDepartureTimeValid = (departureTime: string): string | null => {
   return "La hora de salida no es válida";
 };
 
-export const isArrivalDateValid = (arrivalTime: string): string | null => {
-  if (typeof arrivalTime === "string") return null;
-  return "La fecha de llegada no es válida";
+export const isArrivalDateValid = (req: Request, res: Response): void => {
+  const arrivalDate = req.body.arrivalDate;
+  if (typeof arrivalDate === "string") {
+    throw createHttpError(400, "La fecha de llegada no es válida");
+  }
 };
 
 export const isDurationValid = (duration: string): string | null => {
