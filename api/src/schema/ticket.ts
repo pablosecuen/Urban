@@ -9,6 +9,7 @@ export interface TicketToRegister {
   paymentId: number;
   merchantOrden: number;
   statusMp: string;
+  passengersData: [{}];
 }
 
 export interface Ticket extends TicketToRegister {
@@ -16,6 +17,7 @@ export interface Ticket extends TicketToRegister {
   reviewSent: Boolean;
   createdAt: string;
   updatedAt: string;
+  passengersData: [{}];
 }
 
 export interface TicketToUpdate {

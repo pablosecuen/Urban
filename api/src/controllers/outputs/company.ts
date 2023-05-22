@@ -5,22 +5,22 @@ export const getCompanies = async (req: Request, res: Response): Promise<void> =
   try {
     let query: any = db.collection("companies");
 
-    const busSnapshot = await query.get();
+    const companySnap = await query.get();
 
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
-    const totalPages = Math.ceil(busSnapshot.docs.length / pageSize);
+    const totalPages = Math.ceil(companySnap.docs.length / pageSize);
 
-    const buses = busSnapshot.docs.slice(startIndex, endIndex).map((doc) => {
+    const companies = companySnap.docs.slice(startIndex, endIndex).map((doc) => {
       return {
         id: doc.id,
         ...doc.data(),
       };
     });
 
-    res.status(200).json({ buses, totalPages });
+    res.status(200).json({ companies, totalPages });
   } catch (innerError) {
     console.error("Error al encontrar los buses", innerError);
     res.status(400).json({ message: innerError.message });
