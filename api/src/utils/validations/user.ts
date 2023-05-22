@@ -15,7 +15,6 @@ import {
   isPasswordValid,
   isPhoneValid,
 } from "./validators";
-import createHttpError from "http-errors";
 
 // Middleware de validación de datos
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
@@ -41,20 +40,21 @@ export const newUserValidated = (req: Request, res: Response, next: NextFunction
 
 export const updateUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   const data: UserToUpdate = req.body;
-
+  console.log(req.body.phone);
   const errors = [];
 
   const validators = {
     cc: isCcValid,
     address: isAddressValid,
-    phone: isPhoneValid,
+    // phone: isPhoneValid,
     gender: isGenderValid,
     ce: isCeValid,
   };
 
-  for (const [field, validator] of Object.entries(validators)) {
-    if (data[field]) {
-      const error = validator(data[field]);
+  for (const field in data) {
+    if (field in validators) {
+      const handler = validators[field];
+      const error = handler(req, res);
       if (error) {
         errors.push({ field, message: error });
       }
