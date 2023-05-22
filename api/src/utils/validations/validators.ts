@@ -309,9 +309,14 @@ export const isDealerIdValid = (chauffeurId: string): string | null => {
   return "El id del chofer no es válido";
 };
 
-export const isOriginValid = (origin: string): string | null => {
-  if (typeof origin === "string" && origin.length >= 5 && origin.length <= 50) return null;
-  return "La origen no es válido";
+export const isOriginValid = (req: Request, res: Response): void => {
+  const origin = req.body.origin;
+  if (typeof origin === "string") {
+    throw createHttpError(400, "El origen debe ser una cadena de texto");
+  }
+  if (origin.length >= 5 && origin.length <= 50) {
+    throw createHttpError(400, "El origen debe tener entre 5 y 50 caracteres");
+  }
 };
 
 export const isOcupationValid = (ocupation: string): string | null => {
