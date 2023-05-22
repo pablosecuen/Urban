@@ -237,43 +237,52 @@ export const iCheckInValid = (checkIn: string): string | null => {
   return "El check in no es válido";
 };
 
-export const isDepartureTimeValid = (departureTime: string): string | null => {
-  if (typeof departureTime === "string") return null;
-  return "La hora de salida no es válida";
+export const isDepartureTimeValid = (req: Request, res: Response): void => {
+  const departureTime = req.body.departureTime;
+  if (typeof departureTime !== "string") {
+    throw createHttpError(400, "La hora de salida no es válida");
+  }
+  return;
 };
 
-export const isArrivalTimeValid = (arrivalTime: string): string | null => {
-  if (typeof arrivalTime === "string") return null;
-  return "La hora de salida no es válida";
+export const isArrivalTimeValid = (req: Request, res: Response): void => {
+  const arrivalTime = req.body.arrivalTime;
+  if (typeof arrivalTime !== "string") {
+    throw createHttpError(400, "La hora de llegada no es válida");
+  }
 };
 
 export const isArrivalDateValid = (req: Request, res: Response): void => {
   const arrivalDate = req.body.arrivalDate;
-  if (typeof arrivalDate === "string") {
+  if (typeof arrivalDate !== "string") {
     throw createHttpError(400, "La fecha de llegada no es válida");
   }
 };
 
 export const isDurationValid = (req: Request, res: Response): void => {
   const duration = req.body.duration;
-  if (typeof duration === "string") return;
-  throw createHttpError(400, "La duración no es válida");
+  if (typeof duration !== "string") {
+    throw createHttpError(400, "La duración no es válida");
+  }
 };
 
-export const isNumberSeatValid = (numberSeat: number): string | null => {
-  if (typeof numberSeat === "number") return null;
-  return "El nÚmero de asientos no es válido";
+export const isNumberSeatValid = (req: Request, res: Response): void => {
+  const numberSeat = req.body.numberSeat;
+  if (typeof numberSeat !== "number") {
+    throw createHttpError(400, "El nÚmero de asientos no es válido");
+  }
 };
 
 export const isPriceValid = (req: Request, res: Response): void => {
   const price = req.body.price;
-  if (typeof price === "number") return;
-  throw createHttpError(400, "El precio no es válido");
+  if (typeof price !== "number") {
+    throw createHttpError(400, "El precio no es válido");
+  }
 };
 
 export const isDestinationValid = (req: Request, res: Response): void => {
   const destination = req.body.destination;
-  if (typeof destination === "string") {
+  if (typeof destination !== "string") {
     throw createHttpError(400, "La destino no es válido");
   }
   if (destination.length >= 5 && destination.length <= 50) {
@@ -289,7 +298,7 @@ export const isDescriptionValid = (description: string): string | null => {
 
 export const isStockValid = (req: Request, res: Response): void => {
   const stock = req.body.stock;
-  if (typeof stock === "number") return;
+  if (typeof stock !== "number") return;
   throw createHttpError(400, "El stock no es válido");
 };
 
