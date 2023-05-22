@@ -15,28 +15,27 @@ import {
   isPasswordValid,
   isPhoneValid,
 } from "./validators";
+import createHttpError from "http-errors";
 
+// Middleware de validación de datos
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
-  const data: UserToRegister = req.body;
+  try {
+    const data: UserToRegister = req.body;
 
-  const validations = [
-    { field: "firstName", validator: isFirstNameValid },
-    { field: "lastName", validator: isNameValid },
-    { field: "password", validator: isPasswordValid },
-    { field: "email", validator: isEmailValid },
-  ];
+    const validations = [
+      { field: "firstName", validator: isFirstNameValid },
+      { field: "lastName", validator: isNameValid },
+      { field: "password", validator: isPasswordValid },
+      { field: "email", validator: isEmailValid },
+    ];
 
-  const errors = validations
-    .map((validation) => {
-      const error = validation.validator(data[validation.field]);
-      return error ? { field: validation.field, message: error } : null;
-    })
-    .filter((error) => error !== null);
+    for (const validation of validations) {
+      validation.validator(req, res);
+    }
 
-  if (errors.length > 0) {
-    res.status(400).json({ message: "Por favor revisa los datos", errors });
-  } else {
     next();
+  } catch (error) {
+    next(error); // Pasar el error al siguiente middleware
   }
 };
 
