@@ -223,9 +223,11 @@ export const isDateValid = (date: string): string | null => {
   return "La fecha no es válida";
 };
 
-export const isDepartureDateValid = (departureTime: string): string | null => {
-  if (typeof departureTime === "string") return null;
-  return "La fecha de salida no es válida";
+export const isDepartureDateValid = (req: Request, res: Response): void => {
+  const departureDate = req.body.departureDate;
+  if (typeof departureDate === "string") {
+    throw createHttpError(400, "La fecha de salida no es válida");
+  }
 };
 
 export const iCheckInValid = (checkIn: string): string | null => {
