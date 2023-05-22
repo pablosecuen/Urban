@@ -270,9 +270,10 @@ export const isDescriptionValid = (description: string): string | null => {
   return "La descripción no es válida";
 };
 
-export const isStockValid = (stock: number): string | null => {
-  if (typeof stock === "number") return null;
-  return "El stock no es válido";
+export const isStockValid = (req: Request, res: Response): void => {
+  const stock = req.body.stock;
+  if (typeof stock === "number") return;
+  throw createHttpError(400, "El stock no es válido");
 };
 
 //IMPORTANTE: verificar funcionamiento
