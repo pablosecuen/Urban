@@ -1,7 +1,12 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { db } from "../../connection/connection";
+import createHttpError from "http-errors";
 
-export const getTicketByUserId = async (req: Request, res: Response): Promise<void> => {
+export const getTicketByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const userId = req.params.id;
     const page = Number(req.query.page) || 1;
@@ -13,6 +18,13 @@ export const getTicketByUserId = async (req: Request, res: Response): Promise<vo
       db.collection("tickets").where("userId", "==", userId).get(),
       db.collection("passages").get(),
     ]);
+
+    if (snapshot.empty) {
+      throw createHttpError(404, "No se encontro el usuarios");
+    }
+    if (passageSnapshots.empty) {
+      throw createHttpError(404, "No se encontro los pasajes");
+    }
 
     const passageMap = new Map<string, any>();
     passageSnapshots.forEach((doc) => passageMap.set(doc.id, doc.data()));
@@ -28,30 +40,36 @@ export const getTicketByUserId = async (req: Request, res: Response): Promise<vo
 
     res.status(200).json({ tickets, totalPages });
   } catch (error) {
-    console.error(error);
-    res.status(400).send("Error al obtener los viajes del usuario");
+    next(error);
   }
 };
 
-export const getTicketById = async (req: Request, res: Response): Promise<void> => {
+export const getTicketById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id: string = req.params.id;
 
   try {
     const doc = await db.collection("tickets").doc(id).get();
 
     if (!doc.exists) {
-      throw new Error("El ticket no existe");
+      throw createHttpError(404, "El ticket no existe");
     }
 
     const ticket = { id: doc.id, ...doc.data() };
     res.status(200).json(ticket);
   } catch (error) {
-    console.error("Error al obtener el ticket", error);
-    res.status(400).json({ message: "Error al obtener el ticket" });
+    next(error);
   }
 };
 
-export const getAllTickets = async (req: Request, res: Response): Promise<void> => {
+export const getAllTickets = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const allProperties = Object.keys(req.query);
 
@@ -66,6 +84,10 @@ export const getAllTickets = async (req: Request, res: Response): Promise<void> 
 
     const ticketsSnapshot = await query.get();
 
+    if (ticketsSnapshot.empty) {
+      throw createHttpError(404, "No se encontraron tickets");
+    }
+
     const page = Number(req.query.page) || 1;
     const pageSize = Number(req.query.pageSize) || 2;
     const startIndex = (page - 1) * pageSize;
@@ -78,7 +100,6 @@ export const getAllTickets = async (req: Request, res: Response): Promise<void> 
 
     res.status(201).json({ tickets: ticketData, totalPages });
   } catch (error) {
-    console.error("Error al obtener las ordenes", error);
-    res.status(500).json({ message: "Error al obtener las ordenes" });
+    next(error);
   }
 };
