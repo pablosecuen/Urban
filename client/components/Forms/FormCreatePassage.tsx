@@ -38,6 +38,7 @@ export default function FormCreatePassage() {
 
   useEffect(() => {
     dispatch(getAllCompanies());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [newPassage, setNewPassage] = useState({
@@ -163,7 +164,11 @@ export default function FormCreatePassage() {
             <label htmlFor="">HORARIO DE SALIDA: </label>
             <select name="arrivalTime" value={newPassage.arrivalTime} onChange={handleChange}>
               {times?.map((i) => {
-                return <option value={i}>{i}</option>;
+                return (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                );
               })}
             </select>
             <small>{""}</small>
@@ -172,7 +177,11 @@ export default function FormCreatePassage() {
             <label htmlFor="">HORARIO DE LLEGADA: </label>
             <select name="departureTime" value={newPassage.departureTime} onChange={handleChange}>
               {times?.map((i) => {
-                return <option value={i}>{i}</option>;
+                return (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                );
               })}
             </select>
             <small>{""}</small>
@@ -205,8 +214,12 @@ export default function FormCreatePassage() {
           <section>
             <label htmlFor="">EMPRESA: </label>
             <select name="companyId" value={newPassage.companyId} onChange={handleChange}>
-              {companies?.map((company) => {
-                return <option value={company.id}>{company.name}</option>;
+              {companies?.map((company, index) => {
+                return (
+                  <option key={index} value={company.id}>
+                    {company.name}
+                  </option>
+                );
               })}
             </select>
             <small>{""}</small>
