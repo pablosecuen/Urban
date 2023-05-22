@@ -24,7 +24,7 @@ export function makeStore() {
       vehicle: vehicleReducer,
       notifications: notificationsReducer,
       payment: paymentReducer,
-      company: companyReducer,
+      companies: companyReducer,
       seats: seatsReducer,
 
 
