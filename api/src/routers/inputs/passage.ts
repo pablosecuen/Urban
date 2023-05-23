@@ -17,6 +17,39 @@ const upload = multer({
 });
 //Ruta para crear pasajes
 
+/**
+ * @swagger
+ * /passage
+ * /:
+ *   post:
+ *     summary: Crear un nuevo pasaje
+ *     description: Crea un nuevo pasaje con la información proporcionada
+ *     tags:
+ *       - Pasajes
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             $ref: '#/components/schemas/NewPassageRequest'
+ *     responses:
+ *       '200':
+ *         description: Pasaje creado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref/components/schemas/AllPassageResponse
+ *       '400':
+ *         description: Error al crear el usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
 router.post("/", upload.single("img"), newAndUpdatePassageValidate, newPassage);
 router.put("/:id", updatePassage);
 router.patch("/:id", enablePassage);
