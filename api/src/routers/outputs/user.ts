@@ -65,9 +65,34 @@ const router = Router();
  */
 router.get("/", allUsers);
 
-
-router.get("/decoding", decodingUser)
-
+/**
+ * @swagger
+ *
+ * /decoding-user:
+ *   get:
+ *     summary: Decodificar usuario
+ *     description: Decodifica el token de autorización y obtiene los datos del usuario correspondiente
+ *     tags:
+ *       - Usuarios
+ *     responses:
+ *       '200':
+ *         description: Datos del usuario obtenidos correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       '400':
+ *         description: Error al decodificar el token o encontrar el usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
+router.get("/decoding", decodingUser);
 
 /**
  * @swagger
@@ -96,13 +121,13 @@ router.get("/decoding", decodingUser)
  *               password: string
  *               img: string
  *               deleted: false
- *               payments: 
+ *               payments:
  *                 securityCode: string
  *                 cardNumber: string
  *                 expirationDate: string
  *               name: string
  *               adress: string
- *               history: 
+ *               history:
  *                 travels: [string]
  *                 orders: [string]
  *               email: string
