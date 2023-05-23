@@ -200,6 +200,72 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+        NewPassageRequest: {
+          type: "object",
+          properties: {
+            departureTime: {
+              type: "string",
+              description: "Hora de salida del pasaje.",
+            },
+            img: {
+              type: "string",
+              format: "binary",
+              description: "Archivo de imagen asociado al pasaje.",
+            },
+            destination: {
+              type: "string",
+              description: "Destino del pasaje.",
+            },
+            arrivalDate: {
+              type: "string",
+              description: "Fecha de llegada del pasaje.",
+            },
+            duration: {
+              type: "string",
+              description: "Duración del viaje.",
+            },
+            createdAt: {
+              type: "string",
+              description: "Fecha y hora de creación del pasaje.",
+            },
+            deleted: {
+              type: "boolean",
+              description: "Indicador de si el pasaje ha sido eliminado.",
+            },
+            price: {
+              type: "number",
+              description: "Precio del pasaje.",
+            },
+            arrivalTime: {
+              type: "string",
+              description: "Hora de llegada del pasaje.",
+            },
+            departureDate: {
+              type: "string",
+              description: "Fecha de salida del pasaje.",
+            },
+            status: {
+              type: "boolean",
+              description: "Estado del pasaje.",
+            },
+            origin: {
+              type: "string",
+              description: "Origen del pasaje.",
+            },
+            companyId: {
+              type: "string",
+              description: "ID de la compañía asociada al pasaje.",
+            },
+            stock: {
+              type: "number",
+              description: "Stock del pasaje.",
+            },
+            service: {
+              type: "string",
+              description: "Tipo de servicio del pasaje.",
+            },
+          },
+        },
       },
       securitySchemes: {
         BearerAuth: {
