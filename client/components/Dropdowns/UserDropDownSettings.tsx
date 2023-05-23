@@ -55,7 +55,7 @@ const UserDropDownSettings = (user: any) => {
       >
         Something else here
       </a>
-      <div>
+      {/*  <div>
         {user?.user?.deleted ? (
           <button
             className="block w-48 whitespace-nowrap rounded-none bg-green-800 px-4 py-2 text-sm font-normal text-white hover:bg-green-900"
@@ -75,7 +75,7 @@ const UserDropDownSettings = (user: any) => {
             Ban
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -57,9 +57,6 @@ export default function Passages() {
           <CardProfilePassage selectedPassage={selectedPassage} />
           <SeatManagement />
         </div>
-        <div>
-          <FormCreatePassage />
-        </div>
       </div>
     </>
   );
