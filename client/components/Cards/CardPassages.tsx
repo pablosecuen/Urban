@@ -338,13 +338,68 @@ export default function CadPassages(props: any) {
                   className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                   htmlFor="grid-password"
                 >
-                  Stock
+                  DURACION DEL VIAJE:
                 </label>
-                <input
-                  type="text"
+                <select
                   className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  defaultValue={selectedPassage ? selectedPassage.stock : ""}
-                />
+                  name="duration"
+                  value={newPassage.duration}
+                  onChange={handleChange}
+                >
+                  <option value="1">1 hora</option>
+                  <option value="2">2 horas</option>
+                  <option value="3">3 horas</option>
+                  <option value="3">4 horas</option>
+                  <option value="3">5 horas</option>
+                  <option value="3">6 horas</option>
+                </select>
+              </div>
+            </div>
+            <div className="w-full px-4 lg:w-6/12">
+              <div className="relative mb-3 w-full">
+                <label
+                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                  htmlFor="grid-password"
+                >
+                  TIPO DE SERVICIO:
+                </label>
+                <select
+                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                  name="service"
+                  value={newPassage.service}
+                  onChange={handleChange}
+                >
+                  <option value="semi-cama">Semi-cama</option>
+                  <option value="cama">Cama</option>
+                  <option value="cama-ejecutivo">Cama-ejecutivo</option>
+                </select>
+              </div>
+            </div>
+            <div className="w-full px-4 lg:w-6/12">
+              <div className="relative mb-3 w-full">
+                <label
+                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                  htmlFor="grid-password"
+                >
+                  EMPRESA:
+                </label>
+                <select
+                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                  name="companyId"
+                  value={newPassage.companyId}
+                  onChange={handleChange}
+                >
+                  {companies?.map((company, i) => {
+                    return (
+                      <option key={i} value={company.id}>
+                        {company.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div>
+                <button>Crear Pasaje</button>
               </div>
             </div>
           </form>
