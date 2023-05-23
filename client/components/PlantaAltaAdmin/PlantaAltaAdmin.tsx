@@ -6,10 +6,12 @@ import { RootState } from "@component/Redux/store/store";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plantaAlta } from "../../assets/data";
+import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
-const PlantaAltaAdmin = () => {
+const PlantaAltaAdmin : React.FC<CardProfilePropsPassage> = ({selectedPassage}) => {
   const dispatch = useDispatch();
   const seatEnabled = useSelector((state: RootState) => state.seats.seatEnabled);
+console.log(seatEnabled);
 
   const handleSeatToggle = (seatIndex: number) => {
     const updatedSeats = [...seatEnabled];
