@@ -95,3 +95,29 @@ export const updateSeatPassage = async (req: Request, res: Response, next: NextF
     next(error);
   }
 };
+
+export const disableSeatsPassage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("passages").doc(id).get();
+    if (!docRef.exists) {
+      throw createHttpError(404, "No se encontró el pasaje");
+    }
+
+    const { numberSeat } = req.body;
+    if (!numberSeat) {
+      throw createHttpError(400, "Se requiere el campo numberSeat en el cuerpo de la solicitud");
+    }
+
+    await db
+      .collection("passages")
+      .doc(id)
+      .update({
+        numberSeat: firebase.firestore.FieldValue.arrayRemove(numberSeat),
+      });
+
+    res.status(200).json({ message: "Pasaje actualizado correctamente" });
+  } catch (error) {
+    next(error);
+  }
+};
