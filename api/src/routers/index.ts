@@ -69,7 +69,7 @@ router.use("/delivery", deliveryInputRouter);
 
 router.use("/order", orderInputRouter);
 
-router.use("/local", localInputRouter);
+// router.use("/local", localInputRouter);
 
 router.use("/products", productInputRouter);
 
@@ -85,7 +85,7 @@ router.use("/logout", logoutInputRouter);
 
 router.use("/payment", paymentInputRouter);
 
-router.use("/busDriver", busDriverInputRouter);
+// router.use("/busDriver", busDriverInputRouter);
 
 router.use("/bus", busInputRouter);
 
@@ -93,7 +93,7 @@ router.use("/passage", passageInputRouter);
 
 router.use("/ticket", ticketInputRouter);
 
-router.use("/roadtrip", roadTripInputRouter);
+// router.use("/roadtrip", roadTripInputRouter);
 
 router.use("/admin", adminInputRouter);
 
@@ -106,7 +106,7 @@ router.use("/user", userOutputRouter);
 
 router.use("/travels", travelOutputRouter);
 
-router.use("/local", localOutputRouter);
+// router.use("/local", localOutputRouter);
 
 router.use("/vehicle", vehicleOutputRouter);
 
@@ -120,7 +120,7 @@ router.use("/delivery", deliveryOutputRouter);
 
 router.use("/order", orderOutputRouter);
 
-router.use("/busDriver", busDriverOutputRouter);
+// router.use("/busDriver", busDriverOutputRouter);
 
 router.use("/bus", busOutputRouter);
 
@@ -128,7 +128,7 @@ router.use("/passage", passageOutputRouter);
 
 router.use("/ticket", ticketOutputRouter);
 
-router.use("/roadtrip", roadTripOutputRouter);
+// router.use("/roadtrip", roadTripOutputRouter);
 
 router.use("/admin", adminOutputRouter);
 
