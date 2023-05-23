@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Gestion() {
   return (
-    <div className=" mt-10 flex h-full w-full   flex-col gap-2 rounded-3xl border-2 p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
+    <div className=" mt-10 flex h-full w-full flex-col  gap-2 rounded-3xl border-2 bg-white p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
       <h2 className="rounded-3xl p-4  text-center text-xl font-semibold tracking-wider text-blue">
         Historial de viajes
       </h2>
