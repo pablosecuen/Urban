@@ -5,7 +5,7 @@ import { HiPhone, HiDevicePhoneMobile, HiEnvelope } from "react-icons/hi2";
 
 export default function Footer() {
   return (
-    <footer className="flex  flex-col justify-around gap-5 bg-verde px-5 py-10 tracking-wide">
+    <footer className="flex  flex-col justify-around gap-5 bg-black px-5 py-10 tracking-wide text-white">
       <div className="flex flex-col gap-10 md:flex-row md:justify-between ">
         <div className="mx-auto flex max-w-md flex-col gap-5 text-center">
           <h4 className="font-semibold uppercase">Nuestra misión</h4>
@@ -57,11 +57,11 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <hr className="h-[2px] bg-black/30 text-black" />
+      <hr className="h-[2px] bg-white text-white" />
 
       <div className="mx-auto flex max-w-3xl items-center justify-center gap-16 text-center">
-        <small>© 2023 Urban.</small>
-        <small>Terminos</small>
+        <small>©copyright, todos los derechos reservados - 2023 Urban.</small>
+        <small></small>
       </div>
     </footer>
   );

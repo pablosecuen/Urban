@@ -15,7 +15,7 @@ export default function Menu() {
         <div className="relative mt-10 flex h-full w-full flex-col gap-4 overflow-hidden  pb-8 lg:w-2/3 lg:items-center lg:justify-center lg:rounded-3xl lg:px-24 lg:py-8 lg:shadow-2xl lg:shadow-black/40 2xl:w-3/4 2xl:py-16">
           {" "}
           <Image
-            className="absolute -z-20  contrast-150 saturate-150"
+            className="absolute -z-20  scale-125 contrast-150 saturate-150 "
             layout="fill"
             objectFit="cover"
             alt=""
