@@ -17,16 +17,17 @@ export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <NavBar />
-      <div className="mx-auto flex min-h-[92vh] flex-col items-center justify-center gap-5 py-10 lg:container lg:flex-row lg:pb-20">
-        <div className="flex w-full flex-col items-center justify-center gap-4 ">
+      <div className="mx-auto flex min-h-[92vh] flex-col items-center justify-center gap-5  py-10 lg:container lg:flex-row lg:pb-20">
+        <div className="flex w-full flex-col items-center justify-center gap-4 border-none">
           <Image
             src={logo}
             alt="logo"
-            className="  mt-10  w-48 border brightness-125 contrast-125  lg:mt-10 lg:w-56 2xl:w-[450px]"
+            className="  mt-10  w-48 border border-none brightness-125  contrast-125 lg:mt-10 lg:w-56 2xl:w-[450px]"
           />
+
           <Menu />
         </div>
-        <div className="flex h-full w-full items-center justify-center">{children}</div>
+        <div className="flex h-full w-full items-center justify-center ">{children}</div>
       </div>
       <div className="mt-48 lg:mt-0">
         <Footer />
