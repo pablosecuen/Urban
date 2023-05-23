@@ -130,17 +130,15 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
           </section>
           <div className="flex flex-col gap-2">
             <section className="text-center text-xl font-semibold">5 ESTRELLAS</section>
-            <div className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2">
-              <section className="rounded-lg border-2 bg-gray-300 py-1 text-center ">
-                COMENTARIO
-              </section>
-              <section className="rounded-lg border-2 bg-gray-300 py-1 text-center ">
-                COMENTARIO
-              </section>
-              <section className="rounded-lg border-2 bg-gray-300 py-1 text-center ">
-                COMENTARIO
-              </section>
-            </div>
+            <section className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2 border border-black">
+              {passage?.companyData?.evaluation?.map((e) => {
+                return (
+                  <p className="rounded-lg border-2 bg-gray-300 py-1 text-center ">
+                    {e.comment}
+                  </p>
+                );
+              })}
+            </section>
           </div>
         </div>
       </article>
