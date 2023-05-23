@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import jsonwebtoken from "jsonwebtoken";
 import passport from "passport";
 import { db } from "../../../connection/connection";
 import { Strategy } from "passport-local";
 import { compareSync } from "bcrypt";
 import { User } from "../../../schema/user";
+import createHttpError from "http-errors";
 
 const userStretegy = new Strategy({ usernameField: "email" }, async (email, password, done) => {
   try {
@@ -45,18 +46,18 @@ passport.deserializeUser(async (email: string, done) => {
   }
 }); //todo esto despues se hara un middlware de auth de passport
 
-export const loginUser = async (req: Request, res: Response): Promise<void> => {
+export const loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   passport.authenticate("userStretegy", async (err: Error, user: User) => {
     if (err) {
-      return res.status(500).json(err);
+      throw createHttpError(404, err);
     }
     if (!user) {
-      return res.status(401).json({ message: "Credenciales inválidas" });
+      throw createHttpError(404, "Usuario no encontrado");
     }
     try {
       const userSnapshot = await db.collection("users").where("email", "==", user.email).get();
       if (userSnapshot.empty) {
-        throw new Error("Usuario no encontrado");
+        throw createHttpError(404, "Usuario no encontrado");
       }
       const userData = userSnapshot.docs[0].data();
       const userId = userSnapshot.docs[0].id;
@@ -65,8 +66,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       const token = jwt.sign({ email: user.email }, secretKey);
       return res.json({ token, user: { ...userData, id: userId } });
     } catch (error) {
-      console.error("Error logueo del user", error);
-      return res.status(500).json({ message: "Error logueo del user" });
+      next(error);
     }
   })(req, res);
 };

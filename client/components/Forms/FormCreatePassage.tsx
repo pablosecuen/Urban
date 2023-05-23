@@ -38,6 +38,7 @@ export default function FormCreatePassage() {
 
   useEffect(() => {
     dispatch(getAllCompanies());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [newPassage, setNewPassage] = useState({
@@ -219,9 +220,11 @@ export default function FormCreatePassage() {
           <section>
             <label htmlFor="">EMPRESA: </label>
             <select name="companyId" value={newPassage.companyId} onChange={handleChange}>
+
               {companies?.map((company, i) => {
                 return (
                   <option key={i} value={company.id}>
+
                     {company.name}
                   </option>
                 );

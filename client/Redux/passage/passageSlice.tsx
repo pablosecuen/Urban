@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPassages, getPassagesByQuery, getPassagesId } from "./passageActions";
-import { PassageToRegister, PassageResponse, Passage } from "../../app/types/Passages";
+import { Passage } from "../../app/types/Passages";
 
 interface PassageState {
   allPassages: Passage[];
