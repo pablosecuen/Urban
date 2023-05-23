@@ -55,7 +55,7 @@ export default function Passages() {
         </div>
         <div className="w-full px-4 lg:w-4/12">
           <CardProfilePassage selectedPassage={selectedPassage} />
-          <SeatManagement />
+          <SeatManagement selectedPassage={selectedPassage}/>
         </div>
       </div>
     </>
