@@ -2,6 +2,12 @@ export interface Company {
   id: string;
   name: string;
   rating: number;
-  comments: Array<{ comment: string; userId: string }>;
+  evaluation: Evaluation[];
   createdAt: string;
+}
+
+export interface Evaluation {
+  comment: string;
+  userId: string;
+  rating: number;
 }
