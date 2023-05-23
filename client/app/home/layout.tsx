@@ -1,6 +1,6 @@
 import NavBar from "@component/components/NavBar/NavBar";
 import Footer from "@component/components/Footer/Footer";
-import logo from "../../assets/imagenes/UrbanIsoLogo.png";
+import logo from "../../assets/imagenes/logosecundario.png";
 import Image from "next/image";
 
 import Menu from "@component/components/Menu/Menu";
@@ -22,7 +22,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
           <Image
             src={logo}
             alt="logo"
-            className="  mt-10  w-24 lg:mt-10 lg:h-52 lg:w-56 2xl:h-72 2xl:w-80"
+            className="  mt-10  w-48 border brightness-125 contrast-125  lg:mt-10 lg:w-56 2xl:w-[450px]"
           />
           <Menu />
         </div>
