@@ -60,11 +60,11 @@ export default function Checkout() {
 
     notifySuccess();
     //post con el endpoint del ticket usando requestData
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="flex flex-col justify-center gap-8">
+    <div className="flex  flex-col justify-center gap-8 bg-white">
       {/* <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p> */}
       {/* <Image src={success} alt="pago exitoso" className="h-80 w-80 self-center"></Image> */}
       <ToastContainer
