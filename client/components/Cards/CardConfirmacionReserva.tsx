@@ -44,7 +44,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
 
   return (
     <>
-      <article className="lg:flex">
+      <article className="bg-white  lg:flex">
         <div className="flex flex-col p-2 lg:w-1/2 lg:p-4">
           <section className="flex p-2 lg:p-4">
             <div className=" mx-auto flex w-20 flex-col text-center">
