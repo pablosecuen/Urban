@@ -1,8 +1,9 @@
 import Seat from "@component/assets/icons/svg/Seat";
 import React, { useEffect, useState } from "react";
 import { plantaBaja } from "../../assets/data";
+import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
-const PlantaBajaAdmin = () => {
+const PlantaBajaAdmin : React.FC<CardProfilePropsPassage> = ({selectedPassage}) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
 
   const handleSeatToggle = (seatIndex: number) => {
