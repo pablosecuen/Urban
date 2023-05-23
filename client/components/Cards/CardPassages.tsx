@@ -50,7 +50,7 @@ export default function CadPassages(props: any) {
     duration: "",
     img: "",
   });
-  const { selectedPassage, handleClick, handleSearchChange, searchTerm, filteredPassages } = props;
+  const { handleClick, handleSearchChange, searchTerm, filteredPassages } = props;
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const companies = useSelector((state: RootState) => state.companies.allCompanies);
 
@@ -399,7 +399,7 @@ export default function CadPassages(props: any) {
                 </select>
               </div>
               <div>
-                <button>Crear Pasaje</button>
+                <button onClick={handleSubmit}>Crear Pasaje</button>
               </div>
             </div>
           </form>
