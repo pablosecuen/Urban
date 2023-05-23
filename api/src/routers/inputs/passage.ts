@@ -19,8 +19,7 @@ const upload = multer({
 
 /**
  * @swagger
- * /passage
- * /:
+ * /passage:
  *   post:
  *     summary: Crear un nuevo pasaje
  *     description: Crea un nuevo pasaje con la información proporcionada
@@ -38,7 +37,11 @@ const upload = multer({
  *         content:
  *           application/json:
  *             schema:
- *               $ref/components/schemas/AllPassageResponse
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID del pasaje creado
  *       '400':
  *         description: Error al crear el usuario
  *         content:
