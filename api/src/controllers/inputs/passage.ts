@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { db, storage } from "../../connection/connection";
-import { PassageToRegister, PassageToUpdate } from "../../schema/passage";
+import { PassageToRegister } from "../../schema/passage";
 import createHttpError from "http-errors";
 
 export const newPassage = async (
@@ -27,6 +27,9 @@ export const newPassage = async (
       throw createHttpError(404, "La compañia no existe");
     }
 
+    const numberSeats: string[] = dataFormated.numberSeat;
+    const stock: number = numberSeats.length + 1;
+
     // Upload the image to Firebase Storage
     const file: Express.Multer.File = req.file;
     const bucket = storage;
@@ -51,6 +54,7 @@ export const newPassage = async (
       const passageRef = await db.collection("passages").add({
         ...dataFormated,
         img,
+        stock,
       });
       res.status(200).json({
         message: "Pasaje creado correctamente",
