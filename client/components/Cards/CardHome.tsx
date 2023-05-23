@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InfiniteSlider from "../InfiniteSlider/InfiniteSlider";
 export default function CardHome() {
   let token: any;
   if (typeof window !== "undefined") {
@@ -62,9 +63,10 @@ export default function CardHome() {
         problemas cotidianos en la menor cantidad de tiempo posibles, entregando al cliente un poder
         increible para <b>gestionar</b> tu tiempo y tus días de la mejor manera posible
       </p>
-      <p className="py-4 text-center text-lg font-bold 2xl:text-xl">
+      {/* <p className="py-4 text-center text-lg font-bold 2xl:text-xl">
         {"<-- "}Selecciona el tipo de servicio para poder continuar
-      </p>
+      </p> */}
+      <InfiniteSlider />
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
