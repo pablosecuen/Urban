@@ -3,7 +3,7 @@ import { HiUserGroup, HiOutlineBriefcase, HiOutlineLocationMarker } from "react-
 
 export default function Especiales() {
   return (
-    <div className=" w-full rounded-3xl border-2 shadow-2xl shadow-black/40 lg:mx-auto lg:mt-10 lg:h-[530px] lg:w-full">
+    <div className=" w-full rounded-3xl border-2 bg-white shadow-2xl shadow-black/40 lg:mx-auto lg:mt-10 lg:h-[530px] lg:w-full">
       <h1 className="mt-12 text-center text-xl text-blue">Llena el formulario para tu pedido</h1>
       <form className="flex w-full flex-col items-center justify-center gap-5 pb-32 pt-12">
         <div className="flex items-center justify-center">
