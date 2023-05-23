@@ -1,17 +1,109 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-
+import { RootState } from "@component/Redux/store/store";
+import { AnyAction } from "@reduxjs/toolkit";
 import UserDropDownSettings from "../Dropdowns/UserDropDownSettings";
-
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getAllCompanies } from "@component/Redux/company/companyActions";
+import { ThunkDispatch } from "redux-thunk";
 // components
 
 export default function CadPassages(props: any) {
+  const times = [
+    "00:00 am",
+    "01:00 am",
+    "02:00 am",
+    "03:00 am",
+    "04:00 am",
+    "05:00 am",
+    "06:00 am",
+    "07:00 am",
+    "08:00 am",
+    "09:00 am",
+    "10:00 am",
+    "11:00 am",
+    "13:00 pm",
+    "14:00 pm",
+    "15:00 pm",
+    "16:00 pm",
+    "17:00 pm",
+    "18:00 pm",
+    "19:00 pm",
+    "20:00 pm",
+    "21:00 pm",
+    "22:00 pm",
+    "23:00 pm",
+  ];
+  const [newPassage, setNewPassage] = useState({
+    stock: 0,
+    price: 0,
+    numberSeat: [],
+    service: "",
+    companyId: "",
+    origin: "",
+    destination: "",
+    departureDate: "",
+    departureTime: "",
+    arrivalDate: "",
+    arrivalTime: "",
+    duration: "",
+    img: "",
+  });
   const { selectedPassage, handleClick, handleSearchChange, searchTerm, filteredPassages } = props;
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const companies = useSelector((state: RootState) => state.companies.allCompanies);
 
+  useEffect(() => {
+    dispatch(getAllCompanies());
+  }, []);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleSettingsClick = () => {
     setShowDropDown(!showDropDown); // toggle state variable on click
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    if (name === "stock") {
+      const stock = parseInt(value, 10);
+      const numberSeat = Array.from({ length: stock }, (_, index) => (index + 1).toString());
+      setNewPassage(
+        (prevPassage) =>
+          ({
+            ...prevPassage,
+            stock,
+            numberSeat,
+          } as typeof newPassage)
+      );
+    } else {
+      setNewPassage(
+        (prevPassage) =>
+          ({
+            ...prevPassage,
+            [name]: value,
+          } as typeof newPassage)
+      );
+    }
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    setNewPassage({
+      stock: 0,
+      price: 0,
+      numberSeat: [],
+      service: "",
+      companyId: "",
+      origin: "",
+      destination: "",
+      departureDate: "",
+      departureTime: "",
+      arrivalDate: "",
+      arrivalTime: "",
+      duration: "",
+      img: "",
+    });
   };
 
   return (
@@ -64,7 +156,7 @@ export default function CadPassages(props: any) {
       <div className="relative mb-6 flex min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-100 shadow-lg">
         <div className="mb-0 rounded-t bg-white px-6 py-6">
           <div className="flex justify-between  text-center">
-            <h6 className="flex text-lg font-bold text-blueGray-700">Detalles del viaje</h6>
+            <h6 className="flex text-lg font-bold text-blueGray-700">Crear Viaje.</h6>
             <button
               className="relative mr-1 w-auto rounded bg-blueGray-700 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blueGray-600"
               type="button"
@@ -87,12 +179,14 @@ export default function CadPassages(props: any) {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Origen
+                    PRECIO:
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.origin : ""}
+                    name="price"
+                    value={newPassage.price}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -102,12 +196,14 @@ export default function CadPassages(props: any) {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Destino
+                    ASIENTOS DISPONIBLES:
                   </label>
                   <input
-                    type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.destination : ""}
+                    type="number"
+                    name="stock"
+                    value={newPassage.stock}
+                    onChange={handleChange}
                   />
                 </div>
               </div>

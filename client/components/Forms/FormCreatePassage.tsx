@@ -106,7 +106,13 @@ export default function FormCreatePassage() {
         <div className="flex justify-between">
           <section>
             <label htmlFor="">PRECIO: </label>
-            <input type="text" name="price" value={newPassage.price} onChange={handleChange} />
+            <input
+              type="text"
+              className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+              name="price"
+              value={newPassage.price}
+              onChange={handleChange}
+            />
             <small>{""}</small>
           </section>
           <section>
@@ -214,9 +220,11 @@ export default function FormCreatePassage() {
           <section>
             <label htmlFor="">EMPRESA: </label>
             <select name="companyId" value={newPassage.companyId} onChange={handleChange}>
-              {companies?.map((company, index) => {
+
+              {companies?.map((company, i) => {
                 return (
-                  <option key={index} value={company.id}>
+                  <option key={i} value={company.id}>
+
                     {company.name}
                   </option>
                 );
