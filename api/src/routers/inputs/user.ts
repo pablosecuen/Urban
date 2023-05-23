@@ -54,6 +54,56 @@ const router = Router();
  */
 router.post("/", newUserValidated, newUser);
 
+/**
+ * @swagger
+ *
+ * /delivery-ratings/{userId}/{deliveryId}:
+ *   post:
+ *     summary: Crear una nueva calificación de entrega
+ *     description: Crea una nueva calificación para un repartidor de entrega
+ *     tags:
+ *       - Calificaciones de entrega
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: deliveryId
+ *         required: true
+ *         description: ID de la entrega
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/DeliveryRatingInput'
+ *     responses:
+ *       '200':
+ *         description: Calificación creada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID de la calificación creada
+ *       '400':
+ *         description: Error al crear la calificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
 router.post("/rating/delivery/:userId/:deliveryId", newRatingValidator, newDeliveryRating);
 
 router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newChauffeurRating);
