@@ -15,26 +15,34 @@ import {
   isPasswordValid,
   isPhoneValid,
 } from "./validators";
+import createHttpError from "http-errors";
+import Joi from "joi";
 
-// Middleware de validación de datos
+const messages = {
+  "string.base": "El valor debe ser una cadena de texto",
+  "string.email": "El correo electrónico no es válido",
+  "string.max": "El valor no puede tener más de {#limit} caracteres",
+  // Agrega aquí otros mensajes personalizados para las validaciones que necesites
+};
+
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const data: UserToRegister = req.body;
 
-    const validations = [
-      { field: "firstName", validator: isFirstNameValid },
-      { field: "lastName", validator: isNameValid },
-      { field: "password", validator: isPasswordValid },
-      { field: "email", validator: isEmailValid },
-    ];
+    const schema = Joi.object({
+      firstName: Joi.string().required().max(50).messages(messages),
+      lastName: Joi.string().required().max(50).messages(messages),
+      password: Joi.string().required().messages(messages),
+      email: Joi.string().email().required().messages(messages),
+    });
 
-    for (const validation of validations) {
-      validation.validator(req, res);
+    const { error } = schema.validate(data);
+    if (error) {
+      throw createHttpError(400, error.message);
     }
-
     next();
   } catch (error) {
-    next(error); // Pasar el error al siguiente middleware
+    next(error);
   }
 };
 
