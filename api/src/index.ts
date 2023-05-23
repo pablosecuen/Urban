@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import session from "express-session";
 import dotenv from "dotenv";
 import router from "./routers";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
-import createError, { HttpError } from "http-errors";
+import { HttpError } from "http-errors";
 import { swaggerSpec } from "./swaggerOptions";
 
 dotenv.config();
@@ -24,7 +24,7 @@ app.use(
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use((_req, res, next) => {
+app.use((_req: Request, res: Response, next: NextFunction) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3001");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -37,9 +37,9 @@ app.use((_req, res, next) => {
 
 app.use(express.json());
 
-app.use((req, res, next) => {
+app.use((req: Request, _res: Response, next: NextFunction) => {
   // Recorrer el cuerpo de la solicitud y convertir los valores a minúsculas e ignora cualquier key que tenga Id para evitar problemas
-  const convertToLowerCase = (obj) => {
+  const convertToLowerCase = (obj: any) => {
     Object.keys(obj).forEach((key) => {
       if (typeof obj[key] === "object") {
         convertToLowerCase(obj[key]);
@@ -55,12 +55,12 @@ app.use((req, res, next) => {
 
 app.use("/", router);
 
-app.use((error: unknown, _req, res, _next) => {
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   console.error(error);
   if (error instanceof HttpError) {
-    const statusCode = error.statusCode || 500;
-    const errorMessage = error.message || "Ocurrió un error";
-    const errorResponse = {
+    const statusCode: number = error.statusCode || 500;
+    const errorMessage: string = error.message || "Ocurrió un error";
+    const errorResponse: object = {
       error: {
         code: statusCode,
         message: errorMessage,
@@ -68,7 +68,7 @@ app.use((error: unknown, _req, res, _next) => {
     };
     return res.status(statusCode).json(errorResponse);
   }
-  const errorResponse = {
+  const errorResponse: object = {
     error: {
       code: 500,
       message: "Ocurrió un error",
