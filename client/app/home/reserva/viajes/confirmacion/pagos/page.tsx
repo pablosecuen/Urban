@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 export default function Pagos() {
   return (
-    <div className="flex w-4/5 flex-col items-center justify-center gap-4 rounded-3xl border-2 py-20 text-center shadow-2xl shadow-black/40 lg:p-10">
+    <div className="flex w-4/5  flex-col items-center justify-center gap-4 rounded-3xl border-2 bg-white py-20 text-center shadow-2xl shadow-black/40 lg:p-10">
       <BtnMp />
       <button className="w-48">Bancolombia</button>
       <button className="w-48">Generar ticket Efecty</button>
