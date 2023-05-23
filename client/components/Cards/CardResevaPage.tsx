@@ -74,7 +74,7 @@ export default function Reserva() {
 
   return (
     <>
-      <form className="flex flex-col items-center justify-center gap-6 pb-16 pt-12">
+      <form className="flex flex-col items-center justify-center gap-6 bg-white pb-16 pt-12">
         <div className="flex w-full items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           <Select
