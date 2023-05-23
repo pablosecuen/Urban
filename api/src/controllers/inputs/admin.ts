@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { db } from "../../connection/connection";
-import { AdminStatus } from "../../schema/adminStatus";
 import createHttpError from "http-errors";
+import firebase from "firebase-admin";
 
 /**
  *  Controlador para adminStatus
@@ -71,6 +71,26 @@ export const updateStatusVehicle = async (req: Request, res: Response, next: Nex
     }
     await db.collection("chauffeur").doc(id).update({ status: true });
     res.status(200).json({ message: "Vehiculo habilitado correctamente" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateSeatPassage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id: string = req.params.id;
+    const docRef = await db.collection("passages").doc(id).get();
+    if (!docRef.exists) {
+      throw createHttpError(404, "No se encontró el pasaje");
+    }
+    await db
+      .collection("passages")
+      .doc(id)
+      .update({
+        numberSeat: firebase.firestore.FieldValue.arrayUnion(req.body.numberSeat),
+      });
+
+    res.status(200).json({ message: "Pasaje actualizado correctamente" });
   } catch (error) {
     next(error);
   }
