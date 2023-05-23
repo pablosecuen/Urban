@@ -27,7 +27,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center lg:flex-row">
+    <div className="flex flex-col items-center justify-center  lg:flex-row">
       <GoogleOAuthProvider
         clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
       >

@@ -16,8 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="">
-          <Providers>{children}</Providers>
+        <main className="bg-slate-200">
+          <Providers>
+            <div>{children}</div>
+          </Providers>
         </main>
       </body>
     </html>
