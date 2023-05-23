@@ -266,6 +266,122 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+        AllPassageResponse: {
+          type: "object",
+          properties: {
+            id: {
+              type: "string",
+              description: "ID del pasaje",
+            },
+            departureTime: {
+              type: "string",
+              description: "Hora de salida",
+            },
+            img: {
+              type: "string",
+              description: "URL de la imagen del pasaje",
+            },
+            destination: {
+              type: "string",
+              description: "Destino del pasaje",
+            },
+            arrivalDate: {
+              type: "string",
+              description: "Fecha de llegada",
+            },
+            duration: {
+              type: "string",
+              description: "Duración del viaje",
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              description: "Fecha de creación del pasaje",
+            },
+            deleted: {
+              type: "boolean",
+              description: "Indicador de eliminación del pasaje",
+            },
+            price: {
+              type: "number",
+              description: "Precio del pasaje",
+            },
+            arrivalTime: {
+              type: "string",
+              description: "Hora de llegada",
+            },
+            departureDate: {
+              type: "string",
+              description: "Fecha de salida",
+            },
+            status: {
+              type: "boolean",
+              description: "Estado del pasaje",
+            },
+            origin: {
+              type: "string",
+              description: "Origen del pasaje",
+            },
+            companyId: {
+              type: "string",
+              description: "ID de la compañía",
+            },
+            stock: {
+              type: "integer",
+              description: "Stock disponible",
+            },
+            service: {
+              type: "string",
+              description: "Tipo de servicio del pasaje",
+            },
+            numberSeat: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+              description: "Lista de asientos disponibles",
+            },
+            companyData: {
+              type: "object",
+              properties: {
+                createdAt: {
+                  type: "string",
+                  format: "date-time",
+                  description: "Fecha de creación de la compañía",
+                },
+                name: {
+                  type: "string",
+                  description: "Nombre de la compañía",
+                },
+                evaluation: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      comment: {
+                        type: "string",
+                        description: "Comentario de evaluación",
+                      },
+                      userId: {
+                        type: "string",
+                        description: "ID del usuario que hizo la evaluación",
+                      },
+                      rating: {
+                        type: "number",
+                        description: "Puntuación de la evaluación",
+                      },
+                    },
+                  },
+                  description: "Lista de evaluaciones de la compañía",
+                },
+                rating: {
+                  type: "number",
+                  description: "Puntuación promedio de la compañía",
+                },
+              },
+            },
+          },
+        },
       },
       securitySchemes: {
         BearerAuth: {
