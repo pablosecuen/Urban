@@ -129,13 +129,18 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             )}
           </section>
           <div className="flex flex-col gap-2">
-            <section className="text-center text-xl font-semibold">5 ESTRELLAS</section>
-            <section className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2 border border-black">
+            <section className="text-center text-xl font-semibold text-amber-700">5 ESTRELLAS</section>
+            <section className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2">
               {passage?.companyData?.evaluation?.map((e) => {
                 return (
-                  <p className="rounded-lg border-2 bg-gray-300 py-1 text-center ">
-                    {e.comment}
-                  </p>
+                  <article className="flex flex-col w-full rounded-md bg-gray-100 py-1 text-left px-2"><div className="flex gap-2">
+                    <p className="font-semibold text-sm text-slate-800">USUARIO</p>
+                    <span className="font-semibold text-sm text-amber-700	">{e.rating} estrellas</span>
+                  </div>
+                    <small className="text-slate-800">
+                      {e.comment}
+                    </small>
+                  </article>
                 );
               })}
             </section>
