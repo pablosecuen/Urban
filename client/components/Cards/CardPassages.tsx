@@ -196,15 +196,18 @@ export default function CadPassages(props: any) {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    ASIENTOS DISPONIBLES:
+                    TIPO DE SERVICIO:
                   </label>
-                  <input
+                  <select
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    type="number"
-                    name="stock"
-                    value={newPassage.stock}
+                    name="service"
+                    value={newPassage.service}
                     onChange={handleChange}
-                  />
+                  >
+                    <option value="semi-cama">Semi-cama</option>
+                    <option value="cama">Cama</option>
+                    <option value="cama-ejecutivo">Cama-ejecutivo</option>
+                  </select>
                 </div>
               </div>
               <div className="w-full px-4 lg:w-6/12">
@@ -352,26 +355,6 @@ export default function CadPassages(props: any) {
                   <option value="3">4 horas</option>
                   <option value="3">5 horas</option>
                   <option value="3">6 horas</option>
-                </select>
-              </div>
-            </div>
-            <div className="w-full px-4 lg:w-6/12">
-              <div className="relative mb-3 w-full">
-                <label
-                  className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
-                  htmlFor="grid-password"
-                >
-                  TIPO DE SERVICIO:
-                </label>
-                <select
-                  className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                  name="service"
-                  value={newPassage.service}
-                  onChange={handleChange}
-                >
-                  <option value="semi-cama">Semi-cama</option>
-                  <option value="cama">Cama</option>
-                  <option value="cama-ejecutivo">Cama-ejecutivo</option>
                 </select>
               </div>
             </div>
