@@ -15,7 +15,7 @@ export default function SearchResults({ params }: { params: { slug: string } }) 
     localidad.replace(/^\w/, (c: any) => c.toUpperCase())
   );
   return (
-    <div className=" h-full w-full rounded-3xl p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
+    <div className=" h-full w-full rounded-3xl  bg-white p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
       <div className="flex w-full flex-col gap-4">
         <h1 className="text-center text-xl text-blue">
           Opciones encontradas desde {capitalizedString[0]} hasta {capitalizedString[1]}
