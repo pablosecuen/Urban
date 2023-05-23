@@ -213,12 +213,55 @@ export default function CadPassages(props: any) {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Fecha de salida
+                    ORIGEN:
+                  </label>
+                  <select
+                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                    name="origin"
+                    value={newPassage.origin}
+                    onChange={handleChange}
+                  >
+                    <option value="jardin">Jardin</option>
+                    <option value="amaga">Amaga</option>
+                    <option value="medellin">Medellin</option>
+                  </select>
+                </div>
+              </div>
+              <div className="w-full px-4 lg:w-6/12">
+                <div className="relative mb-3 w-full">
+                  <label
+                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    DESTINO:
+                  </label>
+                  <select
+                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                    name="destination"
+                    value={newPassage.destination}
+                    onChange={handleChange}
+                  >
+                    <option value="jardin">Jardin</option>
+                    <option value="amaga">Amaga</option>
+                    <option value="medellin">Medellin</option>
+                  </select>
+                </div>
+              </div>
+              <div className="w-full px-4 lg:w-6/12">
+                <div className="relative mb-3 w-full">
+                  <label
+                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    FECHA DE SALIDA:
                   </label>
                   <input
-                    type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.departureDate : ""}
+                    type="date"
+                    name="arrivalDate"
+                    value={newPassage.arrivalDate}
+                    onChange={handleChange}
+                    disabled={false}
                   />
                 </div>
               </div>
@@ -228,42 +271,15 @@ export default function CadPassages(props: any) {
                     className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Fecha de llegada
+                    FECHA DE LLEGADA:
                   </label>
                   <input
-                    type="text"
                     className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.arrivalDate : ""}
-                  />
-                </div>
-              </div>
-              <div className="w-full px-4 lg:w-6/12">
-                <div className="relative mb-3 w-full">
-                  <label
-                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    Duración del viaje
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.duration : ""}
-                  />
-                </div>
-              </div>
-              <div className="w-full px-4 lg:w-6/12">
-                <div className="relative mb-3 w-full">
-                  <label
-                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    Numero de butaca
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                    defaultValue={selectedPassage ? selectedPassage.numberSeat : ""}
+                    type="date"
+                    name="departureDate"
+                    value={newPassage.departureDate}
+                    onChange={handleChange}
+                    disabled={false}
                   />
                 </div>
               </div>
