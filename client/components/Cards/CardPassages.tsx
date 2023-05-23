@@ -283,6 +283,54 @@ export default function CadPassages(props: any) {
                   />
                 </div>
               </div>
+              <div className="w-full px-4 lg:w-6/12">
+                <div className="relative mb-3 w-full">
+                  <label
+                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    HORARIO DE SALIDA:
+                  </label>
+                  <select
+                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                    name="arrivalTime"
+                    value={newPassage.arrivalTime}
+                    onChange={handleChange}
+                  >
+                    {times?.map((i) => {
+                      return (
+                        <option key={i} value={i}>
+                          {i}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+              <div className="w-full px-4 lg:w-6/12">
+                <div className="relative mb-3 w-full">
+                  <label
+                    className="mb-2 block text-xs font-bold uppercase text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    HORARIO DE LLEGADA:
+                  </label>
+                  <select
+                    className="w-full rounded border-0 bg-white px-3 py-3 text-sm text-blueGray-600 placeholder-blueGray-300 shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                    name="departureTime"
+                    value={newPassage.departureTime}
+                    onChange={handleChange}
+                  >
+                    {times?.map((i) => {
+                      return (
+                        <option key={i} value={i}>
+                          {i}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
             </div>
             <div className="w-full px-4 lg:w-6/12">
               <div className="relative mb-3 w-full">
