@@ -9,13 +9,19 @@ import {
   HiShoppingBag,
   HiOutlineInbox,
 } from "react-icons/hi";
+import Image from "next/image";
 
 // Icons Footer
 import sos from "./icons/sos.png";
 import escudo from "./icons/escudo.png";
 import planet from "./icons/planet.png";
 import contract from "./icons/contract.png";
-
+import bus from "./icons/slider/bus.png";
+import carpool from "./icons/slider/carpool.png";
+import delivery from "./icons/slider/delivery.png";
+import emergency from "./icons/slider/emergency.png";
+import mercadopago from "./icons/slider/mercadopago.png";
+import { SliderItem } from "@component/app/types/Slider";
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * E X P O R T S * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 //  NavBar para renderizar elementos
@@ -203,3 +209,16 @@ const generarArraysPlantasBus = () => {
 
 export const plantaBaja = generarArraysPlantasBus()[0];
 export const plantaAlta = generarArraysPlantasBus()[1];
+
+
+// infinite slider home section
+
+export const slider: SliderItem[] = [
+  // Replace these with your own logos or spans
+  { id: "1", logo: bus  , description: "Buses intermunicipales" },
+  { id: "2", logo: carpool  , description: "Comparte vehiculo" },
+  { id: "3", logo: delivery , description: "Entrega de mercancias on demand" },
+  { id: "4", logo: emergency , description: "Boton de emergencias" },
+  { id: "5", logo: mercadopago , description: "Pago online" },
+  // { id: 6, logo: 'Logo 6' },
+];
