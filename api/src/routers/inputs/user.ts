@@ -54,10 +54,160 @@ const router = Router();
  */
 router.post("/", newUserValidated, newUser);
 
+/**
+ * @swagger
+ *
+ * /delivery-ratings/{userId}/{deliveryId}:
+ *   post:
+ *     summary: Crear una nueva calificación de entrega
+ *     description: Crea una nueva calificación para un repartidor de entrega
+ *     tags:
+ *       - Calificaciones
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: deliveryId
+ *         required: true
+ *         description: ID de la entrega
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/DeliveryRatingInput'
+ *     responses:
+ *       '200':
+ *         description: Calificación creada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID de la calificación creada
+ *       '400':
+ *         description: Error al crear la calificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
 router.post("/rating/delivery/:userId/:deliveryId", newRatingValidator, newDeliveryRating);
 
+/**
+ * @swagger
+ *
+ * /chauffeur-ratings/{userId}/{chauffeurId}:
+ *   post:
+ *     summary: Crear una nueva calificación de distribuidor
+ *     description: Crea una nueva calificación para un distribuidor de entrega
+ *     tags:
+ *       - Calificaciones
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: chauffeurId
+ *         required: true
+ *         description: ID del distribuidor
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ChauffeurRatingInput'
+ *     responses:
+ *       '200':
+ *         description: Calificación creada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID de la calificación creada
+ *       '400':
+ *         description: Error al crear la calificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
 router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newChauffeurRating);
 
+/**
+ * @swagger
+ *
+ * /company-ratings/{ticketId}/{companyId}:
+ *   post:
+ *     summary: Crear una nueva calificación de compañía
+ *     description: Crea una nueva calificación para una compañía
+ *     tags:
+ *       - Calificaciones
+ *     parameters:
+ *       - in: path
+ *         name: ticketId
+ *         required: true
+ *         description: ID del ticket
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: companyId
+ *         required: true
+ *         description: ID de la compañía
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CompanyRatingInput'
+ *     responses:
+ *       '200':
+ *         description: Calificación creada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID de la calificación creada
+ *       '400':
+ *         description: Error al crear la calificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Descripción del error
+ */
 router.post("/rating/company/:ticketId/:companyId", newRatingValidator, newCompanyRating);
 
 router.post("/forgot-password", forgotPassword);
