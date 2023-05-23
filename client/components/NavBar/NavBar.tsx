@@ -112,7 +112,7 @@ export default function NavBar() {
           </nav>
         </>
       ) : (
-        <div className="flex h-16 w-full items-center justify-between bg-verde px-4 py-2 lg:py-0">
+        <div className="flex h-16 w-full items-center justify-between bg-gradient-to-r from-black via-slate-700  to-blue px-4 py-2 lg:py-0">
           <div>
             <Image
               src={logo}
@@ -133,7 +133,7 @@ export default function NavBar() {
                 >
                   <Link
                     href={link.route}
-                    className="flex items-center gap-1 text-sm font-semibold uppercase"
+                    className="flex items-center gap-1 text-sm font-semibold uppercase text-white"
                   >
                     <link.icon className="h-6 w-5 " />
                     {link.label}
