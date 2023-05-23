@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getAllCompanies } from "@component/Redux/company/companyActions";
 import { ThunkDispatch } from "redux-thunk";
+import axios from "axios";
 // components
 
 export default function CadPassages(props: any) {
@@ -87,8 +88,9 @@ export default function CadPassages(props: any) {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    await axios.post("http://localhost:3000/passage", newPassage);
     setNewPassage({
       stock: 0,
       price: 0,
