@@ -64,6 +64,13 @@ export const validateNewPassage = (data: any): ValidationResult => {
   return passageSchema.validate(data);
 };
 
+export const validateNewCompany = (data: any): ValidationResult => {
+  const companySchema: Schema = Joi.object({
+    name: Joi.string().required().min(5).max(20).messages(messages),
+  }).options({ abortEarly: false });
+  return companySchema.validate(data);
+};
+
 export const isNameValid = (req: Request, res: Response): void => {
   const name: string = req.body.lastName;
   if (typeof name !== "string") {
