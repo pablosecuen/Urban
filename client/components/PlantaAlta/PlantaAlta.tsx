@@ -1,11 +1,15 @@
-'use client'
-import Seat from "@component/assets/icons/svg/Seat";
+"use client";
 import React, { useEffect, useState } from "react";
-import { plantaBaja } from "../../assets/data";
-import { CardProfilePropsPassage } from "@component/app/types/Passages";
+import Seat from "@component/assets/icons/svg/Seat";
+import { plantaAlta } from "../../assets/data";
+import { Passagers } from "@component/app/types/Passages";
+import PassengerModal from "../modalPasajeros/ModalPasajeros";
 
-const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
+  const [selectedSeat, setSelectedSeat] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [remainingPassengers, setRemainingPassengers] = useState(passangers);
 
   const handleSeatToggle = (seatIndex: number) => {
     setSeatEnabled((prevSeats) => {
@@ -15,23 +19,40 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
     });
   };
 
+  console.log(passangers);
+
+  const handleSeatSelection = (seat: string) => {
+    if (!isSeatEnabled(plantaAlta.indexOf(seat))) {
+      return; // Skip opening the modal for disabled seats
+    }
+    setSelectedSeat(seat);
+
+    setIsModalOpen(true);
+  };
+
+  // const handleModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
+
   useEffect(() => {
-    setSeatEnabled(Array(plantaBaja.length).fill(false));
+    setSeatEnabled(Array(plantaAlta.length).fill(false));
   }, []);
 
-const numberSeat = selectedPassage?.numberSeat ?? [];
-  const isSeatSelected = (index: number) => {
-    console.log(selectedPassage?.numberSeat.includes(`${plantaBaja[index+1]}`));
-    
-    return plantaBaja.includes(`b${numberSeat[index]}`);
+  const numberSeat = enabledSeats?.numberSeat ?? [];
+  const isSeatEnabled = (index: number) => {
+    const seat = plantaAlta[index];
+    return numberSeat.includes(seat);
   };
-if(!selectedPassage){
-  return <div>Loading</div>
-}
+
+  if (!enabledSeats) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div className="flex w-4/5 flex-col gap-4">
+      planta alta
       <ul className="grid grid-cols-5 gap-2">
-        {plantaBaja.map((seat, index) => (
+        {plantaAlta.map((seat, index) => (
           <React.Fragment key={index}>
             {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
             <li className="relative">
@@ -41,16 +62,17 @@ if(!selectedPassage){
                 id={`checkbox-${seat}`}
                 className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
                 onClick={() => handleSeatToggle(index)}
-                disabled={isSeatSelected(index)}
+                disabled={isSeatEnabled(index)}
               />
               <label
                 className={`cursor-pointer ${
                   seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
                 }`}
                 htmlFor={`checkbox-${seat}`}
+                onClick={() => handleSeatSelection(seat)}
               >
                 <Seat
-                  fill={isSeatSelected(index) ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"}
+                  fill={isSeatEnabled(index) ? "#000000" : "#C0C0C0"}
                   width="30px"
                   height="36px"
                 />
@@ -59,8 +81,17 @@ if(!selectedPassage){
           </React.Fragment>
         ))}
       </ul>
+      {isModalOpen && (
+        <PassengerModal
+          enabledSeats={enabledSeats}
+          setIsModalOpen={setIsModalOpen}
+          isModalOpen={isModalOpen}
+          seat={selectedSeat}
+        
+        />
+      )}
     </div>
   );
 };
 
-export default PlantaBajaAdmin;
+export default PlantaAltaAdmin;
