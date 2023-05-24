@@ -1,3 +1,4 @@
+import { NumericLiteral } from "typescript";
 import { Company } from "./Company";
 
 export interface Passage {
@@ -42,4 +43,15 @@ export interface PassageToUpdate extends Partial<PassageToRegister> {
 
 export interface CardProfilePropsPassage {
   selectedPassage: Passage | null;
+
+}
+
+export interface CardProfilePropsEnabledSeats{
+  enabledSeats: Passage | null;
+
+}
+
+export interface Passagers {
+  enabledSeats: Passage | null;
+  passangers: Number
 }
