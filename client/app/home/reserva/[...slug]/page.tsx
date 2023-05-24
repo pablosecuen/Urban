@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 export default function SearchResults({ params }: { params: { slug: string } }) {
   const localilades: any = params.slug;
-  console.log(localilades);
+
   const capitalizedString = localilades.map((localidad: any) =>
     localidad.replace(/^\w/, (c: any) => c.toUpperCase())
   );
