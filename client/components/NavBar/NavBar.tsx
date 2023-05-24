@@ -39,15 +39,14 @@ export default function NavBar() {
     <header className="  bg-verde">
       {isMobile ? (
         <>
-          <Image
-            src={logo}
-            alt="logo"
-            className="absolute left-0 top-1 z-10 h-10 w-auto  self-center"
-            width={50}
-            height={50}
-          />
-
-          <nav className="relative flex h-12 w-full justify-between bg-verde ">
+          <nav className="fixed z-50 h-12 w-full justify-between  bg-gradient-to-r from-black via-slate-700  to-blue ">
+            <Image
+              src={logo}
+              alt="logo"
+              className=" flex h-full w-auto items-center justify-center "
+              width={50}
+              height={50}
+            />
             <button className="bg-transparent text-black shadow-none" onClick={toggleMenu}>
               {showMenu ? (
                 <HiMenuAlt3 className="absolute right-0 top-0  z-50 mr-4 h-full w-1/12 cursor-pointer  text-xl md:hidden" />
@@ -57,18 +56,18 @@ export default function NavBar() {
             </button>
 
             <div
-              className={`absolute left-0 top-0  h-screen bg-black/30 transition-all duration-700 ease-in-out ${
+              className={` fixed left-0 top-0 h-screen w-full bg-black/30 transition-all duration-700 ease-in-out ${
                 !showMenu ? "hidden opacity-0" : "opacity-100"
               }`}
             ></div>
             <div
-              className={`absolute left-0 top-0 z-20 h-screen w-0 overflow-hidden  bg-white transition-all  duration-1000 ease-in-out md:hidden ${
+              className={`absolute left-0 top-0 z-20 h-screen w-0 overflow-hidden bg-black  transition-all  duration-1000 ease-in-out md:hidden ${
                 showMenu && "w-1/2 shadow-custom-md"
               }`}
             >
-              <ul className="flex flex-col items-center p-4">
+              <ul className="flex flex-col items-start bg-black p-4">
                 {user ? (
-                  <li className="flex flex-col items-center justify-between py-2 ">
+                  <div className="flex w-full flex-col items-center justify-between  py-2 text-white">
                     <Image
                       src={user?.img}
                       alt={user?.name}
@@ -82,9 +81,9 @@ export default function NavBar() {
                         Logout
                       </button>
                     </div>
-                  </li>
+                  </div>
                 ) : (
-                  <li className="my-2 flex items-center ">
+                  <li className="my-2 flex items-center  ">
                     <Image
                       src="/placeholder.png"
                       alt="placeholder"
@@ -93,14 +92,14 @@ export default function NavBar() {
                       className="h-6 w-6 rounded-full"
                     />
                     <span className="mx-2">Guest</span>
-                    <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white">
+                    <Link href="/" className="rounded bg-blue px-2 py-1 text-center text-white ">
                       Login
                     </Link>
                   </li>
                 )}
 
                 {linksMobile.map((link) => (
-                  <li key={link.id} className="my-2 flex items-center ">
+                  <li key={link.id} className="my-2 flex items-start bg-black text-white">
                     <link.icon className="h-6 w-6" />
                     <Link href={link.route} onClick={toggleMenu}>
                       <span className="mx-2">{link.label}</span>
