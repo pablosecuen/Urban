@@ -1,7 +1,10 @@
 "use client";
+import { savePassengerData } from "@component/Redux/payment/paymentSlice";
 import { PassengerFormData, PassengerFormModalProps } from "@component/app/types/Passenger";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
   isModalOpen,
@@ -22,6 +25,13 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
     cc: "",
     quantity: "",
   });
+  const dispatch = useDispatch();
+  const existingData = useSelector((state: any) => state.payment?.passengerData);
+
+  useEffect(() => {
+    // Aquí puedes realizar cualquier acción que necesites cuando cambie `existingData`
+    console.log("existingData has changed:", existingData);
+  }, [existingData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -30,39 +40,20 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
       [name]: value,
     }));
   };
-
-  // Elimina la línea de importación de sessionStorage
-
-  // ...
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Perform form validation here
 
-    // Get existing passenger data from sessionStorage
-    const existingData = sessionStorage.getItem("passengerData");
+    const updatedPassengerData = [...existingData, { ...formData, seat, quantity: "1" }];
 
-    // Parse existing data as JSON or initialize an empty array
-    const existingPassengerData = existingData ? JSON.parse(existingData) : [];
+    dispatch(savePassengerData(updatedPassengerData));
 
-    // Concatenate new form data with existing data
-    const updatedPassengerData = [...existingPassengerData, { ...formData, seat, quantity: "1" }];
-
-    // Save updated passenger data to sessionStorage
-    sessionStorage.setItem("passengerData", JSON.stringify(updatedPassengerData));
-
-    // Mark the selected seat as occupied
     const updatedEnabledSeats = {
       ...enabledSeats,
       numberSeat: [...enabledSeats.numberSeat, seat],
     };
 
-    // Pass the updated enabled seats back to the parent component
-    // You may need to define a prop to pass the function to update the enabled seats
+    setIsModalOpen(false); 
 
-    setIsModalOpen(false); // Close the modal
-
-    // Reset the form data
     setFormData({
       nombre: "",
       apellido: "",
@@ -78,9 +69,7 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
     });
   };
 
-  // ...
 
-  // console.log(`a${enabledSeats?.numberSeat}`);
   const handleCloseModal = () => {
     setIsModalOpen(!isModalOpen);
   };
