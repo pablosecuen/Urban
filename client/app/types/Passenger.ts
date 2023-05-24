@@ -1,3 +1,5 @@
+import { Passage } from "./Passages";
+
 export interface PassengerFormData {
     nombre: string;
     apellido: string;
@@ -10,13 +12,14 @@ export interface PassengerFormData {
     telefono: string;
     email: string;
     cc: string;
-   
   }
   
   export interface PassengerFormModalProps {
-    isOpen: boolean;
-    onFormSubmit: (formData: PassengerFormData) => void;
-    onCancel: () => void;
-    seat: string;
+    isModalOpen: boolean;
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    seat: string | null;
+    enabledSeats: Passage;
+
+
   }
   
