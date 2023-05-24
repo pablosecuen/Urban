@@ -1,7 +1,8 @@
+'use client'
 import React from "react";
-import PlantaAltaAdmin from "../PlantaAltaAdmin/PlantaAltaAdmin";
-import PlantaBajaAdmin from "../PlantaBajaAdmin/PlantaBajaAdmin";
 import { CardProfilePropsPassage } from "@component/app/types/Passages";
+import PlantaAlta from "@component/components/PlantaAlta/PlantaAlta";
+import PlantaBaja from "@component/components/PlantaBaja/PlantaBaja";
 
 const SeatManagement: React.FC<CardProfilePropsPassage>  = ({selectedPassage}) => {
   return (
@@ -9,10 +10,10 @@ const SeatManagement: React.FC<CardProfilePropsPassage>  = ({selectedPassage}) =
       <h2 className="py-4 text-center">Seat Management</h2>
       <ul className="flex items-center justify-center gap-4">
         <li className="flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4">
-          <PlantaAltaAdmin selectedPassage={selectedPassage}/>
+          <PlantaAlta selectedPassage={selectedPassage}/>
         </li>
         <li className="flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4">
-          <PlantaBajaAdmin selectedPassage={selectedPassage}/>
+          <PlantaBaja selectedPassage={selectedPassage}/>
         </li>
       </ul>
     </div>
