@@ -13,7 +13,7 @@ export interface Passage {
   departureTime: string;
   arrivalTime: string;
   quantity: number;
-  numberSeat: number;
+  numberSeat: string[];
   price: number;
   stock: number;
   img: string;
