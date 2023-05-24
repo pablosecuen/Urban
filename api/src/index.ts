@@ -6,6 +6,7 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import { HttpError } from "http-errors";
 import { swaggerSpec } from "./swaggerOptions";
+import compression from "compression";
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use(
 );
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(compression());
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3001");

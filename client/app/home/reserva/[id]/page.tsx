@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Confirmacion({ params }: { params: { id: string } }) {
   const { id } = params;
   return (
-    <div className="flex w-11/12 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 py-4 shadow-xl shadow-black/40 xl:h-[510px] xl:justify-between">
+    <div className="flex w-11/12 flex-col  items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[510px] xl:justify-between">
       <h3 className="text-center font-bold lg:text-xl ">Pasaje disponible!</h3>
       <CardConfirmacionViajes id={id} />
 
@@ -21,7 +21,7 @@ export default function Confirmacion({ params }: { params: { id: string } }) {
         <p className="w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4">
           Tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
         </p>
-        <Link href={`/home/reserva/${id}}/buslayout`}  className="flex justify-center ">
+        <Link href={`/home/reserva/${id}}/buslayout`} className="flex justify-center ">
           <button>Siguiente paso</button>
         </Link>
       </div>

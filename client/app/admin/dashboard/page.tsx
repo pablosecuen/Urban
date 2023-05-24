@@ -17,7 +17,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="mt-4 flex flex-wrap ">
+        <div className="mt-4 flex w-full flex-wrap ">
           <div className="mb-12 w-full px-4 xl:mb-0 xl:w-8/12">
             <CardLineChart />
           </div>
@@ -27,7 +27,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex flex-wrap">
-        <div className="mt-4 flex flex-wrap ">
+        <div className="mt-4 flex w-full flex-wrap ">
           <div className="mb-12 w-full px-4 xl:mb-0 xl:w-8/12">
             <CardGrossIncomeChart />
           </div>
@@ -36,7 +36,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex flex-wrap">
+      <div className="mt-4 flex w-full flex-wrap">
         <div className="mb-12 w-full px-4 xl:mb-0 xl:w-8/12">
           <CardPageVisits />
         </div>

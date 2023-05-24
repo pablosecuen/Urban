@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-free/css/all.css";
-import axios from "axios";
 import CardStats from "../Cards/CardStats";
+import city from "../../../client/assets/imagenes/city.webp";
 
 import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { ThunkDispatch } from "redux-thunk";
 
 import { getAllUsers } from "@component/Redux/user/userActions";
 import { getAllTravels } from "@component/Redux/travel/travelActions";
+import Image from "next/image";
 
 config.autoAddCss = false;
 
@@ -82,7 +83,12 @@ export default function HeaderStats(): JSX.Element {
     <>
       {/* Header */}
 
-      <div className="relative bg-blueGray-800 pb-32 pt-12 md:pt-32">
+      <div className="relative overflow-hidden pb-32 pt-12 md:pt-32">
+        <Image
+          alt=""
+          src={city}
+          className="absolute -top-[600px]  w-full brightness-75 contrast-150 saturate-150"
+        />
         <div className="mx-auto w-full px-4 md:px-10">
           <div>
             {/* Card stats */}

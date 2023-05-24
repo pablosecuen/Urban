@@ -77,7 +77,7 @@ export default function NavBar() {
                       className="w-1/2 rounded-full border-2 border-blue"
                     />
                     <div className="flex flex-col gap-2 py-2">
-                      <small className="mx-auto text-center">{user?.name}</small>
+                      <small className="mx-auto text-center text-white">{user?.name}</small>
                       <button className="text-blue-500 text-sm" onClick={handleLogout}>
                         Logout
                       </button>
@@ -112,7 +112,7 @@ export default function NavBar() {
           </nav>
         </>
       ) : (
-        <div className="flex h-16 w-full items-center justify-between bg-verde px-4 py-2 lg:py-0">
+        <div className="flex h-16 w-full items-center justify-between bg-gradient-to-r from-black via-slate-700  to-blue px-4 py-2 lg:py-0">
           <div>
             <Image
               src={logo}
@@ -133,7 +133,7 @@ export default function NavBar() {
                 >
                   <Link
                     href={link.route}
-                    className="flex items-center gap-1 text-sm font-semibold uppercase"
+                    className="flex items-center gap-1 text-sm font-semibold uppercase text-white"
                   >
                     <link.icon className="h-6 w-5 " />
                     {link.label}
@@ -150,7 +150,7 @@ export default function NavBar() {
                       height={50}
                       className=" rounded-full border-2 border-blue lg:h-12 lg:w-12"
                     />
-                    <span className="mx-2 font-semibold lg:text-sm">{user?.name}</span>
+                    <span className="mx-2 font-semibold text-white lg:text-sm">{user?.name}</span>
                     <button
                       className="rounded bg-blue px-2 py-1 text-center text-white lg:w-auto"
                       onClick={handleLogout}

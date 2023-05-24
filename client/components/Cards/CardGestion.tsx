@@ -150,9 +150,9 @@ export default function CardGestion() {
               onClick={(e) => e.stopPropagation()}
             >
               {selectedTicket && (
-                <article className="p-6 ">
-                  <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
-                  <h2 className="mb-4 text-center text-2xl font-bold">Valoración</h2>
+                <article className="flex flex-col items-center justify-center gap-4 p-6 ">
+                  <Image src={logo} alt="logo" className="mx-auto  w-16  " />
+                  <h2 className=" text-center text-2xl font-bold">Valoración</h2>
                   <div className="flex flex-col items-center justify-center ">
                     <RatingStars
                       onClickFunction={onClickFuntionToRatingStars}
@@ -160,14 +160,16 @@ export default function CardGestion() {
                     />
                     <textarea
                       onChange={handleChangeValuationComment}
-                      className="p- border"
+                      className=" border"
                       cols={30}
                       rows={4}
                       value={valuationData.comment}
                       placeholder="tu feedback nos ayuda a mejorar la calidad de nuestro servicio"
                     />
                   </div>
-                  <button onClick={sendValuation}>Enviar Valoración</button>
+                  <button onClick={sendValuation} className="w-1/2">
+                    Enviar Valoración
+                  </button>
                 </article>
               )}
             </div>

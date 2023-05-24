@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 export default function Buslayout() {
   const passage = useSelector((state: RootState) => state.passage.passageById);
 
-
   return (
+
     <SeatManagementClient selectedPassage={passage}  />
   )
+
 }

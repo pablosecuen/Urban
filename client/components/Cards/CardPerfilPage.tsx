@@ -34,14 +34,14 @@ export default function PerfilPage() {
   }
 
   return (
-    <div className=" rounded-xl shadow-xl shadow-black/40 xl:h-[600px]">
+    <div className=" rounded-xl  shadow-xl shadow-black/40 xl:h-[600px]">
       {/* Tabs */}
       <div className="flex  ">
         {pestañasHistorialPerfil.map((item, index) => (
           <div
             key={index}
-            className={`flex  w-full cursor-pointer items-center rounded-t-xl border border-gray-300 px-2 py-1 align-middle transition duration-500 md:py-1 lg:hover:bg-gray-300 xl:border-gray-200 ${
-              activeTab === `${item.name}` && "bg-blue font-semibold text-white"
+            className={`flex  w-full  cursor-pointer items-center rounded-t-xl border-2  px-2 py-1 align-middle transition duration-500 md:py-1 lg:hover:bg-gray-300 xl:border-gray-200 ${
+              activeTab === `${item.name}` && "?? bg-blue font-semibold text-white"
             }`}
             onClick={() => handleTabClick(`${item.name}`)}
           >
@@ -56,7 +56,7 @@ export default function PerfilPage() {
           {activeTab === `${item.name}` && (
             <div
               key={index}
-              className="text-35 bg-gray-white h-[570px] w-full overflow-hidden"
+              className="text-35 bg-gray-white  h-[570px] w-full overflow-hidden bg-white"
               title={item.title}
             >
               <h4 className="border-y-2 border-blue text-center text-lg font-semibold">{item.p}</h4>

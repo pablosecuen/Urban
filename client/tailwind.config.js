@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        menu: "url('/assets/imagenes/city.webp')",
+      },
       colors: {
         verde: "#e0ffcd",
         verdeurban: "#76F900",

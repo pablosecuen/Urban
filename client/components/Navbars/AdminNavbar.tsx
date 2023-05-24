@@ -1,11 +1,13 @@
 "use client";
+import Image from "next/image";
 import React from "react";
+
 
 import UserDropdown from "../Dropdowns/UserDropdown";
 
 export default function Navbar() {
   return (
-    <div className="flex justify-between">
+    <div className="relative flex justify-between">
       {/* Navbar */}
       <nav className="absolute left-0 top-0 z-10 flex w-full items-center bg-transparent p-4 md:flex-row md:flex-nowrap md:justify-start">
         <div className="mx-autp flex w-full flex-wrap items-center justify-between px-4 md:flex-nowrap md:px-10">

@@ -9,7 +9,6 @@ import getLocations from "../../services/api/locations";
 import ToastComponent from "../00-Toastify/ToastComponent";
 import { Location } from "@component/app/types/Select";
 
-
 export default function Reserva() {
   const router = useRouter();
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
@@ -75,7 +74,7 @@ export default function Reserva() {
 
   return (
     <>
-      <form className="flex flex-col items-center justify-center gap-5 pb-16 pt-12">
+      <form className="flex flex-col items-center justify-center gap-6 pb-16 pt-12">
         <div className="flex w-full items-center justify-center">
           <HiOutlineLocationMarker className="w-10 text-blue" />
           <Select
@@ -125,7 +124,7 @@ export default function Reserva() {
         <button
           onClick={handleSubmit}
           disabled={!isFormValid}
-          className={`transition_all w-1/2 self-center ${
+          className={`transition_all mt-4 w-1/2 self-center ${
             !isFormValid ? "!bg-gray-500" : "cursor-pointer"
           }`}
         >
