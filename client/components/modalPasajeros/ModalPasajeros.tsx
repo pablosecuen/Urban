@@ -4,10 +4,11 @@ import { PassengerFormData, PassengerFormModalProps } from "@component/app/types
 import React, { useState } from "react";
 
 const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
-  isOpen,
-  onFormSubmit,
-  onCancel,
+  isModalOpen,
+  setIsModalOpen,
   seat,
+  enabledSeats,
+  
 }) => {
   const [formData, setFormData] = useState<PassengerFormData>({
     nombre: "",
@@ -35,16 +36,45 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
     e.preventDefault();
     // Perform form validation here
 
-    // Save passenger data to sessionStorage
-    sessionStorage.setItem("passengerData", JSON.stringify(formData));
+    // Get existing passenger data from sessionStorage
+    const existingData = sessionStorage.getItem("passengerData");
 
+    // Parse existing data as JSON or initialize an empty array
+    const existingPassengerData = existingData ? JSON.parse(existingData) : [];
+
+    // Concatenate new form data with existing data
+    const updatedPassengerData = [...existingPassengerData, { ...formData, seat, quantity: "1" }];
+
+    // Save updated passenger data to sessionStorage
+    sessionStorage.setItem("passengerData", JSON.stringify(updatedPassengerData));
+
+    setIsModalOpen(false); //
     // Pass the form data to the parent component
-    onFormSubmit(formData);
+
+    // Reset the form data
+    setFormData({
+      nombre: "",
+      apellido: "",
+      nacionalidad: "",
+      tipoDocumento: "",
+      fechaNacimiento: "",
+      genero: "",
+      codigoArea: "",
+      telefono: "",
+      email: "",
+      cc: "",
+      quantity: "",
+    });
+  };
+
+  // console.log(`a${enabledSeats?.numberSeat}`);
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
     <>
-      {isOpen && (
+      {isModalOpen && (
         <div className="fixed left-1/2 top-1/2 z-50 h-[660px] w-96 -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-6 shadow-2xl shadow-black/40 ">
           <h2 className=" text-2xl font-bold">Información del pasajero</h2>
           <form onSubmit={handleSubmit}>
@@ -195,7 +225,7 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
             </div>
             {/* Continue adding the rest of the form fields */}
             <div className="flex justify-center gap-4 pt-8">
-              <button type="button" onClick={onCancel} className=" bg-blue px-4 py-2">
+              <button type="button" onClick={handleCloseModal} className=" bg-blue px-4 py-2">
                 Cancel
               </button>
               <button type="submit" className="bg-blue px-4 py-2 text-white">
