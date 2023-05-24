@@ -2,7 +2,45 @@ import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Passenger, Payment, Phone, TypeVehicle } from "../../types/types";
 import createHttpError from "http-errors";
 import { Request, Response, NextFunction } from "express";
-import { arrayRemove } from "firebase/firestore";
+import Joi, { Schema, ValidationResult } from "joi";
+
+const messages = {
+  "string.base": "El valor debe ser una cadena de texto",
+  "string.email": "El correo electrónico no es válido",
+  "string.max": "El valorde {#label} no puede tener más de {#limit} caracteres",
+};
+export const validateDataNewUser = (data: any): ValidationResult => {
+  const userSchema: Schema = Joi.object({
+    firstName: Joi.string().required().max(1).messages(messages),
+    lastName: Joi.string().required().max(1).messages(messages),
+    password: Joi.string().required().messages(messages),
+    email: Joi.string().email().required().messages(messages),
+  });
+
+  return userSchema.validate(data);
+};
+
+export const validateDataUpdatedUser = (data: any): ValidationResult => {
+  const userSchema: Schema = Joi.object({
+    cc: Joi.string().max(8).messages(messages),
+    gender: Joi.string().valid("masculino", "femenino", "prefiero no decir").messages(messages),
+    address: Joi.object({
+      postalCode: Joi.string().required().messages(messages),
+      location: Joi.string().required().messages(messages),
+      state: Joi.string().required().messages(messages),
+      street: Joi.string().required().messages(messages),
+      number: Joi.string().required().messages(messages),
+      department: Joi.string().required().messages(messages),
+    })
+      .required()
+      .messages(messages),
+    phone: Joi.object({
+      areaCode: Joi.string().required().messages(messages),
+      number: Joi.string().required().messages(messages),
+    }),
+  });
+  return userSchema.validate(data);
+};
 
 export const isNameValid = (req: Request, res: Response): void => {
   const name: string = req.body.lastName;
