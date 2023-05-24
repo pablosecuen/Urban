@@ -16,7 +16,6 @@ interface LoginProps {
 }
 
 export default function LandingPage() {
-  const userDataString = localStorage.getItem("user");
 
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
