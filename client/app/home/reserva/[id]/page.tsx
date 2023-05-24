@@ -21,9 +21,6 @@ export default function Confirmacion({ params }: { params: { id: string } }) {
         <p className="w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4">
           Tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
         </p>
-        <Link href={`/home/reserva/${id}}/buslayout`} className="flex justify-center ">
-          <button>Siguiente paso</button>
-        </Link>
       </div>
     </div>
   );
