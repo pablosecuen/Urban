@@ -1,6 +1,13 @@
-import CardConfirmacionViajes from "@component/components/Cards/CardConfirmacionReserva";
-import Link from "next/link";
+"use client";
+import CardConfirmacionReserva from "@component/components/Cards/CardConfirmacionReserva";
+
 import type { Metadata } from "next";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "@reduxjs/toolkit";
+import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
+import { RootState } from "@component/Redux/store/store";
 
 export const metadata: Metadata = {
   title: "Urban | Viajes | Confirmacion",
@@ -11,19 +18,26 @@ export const metadata: Metadata = {
 };
 
 export default function Confirmacion({ params }: { params: { id: string } }) {
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const route = useRouter();
   const { id } = params;
+  const handleClick = () => {
+    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
+    route.push(`/home/reserva/${id}}/buslayout`);
+  };
   return (
     <div className="flex w-11/12 flex-col  items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[510px] xl:justify-between">
       <h3 className="text-center font-bold lg:text-xl ">Pasaje disponible!</h3>
-      <CardConfirmacionViajes id={id} />
+      <CardConfirmacionReserva id={id} />
 
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4">
           Tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
         </p>
-        <Link href={`/home/reserva/${id}}/buslayout`} className="flex justify-center ">
-          <button>Siguiente paso</button>
-        </Link>
+
+        <button className="flex justify-center " onClick={handleClick}>
+          Siguiente paso
+        </button>
       </div>
     </div>
   );
