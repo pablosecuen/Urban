@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { UserToRegister, UserToUpdate } from "../../schema/user";
-import {
-  isAddressValid,
-  isCcValid,
-  isCeValid,
-  isGenderValid,
-  validateDataNewUser,
-  validateDataUpdatedUser,
-} from "./validators";
+import { validateDataNewUser, validateDataUpdatedUser } from "./validators";
 import createHttpError from "http-errors";
 
 export const newUserValidated = (req: Request, res: Response, next: NextFunction): void => {
