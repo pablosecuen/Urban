@@ -5,9 +5,13 @@ import { Request, Response, NextFunction } from "express";
 import Joi, { Schema, ValidationResult } from "joi";
 
 const messages = {
-  "string.base": "El valor debe ser una cadena de texto",
+  "string.base": "El valor {#label} debe ser una cadena de texto",
   "string.email": "El correo electrónico no es válido",
-  "string.max": "El valorde {#label} no puede tener más de {#limit} caracteres",
+  "string.max": "El valor de {#label} no puede tener más de {#limit} caracteres",
+  "string.min": "El valor de {#label} no puede tener menos de {#limit} caracteres",
+  "string.empty": "El valor de {#label} no puede estar vacío",
+  "string.valid": "El valor de {#label} no es válido",
+  "number.base": "El valor {#label} debe ser un numero",
 };
 export const validateDataNewUser = (data: any): ValidationResult => {
   const userSchema: Schema = Joi.object({
@@ -40,6 +44,24 @@ export const validateDataUpdatedUser = (data: any): ValidationResult => {
     }),
   });
   return userSchema.validate(data);
+};
+
+export const validateNewPassage = (data: any): ValidationResult => {
+  const passageSchema: Schema = Joi.object({
+    origin: Joi.string().required().max(20).messages(messages),
+    stock: Joi.number().required().messages(messages),
+    destination: Joi.string().required().min(5).max(50).messages(messages),
+    departureDate: Joi.string().required().messages(messages),
+    arrivalDate: Joi.string().required().messages(messages),
+    duration: Joi.string().required().messages(messages),
+    price: Joi.number().required().messages(messages),
+    departureTime: Joi.string().required().messages(messages),
+    arrivalTime: Joi.string().required().messages(messages),
+    companyId: Joi.string().required().messages(messages),
+    service: Joi.string().valid("cama", "semi cama", "cama ejecutivo").messages(messages),
+    numberSeat: Joi.array().items(Joi.string().min(1).max(2)).required().messages(messages),
+  }).options({ abortEarly: false });
+  return passageSchema.validate(data);
 };
 
 export const isNameValid = (req: Request, res: Response): void => {
