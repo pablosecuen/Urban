@@ -8,7 +8,6 @@ import { getPassagesId } from "@component/Redux/passage/passageActions";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
 
@@ -49,7 +48,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
 
   return (
     <>
-      <article className="bg-white  lg:flex">
+      <article className="bg-white  lg:flex ">
         <div className="flex flex-col p-2 lg:w-1/2 lg:p-4">
           <section className="flex p-2 lg:p-4">
             <div className=" mx-auto flex w-20 flex-col text-center">
@@ -110,13 +109,9 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
               />
             </div>
             {isModalOpen && (
-              <>
+              <div className="transition-opacity duration-700">
                 <div
-                  onClick={closeModal}
-                  className="absolute left-0 top-0 h-screen bg-black/30 transition-opacity duration-700"
-                ></div>
-                <div
-                  className=" fixed inset-0 z-50 flex items-center justify-center  "
+                  className=" fixed inset-0 z-50 flex items-center justify-center  bg-black/30 "
                   onClick={closeModal}
                 >
                   <div className="flex w-[800px] items-center justify-center ">
@@ -130,7 +125,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
                     />
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </section>
           <div className="flex flex-col gap-2">
@@ -157,9 +152,8 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             </section>
           </div>
         </div>
-
-        <button onClick={handleClick}>Siguiente paso</button>
       </article>
+      <button onClick={handleClick}>Siguiente paso</button>
     </>
   );
 }
