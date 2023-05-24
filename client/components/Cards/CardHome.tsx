@@ -10,8 +10,9 @@ export default function CardHome() {
     const urlParams = new URLSearchParams(window.location.search); //fijarse problema de window
     token = urlParams.get("token");
   }
-
-  const user = JSON.parse(localStorage.getItem("user")!);
+  
+  const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
+  const user = userString ? JSON.parse(userString) : null;
 
   const notifySuccess = () =>
     //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa

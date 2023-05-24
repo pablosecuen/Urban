@@ -16,7 +16,10 @@ interface LoginProps {
 }
 
 export default function LandingPage() {
-  const user = localStorage.getItem("user");
+  const userDataString = localStorage.getItem("user");
+
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
   const router = useRouter();
 
   useEffect(() => {
