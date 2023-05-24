@@ -1,69 +1,65 @@
-// PlantaAltaAdmin.tsx
-
 import Seat from "@component/assets/icons/svg/Seat";
-import { updateSeatEnabled, saveSeatEnabled } from "@component/Redux/seats/seatsSlice";
-import { RootState } from "@component/Redux/store/store";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { plantaAlta } from "../../assets/data";
+import React, { useEffect, useState } from "react";
+import { plantaBaja } from "../../assets/data";
+import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
-const PlantaAltaAdmin = () => {
-  const dispatch = useDispatch();
-  const seatEnabled = useSelector((state: RootState) => state.seats.seatEnabled);
+const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+  const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
 
   const handleSeatToggle = (seatIndex: number) => {
-    const updatedSeats = [...seatEnabled];
-    updatedSeats[seatIndex] = !seatEnabled[seatIndex]; // Toggle the seat enabled state
-    dispatch(updateSeatEnabled(updatedSeats));
-  };
-
-  const handleSaveSeats = () => {
-    seatEnabled.forEach((enabled, index) => {
-      dispatch(saveSeatEnabled({ seatIndex: index, enabled }));
+    setSeatEnabled((prevSeats) => {
+      const updatedSeats = [...prevSeats];
+      updatedSeats[seatIndex] = !updatedSeats[seatIndex]; // Toggle the seat enabled state
+      return updatedSeats;
     });
-    console.log("Saved Seats:", seatEnabled); // Log saved seats
   };
 
   useEffect(() => {
-    // Initialize the seatEnabled state from the Redux store
-    dispatch(updateSeatEnabled(Array(plantaAlta.length).fill(false)));
-  }, [dispatch]);
+    setSeatEnabled(Array(plantaBaja.length).fill(false));
+  }, []);
 
-  console.log("Current Seats:", seatEnabled); // Log current seats
-
+const numberSeat = selectedPassage?.numberSeat ?? [];
+  const isSeatSelected = (index: number) => {
+    console.log(selectedPassage?.numberSeat.includes(`${plantaBaja[index+1]}`));
+    
+    return plantaBaja.includes(`b${numberSeat[index]}`);
+  };
+if(!selectedPassage){
+  return <div>Loading</div>
+}
   return (
     <div className="flex w-4/5 flex-col gap-4">
       <ul className="grid grid-cols-5 gap-2">
-        {seatEnabled.map((enabled, index) => (
+        {plantaBaja.map((seat, index) => (
           <React.Fragment key={index}>
             {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
             <li className="relative">
               <input
                 type="checkbox"
-                name={`checkbox-${plantaAlta[index]}`}
-                id={`checkbox-${plantaAlta[index]}`}
+                name={`checkbox-${seat}`}
+                id={`checkbox-${seat}`}
                 className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
                 onClick={() => handleSeatToggle(index)}
+                disabled={isSeatSelected(index)}
               />
               <label
-                className={`cursor-pointer ${enabled ? "hover:bg-blue-200" : "cursor-not-allowed"}`}
-                htmlFor={`checkbox-${plantaAlta[index]}`}
+                className={`cursor-pointer ${
+                  seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
+                }`}
+                htmlFor={`checkbox-${seat}`}
               >
-                <Seat fill={enabled ? "#0000FF" : "#C0C0C0"} width="30px" height="36px" />
+                <Seat
+                  fill={isSeatSelected(index) ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"}
+                  width="30px"
+                  height="36px"
+                />
               </label>
             </li>
           </React.Fragment>
         ))}
       </ul>
-      <button onClick={handleSaveSeats}>Save Seats</button>
-      <div>
-        <h2>Enabled Seats:</h2>
-        {seatEnabled.map((enabled, index) => (
-          <p key={index}>{enabled ? `Seat ${index + 1}` : ""}</p>
-        ))}
-      </div>
     </div>
   );
 };
 
-export default PlantaAltaAdmin;
+export default PlantaBajaAdmin;

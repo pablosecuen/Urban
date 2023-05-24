@@ -6,8 +6,11 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { getPassagesId } from "@component/Redux/passage/passageActions";
 import { useEffect, useState } from "react";
-import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
 
 export default function CardConfirmacionReserva({ id }: { id: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +19,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const passage = useSelector((state: RootState) => state.passage.passageById);
   const stock: any = passage?.stock; // Stock disponible del objeto (ejemplo)
-
+  const router = useRouter();
   const handleIncrement = () => {
     if (count < stock) {
       setCount(count + 1);
@@ -36,11 +39,13 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  const handleClick = () => {
+    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
+    router.push(`/home/reserva/${id}}/buslayout`);
+  };
   useEffect(() => {
     dispatch(getPassagesId(id));
-    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
-  }, [count, id]); // Include 'count' and 'id' in the dependency array
+  }, [id]); // Include 'count' and 'id' in the dependency array
 
   return (
     <>
@@ -129,23 +134,31 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             )}
           </section>
           <div className="flex flex-col gap-2">
-            <section className="text-center text-xl font-semibold text-amber-700">5 ESTRELLAS</section>
+            <section className="text-center text-xl font-semibold text-amber-700">
+              5 ESTRELLAS
+            </section>
             <section className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2">
-              {passage?.companyData?.evaluation?.map((e) => {
+              {passage?.companyData?.evaluation?.map((e, i) => {
                 return (
-                  <article className="flex flex-col w-full rounded-md bg-gray-100 py-1 text-left px-2"><div className="flex gap-2">
-                    <p className="font-semibold text-sm text-slate-800">USUARIO</p>
-                    <span className="font-semibold text-sm text-amber-700	">{e.rating} estrellas</span>
-                  </div>
-                    <small className="text-slate-800">
-                      {e.comment}
-                    </small>
+                  <article
+                    key={i}
+                    className="flex w-full flex-col rounded-md bg-gray-100 px-2 py-1 text-left"
+                  >
+                    <div className="flex gap-2">
+                      <p className="text-sm font-semibold text-slate-800">USUARIO</p>
+                      <span className="text-sm font-semibold text-amber-700	">
+                        {e.rating} estrellas
+                      </span>
+                    </div>
+                    <small className="text-slate-800">{e.comment}</small>
                   </article>
                 );
               })}
             </section>
           </div>
         </div>
+
+        <button onClick={handleClick}>Siguiente paso</button>
       </article>
     </>
   );

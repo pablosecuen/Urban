@@ -2,11 +2,6 @@ import { Passage, PassageToRegister, PassagePayload } from "@component/app/types
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
-
-
-
 export const getPassagesIdForPayment = createAsyncThunk<PassageToRegister[], PassagePayload[]>(
   "payment/getPassagesIdForPayment",
   async (passages: PassagePayload[]) => {
@@ -15,12 +10,12 @@ export const getPassagesIdForPayment = createAsyncThunk<PassageToRegister[], Pas
       const passageData: Passage = response.data;
       const passageToRegister: PassageToRegister = {
         ...passageData,
-        quantity: quantity
+        quantity: quantity,
       };
+      console.log(passageToRegister);
       return passageToRegister;
     });
 
     return Promise.all(passagePromises);
   }
 );
-  
