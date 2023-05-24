@@ -12,7 +12,7 @@ export const getPassagesIdForPayment = createAsyncThunk<PassageToRegister[], Pas
         ...passageData,
         quantity: quantity,
       };
-      console.log(passageToRegister);
+     
       return passageToRegister;
     });
 

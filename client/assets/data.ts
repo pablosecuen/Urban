@@ -196,12 +196,12 @@ const generarArraysPlantasBus = () => {
 
   // Generar array plantaBaja
   for (let i = 1; i <= 40; i++) {
-    plantaBaja.push(`b${i}`);
+    plantaBaja.push(`${i}`);
   }
 
   // Generar array plantaAlta
-  for (let i = 1; i <= 40; i++) {
-    plantaAlta.push(`a${i}`);
+  for (let i = 41; i <= 80; i++) {
+    plantaAlta.push(`${i}`);
   }
 
   return [plantaBaja, plantaAlta];

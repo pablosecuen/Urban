@@ -1,12 +1,15 @@
 "use client";
-import Seat from "@component/assets/icons/svg/Seat";
 import React, { useEffect, useState } from "react";
+import Seat from "@component/assets/icons/svg/Seat";
 import { plantaBaja } from "../../assets/data";
-import { CardProfilePropsPassage } from "@component/app/types/Passages";
+import {  Passagers } from "@component/app/types/Passages";
+import PassengerModal from "../modalPasajeros/ModalPasajeros";
 
-const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+const PlantaBajaAdmin: React.FC<Passagers> = ({ enabledSeats }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
-  const numberSeat = selectedPassage?.numberSeat ?? [];
+  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleSeatToggle = (seatIndex: number) => {
     setSeatEnabled((prevSeats) => {
       const updatedSeats = [...prevSeats];
@@ -14,19 +17,29 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
       return updatedSeats;
     });
   };
-  console.log(numberSeat);
-  
+
+  const handleSeatSelection = (seat: string) => {
+    setSelectedSeat(seat);
+    setIsModalOpen(true);
+  };
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   useEffect(() => {
     setSeatEnabled(Array(plantaBaja.length).fill(false));
   }, []);
 
-  const isSeatSelected = () => {
-    return !numberSeat.some((value) => plantaBaja.includes(`b${value}`));
+  const numberSeat = enabledSeats?.numberSeat ?? [];
+  const isSeatSelected = (index: number) => {
+    return plantaBaja.includes(`${numberSeat}`);
   };
 
-  if (!selectedPassage) {
+  if (!enabledSeats) {
     return <div>Loading</div>;
   }
+
   return (
     <div className="flex w-4/5 flex-col gap-4">
       <ul className="grid grid-cols-5 gap-2">
@@ -40,17 +53,18 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
                 id={`checkbox-${seat}`}
                 className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
                 onClick={() => handleSeatToggle(index)}
-                disabled={isSeatSelected()}
+                disabled={isSeatSelected(index)}
               />
               <label
                 className={`cursor-pointer ${
                   seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
                 }`}
                 htmlFor={`checkbox-${seat}`}
+                onClick={() => handleSeatSelection(seat)}
               >
                 <Seat
                   fill={
-                    isSeatSelected() ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"
+                    isSeatSelected(index) ? "#0000FF" : seatEnabled[index] ? "#000000" : "#C0C0C0"
                   }
                   width="30px"
                   height="36px"
@@ -60,6 +74,15 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
           </React.Fragment>
         ))}
       </ul>
+      {isModalOpen && (
+        <PassengerModal
+          enabledSeats={enabledSeats}
+          setIsModalOpen={setIsModalOpen}
+          isModalOpen={isModalOpen}
+          seat={selectedSeat}
+     
+        />
+      )}
     </div>
   );
 };
