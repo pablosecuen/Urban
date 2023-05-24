@@ -6,8 +6,11 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { getPassagesId } from "@component/Redux/passage/passageActions";
 import { useEffect, useState } from "react";
-import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
 
 export default function CardConfirmacionReserva({ id }: { id: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +19,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const passage = useSelector((state: RootState) => state.passage.passageById);
   const stock: any = passage?.stock; // Stock disponible del objeto (ejemplo)
-
+  const router = useRouter();
   const handleIncrement = () => {
     if (count < stock) {
       setCount(count + 1);
@@ -36,11 +39,13 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  const handleClick = () => {
+    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
+    router.push(`/home/reserva/${id}}/buslayout`);
+  };
   useEffect(() => {
     dispatch(getPassagesId(id));
-    dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
-  }, [count, id]); // Include 'count' and 'id' in the dependency array
+  }, [id]); // Include 'count' and 'id' in the dependency array
 
   return (
     <>
@@ -152,6 +157,8 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             </section>
           </div>
         </div>
+
+        <button onClick={handleClick}>Siguiente paso</button>
       </article>
     </>
   );
