@@ -5,11 +5,13 @@ import { plantaAlta } from "../../assets/data";
 import { Passagers } from "@component/app/types/Passages";
 import PassengerModal from "../modalPasajeros/ModalPasajeros";
 
-const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
+const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
   const [selectedSeat, setSelectedSeat] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [remainingPassengers, setRemainingPassengers] = useState(passangers);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
 
   const handleSeatToggle = (seatIndex: number) => {
     setSeatEnabled((prevSeats) => {
@@ -22,10 +24,12 @@ const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   console.log(passangers);
 
   const handleSeatSelection = (seat: string) => {
-    if (!isSeatEnabled(plantaAlta.indexOf(seat))) {
-      return; // Skip opening the modal for disabled seats
+    if (!isSeatEnabled(plantaAlta.indexOf(seat)) || selectedSeats.includes(seat)) {
+      return; // Skip opening the modal for disabled seats or already selected seats
     }
+
     setSelectedSeat(seat);
+    setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, seat]);
 
     setIsModalOpen(true);
   };
@@ -41,7 +45,7 @@ const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   const numberSeat = enabledSeats?.numberSeat ?? [];
   const isSeatEnabled = (index: number) => {
     const seat = plantaAlta[index];
-    return numberSeat.includes(seat);
+    return numberSeat.includes(seat) && !occupiedSeats.includes(seat);
   };
 
   if (!enabledSeats) {
@@ -67,7 +71,7 @@ const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
               <label
                 className={`cursor-pointer ${
                   seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
-                }`}
+                } ${selectedSeats.includes(seat) ? "bg-blue-500" : ""}`}
                 htmlFor={`checkbox-${seat}`}
                 onClick={() => handleSeatSelection(seat)}
               >
@@ -87,11 +91,10 @@ const PlantaAltaAdmin: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
           setIsModalOpen={setIsModalOpen}
           isModalOpen={isModalOpen}
           seat={selectedSeat}
-        
         />
       )}
     </div>
   );
 };
 
-export default PlantaAltaAdmin;
+export default PlantaAlta;
