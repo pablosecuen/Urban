@@ -8,7 +8,6 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
   setIsModalOpen,
   seat,
   enabledSeats,
-  
 }) => {
   const [formData, setFormData] = useState<PassengerFormData>({
     nombre: "",
@@ -32,6 +31,10 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
     }));
   };
 
+  // Elimina la línea de importación de sessionStorage
+
+  // ...
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Perform form validation here
@@ -48,8 +51,16 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
     // Save updated passenger data to sessionStorage
     sessionStorage.setItem("passengerData", JSON.stringify(updatedPassengerData));
 
-    setIsModalOpen(false); //
-    // Pass the form data to the parent component
+    // Mark the selected seat as occupied
+    const updatedEnabledSeats = {
+      ...enabledSeats,
+      numberSeat: [...enabledSeats.numberSeat, seat],
+    };
+
+    // Pass the updated enabled seats back to the parent component
+    // You may need to define a prop to pass the function to update the enabled seats
+
+    setIsModalOpen(false); // Close the modal
 
     // Reset the form data
     setFormData({
@@ -66,6 +77,8 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
       quantity: "",
     });
   };
+
+  // ...
 
   // console.log(`a${enabledSeats?.numberSeat}`);
   const handleCloseModal = () => {
