@@ -4,15 +4,18 @@ import { CardProfilePropsEnabledSeats } from "@component/app/types/Passages";
 import PlantaAlta from "@component/components/PlantaAlta/PlantaAlta";
 import PlantaBaja from "@component/components/PlantaBaja/PlantaBaja";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }) => {
+  const router = useRouter();
   const count = useSelector((state: any) => state.payment.passageById[0]);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
   const lengthData = passagerData.length;
-  console.log({ longitud: passagerData.length });
 
   const passangers = count?.quantity;
-
+  if (count?.quantity - lengthData == 0) {
+    router.push("/home/reserva/viajes/confirmacion/pagos");
+  }
   return (
     <div className='flex w-full flex-col  items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between'>
       <div className='relative  flex min-w-0 flex-col break-words rounded-lg bg-transparent '>
