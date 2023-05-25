@@ -12,6 +12,8 @@ const messages = {
   "string.empty": "El valor de {#label} no puede estar vacío",
   "string.valid": "El valor de {#label} no es válido",
   "number.base": "El valor {#label} debe ser un numero",
+  "number.min": "El valor de {#label} no puede ser menor a {#limit}",
+  "number.max": "El valor de {#label} no puede ser mayor a {#limit}",
 };
 export const validateDataNewUser = (data: any): ValidationResult => {
   const userSchema: Schema = Joi.object({
@@ -69,6 +71,14 @@ export const validateNewCompany = (data: any): ValidationResult => {
     name: Joi.string().required().min(5).max(20).messages(messages),
   }).options({ abortEarly: false });
   return companySchema.validate(data);
+};
+
+export const validateNewRatingAndComment = (data: any): ValidationResult => {
+  const ratingAndCommentSchema: Schema = Joi.object({
+    rating: Joi.number().min(1).max(5).required().messages(messages),
+    comment: Joi.string().min(5).max(50).messages(messages),
+  }).options({ abortEarly: false });
+  return ratingAndCommentSchema.validate(data);
 };
 
 export const isNameValid = (req: Request, res: Response): void => {
