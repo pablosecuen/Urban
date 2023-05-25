@@ -1,15 +1,17 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Seat from "@component/assets/icons/svg/Seat";
 import { plantaAlta } from "../../assets/data";
 import { Passagers } from "@component/app/types/Passages";
 import PassengerModal from "../modalPasajeros/ModalPasajeros";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ToastComponent from "../00-Toastify/ToastComponent";
 
-const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
+const PlantaAlta: React.FC<Passagers> = ({ enabledSeats }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
   const [selectedSeat, setSelectedSeat] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([""]);
   const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
   const [seatsChosen, setSeatsChosen] = useState<boolean>(false);
 
@@ -21,7 +23,6 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
     });
   };
 
-  console.log({ asientos: enabledSeats?.numberSeat });
   const handleSeatSelection = (seat: string) => {
     if (!isSeatEnabled(plantaAlta.indexOf(seat)) || selectedSeats.includes(seat)) {
       return;
@@ -48,22 +49,38 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
     const seat = plantaAlta[index];
     return selectedSeats.includes(seat);
   };
+
+  const notifySeatSelected = () => {
+    toast.success("Asiento Seleccionado", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   if (!enabledSeats) {
     return <div>Loading</div>;
   }
+
   return (
-    <div className='flex w-4/5 flex-col gap-4'>
-      Planta alta
-      <ul className='grid grid-cols-5 gap-2'>
-        {plantaAlta.map((seat, index = 40) => (
+    <div className="flex w-4/5 flex-col gap-4">
+      Planta baja
+      <ToastComponent />
+      <ul className="grid grid-cols-5 gap-2">
+        {plantaAlta.map((seat, index) => (
           <React.Fragment key={index}>
-            {(index === 2 || (index - 2) % 4 === 0) && <li className='' />}
-            <li className='relative'>
+            {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
+            <li className="relative">
               <input
-                type='checkbox'
+                type="checkbox"
                 name={`checkbox-${seat}`}
                 id={`checkbox-${seat}`}
-                className='absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0'
+                className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
                 onClick={() => handleSeatToggle(index)}
                 disabled={isSeatEnabled(index)}
               />
@@ -82,8 +99,8 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
                       ? "#000000"
                       : "#C0C0C0"
                   }
-                  width='30px'
-                  height='36px'
+                  width="30px"
+                  height="36px"
                 />
               </label>
             </li>
@@ -96,6 +113,9 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
           setIsModalOpen={setIsModalOpen}
           isModalOpen={isModalOpen}
           seat={selectedSeat}
+          notifySeatSelected={notifySeatSelected}
+          setSelectedSeats={setSelectedSeats}
+          selectedSeats={selectedSeats}
         />
       )}
     </div>
