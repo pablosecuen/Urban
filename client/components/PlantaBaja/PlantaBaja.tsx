@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from "react";
 import Seat from "@component/assets/icons/svg/Seat";
 import { plantaBaja } from "../../assets/data";
-import {  Passagers } from "@component/app/types/Passages";
+import { Passagers } from "@component/app/types/Passages";
 import PassengerModal from "../modalPasajeros/ModalPasajeros";
 
-const PlantaBajaAdmin: React.FC<Passagers> = ({ enabledSeats }) => {
+const PlantaBaja: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
-  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const [selectedSeat, setSelectedSeat] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
+  const [seatsChosen, setSeatsChosen] = useState<boolean>(false);
 
   const handleSeatToggle = (seatIndex: number) => {
     setSeatEnabled((prevSeats) => {
@@ -17,14 +20,18 @@ const PlantaBajaAdmin: React.FC<Passagers> = ({ enabledSeats }) => {
       return updatedSeats;
     });
   };
-
+  console.log({ baja: enabledSeats?.numberSeat });
+  console.log({ asientos: enabledSeats?.numberSeat });
   const handleSeatSelection = (seat: string) => {
-    setSelectedSeat(seat);
-    setIsModalOpen(true);
-  };
+    if (!isSeatEnabled(plantaBaja.indexOf(seat)) || selectedSeats.includes(seat)) {
+      return;
+    }
 
-  const handleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    setSelectedSeat(seat);
+    setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, seat]);
+
+    setIsModalOpen(true);
+    setSeatsChosen(true);
   };
 
   useEffect(() => {
@@ -32,42 +39,52 @@ const PlantaBajaAdmin: React.FC<Passagers> = ({ enabledSeats }) => {
   }, []);
 
   const numberSeat = enabledSeats?.numberSeat ?? [];
-  const isSeatSelected = (index: number) => {
-    return plantaBaja.includes(`${numberSeat}`);
+  const isSeatEnabled = (index: number) => {
+    const seat = plantaBaja[index];
+    return numberSeat.includes(seat) && !occupiedSeats.includes(seat);
   };
 
+  const isSeatSelected = (index: number) => {
+    const seat = plantaBaja[index];
+    return selectedSeats.includes(seat);
+  };
   if (!enabledSeats) {
     return <div>Loading</div>;
   }
 
   return (
-    <div className="flex w-4/5 flex-col gap-4">
-      <ul className="grid grid-cols-5 gap-2">
+    <div className='flex w-4/5 flex-col gap-4'>
+      Planta baja
+      <ul className='grid grid-cols-5 gap-2'>
         {plantaBaja.map((seat, index) => (
           <React.Fragment key={index}>
-            {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
-            <li className="relative">
+            {(index === 2 || (index - 2) % 4 === 0) && <li className='' />}
+            <li className='relative'>
               <input
-                type="checkbox"
+                type='checkbox'
                 name={`checkbox-${seat}`}
                 id={`checkbox-${seat}`}
-                className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
+                className='absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0'
                 onClick={() => handleSeatToggle(index)}
-                disabled={isSeatSelected(index)}
+                disabled={isSeatEnabled(index)}
               />
               <label
                 className={`cursor-pointer ${
                   seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
-                }`}
+                } ${selectedSeats.includes(seat) ? "bg-blue-500" : ""}`}
                 htmlFor={`checkbox-${seat}`}
                 onClick={() => handleSeatSelection(seat)}
               >
                 <Seat
                   fill={
-                    isSeatSelected(index) ? "#0000FF" : seatEnabled[index] ? "#000000" : "#C0C0C0"
+                    isSeatEnabled(index) && isSeatSelected(index) && seatsChosen
+                      ? "#0000FF"
+                      : isSeatEnabled(index)
+                      ? "#000000"
+                      : "#C0C0C0"
                   }
-                  width="30px"
-                  height="36px"
+                  width='30px'
+                  height='36px'
                 />
               </label>
             </li>
@@ -80,11 +97,10 @@ const PlantaBajaAdmin: React.FC<Passagers> = ({ enabledSeats }) => {
           setIsModalOpen={setIsModalOpen}
           isModalOpen={isModalOpen}
           seat={selectedSeat}
-     
         />
       )}
     </div>
   );
 };
 
-export default PlantaBajaAdmin;
+export default PlantaBaja;

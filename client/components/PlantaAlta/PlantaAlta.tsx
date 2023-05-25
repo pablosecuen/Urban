@@ -9,9 +9,9 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
   const [selectedSeat, setSelectedSeat] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [remainingPassengers, setRemainingPassengers] = useState(passangers);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
+  const [seatsChosen, setSeatsChosen] = useState<boolean>(false);
 
   const handleSeatToggle = (seatIndex: number) => {
     setSeatEnabled((prevSeats) => {
@@ -21,22 +21,18 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
     });
   };
 
-  console.log(passangers);
-
+  console.log({ asientos: enabledSeats?.numberSeat });
   const handleSeatSelection = (seat: string) => {
     if (!isSeatEnabled(plantaAlta.indexOf(seat)) || selectedSeats.includes(seat)) {
-      return; // Skip opening the modal for disabled seats or already selected seats
+      return;
     }
 
     setSelectedSeat(seat);
     setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, seat]);
 
     setIsModalOpen(true);
+    setSeatsChosen(true);
   };
-
-  // const handleModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
 
   useEffect(() => {
     setSeatEnabled(Array(plantaAlta.length).fill(false));
@@ -48,23 +44,26 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
     return numberSeat.includes(seat) && !occupiedSeats.includes(seat);
   };
 
+  const isSeatSelected = (index: number) => {
+    const seat = plantaAlta[index];
+    return selectedSeats.includes(seat);
+  };
   if (!enabledSeats) {
     return <div>Loading</div>;
   }
-
   return (
-    <div className="flex w-4/5 flex-col gap-4">
-      planta alta
-      <ul className="grid grid-cols-5 gap-2">
-        {plantaAlta.map((seat, index) => (
+    <div className='flex w-4/5 flex-col gap-4'>
+      Planta alta
+      <ul className='grid grid-cols-5 gap-2'>
+        {plantaAlta.map((seat, index = 40) => (
           <React.Fragment key={index}>
-            {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
-            <li className="relative">
+            {(index === 2 || (index - 2) % 4 === 0) && <li className='' />}
+            <li className='relative'>
               <input
-                type="checkbox"
+                type='checkbox'
                 name={`checkbox-${seat}`}
                 id={`checkbox-${seat}`}
-                className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
+                className='absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0'
                 onClick={() => handleSeatToggle(index)}
                 disabled={isSeatEnabled(index)}
               />
@@ -76,9 +75,15 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats, passangers }) => {
                 onClick={() => handleSeatSelection(seat)}
               >
                 <Seat
-                  fill={isSeatEnabled(index) ? "#000000" : "#C0C0C0"}
-                  width="30px"
-                  height="36px"
+                  fill={
+                    isSeatEnabled(index) && isSeatSelected(index) && seatsChosen
+                      ? "#0000FF"
+                      : isSeatEnabled(index)
+                      ? "#000000"
+                      : "#C0C0C0"
+                  }
+                  width='30px'
+                  height='36px'
                 />
               </label>
             </li>
