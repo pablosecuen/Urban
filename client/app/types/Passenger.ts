@@ -19,7 +19,9 @@ export interface PassengerFormData {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     seat: string | null;
     enabledSeats: Passage;
-
-
+    notifySeatSelected: () => void;
+    setSelectedSeats: React.Dispatch<React.SetStateAction<string[]>>;
+    selectedSeats: string[];
+  
   }
   

@@ -66,11 +66,11 @@ export default function Pagos() {
   };
 
   return (
-    <>
-      <span className='text-2xl'>Valor a pagar: ${totalPrice}</span>
-      <button onClick={handleClickMP} className='w-48'>
+    <div className="flex flex-col items-center gap-2 pb-4">
+      <span className=" rounded-2xl bg-white px-4 text-2xl">Valor a pagar: ${totalPrice}</span>
+      <button onClick={handleClickMP} className="w-48">
         Mercado Pago
       </button>
-    </>
+    </div>
   );
 }
