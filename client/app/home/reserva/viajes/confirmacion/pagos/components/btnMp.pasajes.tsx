@@ -2,19 +2,26 @@
 import { RootState } from "@component/Redux/store/store";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { ToPay } from "@component/app/types/MercadoPago"
+import { ToPay } from "@component/app/types/MercadoPago";
+
 export default function Pagos() {
   const user = JSON.parse(localStorage.getItem("user") || "");
   const passages = useSelector((state: RootState) => state.payment.passageById);
-
+  const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
   const token: string = `${user.id}`;
 
   let toPay: ToPay[] = [];
 
   if (passages) {
-    toPay = passages.slice(0, 2).map((passage) => {
-      console.log(passage.id);
+    toPay = passages.slice(0, 2).map((passage, index) => {
+      const passenger = passagerData[index];
+      let description = `Pasaje de viaje cantidad ${passage.quantity}`;
+
+      if (passenger) {
+        const passengerInfo = `${passenger.nombre} ${passenger.apellido}`;
+        description += `, a nombre de ${passengerInfo}, asiento ${passenger.asiento}`;
+      }
 
       return {
         passageId: passage.id,
@@ -23,7 +30,7 @@ export default function Pagos() {
         img: passage.img,
         unit_price: passage.price,
         quantity: passage.quantity,
-        description: passage.numberSeat,
+        description: description,
       };
     });
   }
@@ -35,8 +42,6 @@ export default function Pagos() {
   }, 0);
 
   const arrToPay = toPay.map((item) => {
-    console.log(item.id);
-
     return {
       id: item.id,
       title: item.name,
@@ -47,6 +52,7 @@ export default function Pagos() {
       description: item.description,
     };
   });
+  console.log(arrToPay);
 
   const handleClickMP = async () => {
     try {
@@ -61,8 +67,8 @@ export default function Pagos() {
 
   return (
     <>
-      <span className="text-2xl">Valor a pagar: ${totalPrice}</span>
-      <button onClick={handleClickMP} className="w-48">
+      <span className='text-2xl'>Valor a pagar: ${totalPrice}</span>
+      <button onClick={handleClickMP} className='w-48'>
         Mercado Pago
       </button>
     </>
