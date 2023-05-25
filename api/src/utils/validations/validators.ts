@@ -2,7 +2,84 @@ import { VehicleForChauffeur } from "../../schema/chauffeur";
 import { Address, Passenger, Payment, Phone, TypeVehicle } from "../../types/types";
 import createHttpError from "http-errors";
 import { Request, Response, NextFunction } from "express";
-import { arrayRemove } from "firebase/firestore";
+import Joi, { Schema, ValidationResult } from "joi";
+
+const messages = {
+  "string.base": "El valor {#label} debe ser una cadena de texto",
+  "string.email": "El correo electrónico no es válido",
+  "string.max": "El valor de {#label} no puede tener más de {#limit} caracteres",
+  "string.min": "El valor de {#label} no puede tener menos de {#limit} caracteres",
+  "string.empty": "El valor de {#label} no puede estar vacío",
+  "string.valid": "El valor de {#label} no es válido",
+  "number.base": "El valor {#label} debe ser un numero",
+  "number.min": "El valor de {#label} no puede ser menor a {#limit}",
+  "number.max": "El valor de {#label} no puede ser mayor a {#limit}",
+};
+export const validateDataNewUser = (data: any): ValidationResult => {
+  const userSchema: Schema = Joi.object({
+    firstName: Joi.string().required().max(1).messages(messages),
+    lastName: Joi.string().required().max(1).messages(messages),
+    password: Joi.string().required().messages(messages),
+    email: Joi.string().email().required().messages(messages),
+  });
+
+  return userSchema.validate(data);
+};
+
+export const validateDataUpdatedUser = (data: any): ValidationResult => {
+  const userSchema: Schema = Joi.object({
+    cc: Joi.string().max(8).messages(messages),
+    gender: Joi.string().valid("masculino", "femenino", "prefiero no decir").messages(messages),
+    address: Joi.object({
+      postalCode: Joi.string().required().messages(messages),
+      location: Joi.string().required().messages(messages),
+      state: Joi.string().required().messages(messages),
+      street: Joi.string().required().messages(messages),
+      number: Joi.string().required().messages(messages),
+      department: Joi.string().required().messages(messages),
+    })
+      .required()
+      .messages(messages),
+    phone: Joi.object({
+      areaCode: Joi.string().required().messages(messages),
+      number: Joi.string().required().messages(messages),
+    }),
+  });
+  return userSchema.validate(data);
+};
+
+export const validateNewPassage = (data: any): ValidationResult => {
+  const passageSchema: Schema = Joi.object({
+    origin: Joi.string().required().max(20).messages(messages),
+    stock: Joi.number().required().messages(messages),
+    destination: Joi.string().required().min(5).max(50).messages(messages),
+    departureDate: Joi.string().required().messages(messages),
+    arrivalDate: Joi.string().required().messages(messages),
+    duration: Joi.string().required().messages(messages),
+    price: Joi.number().required().messages(messages),
+    departureTime: Joi.string().required().messages(messages),
+    arrivalTime: Joi.string().required().messages(messages),
+    companyId: Joi.string().required().messages(messages),
+    service: Joi.string().valid("cama", "semi cama", "cama ejecutivo").messages(messages),
+    numberSeat: Joi.array().items(Joi.string().min(1).max(2)).required().messages(messages),
+  }).options({ abortEarly: false });
+  return passageSchema.validate(data);
+};
+
+export const validateNewCompany = (data: any): ValidationResult => {
+  const companySchema: Schema = Joi.object({
+    name: Joi.string().required().min(5).max(20).messages(messages),
+  }).options({ abortEarly: false });
+  return companySchema.validate(data);
+};
+
+export const validateNewRatingAndComment = (data: any): ValidationResult => {
+  const ratingAndCommentSchema: Schema = Joi.object({
+    rating: Joi.number().min(1).max(5).required().messages(messages),
+    comment: Joi.string().min(5).max(50).messages(messages),
+  }).options({ abortEarly: false });
+  return ratingAndCommentSchema.validate(data);
+};
 
 export const isNameValid = (req: Request, res: Response): void => {
   const name: string = req.body.lastName;
