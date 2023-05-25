@@ -5,7 +5,11 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["lh3.googleusercontent.com", "storage.googleapis.com"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "storage.googleapis.com",
+      "horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app",
+    ],
   },
 };
 
