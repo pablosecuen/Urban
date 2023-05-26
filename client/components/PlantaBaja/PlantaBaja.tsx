@@ -68,7 +68,7 @@ const PlantaBaja: React.FC<Passagers> = ({ enabledSeats }) => {
   }
 
   return (
-    <div className="flex w-4/5 flex-col gap-4">
+    <div className="flex w-4/5 flex-col gap-2 text-center">
       Planta baja
       <ToastComponent />
       <ul className="grid grid-cols-5 gap-2">

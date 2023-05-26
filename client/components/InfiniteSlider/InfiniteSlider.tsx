@@ -49,7 +49,7 @@ const InfiniteSlider = () => {
       <div ref={sliderRef} className={`${styles.sliderContainer} absolute flex`}>
         {clonedSlider.map((s, index) => (
           <article
-            key={s.id}
+            key={index}
             className={`flex w-full items-center justify-center px-4 ${
               index < slider.length ? "active" : ""
             }`}

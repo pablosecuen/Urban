@@ -110,17 +110,20 @@ export const iconsData = [
     image: sos,
     alt: "sos",
     description:
-      "Verificamos cuidadosamente la identidad y antecedentes de nuestros transportadores y usuarios",
+      "Nuestro botón de emergencia está disponible 24 horas",
+    className:"aspect-auto w-24"
   },
   {
     image: escudo,
     alt: "protected",
-    description: "Nuestro botón de emergencia está disponible 24 horas",
+    description: "Verificamos cuidadosamente la identidad y antecedentes de nuestros transportadores y usuarios",
+    className:"aspect-auto w-24 scale-50"
   },
   {
     image: planet,
     alt: "planet",
     description: "Viajando con nuestros aliados contribuyes al cuidado del medio ambiente",
+    className:"aspect-auto w-24 scale-50"
   },
   {
     image: contract,

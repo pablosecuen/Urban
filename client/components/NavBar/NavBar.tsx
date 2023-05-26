@@ -11,6 +11,7 @@ import { HiMenu, HiMenuAlt3 } from "react-icons/hi";
 
 import logo from "../../assets/imagenes/UrbanIso.png";
 
+
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
   const [user, setUser] = useState<userData | null>(null);
@@ -28,6 +29,7 @@ export default function NavBar() {
       const userDataObject = JSON.parse(userDataString);
       setUser(userDataObject);
     }
+    
   }, [setUser]);
   const handleLogout = () => {
     localStorage.removeItem("user");
