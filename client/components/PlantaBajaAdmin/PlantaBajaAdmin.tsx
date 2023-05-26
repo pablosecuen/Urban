@@ -1,15 +1,22 @@
+// PlantaBajaAdmin.jsx
 import Seat from "@component/assets/icons/svg/Seat";
 import React, { useEffect, useState } from "react";
 import { plantaBaja } from "../../assets/data";
 import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
-const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({
+  selectedPassage,
+  newSeats,
+  onSeatToggle,
+}) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
 
   const handleSeatToggle = (seatIndex: number) => {
+    const seat = plantaBaja[seatIndex];
+    onSeatToggle?.(seat); // Verificar si onSeatToggle existe antes de invocarlo
     setSeatEnabled((prevSeats) => {
       const updatedSeats = [...prevSeats];
-      updatedSeats[seatIndex] = !updatedSeats[seatIndex]; // Toggle the seat enabled state
+      updatedSeats[seatIndex] = !updatedSeats[seatIndex];
       return updatedSeats;
     });
   };
@@ -18,9 +25,8 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
     setSeatEnabled(Array(plantaBaja.length).fill(false));
   }, []);
 
-  const numberSeat = selectedPassage?.numberSeat ?? [];
   const isSeatSelected = (seat: string) => {
-    return numberSeat.includes(seat);
+    return selectedPassage?.numberSeat.includes(seat);
   };
 
   if (!selectedPassage) {
@@ -51,11 +57,7 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
               >
                 <Seat
                   fill={
-                    isSeatSelected(seat)
-                      ? "#000000" // Si el asiento está seleccionado, el color es negro
-                      : seatEnabled[index]
-                      ? "#0000FF" // Si el asiento está habilitado, el color es azul
-                      : "#C0C0C0" // Si el asiento está deshabilitado, el color es gris claro
+                    isSeatSelected(seat) ? "#000000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"
                   }
                   width='30px'
                   height='36px'
