@@ -7,7 +7,7 @@ export default function Perfil() {
   return (
     <div className="w-full">
       <NavBar />
-      <div className=" container mx-auto  flex min-h-[90vh] flex-col items-center justify-center gap-6 py-10 md:h-screen md:flex-row ">
+      <div className=" container mx-auto  flex min-h-[90vh] flex-col items-center justify-center gap-6 py-10 md:h-screen xl:flex-row ">
         <section className="rounded-2xl  bg-white xl:w-1/3">
           <Profile />
         </section>
