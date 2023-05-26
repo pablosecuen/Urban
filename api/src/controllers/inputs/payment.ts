@@ -1,4 +1,6 @@
 import axios from "axios";
+import { db } from "../../connection/connection";
+import createHttpError from "http-errors";
 
 const { MP_TOKEN } = process.env;
 // SDK de Mercado Pago
@@ -8,12 +10,38 @@ mercadopago.configure({
   access_token: MP_TOKEN,
 });
 
-export const postPayment = (req, res) => {
+export const postPayment = async (req, res, next) => {
   const products = req.body;
-  // products.forEach((product) => {
-  //   product.description = product.description.toString();
-  // });
-  // preference
+  console.log(products[0]);
+  const passageDoc = await db.collection("passages").doc(products[0].id).get();
+
+  if (!passageDoc.exists) {
+    throw new Error("El pasaje no existe");
+  }
+
+  const passageData = passageDoc.data();
+
+  const currentStock = passageData.stock;
+
+  if (currentStock < products[0].quantity) {
+    throw new Error("No hay suficiente stock disponible");
+  }
+
+  const description = products[0].description;
+  const seatRegex = /asiento (\d+)/g;
+  const numberSeat = [];
+  let match;
+
+  while ((match = seatRegex.exec(description)) !== null) {
+    numberSeat.push(match[1]);
+  }
+
+  const areSeatsValid = numberSeat.every((seat: string) => passageData.numberSeat.includes(seat));
+
+  if (!areSeatsValid) {
+    throw new Error("Algunos asientos seleccionados no son válidos");
+  }
+
   let preference = {
     items: products,
     back_urls: {
