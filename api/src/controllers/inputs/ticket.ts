@@ -7,7 +7,7 @@ import createHttpError from "http-errors";
 
 export const newTicket = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const data: TicketToRegister = req.body;
+    const data = req.body;
 
     const [userDoc, passageDoc] = await Promise.all([
       db.collection("users").doc(data.userId).get(),
@@ -43,11 +43,26 @@ export const newTicket = async (req: Request, res: Response, next: NextFunction)
 
     const updatedStock = currentStock - data.quantity;
 
-    // Eliminar los números de asientos seleccionados del pasaje
-    const selectedSeats = data.numberSeat;
+    const description = data.passengersData.description;
+    const seatRegex = /asiento (\d+)/g;
+    const numberSeat = [];
+    let match;
+
+    while ((match = seatRegex.exec(description)) !== null) {
+      numberSeat.push(match[1]);
+    }
+
+    const areSeatsValid = numberSeat.every((seat: string) => passageData.numberSeat.includes(seat));
+
+    if (!areSeatsValid) {
+      throw createHttpError(400, "Algunos asientos seleccionados no son válidos");
+    }
+
+    const selectedSeats = numberSeat;
     const updatedNumberSeat = passageData.numberSeat.filter(
-      (seat) => !selectedSeats.includes(seat)
+      (seat: string) => !selectedSeats.includes(seat)
     );
+
     await Promise.all([
       db
         .collection("users")
