@@ -2,8 +2,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ToastComponent from "../00-Toastify/ToastComponent";
-import { toast } from "react-toastify";
 
 export default function Profile() {
   const [userData, setUserData] = useState<any>(null);
@@ -33,7 +31,7 @@ export default function Profile() {
       .then((response) => {
         localStorage.setItem("user", JSON.stringify(userData));
         setShowInput(false);
-        notifySuccess();
+        console.log("todo bien", userData);
 
         // Redirect to a new page or perform any other actions
         // window.location.href = "/success"; // Replace "/success" with your desired route
@@ -71,26 +69,13 @@ export default function Profile() {
     }
   };
 
-  const notifySuccess = () =>
-    //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
-    //Si miran cada Toast solo con cambiar el success, error, warn o info, cambie su funcion
-    //No hace falta cambiar el ToastContainer a la par si solo se cambia el Toast
-    toast.success("Datos guardados con exito", {
-      position: "top-center",
-      autoClose: 5000, //Con autoClose={false} no se cierra automaticamente
-      hideProgressBar: false, //Para que se vea o no el progreso
-      closeOnClick: true,
-      pauseOnHover: false, //Se pondra en pausa, o no, si el mouse esta encima
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+  console.log(userData?.phone.number);
+
   return (
     <form
       onSubmit={onSubmit}
       className=" flex w-full flex-col items-center justify-evenly gap-4 rounded-xl py-8 shadow-xl  shadow-black/40 xl:h-[600px]  xl:flex-col"
     >
-      <ToastComponent />
       <div className="relative flex flex-col items-center justify-center ">
         {userData && (
           <Image
@@ -107,15 +92,15 @@ export default function Profile() {
       </div>
 
       <div className="lg:w-8/10 flex h-auto w-[350px] flex-wrap justify-center gap-2 rounded-3xl border  text-center lg:mb-0 lg:justify-between xl:flex-col 2xl:text-lg ">
-        <div className=" flex w-full gap-2  p-2 md:w-full">
-          <label htmlFor="" className="flex w-1/3 flex-col py-1 text-base">
+        <div className=" flex w-36 gap-2  p-2 md:w-full">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Cod. Area
             {showInput === true ? (
               <input
                 name="areacode"
                 type="text"
                 placeholder="area"
-                className="border-b-1 rounded-xl bg-white py-1 text-center text-base font-light  italic text-gray-800"
+                className="border-b-1 rounded-2xl bg-white text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.phone.areaCode}
               />
@@ -123,21 +108,21 @@ export default function Profile() {
               <input
                 type="text"
                 placeholder="Ingrese su numero"
-                className=" border-0 bg-white py-1 text-center text-base font-semibold text-gray-800"
+                className=" border-0 bg-white text-center font-semibold text-gray-800"
                 disabled
                 value={userData?.phone.areaCode}
               />
             )}
           </label>
 
-          <label htmlFor="" className="flex w-1/3 flex-col  py-1 text-base">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Telefono
             {showInput === true ? (
               <input
                 name="number"
                 type="text"
                 placeholder="número"
-                className="border-b-1 rounded-xl bg-white py-1 text-center text-base font-light italic text-gray-800"
+                className="border-b-1 rounded-2xl bg-white text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.phone?.number}
               />
@@ -145,20 +130,22 @@ export default function Profile() {
               <input
                 type="text"
                 placeholder="Ingrese su numero"
-                className=" border-0 bg-white py-1  text-center font-semibold text-gray-800"
+                className=" border-0 bg-white text-center font-semibold text-gray-800"
                 disabled
                 value={userData?.phone?.number}
               />
             )}
           </label>
-          <label htmlFor="" className="flex w-1/3 flex-col  py-1 text-base">
+        </div>
+        <div className=" flex w-36 justify-center gap-2 p-2 md:w-full">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Cc:
             {showInput === true ? (
               <input
                 name="cc"
                 type="text"
-                placeholder="Ingrese  cc"
-                className="border-b-1 rounded-xl py-1 text-center text-base font-light italic text-gray-800"
+                placeholder="Ingrese su CC"
+                className="border-b-1 rounded-2xl text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.cc}
               />
@@ -166,7 +153,7 @@ export default function Profile() {
               <input
                 type="text"
                 placeholder="Ingrese su CC"
-                className="rounded-2xl border-0 bg-white py-1  text-center text-base font-semibold text-gray-800"
+                className="rounded-2xl border-0 bg-white text-center font-semibold text-gray-800"
                 disabled
                 value={userData?.cc}
               />
@@ -174,7 +161,7 @@ export default function Profile() {
           </label>
         </div>
 
-        <div className=" flex w-36 gap-2  p-2 py-1  text-base md:w-full">
+        <div className=" flex w-36 gap-2  p-2 md:w-full">
           <label htmlFor="" className="flex w-1/2 flex-col">
             State
             {showInput === true ? (
@@ -182,7 +169,7 @@ export default function Profile() {
                 name="state"
                 type="text"
                 placeholder="Ingrese su Estado"
-                className="border-b-1 rounded-xl py-1  text-center text-base font-light italic text-gray-800"
+                className="border-b-1 rounded-2xl text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.state}
               />
@@ -191,19 +178,19 @@ export default function Profile() {
                 type="text"
                 disabled
                 placeholder="Ingrese su Estado"
-                className="border-0 bg-white py-1  text-center text-base font-semibold text-gray-800"
+                className="border-0 bg-white text-center font-semibold text-gray-800"
                 value={userData?.state}
               />
             )}
           </label>
-          <label htmlFor="" className="flex w-1/2 flex-col  py-1 text-base">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Location
             {showInput === true ? (
               <input
                 name="location"
                 type="text"
                 placeholder="Ingrese su Ciudad"
-                className="border-b-1 rounded-xl py-1  text-center text-base font-light italic text-gray-800"
+                className="border-b-1 rounded-2xl text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.location}
               />
@@ -212,7 +199,7 @@ export default function Profile() {
                 type="text"
                 disabled
                 placeholder="Ingrese su Ciudad"
-                className="border-0 bg-white py-1  text-center text-base font-semibold text-gray-800"
+                className="border-0 bg-white text-center font-semibold text-gray-800"
                 value={userData?.location}
               />
             )}
@@ -220,14 +207,14 @@ export default function Profile() {
         </div>
 
         <div className=" flex w-36 gap-2  p-2 md:w-full">
-          <label htmlFor="" className="flex w-1/2 flex-col  py-1 text-base">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Calle
             {showInput === true ? (
               <input
                 name="street"
                 type="text"
                 placeholder="Ingrese su Calle"
-                className="border-b-1 rounded-xl text-center font-light italic text-gray-800"
+                className="border-b-1 rounded-2xl text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.street}
               />
@@ -236,19 +223,19 @@ export default function Profile() {
                 type="text"
                 disabled
                 placeholder="Ingrese su Calle"
-                className="border-0 bg-white py-1  text-center text-base font-semibold text-gray-800"
+                className="border-0 bg-white text-center font-semibold text-gray-800"
                 value={userData?.street}
               />
             )}
           </label>
-          <label htmlFor="" className="flex w-1/2 flex-col py-1 text-base">
+          <label htmlFor="" className="flex w-1/2 flex-col">
             Numero
             {showInput === true ? (
               <input
                 name="number"
                 type="text"
                 placeholder="Ingrese su Numero"
-                className="border-b-1 rounded-xl py-1  text-center text-base font-light italic text-gray-800"
+                className="border-b-1 rounded-2xl text-center text-gray-800"
                 onChange={onChange}
                 value={userData?.number}
               />
@@ -257,7 +244,7 @@ export default function Profile() {
                 type="text"
                 disabled
                 placeholder="Ingrese su Numero"
-                className="border-0 bg-white py-1 text-center  text-base font-semibold text-gray-800"
+                className="border-0 bg-white text-center font-semibold text-gray-800"
                 value={userData?.number}
               />
             )}
