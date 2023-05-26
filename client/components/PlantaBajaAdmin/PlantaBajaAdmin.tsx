@@ -19,29 +19,29 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
   }, []);
 
   const numberSeat = selectedPassage?.numberSeat ?? [];
-  const isSeatSelected = (index: number) => {
-    console.log(selectedPassage?.numberSeat.includes(`${plantaBaja[index + 1]}`));
-
-    return plantaBaja.includes(`b${numberSeat[index]}`);
+  const isSeatSelected = (seat: string) => {
+    return numberSeat.includes(seat);
   };
+
   if (!selectedPassage) {
-    return <div>Aun no has seleeccionado ningun pasaje</div>;
+    return <div>Aun no has seleccionado ningún pasaje</div>;
   }
+
   return (
-    <div className="flex w-4/5 flex-col gap-4">
-      <p className="text-center">alanta alta</p>
-      <ul className="grid grid-cols-5 gap-2">
+    <div className='flex w-4/5 flex-col gap-4'>
+      <p className='text-center'>Planta baja</p>
+      <ul className='grid grid-cols-5 gap-2'>
         {plantaBaja.map((seat, index) => (
           <React.Fragment key={index}>
-            {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
-            <li className="relative">
+            {(index === 2 || (index - 2) % 4 === 0) && <li className='' />}
+            <li className='relative'>
               <input
-                type="checkbox"
+                type='checkbox'
                 name={`checkbox-${seat}`}
                 id={`checkbox-${seat}`}
-                className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
+                className='absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0'
                 onClick={() => handleSeatToggle(index)}
-                disabled={isSeatSelected(index)}
+                disabled={isSeatSelected(seat)}
               />
               <label
                 className={`cursor-pointer ${
@@ -51,10 +51,14 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
               >
                 <Seat
                   fill={
-                    isSeatSelected(index) ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"
+                    isSeatSelected(seat)
+                      ? "#000000" // Si el asiento está seleccionado, el color es negro
+                      : seatEnabled[index]
+                      ? "#0000FF" // Si el asiento está habilitado, el color es azul
+                      : "#C0C0C0" // Si el asiento está deshabilitado, el color es gris claro
                   }
-                  width="30px"
-                  height="36px"
+                  width='30px'
+                  height='36px'
                 />
               </label>
             </li>
