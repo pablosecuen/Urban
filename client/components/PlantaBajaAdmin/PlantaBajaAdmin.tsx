@@ -18,17 +18,18 @@ const PlantaBajaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
     setSeatEnabled(Array(plantaBaja.length).fill(false));
   }, []);
 
-const numberSeat = selectedPassage?.numberSeat ?? [];
+  const numberSeat = selectedPassage?.numberSeat ?? [];
   const isSeatSelected = (index: number) => {
-    console.log(selectedPassage?.numberSeat.includes(`${plantaBaja[index+1]}`));
-    
+    console.log(selectedPassage?.numberSeat.includes(`${plantaBaja[index + 1]}`));
+
     return plantaBaja.includes(`b${numberSeat[index]}`);
   };
-if(!selectedPassage){
-  return <div>Loading</div>
-}
+  if (!selectedPassage) {
+    return <div>Aun no has seleeccionado ningun pasaje</div>;
+  }
   return (
     <div className="flex w-4/5 flex-col gap-4">
+      <p className="text-center">alanta alta</p>
       <ul className="grid grid-cols-5 gap-2">
         {plantaBaja.map((seat, index) => (
           <React.Fragment key={index}>
@@ -49,7 +50,9 @@ if(!selectedPassage){
                 htmlFor={`checkbox-${seat}`}
               >
                 <Seat
-                  fill={isSeatSelected(index) ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"}
+                  fill={
+                    isSeatSelected(index) ? "#FF0000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"
+                  }
                   width="30px"
                   height="36px"
                 />
