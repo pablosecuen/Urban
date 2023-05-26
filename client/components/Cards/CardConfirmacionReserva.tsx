@@ -13,7 +13,7 @@ import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions
 
 export default function CardConfirmacionReserva({ id }: { id: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const passage = useSelector((state: RootState) => state.passage.passageById);
@@ -99,18 +99,14 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
         <div className="flex flex-col gap-5 lg:w-1/2">
           <section className="mx-auto flex h-1/3 w-64 justify-center">
             <div className="flex h-32 w-64  items-center justify-center overflow-hidden ">
-              {passage?.img ? (
-                <Image
-                  onClick={handleOpenModal}
-                  src={passage.img}
-                  alt=""
-                  className="transition_all cursor-zoom-in hover:scale-125"
-                  width={250}
-                  height={250}
-                />
-              ) : (
-                <p>No image available</p>
-              )}
+              <Image
+                onClick={handleOpenModal}
+                src={passage?.img !== undefined ? passage.img : ""}
+                alt="amaga-bolombolo"
+                className="transition_all  cursor-zoom-in hover:scale-125"
+                width={250}
+                height={250}
+              />
             </div>
             {isModalOpen && (
               <div className="transition-opacity duration-700">
@@ -119,18 +115,14 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
                   onClick={closeModal}
                 >
                   <div className="flex w-[800px] items-center justify-center ">
-                    {passage?.img ? (
-                      <Image
-                        onClick={handleOpenModal}
-                        src={passage.img}
-                        alt=""
-                        className="transition_all cursor-zoom-in hover:scale-125"
-                        width={250}
-                        height={250}
-                      />
-                    ) : (
-                      <p>No image available</p>
-                    )}
+                    <Image
+                      onClick={handleOpenModal}
+                      src={passage?.img !== undefined ? passage.img : ""}
+                      alt="amaga-bolombolo"
+                      className="w-full rounded-3xl shadow-2xl shadow-black/40"
+                      width={800}
+                      height={800}
+                    />
                   </div>
                 </div>
               </div>
