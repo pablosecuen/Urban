@@ -6,22 +6,21 @@ import { ToPay } from "@component/app/types/MercadoPago";
 
 export default function Pagos() {
   const user = JSON.parse(localStorage.getItem("user") || "");
-  const passages = useSelector((state: RootState) => state.payment.passageById);
+  const passages = useSelector((state: RootState) => state.payment?.passageById);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
   const token: string = `${user.id}`;
-
   let toPay: ToPay[] = [];
-
-  if (passages) {
-    toPay = passages.slice(0, 2).map((passage, index) => {
+  if (passages && passagerData) {
+    toPay = passages.map((passage, index) => {
       const passenger = passagerData[index];
-      let description = `Pasaje de viaje cantidad ${passage.quantity}`;
+      let description = `Pasaje de viaje cantidad ${passage.quantity},`;
 
-      if (passenger) {
+      passagerData.forEach((passenger: any) => {
         const passengerInfo = `${passenger.nombre} ${passenger.apellido}`;
-        description += `, a nombre de ${passengerInfo}, asiento ${passenger.asiento}`;
-      }
+        description += ` asiento ${passenger.seat}, a nombre de ${passengerInfo}`;
+        console.log(passagerData.seat);
+      });
 
       return {
         passageId: passage.id,
@@ -42,23 +41,22 @@ export default function Pagos() {
   }, 0);
 
   const arrToPay = toPay.map((item) => {
+    console.log({ desripcion: item.description });
     return {
       id: item.id,
       title: item.name,
       picture_url: item.img,
       unit_price: item.unit_price,
       quantity: item.quantity,
-      //currency_id: "COP",
       description: item.description,
     };
   });
-  console.log(arrToPay);
 
   const handleClickMP = async () => {
     try {
       if (token) {
         const { data } = await axios.post("http://localhost:3000/payment/new", arrToPay);
-        window.location.href = await data.response.body.init_point;
+        window.location.href = data.response.body.init_point;
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -66,9 +64,9 @@ export default function Pagos() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 pb-4">
-      <span className=" rounded-2xl bg-white px-4 text-2xl">Valor a pagar: ${totalPrice}</span>
-      <button onClick={handleClickMP} className="w-48">
+    <div className='flex flex-col items-center gap-2 pb-4'>
+      <span className=' rounded-2xl bg-white px-4 text-2xl'>Valor a pagar: ${totalPrice}</span>
+      <button onClick={handleClickMP} className='w-48'>
         Mercado Pago
       </button>
     </div>
