@@ -1,18 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import PlantaAltaAdmin from "../PlantaAltaAdmin/PlantaAltaAdmin";
 import PlantaBajaAdmin from "../PlantaBajaAdmin/PlantaBajaAdmin";
 import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
 const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+  const [newSeats, setNewSeats] = useState<string[]>([]);
+
+  const handleSeatToggle = (seat: string) => {
+    if (newSeats.includes(seat)) {
+      setNewSeats((prevSeats) => prevSeats.filter((s) => s !== seat));
+    } else {
+      setNewSeats((prevSeats) => [...prevSeats, seat]);
+    }
+  };
+
+  if (!selectedPassage) {
+    return <div>Aún no has seleccionado ningún pasaje</div>;
+  }
+
+  const renderSelectedSeats = () => {
+    if (newSeats.length === 0) {
+      return <div>No se han seleccionado asientos</div>;
+    }
+
+    return (
+      <div>
+        <h3>Asientos seleccionados:</h3>
+        <ul>
+          {newSeats.map((seat, index) => (
+            <li key={index}>{seat}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
-    <div className="relative mb-6 mt-16 flex min-w-0 flex-col break-words rounded-lg bg-white shadow-xl">
-      <h2 className="py-4 text-center">Seat Management</h2>
-      <ul className="flex items-center justify-center gap-4">
-        <li className="flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4">
-          <PlantaAltaAdmin selectedPassage={selectedPassage} />
+    <div className='relative mb-6 mt-16 flex min-w-0 flex-col break-words rounded-lg bg-white shadow-xl'>
+      <h2 className='py-4 text-center'>Seat Management</h2>
+
+      {renderSelectedSeats()}
+
+      <ul className='flex items-center justify-center gap-4'>
+        <li className='flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4'>
+          <PlantaAltaAdmin
+            selectedPassage={selectedPassage}
+            newSeats={newSeats}
+            onSeatToggle={handleSeatToggle}
+          />
         </li>
-        <li className="flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4">
-          <PlantaBajaAdmin selectedPassage={selectedPassage} />
+        <li className='flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4'>
+          <PlantaBajaAdmin
+            selectedPassage={selectedPassage}
+            newSeats={newSeats}
+            onSeatToggle={handleSeatToggle}
+          />
         </li>
       </ul>
     </div>
