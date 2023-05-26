@@ -43,15 +43,15 @@ export interface PassageToUpdate extends Partial<PassageToRegister> {
 
 export interface CardProfilePropsPassage {
   selectedPassage: Passage | null;
-
+  newSeats?: string[];
+  onSeatToggle?: (seat: string) => void;
 }
 
-export interface CardProfilePropsEnabledSeats{
+export interface CardProfilePropsEnabledSeats {
   enabledSeats: Passage | null;
-
 }
 
 export interface Passagers {
   enabledSeats: Passage | null;
-  passangers: Number
+  passangers: Number;
 }
