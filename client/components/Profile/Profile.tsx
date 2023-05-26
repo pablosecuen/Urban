@@ -100,7 +100,7 @@ export default function Profile() {
                 name="areacode"
                 type="text"
                 placeholder="area"
-                className="border-b-1 rounded-2xl bg-white text-center text-gray-800"
+                className="border-b-1 rounded-2xl bg-white py-1 text-center text-base  font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.phone.areaCode}
               />
@@ -122,7 +122,7 @@ export default function Profile() {
                 name="number"
                 type="text"
                 placeholder="número"
-                className="border-b-1 rounded-2xl bg-white text-center text-gray-800"
+                className="border-b-1 rounded-2xl bg-white py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.phone?.number}
               />
@@ -145,7 +145,7 @@ export default function Profile() {
                 name="cc"
                 type="text"
                 placeholder="Ingrese su CC"
-                className="border-b-1 rounded-2xl text-center text-gray-800"
+                className="border-b-1 rounded-2xl py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.cc}
               />
@@ -169,7 +169,7 @@ export default function Profile() {
                 name="state"
                 type="text"
                 placeholder="Ingrese su Estado"
-                className="border-b-1 rounded-2xl text-center text-gray-800"
+                className="border-b-1 rounded-2xl py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.state}
               />
@@ -178,7 +178,7 @@ export default function Profile() {
                 type="text"
                 disabled
                 placeholder="Ingrese su Estado"
-                className="border-0 bg-white text-center font-semibold text-gray-800"
+                className="border-0 bg-white text-center font-semibold  text-gray-800"
                 value={userData?.state}
               />
             )}
@@ -190,7 +190,7 @@ export default function Profile() {
                 name="location"
                 type="text"
                 placeholder="Ingrese su Ciudad"
-                className="border-b-1 rounded-2xl text-center text-gray-800"
+                className="border-b-1 rounded-2xl py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.location}
               />
@@ -214,7 +214,7 @@ export default function Profile() {
                 name="street"
                 type="text"
                 placeholder="Ingrese su Calle"
-                className="border-b-1 rounded-2xl text-center text-gray-800"
+                className="border-b-1 rounded-2xl py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.street}
               />
@@ -235,7 +235,7 @@ export default function Profile() {
                 name="number"
                 type="text"
                 placeholder="Ingrese su Numero"
-                className="border-b-1 rounded-2xl text-center text-gray-800"
+                className="border-b-1 rounded-2xl py-1 text-center text-base font-light italic text-gray-800"
                 onChange={onChange}
                 value={userData?.number}
               />
@@ -252,7 +252,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <button type="button" onClick={onClick} className="rounded bg-blue px-2 py-1  text-white">
+        <button type="button" onClick={onClick} className="rounded bg-blue px-4 py-1  text-white">
           Editar
         </button>
         <button className="rounded bg-blue px-2 py-1  text-white">Guardar</button>
