@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { plantaAlta } from "../../assets/data";
 import { CardProfilePropsPassage } from "@component/app/types/Passages";
 
-const PlantaAltaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage }) => {
+const PlantaAltaAdmin: React.FC<CardProfilePropsPassage> = ({
+  selectedPassage,
+  newSeats,
+  onSeatToggle,
+}) => {
   const [seatEnabled, setSeatEnabled] = useState<boolean[]>([]);
 
   const handleSeatToggle = (seatIndex: number) => {
+    const seatNumber = seatIndex + 41;
+    onSeatToggle?.(seatNumber.toString());
     setSeatEnabled((prevSeats) => {
       const updatedSeats = [...prevSeats];
-      const seatNumber = seatIndex + 41; // Ajustar el índice al número de asiento correspondiente
-      updatedSeats[seatNumber] = !updatedSeats[seatNumber]; // Toggle the seat enabled state
+      updatedSeats[seatIndex] = !updatedSeats[seatIndex];
       return updatedSeats;
     });
   };
@@ -19,10 +24,9 @@ const PlantaAltaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
     setSeatEnabled(Array(plantaAlta.length).fill(false));
   }, []);
 
-  const numberSeat = selectedPassage?.numberSeat ?? [];
   const isSeatSelected = (seatIndex: number) => {
-    const seatNumber = seatIndex + 41; // Ajustar el índice al número de asiento correspondiente
-    return numberSeat.includes(`${seatNumber}`);
+    const seatNumber = seatIndex + 41;
+    return selectedPassage?.numberSeat.includes(`${seatNumber}`);
   };
 
   if (!selectedPassage) {
@@ -34,8 +38,7 @@ const PlantaAltaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
       <p className='text-center'>Planta alta</p>
       <ul className='grid grid-cols-5 gap-2'>
         {plantaAlta.map((seat, index) => {
-          const seatNumber = index + 41; // Ajustar el índice al número de asiento correspondiente
-          console.log("Índice:", seatNumber);
+          const seatNumber = index + 41;
           return (
             <React.Fragment key={seatNumber}>
               {(index === 2 || (index - 2) % 4 === 0) && <li className='' />}
@@ -50,17 +53,13 @@ const PlantaAltaAdmin: React.FC<CardProfilePropsPassage> = ({ selectedPassage })
                 />
                 <label
                   className={`cursor-pointer ${
-                    seatEnabled[seatNumber] ? "hover:bg-blue-200" : "cursor-not-allowed"
+                    seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
                   }`}
                   htmlFor={`checkbox-${seatNumber}`}
                 >
                   <Seat
                     fill={
-                      isSeatSelected(index)
-                        ? "#000000"
-                        : seatEnabled[seatNumber]
-                        ? "#0000FF"
-                        : "#C0C0C0"
+                      isSeatSelected(index) ? "#000000" : seatEnabled[index] ? "#0000FF" : "#C0C0C0"
                     }
                     width='30px'
                     height='36px'
