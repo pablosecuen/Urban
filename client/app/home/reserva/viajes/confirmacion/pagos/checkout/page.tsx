@@ -2,6 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 //import CardCheckout from "@component/components/Cards/CardCheckout";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -14,7 +15,6 @@ export default function Checkout() {
   const merchantOrder: string | null = queryParams.get("merchant_order_id"); //codigo factura
   const status: string | null = queryParams.get("status"); //estado de exito o no
   const user: any | null = JSON.parse(localStorage.getItem("user") || ""); //id del usuario de la app;
-
   // - - - - - - - - - - - - NOTIFICACIONES - - - - - - - - - - - -
   const notifySuccess = () =>
     toast.success(`Su pago ha sido realizado con éxito!`, {
@@ -35,16 +35,17 @@ export default function Checkout() {
       );
       //este axios pueeeede llegar a ser a mercadopago
       //aca se guarda la info y con esto generamos la factura
-
       const requestData = {
         userId: user?.id,
-        /// reemplazar la variable objeto por data
         passageId: data?.items[0].id,
         price: data?.items[0].unit_price,
         quantity: data?.items[0].quantity,
         paymentId: paymentId,
         merchantOrder: merchantOrder,
         statusMp: status,
+        passengersData: {
+          description: data?.items[0].description,
+        },
       };
       return requestData;
     } catch (error) {
@@ -64,11 +65,11 @@ export default function Checkout() {
   }, []);
 
   return (
-    <div className="flex  flex-col justify-center gap-8 bg-white">
+    <div className='flex  flex-col justify-center gap-8 bg-white'>
       {/* <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p> */}
       {/* <Image src={success} alt="pago exitoso" className="h-80 w-80 self-center"></Image> */}
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -77,12 +78,12 @@ export default function Checkout() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
 
-      <Link href="/home">
-        <button className="mx-auto flex  w-1/2 justify-center py-1 text-center">
+      <Link href='/home'>
+        <button className='mx-auto flex  w-1/2 justify-center py-1 text-center'>
           Volver al inicio
         </button>
       </Link>
