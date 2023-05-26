@@ -10,28 +10,27 @@ export default function CardHome() {
     const urlParams = new URLSearchParams(window.location.search); //fijarse problema de window
     token = urlParams.get("token");
   }
-
+  
   const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
   const user = userString ? JSON.parse(userString) : null;
-  useEffect(() => {
-    const notifySuccess = () => {
-      toast.success(`Bienvenido ${user?.name} `, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    };
 
-    if (user) {
-      notifySuccess();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const notifySuccess = () =>
+    //Aca es donde se define el funcionamiento de la notificacion, si dura mucho o poco, si es positiva o negativa
+    //Si miran cada Toast solo con cambiar el success, error, warn o info, cambie su funcion
+    //No hace falta cambiar el ToastContainer a la par si solo se cambia el Toast
+    toast.success(`Bienvenido ${user?.name} `, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  if (user) {
+    notifySuccess();
+  }
 
   useEffect(() => {
     token &&
