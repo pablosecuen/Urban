@@ -1,7 +1,5 @@
 import CardConfirmacionReserva from "@component/components/Cards/CardConfirmacionReserva";
-
 import type { Metadata } from "next";
-
 export const metadata: Metadata = {
   title: "Urban | Viajes | Confirmacion",
   description:
@@ -12,13 +10,19 @@ export const metadata: Metadata = {
 
 export default function Confirmacion({ params }: { params: { id: string } }) {
   const { id } = params;
+
+  const containerStyles =
+    "flex w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[530px] xl:justify-between";
+  const titleStyles = "text-center font-bold lg:text-xl";
+  const textStyles = "w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4";
+
   return (
-    <div className="flex w-full flex-col  items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[530px] xl:justify-between">
-      <h3 className="text-center font-bold lg:text-xl ">Pasaje disponible!</h3>
+    <div className={containerStyles}>
+      <h3 className={titleStyles}>Pasaje disponible!</h3>
       <CardConfirmacionReserva id={id} />
 
       <div className="flex flex-col items-center justify-center gap-2">
-        <p className="w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4">
+        <p className={textStyles}>
           Tocando el boton para abonar el servicio aceptas nuestros terminos y condiciones de uso
         </p>
       </div>
