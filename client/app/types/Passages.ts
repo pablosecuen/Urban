@@ -44,8 +44,9 @@ export interface PassageToUpdate extends Partial<PassageToRegister> {
 export interface CardProfilePropsPassage {
   selectedPassage: Passage | null;
   newSeats?: string[];
+  disabledSeats?: string[];
   onSeatToggle?: (seat: string) => void;
-  enableSeats?: () => void;
+  onDisableSeatToggle?: (seat: string) => void;
 }
 
 export interface CardProfilePropsEnabledSeats {
