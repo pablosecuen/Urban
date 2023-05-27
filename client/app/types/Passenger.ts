@@ -1,6 +1,7 @@
 import { Passage } from "./Passages";
 
 export interface PassengerFormData {
+    isMinor?: any;
     nombre: string;
     apellido: string;
     nacionalidad: string;
