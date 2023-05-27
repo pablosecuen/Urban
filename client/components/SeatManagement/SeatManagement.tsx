@@ -46,6 +46,7 @@ const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, ne
         numberSeat: disabledSeats,
       });
       toastSuccess();
+      setDisabledSeats([]);
       console.log("Todo Ok");
     } catch (error) {
       console.error("Error", error);
