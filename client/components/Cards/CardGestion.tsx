@@ -1,4 +1,5 @@
 "use client";
+
 import { RootState } from "@component/Redux/store/store";
 import { getTicketsByUserId } from "@component/Redux/ticket/ticketActions";
 import { AnyAction } from "@reduxjs/toolkit";
@@ -8,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import logo from "../../assets/imagenes/UrbanIsoLogo.png";
 import { Ticket } from "@component/app/types/Ticket";
-import { FaBus } from "react-icons/fa";
+import { FaBus, FaCar, FaTaxi } from "react-icons/fa";
 import RatingStars from "../RatingStars/RatingStars";
 import { toast } from "react-toastify";
 import ToastComponent from "../00-Toastify/ToastComponent";
@@ -101,35 +102,31 @@ export default function CardGestion() {
     toast.success(`Gracias por tu valoración`);
   };
 
-  // Styles
-  const sectionStyles = `flex h-full w-full flex-col gap-2 ${
-    allTickets.length > 4 ? "scrollbar overflow-y-scroll" : ""
-  } rounded-3xl bg-transparent lg:container lg:mx-auto lg:h-[500px] lg:p-10`;
-  const ticketStyles = "flex items-center justify-around align-middle";
-  const busIconStyles = "w-auto pr-2 text-blue";
-  const ticketInfoStyles = "flex flex-col";
-  const busTypeStyles = "text-xl font-semibold text-gray-600";
-  const ticketDetailsStyles = "pt-2 text-gray-600";
-  const buttonStyles = "w-auto shadow-transparent";
-
   return (
-    <section className={sectionStyles}>
+    <section
+      className={` flex h-full w-full flex-col gap-2  ${
+        allTickets.length > 4 ? "scrollbar overflow-y-scroll" : ""
+      } rounded-3xl bg-transparent  lg:container lg:mx-auto  lg:h-[500px] lg:p-10`}
+    >
       {allTickets.map((ticket) => (
         <>
-          <div key={ticket.id} className={ticketStyles}>
-            <FaBus size="40" className={busIconStyles} />
-            <div className={ticketInfoStyles}>
-              <div className="flex items-center gap-2">
-                <span className={busTypeStyles}>Bus intermunicipal</span>
+          <div key={ticket.id} className="flex items-center justify-around  align-middle ">
+            <FaBus size="40" className=" w-auto pr-2 text-blue" />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 ">
+                <span className="text-xl font-semibold text-gray-600">Bus intermunicipal</span>
               </div>
-              <span className={ticketDetailsStyles}>
+              <span className="pt-2 text-gray-600">
                 Origen: {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella
                 St <br />
                 Tiempo estimado: {ticket.passageInfo.duration}
               </span>
             </div>
             {!ticket.reviewSent && (
-              <button className={buttonStyles} onClick={() => handleOpenModal(ticket)}>
+              <button
+                className="w-auto shadow-transparent "
+                onClick={() => handleOpenModal(ticket)}
+              >
                 Valorar
               </button>
             )}
@@ -149,21 +146,21 @@ export default function CardGestion() {
             ref={modalRef}
           >
             <div
-              className="mx-auto h-96 w-96 rounded-2xl bg-white shadow-2xl shadow-black/60"
+              className="mx-auto h-96 w-96 rounded-2xl  bg-white shadow-2xl shadow-black/60"
               onClick={(e) => e.stopPropagation()}
             >
               {selectedTicket && (
                 <article className="flex flex-col items-center justify-center gap-4 p-6 ">
-                  <Image src={logo} alt="logo" className="mx-auto w-16" />
-                  <h2 className="text-center text-2xl font-bold">Valoración</h2>
-                  <div className="flex flex-col items-center justify-center">
+                  <Image src={logo} alt="logo" className="mx-auto  w-16  " />
+                  <h2 className=" text-center text-2xl font-bold">Valoración</h2>
+                  <div className="flex flex-col items-center justify-center ">
                     <RatingStars
                       onClickFunction={onClickFuntionToRatingStars}
                       stateValue={valuationData?.rating || 0}
                     />
                     <textarea
                       onChange={handleChangeValuationComment}
-                      className="border"
+                      className=" border"
                       cols={30}
                       rows={4}
                       value={valuationData.comment}
