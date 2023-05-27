@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 export default function Pagos() {
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const user = JSON.parse(window?.localStorage.getItem("user") || "");
   const passages = useSelector((state: RootState) => state.payment.passageById);
 
   interface ToPay {
