@@ -309,7 +309,7 @@ export const newCompanyRating = async (
 
     if (!ticketDoc.exists) throw createHttpError(404, "El ticket no existe");
     if (ticketDoc.data().reviewSent === true)
-      throw new Error("No se puede enviar mas de una review por ticket");
+      throw createHttpError(400, "No se puede enviar mas de una review por ticket");
     if (!companiesDoc.exists) throw createHttpError(404, "La compañia no existe");
 
     const dataFormatted: CompanyRating = {
