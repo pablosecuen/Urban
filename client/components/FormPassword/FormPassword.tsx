@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { HiEyeOff, HiEye } from "react-icons/hi";
 import setValidate from "./Validate";
