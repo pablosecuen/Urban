@@ -8,29 +8,21 @@ export const metadata: Metadata = {
   keywords:
     "gestión de viajes, viajes disponibles, opciones de transporte, buses intermunicipales, taxis públicos, transportes privados, destinos, fechas de viaje, horarios, planificar viajes, elegir opciones de viaje, experiencia de viaje, herramienta de gestión de viajes.",
 };
-
 export default function SearchResults({ params }: { params: { slug: string } }) {
-  const localidades: any = params.slug;
+  const localilades: any = params.slug;
 
-  const capitalizedString = localidades.map((localidad: any) =>
+  const capitalizedString = localilades.map((localidad: any) =>
     localidad.replace(/^\w/, (c: any) => c.toUpperCase())
   );
-
-  const containerStyles =
-    "h-full w-full rounded-3xl bg-white p-10 shadow-2xl shadow-black/40 lg:ml-12";
-  const flexContainerStyles = "flex w-full flex-col gap-4";
-  const titleStyles = "text-center text-xl text-blue";
-  const buttonStyles = "flex gap-2 pt-10";
-
   return (
-    <div className={containerStyles}>
-      <div className={flexContainerStyles}>
-        <h1 className={titleStyles}>
+    <div className=" h-full w-full rounded-3xl  bg-white p-10 shadow-2xl shadow-black/40 lg:ml-12 ">
+      <div className="flex w-full flex-col gap-4">
+        <h1 className="text-center text-xl text-blue">
           Opciones encontradas desde {capitalizedString[0]} hasta {capitalizedString[1]}
         </h1>
         <CardReservaSlug params={params} />
       </div>
-      <div className={buttonStyles}>
+      <div className="flex gap-2 pt-10">
         <button>Ver mas opciones</button>
       </div>
     </div>
