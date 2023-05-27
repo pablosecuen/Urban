@@ -117,9 +117,9 @@ export default function CardGestion() {
                 <span className="text-xl font-semibold text-gray-600">Bus intermunicipal</span>
               </div>
               <span className="pt-2 text-gray-600">
-                Origen: {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella
-                St <br />
-                Tiempo estimado: {ticket.passageInfo.duration}
+                Origen: {ticket.passageInfo?.origin} - {ticket.passageInfo?.departureTime} -
+                Estrella St <br />
+                Tiempo estimado: {ticket.passageInfo?.duration}
               </span>
             </div>
             {!ticket.reviewSent && (
