@@ -79,16 +79,21 @@ export const updateStatusVehicle = async (req: Request, res: Response, next: Nex
 export const updateSeatPassage = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = req.params.id;
+    const numberSeats: string[] = req.body.numberSeat;
+    console.log(numberSeats);
     const docRef = await db.collection("passages").doc(id).get();
     if (!docRef.exists) {
       throw createHttpError(404, "No se encontró el pasaje");
     }
-    await db
-      .collection("passages")
-      .doc(id)
-      .update({
-        numberSeat: firebase.firestore.FieldValue.arrayUnion(req.body.numberSeat),
-      });
+
+    const passageData = docRef.data();
+    const existingSeats: string[] = passageData.numberSeat || [];
+
+    const updatedSeats = Array.from(new Set([...existingSeats, ...numberSeats]));
+
+    await db.collection("passages").doc(id).update({
+      numberSeat: updatedSeats,
+    });
 
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
   } catch (error) {
