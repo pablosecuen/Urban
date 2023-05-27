@@ -9,7 +9,6 @@ module.exports = {
     extend: {
       backgroundImage: {
         menu: "url('/assets/imagenes/city.webp')",
-        loginadmin: "url('/assets/imagenes/loginadmin.png')",
       },
       colors: {
         verde: "#e0ffcd",
