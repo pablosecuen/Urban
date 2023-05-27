@@ -1,13 +1,13 @@
 import { ToastContainer, toast } from "react-toastify";
 
 const ToastComponent = ({
-  position = "bottom-right",
+  position = "top-center",
   autoClose = 5000,
   hideProgressBar = false,
   closeOnClick = false,
   pauseOnHover = false,
   draggable = true,
-  theme = "light",
+  theme = "dark",
   closeButton = false,
 }: any) => {
   return (
