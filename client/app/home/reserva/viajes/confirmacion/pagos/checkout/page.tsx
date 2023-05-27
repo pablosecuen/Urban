@@ -10,11 +10,11 @@ import { Ticket } from "../../../../../../types/Ticket";
 
 export default function Checkout() {
   //datos mercadopago
-  const queryParams = new URLSearchParams(window?.location.search);
+  const queryParams = new URLSearchParams(window && location.search);
   const paymentId: string | null = queryParams.get("payment_id"); //id del usuario de mp
   const merchantOrder: string | null = queryParams.get("merchant_order_id"); //codigo factura
   const status: string | null = queryParams.get("status"); //estado de exito o no
-  const user: any | null = JSON.parse(localStorage.getItem("user") || ""); //id del usuario de la app;
+  const user: any | null = JSON.parse((window && localStorage.getItem("user")) || ""); //id del usuario de la app;
   const [ticket, setTicket] = useState<Ticket | null>(null);
 
   // - - - - - - - - - - - - NOTIFICACIONES - - - - - - - - - - - -

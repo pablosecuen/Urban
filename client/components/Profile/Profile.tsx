@@ -8,7 +8,7 @@ export default function Profile() {
   const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
-    const userDataString = window?.localStorage.getItem("user");
+    const userDataString = window && localStorage.getItem("user");
     if (userDataString) {
       setUserData(JSON.parse(userDataString));
     }
@@ -22,14 +22,14 @@ export default function Profile() {
     event.preventDefault();
 
     // Retrieve the user ID from localStorage
-    const userString = window?.localStorage.getItem("user");
+    const userString = window && localStorage.getItem("user");
     const user = userString ? JSON.parse(userString) : null;
 
     // Make the PUT request to update the user
     axios
       .put(`http://localhost:3000/user/${user.id}`, userData)
       .then((response) => {
-        window?.localStorage.setItem("user", JSON.stringify(userData));
+        window && localStorage.setItem("user", JSON.stringify(userData));
         setShowInput(false);
         console.log("todo bien", userData);
 
@@ -68,8 +68,6 @@ export default function Profile() {
       }));
     }
   };
-
-  console.log(userData?.phone.number);
 
   return (
     <form

@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMediaQuery } from "react-responsive";
+
 import { userData } from "../../app/types/User";
-import { links, linksMobile } from "../../assets/data";
-import { HiMenu, HiMenuAlt1, HiMenuAlt3 } from "react-icons/hi";
+import { linksMobile } from "../../assets/data";
+import { HiMenu, HiMenuAlt3 } from "react-icons/hi";
 
 import logo from "../../assets/imagenes/UrbanIso.png";
 
@@ -16,11 +15,10 @@ export default function NavBarMobile() {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-    console.log(showMenu);
   };
 
   useEffect(() => {
-    const userDataString = localStorage.getItem("user");
+    const userDataString = window && localStorage.getItem("user");
     if (userDataString) {
       const userDataObject = JSON.parse(userDataString);
       setUser(userDataObject);
@@ -28,7 +26,7 @@ export default function NavBarMobile() {
   }, [setUser]);
 
   const handleLogout = () => {
-    window?.localStorage.removeItem("user");
+    window && localStorage.removeItem("user");
     setUser(null);
   };
 

@@ -10,7 +10,7 @@ const Login = () => {
 
   const handleSetIsRegister = (value: boolean) => {
     setIsRegister(value);
-    sessionStorage.setItem("isRegister", value.toString());
+    window && sessionStorage.setItem("isRegister", value.toString());
   };
 
   return (

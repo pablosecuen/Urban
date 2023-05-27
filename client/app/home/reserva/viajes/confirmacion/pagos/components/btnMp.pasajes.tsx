@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { ToPay } from "@component/app/types/MercadoPago";
 
 export default function Pagos() {
-  const user = JSON.parse(window?.localStorage.getItem("user") || "");
+  const user = JSON.parse((window && localStorage.getItem("user")) || "");
   const passages = useSelector((state: RootState) => state.payment?.passageById);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
@@ -41,7 +41,6 @@ export default function Pagos() {
   }, 0);
 
   const arrToPay = toPay.map((item) => {
-    console.log({ desripcion: item.description });
     return {
       id: item.id,
       title: item.name,
