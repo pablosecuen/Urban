@@ -113,12 +113,14 @@ export const disableSeatsPassage = async (req: Request, res: Response, next: Nex
     if (!numberSeat) {
       throw createHttpError(400, "Se requiere el campo numberSeat en el cuerpo de la solicitud");
     }
+    console.log(numberSeat);
+    const updatedNumberSeat = Array.isArray(numberSeat) ? numberSeat : [numberSeat];
 
     await db
       .collection("passages")
       .doc(id)
       .update({
-        numberSeat: firebase.firestore.FieldValue.arrayRemove(numberSeat),
+        numberSeat: firebase.firestore.FieldValue.arrayRemove(...updatedNumberSeat),
       });
 
     res.status(200).json({ message: "Pasaje actualizado correctamente" });
