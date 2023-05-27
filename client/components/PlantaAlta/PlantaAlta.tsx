@@ -67,34 +67,27 @@ const PlantaAlta: React.FC<Passagers> = ({ enabledSeats }) => {
     return <div>Loading</div>;
   }
 
-  const containerStyles = "flex w-4/5 flex-col gap-4";
-  const ulStyles = "grid grid-cols-5 gap-2";
-  const listItemStyles = "relative";
-  const checkboxStyles = "absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0";
-  const labelStyles = "cursor-pointer";
-  const selectedSeatStyles = "bg-blue-500";
-
   return (
-    <div className={containerStyles}>
+    <div className="flex w-4/5 flex-col gap-4">
       Planta baja
       <ToastComponent />
-      <ul className={ulStyles}>
+      <ul className="grid grid-cols-5 gap-2">
         {plantaAlta.map((seat, index) => (
           <React.Fragment key={index}>
             {(index === 2 || (index - 2) % 4 === 0) && <li className="" />}
-            <li className={listItemStyles}>
+            <li className="relative">
               <input
                 type="checkbox"
                 name={`checkbox-${seat}`}
                 id={`checkbox-${seat}`}
-                className={checkboxStyles}
+                className="absolute bottom-0 left-0 right-0 top-0 -z-10 opacity-0"
                 onClick={() => handleSeatToggle(index)}
                 disabled={isSeatEnabled(index)}
               />
               <label
-                className={`${labelStyles} ${
+                className={`cursor-pointer ${
                   seatEnabled[index] ? "hover:bg-blue-200" : "cursor-not-allowed"
-                } ${selectedSeats.includes(seat) ? selectedSeatStyles : ""}`}
+                } ${selectedSeats.includes(seat) ? "bg-blue-500" : ""}`}
                 htmlFor={`checkbox-${seat}`}
                 onClick={() => handleSeatSelection(seat)}
               >
