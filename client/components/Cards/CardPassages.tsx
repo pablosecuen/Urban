@@ -57,6 +57,7 @@ export default function CadPassages(props: any) {
 
   useEffect(() => {
     dispatch(getAllCompanies());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [showDropDown, setShowDropDown] = useState(false);
 
