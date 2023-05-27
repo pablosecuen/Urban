@@ -45,6 +45,7 @@ export interface CardProfilePropsPassage {
   selectedPassage: Passage | null;
   newSeats?: string[];
   onSeatToggle?: (seat: string) => void;
+  enableSeats?: () => void;
 }
 
 export interface CardProfilePropsEnabledSeats {
