@@ -17,7 +17,7 @@ import { User } from "@component/app/types/User";
 import "react-toastify/dist/ReactToastify.css";
 import { updateReviewSent } from "@component/Redux/ticket/ticketSlice";
 interface ValuationData {
-  rating: number;
+  rating: number | null;
   comment: string;
 }
 interface UserAndCompanyIds {
@@ -28,7 +28,7 @@ export default function CardGestion() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>();
   const [valuationData, setValuationData] = useState<ValuationData>({
-    rating: 0,
+    rating: null,
     comment: "",
   });
   const [userData, setUserData] = useState<User | null>(null);
@@ -65,30 +65,53 @@ export default function CardGestion() {
     });
   };
   const handleChangeValuationComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
-    if (target.value.length < 200) {
+    if (target.value.length <= 200) {
       setValuationData((prev) => {
         return { ...prev, comment: target.value };
       });
     }
   };
   const sendValuation = () => {
+    console.log("Sending valuation data...");
     if (selectedTicket) {
       const { id: ticketId, passageInfo } = selectedTicket;
       const { companyId } = passageInfo;
+      const currentValuationData = valuationData; // Capture the current value of valuationData
+      console.log("Before Axios request");
       axios
-        .post(`http://localhost:3000/user/rating/company/${ticketId}/${companyId}`, valuationData)
-        .then(() => {
+        .post(
+          `http://localhost:3000/user/rating/company/${ticketId}/${companyId}`,
+          currentValuationData
+        )
+        .then((response) => {
+          console.log("Axios request successful");
+          console.log(response.data);
           notifySuccess();
           closeModal();
           dispatch(updateReviewSent(ticketId));
         })
         .catch((error: AxiosError | any) => {
+          console.log("Axios request failed");
           console.log(error);
         });
+      console.log("After Axios request");
     }
   };
+
   const notifySuccess = () => {
-    toast.success(`Gracias por tu valoración`);
+    if (!toast.isActive("sucess")) {
+      toast.success(`Gracias por su valoración!`, {
+        toastId: "success",
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   };
 
   // Styles
@@ -104,18 +127,18 @@ export default function CardGestion() {
 
   return (
     <section className={sectionStyles}>
-      {allTickets.map((ticket) => (
-        <>
-          <div key={ticket.id} className={ticketStyles}>
+      {allTickets.map((ticket, index) => (
+        <div key={index}>
+          <div className={ticketStyles}>
             <FaBus size="40" className={busIconStyles} />
             <div className={ticketInfoStyles}>
               <div className="flex items-center gap-2">
                 <span className={busTypeStyles}>Bus intermunicipal</span>
               </div>
               <span className={ticketDetailsStyles}>
-                Origen: {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella
-                St <br />
-                Tiempo estimado: {ticket.passageInfo.duration}
+                Origen: {ticket.passageInfo?.origin} - {ticket.passageInfo?.departureTime} -
+                Estrella St <br />
+                Tiempo estimado: {ticket.passageInfo?.duration}
               </span>
             </div>
             {!ticket.reviewSent && (
@@ -125,7 +148,7 @@ export default function CardGestion() {
             )}
           </div>
           <hr className="mb-4" />
-        </>
+        </div>
       ))}
       {isModalOpen && (
         <>
