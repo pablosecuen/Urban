@@ -72,12 +72,10 @@ export default function CardGestion() {
     }
   };
   const sendValuation = () => {
-    console.log("Sending valuation data...");
     if (selectedTicket) {
       const { id: ticketId, passageInfo } = selectedTicket;
       const { companyId } = passageInfo;
       const currentValuationData = valuationData; // Capture the current value of valuationData
-      console.log("Before Axios request");
       axios
         .post(
           `http://localhost:3000/user/rating/company/${ticketId}/${companyId}`,
@@ -91,10 +89,8 @@ export default function CardGestion() {
           dispatch(updateReviewSent(ticketId));
         })
         .catch((error: AxiosError | any) => {
-          console.log("Axios request failed");
           console.log(error);
         });
-      console.log("After Axios request");
     }
   };
 
