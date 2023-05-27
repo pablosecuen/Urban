@@ -8,13 +8,16 @@ export const metadata: Metadata = {
   keywords:
     "gestión de viajes, buscar viajes, destino, origen, fecha de salida, fecha de regreso, opciones de transporte, buses intermunicipales, taxis públicos, transportes privados, planificar viaje, tomar decisiones informadas, optimizar viajes, experiencia de viaje.",
 };
+
 export default function Reserva() {
+  const sectionStyles =
+    "mx-auto mt-10 flex w-full flex-col justify-between rounded-3xl border-2 bg-white px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-10 lg:h-[530px]";
+  const headingStyles = "px-8 text-center text-blue lg:px-0 lg:text-xl";
+
   return (
-    <section className="mx-auto mt-10 flex w-full flex-col justify-between rounded-3xl border-2 bg-white px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-10 lg:h-[530px]">
-      <div className="flex flex-col gap-8  ">
-        <h1 className="px-8 text-center text-blue lg:px-0 lg:text-xl">
-          Llena el formulario para encontrar tu viaje
-        </h1>
+    <section className={sectionStyles}>
+      <div className="flex flex-col gap-8">
+        <h1 className={headingStyles}>Llena el formulario para encontrar tu viaje</h1>
         <CardReservaPage />
       </div>
     </section>

@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { HiOutlineLocationMarker, HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
-import getLocations from "../../services/api/locations";
+
 import ToastComponent from "../00-Toastify/ToastComponent";
 import { Location } from "@component/app/types/Select";
+import getLocations from "@component/services/api/locations";
 
 export default function Reserva() {
   const router = useRouter();
@@ -72,11 +73,19 @@ export default function Reserva() {
     fetchLocations();
   }, []);
 
+  const formStyles = "flex flex-col items-center justify-center gap-6 bg-white pb-16 pt-12";
+  const inputWrapperStyles = "flex w-full items-center justify-center";
+  const inputIconStyles = "w-10 text-blue";
+  const inputStyles = "w-2/3 pl-2";
+  const buttonStyles = `transition_all mt-4 w-1/2 self-center ${
+    !isFormValid ? "!bg-gray-500" : "cursor-pointer"
+  }`;
+
   return (
     <>
-      <form className="flex flex-col items-center justify-center gap-6 bg-white pb-16 pt-12">
-        <div className="flex w-full items-center justify-center">
-          <HiOutlineLocationMarker className="w-10 text-blue" />
+      <form className={formStyles}>
+        <div className={inputWrapperStyles}>
+          <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
             placeholder="Origen..."
@@ -86,8 +95,8 @@ export default function Reserva() {
             value={origin ? { value: origin, label: origin } : null}
           />
         </div>
-        <div className="flex w-full items-center justify-center">
-          <HiOutlineLocationMarker className="w-10 text-blue" />
+        <div className={inputWrapperStyles}>
+          <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
             placeholder="Destino..."
@@ -98,10 +107,10 @@ export default function Reserva() {
           />
         </div>
 
-        <div className="flex w-full items-center justify-center">
-          <HiTrendingUp className="w-10 text-blue" />
+        <div className={inputWrapperStyles}>
+          <HiTrendingUp className={inputIconStyles} />
           <input
-            className="w-2/3 pl-2"
+            className={inputStyles}
             placeholder="Fecha de salida"
             type="date"
             value={departureDate}
@@ -109,10 +118,10 @@ export default function Reserva() {
             onChange={handleDepartureDateChange}
           />
         </div>
-        <div className="flex w-full items-center justify-center">
-          <HiTrendingDown className="w-10 text-blue" />
+        <div className={inputWrapperStyles}>
+          <HiTrendingDown className={inputIconStyles} />
           <input
-            className="w-2/3 pl-2"
+            className={inputStyles}
             placeholder="Fecha de llegada"
             type="date"
             value={arrivalDate}
@@ -121,13 +130,7 @@ export default function Reserva() {
           />
         </div>
 
-        <button
-          onClick={handleSubmit}
-          disabled={!isFormValid}
-          className={`transition_all mt-4 w-1/2 self-center ${
-            !isFormValid ? "!bg-gray-500" : "cursor-pointer"
-          }`}
-        >
+        <button onClick={handleSubmit} disabled={!isFormValid} className={buttonStyles}>
           Buscar tu viaje!
         </button>
       </form>
