@@ -12,35 +12,23 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
   const lengthData = passagerData.length;
 
-  const containerStyles =
-    "flex w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between";
-  const relativeContainerStyles =
-    "relative flex min-w-0 flex-col break-words rounded-lg bg-transparent";
-  const titleStyles = "py-4 text-center";
-  const italicStyles = "italic text-gray-400";
-  const passengersRemainingStyles = "";
-  const ulStyles = "flex items-center justify-center gap-4 bg-transparent";
-  const liStyles = "flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4";
-
   const passangers = count?.quantity;
   if (count?.quantity - lengthData == 0) {
     router.push("/home/reserva/viajes/confirmacion/pagos");
   }
   return (
-    <div className={containerStyles}>
-      <div className={relativeContainerStyles}>
-        <h2 className={titleStyles}>Elige tus asientos </h2>
-        <p className={italicStyles}>
-          Al hacer click se te solicitará la información de los pasajeros
+    <div className='flex w-full flex-col  items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between'>
+      <div className='relative  flex min-w-0 flex-col break-words rounded-lg bg-transparent '>
+        <h2 className='py-4 text-center'>Elige tus asientos </h2>
+        <p className='italic text-gray-400'>
+          Al hacer click se te solicitara la informacion de los pasajeros
         </p>
-        <p className={passengersRemainingStyles}>
-          Pasajeros restantes: {count?.quantity - lengthData}
-        </p>
-        <ul className={ulStyles}>
-          <li className={liStyles}>
+        <p>Pasajeros restantes: {count?.quantity - lengthData}</p>
+        <ul className='flex items-center justify-center gap-4 bg-transparent'>
+          <li className='flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4'>
             <PlantaAlta enabledSeats={enabledSeats} passangers={passangers} />
           </li>
-          <li className={liStyles}>
+          <li className='flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4'>
             <PlantaBaja enabledSeats={enabledSeats} passangers={passangers} />
           </li>
         </ul>
