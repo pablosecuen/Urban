@@ -14,6 +14,13 @@ export interface Ticket extends TicketToRegister {
   status: TicketStatus;
   createdAt: string;
   updatedAt: string;
+  quantity?: number;
+  paymentId?: string;
+  merchantOrder?: string;
+  statusMp?: string;
+  passengersData?: {
+    description: string;
+  };
 }
 
 export interface TicketToUpdate {
