@@ -5,7 +5,7 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
 
 const Login = () => {
-  const isRegisterFromSessionStorage = sessionStorage.getItem("isRegister");
+  const isRegisterFromSessionStorage = window?.sessionStorage.getItem("isRegister");
   const [isRegister, setIsRegister] = useState(Boolean(isRegisterFromSessionStorage) || false);
 
   const handleSetIsRegister = (value: boolean) => {

@@ -30,7 +30,7 @@ export default function NavBar() {
     }
   }, [setUser]);
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    window?.localStorage.removeItem("user");
     setUser(null);
     router.push("/");
   };

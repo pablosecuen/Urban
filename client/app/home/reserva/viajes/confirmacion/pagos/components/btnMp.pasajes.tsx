@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { ToPay } from "@component/app/types/MercadoPago";
 
 export default function Pagos() {
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const user = JSON.parse(window?.localStorage.getItem("user") || "");
   const passages = useSelector((state: RootState) => state.payment?.passageById);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
@@ -64,9 +64,9 @@ export default function Pagos() {
   };
 
   return (
-    <div className='flex flex-col items-center gap-2 pb-4'>
-      <span className=' rounded-2xl bg-white px-4 text-2xl'>Valor a pagar: ${totalPrice}</span>
-      <button onClick={handleClickMP} className='w-48'>
+    <div className="flex flex-col items-center gap-2 pb-4">
+      <span className=" rounded-2xl bg-white px-4 text-2xl">Valor a pagar: ${totalPrice}</span>
+      <button onClick={handleClickMP} className="w-48">
         Mercado Pago
       </button>
     </div>

@@ -28,7 +28,7 @@ export default function NavBarMobile() {
   }, [setUser]);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    window?.localStorage.removeItem("user");
     setUser(null);
   };
 

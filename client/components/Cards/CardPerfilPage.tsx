@@ -20,7 +20,7 @@ export default function PerfilPage() {
   };
 
   useEffect(() => {
-    const userDataString = localStorage.getItem("user");
+    const userDataString = window?.localStorage.getItem("user");
     setLoading(false);
     if (userDataString) {
       setUserData(JSON.parse(userDataString));
