@@ -1,19 +1,40 @@
-interface User {
+import { Address, Payment, Phone } from "../types/types";
+
+export interface UserToRegister {
+  firstName: string;
+  lastName: string;
   name: string;
-  address: string;
   email: string;
   password: string;
-  payments: {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
-  };
+}
+export interface User extends UserToRegister {
+  address: Address;
+  payments: Payment[];
   history: {
     orders: string[];
     travels: string[];
+    tickets: string[];
   };
+  phone: Phone;
+  nationality: string;
+  birthday: string;
+  gender: string;
   img: string;
-  DNI: string;
+  cc?: string;
+  ce?: string;
+  deleted: boolean;
+  createdAt?: string;
 }
 
-export default User
+export interface UserToUpdate {
+  address?: Address;
+  phone?: Phone;
+  img?: string;
+  payments?: Payment[];
+  nationality?: string;
+  birthday?: string;
+  gender?: string;
+  cc?: string;
+  ce?: string;
+  updatedAt?: string;
+}

@@ -1,47 +1,27 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Link from "next/link"
+import "./globals.css";
+import { Inter } from "next/font/google";
+import { Providers } from "./provider";
+import type { Metadata } from "next";
+const inter = Inter({ subsets: ["latin"] });
 
-const links = [{
-  label: "home",
-  route: "/",
-},{
-  label: "perfil",
-  route: "/perfil",
-},{
-  label: "ayuda",
-  route: "/ayuda",
-}]
+export const metadata: Metadata = {
+  title: "Urban",
+  description:
+    "Descubre la libertad de elegir tu medio de transporte con nuestra aplicación: ¡empodérate con información y toma decisiones informadas! Encuentra una amplia variedad de servicios de transporte, desde buses intermunicipales, taxis públicos y transportes privados, hasta una sección de cadetería. Resuelve tus problemas cotidianos de manera rápida y eficiente con soluciones reales, mientras gestionas tu tiempo y optimizas tus días. ¡Experimenta el poder de decidir y mejorar tu vida con nuestra app!",
+  keywords:
+    "transporte, medio de transporte, aplicacion de transporte, servicios de transporte, buses intermunicipales, taxis publicos, transportes privados, cadeteria, soluciones reales, gestionar tiempo, optimizar días.",
+};
 
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'Urban',
-  description: 'Solucion en tranportes a tu alcance ',
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>
-        <nav> 
-          <ul>  
-            {links.map(({label, route}) =>(
-              <li key={route}>
-                <Link href={route}>{label}</Link>
-              </li>
-            ))}
-          </ul>
-      
-        </nav>
-        </header>
-        {children}</body>
+        <main className="bg-slate-200">
+          <Providers>
+            <div>{children}</div>
+          </Providers>
+        </main>
+      </body>
     </html>
-  )
+  );
 }

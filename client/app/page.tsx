@@ -1,96 +1,49 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import Login from "@component/components/Login/Login";
+import logo from "../assets/imagenes/UrbanLogo.png";
+import Image, { StaticImageData } from "next/image";
+// import { useDispatch, useSelector } from "react-redux";
+// import { AppDispatch, RootState } from "@component/Redux/store/store";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function Home() {
+interface LoginProps {
+  onLogin: (email: string, password: string) => void;
+  onRegisterClick: () => void;
+  onRegister: (name: string, email: string, password: string) => void;
+  onLoginClick: () => void;
+}
+
+export default function LandingPage() {
+
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-<h1>Esta es nuestra home</h1>
-    // <main className={styles.main}>
-    //   <div className={styles.description}>
-    //     <p>
-    //       Get started by editing&nbsp;
-    //       <code className={styles.code}>app/page.tsx</code>
-    //     </p>
-    //     <div>
-    //       <a
-    //         href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //       >
-    //         By{' '}
-    //         <Image
-    //           src="/vercel.svg"
-    //           alt="Vercel Logo"
-    //           className={styles.vercelLogo}
-    //           width={100}
-    //           height={24}
-    //           priority
-    //         />
-    //       </a>
-    //     </div>
-    //   </div>
-
-    //   <div className={styles.center}>
-    //     <Image
-    //       className={styles.logo}
-    //       src="/next.svg"
-    //       alt="Next.js Logo"
-    //       width={180}
-    //       height={37}
-    //       priority
-    //     />
-    //   </div>
-
-    //   <div className={styles.grid}>
-    //     <a
-    //       href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Docs <span>-&gt;</span>
-    //       </h2>
-    //       <p>Find in-depth information about Next.js features and API.</p>
-    //     </a>
-
-    //     <a
-    //       href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Learn <span>-&gt;</span>
-    //       </h2>
-    //       <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Templates <span>-&gt;</span>
-    //       </h2>
-    //       <p>Explore the Next.js 13 playground.</p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Deploy <span>-&gt;</span>
-    //       </h2>
-    //       <p>
-    //         Instantly deploy your Next.js site to a shareable URL with Vercel.
-    //       </p>
-    //     </a>
-    //   </div>
-    // </main>
-  )
+    <div className="flex flex-col items-center justify-center  lg:flex-row">
+      <GoogleOAuthProvider
+        clientId={"413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com"}
+      >
+        <div className="mx-auto flex w-1/2 justify-center lg:justify-end lg:pr-28 ">
+          <Image
+            src={logo as StaticImageData}
+            alt="logo"
+            className="aspect-ratio-square h-40 w-40  sm:h-72 sm:w-72  lg:h-96 lg:w-96"
+          />
+        </div>
+        <div className="lg:mx-auto lg:w-1/2">
+          <Login />
+        </div>
+      </GoogleOAuthProvider>
+    </div>
+  );
 }
