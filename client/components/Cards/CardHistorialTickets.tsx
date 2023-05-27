@@ -73,7 +73,7 @@ export default function CardHistorialTickets() {
             <div className="flex flex-col items-center justify-center gap-1">
               <FaBus size="40" className=" w-auto  text-blue" />
               <small className="w-full text-right md:w-auto ">
-                {ticket.passageInfo.departureDate}
+                {ticket.passageInfo?.departureDate}
               </small>
             </div>
             <div className="flex items-center gap-2 ">
@@ -85,13 +85,13 @@ export default function CardHistorialTickets() {
                 <div className="flex flex-col items-center justify-center">
                   <strong className="px-2"> Origen:</strong>
                   <p>
-                    {ticket.passageInfo.origin} - {ticket.passageInfo.departureTime} - Estrella St{" "}
+                    {ticket.passageInfo?.origin} - {ticket.passageInfo?.departureTime} - Estrella St{" "}
                     <br />
                   </p>{" "}
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <strong className="px-2">Tiempo estimado: </strong>
-                  <p>{ticket.passageInfo.duration}</p>
+                  <p>{ticket.passageInfo?.duration}</p>
                 </div>
               </span>
             </div>

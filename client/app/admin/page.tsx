@@ -8,7 +8,7 @@ import Auth from "../../layouts/Auth";
 export default function Adminlogin() {
   return (
     <>
-      <div className="container mx-auto flex h-screen w-full items-center justify-center px-4">
+      <div className="container w- mx-auto flex h-screen w-full items-center justify-center px-4">
         <div className="flex h-full content-center items-center justify-center">
           <div className="w-full px-4 lg:w-4/12">
             <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg border-0 bg-blueGray-200 shadow-lg lg:h-[630px]">
