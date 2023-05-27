@@ -20,17 +20,21 @@ export default function CardHome() {
   const titleStyles = "py-4 text-center text-xl font-bold xl:text-2xl 2xl:text-2xl";
   const paragraphStyles = "w-full px-4 text-center lg:text-xs xl:text-base 2xl:text-lg";
 
-  const notifySuccess = () =>
-    toast.success(`Bienvenido ${user?.name} `, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  const notifySuccess = () => {
+    if (!toast.isActive("success")) {
+      toast.success(`Bienvenido ${user?.name} `, {
+        toastId: "success",
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
 
   if (user) {
     notifySuccess();
