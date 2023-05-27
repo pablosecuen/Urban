@@ -208,7 +208,7 @@ router.post("/rating/chauffeur/:userId/:chauffeurId", newRatingValidator, newCha
  *                   type: string
  *                   description: Descripción del error
  */
-router.post("/rating/company/:ticketId/:companyId", newRatingValidator, newCompanyRating);
+router.post("/rating/company/:ticketId/:companyId", newCompanyRating);
 
 router.post("/forgot-password", forgotPassword);
 
