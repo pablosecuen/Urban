@@ -104,7 +104,7 @@ export default function CardHistorialTickets() {
         <>
           <div
             onClick={closeModal}
-            className="absolute left-0 top-0 z-10 h-screen w-screen bg-black/30"
+            className=" fixed left-0 top-0 z-10 h-screen w-screen bg-black/30"
           ></div>
           <div
             className="fixed inset-0 z-50 flex items-center justify-center"
