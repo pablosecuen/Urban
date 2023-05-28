@@ -23,11 +23,14 @@ export default function CardHistorialTickets() {
 
   useEffect(() => {
     // Retrieve "user" from local storage
-    const userString = localStorage.getItem("user");
-    if (userString) {
-      const user = JSON.parse(userString);
-      dispatch(getTicketsByUserId(user.id));
+    if (window) {
+      const userString = localStorage.getItem("user") || "";
+      if (userString) {
+        const user = JSON.parse(userString);
+        dispatch(getTicketsByUserId(user.id));
+      }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

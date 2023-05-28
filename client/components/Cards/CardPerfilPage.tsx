@@ -20,10 +20,11 @@ export default function PerfilPage() {
   };
 
   useEffect(() => {
-    const userDataString = localStorage.getItem("user");
-    setLoading(false);
-    if (userDataString) {
-      setUserData(JSON.parse(userDataString));
+    if (window) {
+      const userString = localStorage.getItem("user");
+      setLoading(false);
+      const userData = userString ? JSON.parse(userString) : null;
+      setUserData(userData);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

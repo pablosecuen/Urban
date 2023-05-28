@@ -1,6 +1,7 @@
-
-
-const BodyHtml = (name, id) =>  `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+const BodyHtml = (
+  name,
+  id
+) => `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
 <head>
 <meta charset="UTF-8">
@@ -174,7 +175,7 @@ mso-hide:all;
 <tr style="border-collapse:collapse">
 <td align="center" style="padding:0;Margin:0;padding-bottom:15px;padding-top:30px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#ed8e20;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-border-alt:10px">
 <a 
-href="http://localhost:3001/home?id=${id}"
+href="${process.env.FRONT_URL}/home?id=${id}"
  class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#ffffff;font-size:18px;display:inline-block;background:#ed8e20;border-radius:5px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;padding:15px 30px;border-color:#ed8e20">Validar</a></span></td>
 </tr>
 </table></td>
@@ -262,6 +263,6 @@ href="http://localhost:3001/home?id=${id}"
 </table>
 </div>
 </body>
-</html>`
+</html>`;
 
 export default BodyHtml;

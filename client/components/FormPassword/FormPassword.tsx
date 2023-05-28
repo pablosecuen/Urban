@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { HiEyeOff, HiEye } from "react-icons/hi";
 import setValidate from "./Validate";
 import Link from "next/link";
@@ -11,6 +11,7 @@ interface UserToPassword {
   password: string;
   repeatPassword: string;
 }
+
 interface PasswordError {
   messageEmail?: string;
   messagePassword?: string;
@@ -23,49 +24,50 @@ export default function FormPassword() {
   const [userData, setUserData] = useState<UserToPassword>({} as UserToPassword);
   const [errores, setErrores] = useState<PasswordError>({} as PasswordError);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toString();
-    const name = e.target.name.toString();
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
 
     setUserData({ ...userData, [name]: value });
     setErrores({ ...errores, ...setValidate({ [name]: value }) });
   };
 
-  function setValidateRepeatPassword(repeatPassword: string, password: string) {
+  const setValidateRepeatPassword = (repeatPassword: string, password: string) => {
     if (repeatPassword === password || repeatPassword === "") {
       return { messageRepeatPassword: "" };
     } else {
       return { messageRepeatPassword: "La contraseña no coincide" };
     }
-  }
+  };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name.toString();
-    const value = e.target.value.toString();
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
     const { password } = userData;
     setErrores({ ...errores, ...setValidateRepeatPassword(value, password) });
   };
 
-  const visiblePassword = (e) => {
-    e.preventDefault();
+  const visiblePassword = () => {
     setShowPassword1(!showPassword1);
   };
 
-  const visiblePassword2 = (e) => {
-    e.preventDefault();
+  const visiblePassword2 = () => {
     setShowPassword2(!showPassword2);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
   };
 
   return (
     <form
-      onSubmit={handlePasswordChange}
+      onSubmit={handleSubmit}
       className="flex h-4/5 w-3/4 flex-col items-center justify-center gap-4 rounded-lg border border-gray-300 shadow-xl shadow-black/40 lg:w-1/2 xl:w-1/3 2xl:h-4/5 2xl:w-2/5 2xl:gap-14 2xl:px-20 2xl:text-lg"
     >
       <Image src={logo} alt="logo" className="w-24 lg:w-28 2xl:w-48" />
       <div className="flex flex-col justify-center gap-8">
         <div className="flex flex-col items-center gap-2">
-          <label htmlFor="" className="text-center">
+          <label htmlFor="email" className="text-center">
             Email:
           </label>
           <input
@@ -120,7 +122,7 @@ export default function FormPassword() {
               name="repeatPassword"
               value={userData.repeatPassword}
               onChange={handlePasswordChange}
-              className={`mx-auto w-3/4 border-gray-400 pl-2 lg:w-2/3  ${
+              className={`mx-auto w-3/4 border-gray-400 pl-2 lg:w-2/3 ${
                 errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
               }`}
             />
@@ -143,7 +145,7 @@ export default function FormPassword() {
                   errores.messageRepeatPassword ? "opacity-0" : "pr-8 opacity-100 lg:pr-20"
                 }  font-medium text-emerald-500`}
               >
-                {errores.messageRepeatPassword == "" &&
+                {errores.messageRepeatPassword === "" &&
                   userData.repeatPassword.length > 0 &&
                   "Las contraseñas coinciden"}
               </small>
@@ -151,14 +153,14 @@ export default function FormPassword() {
           </div>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <button onClick={handlePasswordChange} className="w-2/3">
+          <button type="submit" className="w-2/3">
             Enviar contraseña
           </button>
         </div>
         <small className="pl-5 2xl:mt-5">
-          Quieres volver al inicio?{" "}
+          ¿Quieres volver al inicio?{" "}
           <Link href={"http://localhost:3001"}>
-            <span className="text-blue hover:cursor-pointer hover:underline">Click aqui</span>
+            <span className="text-blue hover:cursor-pointer hover:underline">Haz clic aquí</span>
           </Link>
         </small>
       </div>

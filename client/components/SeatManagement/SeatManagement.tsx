@@ -6,6 +6,7 @@ import PlantaBajaAdmin from "../PlantaBajaAdmin/PlantaBajaAdmin";
 import { CardProfilePropsPassage } from "@component/app/types/Passages";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "@component/services/axiosInstance";
 
 const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, newSeats }) => {
   const [selectedSeats, setSelectedSeats] = useState<string[]>(newSeats || []);
@@ -29,7 +30,7 @@ const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, ne
 
   const enableSeats = async () => {
     try {
-      await axios.put(`http://localhost:3000/admin/enableSeats/${selectedPassage?.id}`, {
+      await axiosInstance.put(`/admin/enableSeats/${selectedPassage?.id}`, {
         numberSeat: selectedSeats,
       });
       toastSuccess();
@@ -42,7 +43,7 @@ const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, ne
 
   const disabledSeat = async () => {
     try {
-      await axios.put(`http://localhost:3000/admin/disableSeats/${selectedPassage?.id}`, {
+      await axiosInstance.put(`/admin/disableSeats/${selectedPassage?.id}`, {
         numberSeat: disabledSeats,
       });
       toastSuccess();

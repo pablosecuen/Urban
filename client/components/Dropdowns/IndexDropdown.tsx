@@ -1,12 +1,15 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
+import { useState } from "react";
+import { useRef } from "react";
 
 const IndexDropdown = () => {
   // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.useRef<HTMLAnchorElement>(null);
-  const popoverDropdownRef = React.useRef<HTMLDivElement>(null);
+  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+  const btnDropdownRef = useRef<HTMLAnchorElement>(null);
+  const popoverDropdownRef = useRef<HTMLDivElement>(null);
   const openDropdownPopover = () => {
     if (btnDropdownRef.current && popoverDropdownRef.current) {
       createPopper(btnDropdownRef.current, popoverDropdownRef.current, {

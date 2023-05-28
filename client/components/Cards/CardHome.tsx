@@ -1,19 +1,26 @@
 "use client";
+import { User } from "@component/app/types/User";
 import axios from "axios";
+import React from "react";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InfiniteSlider from "../InfiniteSlider/InfiniteSlider";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function CardHome() {
-  let token: any;
-  if (typeof window !== "undefined") {
-    const urlParams = new URLSearchParams(window.location.search);
-    token = urlParams.get("token");
-  }
-
-  const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-  const user = userString ? JSON.parse(userString) : null;
+  const [user, setUser] = React.useState<User | null>(null);
+  const [token, setToken] = React.useState<string | null>(null);
+  useEffect(() => {
+    if (window) {
+      const urlParams = new URLSearchParams(location.search);
+      const tokendata = urlParams.get("token");
+      const userString = localStorage.getItem("user");
+      const userData = userString ? JSON.parse(userString) : null;
+      setUser(userData);
+      setToken(tokendata);
+    }
+  }, []);
 
   const containerStyles =
     "mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
@@ -41,8 +48,8 @@ export default function CardHome() {
   }
   useEffect(() => {
     token &&
-      axios
-        .get("http://localhost:3000/user/decoding", {
+      axiosInstance
+        .get("/user/decoding", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -58,8 +65,8 @@ export default function CardHome() {
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className="text-verdeurban">U</span>
-        <span className=" text-celeste">rban</span>!
+        Bienvedios a <span className='text-verdeurban'>U</span>
+        <span className=' text-celeste'>rban</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
@@ -73,7 +80,7 @@ export default function CardHome() {
       </p>
       <InfiniteSlider />
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -82,7 +89,7 @@ export default function CardHome() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
     </div>
