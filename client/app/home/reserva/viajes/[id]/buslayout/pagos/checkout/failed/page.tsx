@@ -1,4 +1,4 @@
-import jpg from "../../../../../../../../assets/imagenes/falloElPago.png";
+import jpg from "../../../../../../../../../assets/imagenes/falloElPago.png";
 import Image from "next/image";
 import Link from "next/link";
 

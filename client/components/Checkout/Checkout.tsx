@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import { Ticket } from "@component/app/types/Ticket";
-import axios from "axios";
-import { User } from "@component/app/types/User";
-=======
 "use client";
 import { Ticket } from "@component/app/types/Ticket";
 import { User } from "@component/app/types/User";
 import axiosInstance from "@component/services/axiosInstance";
 import axios from "axios";
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 //import CardCheckout from "@component/components/Cards/CardCheckout";
@@ -39,11 +34,7 @@ export default function Checkout() {
       setUser(userData);
 
       const getToken = async () => {
-<<<<<<< HEAD
-        const { data } = await axios.get(`/token?merchantOrder=${merchantOrder}`);
-=======
         const { data } = await axiosInstance.get(`/token?merchantOrder=${merchantOrder}`);
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
         setDataState(data);
         const requestData = {
           userId: userId,
@@ -103,17 +94,10 @@ export default function Checkout() {
   useEffect(() => {
     const getToken = async () => {
       try {
-<<<<<<< HEAD
-        const { data } = await axios.get(
-          `https://api-urban.onrender.com/payment/merchantOrder?merchantOrder=${merchantOrder}`
-        );
-        //este axios pueeeede llegar a ser a mercadopago
-=======
         const { data } = await axiosInstance.get(
           `/payment/merchantOrder?merchantOrder=${merchantOrder}`
         );
         //este axiosInstance pueeeede llegar a ser a mercadopago
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
         //aca se guarda la info y con esto generamos la factura
         const requestData = {
           userId: user?.id,
@@ -136,11 +120,7 @@ export default function Checkout() {
     (async () => {
       try {
         const ticketData = await getToken();
-<<<<<<< HEAD
-        axios.post("https://api-urban.onrender.com/ticket", ticketData);
-=======
         axiosInstance.post("/ticket", ticketData);
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
         setTicket(ticketData as Ticket | null);
         notifySuccess();
       } catch (error) {
@@ -151,19 +131,11 @@ export default function Checkout() {
   }, []);
 
   return (
-<<<<<<< HEAD
     <div className="relative mt-10 flex h-full w-full flex-col items-center gap-2 rounded-3xl border-2 bg-white p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
       {/* <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p> */}
       {/* <Image src={success} alt="pago exitoso" className="h-80 w-80 self-center"></Image> */}
       <ToastContainer
         position="top-right"
-=======
-    <div className='relative mt-10 flex h-full w-full flex-col items-center gap-2 rounded-3xl border-2 bg-white p-6 shadow-2xl shadow-black/40 lg:h-[530px]'>
-      {/* <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p> */}
-      {/* <Image src={success} alt="pago exitoso" className="h-80 w-80 self-center"></Image> */}
-      <ToastContainer
-        position='top-right'
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -172,7 +144,6 @@ export default function Checkout() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-<<<<<<< HEAD
         theme="light"
         closeButton={false}
       />
@@ -194,29 +165,6 @@ export default function Checkout() {
           <Link
             href="/home"
             className="mx-auto rounded-md bg-blue px-2 py-1 text-center text-white hover:bg-indigo-700"
-=======
-        theme='light'
-        closeButton={false}
-      />
-      <h1 className='abolsute top-4 border-2 text-center text-lg font-bold'>
-        Su pago ha sido realizado con éxito
-      </h1>
-      <div className='mt-10 flex h-full flex-col'>
-        <div className='flex h-full flex-col gap-4 overflow-y-auto'>
-          <h2 className='text-center text-sm font-light italic'>resumen informativo</h2>
-          {ticket &&
-            Object.entries(ticket.passengersData || {}).map(([key, value]) => (
-              <div key={key} className='py-4'>
-                <h3 className='text-gray-700'>Descripcion:</h3>
-                <h4 className='text-gray-400'>{JSON.stringify(value)}</h4>
-              </div>
-            ))}
-        </div>
-        <div className='absolute bottom-10 left-0 flex w-full justify-center'>
-          <Link
-            href='/home'
-            className='mx-auto rounded-md bg-blue px-2 py-1 text-center text-white hover:bg-indigo-700'
->>>>>>> cde98445d22dcc777be2969b787d7aa4d3b9caf0
           >
             Volver al inicio
           </Link>

@@ -25,7 +25,7 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
 
   const passangers = count?.quantity;
   if (count?.quantity - lengthData == 0) {
-    router.push(`/home/reserva/viajes/${passage?.id}/buslayout/confirmacion/pagos`);
+    router.push(`/home/reserva/viajes/${passage?.id}/buslayout/pagos`);
   }
   return (
     <div className={containerStyles}>
