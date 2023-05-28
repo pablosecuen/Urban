@@ -13,14 +13,10 @@ export default function LandingPage() {
     const userData = userString ? JSON.parse(userString) : null;
     setUser(userData);
 
-    if (userData) {
-      redirectToHome();
+    if (userData && window) {
+      location.href = "/home";
     }
   }, []);
-
-  const redirectToHome = () => {
-    window.location.href = "/home";
-  };
 
   return (
     <div className="flex flex-col items-center justify-center  lg:flex-row">
