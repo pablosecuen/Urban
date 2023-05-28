@@ -4,7 +4,6 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 
-
 const router = Router();
 
 passport.use(
@@ -12,45 +11,47 @@ passport.use(
     {
       clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:3000/login/auth/google",
+      callbackURL: `${process.env.BACK_URL}/login/auth/google`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
         let user: any = await db.collection("users").doc(profile.id).get();
         if (!user.exists) {
-          user = await db.collection("users").doc(profile.id).set({
-            email: profile.emails[0].value,
-            firstName: profile.name.givenName,
-            lastName: profile.name.familyName,
-            name: profile.displayName,
-            img: profile.photos[0].value,
-            payments: {
-              cardNumber: "",
-              expirationDate: "",
-              securityCode: "",
-            }
-            ,
-            history: {
-              orders: [],
-              travels: [],
-            },
-            cc: "",
-            address: {
-              number: "",
-              street: "",
-              postalCode: "",
-              location: "",
-              state: "",
-              department: ""
-            },
-            nationality: "",
-            phone: {
-              number: "",
-              areaCode: "",
-              displayPhone: ""
-            },
-            deleted: false
-          });
+          user = await db
+            .collection("users")
+            .doc(profile.id)
+            .set({
+              email: profile.emails[0].value,
+              firstName: profile.name.givenName,
+              lastName: profile.name.familyName,
+              name: profile.displayName,
+              img: profile.photos[0].value,
+              payments: {
+                cardNumber: "",
+                expirationDate: "",
+                securityCode: "",
+              },
+              history: {
+                orders: [],
+                travels: [],
+              },
+              cc: "",
+              address: {
+                number: "",
+                street: "",
+                postalCode: "",
+                location: "",
+                state: "",
+                department: "",
+              },
+              nationality: "",
+              phone: {
+                number: "",
+                areaCode: "",
+                displayPhone: "",
+              },
+              deleted: false,
+            });
         }
         const payload = {
           email: profile.emails[0].value,
@@ -58,8 +59,8 @@ passport.use(
           lastName: profile.name.familyName,
           name: profile.displayName,
           img: profile.photos[0].value,
-          id: profile.id
-        }
+          id: profile.id,
+        };
         done(null, payload);
       } catch (error) {
         console.log(error);
@@ -74,7 +75,7 @@ router.get("/", (req, res) => {
   console.log(user);
   const token = jwt.sign(user, "clavemegasecreta");
   console.log(token);
-  res.redirect(`http://localhost:3001/home?token=${token}`);
+  res.redirect(`${process.env.FRONT_URL}/home?token=${token}`);
 });
 
 export default router;
