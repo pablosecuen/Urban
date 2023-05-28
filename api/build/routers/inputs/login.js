@@ -36,7 +36,7 @@ router.use("/auth/google", loginGoogle_1.default);
 passport_1.default.use(new passport_facebook_1.default({
     clientID: "1965817520430450",
     clientSecret: "eb27ee0a9ce5843d7ecc15b1ae0d2e93",
-    callbackURL: "http://localhost:3000/login/oauth2/redirect/facebook",
+    callbackURL: `${process.env.BACK_URL}/login/oauth2/redirect/facebook`,
     profileFields: ["id", "displayName", "email"],
 }, function (accessToken, refreshToken, profile, cb) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -65,14 +65,14 @@ router.get("/oauth2/redirect/facebook", passport_1.default.authenticate("faceboo
     const { user } = req;
     const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
     // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
-    res.redirect(`http://localhost:3001?token=${token}`);
+    res.redirect(`${process.env.FRONT_URL}/login}?token=${token}`);
 });
 //Auth de Microsoft
 passport_1.default.use(new passport_microsoft_1.Strategy({
     //Hay que registrar la app en Microsoft Azure para obtener los datos
     clientID: process.env.MICROSOFT_CLIENT_ID,
     clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/microsoft/callback",
+    callbackURL: `${process.env.BACK_URL}/auth/microsoft/callback`,
     scope: ["user.read", "mail.read", "offline_access"],
     authorizationURL: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
     tokenURL: "https://login.microsoftonline.com/common/oauth2/v2.0/token",

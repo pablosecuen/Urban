@@ -25,7 +25,7 @@ router.post("/dealer", loginDelivery);
 
 router.post("/local", loginLocal);
 
-router.use("/auth/google", loginGoogle)
+router.use("/auth/google", loginGoogle);
 
 // auth de facebook
 passport.use(
@@ -33,7 +33,7 @@ passport.use(
     {
       clientID: "1965817520430450",
       clientSecret: "eb27ee0a9ce5843d7ecc15b1ae0d2e93",
-      callbackURL: "http://localhost:3000/login/oauth2/redirect/facebook",
+      callbackURL: `${process.env.BACK_URL}/login/oauth2/redirect/facebook`,
       profileFields: ["id", "displayName", "email"],
     },
     async function (accessToken, refreshToken, profile, cb) {
@@ -67,7 +67,7 @@ router.get(
     const token = jwt.sign(user, "clavemegasecreta");
 
     // !!IMPORTANTE: en la url aparece un "#_=_"  al final que no es del token
-    res.redirect(`http://localhost:3001?token=${token}`);
+    res.redirect(`${process.env.FRONT_URL}/login}?token=${token}`);
   }
 );
 
@@ -79,7 +79,7 @@ passport.use(
       //Hay que registrar la app en Microsoft Azure para obtener los datos
       clientID: process.env.MICROSOFT_CLIENT_ID,
       clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/microsoft/callback",
+      callbackURL: `${process.env.BACK_URL}/auth/microsoft/callback`,
       scope: ["user.read", "mail.read", "offline_access"],
       authorizationURL: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       tokenURL: "https://login.microsoftonline.com/common/oauth2/v2.0/token",

@@ -21,12 +21,15 @@ const router = (0, express_1.Router)();
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
     clientSecret: "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",
-    callbackURL: "http://localhost:3000/login/auth/google",
+    callbackURL: `${process.env.BACK_URL}/login/auth/google`,
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let user = yield connection_1.db.collection("users").doc(profile.id).get();
         if (!user.exists) {
-            user = yield connection_1.db.collection("users").doc(profile.id).set({
+            user = yield connection_1.db
+                .collection("users")
+                .doc(profile.id)
+                .set({
                 email: profile.emails[0].value,
                 firstName: profile.name.givenName,
                 lastName: profile.name.familyName,
@@ -48,15 +51,15 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
                     postalCode: "",
                     location: "",
                     state: "",
-                    department: ""
+                    department: "",
                 },
                 nationality: "",
                 phone: {
                     number: "",
                     areaCode: "",
-                    displayPhone: ""
+                    displayPhone: "",
                 },
-                deleted: false
+                deleted: false,
             });
         }
         const payload = {
@@ -65,7 +68,7 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
             lastName: profile.name.familyName,
             name: profile.displayName,
             img: profile.photos[0].value,
-            id: profile.id
+            id: profile.id,
         };
         done(null, payload);
     }
@@ -80,6 +83,6 @@ router.get("/", (req, res) => {
     console.log(user);
     const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
     console.log(token);
-    res.redirect(`http://localhost:3001/home?token=${token}`);
+    res.redirect(`${process.env.FRONT_URL}/home?token=${token}`);
 });
 exports.default = router;

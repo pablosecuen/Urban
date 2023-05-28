@@ -49,8 +49,8 @@ const postPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         items: products,
         back_urls: {
             // corregir redireccionamiento
-            success: `http://localhost:3001/home/reserva/viajes/confirmacion/pagos/checkout`,
-            failure: `http://localhost:3001/failure`,
+            success: `${process.env.FRONT_URL}/home/reserva/viajes/confirmacion/pagos/checkout`,
+            failure: `${process.env.FRONT_URL}/failure`,
             pending: ``,
         },
         auto_return: "approved",
