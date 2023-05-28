@@ -21,7 +21,7 @@ const router = (0, express_1.Router)();
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
     clientSecret: "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",
-    callbackURL: `/login/auth/google`,
+    callbackURL: `https://api-urban.onrender.com/login/auth/google`,
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let user = yield connection_1.db.collection("users").doc(profile.id).get();
