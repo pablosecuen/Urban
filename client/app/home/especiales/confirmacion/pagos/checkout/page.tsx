@@ -7,32 +7,36 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Checkout() {
-  const router = useRouter();
-  const { query } = router;
-  const { payment_id: paymentId, merchant_order_id: merchantOrder, status } = query;
   const [dataState, setDataState] = useState({});
   const userId = "";
 
   useEffect(() => {
-    const getToken = async () => {
-      const { data } = await axios.get(`/token?merchantOrder=${merchantOrder}`);
-      setDataState(data);
-      const requestData = {
-        userId: userId,
-        products: data.items.map((product: any) => ({
-          id: product.id,
-          unitPrice: product.unit_price,
-          quantity: product.quantity,
-        })),
-        paymentId: paymentId,
-        merchantOrder: merchantOrder,
-        status: status,
-      };
-      return requestData;
-    };
+    if (typeof window !== "undefined") {
+      const queryParams = new URLSearchParams(window.location.search);
+      const paymentId = queryParams.get("payment_id");
+      const merchantOrder = queryParams.get("merchant_order_id");
+      const status = queryParams.get("status");
 
-    getToken();
-  }, [merchantOrder, paymentId, status, userId]);
+      const getToken = async () => {
+        const { data } = await axios.get(`/token?merchantOrder=${merchantOrder}`);
+        setDataState(data);
+        const requestData = {
+          userId: userId,
+          products: data.items.map((product: any) => ({
+            id: product.id,
+            unitPrice: product.unit_price,
+            quantity: product.quantity,
+          })),
+          paymentId: paymentId,
+          merchantOrder: merchantOrder,
+          status: status,
+        };
+        return requestData;
+      };
+
+      getToken();
+    }
+  }, [userId]);
 
   return (
     <div className="flex flex-col justify-center gap-8">
