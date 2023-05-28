@@ -235,7 +235,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
       <div className='mx-auto flex w-4/5 flex-col gap-2'>
         <Link
           className='mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30'
-          href='http://localhost:3000/login/auth/google'
+          href='/login/auth/google'
           rel='noopener noreferrer'
         >
           <Google width='23' height='23' />
@@ -243,7 +243,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         </Link>
         <Link
           className='mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30'
-          href='http://localhost:3000/login/auth/google'
+          href='/login/auth/google'
           rel='noopener noreferrer'
         >
           <svg className=' h-6 w-6 fill-current' viewBox='0 0 24 24'>
