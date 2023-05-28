@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { createPopper } from "@popperjs/core/lib/createPopper.js";
 import Image from "next/image";

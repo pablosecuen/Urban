@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function CardBarChart() {
   // tiene que mostrar las operaciones por tipo
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
       const { data } = await axios.get("http://localhost:3000/admin/operations?year=2023");

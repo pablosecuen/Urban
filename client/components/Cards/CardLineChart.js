@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
 export default function CardLineChart() {
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       const { data: userRecords } = await axios.get(
         "http://localhost:3000/admin/userRecords?year=2023"

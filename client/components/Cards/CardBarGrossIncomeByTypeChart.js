@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
 // function to render products an prices in html divs
 
 export default function CardBarGrossIncomeByTypeChart() {
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
       const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");

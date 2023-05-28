@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
 
 export default function CardGrossIncomeChart() {
   // tiene que mostrar los ingresos brutos totales por mes
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
