@@ -6,19 +6,19 @@ import Image from "next/image";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function LandingPage() {
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   if (window) {
-  //     const userString = localStorage.getItem("user");
-  //     const userData = userString ? JSON.parse(userString) : null;
-  //     setUser(userData);
+  useEffect(() => {
+    if (window) {
+      const userString = localStorage.getItem("user");
+      const userData = userString ? JSON.parse(userString) : null;
+      setUser(userData);
 
-  //     if (userData) {
-  //       window.location.href = "/home";
-  //     }
-  //   }
-  // }, []);
+      if (userData) {
+        window.location.href = "/home";
+      }
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center  lg:flex-row">
