@@ -108,10 +108,10 @@ passport_1.default.use(
 );
 router.get("/", passport_1.default.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/", (req, res) => {
-  const { user } = req;
-  console.log(user);
-  const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
-  console.log(token);
-  res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
+    const { user } = req;
+    console.log(user);
+    const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
+    console.log(token);
+    res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 exports.default = router;
