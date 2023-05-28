@@ -12,9 +12,11 @@ export default function CardHome() {
   const [token, setToken] = React.useState<string | null>(null);
 
   useEffect(() => {
+
     if (typeof token === "string") {
       axiosInstance
         .get("/user/decoding", {
+
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -24,6 +26,7 @@ export default function CardHome() {
           localStorage.setItem("user", JSON.stringify(userData));
           location.replace("/home");
         });
+
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

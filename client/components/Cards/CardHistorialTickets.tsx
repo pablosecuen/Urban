@@ -121,7 +121,7 @@ export default function CardHistorialTickets() {
               {selectedTicket && (
                 <article
                   key={selectedTicket.id}
-                  className="flex flex-col items-center justify-center p-6 "
+                  className="flex h-full w-full flex-col items-center justify-center p-6 "
                 >
                   <Image src={logo} alt="logo" className="mx-auto  w-16  py-4" />
                   <h2 className="mb-4 text-center text-2xl font-bold">
@@ -134,25 +134,28 @@ export default function CardHistorialTickets() {
                   <div className="grid w-full grid-cols-2 gap-4 text-center">
                     <div className="w-full">
                       <p className="mb-2 flex flex-col">
-                        <strong>Fecha de salida:</strong> {selectedTicket.passageInfo.departureDate}
+                        <strong>Fecha de salida:</strong>
+                        <small> {selectedTicket.passageInfo.departureDate}</small>
                       </p>
                       <p className="mb-2 flex flex-col">
                         <strong>Horario de salida:</strong>{" "}
-                        {selectedTicket.passageInfo.departureTime}
+                        <small>{selectedTicket.passageInfo.departureTime}</small>
                       </p>
                       <p className="mb-2 flex flex-col">
-                        <strong>Duracion del viaje:</strong> {selectedTicket.passageInfo.duration}
+                        <strong>Duracion del viaje:</strong>{" "}
+                        <small> {selectedTicket.passageInfo.duration}</small>
                       </p>
                     </div>
                     <div>
                       <p className="mb-2 flex flex-col">
-                        <strong>Ticket ID:</strong> {selectedTicket.id}
+                        <strong>Ticket ID:</strong> <small>{selectedTicket.id}</small>
                       </p>
                       <p className="mb-2 flex flex-col">
-                        <strong>Precio:</strong> ${selectedTicket.price}
+                        <strong>Precio:</strong> <small>${selectedTicket.price}</small>
                       </p>
                       <p className="mb-2 flex flex-col">
-                        <strong>Número de asiento:</strong> {selectedTicket.passageInfo.numberSeat}
+                        <strong>Número de asiento:</strong>{" "}
+                        <small>{selectedTicket.passageInfo.numberSeat}</small>
                       </p>
                     </div>
                   </div>

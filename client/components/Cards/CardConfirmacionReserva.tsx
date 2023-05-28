@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { getPassagesIdForPayment } from "@component/Redux/payment/paymentActions";
 export default function CardConfirmacionReserva({ id }: { id: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const passage = useSelector((state: RootState) => state.passage.passageById);
   const stock: any = passage?.stock; // Stock disponible del objeto (ejemplo)
@@ -36,7 +36,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
 
   const handleClick = () => {
     dispatch(getPassagesIdForPayment([{ passageId: id, quantity: count }]));
-    router.push(`/home/reserva/${id}/buslayout`);
+    router.push(`/home/reserva/viajes/${id}/buslayout`);
   };
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
             <section className="text-center text-xl font-semibold text-amber-700">
               5 ESTRELLAS
             </section>
-            <section className="mx-auto flex w-11/12 flex-col items-center justify-center gap-2">
+            <section className="mx-auto flex h-40 w-11/12 flex-col items-center justify-center gap-2 overflow-y-auto rounded-md border">
               {passage?.companyData?.evaluation?.map((e, i) => {
                 return (
                   <article

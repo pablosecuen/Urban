@@ -5,8 +5,10 @@ import PlantaAlta from "@component/components/PlantaAlta/PlantaAlta";
 import PlantaBaja from "@component/components/PlantaBaja/PlantaBaja";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { RootState } from "@component/Redux/store/store";
 const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }) => {
   const router = useRouter();
+  const passage = useSelector((state: RootState) => state.passage.passageById);
   const count = useSelector((state: any) => state.payment.passageById[0]);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
   const lengthData = passagerData.length;
@@ -23,7 +25,7 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
 
   const passangers = count?.quantity;
   if (count?.quantity - lengthData == 0) {
-    router.push("/home/reserva/viajes/confirmacion/pagos");
+    router.push(`/home/reserva/viajes/${passage?.id}/buslayout/confirmacion/pagos`);
   }
   return (
     <div className={containerStyles}>

@@ -5,6 +5,7 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 
 const router = Router();
+const { FRONT_URL } = process.env;
 
 passport.use(
   new GoogleStrategy(
@@ -74,7 +75,8 @@ router.get("/", passport.authenticate("google", { scope: ["profile", "email"] })
 router.get("/", (req, res) => {
   const { user } = req;
   const token = jwt.sign(user, "clavemegasecreta");
-  res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
+  res.redirect(`http://localhost:3001/home?token=${token}`);
+  // res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 
 export default router;

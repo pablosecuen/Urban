@@ -9,6 +9,7 @@ const mercadopago = require("mercadopago");
 mercadopago.configure({
   access_token: MP_TOKEN,
 });
+const { FRONT_URL } = process.env;
 
 export const postPayment = async (req, res, next) => {
   const products = req.body;
@@ -46,8 +47,8 @@ export const postPayment = async (req, res, next) => {
     items: products,
     back_urls: {
       // corregir redireccionamiento
-      success: `${process.env.FRONT_URL}/home/reserva/viajes/confirmacion/pagos/checkout`,
-      failure: `${process.env.FRONT_URL}/failure`,
+      success: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout`,
+      failure: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout/failed`,
       pending: ``,
     },
     auto_return: "approved",

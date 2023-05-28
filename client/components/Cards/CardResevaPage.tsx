@@ -8,9 +8,16 @@ import Select, { SingleValue } from "react-select";
 import ToastComponent from "../00-Toastify/ToastComponent";
 import { Location } from "@component/app/types/Select";
 import getLocations from "@component/services/api/locations";
+import { useDispatch } from "react-redux";
+import { getPassagesByQuery } from "../../Redux/passage/passageActions";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "@component/Redux/store/store";
+import { useSelector } from "react-redux";
 
 export default function Reserva() {
   const router = useRouter();
+
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
   const today = new Date().toISOString().slice(0, 10); // la fecha actual en formato YYYY-MM-DD
   // - - - - - - - - - - - - - -  ESTADOS LOCALES - - - - - - - - - - - - - - -
   const [origin, setOrigin] = useState<string | null>();
@@ -47,9 +54,11 @@ export default function Reserva() {
       ...(arrivalDate && { arrivalDate: arrivalDate.split("-").reverse().join("-") }),
       // armo la query y agrego las propiedades extras si las hay
     };
+    dispatch(getPassagesByQuery(query));
     const URL = Object.values(query).join("/");
-    router.push(`/home/reserva/${URL}`);
+    router.push("/home/reserva/viajes");
   };
+
   useEffect(() => {
     const fetchLocations = async () => {
       const adapter: Location[] = [];
@@ -77,8 +86,8 @@ export default function Reserva() {
           <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
-            placeholder='Origen...'
-            className='w-2/3 capitalize'
+            placeholder="Origen..."
+            className="w-2/3 capitalize"
             onChange={handleOriginChange}
             isClearable
             value={origin ? { value: origin, label: origin } : null}
@@ -88,8 +97,8 @@ export default function Reserva() {
           <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
-            placeholder='Destino...'
-            className='w-2/3 capitalize'
+            placeholder="Destino..."
+            className="w-2/3 capitalize"
             onChange={handleDestinationChange}
             isClearable
             value={destination ? { value: destination, label: destination } : null}
@@ -100,8 +109,8 @@ export default function Reserva() {
           <HiTrendingUp className={inputIconStyles} />
           <input
             className={inputStyles}
-            placeholder='Fecha de salida'
-            type='date'
+            placeholder="Fecha de salida"
+            type="date"
             value={departureDate}
             min={today}
             onChange={handleDepartureDateChange}
@@ -111,8 +120,8 @@ export default function Reserva() {
           <HiTrendingDown className={inputIconStyles} />
           <input
             className={inputStyles}
-            placeholder='Fecha de llegada'
-            type='date'
+            placeholder="Fecha de llegada"
+            type="date"
             value={arrivalDate}
             min={departureDate ? departureDate : today}
             onChange={handleArrivalDateChange}
