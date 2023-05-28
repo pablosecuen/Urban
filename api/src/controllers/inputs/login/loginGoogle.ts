@@ -73,10 +73,8 @@ passport.use(
 router.get("/", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/", (req, res) => {
   const { user } = req;
-  console.log(user);
   const token = jwt.sign(user, "clavemegasecreta");
-  console.log(token);
-  res.redirect(`${process.env.FRONT_URL}/home?token=${token}`);
+  res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 
 export default router;

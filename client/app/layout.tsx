@@ -2,10 +2,10 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
 import type { Metadata } from "next";
-import type { AppProps } from "next/app";
-import { Analytics } from "@vercel/analytics/react";
 
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Urban",
@@ -24,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>{children}</div>
             <Analytics />
           </Providers>
+          <Analytics />
         </main>
       </body>
     </html>
