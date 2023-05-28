@@ -13,8 +13,8 @@ export default function CardHome() {
   const [token, setToken] = React.useState<string | null>(null);
   useEffect(() => {
     token &&
-      axiosInstance
-        .get("/user/decoding", {
+      axios
+        .get("https://api-urban.onrender.com/user/decoding", {
           headers: {
             Authorization: "Bearer " + token,
           },
