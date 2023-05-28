@@ -12,6 +12,22 @@ export default function CardHome() {
   const [user, setUser] = React.useState<User | null>(null);
   const [token, setToken] = React.useState<string | null>(null);
   useEffect(() => {
+    token &&
+      axios
+        .get("https://api-urban.onrender.com/user/decoding", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((data) => {
+          const userData = data.data;
+          localStorage.setItem("user", JSON.stringify(userData));
+          location.replace("/home");
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (window) {
       const urlParams = new URLSearchParams(location.search);
       const tokendata = urlParams.get("token");
@@ -46,27 +62,12 @@ export default function CardHome() {
   if (user) {
     notifySuccess();
   }
-  useEffect(() => {
-    token &&
-      axiosInstance
-        .get("/user/decoding", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((data) => {
-          const userData = data.data;
-          localStorage.setItem("user", JSON.stringify(userData));
-          location.replace("/home");
-        });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className='text-verdeurban'>U</span>
-        <span className=' text-celeste'>rban</span>!
+        Bienvedios a <span className="text-verdeurban">U</span>
+        <span className=" text-celeste">rban</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
@@ -80,7 +81,7 @@ export default function CardHome() {
       </p>
       <InfiniteSlider />
       <ToastContainer
-        position='bottom-right'
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -89,7 +90,7 @@ export default function CardHome() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='light'
+        theme="light"
         closeButton={false}
       />
     </div>

@@ -96,172 +96,174 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     setUserData(userFromSessionStorage as UserToRegister);
   }, []);
   return (
-    <form
-      onSubmit={handleRegister}
-      className='relative mx-2 h-[500px] w-96 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40'
-    >
-      {/* div que contiene todos los labels e inputs */}
-      <div className='flex h-[250px] flex-col gap-5 px-5 pb-5'>
-        {/* Name and lastName */}
-        <div className='flex gap-1'>
-          {/* Name */}
-          <div className='relative w-1/2'>
-            <label className='px-1 '>Name:</label>
+    <>
+      <form
+        onSubmit={handleRegister}
+        className="relative mx-2 h-[500px] w-96 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40"
+      >
+        {/* div que contiene todos los labels e inputs */}
+        <div className="flex h-[250px] flex-col gap-5 px-5 pb-5">
+          {/* Name and lastName */}
+          <div className="flex gap-1">
+            {/* Name */}
+            <div className="relative w-1/2">
+              <label className="px-1 ">Name:</label>
+              <input
+                className={`px-1 text-black ${
+                  errores.messageName ? "border-red-500 focus-visible:outline-red-500" : ""
+                }`}
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                value={userData.name}
+                onChange={handleInputChange}
+              />
+              <small
+                className={`transition_all absolute text-right ${
+                  errores.messageName ? "opacity-100" : "opacity-0"
+                } -bottom-6 left-0 text-left font-medium text-red-500`}
+              >
+                {errores.messageName}
+              </small>
+            </div>
+            {/* Lastname  */}
+            <div className="relative w-1/2">
+              <label htmlFor="" className="px-1">
+                Lastname:
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Apellido"
+                className={`px-1 text-black ${
+                  errores.messageLastName ? "border-red-500 focus-visible:outline-red-500" : ""
+                }`}
+                value={userData.lastName}
+                onChange={handleInputChange}
+              />
+              <small
+                className={`transition_all absolute text-right ${
+                  errores.messageLastName ? "opacity-100" : "opacity-0"
+                } -bottom-6 left-0 text-left font-medium text-red-500`}
+              >
+                {errores.messageLastName}
+              </small>
+            </div>
+          </div>
+          {/* Email */}
+          <div className="relative">
+            <label className="px-1">Email:</label>
             <input
               className={`px-1 text-black ${
-                errores.messageName ? "border-red-500 focus-visible:outline-red-500" : ""
+                errores.messageEmail ? "border-red-500 focus-visible:outline-red-500" : ""
               }`}
-              type='text'
-              name='name'
-              placeholder='Nombre'
-              value={userData.name}
+              type="email"
+              name="email"
+              placeholder="Ingresa tu email"
+              value={userData.email}
               onChange={handleInputChange}
             />
             <small
               className={`transition_all absolute text-right ${
-                errores.messageName ? "opacity-100" : "opacity-0"
+                errores.messageEmail ? "opacity-100" : "opacity-0"
               } -bottom-6 left-0 text-left font-medium text-red-500`}
             >
-              {errores.messageName}
+              {errores.messageEmail}
             </small>
           </div>
-          {/* Lastname  */}
-          <div className='relative w-1/2'>
-            <label htmlFor='' className='px-1'>
-              Lastname:
-            </label>
+          {/* Password  */}
+          <div className="relative">
+            <label className="px-1">Password:</label>
             <input
-              type='text'
-              name='lastName'
-              placeholder='Apellido'
               className={`px-1 text-black ${
-                errores.messageLastName ? "border-red-500 focus-visible:outline-red-500" : ""
+                errores.messagePassword ? "border-red-500 focus-visible:outline-red-500" : ""
               }`}
-              value={userData.lastName}
+              type="password"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              value={userData.password}
               onChange={handleInputChange}
             />
             <small
               className={`transition_all absolute text-right ${
-                errores.messageLastName ? "opacity-100" : "opacity-0"
+                errores.messagePassword ? "opacity-100" : "opacity-0"
               } -bottom-6 left-0 text-left font-medium text-red-500`}
             >
-              {errores.messageLastName}
+              {errores.messagePassword}
             </small>
           </div>
-        </div>
-        {/* Email */}
-        <div className='relative'>
-          <label className='px-1'>Email:</label>
-          <input
-            className={`px-1 text-black ${
-              errores.messageEmail ? "border-red-500 focus-visible:outline-red-500" : ""
-            }`}
-            type='email'
-            name='email'
-            placeholder='Ingresa tu email'
-            value={userData.email}
-            onChange={handleInputChange}
-          />
-          <small
-            className={`transition_all absolute text-right ${
-              errores.messageEmail ? "opacity-100" : "opacity-0"
-            } -bottom-6 left-0 text-left font-medium text-red-500`}
-          >
-            {errores.messageEmail}
-          </small>
-        </div>
-        {/* Password  */}
-        <div className='relative'>
-          <label className='px-1'>Password:</label>
-          <input
-            className={`px-1 text-black ${
-              errores.messagePassword ? "border-red-500 focus-visible:outline-red-500" : ""
-            }`}
-            type='password'
-            name='password'
-            placeholder='Ingresa tu contraseña'
-            value={userData.password}
-            onChange={handleInputChange}
-          />
-          <small
-            className={`transition_all absolute text-right ${
-              errores.messagePassword ? "opacity-100" : "opacity-0"
-            } -bottom-6 left-0 text-left font-medium text-red-500`}
-          >
-            {errores.messagePassword}
-          </small>
-        </div>
-        {/* Repeat Password   */}
-        <div className='relative'>
-          <label className='px-1'>Repeat Password:</label>
-          <input
-            className={`px-1 text-black ${
-              errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
-            }`}
-            type='password'
-            name='repeatPassword'
-            placeholder='Repita su contraseña'
-            value={userData.repeatPassword}
-            onChange={handlePasswordChange}
-          />
-          <div className='absolute -bottom-6 left-0 text-right'>
-            <small
-              className={`transition_all  text-right ${
-                errores.messageRepeatPassword ? "opacity-100" : "opacity-0"
-              }  font-medium text-red-500`}
-            >
-              {errores.messageRepeatPassword}
-            </small>
-            <small
-              className={`transition_all  text-right ${
-                errores.messageRepeatPassword ? "opacity-0" : "opacity-100"
-              }  font-medium text-emerald-500`}
-            >
-              {errores.messageRepeatPassword == "" &&
-                userData.repeatPassword.length > 0 &&
-                "Las contraseñas coinciden"}
-            </small>
+          {/* Repeat Password   */}
+          <div className="relative">
+            <label className="px-1">Repeat Password:</label>
+            <input
+              className={`px-1 text-black ${
+                errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
+              }`}
+              type="password"
+              name="repeatPassword"
+              placeholder="Repita su contraseña"
+              value={userData.repeatPassword}
+              onChange={handlePasswordChange}
+            />
+            <div className="absolute -bottom-6 left-0 text-right">
+              <small
+                className={`transition_all  text-right ${
+                  errores.messageRepeatPassword ? "opacity-100" : "opacity-0"
+                }  font-medium text-red-500`}
+              >
+                {errores.messageRepeatPassword}
+              </small>
+              <small
+                className={`transition_all  text-right ${
+                  errores.messageRepeatPassword ? "opacity-0" : "opacity-100"
+                }  font-medium text-emerald-500`}
+              >
+                {errores.messageRepeatPassword == "" &&
+                  userData.repeatPassword.length > 0 &&
+                  "Las contraseñas coinciden"}
+              </small>
+            </div>
           </div>
         </div>
-      </div>
-      {/*  Boton de registro */}
-      <div className='py-4 text-center'>
-        <button className='mx-auto w-1/2' onClick={handleRegister}>
-          Register
-        </button>
-      </div>
+        {/*  Boton de registro */}
+        <div className="py-4 text-center">
+          <button className="mx-auto w-1/2" onClick={handleRegister}>
+            Register
+          </button>
+        </div>
 
-      {/*  */}
-      <div className='mx-auto flex w-4/5 flex-col gap-2'>
-        <Link
-          className='mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30'
-          href='http://localhost:3000/login/auth/google'
-          rel='noopener noreferrer'
-        >
-          <Google width='23' height='23' />
-          Login with Google
-        </Link>
-        <Link
-          className='mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30'
-          href='http://localhost:3000/login/auth/google'
-          rel='noopener noreferrer'
-        >
-          <svg className=' h-6 w-6 fill-current' viewBox='0 0 24 24'>
-            <path d='M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z' />
-          </svg>
-          Login with Facebook
-        </Link>
-      </div>
-      <small className='absolute bottom-5 right-5 block pt-2 text-right text-black'>
-        Ya tenes cuenta?{" "}
-        <span
-          onClick={handleLoginClick}
-          className='font-semibold text-blue hover:cursor-pointer hover:underline'
-        >
-          Ingresa aqui
-        </span>
-      </small>
-    </form>
+        {/*  */}
+        <div className="mx-auto flex w-4/5 flex-col gap-2">
+          <Link
+            className="mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30"
+            href="https://api-urban.onrender.com/login/auth/google"
+            rel="noopener noreferrer"
+          >
+            <Google width="23" height="23" />
+            Login with Google
+          </Link>
+          <Link
+            className="mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30"
+            href="/login/auth/google"
+            rel="noopener noreferrer"
+          >
+            <svg className=" h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path d="M20.02 0H3.98A3.98 3.98 0 0 0 0 3.98v16.04A3.98 3.98 0 0 0 3.98 24h8.22v-9.29H8.65v-3.62h3.55V9.02c0-3.52 2.14-5.44 5.28-5.44 1.54 0 2.87.12 3.26.18v3.66l-2.23.001c-1.75 0-2.09.83-2.09 2.05v2.69h4.19l-.55 3.62h-3.64V24h7.12A3.98 3.98 0 0 0 24 20.02V3.98C24 1.78 22.2 0 20.02 0z" />
+            </svg>
+            Login with Facebook
+          </Link>
+        </div>
+        <small className="absolute bottom-5 right-5 block pt-2 text-right text-black">
+          Ya tenes cuenta?{" "}
+          <span
+            onClick={handleLoginClick}
+            className="font-semibold text-blue hover:cursor-pointer hover:underline"
+          >
+            Ingresa aqui
+          </span>
+        </small>
+      </form>
+    </>
   );
 }
 
