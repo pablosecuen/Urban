@@ -12,8 +12,7 @@ export default function CardHome() {
   const [user, setUser] = React.useState<User | null>(null);
   const [token, setToken] = React.useState<string | null>(null);
   useEffect(() => {
-    token &&
-      axios
+    if (token){  axios
         .get("https://api-urban.onrender.com/user/decoding", {
           headers: {
             Authorization: "Bearer " + token,
@@ -24,6 +23,11 @@ export default function CardHome() {
           localStorage.setItem("user", JSON.stringify(userData));
           location.replace("/home");
         });
+      } else {
+        console.log("no ejecuta decoding")
+      }
+    
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
