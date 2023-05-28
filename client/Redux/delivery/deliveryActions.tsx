@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Distributor } from "../../app/types/Distributor";
+import axiosInstance from "@component/services/axiosInstance";
 
 // Define async thunk actions to fetch user data
 // export const getAllUsers = async () => {
@@ -11,7 +12,7 @@ import { Distributor } from "../../app/types/Distributor";
 export const getAllDeliveries = createAsyncThunk<Distributor[], void>(
   "delivery/getAllDeliveries",
   async () => {
-    const response = await axios.get(`https://api-urban.onrender.com/delivery?page=1&pageSize=1000`);
+    const response = await axiosInstance.get(`/delivery?page=1&pageSize=1000`);
     return response.data.deliverys;
   }
 );
@@ -19,7 +20,7 @@ export const getAllDeliveries = createAsyncThunk<Distributor[], void>(
 export const getDeliveryById = createAsyncThunk<Distributor, string>(
   "delivery/getDeliveryById",
   async (userId) => {
-    const response = await axios.get(`https://api-urban.onrender.com/delivery/${userId}`);
+    const response = await axiosInstance.get(`/delivery/${userId}`);
     return response.data;
   }
 );
@@ -27,20 +28,20 @@ export const getDeliveryById = createAsyncThunk<Distributor, string>(
 export const getDeliveryByName = createAsyncThunk(
   "delivery/getDeliveryByName",
   async (name: string) => {
-    const response = await axios.get(`https://api-urban.onrender.com/delivery?name=${name}`);
+    const response = await axiosInstance.get(`/delivery?name=${name}`);
     return response.data.deliverys;
   }
 );
 
 export const getDeliveryByCc = createAsyncThunk("delivery/getUsersByCc", async (cc: string) => {
-  const response = await axios.get(`https://api-urban.onrender.com/delivery?cc=${cc}`);
+  const response = await axiosInstance.get(`/delivery?cc=${cc}`);
   return response.data.deliverys;
 });
 
 export const getDeliveryByEmail = createAsyncThunk(
   "delivery/getDeliveryByEmail",
   async (email: string) => {
-    const response = await axios.get(`https://api-urban.onrender.com/delivery?email=${email}`);
+    const response = await axiosInstance.get(`/delivery?email=${email}`);
     return response.data.deliverys;
   }
 );

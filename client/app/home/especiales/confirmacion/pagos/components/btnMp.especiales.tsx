@@ -2,6 +2,7 @@
 import { Passage } from "@component/app/types/Passages";
 import { User } from "@component/app/types/User";
 import { RootState } from "@component/Redux/store/store";
+import axiosInstance from "@component/services/axiosInstance";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -62,7 +63,7 @@ export default function Pagos() {
   const handleClickMP = async () => {
     try {
       if (token) {
-        const { data } = await axios.post("https://api-urban.onrender.com/payment/new", arrToPay);
+        const { data } = await axiosInstance.post("/payment/new", arrToPay);
         if (window) {
           location.href = await data.response.body.init_point;
         }
@@ -74,7 +75,7 @@ export default function Pagos() {
 
   return (
     <>
-      <span className="text-2xl">Valor a pagar: ${totalPrice}</span>
+      <span className='text-2xl'>Valor a pagar: ${totalPrice}</span>
       <button onClick={handleClickMP}>Mercado Pago</button>
     </>
   );
