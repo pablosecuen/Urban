@@ -9,11 +9,10 @@ export default function LandingPage() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-    const userData = userString ? JSON.parse(userString) : null;
-    setUser(userData);
-
-    if (userData && window) {
+    if (window) {
+      const userString = localStorage.getItem("user");
+      const userData = userString ? JSON.parse(userString) : null;
+      setUser(userData);
       location.href = "/home";
     }
   }, []);
