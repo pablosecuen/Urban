@@ -1,4 +1,5 @@
 "use client";
+import { Ticket } from "@component/app/types/Ticket";
 import { User } from "@component/app/types/User";
 import axios from "axios";
 import Link from "next/link";
@@ -7,7 +8,6 @@ import { useEffect, useState } from "react";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Ticket } from "../../../../../../types/Ticket";
 
 export default function Checkout() {
   //datos mercadopago
