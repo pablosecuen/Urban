@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Ticket } from "../../../../../../../../types/Ticket";
+import { Ticket } from "../../../../../../../types/Ticket";
 import axiosInstance from "@component/services/axiosInstance";
 
 export default function Checkout() {
