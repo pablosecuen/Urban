@@ -1,13 +1,21 @@
 "use client";
 import { Passage } from "@component/app/types/Passages";
+import { User } from "@component/app/types/User";
 import { RootState } from "@component/Redux/store/store";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Pagos() {
-  const user = JSON.parse((window && localStorage.getItem("user")) || "");
+  const [user, setUser] = useState<User>();
   const passages = useSelector((state: RootState) => state.payment.passageById);
 
+  useEffect(() => {
+    if (window) {
+      const userData = JSON.parse((window && localStorage.getItem("user")) || "");
+      setUser(userData);
+    }
+  }, []);
   interface ToPay {
     passageId: string; // Update the type to a string or the appropriate type for passageId
     id: any;
@@ -17,7 +25,7 @@ export default function Pagos() {
     quantity: number | Passage;
   }
 
-  const token: string = `${user.id}`;
+  const token: string = `${user?.id}`;
 
   let toPay: ToPay[] = [];
 
