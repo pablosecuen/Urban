@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InfiniteSlider from "../InfiniteSlider/InfiniteSlider";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function CardHome() {
   const [user, setUser] = React.useState<User | null>(null);
@@ -47,8 +48,8 @@ export default function CardHome() {
   }
   useEffect(() => {
     token &&
-      axios
-        .get("https://api-urban.onrender.com/user/decoding", {
+      axiosInstance
+        .get("/user/decoding", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -64,8 +65,8 @@ export default function CardHome() {
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className="text-verdeurban">U</span>
-        <span className=" text-celeste">rban</span>!
+        Bienvedios a <span className='text-verdeurban'>U</span>
+        <span className=' text-celeste'>rban</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
@@ -79,7 +80,7 @@ export default function CardHome() {
       </p>
       <InfiniteSlider />
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -88,7 +89,7 @@ export default function CardHome() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
     </div>
