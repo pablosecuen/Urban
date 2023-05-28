@@ -1,6 +1,5 @@
 "use client";
 import { User } from "@component/app/types/User";
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,9 +10,13 @@ import axiosInstance from "@component/services/axiosInstance";
 export default function CardHome() {
   const [user, setUser] = React.useState<User | null>(null);
   const [token, setToken] = React.useState<string | null>(null);
+
   useEffect(() => {
-    if (token){  axios
-        .get("https://api-urban.onrender.com/user/decoding", {
+
+    if (typeof token === "string") {
+      axiosInstance
+        .get("/user/decoding", {
+
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -23,11 +26,9 @@ export default function CardHome() {
           localStorage.setItem("user", JSON.stringify(userData));
           location.replace("/home");
         });
-      } else {
-        console.log("no ejecuta decoding")
-      }
-    
-        
+
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
