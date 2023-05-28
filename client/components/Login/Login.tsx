@@ -1,16 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
 
 const Login = () => {
-  const isRegisterFromSessionStorage = sessionStorage.getItem("isRegister");
-  const [isRegister, setIsRegister] = useState(Boolean(isRegisterFromSessionStorage) || false);
+  const [isRegister, setIsRegister] = useState(false);
 
-  const handleSetIsRegister = (value: boolean) => {
+  useEffect(() => {
+    const isRegisterFromSessionStorage = sessionStorage.getItem("isRegister");
+    setIsRegister(Boolean(isRegisterFromSessionStorage) || false);
+  }, []);
+
+  const handleSetIsRegister = (value: boolean | ((prevState: boolean) => boolean)) => {
     setIsRegister(value);
-    sessionStorage.setItem("isRegister", value.toString());
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("isRegister", value.toString());
+    }
   };
 
   return (

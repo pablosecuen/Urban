@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { createPopper } from "@popperjs/core";
-import Image from "next/image";
+"use client";
+import React from "react";
+
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "@component/Redux/store/store";
 import { AnyAction } from "@reduxjs/toolkit";

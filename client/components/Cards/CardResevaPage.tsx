@@ -77,8 +77,8 @@ export default function Reserva() {
           <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
-            placeholder="Origen..."
-            className="w-2/3 capitalize"
+            placeholder='Origen...'
+            className='w-2/3 capitalize'
             onChange={handleOriginChange}
             isClearable
             value={origin ? { value: origin, label: origin } : null}
@@ -88,8 +88,8 @@ export default function Reserva() {
           <HiOutlineLocationMarker className={inputIconStyles} />
           <Select
             options={locations}
-            placeholder="Destino..."
-            className="w-2/3 capitalize"
+            placeholder='Destino...'
+            className='w-2/3 capitalize'
             onChange={handleDestinationChange}
             isClearable
             value={destination ? { value: destination, label: destination } : null}
@@ -100,8 +100,8 @@ export default function Reserva() {
           <HiTrendingUp className={inputIconStyles} />
           <input
             className={inputStyles}
-            placeholder="Fecha de salida"
-            type="date"
+            placeholder='Fecha de salida'
+            type='date'
             value={departureDate}
             min={today}
             onChange={handleDepartureDateChange}
@@ -111,8 +111,8 @@ export default function Reserva() {
           <HiTrendingDown className={inputIconStyles} />
           <input
             className={inputStyles}
-            placeholder="Fecha de llegada"
-            type="date"
+            placeholder='Fecha de llegada'
+            type='date'
             value={arrivalDate}
             min={departureDate ? departureDate : today}
             onChange={handleArrivalDateChange}

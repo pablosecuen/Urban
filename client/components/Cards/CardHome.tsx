@@ -1,19 +1,42 @@
 "use client";
+import { User } from "@component/app/types/User";
 import axios from "axios";
+import React from "react";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InfiniteSlider from "../InfiniteSlider/InfiniteSlider";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function CardHome() {
-  let token: any;
-  if (typeof window !== "undefined") {
-    const urlParams = new URLSearchParams(window.location.search);
-    token = urlParams.get("token");
-  }
+  const [user, setUser] = React.useState<User | null>(null);
+  const [token, setToken] = React.useState<string | null>(null);
+  useEffect(() => {
+    token &&
+      axios
+        .get("https://api-urban.onrender.com/user/decoding", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((data) => {
+          const userData = data.data;
+          localStorage.setItem("user", JSON.stringify(userData));
+          location.replace("/home");
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-  const user = userString ? JSON.parse(userString) : null;
+  useEffect(() => {
+    if (window) {
+      const urlParams = new URLSearchParams(location.search);
+      const tokendata = urlParams.get("token");
+      const userString = localStorage.getItem("user");
+      const userData = userString ? JSON.parse(userString) : null;
+      setUser(userData);
+      setToken(tokendata);
+    }
+  }, []);
 
   const containerStyles =
     "mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
@@ -39,21 +62,6 @@ export default function CardHome() {
   if (user) {
     notifySuccess();
   }
-  useEffect(() => {
-    token &&
-      axios
-        .get("http://localhost:3000/user/decoding", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((data) => {
-          const userData = data.data;
-          localStorage.setItem("user", JSON.stringify(userData));
-          location.replace("/home");
-        });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className={containerStyles}>
@@ -64,11 +72,11 @@ export default function CardHome() {
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
         acercando a la oferta a la palma de su mano, <b>para empoderarte</b> con mayor información
-        asistiendo en que tomes la mejor decision disponble dentro de tus necesidades, en nuestra
-        app podras encontrar todo tipo de servicios de transporte, desde
+        asistiendo en que tomes la mejor decisión disponble dentro de tus necesidades, en nuestra
+        app podrás encontrar todo tipo de servicios de transporte, desde
         <b> buses intermunicipales, taxis publicos, transportes privados</b>, inclusive una
         <b> sección de cadeteria</b>, para que puedas encontrar <b>soluciones reales</b> a tus
-        problemas cotidianos en la menor cantidad de tiempo posibles, entregando al cliente un poder
+        problemas cotidianos en la menor cantidad de tiempo, entregando al cliente un poder
         increible para <b>gestionar</b> tu tiempo y tus días de la mejor manera posible
       </p>
       <InfiniteSlider />

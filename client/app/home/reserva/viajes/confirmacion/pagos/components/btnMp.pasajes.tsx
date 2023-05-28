@@ -3,9 +3,10 @@ import { RootState } from "@component/Redux/store/store";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { ToPay } from "@component/app/types/MercadoPago";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function Pagos() {
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const user = JSON.parse((window && localStorage.getItem("user")) || "");
   const passages = useSelector((state: RootState) => state.payment?.passageById);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
@@ -41,7 +42,6 @@ export default function Pagos() {
   }, 0);
 
   const arrToPay = toPay.map((item) => {
-    console.log({ desripcion: item.description });
     return {
       id: item.id,
       title: item.name,
@@ -55,7 +55,7 @@ export default function Pagos() {
   const handleClickMP = async () => {
     try {
       if (token) {
-        const { data } = await axios.post("http://localhost:3000/payment/new", arrToPay);
+        const { data } = await axiosInstance.post("/payment/new", arrToPay);
         window.location.href = data.response.body.init_point;
       }
     } catch (error) {

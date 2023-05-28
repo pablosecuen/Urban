@@ -1,5 +1,6 @@
 import { PassageResponse, PassageToRegister, Passage } from "@component/app/types/Passages";
 import { QueryParams } from "@component/app/types/QueryParams";
+import axiosInstance from "@component/services/axiosInstance";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -7,7 +8,7 @@ import axios from "axios";
 export const getAllPassages = createAsyncThunk<Passage[], void>(
   "passage/getAllPassages",
   async () => {
-    const response = await axios.get("http://localhost:3000/passage?page=1&pageSize=10000");
+    const response = await axiosInstance.get("/passage?page=1&pageSize=10000");
     return response.data.passages;
   }
 );
@@ -15,7 +16,7 @@ export const getAllPassages = createAsyncThunk<Passage[], void>(
 export const getPassagesId = createAsyncThunk<PassageToRegister, string>(
   "passage/getPassagesId",
   async (id: string) => {
-    const response = await axios.get(`http://localhost:3000/passage/${id}`);
+    const response = await axiosInstance.get(`/passage/${id}`);
     return response.data;
   }
 );
@@ -24,8 +25,8 @@ export const getPassagesByQuery = createAsyncThunk<Passage[], QueryParams>(
   "passage/fetchPassagesByQuery",
   async (queryParams: QueryParams) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
-    const response = await axios.get(
-      `http://localhost:3000/passage?page=1&pageSize=10000&${urlSearchParams.toString()}`
+    const response = await axiosInstance.get(
+      `/passage?page=1&pageSize=10000&${urlSearchParams.toString()}`
     );
     return response.data.passages;
   }

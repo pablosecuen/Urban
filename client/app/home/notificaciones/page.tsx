@@ -10,11 +10,13 @@ import { ThunkDispatch } from "redux-thunk";
 
 export default function Notifications() {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const user = JSON.parse(localStorage.getItem("user") || "");
   const notification = useSelector((state: RootState) => state.notifications.allNotifications);
 
   useEffect(() => {
-    dispatch(getAllNotificationsByUser(user.id));
+    if (window) {
+      const user = JSON.parse((window && localStorage.getItem("user")) || "");
+      dispatch(getAllNotificationsByUser(user.id));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

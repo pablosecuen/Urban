@@ -20,17 +20,19 @@ export default function NavBar() {
   const router = useRouter();
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-    console.log(showMenu);
   };
+
+  
   useEffect(() => {
-    const userDataString = localStorage.getItem("user");
+    const userDataString = window && localStorage.getItem("user");
     if (userDataString) {
       const userDataObject = JSON.parse(userDataString);
       setUser(userDataObject);
     }
   }, [setUser]);
+
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    window && localStorage.removeItem("user");
     setUser(null);
     router.push("/");
   };

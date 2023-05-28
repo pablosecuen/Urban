@@ -1,13 +1,14 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function CardGrossIncomeChart() {
   // tiene que mostrar los ingresos brutos totales por mes
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
-      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { data } = await axiosInstance.get("/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const grossIncomeValues = [];
       for (let i = 0; i < 12; i++) {
@@ -128,19 +129,19 @@ export default function CardGrossIncomeChart() {
   }, []);
   return (
     <>
-      <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-blueGray-700 shadow-lg">
-        <div className="mb-0 rounded-t bg-transparent px-4 py-3">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Ingresos</h6>
-              <h2 className="text-xl font-semibold text-white">Ingresos brutos totales</h2>
+      <div className='relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-blueGray-700 shadow-lg'>
+        <div className='mb-0 rounded-t bg-transparent px-4 py-3'>
+          <div className='flex flex-wrap items-center'>
+            <div className='relative w-full max-w-full flex-1 flex-grow'>
+              <h6 className='mb-1 text-xs font-semibold uppercase text-blueGray-100'>Ingresos</h6>
+              <h2 className='text-xl font-semibold text-white'>Ingresos brutos totales</h2>
             </div>
           </div>
         </div>
-        <div className="flex-auto p-4">
+        <div className='flex-auto p-4'>
           {/* Chart */}
-          <div className="relative h-[350px]">
-            <canvas id="grossIncome-chart"></canvas>
+          <div className='relative h-[350px]'>
+            <canvas id='grossIncome-chart'></canvas>
           </div>
         </div>
       </div>

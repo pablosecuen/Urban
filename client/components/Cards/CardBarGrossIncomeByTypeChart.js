@@ -1,15 +1,16 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
+import axiosInstance from "@component/services/axiosInstance";
 
 // function to render products an prices in html divs
 
 export default function CardBarGrossIncomeByTypeChart() {
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { data } = await axiosInstance.get("/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const ticketsValues = [];
       const ordersValues = [];
@@ -130,19 +131,19 @@ export default function CardBarGrossIncomeByTypeChart() {
   }, []);
   return (
     <>
-      <div className="relative mb-6 flex  w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
-        <div className="mb-0 rounded-t bg-transparent px-4 py-3">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-400">Ingresos</h6>
-              <h2 className="text-xl font-semibold text-blueGray-700">Ingresos brutos por tipo</h2>
+      <div className='relative mb-6 flex  w-full min-w-0 flex-col break-words rounded bg-white shadow-lg'>
+        <div className='mb-0 rounded-t bg-transparent px-4 py-3'>
+          <div className='flex flex-wrap items-center'>
+            <div className='relative w-full max-w-full flex-1 flex-grow'>
+              <h6 className='mb-1 text-xs font-semibold uppercase text-blueGray-400'>Ingresos</h6>
+              <h2 className='text-xl font-semibold text-blueGray-700'>Ingresos brutos por tipo</h2>
             </div>
           </div>
         </div>
-        <div className="flex-auto p-4">
+        <div className='flex-auto p-4'>
           {/* Chart */}
-          <div className="relative h-[350px]">
-            <canvas id="barGrossIncomeByType-chart"></canvas>
+          <div className='relative h-[350px]'>
+            <canvas id='barGrossIncomeByType-chart'></canvas>
           </div>
         </div>
       </div>

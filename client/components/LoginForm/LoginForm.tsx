@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import setValidate from "./Validate";
 import Link from "next/link";
 import { Google } from "@component/assets/icons/svg/Google";
+import axiosInstance from "@component/services/axiosInstance";
 
 // interface UserToRegister {
 //   name: string;
@@ -46,14 +47,16 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
     e.preventDefault();
     const user: UserToLogin = userData;
     try {
-      const response = await axios.post("http://localhost:3000/login/user", user);
+      const response = await axiosInstance.post("/login/user", user);
       const { token } = response.data;
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      if (window) {
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
+
       if (token) {
         console.log("Login successful");
-        // store the user object in local storage
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         router.push("/home");
-        // Save the token to localStorage or a state variable
       } else {
         console.log("Login failed");
       }
@@ -135,7 +138,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
       <div className="mx-auto flex w-4/5 flex-col gap-2">
         <Link
           className="mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30"
-          href="http://localhost:3000/login/auth/google"
+          href="https://api-urban.onrender.com/login/auth/google"
           rel="noopener noreferrer"
         >
           <Google width="23" height="23" />
@@ -143,7 +146,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
         </Link>
         <Link
           className="mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30"
-          href="http://localhost:3000/login/auth/google"
+          href="/login/auth/google"
           rel="noopener noreferrer"
         >
           <svg className=" h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -155,7 +158,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
       <div className="mt-2 flex">
         <small className="bottom-5 right-5 block pt-2 text-right text-black">
           Olvidaste tu contraseña?{" "}
-          <Link href="http://localhost:3001/recuperacion">
+          <Link href="https://api-urban.onrender.com/recuperacion">
             <span className="font-semibold text-blue hover:cursor-pointer hover:underline">
               Click aqui
             </span>

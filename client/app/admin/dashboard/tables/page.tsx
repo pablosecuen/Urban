@@ -1,7 +1,4 @@
-"use client";
-
 import CardTable from "../../../../components/Cards/CardRutas";
-import TableDropdown from "../../../../components/Dropdowns/TableDropdown";
 
 export default function Table() {
   return (

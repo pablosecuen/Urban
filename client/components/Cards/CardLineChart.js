@@ -1,14 +1,13 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import axios from "axios";
+import axiosInstance from "@component/services/axiosInstance";
 
 export default function CardLineChart() {
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
-      const { data: userRecords } = await axios.get(
-        "http://localhost:3000/admin/userRecords?year=2023"
-      );
+      const { data: userRecords } = await axiosInstance.get("/admin/userRecords?year=2023");
 
       const { usersRecordsPerMonth } = userRecords;
       const userRecordsValues = [];
@@ -127,19 +126,19 @@ export default function CardLineChart() {
   }, []);
   return (
     <>
-      <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-blueGray-700 shadow-lg">
-        <div className="mb-0 rounded-t bg-transparent px-4 py-3">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full max-w-full flex-1 flex-grow">
-              <h6 className="mb-1 text-xs font-semibold uppercase text-blueGray-100">Usuarios</h6>
-              <h2 className="text-xl font-semibold text-white">Cantidad de registros</h2>
+      <div className='relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-blueGray-700 shadow-lg'>
+        <div className='mb-0 rounded-t bg-transparent px-4 py-3'>
+          <div className='flex flex-wrap items-center'>
+            <div className='relative w-full max-w-full flex-1 flex-grow'>
+              <h6 className='mb-1 text-xs font-semibold uppercase text-blueGray-100'>Usuarios</h6>
+              <h2 className='text-xl font-semibold text-white'>Cantidad de registros</h2>
             </div>
           </div>
         </div>
-        <div className="flex-auto p-4">
+        <div className='flex-auto p-4'>
           {/* Chart */}
-          <div className="relative h-[350px]">
-            <canvas id="line-chart"></canvas>
+          <div className='relative h-[350px]'>
+            <canvas id='line-chart'></canvas>
           </div>
         </div>
       </div>
