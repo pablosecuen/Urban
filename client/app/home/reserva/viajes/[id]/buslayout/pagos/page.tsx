@@ -3,7 +3,7 @@ import BtnMp from "./components/btnMp.pasajes";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import icon from "../../../../../../../../assets/icons/user-01.png";
+import icon from "../../../../../../../assets/icons/user-01.png";
 
 export default function Pagos() {
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
