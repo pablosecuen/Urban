@@ -3,7 +3,6 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import success from "../../../../../../assets/imagenes/success.png";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Checkout() {
@@ -11,7 +10,7 @@ export default function Checkout() {
   const userId = "";
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (window) {
       const queryParams = new URLSearchParams(window.location.search);
       const paymentId = queryParams.get("payment_id");
       const merchantOrder = queryParams.get("merchant_order_id");
