@@ -18,6 +18,7 @@ const passport_google_oauth20_1 = require("passport-google-oauth20");
 const passport_1 = __importDefault(require("passport"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const router = (0, express_1.Router)();
+const { FRONT_URL } = process.env;
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
     clientSecret: "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",
@@ -81,6 +82,7 @@ router.get("/", passport_1.default.authenticate("google", { scope: ["profile", "
 router.get("/", (req, res) => {
     const { user } = req;
     const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
+    // res.redirect(`http://localhost:3001/home?token=${token}`);
     res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 exports.default = router;

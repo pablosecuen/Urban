@@ -47,8 +47,10 @@ export const postPayment = async (req, res, next) => {
     items: products,
     back_urls: {
       // corregir redireccionamiento
-      success: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout`,
-      failure: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout/failed`,
+      // success: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout`,
+      // failure: `http://localhost:3001/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout/failed`,
+      success: `https//:urban-movi.vercel.app/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout`,
+      failure: `https//:urban-movi.vercel.app/home/reserva/viajes/${products[0].id}/buslayout/confirmacion/pagos/checkout/failed`,
       pending: ``,
     },
     auto_return: "approved",
