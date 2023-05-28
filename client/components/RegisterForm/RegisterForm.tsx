@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Google } from "@component/assets/icons/svg/Google";
@@ -8,13 +9,14 @@ import { RegisterError } from "@component/app/types/LoginRegister";
 import axios from "axios";
 
 function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsRegister: any }) {
-  const userFromSessionStorage: UserToRegister | {} = JSON.parse(
-    sessionStorage.getItem("user") || "{}"
-  );
-  const [userData, setUserData] = useState<UserToRegister>(
-    userFromSessionStorage as UserToRegister
-  );
-  const [errores, setErrores] = useState<RegisterError>({} as RegisterError);
+  const [userData, setUserData] = useState<UserToRegister>({
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+  const [errores, setErrores] = useState<RegisterError>({});
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toString();
@@ -25,9 +27,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
       errorRepeatPassword = setValidateRepeatPassword(repeatPassword, value);
     }
     setUserData({ ...userData, [name]: value });
-    sessionStorage.setItem("user", JSON.stringify({ ...userData, [name]: value }));
     setErrores({ ...errores, ...setValidate({ [name]: value }), ...errorRepeatPassword });
   };
+
   function setValidateRepeatPassword(repeatPassword: string, password: string) {
     if (repeatPassword === password || repeatPassword === "") {
       return { messageRepeatPassword: "" };
@@ -62,18 +64,19 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
       };
       await createUser(userData);
 
-      sessionStorage.removeItem("user");
-      sessionStorage.removeItem("isRegister");
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("isRegister");
+      }
     } else {
       alert("Passwords do not match");
     }
   };
-  // firstName: name, LastName: lastName, name: firstName + lastName, email, password
 
   const createUser = async (userData: any) => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
-      if (window) {
+      if (typeof window !== "undefined") {
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }
 
@@ -84,6 +87,13 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
       alert(error?.response?.data?.message);
     }
   };
+
+  useEffect(() => {
+    const userFromSessionStorage: UserToRegister | {} = JSON.parse(
+      sessionStorage.getItem("user") || "{}"
+    );
+    setUserData(userFromSessionStorage as UserToRegister);
+  }, []);
   return (
     <form
       onSubmit={handleRegister}
