@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Login from "@component/components/Login/Login";
 import logo from "../assets/imagenes/UrbanLogo.png";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ export default function LandingPage() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (window) {
       const userString = localStorage.getItem("user");
       const userData = userString ? JSON.parse(userString) : null;
       setUser(userData);
