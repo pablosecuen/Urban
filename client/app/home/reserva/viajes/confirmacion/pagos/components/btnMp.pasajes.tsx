@@ -54,7 +54,7 @@ export default function Pagos() {
   const handleClickMP = async () => {
     try {
       if (token) {
-        const { data } = await axios.post("http://localhost:3000/payment/new", arrToPay);
+        const { data } = await axios.post("https://api-urban.onrender.com/payment/new", arrToPay);
         window.location.href = data.response.body.init_point;
       }
     } catch (error) {
