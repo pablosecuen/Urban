@@ -13,10 +13,6 @@ export default function LandingPage() {
       const userString = localStorage.getItem("user");
       const userData = userString ? JSON.parse(userString) : null;
       setUser(userData);
-
-      if (userData) {
-        window.location.href = "/home";
-      }
     }
   }, []);
 
