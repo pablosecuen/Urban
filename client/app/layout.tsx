@@ -2,8 +2,10 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
 import type { Metadata } from "next";
+
 import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Urban",
@@ -20,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="bg-slate-200">
           <Providers>
             <div>{children}</div>
+            <Analytics />
           </Providers>
           <Analytics />
         </main>

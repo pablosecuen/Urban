@@ -74,11 +74,11 @@ export default function CardHome() {
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
         acercando a la oferta a la palma de su mano, <b>para empoderarte</b> con mayor información
-        asistiendo en que tomes la mejor decision disponble dentro de tus necesidades, en nuestra
-        app podras encontrar todo tipo de servicios de transporte, desde
+        asistiendo en que tomes la mejor decisión disponble dentro de tus necesidades, en nuestra
+        app podrás encontrar todo tipo de servicios de transporte, desde
         <b> buses intermunicipales, taxis publicos, transportes privados</b>, inclusive una
         <b> sección de cadeteria</b>, para que puedas encontrar <b>soluciones reales</b> a tus
-        problemas cotidianos en la menor cantidad de tiempo posibles, entregando al cliente un poder
+        problemas cotidianos en la menor cantidad de tiempo, entregando al cliente un poder
         increible para <b>gestionar</b> tu tiempo y tus días de la mejor manera posible
       </p>
       <InfiniteSlider />
