@@ -48,7 +48,7 @@ export default function Reserva() {
       // armo la query y agrego las propiedades extras si las hay
     };
     const URL = Object.values(query).join("/");
-    router.push(`/home/reserva/${URL}`);
+    router.push(`https://api-urban.onrender.com/home/reserva/${URL}`);
   };
   useEffect(() => {
     const fetchLocations = async () => {
