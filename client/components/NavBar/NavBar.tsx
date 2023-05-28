@@ -21,6 +21,8 @@ export default function NavBar() {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  
   useEffect(() => {
     const userDataString = window && localStorage.getItem("user");
     if (userDataString) {
@@ -28,6 +30,7 @@ export default function NavBar() {
       setUser(userDataObject);
     }
   }, [setUser]);
+
   const handleLogout = () => {
     window && localStorage.removeItem("user");
     setUser(null);

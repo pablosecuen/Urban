@@ -55,6 +55,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
 
       if (token) {
         console.log("Login successful");
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         router.push("/home");
       } else {
         console.log("Login failed");
