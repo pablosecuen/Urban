@@ -83,6 +83,6 @@ router.get("/", (req, res) => {
     console.log(user);
     const token = jsonwebtoken_1.default.sign(user, "clavemegasecreta");
     console.log(token);
-    res.redirect(`${process.env.FRONT_URL}/home?token=${token}`);
+    res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 exports.default = router;
