@@ -1,21 +1,26 @@
 "use client";
 import Login from "@component/components/Login/Login";
 import logo from "../assets/imagenes/UrbanLogo.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { useRouter } from "next/router";
 
 export default function LandingPage() {
-  const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-  const user = userString ? JSON.parse(userString) : null;
-  const router = useRouter();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (user) {
-      router.push("/home");
+    const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
+    const userData = userString ? JSON.parse(userString) : null;
+    setUser(userData);
+
+    if (userData) {
+      redirectToHome();
     }
-  }, [user, router]);
+  }, []);
+
+  const redirectToHome = () => {
+    window.location.href = "/home";
+  };
 
   return (
     <div className="flex flex-col items-center justify-center  lg:flex-row">
