@@ -28,7 +28,7 @@ export default function Profile() {
 
     // Make the PUT request to update the user
     axios
-      .put(`http://localhost:3000/user/${user.id}`, userData)
+      .put(`https://api-urban.onrender.com/user/${user.id}`, userData)
       .then((response) => {
         window && localStorage.setItem("user", JSON.stringify(userData));
         setShowInput(false);

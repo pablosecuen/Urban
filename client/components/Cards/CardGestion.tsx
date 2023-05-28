@@ -78,7 +78,7 @@ export default function CardGestion() {
       const currentValuationData = valuationData; // Capture the current value of valuationData
       axios
         .post(
-          `http://localhost:3000/user/rating/company/${ticketId}/${companyId}`,
+          `https://api-urban.onrender.com/user/rating/company/${ticketId}/${companyId}`,
           currentValuationData
         )
         .then((response) => {

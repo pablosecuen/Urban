@@ -5,7 +5,7 @@ import { Travel } from "@component/app/types/Travels";
 
 // Define async thunk actions to fetch user data
 export const getAllTravels = createAsyncThunk("travels/getAllTravels", async () => {
-  const response = await axios.get("http://localhost:3000/travels?page=1&pageSize=10000");
+  const response = await axios.get("https://api-urban.onrender.com/travels?page=1&pageSize=10000");
   return response.data.travels; // return only the data from the response
 });
 
@@ -20,7 +20,7 @@ export const getTravelsByQuery = createAsyncThunk<Travel[], QueryParams, {}>(
   async (queryParams: QueryParams) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
     const response = await axios.get(
-      `http://localhost:3000/travels?page=1&pageSize=10000&${urlSearchParams.toString()}`
+      `https://api-urban.onrender.com/travels?page=1&pageSize=10000&${urlSearchParams.toString()}`
     );
     return response.data;
   }
@@ -30,7 +30,7 @@ export const getTravelsByUserId = createAsyncThunk<Travel[], string, {}>(
   "travels/getTravelsByUserId",
   async (userId: string) => {
     const response = await axios.get(
-      `http://localhost:3000/travels/user/${userId}?page=1&pageSize=100`
+      `https://api-urban.onrender.com/travels/user/${userId}?page=1&pageSize=100`
     );
     return response.data.travels;
   }

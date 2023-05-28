@@ -75,7 +75,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
 
   const createUser = async (userData: any) => {
     try {
-      const response = await axios.post("http://localhost:3000/user", userData);
+      const response = await axios.post("https://api-urban.onrender.com/user", userData);
       if (typeof window !== "undefined") {
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }

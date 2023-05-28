@@ -29,7 +29,7 @@ const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, ne
 
   const enableSeats = async () => {
     try {
-      await axios.put(`http://localhost:3000/admin/enableSeats/${selectedPassage?.id}`, {
+      await axios.put(`https://api-urban.onrender.com/admin/enableSeats/${selectedPassage?.id}`, {
         numberSeat: selectedSeats,
       });
       toastSuccess();
@@ -42,7 +42,7 @@ const SeatManagement: React.FC<CardProfilePropsPassage> = ({ selectedPassage, ne
 
   const disabledSeat = async () => {
     try {
-      await axios.put(`http://localhost:3000/admin/disableSeats/${selectedPassage?.id}`, {
+      await axios.put(`https://api-urban.onrender.com/admin/disableSeats/${selectedPassage?.id}`, {
         numberSeat: disabledSeats,
       });
       toastSuccess();

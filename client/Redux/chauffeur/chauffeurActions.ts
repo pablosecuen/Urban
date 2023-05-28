@@ -10,7 +10,7 @@ import axios, { AxiosResponse } from "axios";
 export const getAllChauffeurs = createAsyncThunk<Chauffeur[], void>(
   "vehicles/getAllChauffeurs",
   async () => {
-    const response = await axios.get(`http://localhost:3000/chauffeur?page=1&pageSize=1000`);
+    const response = await axios.get(`https://api-urban.onrender.com/chauffeur?page=1&pageSize=1000`);
     return response.data.chauffeurs;
   }
   //Falta hacer su slice
@@ -19,7 +19,7 @@ export const getAllChauffeurs = createAsyncThunk<Chauffeur[], void>(
 export const getChauffeurById = createAsyncThunk<Chauffeur, string>(
   "vehicles/getChauffeurById",
   async (chauffeurId: string) => {
-    const response = await axios.get(`http://localhost:3000/chauffeur/${chauffeurId}`);
+    const response = await axios.get(`https://api-urban.onrender.com/chauffeur/${chauffeurId}`);
     return response.data;
   }
   //Falta hacer su slice
@@ -29,7 +29,7 @@ export const getChauffeurs = createAsyncThunk<FilteredChauffeurs, ChauffeurQuery
   "chauffeur/getFilteredChauffeurs",
   async (queryParams: ChauffeurQueryParams): Promise<FilteredChauffeurs> => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
-    let URL = "http://localhost:3000/chauffeur?";
+    let URL = "https://api-urban.onrender.com/chauffeur?";
     URL += "page=1&pageSize=10";
     const URLParams = urlSearchParams.toString();
     if (URLParams) URL += "&" + URLParams;

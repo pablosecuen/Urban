@@ -7,7 +7,7 @@ import axios from "axios";
 export const getAllPassages = createAsyncThunk<Passage[], void>(
   "passage/getAllPassages",
   async () => {
-    const response = await axios.get("http://localhost:3000/passage?page=1&pageSize=10000");
+    const response = await axios.get("https://api-urban.onrender.com/passage?page=1&pageSize=10000");
     return response.data.passages;
   }
 );
@@ -15,7 +15,7 @@ export const getAllPassages = createAsyncThunk<Passage[], void>(
 export const getPassagesId = createAsyncThunk<PassageToRegister, string>(
   "passage/getPassagesId",
   async (id: string) => {
-    const response = await axios.get(`http://localhost:3000/passage/${id}`);
+    const response = await axios.get(`https://api-urban.onrender.com/passage/${id}`);
     return response.data;
   }
 );
@@ -25,7 +25,7 @@ export const getPassagesByQuery = createAsyncThunk<Passage[], QueryParams>(
   async (queryParams: QueryParams) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
     const response = await axios.get(
-      `http://localhost:3000/passage?page=1&pageSize=10000&${urlSearchParams.toString()}`
+      `https://api-urban.onrender.com/passage?page=1&pageSize=10000&${urlSearchParams.toString()}`
     );
     return response.data.passages;
   }

@@ -91,7 +91,7 @@ export default function CadPassages(props: any) {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    await axios.post("http://localhost:3000/passage", newPassage);
+    await axios.post("https://api-urban.onrender.com/passage", newPassage);
     setNewPassage({
       stock: 0,
       price: 0,

@@ -48,7 +48,7 @@ export default function CardHome() {
   useEffect(() => {
     token &&
       axios
-        .get("http://localhost:3000/user/decoding", {
+        .get("https://api-urban.onrender.com/user/decoding", {
           headers: {
             Authorization: "Bearer " + token,
           },

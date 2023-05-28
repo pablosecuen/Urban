@@ -9,7 +9,7 @@ export default function CardBarGrossIncomeByTypeChart() {
   useEffect(() => {
     (async () => {
       // Crear endpoint en backend que retorne un array con los ingresos por mes (y demas endpoints de data requerida)
-      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { data } = await axios.get("https://api-urban.onrender.com/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const ticketsValues = [];
       const ordersValues = [];

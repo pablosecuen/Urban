@@ -7,7 +7,7 @@ export default function CardLineChart() {
   useEffect(() => {
     (async () => {
       const { data: userRecords } = await axios.get(
-        "http://localhost:3000/admin/userRecords?year=2023"
+        "https://api-urban.onrender.com/admin/userRecords?year=2023"
       );
 
       const { usersRecordsPerMonth } = userRecords;

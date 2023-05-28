@@ -6,7 +6,7 @@ import { QueryParamsVehicle } from "@component/app/types/QueryParams";
 export const getAllVehicles = createAsyncThunk<Vehicle[], void>(
   "vehicles/getAllVehicles",
   async () => {
-    const response = await axios.get(`http://localhost:3000/vehicle?page=1&pageSize=1000`);
+    const response = await axios.get(`https://api-urban.onrender.com/vehicle?page=1&pageSize=1000`);
     return response.data.vehicles;
   }
 );
@@ -14,7 +14,7 @@ export const getAllVehicles = createAsyncThunk<Vehicle[], void>(
 export const getVehicleById = createAsyncThunk<Vehicle, string>(
   "vehicles/getVehicleByName",
   async (vechicleId) => {
-    const response = await axios.get(`http://localhost:3000/vehicle/${vechicleId}`);
+    const response = await axios.get(`https://api-urban.onrender.com/vehicle/${vechicleId}`);
     return response.data;
   }
 );
@@ -24,7 +24,7 @@ export const getVehicleByQuery = createAsyncThunk<Vehicle[], QueryParamsVehicle>
   async (queryParams: QueryParamsVehicle) => {
     const urlSearchParams = new URLSearchParams(queryParams as Record<string, string>);
     const response = await axios.get(
-      `http://localhost:3000/vehicle?page=1&pageSize=10000&${urlSearchParams.toString()}`
+      `https://api-urban.onrender.com/vehicle?page=1&pageSize=10000&${urlSearchParams.toString()}`
     );
     return response.data.vehicles;
   }

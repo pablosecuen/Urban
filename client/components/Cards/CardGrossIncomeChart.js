@@ -7,7 +7,7 @@ export default function CardGrossIncomeChart() {
   // tiene que mostrar los ingresos brutos totales por mes
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("http://localhost:3000/admin/grossIncome?year=2023");
+      const { data } = await axios.get("https://api-urban.onrender.com/admin/grossIncome?year=2023");
       const { ticketsRevenuePerMonth, ordersRevenuePerMonth, travelsRevenuePerMonth } = data;
       const grossIncomeValues = [];
       for (let i = 0; i < 12; i++) {

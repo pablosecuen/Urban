@@ -6,7 +6,7 @@ import axios from "axios";
 export const getAllCompanies = createAsyncThunk<Company[], void>(
   "companies/getAllCompanies",
   async () => {
-    const response = await axios.get(`http://localhost:3000/company`);
+    const response = await axios.get(`https://api-urban.onrender.com/company`);
     console.log(response.data.companies);
     return response.data.companies;
   }

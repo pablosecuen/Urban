@@ -93,7 +93,7 @@ export default function Checkout() {
     const getToken = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3000/payment/merchantOrder?merchantOrder=${merchantOrder}`
+          `https://api-urban.onrender.com/payment/merchantOrder?merchantOrder=${merchantOrder}`
         );
         //este axios pueeeede llegar a ser a mercadopago
         //aca se guarda la info y con esto generamos la factura
@@ -118,7 +118,7 @@ export default function Checkout() {
     (async () => {
       try {
         const ticketData = await getToken();
-        axios.post("http://localhost:3000/ticket", ticketData);
+        axios.post("https://api-urban.onrender.com/ticket", ticketData);
         setTicket(ticketData as Ticket | null);
         notifySuccess();
       } catch (error) {
