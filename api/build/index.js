@@ -32,7 +32,7 @@ app.use(
 );
 app.use((0, compression_1.default)());
 app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://urban-movi.vercel.app");
+  res.header("Access-Control-Allow-Origin", "https://urban-movi.vercel.app/");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
