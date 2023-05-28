@@ -75,7 +75,7 @@ router.get("/", passport.authenticate("google", { scope: ["profile", "email"] })
 router.get("/", (req, res) => {
   const { user } = req;
   const token = jwt.sign(user, "clavemegasecreta");
-  res.redirect(`${FRONT_URL}/home?token=${token}`);
+  res.redirect(`http://localhost:3001/home?token=${token}`);
   // res.redirect(`https://urban-movi.vercel.app/home?token=${token}`);
 });
 
