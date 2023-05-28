@@ -12,7 +12,7 @@ export default function Pagos() {
 
   useEffect(() => {
     if (window) {
-      const userData = JSON.parse((window && localStorage.getItem("user")) || "");
+      const userData = JSON.parse(localStorage.getItem("user") || "");
       setUser(userData);
     }
   }, []);
@@ -63,7 +63,9 @@ export default function Pagos() {
     try {
       if (token) {
         const { data } = await axios.post("http://localhost:3000/payment/new", arrToPay);
-        window.location.href = await data.response.body.init_point;
+        if (window) {
+          location.href = await data.response.body.init_point;
+        }
       }
     } catch (error) {
       console.error("An error occurred:", error);

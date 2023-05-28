@@ -8,9 +8,10 @@ export default function Profile() {
   const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
-    const userDataString = window && localStorage.getItem("user");
-    if (userDataString) {
-      setUserData(JSON.parse(userDataString));
+    if (window) {
+      const userString = localStorage.getItem("user");
+      const userData = userString ? JSON.parse(userString) : null;
+      setUserData(userData);
     }
   }, []);
 

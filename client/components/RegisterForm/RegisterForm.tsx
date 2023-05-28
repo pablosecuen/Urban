@@ -73,7 +73,10 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
   const createUser = async (userData: any) => {
     try {
       const response = await axios.post("http://localhost:3000/user", userData);
-      window && localStorage.setItem("user", JSON.stringify(response.data.user));
+      if (window) {
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
+
       router.push("/home");
     } catch (error: any) {
       console.log(error);

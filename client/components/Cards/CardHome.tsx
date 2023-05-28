@@ -1,19 +1,22 @@
 "use client";
+import { User } from "@component/app/types/User";
 import axios from "axios";
+import React from "react";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InfiniteSlider from "../InfiniteSlider/InfiniteSlider";
 
 export default function CardHome() {
+  const [user, setUser] = React.useState<User | null>(null);
   let token: any;
-  if (typeof window !== "undefined") {
+  if (window) {
     const urlParams = new URLSearchParams(window.location.search);
     token = urlParams.get("token");
+    const userString = localStorage.getItem("user");
+    const userData = userString ? JSON.parse(userString) : null;
+    setUser(userData);
   }
-
-  const userString = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-  const user = userString ? JSON.parse(userString) : null;
 
   const containerStyles =
     "mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
