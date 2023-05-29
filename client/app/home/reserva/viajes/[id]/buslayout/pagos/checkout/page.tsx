@@ -119,7 +119,7 @@ export default function Checkout() {
     (async () => {
       try {
         const ticketData = await getToken();
-        axiosInstance.post("http://localhost:3000/ticket", ticketData);
+        axiosInstance.post("/ticket", ticketData);
         setTicket(ticketData as Ticket | null);
         notifySuccess();
       } catch (error) {
@@ -130,11 +130,11 @@ export default function Checkout() {
   }, []);
 
   return (
-    <div className="relative mt-10 flex h-full w-full flex-col items-center gap-2 rounded-3xl border-2 bg-white p-6 shadow-2xl shadow-black/40 lg:h-[530px]">
+    <div className='relative mt-10 flex h-full w-full flex-col items-center gap-2 rounded-3xl border-2 bg-white p-6 shadow-2xl shadow-black/40 lg:h-[530px]'>
       {/* <p className="text-center text-2xl font-bold">Su pago ha sido realizado con éxito !</p> */}
       {/* <Image src={success} alt="pago exitoso" className="h-80 w-80 self-center"></Image> */}
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -143,27 +143,27 @@ export default function Checkout() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
-      <h1 className="abolsute top-4 border-2 text-center text-lg font-bold">
+      <h1 className='abolsute top-4 border-2 text-center text-lg font-bold'>
         Su pago ha sido realizado con éxito
       </h1>
-      <div className="mt-10 flex h-full flex-col">
-        <div className="flex h-full flex-col gap-4 overflow-y-auto">
-          <h2 className="text-center text-sm font-light italic">resumen informativo</h2>
+      <div className='mt-10 flex h-full flex-col'>
+        <div className='flex h-full flex-col gap-4 overflow-y-auto'>
+          <h2 className='text-center text-sm font-light italic'>resumen informativo</h2>
           {ticket &&
             Object.entries(ticket.passengersData || {}).map(([key, value]) => (
-              <div key={key} className="py-4">
-                <h3 className="text-gray-700">Descripcion:</h3>
-                <h4 className="text-gray-400">{JSON.stringify(value)}</h4>
+              <div key={key} className='py-4'>
+                <h3 className='text-gray-700'>Descripcion:</h3>
+                <h4 className='text-gray-400'>{JSON.stringify(value)}</h4>
               </div>
             ))}
         </div>
-        <div className="absolute bottom-10 left-0 flex w-full justify-center">
+        <div className='absolute bottom-10 left-0 flex w-full justify-center'>
           <Link
-            href="/home"
-            className="mx-auto rounded-md bg-blue px-2 py-1 text-center text-white hover:bg-indigo-700"
+            href='/home'
+            className='mx-auto rounded-md bg-blue px-2 py-1 text-center text-white hover:bg-indigo-700'
           >
             Volver al inicio
           </Link>
