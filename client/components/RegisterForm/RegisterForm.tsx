@@ -102,14 +102,14 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         className="relative mx-2 h-[500px] w-96 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40"
       >
         {/* div que contiene todos los labels e inputs */}
-        <div className="flex h-[250px] flex-col gap-5 px-5 pb-5">
+        <div className="flex h-[250px] flex-col gap-5 px-5 pb-5 pt-10">
           {/* Name and lastName */}
           <div className="flex gap-1">
             {/* Name */}
             <div className="relative w-1/2">
               <label className="px-1 ">Name:</label>
               <input
-                className={`px-1 text-black ${
+                className={`w-11/12 px-1 text-black ${
                   errores.messageName ? "border-red-500 focus-visible:outline-red-500" : ""
                 }`}
                 type="text"
@@ -135,7 +135,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
                 type="text"
                 name="lastName"
                 placeholder="Apellido"
-                className={`px-1 text-black ${
+                className={`w-11/12 px-1 text-black ${
                   errores.messageLastName ? "border-red-500 focus-visible:outline-red-500" : ""
                 }`}
                 value={userData.lastName}
@@ -152,7 +152,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
           </div>
           {/* Email */}
           <div className="relative">
-            <label className="px-1">Email:</label>
+            <label className="px-1 pr-[42px]">Email:</label>
             <input
               className={`px-1 text-black ${
                 errores.messageEmail ? "border-red-500 focus-visible:outline-red-500" : ""
@@ -173,7 +173,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
           </div>
           {/* Password  */}
           <div className="relative">
-            <label className="px-1">Password:</label>
+            <label className="px-1 pr-3">Password:</label>
             <input
               className={`px-1 text-black ${
                 errores.messagePassword ? "border-red-500 focus-visible:outline-red-500" : ""
@@ -194,7 +194,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
           </div>
           {/* Repeat Password   */}
           <div className="relative">
-            <label className="px-1">Repeat Password:</label>
+            <label className="px-1">*Password:</label>
             <input
               className={`px-1 text-black ${
                 errores.messageRepeatPassword ? "border-red-500 focus-visible:outline-red-500" : ""
@@ -227,7 +227,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         </div>
         {/*  Boton de registro */}
         <div className="py-4 text-center">
-          <button className="mx-auto w-1/2" onClick={handleRegister}>
+          <button className=" mx-auto px-[67px] py-[10px]" onClick={handleRegister}>
             Register
           </button>
         </div>
