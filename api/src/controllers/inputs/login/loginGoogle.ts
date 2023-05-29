@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: `https://api-urban.onrender.com/login/auth/google`,
+      callbackURL: `http://localhost:3000/login/auth/google`,
     },
 
     async (accessToken, refreshToken, profile, done) => {
