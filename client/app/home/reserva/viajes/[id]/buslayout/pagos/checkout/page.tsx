@@ -147,7 +147,7 @@ export default function Checkout() {
         theme="light"
         closeButton={false}
       />
-      <h1 className="abolsute top-4 border-2 text-center text-lg font-bold">
+      <h1 className="abolsute top-4 rounded-lg border text-center text-lg font-bold">
         Su pago ha sido realizado con éxito
       </h1>
       <div className="mt-10 flex h-full flex-col">
