@@ -5,11 +5,12 @@ import { ToPay } from "@component/app/types/MercadoPago";
 import axiosInstance from "@component/services/axiosInstance";
 
 export default function Pagos() {
-  const user = JSON.parse((window && localStorage.getItem("user")) || "");
+  const userJSON = localStorage.getItem("user");
+  const user = userJSON ? JSON.parse(userJSON) : null;
   const passages = useSelector((state: RootState) => state.payment?.passageById);
   const passagerData = useSelector((state: any) => state.payment?.passengerData);
 
-  const token: string = `${user.id}`;
+  const token: string = `${user?.id}`;
   let toPay: ToPay[] = [];
   if (passages && passagerData) {
     toPay = passages.map((passage, index) => {

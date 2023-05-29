@@ -24,14 +24,10 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const liStyles = "flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4";
 
   const passangers = count?.quantity;
-  useEffect(() => {
-    if (count?.quantity - lengthData === 0) {
-      setTimeout(() => {
-        router.push(`/home/reserva/viajes/${passage?.id}/buslayout/pagos`);
-      }, 0);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  if (count?.quantity - lengthData === 0) {
+    router.push(`/home/reserva/viajes/${passage?.id}/buslayout/pagos`);
+  }
 
   return (
     <div className={containerStyles}>

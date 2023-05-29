@@ -5,14 +5,13 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 
 const router = Router();
-const { FRONT_URL } = process.env;
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: `/login/auth/google`,
+      callbackURL: `https://api-urban.onrender.com/login/auth/google`,
     },
 
     async (accessToken, refreshToken, profile, done) => {

@@ -12,36 +12,27 @@ export default function CardHome() {
   const [token, setToken] = React.useState<string | null>(null);
 
   useEffect(() => {
-
-    if (typeof token === "string") {
-      axiosInstance
-        .get("/user/decoding", {
-
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((data) => {
-          const userData = data.data;
-          localStorage.setItem("user", JSON.stringify(userData));
-          location.replace("/home");
-        });
-
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const urlParams = new URLSearchParams(location.search);
+    const tokendata = urlParams.get("token");
+    const userString = localStorage.getItem("user");
+    const userData = userString ? JSON.parse(userString) : null;
+    setUser(userData);
+    setToken(tokendata);
   }, []);
 
-  useEffect(() => {
-    if (window) {
-      const urlParams = new URLSearchParams(location.search);
-      const tokendata = urlParams.get("token");
-      const userString = localStorage.getItem("user");
-      const userData = userString ? JSON.parse(userString) : null;
-      setUser(userData);
-      setToken(tokendata);
-    }
-  }, []);
+  if (token) {
+    axiosInstance
+      .get("/user/decoding", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((data) => {
+        const userData = data.data;
+        localStorage.setItem("user", JSON.stringify(userData));
+        location.replace("/home");
+      });
+  }
 
   const containerStyles =
     "mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
@@ -71,8 +62,8 @@ export default function CardHome() {
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className="text-verdeurban">U</span>
-        <span className=" text-celeste">rban</span>!
+        Bienvedios a <span className='text-verdeurban'>U</span>
+        <span className=' text-celeste'>rban</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
@@ -86,7 +77,7 @@ export default function CardHome() {
       </p>
       <InfiniteSlider />
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -95,7 +86,7 @@ export default function CardHome() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
     </div>
