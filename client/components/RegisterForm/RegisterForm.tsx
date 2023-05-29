@@ -253,7 +253,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
             Login with Facebook
           </Link>
         </div>
-        <small className="absolute bottom-5 right-5 block pt-2 text-right text-black">
+        <small className="absolute bottom-5 right-5 block pt-2 text-right text-black ">
           Ya tenes cuenta?{" "}
           <span
             onClick={handleLoginClick}
