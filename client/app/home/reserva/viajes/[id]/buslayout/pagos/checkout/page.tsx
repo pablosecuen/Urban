@@ -119,7 +119,7 @@ export default function Checkout() {
     (async () => {
       try {
         const ticketData = await getToken();
-        axiosInstance.post("http://localhost:3000/ticket", ticketData);
+        axiosInstance.post("https://urban-movi.vercel.app/ticket", ticketData);
         setTicket(ticketData as Ticket | null);
         notifySuccess();
       } catch (error) {
