@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: "413100398306-qhc30n7vdf81seedk3o8bckqrlisu86d.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: `https://urban-movi.vercel.app/login/auth/google`,
+      callbackURL: `https://api-urban.onrender.com/login/auth/google`,
     },
 
     async (accessToken, refreshToken, profile, done) => {
