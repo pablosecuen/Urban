@@ -12,10 +12,9 @@ const Seat = ({ fill, height, width }: Props) => {
       width={width}
       version="1.1"
       id="Capa_1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 353.926 353.926"
       xmlSpace="preserve"
+      className="sm-w-8 w-6"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

@@ -9,24 +9,20 @@ export const metadata: Metadata = {
 };
 
 export default function SearchResults() {
-
-
   // const capitalizedString = localidades.map((localidad: any) =>
   //   localidad.replace(/^\w/, (c: any) => c.toUpperCase())
   // );
 
   const containerStyles =
-    "h-full w-full rounded-3xl bg-white p-10 shadow-2xl shadow-black/40 lg:ml-12";
+    "h-full w-10/12 sm:w-full rounded-3xl bg-white p-10 shadow-2xl shadow-black/40 lg:ml-12";
   const flexContainerStyles = "flex w-full flex-col gap-4";
   const titleStyles = "text-center text-xl text-blue";
-  const buttonStyles = "flex gap-2 pt-10";
+  const buttonStyles = "flex gap-2 pt-10 justify-center sm:justify-start";
 
   return (
     <div className={containerStyles}>
       <div className={flexContainerStyles}>
-        <h1 className={titleStyles}>
-          Opciones encontradas 
-        </h1>
+        <h1 className={titleStyles}>Opciones encontradas</h1>
         <CardReservaSlug />
       </div>
       <div className={buttonStyles}>

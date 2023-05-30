@@ -18,7 +18,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
     "mx-auto flex min-h-[92vh] flex-col items-center justify-center gap-5 py-10 lg:container lg:flex-row lg:pb-20";
   const logoStyles =
     "mt-10 w-48 border border-none brightness-125 contrast-125 lg:mt-10 lg:w-56 2xl:w-[450px]";
-  const footerStyles = "mt-48 lg:mt-0";
+  const footerStyles = "sm:mt-48 lg:mt-0";
 
   return (
     <div>
