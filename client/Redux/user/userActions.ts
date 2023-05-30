@@ -10,7 +10,13 @@ import axiosInstance from "@component/services/axiosInstance";
 // };
 
 export const getAllUsers = createAsyncThunk<User[], void>("users/getAllUsers", async () => {
-  const response = await axiosInstance.get(`/user?page=1&pageSize=1000`);
+  const token = localStorage.getItem("token");
+  const response = await axiosInstance.get(`/user?page=1&pageSize=1000`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return response.data.users;
 });
 
