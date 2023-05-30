@@ -27,13 +27,13 @@ export default function Pagos() {
   const showButtons = passagerData.length > 1;
 
   return (
-    <div className="mt-20 flex h-full max-h-[530px] w-full flex-col items-center justify-center gap-2 sm:mt-0">
+    <div className="mb-10 mt-20 flex h-full max-h-[530px] w-11/12 flex-col items-center justify-center gap-2 border-2  sm:mb-0 sm:mt-0 sm:w-full">
       {currentCards.map((passager: any, index: any) => (
         <div
           key={index}
-          className="flex h-full flex-col items-center justify-center rounded-3xl border bg-white shadow-xl shadow-black/40"
+          className="flex h-full w-full flex-col items-center justify-center rounded-3xl border bg-white shadow-xl shadow-black/40"
         >
-          <div className="shadow-3xl shadow-shadow-500 dark:!bg-navy-800 relative mx-auto flex w-[400px] flex-col items-center rounded-[20px] bg-white bg-clip-border p-4 dark:text-white dark:!shadow-none">
+          <div className="shadow-3xl shadow-shadow-500 dark:!bg-navy-800 relative mx-auto flex w-10/12 flex-col items-center rounded-[20px] bg-white bg-clip-border p-4 dark:text-white dark:!shadow-none sm:w-[400px]">
             <div className="relative flex h-32 w-full justify-center rounded-xl bg-cover">
               <Image
                 src="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png"
@@ -58,7 +58,7 @@ export default function Pagos() {
               </span>
               <p className="text-base font-normal text-gray-600">{passager?.nacionalidad}</p>
             </div>
-            <div className="mb-3 mt-6 flex gap-14 md:!gap-14">
+            <div className="mb-3 mt-6 flex flex-col sm:flex-row sm:gap-14 md:!gap-14">
               <div className="flex flex-col items-center justify-center">
                 <p className="text-navy-700 text-xl font-bold text-gray-600">Nacimiento</p>
                 <p className="text-sm font-normal text-gray-600">{passager?.fechaNacimiento}</p>
@@ -73,7 +73,9 @@ export default function Pagos() {
               </div>
             </div>
           </div>
-          <p className="text-navy-700 mx-auto mt-10 w-max font-normal">Información de pasajero</p>
+          <p className="text-navy-700 mx-auto w-max font-normal sm:mt-10">
+            Información de pasajero
+          </p>
           {showButtons && (
             <div className="mt-4 flex justify-center gap-4 pb-2">
               <button onClick={handlePreviousPage} disabled={currentPage === 1} className="">
