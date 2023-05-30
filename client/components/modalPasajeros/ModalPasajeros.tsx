@@ -166,197 +166,203 @@ const ModalPasajeros: React.FC<PassengerFormModalProps> = ({
   return (
     <>
       {isModalOpen && (
-        <div className='fixed left-1/2 top-1/2 z-50 h-[660px] w-96 -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-6 shadow-2xl shadow-black/40 '>
-          <h2 className=' text-2xl font-bold'>Información del pasajero</h2>
-          <form onSubmit={handleSubmit}>
-            <div className=''>
-              <label className=' block' htmlFor='nombre'>
-                Nombre
-              </label>
-              <input
-                type='text'
-                id='nombre'
-                name='nombre'
-                value={formData.nombre}
-                onChange={handleChange}
-                className='w-full rounded border border-gray-300 px-3 py-1'
-                maxLength={20}
-                required
-              />
-              {nombreError && <span className='error'>{nombreError}</span>}
-            </div>
-            <div className=''>
-              <label className='mb-2 block' htmlFor='apellido'>
-                Apellido
-              </label>
-              <input
-                type='text'
-                id='apellido'
-                name='apellido'
-                value={formData.apellido}
-                onChange={handleChange}
-                className='w-full rounded border border-gray-300 px-3 py-1'
-                maxLength={20}
-                required
-              />
-              {apellidoError && <span className='error'>{apellidoError}</span>}
-            </div>
-            <div className=''>
-              <label className='mb-2 block' htmlFor='nacionalidad'>
-                Nacionalidad
-              </label>
-              <select
-                id='nacionalidad'
-                name='nacionalidad'
-                value={formData.nacionalidad}
-                onChange={handleChange}
-                className='w-full rounded border border-gray-300 px-3 py-1'
-                required
-              >
-                <option value=''>Seleccione una opción</option>
-                {countryOptions.map((country, index) => (
-                  <option key={index} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-              {nacionalidadError && <span className='error'>{nacionalidadError}</span>}
-            </div>
-            <div className=''>
-              <label className='mb-2 block' htmlFor='tipoDocumento'>
-                Tipo de Documento
-              </label>
-              <div className='flex'>
-                {" "}
-                <select
-                  id='tipoDocumento'
-                  name='tipoDocumento'
-                  value={formData.tipoDocumento}
-                  onChange={handleChange}
-                  className='w-1/4 rounded border border-gray-300 px-3 py-1'
-                  required
-                >
-                  <option value=''>Seleccione una opción</option>
-                  <option value='CC'>C.C</option>
-                  <option value='CE'>C.E</option>
-                </select>
-                <input
-                  type='text'
-                  id='cc'
-                  name='cc'
-                  value={formData.cc}
-                  onChange={handleChange}
-                  className='w-full rounded border border-gray-300 px-3 py-1'
-                  maxLength={8}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='fechaNacimiento'>Fecha de Nacimiento:</label>
-              <input
-                type='date'
-                id='fechaNacimiento'
-                name='fechaNacimiento'
-                value={formData.fechaNacimiento}
-                onChange={handleChange}
-                required
-                className='w-full rounded border border-gray-300 px-3 py-1'
-              />
-            </div>
-            {age > 1 && age < 18 && isDateSelected && (
-              <div className='flex items-center justify-between'>
-                <label htmlFor='isMinor' className='text-xs font-light italic tracking-tighter'>
-                  Entiendo que es un pasajero menor de edad y viajará con un adulto responsable
+        <>
+          <div
+            onClick={handleCloseModal}
+            className="fixed left-0 top-0 z-40 h-screen w-screen bg-black/30"
+          ></div>
+          <div className="fixed left-1/2 top-1/2 z-50 h-[660px] w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-6 shadow-2xl shadow-black/40 sm:w-96 ">
+            <h2 className=" text-2xl font-bold">Información del pasajero</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="">
+                <label className=" block" htmlFor="nombre">
+                  Nombre
                 </label>
                 <input
-                  type='checkbox'
-                  id='isMinor'
-                  name='isMinor'
-                  checked={formData.isMinor}
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={formData.nombre}
                   onChange={handleChange}
+                  className="w-full rounded border border-gray-300 px-3 py-1"
+                  maxLength={20}
+                  required
+                />
+                {nombreError && <span className="error">{nombreError}</span>}
+              </div>
+              <div className="">
+                <label className="mb-2 block" htmlFor="apellido">
+                  Apellido
+                </label>
+                <input
+                  type="text"
+                  id="apellido"
+                  name="apellido"
+                  value={formData.apellido}
+                  onChange={handleChange}
+                  className="w-full rounded border border-gray-300 px-3 py-1"
+                  maxLength={20}
+                  required
+                />
+                {apellidoError && <span className="error">{apellidoError}</span>}
+              </div>
+              <div className="">
+                <label className="mb-2 block" htmlFor="nacionalidad">
+                  Nacionalidad
+                </label>
+                <select
+                  id="nacionalidad"
+                  name="nacionalidad"
+                  value={formData.nacionalidad}
+                  onChange={handleChange}
+                  className="w-full rounded border border-gray-300 px-3 py-1"
+                  required
+                >
+                  <option value="">Seleccione una opción</option>
+                  {countryOptions.map((country, index) => (
+                    <option key={index} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+                {nacionalidadError && <span className="error">{nacionalidadError}</span>}
+              </div>
+              <div className="">
+                <label className="mb-2 block" htmlFor="tipoDocumento">
+                  Tipo de Documento
+                </label>
+                <div className="flex">
+                  {" "}
+                  <select
+                    id="tipoDocumento"
+                    name="tipoDocumento"
+                    value={formData.tipoDocumento}
+                    onChange={handleChange}
+                    className="w-1/4 rounded border border-gray-300 px-3 py-1"
+                    required
+                  >
+                    <option value="">Seleccione una opción</option>
+                    <option value="CC">C.C</option>
+                    <option value="CE">C.E</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="cc"
+                    name="cc"
+                    value={formData.cc}
+                    onChange={handleChange}
+                    className="w-full rounded border border-gray-300 px-3 py-1"
+                    maxLength={8}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input
+                  type="date"
+                  id="fechaNacimiento"
+                  name="fechaNacimiento"
+                  value={formData.fechaNacimiento}
+                  onChange={handleChange}
+                  required
+                  className="w-full rounded border border-gray-300 px-3 py-1"
                 />
               </div>
-            )}
-
-            <div>
-              <label htmlFor='genero'>Género:</label>
-              <select
-                id='genero'
-                name='genero'
-                value={formData.genero}
-                onChange={handleChange}
-                className='w-full rounded border border-gray-300 px-3 py-1'
-                required
-              >
-                <option value=''>Seleccione un género</option>
-                <option value='masculino'>Masculino</option>
-                <option value='femenino'>Femenino</option>
-                <option value='prefiero declarar'>No Declara</option>
-              </select>
-            </div>
-            <div>
-              <div className='flex gap-4'>
-                <div className='flex w-1/3 flex-col'>
-                  <label htmlFor='telefono'>Area:</label>
+              {age > 1 && age < 18 && isDateSelected && (
+                <div className="flex items-center justify-between">
+                  <label htmlFor="isMinor" className="text-xs font-light italic tracking-tighter">
+                    Entiendo que es un pasajero menor de edad y viajará con un adulto responsable
+                  </label>
                   <input
-                    type='text'
-                    id='codigoArea'
-                    name='codigoArea'
-                    value={formData.codigoArea}
+                    type="checkbox"
+                    id="isMinor"
+                    name="isMinor"
+                    checked={formData.isMinor}
                     onChange={handleChange}
-                    maxLength={5}
-                    className='w-full rounded border border-gray-300 px-3 py-1'
-                    required
                   />
-                  {codigoAreaError && <span className='error'>{codigoAreaError}</span>}
                 </div>
-                <div className='flex flex-col'>
-                  <label htmlFor='telefono'>Teléfono:</label>
-                  <input
-                    type='text'
-                    id='telefono'
-                    name='telefono'
-                    value={formData.telefono}
-                    onChange={handleChange}
-                    minLength={6}
-                    maxLength={10}
-                    className='w-full rounded border border-gray-300 px-3 py-1'
-                    required
-                  />
-                  {telefonoError && <span className='error'>{telefonoError}</span>}
+              )}
+
+              <div>
+                <label htmlFor="genero">Género:</label>
+                <select
+                  id="genero"
+                  name="genero"
+                  value={formData.genero}
+                  onChange={handleChange}
+                  className="w-full rounded border border-gray-300 px-3 py-1"
+                  required
+                >
+                  <option value="">Seleccione un género</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="prefiero declarar">No Declara</option>
+                </select>
+              </div>
+              <div>
+                <div className="flex gap-4">
+                  <div className="flex w-1/3 flex-col">
+                    <label htmlFor="telefono">Area:</label>
+                    <input
+                      type="text"
+                      id="codigoArea"
+                      name="codigoArea"
+                      value={formData.codigoArea}
+                      onChange={handleChange}
+                      maxLength={5}
+                      className="w-full rounded border border-gray-300 px-3 py-1"
+                      required
+                    />
+                    {codigoAreaError && <span className="error">{codigoAreaError}</span>}
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="telefono">Teléfono:</label>
+                    <input
+                      type="text"
+                      id="telefono"
+                      name="telefono"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                      minLength={6}
+                      maxLength={10}
+                      className="w-full rounded border border-gray-300 px-3 py-1"
+                      required
+                    />
+                    {telefonoError && <span className="error">{telefonoError}</span>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <label htmlFor='email'>Email:</label>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleChange}
-                pattern='^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-                className='w-full rounded border border-gray-300 px-3 py-1'
-                required
-              />
-              {emailError && <span className='error'>{emailError}</span>}
-            </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                  className="w-full rounded border border-gray-300 px-3 py-1"
+                  required
+                />
+                {emailError && <span className="error">{emailError}</span>}
+              </div>
 
-            <div className='flex justify-center gap-4 pt-8'>
-              <button
-                type='button'
-                className='bg-blue px-4 py-2 text-white'
-                onClick={handleCloseModal}
-              >
-                Cancel
-              </button>
-              <button type='submit' className='bg-blue px-4 py-2 text-white'>
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
+              <div className="flex justify-center gap-4 pt-8">
+                <button
+                  type="button"
+                  className="bg-blue px-4 py-2 text-white"
+                  onClick={handleCloseModal}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="bg-blue px-4 py-2 text-white">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
       )}
     </>
   );

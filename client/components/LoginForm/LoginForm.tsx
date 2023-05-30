@@ -141,7 +141,9 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
         <Link
 
           className="mx-auto flex w-4/5 items-center justify-center gap-1 rounded-md  border border-[#888] bg-white py-2 font-semibold  text-[#757575] shadow-md shadow-black/30 sm:w-2/3"
-          href="/login/auth/google"
+
+          // href="http://localhost:3000/login/auth/google"
+          href="https://api-urban.onrender.com/login/auth/google"
 
           rel="noopener noreferrer"
         >
