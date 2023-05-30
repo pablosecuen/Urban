@@ -104,7 +104,6 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         {/* div que contiene todos los labels e inputs */}
 
         <div className="flex h-[250px] flex-col gap-5 px-5 pb-5 sm:pt-10">
-
           {/* Name and lastName */}
           <div className="flex gap-1">
             {/* Name */}
