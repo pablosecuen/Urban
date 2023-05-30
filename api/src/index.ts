@@ -28,8 +28,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(compression());
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
-  // res.header("Access-Control-Allow-Origin", "http://localhost:3001");
-  res.header("Access-Control-Allow-Origin", "https://urban-movi.vercel.app");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  // res.header("Access-Control-Allow-Origin", "https://urban-movi.vercel.app");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
