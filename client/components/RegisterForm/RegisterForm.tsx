@@ -99,10 +99,10 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
     <>
       <form
         onSubmit={handleRegister}
-        className="relative mx-2 h-[500px] w-96 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40"
+        className="relative mx-2 h-[500px] w-80 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40 sm:w-96"
       >
         {/* div que contiene todos los labels e inputs */}
-        <div className="flex h-[250px] flex-col gap-5 px-5 pb-5 pt-10">
+        <div className="flex h-[250px] flex-col gap-5 px-5 pb-5 sm:pt-10">
           {/* Name and lastName */}
           <div className="flex gap-1">
             {/* Name */}
@@ -235,7 +235,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         {/*  */}
         <div className="mx-auto flex w-4/5 flex-col gap-2">
           <Link
-            className="mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30"
+            className="mx-auto flex w-4/5 items-center justify-center gap-1 rounded-md  border border-[#888] bg-white py-2 font-semibold  text-[#757575] shadow-md shadow-black/30 sm:w-2/3"
             href="https://api-urban.onrender.com/login/auth/google"
             rel="noopener noreferrer"
           >
@@ -243,7 +243,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
             Login with Google
           </Link>
           <Link
-            className="mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30"
+            className="mx-auto flex w-4/5 items-center justify-center gap-1   rounded-md border border-[#888] bg-white py-2 font-semibold  text-blue shadow-md shadow-black/30 sm:w-2/3"
             href="/login/auth/google"
             rel="noopener noreferrer"
           >
