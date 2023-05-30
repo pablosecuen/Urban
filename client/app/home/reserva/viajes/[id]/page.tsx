@@ -12,9 +12,9 @@ export default function Confirmacion({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const containerStyles =
-    "flex w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[530px] xl:justify-between";
+    "flex w-10/12 sm:w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[530px] xl:justify-between";
   const titleStyles = "text-center font-bold lg:text-xl";
-  const textStyles = "w-11/12 py-2 text-center text-xs text-gray-400 lg:w-3/4";
+  const textStyles = "w-10/12 py-2 text-center text-xs text-gray-400 lg:w-3/4";
 
   return (
     <div className={containerStyles}>

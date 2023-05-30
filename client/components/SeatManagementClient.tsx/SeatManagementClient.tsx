@@ -16,7 +16,7 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const containerStyles =
     "flex w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between";
   const relativeContainerStyles =
-    "relative flex min-w-0 flex-col break-words rounded-lg bg-transparent";
+    "relative flex min-w-0 px-4 sm:px-0 flex-col break-words rounded-lg bg-transparent";
   const titleStyles = "py-4 text-center";
   const italicStyles = "italic text-gray-400";
   const passengersRemainingStyles = "";

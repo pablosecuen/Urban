@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Reserva() {
   const sectionStyles =
-    "mx-auto mt-10 flex w-full flex-col justify-between rounded-3xl border-2 bg-white px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-10 lg:h-[530px]";
+    "mx-auto mt-10 flex sm:w-full w-10/12 flex-col justify-between rounded-3xl border-2 bg-white px-2 pt-10 shadow-2xl shadow-black/40 lg:mt-10 lg:h-[530px]";
   const headingStyles = "px-8 text-center text-blue lg:px-0 lg:text-xl";
 
   return (

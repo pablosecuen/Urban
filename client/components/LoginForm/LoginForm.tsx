@@ -69,7 +69,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
   return (
     <form
       onSubmit={handleLogin}
-      className="relative mx-2 h-[500px] w-96 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40"
+      className="relative mx-2 h-[500px] w-80 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40 sm:w-96"
     >
       {/* div que contiene Email y Password */}
       <div className="flex h-[250px] flex-col gap-5 px-5 pt-10">
@@ -137,15 +137,15 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
 
       <div className="mx-auto flex w-4/5 flex-col gap-2">
         <Link
-          className="mx-auto flex w-2/3 items-center justify-center gap-1  rounded-md border border-[#888] bg-white py-2  font-semibold text-[#757575] shadow-md shadow-black/30"
-          href="http://localhost:3000/login/auth/google"
+          className="mx-auto flex w-4/5 items-center justify-center gap-1 rounded-md  border border-[#888] bg-white py-2 font-semibold  text-[#757575] shadow-md shadow-black/30 sm:w-2/3"
+          href="/login/auth/google"
           rel="noopener noreferrer"
         >
           <Google width="23" height="23" />
           Login with Google
         </Link>
         <Link
-          className="mx-auto flex w-2/3 items-center justify-center   gap-1 rounded-md border border-[#888] bg-white py-2  font-semibold text-blue shadow-md shadow-black/30"
+          className="mx-auto flex w-4/5 items-center justify-center gap-1   rounded-md border border-[#888] bg-white py-2 font-semibold  text-blue shadow-md shadow-black/30 sm:w-2/3"
           href="/login/auth/google"
           rel="noopener noreferrer"
         >
@@ -155,21 +155,21 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
           Login with Facebook
         </Link>
       </div>
-      <div className="mt-2 flex justify-evenly gap-6">
+      <div className="mt-2 flex flex-col justify-evenly sm:mt-2 sm:flex-row sm:gap-6">
         <Link
           href="https://api-urban.onrender.com/recuperacion"
           className="font-semibold text-blue hover:cursor-pointer hover:underline"
         >
-          <span className="bottom-5 right-5 block pt-2 text-right text-[0.7rem] font-semibold text-blue hover:cursor-pointer hover:underline">
+          <span className="bottom-5 right-5 block text-right text-[0.7rem] font-semibold text-blue hover:cursor-pointer hover:underline sm:pt-2 sm:text-right">
             Olvidaste tu contraseña?{" "}
           </span>
         </Link>
 
         <span
           onClick={handleRegisterClick}
-          className="bottom-5 right-5 flex gap-1 pt-2 text-right text-[0.7rem] font-semibold text-blue hover:cursor-pointer hover:underline"
+          className="bottom-5 right-5 block  text-right text-[0.7rem] font-semibold text-blue hover:cursor-pointer hover:underline sm:pt-2 sm:text-right"
         >
-          <p className="text-gray-500">No tienes cuenta?</p>Registrate!
+          <p className="text-blue ">No tienes cuenta? Registrate!</p>
         </span>
       </div>
       {/* <button onClick={handleRegisterClick}>Facebook</button> */}

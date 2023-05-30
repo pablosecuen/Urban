@@ -43,15 +43,15 @@ export default function CardConfirmacionReserva({ id }: { id: string }) {
     dispatch(getPassagesId(id));
   }, [id]); // Include 'count' and 'id' in the dependency array
 
-  const containerStyles = "bg-white  lg:flex";
-  const infoContainerStyles = "flex flex-col p-2 lg:w-1/2 lg:p-4";
+  const containerStyles = "bg-white w-10/12 sm:w-full lg:flex";
+  const infoContainerStyles = "flex flex-col p-2  mx-auto  lg:w-1/2 lg:p-4";
   const originStyles = "mx-auto flex w-20 flex-col text-center";
   const destinationStyles = "mx-auto flex w-20 flex-col";
   const timeStyles = "flex flex-col";
   const priceStyles = "mx-auto flex w-20 flex-col text-center";
   const counterStyles = "flex w-auto items-center justify-center px-28 text-center";
   const modalOverlayStyles = "fixed inset-0 z-50 flex items-center justify-center bg-black/30";
-  const modalImageContainerStyles = "flex w-[800px] items-center justify-center";
+  const modalImageContainerStyles = "flex sm:w-[800px] items-center justify-center";
   const modalImageStyles = "w-full rounded-3xl shadow-2xl shadow-black/40";
 
   return (

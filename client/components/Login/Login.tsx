@@ -20,9 +20,9 @@ const Login = () => {
   };
 
   return (
-    <div className="relative mt-0 flex  items-center justify-center lg:h-screen ">
+    <div className="relative mt-0 flex items-center  justify-center sm:w-full lg:h-screen ">
       <div
-        className={` transition_all absolute bottom-0 left-0 right-0 top-56 m-auto grid w-96 place-content-center opacity-0 lg:-left-96 lg:top-0   ${
+        className={` transition_all absolute bottom-0 left-0 right-0 top-56 m-auto grid place-content-center  opacity-0 sm:w-auto lg:-left-96 lg:top-0   ${
           isRegister && "z-10 opacity-100"
         }`}
       >
