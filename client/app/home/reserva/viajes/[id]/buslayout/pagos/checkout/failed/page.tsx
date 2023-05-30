@@ -9,7 +9,10 @@ export default function Failed() {
       <p className="text-center font-mono text-xl font-semibold text-red-500 2xl:text-3xl">
         Hubo un problema con el pago, lo sentimos. Intentelo de nuevo mas tarde!
       </p>
-      <Link href={"https://localhost:3001/home"} className="mt-7 flex justify-center 2xl:mt-10">
+      <Link
+        href={"https://urban-movi.vercel.app/home"}
+        className="mt-7 flex justify-center 2xl:mt-10"
+      >
         <button className="w-1/2 2xl:text-xl"> Volver al inicio</button>
       </Link>
     </div>

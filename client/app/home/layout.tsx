@@ -1,6 +1,6 @@
 import NavBar from "@component/components/NavBar/NavBar";
 import Footer from "@component/components/Footer/Footer";
-import logo from "../../assets/imagenes/logosecundario.png";
+import logo from "../../assets/imagenes/logosecundario.webp";
 import Image from "next/image";
 import Menu from "@component/components/Menu/Menu";
 import type { Metadata } from "next";
