@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { searchUser, allUsers, decodingUser } from "../../controllers/outputs/user";
+import { authenticate } from "../../utils/auth/auth";
 
 const router = Router();
 
@@ -63,7 +64,7 @@ const router = Router();
  *                   type: string
  *                   description: Descripción del error
  */
-router.get("/", allUsers);
+router.get("/", authenticate, allUsers);
 
 /**
  * @swagger
