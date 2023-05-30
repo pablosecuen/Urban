@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { CardProfilePropsEnabledSeats } from "@component/app/types/Passages";
 import PlantaAlta from "@component/components/PlantaAlta/PlantaAlta";
 import PlantaBaja from "@component/components/PlantaBaja/PlantaBaja";
@@ -24,9 +24,11 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const liStyles = "flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4";
 
   const passangers = count?.quantity;
-  if (count?.quantity - lengthData == 0) {
+
+  if (count?.quantity - lengthData === 0) {
     router.push(`/home/reserva/viajes/${passage?.id}/buslayout/pagos`);
   }
+
   return (
     <div className={containerStyles}>
       <div className={relativeContainerStyles}>

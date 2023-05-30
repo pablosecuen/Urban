@@ -102,7 +102,9 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
         className="relative mx-2 h-[500px] w-80 max-w-md rounded-lg bg-white px-4 py-8 text-sm text-white/90 shadow-lg shadow-black/40 sm:w-96"
       >
         {/* div que contiene todos los labels e inputs */}
+
         <div className="flex h-[250px] flex-col gap-5 px-5 pb-5 sm:pt-10">
+
           {/* Name and lastName */}
           <div className="flex gap-1">
             {/* Name */}
@@ -253,7 +255,7 @@ function Register({ isRegister, setIsRegister }: { isRegister: boolean; setIsReg
             Login with Facebook
           </Link>
         </div>
-        <small className="absolute bottom-5 right-5 block pt-2 text-right text-black">
+        <small className="absolute bottom-5 right-5 block pt-2 text-right text-black ">
           Ya tenes cuenta?{" "}
           <span
             onClick={handleLoginClick}
