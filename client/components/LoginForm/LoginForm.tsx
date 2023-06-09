@@ -138,8 +138,8 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
       <div className='mx-auto flex w-4/5 flex-col gap-2'>
         <Link
           className='mx-auto flex w-4/5 items-center justify-center gap-1 rounded-md  border border-[#888] bg-white py-2 font-semibold  text-[#757575] shadow-md shadow-black/30 sm:w-2/3'
-          href='http://localhost:3000/login/auth/google'
-          // href="https://api-urban.onrender.com/login/auth/google"
+          // href='http://localhost:3000/login/auth/google'
+          href='https://api-urban.onrender.com/login/auth/google'
           rel='noopener noreferrer'
         >
           <Google width='23' height='23' />
@@ -147,8 +147,8 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
         </Link>
         <Link
           className='mx-auto flex w-4/5 items-center justify-center gap-1   rounded-md border border-[#888] bg-white py-2 font-semibold  text-blue shadow-md shadow-black/30 sm:w-2/3'
-          href='http://localhost:3000/login/auth/google'
-          // href='https://api-urban.onrender.com/login/auth/google'
+          // href='http://localhost:3000/login/auth/google'
+          href='https://api-urban.onrender.com/login/auth/google'
           rel='noopener noreferrer'
         >
           <svg className=' h-6 w-6 fill-current' viewBox='0 0 24 24'>
@@ -160,7 +160,7 @@ const LoginForm = ({ isRegister, setIsRegister }: { isRegister: boolean; setIsRe
 
       <div className='mt-2 flex flex-col justify-evenly sm:mt-2 sm:flex-row sm:gap-6'>
         <Link
-          href='http://localhost:3000/recuperacion'
+          href='https://api-urban.onrender.com/recuperacion'
           className='font-semibold text-blue hover:cursor-pointer hover:underline'
         >
           <span className='bottom-5 right-5 block text-right text-[0.7rem] font-semibold text-blue hover:cursor-pointer hover:underline sm:pt-2 sm:text-right'>
