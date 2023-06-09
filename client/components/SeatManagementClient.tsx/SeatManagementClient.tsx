@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { CardProfilePropsEnabledSeats } from "@component/app/types/Passages";
 import PlantaAlta from "@component/components/PlantaAlta/PlantaAlta";
 import PlantaBaja from "@component/components/PlantaBaja/PlantaBaja";
@@ -14,9 +14,9 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const lengthData = passagerData.length;
 
   const containerStyles =
-    "flex w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between";
+    "flex w-11/12 sm:w-full flex-col items-center justify-center gap-2 rounded-3xl border-2 border-gray-300 bg-white py-4 shadow-xl shadow-black/40 xl:h-[650px] xl:justify-between";
   const relativeContainerStyles =
-    "relative flex min-w-0 flex-col break-words rounded-lg bg-transparent";
+    "relative flex min-w-0 px-4 sm:px-0 flex-col break-words rounded-lg bg-transparent";
   const titleStyles = "py-4 text-center";
   const italicStyles = "italic text-gray-400";
   const passengersRemainingStyles = "";
@@ -24,9 +24,11 @@ const SeatManagement: React.FC<CardProfilePropsEnabledSeats> = ({ enabledSeats }
   const liStyles = "flex w-1/2 items-center justify-center rounded-xl border-2 border-blue p-4";
 
   const passangers = count?.quantity;
-  if (count?.quantity - lengthData == 0) {
+
+  if (count?.quantity - lengthData === 0) {
     router.push(`/home/reserva/viajes/${passage?.id}/buslayout/pagos`);
   }
+
   return (
     <div className={containerStyles}>
       <div className={relativeContainerStyles}>

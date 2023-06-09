@@ -22,7 +22,6 @@ export default function NavBar() {
     setShowMenu(!showMenu);
   };
 
-  
   useEffect(() => {
     const userDataString = window && localStorage.getItem("user");
     if (userDataString) {
@@ -58,7 +57,8 @@ export default function NavBar() {
             </button>
 
             <div
-              className={` fixed left-0 top-0 h-screen w-full bg-black/30 transition-all duration-700 ease-in-out ${
+              onClick={toggleMenu}
+              className={` fixed left-0 top-0 h-screen w-full bg-black/30  transition-all duration-700 ease-in-out ${
                 !showMenu ? "hidden opacity-0" : "opacity-100"
               }`}
             ></div>

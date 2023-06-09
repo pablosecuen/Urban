@@ -5,14 +5,14 @@ import { HiOutlineLocationMarker, HiTrendingUp, HiTrendingDown } from "react-ico
 import { QueryParams } from "@component/app/types/QueryParams";
 import Select, { SingleValue } from "react-select";
 
-import ToastComponent from "../00-Toastify/ToastComponent";
+
 import { Location } from "@component/app/types/Select";
 import getLocations from "@component/services/api/locations";
 import { useDispatch } from "react-redux";
 import { getPassagesByQuery } from "../../Redux/passage/passageActions";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "@component/Redux/store/store";
-import { useSelector } from "react-redux";
+
 
 export default function Reserva() {
   const router = useRouter();

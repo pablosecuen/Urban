@@ -14,6 +14,9 @@ export default function CardHome() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tokendata = urlParams.get("token");
+    if (tokendata) {
+      localStorage.setItem("token", tokendata);
+    }
     const userString = localStorage.getItem("user");
     const userData = userString ? JSON.parse(userString) : null;
     setUser(userData);
@@ -35,9 +38,10 @@ export default function CardHome() {
   }
 
   const containerStyles =
-    "mb-8 mt-10 flex w-full flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
+    "mb-8 mt-10 flex sm:w-full w-10/12 flex-col items-center justify-evenly rounded-3xl border-2 bg-white px-4 py-4 shadow-2xl shadow-black/40 min-[420px]:mt-32 min-[420px]:w-4/5 lg:mt-10 lg:h-[400px] xl:h-[450px] xl:w-full 2xl:h-4/5";
   const titleStyles = "py-4 text-center text-xl font-bold xl:text-2xl 2xl:text-2xl";
-  const paragraphStyles = "w-full px-4 text-center lg:text-xs xl:text-base 2xl:text-lg";
+  const paragraphStyles =
+    "w-full px-4 text-justify sm:text-center lg:text-xs xl:text-base 2xl:text-lg";
 
   const notifySuccess = () => {
     if (!toast.isActive("success")) {
