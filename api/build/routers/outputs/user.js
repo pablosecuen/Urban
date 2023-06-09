@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const user_1 = require("../../controllers/outputs/user");
+const auth_1 = require("../../utils/auth/auth");
 const router = (0, express_1.Router)();
 // Ruta para obtener un usuario por su I
 /**
@@ -62,7 +63,7 @@ const router = (0, express_1.Router)();
  *                   type: string
  *                   description: Descripción del error
  */
-router.get("/", user_1.allUsers);
+router.get("/", auth_1.authenticate, user_1.allUsers);
 /**
  * @swagger
  *

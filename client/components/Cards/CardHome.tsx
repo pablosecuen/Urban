@@ -14,6 +14,9 @@ export default function CardHome() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tokendata = urlParams.get("token");
+    if (tokendata) {
+      localStorage.setItem("token", tokendata);
+    }
     const userString = localStorage.getItem("user");
     const userData = userString ? JSON.parse(userString) : null;
     setUser(userData);
@@ -63,8 +66,8 @@ export default function CardHome() {
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className="text-verdeurban">U</span>
-        <span className=" text-celeste">rban</span>!
+        Bienvedios a <span className='text-verdeurban'>U</span>
+        <span className=' text-celeste'>rban</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
@@ -78,7 +81,7 @@ export default function CardHome() {
       </p>
       <InfiniteSlider />
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -87,7 +90,7 @@ export default function CardHome() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
         closeButton={false}
       />
     </div>
