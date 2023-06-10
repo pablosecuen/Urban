@@ -44,7 +44,7 @@ export default function NavBar() {
             <Image
               src={logo}
               alt="logo"
-              className=" flex h-full w-auto items-center justify-center "
+              className=" h-10/12 flex w-auto items-center justify-center "
               width={50}
               height={50}
             />

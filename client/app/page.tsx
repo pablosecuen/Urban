@@ -25,7 +25,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col items-center justify-center  lg:flex-row ">
       <GoogleOAuthProvider clientId="your-client-id">
-        <div className="mx-auto flex w-1/2 justify-center lg:justify-end lg:pr-28 ">
+        <div className="mx-auto flex w-1/2 justify-center py-16 lg:justify-end lg:pr-28">
           <Image src={logo} alt="logo" className="aspect-ratio-square lg:w-96" />
         </div>
         <div className="lg:mx-auto lg:w-1/2">
