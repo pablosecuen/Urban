@@ -66,8 +66,8 @@ export default function CardHome() {
   return (
     <div className={containerStyles}>
       <p className={titleStyles}>
-        Bienvedios a <span className='text-verdeurban'>U</span>
-        <span className=' text-celeste'>rban</span>!
+        Bienvedios a <span className='text-verdeurban'>M</span>
+        <span className=' text-celeste'>ovi</span>!
       </p>
       <p className={paragraphStyles}>
         Nuestra <b>misión</b> es entregar al usuario el poder de decidir su medio de transporte
